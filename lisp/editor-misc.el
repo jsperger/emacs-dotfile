@@ -131,8 +131,8 @@ reuse it's window, otherwise create new one."
         terminal-here-project-root-function (lambda () (project-root (project-current t))))
   :general
   (tyrant-def
-    "\""   'terminal-here-launch
-    "p \"" 'terminal-here-project-launch))
+    "\'"   'terminal-here-launch
+    "p \'" 'terminal-here-project-launch))
 
 (use-package treesit-auto
   :when (and (fboundp 'treesit-available-p) (treesit-available-p))

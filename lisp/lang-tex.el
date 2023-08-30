@@ -167,17 +167,48 @@
 
 
 (use-package bibtex
-  :disabled
   :elpaca nil
   :defer t
   :config
-  (setq bibtex-file-path "~/pCloud/Bibliography/"
-        bibtex-files '("my_library.bib")
-
+  (setq bibtex-file-path "~/bibliography/"
+        bibtex-files '("my-library.bib")
+        bibtex-notes-path "~/bibliography/notes/"
         bibtex-align-at-equal-sign t
-        bibtex-dialect 'biblatex))
+        bibtex-dialect 'bibtex))
 
+(use-package citar
+  :elpaca (:files (:defaults))
+  :hook ((org-mode latex-mode) . citar-setup-capf)
+  :init
+  (with-eval-after-load 'embark
+    (defun bibtex-key-embark ()
+      (save-excursion
+        (bibtex-beginning-of-entry)
+        (when (looking-at bibtex-entry-maybe-empty-head)
+          (cons 'bibtex-key
+                (bibtex-key-in-head)))))
+    (defvar-keymap bibtex-key-embark-map
+      :doc "Embark keymap for Zetteldeft links"
+      :parent embark-general-map
+      "f" #'citar-open
+      "n" #'citar-open-notes)
+    (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map)))
+  :config
+  (citar-embark-mode)
 
+  (setq citar-at-point-function 'embark-act
+        citar-bibliography (mapcar (lambda (file) (concat bibtex-file-path file)) bibtex-files)
+        citar-library-paths `(,(concat bibtex-file-path "files/"))
+        citar-notes-paths `(,bibtex-notes-path)
+        citar-file-open-functions '(("html" . citar-file-open-external)
+                                    ("pdf" . citar-file-open-external)
+                                    (t . find-file)))
+  (defun citar-setup-capf ()
+    "add `citar-capf' to `completion-at-point-functions'"
+    (add-to-list 'completion-at-point-functions #'citar-capf))
+  :general
+  (tyrant-def "aC" 'citar-open)
+ )
 
 (provide 'lang-tex)
 ;;; lang-tex.el ends here

@@ -94,5 +94,23 @@
     "M-k"      'markdown-move-up
     "M-l"      'markdown-demote))
 
+(use-package csv-mode
+  :elpaca t
+  :mode (".csv" . csv-mode)
+  :config
+  (add-hook 'csv-mode-hook 'csv-guess-set-separator)
+
+  (despot-def csv-mode-map
+    "s" 'csv-sort-fields
+    "n" 'csv-sort-numeric-fields
+    "r" 'csv-reverse-region
+    "k" 'csv-kill-fields
+    "y" 'csv-yank-fields
+    "a" 'csv-align-fields
+    "A" 'csv-align-mode
+    "u" 'csv-unalign-fields
+    "t" 'csv-transpose
+    )
+  )
 (provide 'lang-misc)
 ;;; lang-misc.el ends here

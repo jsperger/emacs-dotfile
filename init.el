@@ -66,13 +66,18 @@
 (require 'editor-completion)
 (elpaca-wait)
 (require 'editor-misc)
-(require 'editor-vc)
 
 (require 'lang-emacs-lisp)
 (require 'lang-tex)
 (require 'lang-misc)
 
+;; Load markdown mode (in lang-tex) before forge or get a warning.
+;; TODO: figure out the right way to deal with it instead of swapping order around.
+(require 'editor-vc)
 
+;; Instead: change definitions in core-keybinds.el so that lowercase switch and follows and uppercase remains
+;; (defadvice split-window (after split-window-after activate)
+;;  (select-window (get-lru-window)))
 
 (setq-default custom-file (no-littering-expand-var-file-name "custom.el"))
 (when (file-exists-p custom-file)
@@ -83,8 +88,14 @@
 ;; Theme
 ;;
 
+(use-package solarized-theme
+  :elpaca t
+  :config
+  (setq solarized-high-contrast-mode-line t)
+)
+(elpaca-wait)
 ;; After custom because custom sets the trusted themes
-(load-theme 'doom-monokai-pro)
+(load-theme 'solarized-light-high-contrast)
 
 
 

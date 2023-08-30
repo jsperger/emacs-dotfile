@@ -188,13 +188,13 @@
     "wL"      'evil-window-move-far-right
     "wr"      'rotate-windows-forward
     "wR"      'rotate-windows-backward
-    "ws"      'split-window-vertically
-    "wS"      'split-window-vertically-and-focus
+    "wS"      'split-window-vertically
+    "ws"      'split-window-vertically-and-focus
     "wt"      'toggle-current-window-dedication
     "wu"      'winner-undo
     "wU"      'winner-redo
-    "wv"      'split-window-horizontally
-    "wV"      'split-window-horizontally-and-focus)
+    "wV"      'split-window-horizontally
+    "wv"      'split-window-horizontally-and-focus)
 
   (general-def
     [remap comment-dwim] 'comment-or-uncomment

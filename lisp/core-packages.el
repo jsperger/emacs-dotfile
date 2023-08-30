@@ -1,12 +1,15 @@
-;;;; core-packages.el --- -*- lexical-binding: t; -*-
-;; Packages
-;;
-;;
+;;; core-packages.el --- -*- lexical-binding: t; -*-
+;;; Commentary: Packages
+;;;
+;;; Code:
 
 
 (use-package exec-path-from-shell
   :if (eq system-type 'darwin)
   :defer t
+  :defines exec-path-from-shell-arguments
+    exec-path-from-shell-variables
+    exec-path-from-shell-initialize
   :init
   (setq exec-path-from-shell-arguments nil
         exec-path-from-shell-variables '("PATH" "MANPATH" "GNUPGHOME" "SSH_AUTH_SOCK"
@@ -42,7 +45,9 @@
          #'command-completion-default-include-p)
 
   ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t))
+   (setq enable-recursive-minibuffers t)
+)
+
 (use-package pomm
   :commands (pomm pomm-third-time))
 
@@ -53,3 +58,4 @@
 )
 
 (provide 'core-packages)
+;;; core-packages.el ends here

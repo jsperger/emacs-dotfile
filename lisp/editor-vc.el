@@ -57,6 +57,7 @@
 
 (use-package forge
   :elpaca t
+  :defer t
   :after magit
   :init
   (setq forge-add-default-bindings nil

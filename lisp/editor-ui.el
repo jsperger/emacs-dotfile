@@ -109,5 +109,9 @@
     (funcall fn proc (xterm-color-filter string)))
   (advice-add 'compilation-filter :around #'compilation-filter@around))
 
+(use-package fira-code-mode
+  :elpaca t
+  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x")) ;; List of ligatures to turn off
+  :hook prog-mode) ;; Enables fira-code-mode automatically for programming major modes
 (provide 'editor-ui)
 ;;; editor-ui.el ends here

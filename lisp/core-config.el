@@ -14,6 +14,34 @@
 (setq user-full-name "John Sperger"
       user-mail-address "josp@duck.com")
 
+(defvar default-font "Fira Code")
+(defvar font-size 12)
+(defvar unicode-font "Noto Sans CJK SC")
+(defvar unicode-scale (/ 16.0 font-size))
+(defvar emoji-font "Noto Color Emoji")
+(defvar symbol-font "Noto Sans Symbols")
+
+(when (eq system-type 'darwin)
+  (setq ns-pop-up-frames nil
+        frame-resize-pixelwise t)
+
+  (setq unicode-font "Noto Sans CJK SC"
+        emoji-font "Apple Color Emoji"
+        symbol-font "Apple Symbols"))
+
+(defun setup-font ()
+  (set-face-attribute 'default nil :font (font-spec :family default-font :size font-size))
+
+  (when (fboundp 'set-fontset-font)
+    (dolist (charset '(kana han cjk-misc bopomofo))
+      (set-fontset-font t charset unicode-font))
+    (add-to-list 'face-font-rescale-alist `(,unicode-font . ,unicode-scale))
+    (set-fontset-font t 'emoji emoji-font nil 'prepend)
+    (set-fontset-font t 'symbol symbol-font nil 'prepend)))
+
+(add-hook 'after-init-hook #'setup-font)
+
+
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil
         frame-resize-pixelwise t))
@@ -204,7 +232,9 @@
 
 (use-package flymake
   :elpaca nil
-  :hook (prog-mode . flymake-mode))
+  :hook (prog-mode . flymake-mode)
+  :init (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
+)
 
 (use-package newcomment
   :elpaca nil
