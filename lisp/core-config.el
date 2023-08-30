@@ -15,7 +15,7 @@
       user-mail-address "josp@duck.com")
 
 (defvar default-font "Fira Code")
-(defvar font-size 12)
+(defvar font-size 13)
 (defvar unicode-font "Noto Sans CJK SC")
 (defvar unicode-scale (/ 16.0 font-size))
 (defvar emoji-font "Noto Color Emoji")
@@ -23,7 +23,8 @@
 
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil
-        frame-resize-pixelwise t)
+        frame-resize-pixelwise t
+        font-size 12)
 
   (setq unicode-font "Noto Sans CJK SC"
         emoji-font "Apple Color Emoji"
