@@ -151,6 +151,7 @@
     "qf"      'delete-frame
     "qq"      'save-buffers-kill-terminal
     "qQ"      'save-buffers-kill-emacs
+    "qs"      'server-shutdown
 
     "s"       (cons "spelling" (make-sparse-keymap))
     "sb"      'flyspell-buffer

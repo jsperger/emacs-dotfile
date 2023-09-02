@@ -347,6 +347,17 @@ a dedicated window."
     (unless prev-window (user-error "Last window not found"))
     (select-window prev-window)))
 
+;; ---------------------------------------------------------------------------
+;; Server
+;; ---------------------------------------------------------------------------
+
+;; define function to shutdown emacs server instance
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+ )
 
 ;; ---------------------------------------------------------------------------
 ;; Misc

@@ -32,6 +32,8 @@
 
   (use-package vertico-buffer
     :elpaca nil
+    :after vertico
+    :no-require
     :hook (vertico-mode . vertico-buffer-mode)
     :config
     (setq vertico-buffer-display-action `(display-buffer-in-side-window
@@ -163,7 +165,7 @@
    [remap consult-imenu-multi] 'consult-org-agenda))
 
 (use-package embark
-  :elpaca t
+  :elpaca (:files (:defaults *.el))
   :init
   (with-eval-after-load 'avy
     (defun avy-action-embark (pt)
@@ -232,13 +234,15 @@ targets."
             "M-." 'embark-dwim))
 
 (use-package embark-consult
-  :elpaca t
+  :elpaca nil
   :demand t
   :after (consult embark)
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-(use-package wgrep :elpaca t :defer t)
+(use-package wgrep
+  :elpaca t
+  :defer t)
 
 (use-package corfu
   :elpaca (:files (:defaults "extensions/*.el"))

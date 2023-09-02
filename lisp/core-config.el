@@ -158,8 +158,9 @@
   :elpaca nil
   :defer t
   :config
-  (setq ls-lisp-use-insert-directory-program t) ; Use external ls
-  (setq insert-directory-program "/usr/local/opt/coreutils/libexec/gnubin/ls") ; Path to GNU ls
+  (when (eq system-type 'darwin) ;on mac use external ls from homebrew gnutils
+    (setq ls-lisp-use-insert-directory-program t
+          insert-directory-program "/usr/local/opt/coreutils/libexec/gnubin/ls"))
   (setq dired-listing-switches "-aBhl --group-directories-first")
   (setq dired-auto-revert-buffer t
         dired-create-destination-dirs 'always

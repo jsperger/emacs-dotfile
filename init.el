@@ -73,7 +73,7 @@
 
 ;; Load markdown mode (in lang-tex) before forge or get a warning.
 ;; TODO: figure out the right way to deal with it instead of swapping order around.
-(require 'editor-vc)
+ (require 'editor-vc)
 
 ;; Instead: change definitions in core-keybinds.el so that lowercase switch and follows and uppercase remains
 ;; (defadvice split-window (after split-window-after activate)

@@ -15,7 +15,8 @@
   (setq vc-follow-symlinks t))
 
 (use-package magit
-  :elpaca t
+  :elpaca (:files (:defaults "lisp/*.el" :exclude "lisp/magit-libgit.el" "lisp/magit-libgit-pkg"))
+  :defer t
   :init
   (setq magit-define-global-key-bindings nil)
   (with-eval-after-load 'project
@@ -66,17 +67,20 @@
 (use-package transient
   :elpaca t
   :defer t
+  :after vc magit
   :config
   (general-def transient-base-map   "q" 'transient-quit-one)
   (general-def transient-sticky-map "q" 'transient-quit-seq))
 
 (use-package browse-at-remote
   :elpaca t
+  :after vc magit
   :general
   (tyrant-def "go" 'browse-at-remote))
 
 (use-package diff-hl
   :elpaca t
+  :after vc magit
   :hook (after-init . global-diff-hl-mode)
   :config
   (setq diff-hl-side 'right)
@@ -89,18 +93,22 @@
     "[ h" '(diff-hl-previous-hunk :jump t)
     "] h" '(diff-hl-next-hunk :jump t)))
 
-(use-package git-modes :elpaca t :defer t)
-
-(use-package git-timemachine
+(use-package git-modes
   :elpaca t
-  :config
-  (general-def git-timemachine-mode-map
-    "gt" '(:ignore t :which-key "git-timemachine"))
-  :general
-  (tyrant-def "gt" 'git-timemachine))
+  :after vc magit
+  :defer t)
+
+;; (use-package git-timemachine
+;;   :elpaca t
+;;   :config
+;;   (general-def git-timemachine-mode-map
+;;     "gt" '(:ignore t :which-key "git-timemachine"))
+;;   :general
+;;   (tyrant-def "gt" 'git-timemachine))
 
 (use-package git-link
   :elpaca t
+  :after vc magit
   :config
   (setq git-link-open-in-browser t)
 
@@ -126,6 +134,7 @@
 
 (use-package gitignore-templates
   :elpaca t
+  :after vc magit
   :config
   (setq gitignore-templates-api 'github)
   :general
