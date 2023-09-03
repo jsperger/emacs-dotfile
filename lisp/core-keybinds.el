@@ -53,6 +53,10 @@
     "a"       (cons "applications" (make-sparse-keymap))
     "ac"      'calc-dispatch
     "ap"      'list-processes
+    "ao"      (cons "obsidian" (make-sparse-keymap))
+    "aoc"     'obsidian-capture
+    "aoj"     'obsidian-jump
+    "aos"     'obsidian-search
     "aP"      'proced
 
     "b"       (cons "buffers" (make-sparse-keymap))
@@ -118,6 +122,7 @@
     "j"       (cons "jump" (make-sparse-keymap))
     "ji"      'imenu
     "jg"      'avy-goto-char-timer
+    "jo"      'obsidian-jump
 
     "l"       (cons "layouts" tab-prefix-map)
     "ld"      'tab-bar-close-tab
@@ -143,6 +148,8 @@
 
     "p"       (cons "projects" project-prefix-map)
     "pt"      'project-open-in-tab
+    "pb"      'bookmark-in-project-toggle
+    "pj"      'bookmark-in-project-jump
 
     "q"       (cons "quit" (make-sparse-keymap))
     "qd"      'restart-emacs-debug-init
@@ -165,6 +172,7 @@
     "Tl"      'toggle-truncate-lines
     "Tm"      'flymake-mode
     "Tn"      'display-line-numbers-mode
+    "To"      'global-obsidian-mode
     "Ts"      'flyspell-mode
     "Tw"      'whitespace-mode
     "TW"      'toggle-word-wrap

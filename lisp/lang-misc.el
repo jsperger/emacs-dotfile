@@ -56,6 +56,16 @@
     "N"     'markdown-next-link
     "l"     (cons "lists" (make-sparse-keymap))
     "li"    'markdown-insert-list-item
+    "o" (cons "obsidian" (make-sparse-keymap))
+    "oo" 'obsidian-follow-link-at-point
+    "ob" 'obsidian-backlink-jump
+    "ol" 'obsidian-insert-link
+    "ow" 'obsidian-insert-wikilink
+    "oc" 'obsidian-capture
+    "oj" 'obsidian-jump
+    "os" 'obsidian-search
+    "ot" 'obsidian-tag-find
+    "om" 'obsidian-move-file
     "P"     'markdown-previous-link
     "t"     (cons "table" (make-sparse-keymap))
     "tp"    'markdown-table-move-row-up
@@ -112,5 +122,23 @@
     "t" 'csv-transpose
     )
   )
+
+;; hacky solution to the fact that the path is different on mac/linux
+(setq obsidian-path
+      (cond ((eq system-type 'darwin)
+             "~/pCloud Drive/Obsidian")
+            ((eq system-type 'gnu/linux)
+             "~/pCloudDrive/Obsidian")
+            (t "~/obsidian"))) ;; default path if neither macOS nor Linux
+
+(use-package obsidian
+  :config
+  (obsidian-specify-path obsidian-path)
+  (global-obsidian-mode t)
+  :custom
+  ;; This directory will be used for `obsidian-capture' if set.
+  (obsidian-inbox-directory "Inbox")
+)
+
 (provide 'lang-misc)
 ;;; lang-misc.el ends here
