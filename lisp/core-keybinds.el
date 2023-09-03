@@ -120,6 +120,7 @@
     "hPr"     'profiler-report
 
     "j"       (cons "jump" (make-sparse-keymap))
+    "jb"      'bookmark-jump
     "ji"      'imenu
     "jg"      'avy-goto-char-timer
     "jo"      'obsidian-jump
