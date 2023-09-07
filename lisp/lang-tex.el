@@ -64,6 +64,7 @@
   (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
   (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
   (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+  (add-hook 'LaTeX-mode-hook 'reftex-mode)
 
   (defun TeX-build ()
     (interactive)
@@ -101,6 +102,7 @@
     ;; TeX-command-run-all runs compile and open the viewer
     "a"             'TeX-command-run-all                       ;; C-c C-a
     "b"             'TeX-build
+    "c"             'TeX-clean
     "h"             'TeX-doc
     "k"             'TeX-kill-job                              ;; C-c C-k
     "l"             'TeX-recenter-output-buffer                ;; C-c C-l
@@ -149,6 +151,10 @@
     "pp"               'preview-at-point
     "pr"               'preview-region
     "ps"               'preview-section
+    "r"                (cons "reference" (make-sparse-keymap))
+    "rr"               'reftex-reference
+    "rl"               'reftex-label
+    "rj"               'reftex-goto-label
     "s"                'LaTeX-section                       ;; C-c C-s
     "x"                (cons "text/fonts" (make-sparse-keymap))
     "xB"               'font-medium
