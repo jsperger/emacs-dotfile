@@ -132,6 +132,7 @@
             (t "~/obsidian"))) ;; default path if neither macOS nor Linux
 
 (use-package obsidian
+  :elpaca t
   :config
   (obsidian-specify-path obsidian-path)
   (global-obsidian-mode t)
