@@ -51,6 +51,27 @@
 (use-package pomm
   :commands (pomm pomm-third-time))
 
+(use-package chronometrist
+  :disabled
+  :elpaca t
+  :hook ('kill-emacs-query-functions . 'cronometrist-query-stop)
+  :init (defun my-activity-indicator ()
+          (--> (chronometrist-latest-record (chronometrist-active-backend))
+               (plist-put it :stop (chronometrist-format-time-iso8601))
+               (list it)
+               (chronometrist-events-to-durations it)
+               (-reduce #'+ it)
+               (truncate it)
+               (chronometrist-format-duration it)))
+
+  (setq chronometrist-activity-indicator #'my-activity-indicator)
+)
+
+(use-package chronometrist-goal
+  :disabled
+  :elpaca t
+  :after chronometrist)
+
 (use-package ess
   :init (require 'ess-site)
   :mode (("\\.[rR]\\'" . R-mode)

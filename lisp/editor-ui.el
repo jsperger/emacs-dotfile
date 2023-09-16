@@ -90,10 +90,10 @@
 (use-package highlight-parentheses
   :hook (prog-mode . highlight-parentheses-mode)
   :config
-  (setq highlight-parentheses-colors '("Springgreen3"
-                                       "IndianRed1"
-                                       "IndianRed3"
-                                       "IndianRed4"))
+  ;; (setq highlight-parentheses-colors '("Springgreen3"
+  ;;                                      "IndianRed1"
+  ;;                                      "IndianRed3"
+  ;;                                      "IndianRed4"))
   (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold))
 
 (use-package rainbow-delimiters
@@ -112,7 +112,7 @@
 (use-package fira-code-mode
   :elpaca t
   :if (display-graphic-p)
-  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" "!=")) ;; List of ligatures to turn off
+  :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" ";" "!=" ":")) ;; List of ligatures to turn off
   :hook prog-mode) ;; Enables fira-code-mode automatically for programming major modes
 
 (use-package bookmark-in-project
