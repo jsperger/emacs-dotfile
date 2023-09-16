@@ -166,6 +166,13 @@
     "sn"      'flyspell-goto-next-error
     "sr"      'flyspell-region
 
+    "r"       (cons "replace" (make-sparse-keymap))
+;; Ask = query
+    "ra"      'query-replace
+    "rs"      'replace-string
+    "rr"      'replace-string-in-region
+
+
     "T"       (cons "toggles" (make-sparse-keymap))
     "Ta"      'auto-fill-mode
     "Td"      'toggle-debug-on-error
@@ -204,7 +211,8 @@
     "wu"      'winner-undo
     "wU"      'winner-redo
     "wV"      'split-window-horizontally
-    "wv"      'split-window-horizontally-and-focus)
+    "wv"      'split-window-horizontally-and-focus
+    "w="      'balance-windows)
 
   (general-def
     [remap comment-dwim] 'comment-or-uncomment
