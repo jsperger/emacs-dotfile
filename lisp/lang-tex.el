@@ -31,18 +31,19 @@
   :demand t
   :defer t
   :mode ("\\.[tT]e[xX]\\'" . TeX-tex-mode)
+  :hook ((LaTeX-math-mode TeX-fold-mode TeX-source-correlate-mode TeX-PDF-mode reftex-mode) . TeX-latex-mode)
   :config
   (setq-default TeX-master nil)
   (setq TeX-parse-self t
         TeX-save-query nil
         TeX-source-correlate-start-server t
-        TeX-view-program-list '(("Preview.app" "open -a Preview.app %o")
-                                ("Skim" "open -a Skim.app %o")
-                                ("displayline" "displayline -b %n %o %b")
-                                ("open" "open %o"))
-        TeX-view-program-selection '((output-dvi "open")
-                                     (output-pdf "displayline")
-                                     (output-html "open"))
+        ;; TeX-view-program-list '(("Preview.app" "open -a Preview.app %o")
+        ;;                         ("Skim" "open -a Skim.app %o")
+        ;;                         ("displayline" "displayline -b %n %o %b")
+        ;;                         ("open" "open %o"))
+        ;; TeX-view-program-selection '((output-dvi "open")
+        ;;                              (output-pdf "displayline")
+        ;;                              (output-html "open"))
         ;; Don't insert line-break at inline math
         LaTeX-fill-break-at-separators nil)
 
@@ -60,11 +61,6 @@
   (with-eval-after-load 'latex
     (setq LaTeX-clean-intermediate-suffixes
           (append LaTeX-clean-intermediate-suffixes '("\\.fdb_latexmk" "\\.fls"))))
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-  (add-hook 'LaTeX-mode-hook 'TeX-fold-mode)
-  (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
-  (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
-  (add-hook 'LaTeX-mode-hook 'reftex-mode)
 
   (defun TeX-build ()
     (interactive)
@@ -168,6 +164,9 @@
     "xo"               'font-oblique))
 
 (elpaca-wait)
+
+(use-package preview-latex
+  :elpaca nil)
 
 (use-package evil-tex
   :elpaca t

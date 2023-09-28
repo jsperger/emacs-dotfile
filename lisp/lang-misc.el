@@ -104,6 +104,10 @@
     "M-k"      'markdown-move-up
     "M-l"      'markdown-demote))
 
+(use-package markdown-preview-mode
+  :elpaca t
+  :after markdown-mode)
+
 (use-package csv-mode
   :elpaca t
   :mode (".csv" . csv-mode)

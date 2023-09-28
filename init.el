@@ -90,14 +90,16 @@
 
 (use-package solarized-theme
   :elpaca t
-  :config
-  (setq solarized-high-contrast-mode-line t)
 )
+
+
+;;  (setq solarized-high-contrast-mode-line t)
+
 (elpaca-wait)
 ;; After custom because custom sets the trusted themes
-(load-theme 'solarized-light-high-contrast)
+;;(load-theme 'solarized-light-high-contrast)
 
-
+(load-theme 'doom-gruvbox)
 
 ;; (use-package nano-theme
 ;;   :defer t)
