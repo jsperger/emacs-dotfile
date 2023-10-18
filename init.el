@@ -70,6 +70,7 @@
 (require 'lang-emacs-lisp)
 (require 'lang-tex)
 (require 'lang-misc)
+(require 'lang-org)
 
 ;; Load markdown mode (in lang-tex) before forge or get a warning.
 ;; TODO: figure out the right way to deal with it instead of swapping order around.
