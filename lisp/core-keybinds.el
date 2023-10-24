@@ -212,7 +212,8 @@
     "wU"      'winner-redo
     "wV"      'split-window-horizontally
     "wv"      'split-window-horizontally-and-focus
-    "w="      'balance-windows)
+    "w="      'golden-ratio
+    )
 
   (general-def
     [remap comment-dwim] 'comment-or-uncomment

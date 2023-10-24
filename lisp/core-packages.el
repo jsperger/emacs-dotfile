@@ -61,7 +61,11 @@
   :init (require 'ess-site)
   :mode (("\\.[rR]\\'" . R-mode)
          ("\\.Rnw\\'" . Rnw-mode))
-)
+  )
+
+(use-package unfill
+  :elpaca t
+  :ensure t)
 
 (provide 'core-packages)
 ;;; core-packages.el ends here
