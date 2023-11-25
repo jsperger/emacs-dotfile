@@ -48,21 +48,6 @@
    (setq enable-recursive-minibuffers t)
 )
 
-(use-package pomm
-  :commands (pomm pomm-third-time))
-
-(use-package chronometrist
-  :elpaca t
-  :ensure t
-  :init
-  (add-hook 'kill-emacs-query-functions 'chronometrist-query-stop))
-
-(use-package ess
-  :init (require 'ess-site)
-  :mode (("\\.[rR]\\'" . R-mode)
-         ("\\.Rnw\\'" . Rnw-mode))
-  )
-
 (use-package unfill
   :elpaca t
   :ensure t)
