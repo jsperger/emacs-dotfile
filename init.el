@@ -55,57 +55,29 @@
 (dolist (dir '("lisp"))
   (push (expand-file-name dir user-emacs-directory) load-path))
 
+(require 'core-keybinds)
+(elpaca-wait)
+(require 'lang-tex)
+(elpaca-wait)
+(require 'editor-themes)
+(elpaca-wait)
+
 (require 'core-packages)
 (require 'core-config)
 (require 'core-funcs)
-(require 'core-keybinds)
-(elpaca-wait)
 
-(require 'editor-ui)
 (require 'editor-completion)
-(elpaca-wait)
 (require 'editor-misc)
+(require 'editor-ui)
+(require 'editor-vc)
 
-(require 'lang-emacs-lisp)
-(require 'lang-tex)
 (require 'lang-misc)
 (require 'lang-org)
+(require 'lang-emacs-lisp)
 
-;; Load markdown mode (in lang-tex) before forge or get a warning.
-;; TODO: figure out the right way to deal with it instead of swapping order around.
- (require 'editor-vc)
-
-;; Instead: change definitions in core-keybinds.el so that lowercase switch and follows and uppercase remains
-;; (defadvice split-window (after split-window-after activate)
-;;  (select-window (get-lru-window)))
-
-(setq-default custom-file (no-littering-expand-var-file-name "custom.el"))
-(when (file-exists-p custom-file)
-  (load custom-file))
+(setq custom-file (expand-file-name "customs.el" user-emacs-directory))
+(add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 
 
-;;;;;;;;;;;;;;;;;
-;; Theme
-;;
-
-(use-package solarized-theme
-  :elpaca t
-)
-
-
-;;  (setq solarized-high-contrast-mode-line t)
-
-(elpaca-wait)
-;; After custom because custom sets the trusted themes
-;;(load-theme 'solarized-light-high-contrast)
-
-(load-theme 'doom-gruvbox)
-
-;; (use-package nano-theme
-;;   :defer t)
-;; (elpaca-wait)
-
-;; (
-;; load-theme 'nano t)
 (provide 'init)
 ;;; init.el ends here
