@@ -382,5 +382,11 @@ Just put this function in `hippie-expand-try-functions-list'."
   :init
   (all-the-icons-completion-mode))
 
+(use-package doom-snippets
+  :elpaca (:host github
+                 :repo "doomemacs/snippets")
+  :after yasnippet
+  )
+
 (provide 'editor-completion)
 ;;; editor-completion.el ends here
