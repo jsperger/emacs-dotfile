@@ -40,6 +40,13 @@
 
 (use-package doom-themes)
 
+(use-package lacquer
+  :after  solarized-themes doom-themes
+  :config
+    (lacquer-cache "~/.emacs.d/.lacquer.el")
+)
+
+
 
 (provide 'editor-themes)
 ;;; editor-themes.el ends here
