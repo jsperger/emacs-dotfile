@@ -18,7 +18,7 @@
         which-key-allow-evil-operators t)
 
   (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
-  
+
 (use-package evil
   :demand t
   :hook ((after-init . evil-mode)
@@ -135,9 +135,8 @@
 
   (general-def 'normal "zf" 'reposition-window)
   (general-def 'insert [remap evil-complete-previous] 'hippie-expand))
-  
+
 (use-package general
-  :after evil
   :demand t
   :config
   (setq general-emit-autoloads nil)
@@ -295,11 +294,14 @@
     "Ta"      'auto-fill-mode
     "Td"      'toggle-debug-on-error
     "Tf"      'display-fill-column-indicator-mode
+    "Tg"      'golden-ratio-mode
     "Tl"      'toggle-truncate-lines
     "Tm"      'flymake-mode
     "Tn"      'display-line-numbers-mode
     "To"      'global-obsidian-mode
+    "Tp"      'pdf-view-mode
     "Ts"      'flyspell-mode
+    "TT"      'TeX-latex-mode
     "Tw"      'whitespace-mode
     "TW"      'toggle-word-wrap
 
@@ -313,6 +315,7 @@
     "wD"      'delete-other-windows
     "wm"      'toggle-maximize-buffer
     "wf"      'follow-mode
+    "wg"      'golden-ratio
     "wh"      'evil-window-left
     "wH"      'evil-window-move-far-left
     "wj"      'evil-window-down
@@ -330,7 +333,7 @@
     "wU"      'winner-redo
     "wV"      'split-window-horizontally
     "wv"      'split-window-horizontally-and-focus
-    "w="      'golden-ratio
+    "w="      'balance-windows
     )
 
   (general-def
