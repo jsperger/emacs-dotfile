@@ -8,6 +8,9 @@
 
 ;;; Code:
 
+(defvar bib-file-location "~/obsidian/obsidian-biblatex.bib")
+
+
 (use-package auctex
   :elpaca (auctex :pre-build (("./autogen.sh")
                               ("./configure"
@@ -18,18 +21,6 @@
   :config
   (load "latex.el" nil t t)
   (load "preview-latex.el" nil t t)
-  (setq-default TeX-master nil
-                TeX-command "LaTeX"
-                TeX-engine 'luatex
-  		preview-scale 1.4
-                preview-scale-function
-                (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
-  (setq preview-auto-cache-preamble nil
-  	TeX-parse-self t
-        TeX-save-query nil
-        TeX-source-correlate-start-server t
-        LaTeX-fill-break-at-separators nil)
-
 	(add-to-list 'TeX-expand-list
 		 '("%(-PDF)"
 		   (lambda ()
@@ -151,7 +142,9 @@
   :hook (TeX-mode . evil-tex-mode))
 
 (use-package cdlatex
-  :after auctex)
+  :after auctex
+  :hook (TeX-latex-mode . cdlatex-mode)
+  (org-beamer-mode . org-cdlatex-mode))
 
 (use-package auctex-latexmk
   :after auctex)
@@ -161,19 +154,13 @@
 
 (use-package bibtex
   :elpaca nil
-  :defer t
   :after auctex
-  :config
-  (setq bibtex-file-path "~/bibliography/"
-        bibtex-files '("my-library.bib")
-        bibtex-notes-path "~/bibliography/notes/"
-        bibtex-align-at-equal-sign t
-        bibtex-dialect 'bibtex))
+  )
 
 (use-package citar
   :elpaca (:files (:defaults))
   :after auctex bibtex
-  :hook ((org-mode latex-mode) . citar-capf-setup)
+  :hook ((org-mode latex-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
   :init
   (with-eval-after-load 'embark
     (defun bibtex-key-embark ()
@@ -188,27 +175,18 @@
       "f" #'citar-open
       "n" #'citar-open-notes)
     (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map)))
-  :config
-
-  (use-package citar-embark
-    :after citar embark
-    :no-require
-    :config
-    (citar-embark-mode))
-
-  (setq citar-at-point-function 'embark-act
-        citar-bibliography (mapcar (lambda (file) (concat bibtex-file-path file)) bibtex-files)
-        citar-library-paths `(,(concat bibtex-file-path "files/"))
-        citar-notes-paths `(,bibtex-notes-path)
-        citar-file-open-functions '(("html" . citar-file-open-external)
-                                    ("pdf" . citar-file-open-external)
-                                    (t . find-file)))
+   :config
   (defun citar-setup-capf ()
     "add `citar-capf' to `completion-at-point-functions'"
     (add-to-list 'completion-at-point-functions #'citar-capf))
   :general
   (tyrant-def "aC" 'citar-open)
  )
+
+(use-package citar-embark
+    :after citar embark
+    :config
+    (citar-embark-mode))
 
 (provide 'lang-tex)
 
