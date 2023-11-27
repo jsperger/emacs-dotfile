@@ -12,7 +12,6 @@
 
 (use-package vertico
   :elpaca (:files (:defaults "extensions/*.el"))
-  :hook (after-init . vertico-mode)
   :config
   (setq vertico-cycle t)
 
@@ -58,8 +57,7 @@
 
 
 (use-package marginalia
-  :elpaca t
-  :hook (after-init . marginalia-mode))
+  :elpaca t)
 
 (use-package orderless
   :elpaca t
@@ -234,7 +232,6 @@ targets."
             "M-." 'embark-dwim))
 
 (use-package embark-consult
-  :elpaca nil
   :demand t
   :after (consult embark)
   :hook
@@ -246,7 +243,6 @@ targets."
 
 (use-package corfu
   :elpaca (:files (:defaults "extensions/*.el"))
-  :hook (after-init . global-corfu-mode)
   :demand t
   :init
  (setq completion-cycle-threshold 3
@@ -298,7 +294,6 @@ targets."
 
 (use-package prescient
   :elpaca t
-  :hook (after-init . prescient-persist-mode)
   :init
   (use-package vertico-prescient
     :elpaca t

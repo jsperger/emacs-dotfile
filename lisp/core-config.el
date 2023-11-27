@@ -119,7 +119,6 @@
 
 (use-package autorevert
   :elpaca nil
-  :hook (after-init . global-auto-revert-mode)
   :config
   (setq global-auto-revert-non-file-buffers t
         auto-revert-verbose nil))
@@ -190,8 +189,7 @@
                 ediff-merge-split-window-function 'split-window-horizontally))
 
 (use-package elec-pair
-  :elpaca nil
-  :hook (after-init . electric-pair-mode))
+  :elpaca nil)
 
 (use-package files
   :elpaca nil
@@ -280,14 +278,12 @@
 
 (use-package recentf
   :elpaca nil
-  :hook (after-init . recentf-mode)
   :config
   (setq recentf-auto-cleanup 'never
         recentf-max-saved-items 100))
 
 (use-package savehist
   :elpaca nil
-  :hook (after-init . savehist-mode)
   :config
   (setq enable-recursive-minibuffers t ; allow commands in minibuffers
         history-length 100
@@ -321,14 +317,11 @@ the unwritable tidbits."
                           (cl-remove-if-not #'savehist-printable register-alist)))))
 
 (use-package saveplace
-  :elpaca nil
-  :hook (after-init . save-place-mode))
+  :elpaca nil)
 
 (use-package server
   :elpaca nil
-  :commands (server-running-p)
-  :hook (after-init . (lambda () (unless (server-running-p)
-                              (server-start)))))
+  :commands (server-running-p))
 
 (use-package simple
   :elpaca nil
@@ -355,7 +348,6 @@ the unwritable tidbits."
 (use-package winner
   :elpaca nil
   :commands (winner-undo winner-redo)
-  :hook (after-init . winner-mode)
   :init
   (setq winner-dont-bind-my-keys t)
   :config

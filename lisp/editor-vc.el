@@ -81,7 +81,6 @@
 (use-package diff-hl
   :elpaca t
   :after vc magit
-  :hook (after-init . global-diff-hl-mode)
   :config
   (setq diff-hl-side 'right)
 

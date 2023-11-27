@@ -9,7 +9,6 @@
 ;;; Code:
 
 (use-package which-key
-  :hook (after-init . which-key-mode)
   :config
   (setq which-key-idle-delay 0.4
         which-key-idle-secondary-delay 0.01
@@ -19,125 +18,9 @@
 
   (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
 
-(use-package evil
-  :demand t
-  :hook ((after-init . evil-mode)
-         (prog-mode . hs-minor-mode))
-  :init
-  (setq evil-want-keybinding nil
-        evil-symbol-word-search t
-        evil-ex-search-vim-style-regexp t
-        evil-search-module 'evil-search
-        evil-magic 'very-magic
-        evil-want-C-u-delete t
-        evil-want-C-u-scroll t
-        hs-minor-mode-map nil)
-  :config
-  (setq evil-cross-lines t
-        evil-kill-on-visual-paste nil
-        evil-move-beyond-eol t
-        evil-want-C-i-jump t
-        evil-want-fine-undo t
-        evil-v$-excludes-newline t)
-
-  (setq evil-normal-state-cursor  '("DarkGoldenrod2" box)
-        evil-insert-state-cursor  '("chartreuse3" (bar . 2))
-        evil-emacs-state-cursor   '("SkyBlue2" box)
-        evil-replace-state-cursor '("chocolate" (hbar . 2))
-        evil-visual-state-cursor  '("gray" (hbar . 2))
-        evil-motion-state-cursor  '("plum3" box))
-
-  (evil-set-undo-system 'undo-redo)
-
-  (progn
-    ;; Thanks to `editorconfig-emacs' for many of these
-    (defvar evil-indent-variable-alist
-      ;; Note that derived modes must come before their sources
-      '(((awk-mode c-mode c++-mode java-mode
-                   idl-mode java-mode objc-mode pike-mode) . c-basic-offset)
-        (groovy-mode . groovy-indent-offset)
-        (python-mode . python-indent-offset)
-        (cmake-mode . cmake-tab-width)
-        (coffee-mode . coffee-tab-width)
-        (cperl-mode . cperl-indent-level)
-        (css-mode . css-indent-offset)
-        (elixir-mode . elixir-smie-indent-basic)
-        ((emacs-lisp-mode lisp-mode) . lisp-indent-offset)
-        (enh-ruby-mode . enh-ruby-indent-level)
-        (erlang-mode . erlang-indent-level)
-        (js2-mode . js2-basic-offset)
-        (js3-mode . js3-indent-level)
-        ((js-mode json-mode) . js-indent-level)
-        (latex-mode . (LaTeX-indent-level tex-indent-basic))
-        (livescript-mode . livescript-tab-width)
-        (mustache-mode . mustache-basic-offset)
-        (nxml-mode . nxml-child-indent)
-        (perl-mode . perl-indent-level)
-        (puppet-mode . puppet-indent-level)
-        (ruby-mode . ruby-indent-level)
-        (rust-mode . rust-indent-offset)
-        (scala-mode . scala-indent:step)
-        (sgml-mode . sgml-basic-offset)
-        (sh-mode . sh-basic-offset)
-        (typescript-mode . typescript-indent-level)
-        (web-mode . web-mode-markup-indent-offset)
-        (yaml-mode . yaml-indent-offset))
-      "An alist where each key is either a symbol corresponding
-  to a major mode, a list of such symbols, or the symbol t,
-  acting as default. The values are either integers, symbols
-  or lists of these.")
-
-    (defun set-evil-shift-width ()
-      "Set the value of `evil-shift-width' based on the indentation settings of the
-  current major mode."
-      (let ((shift-width
-             (catch 'break
-               (dolist (test evil-indent-variable-alist)
-                 (let ((mode (car test))
-                       (val (cdr test)))
-                   (when (or (and (symbolp mode) (derived-mode-p mode))
-                             (and (listp mode) (apply 'derived-mode-p mode))
-                             (eq 't mode))
-                     (when (not (listp val))
-                       (setq val (list val)))
-                     (dolist (v val)
-                       (cond
-                        ((integerp v) (throw 'break v))
-                        ((and (symbolp v) (boundp v))
-                         (throw 'break (symbol-value v))))))))
-               (throw 'break (default-value 'evil-shift-width)))))
-        (when (and (integerp shift-width)
-                   (< 0 shift-width))
-          (setq-local evil-shift-width shift-width))))
-
-    ;; after major mode has changed, reset evil-shift-width
-    (add-hook 'after-change-major-mode-hook #'set-evil-shift-width 'append))
-
-  (progn
-    (evil-define-text-object evil-pasted (count &rest args)
-      (list (save-excursion (evil-goto-mark ?\[) (point))
-            (save-excursion (evil-goto-mark ?\]) (1+ (point)))))
-    (define-key evil-inner-text-objects-map "P" 'evil-pasted)
-
-    ;; define text-object for entire buffer
-    (evil-define-text-object evil-inner-buffer (count &optional beg end type)
-      (list (point-min) (point-max)))
-    (define-key evil-inner-text-objects-map "g" 'evil-inner-buffer))
-
-  ;; allow eldoc to trigger directly after changing modes
-  (eldoc-add-command #'evil-normal-state
-                     #'evil-insert
-                     #'evil-change
-                     #'evil-delete
-                     #'evil-replace)
-
-  (add-hook 'evil-normal-state-exit-hook #'evil-ex-nohighlight)
-
-  (general-def 'normal "zf" 'reposition-window)
-  (general-def 'insert [remap evil-complete-previous] 'hippie-expand))
-
 (use-package general
   :demand t
+  :after evil
   :config
   (setq general-emit-autoloads nil)
 
@@ -371,14 +254,131 @@
 
 (elpaca-wait)
 
+(use-package evil
+  :demand t
+  :hook ((prog-mode . hs-minor-mode))
+  :init
+  (setq evil-want-keybinding nil
+        evil-symbol-word-search t
+        evil-ex-search-vim-style-regexp t
+        evil-search-module 'evil-search
+        evil-magic 'very-magic
+        evil-want-C-u-delete t
+        evil-want-C-u-scroll t
+        hs-minor-mode-map nil)
+  :config
+  (setq evil-cross-lines t
+        evil-kill-on-visual-paste nil
+        evil-move-beyond-eol t
+        evil-want-C-i-jump t
+        evil-want-fine-undo t
+        evil-v$-excludes-newline t)
+
+  (setq evil-normal-state-cursor  '("DarkGoldenrod2" box)
+        evil-insert-state-cursor  '("chartreuse3" (bar . 2))
+        evil-emacs-state-cursor   '("SkyBlue2" box)
+        evil-replace-state-cursor '("chocolate" (hbar . 2))
+        evil-visual-state-cursor  '("gray" (hbar . 2))
+        evil-motion-state-cursor  '("plum3" box))
+
+  (evil-set-undo-system 'undo-redo)
+
+  (progn
+    ;; Thanks to `editorconfig-emacs' for many of these
+    (defvar evil-indent-variable-alist
+      ;; Note that derived modes must come before their sources
+      '(((awk-mode c-mode c++-mode java-mode
+                   idl-mode java-mode objc-mode pike-mode) . c-basic-offset)
+        (groovy-mode . groovy-indent-offset)
+        (python-mode . python-indent-offset)
+        (cmake-mode . cmake-tab-width)
+        (coffee-mode . coffee-tab-width)
+        (cperl-mode . cperl-indent-level)
+        (css-mode . css-indent-offset)
+        (elixir-mode . elixir-smie-indent-basic)
+        ((emacs-lisp-mode lisp-mode) . lisp-indent-offset)
+        (enh-ruby-mode . enh-ruby-indent-level)
+        (erlang-mode . erlang-indent-level)
+        (js2-mode . js2-basic-offset)
+        (js3-mode . js3-indent-level)
+        ((js-mode json-mode) . js-indent-level)
+        (latex-mode . (LaTeX-indent-level tex-indent-basic))
+        (TeX-latex-mode . (LaTeX-indent-level tex-indent-basic))
+        (livescript-mode . livescript-tab-width)
+        (mustache-mode . mustache-basic-offset)
+        (nxml-mode . nxml-child-indent)
+        (perl-mode . perl-indent-level)
+        (puppet-mode . puppet-indent-level)
+        (ruby-mode . ruby-indent-level)
+        (rust-mode . rust-indent-offset)
+        (scala-mode . scala-indent:step)
+        (sgml-mode . sgml-basic-offset)
+        (sh-mode . sh-basic-offset)
+        (typescript-mode . typescript-indent-level)
+        (web-mode . web-mode-markup-indent-offset)
+        (yaml-mode . yaml-indent-offset))
+      "An alist where each key is either a symbol corresponding
+  to a major mode, a list of such symbols, or the symbol t,
+  acting as default. The values are either integers, symbols
+  or lists of these.")
+
+    (defun set-evil-shift-width ()
+      "Set the value of `evil-shift-width' based on the indentation settings of the
+  current major mode."
+      (let ((shift-width
+             (catch 'break
+               (dolist (test evil-indent-variable-alist)
+                 (let ((mode (car test))
+                       (val (cdr test)))
+                   (when (or (and (symbolp mode) (derived-mode-p mode))
+                             (and (listp mode) (apply 'derived-mode-p mode))
+                             (eq 't mode))
+                     (when (not (listp val))
+                       (setq val (list val)))
+                     (dolist (v val)
+                       (cond
+                        ((integerp v) (throw 'break v))
+                        ((and (symbolp v) (boundp v))
+                         (throw 'break (symbol-value v))))))))
+               (throw 'break (default-value 'evil-shift-width)))))
+        (when (and (integerp shift-width)
+                   (< 0 shift-width))
+          (setq-local evil-shift-width shift-width))))
+
+    ;; after major mode has changed, reset evil-shift-width
+    (add-hook 'after-change-major-mode-hook #'set-evil-shift-width 'append))
+
+  (progn
+    (evil-define-text-object evil-pasted (count &rest args)
+      (list (save-excursion (evil-goto-mark ?\[) (point))
+            (save-excursion (evil-goto-mark ?\]) (1+ (point)))))
+    (define-key evil-inner-text-objects-map "P" 'evil-pasted)
+
+    ;; define text-object for entire buffer
+    (evil-define-text-object evil-inner-buffer (count &optional beg end type)
+      (list (point-min) (point-max)))
+    (define-key evil-inner-text-objects-map "g" 'evil-inner-buffer))
+
+  ;; allow eldoc to trigger directly after changing modes
+  (eldoc-add-command #'evil-normal-state
+                     #'evil-insert
+                     #'evil-change
+                     #'evil-delete
+                     #'evil-replace)
+
+  (add-hook 'evil-normal-state-exit-hook #'evil-ex-nohighlight)
+
+  (general-def 'normal "zf" 'reposition-window)
+  (general-def 'insert [remap evil-complete-previous] 'hippie-expand))
+
+(elpaca-wait)
+
 (use-package evil-collection
-  :hook (after-init . evil-collection-init)
   :init
   (add-hook 'org-agenda-mode-hook
             (lambda () (evil-collection-unimpaired-mode -1))))
 
 (use-package evil-owl
-  :hook (after-init . evil-owl-mode)
   :config
   (add-to-list 'display-buffer-alist
                '("*evil-owl*"
@@ -388,8 +388,7 @@
   (setq evil-owl-idle-delay 0.5))
 
 (use-package evil-snipe
-  :hook ((after-init . evil-snipe-mode)
-         (evil-snipe-mode . evil-snipe-override-mode))
+  :hook ((evil-snipe-mode . evil-snipe-override-mode))
   :config
   (setq evil-snipe-spillover-scope 'whole-buffer)
   (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))

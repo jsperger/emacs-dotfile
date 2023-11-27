@@ -16,7 +16,6 @@
 
 (use-package gcmh
   :elpaca t
-  :hook (after-init . gcmh-mode)
   :config
   (setq gcmh-high-cons-threshold #x1200000))
 
@@ -82,8 +81,6 @@ reuse it's window, otherwise create new one."
 
 (use-package popper
   :elpaca t
-  :hook ((after-init . popper-mode)
-         (after-init . popper-echo-mode))
   :config
   (setq popper-display-control nil
         popper-reference-buffers
@@ -137,11 +134,9 @@ reuse it's window, otherwise create new one."
 (use-package treesit-auto
   :when (and (fboundp 'treesit-available-p) (treesit-available-p))
   :elpaca t
-  :hook (after-init . global-treesit-auto-mode))
-
+)
 (use-package undohist
   :elpaca t
-  :hook (after-init . undohist-initialize)
   :config
   (add-to-list 'undohist-ignored-files "EDITMSG")
 
@@ -156,7 +151,6 @@ reuse it's window, otherwise create new one."
 
 (use-package winum
   :elpaca t
-  :hook (after-init . winum-mode)
   :init
   (with-eval-after-load 'which-key
     (push '((nil . "winum-select-window-[1-9]") . t) which-key-replacement-alist)

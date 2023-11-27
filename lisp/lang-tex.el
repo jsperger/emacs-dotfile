@@ -49,6 +49,24 @@
       (TeX-command TeX-command-default 'TeX-master-file -1)))
 
 
+  ;; Rebindings for TeX-font
+  (with-eval-after-load 'latex
+    (add-to-list 'LaTeX-font-list '(?\C-l "\\underline{"     "}")))
+  (defun font-bold () (interactive) (TeX-font nil ?\C-b))
+  (defun font-medium () (interactive) (TeX-font nil ?\C-m))
+  (defun font-code () (interactive) (TeX-font nil ?\C-t))
+  (defun font-emphasis () (interactive) (TeX-font nil ?\C-e))
+  (defun font-italic () (interactive) (TeX-font nil ?\C-i))
+  (defun font-clear () (interactive) (TeX-font nil ?\C-d))
+  (defun font-calligraphic () (interactive) (TeX-font nil ?\C-a))
+  (defun font-small-caps () (interactive) (TeX-font nil ?\C-c))
+  (defun font-sans-serif () (interactive) (TeX-font nil ?\C-f))
+  (defun font-normal () (interactive) (TeX-font nil ?\C-n))
+  (defun font-serif () (interactive) (TeX-font nil ?\C-r))
+  (defun font-oblique () (interactive) (TeX-font nil ?\C-s))
+  (defun font-underline () (interactive) (TeX-font nil ?\C-l))
+  (defun font-upright () (interactive) (TeX-font nil ?\C-u))
+
     (general-def TeX-mode-map "<H-S-mouse-1>" 'TeX-view)
 
     (despot-def (TeX-mode-map LaTeX-mode-map TeX-latex-mode-map)
@@ -138,8 +156,10 @@
 
 (use-package evil-tex
   :elpaca t
-  :after evil auctex
-  :hook (TeX-mode . evil-tex-mode))
+  :after evil
+  :hook
+  (TeX-mode . evil-tex-mode)
+  (TeX-latex-mode . evil-tex-mode))
 
 (use-package cdlatex
   :after auctex

@@ -9,7 +9,6 @@
 ;;; Code:
 
 (use-package doom-modeline
-  :hook (after-init . doom-modeline-mode)
   :config
   (setq inhibit-compacting-font-caches t
 
@@ -23,7 +22,6 @@
         doom-modeline-persp-name nil))
 
 (use-package shackle
-  :hook (after-init . shackle-mode)
   :config
   (setq shackle-default-size 0.4
         shackle-rules `((help-mode                       :select t :align right :size ,fill-column)
@@ -39,7 +37,6 @@
                         ("\\*EGLOT.*"                    :select t :align right :size ,fill-column :regexp t))))
 
 (use-package writeroom-mode
-;;  :hook (after-init . global-writeroom-mode)
   :config
   (setq split-width-threshold 120
 
@@ -56,8 +53,7 @@
     "wc" 'writeroom-mode
     "wC" 'global-writeroom-mode))
 
-(use-package hl-todo
-  :hook (after-init . global-hl-todo-mode))
+(use-package hl-todo)
 
 (use-package highlight-parentheses
   :hook (prog-mode . highlight-parentheses-mode)
