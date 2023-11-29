@@ -172,6 +172,8 @@
     "rs"      'replace-string
     "rr"      'replace-string-in-region
 
+    "t"       (cons "tempel" (make-sparse-keymap))
+    "ti"      'tempel-insert
 
     "T"       (cons "toggles" (make-sparse-keymap))
     "Ta"      'auto-fill-mode

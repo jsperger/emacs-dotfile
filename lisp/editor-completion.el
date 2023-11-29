@@ -377,7 +377,12 @@ Just put this function in `hippie-expand-try-functions-list'."
   :init
   (all-the-icons-completion-mode))
 
+
+(use-package tempel-collection
+  :after tempel)
+
 (use-package doom-snippets
+  :disabled
   :elpaca (:host github
                  :repo "doomemacs/snippets")
   :after yasnippet

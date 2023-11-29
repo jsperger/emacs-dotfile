@@ -11,17 +11,21 @@
 (defvar bib-file-location "~/obsidian/obsidian-biblatex.bib")
 
 
-(use-package auctex
+(use-package tex
   :elpaca (auctex :pre-build (("./autogen.sh")
                               ("./configure"
                                "--with-texmf-dir=$(dirname $(kpsexpand '$TEXMFHOME'))")
                               ("make")))
   :mode ("\\.tex\\'" . TeX-latex-mode)
-  :hook ((LaTeX-math-mode TeX-fold-mode TeX-source-correlate-mode TeX-PDF-mode reftex-mode) . TeX-latex-mode)
+
+  ;;:hook
+  ;; ((LaTeX-math-mode TeX-fold-mode TeX-source-correlate-mode TeX-PDF-mode reftex-mode) . TeX-latex-mode)
+  ;;(TeX-mode . (outline-minor-mode))
+
   :config
-  (load "latex.el" nil t t)
-  (load "preview-latex.el" nil t t)
-	(add-to-list 'TeX-expand-list
+;;(load "latex.el" nil nil t)
+;;(load "preview-latex.el" nil nil t)
+(add-to-list 'TeX-expand-list
 		 '("%(-PDF)"
 		   (lambda ()
 		     (if TeX-PDF-mode
