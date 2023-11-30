@@ -14,8 +14,9 @@
 (setq user-full-name "John Sperger"
       user-mail-address "josp@duck.com")
 
-(defvar default-font "Fira Code")
-(defvar font-size 13)
+(defvar default-font "JetBrains Mono")
+(defvar font-size 18)
+(defvar font-weight 'medium)
 (defvar unicode-font "Noto Sans CJK SC")
 (defvar unicode-scale (/ 16.0 font-size))
 (defvar emoji-font "Noto Color Emoji")
@@ -31,7 +32,7 @@
         symbol-font "Apple Symbols"))
 
 (defun setup-font ()
-  (set-face-attribute 'default nil :font (font-spec :family default-font :size font-size))
+  (set-face-attribute 'default nil :font (font-spec :family default-font :size font-size :weight font-weight))
 
   (when (fboundp 'set-fontset-font)
     (dolist (charset '(kana han cjk-misc bopomofo))
