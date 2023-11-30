@@ -143,8 +143,6 @@
      (TeX-master . t))))
 
 
-;; (load-theme 'doom-gruvbox)
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -152,26 +150,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t nil))))
 
-  (setq
-    	lacquer-appearance-switch t ;; Switch theme once the system appearance is changed, and distinguish light and dark theme.
-    	lacquer-theme-list '((solarized-theme solarized-light)
-                          (solarized-theme solarized-dark)
-                          (solarized-theme solarized-gruvbox-light)
-                          (solarized-theme solarized-gruvbox-dark)
-                          (doom-themes doom-nord)
-                          (doom-themes doom-gruvbox)
-                          (doom-themes doom-gruvbox-light)
-                          (doom-themes doom-monokai-pro)
-                          (doom-themes doom-monokai-classic)
-                          (doom-themes doom-zenburn))
-        lacquer-default-theme 'solarized-light
-        lacquer-font-list '(Source\ Sans\ 3
-                            Fira\ Code
-                            Minion\ 3)
-        lacquer-default-font-size 115
-    )
 
-(lambda () (if (daemonp)
-  		  (add-hook 'server-after-make-frame-hook #'lacquer-auto-mode)
-        (lacquer-auto-mode)))
-(lacquer-auto-mode)
+(load-theme 'doom-nord-aurora)
+(setup-font)
+

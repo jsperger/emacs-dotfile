@@ -41,6 +41,7 @@
 (use-package doom-themes)
 
 (use-package lacquer
+  :disabled
   :after  solarized-themes doom-themes
   :config
     (lacquer-cache "~/.emacs.d/.lacquer.el")
