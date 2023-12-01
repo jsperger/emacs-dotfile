@@ -237,6 +237,12 @@ targets."
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+(use-package citar-embark
+    :after embark citar
+    :config
+    (citar-embark-mode))
+
+
 (use-package wgrep
   :elpaca t
   :defer t)

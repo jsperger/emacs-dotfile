@@ -340,11 +340,7 @@ the unwritable tidbits."
   :hook ((prog-mode . show-trailing-whitespace)
          (diff-mode . whitespace-mode))
   :config
-  (defun show-trailing-whitespace ()
-    (set-face-attribute 'trailing-whitespace nil :background
-                        (face-attribute 'font-lock-comment-face
-                                        :foreground))
-    (setq show-trailing-whitespace t)))
+    (setq show-trailing-whitespace t))
 
 (use-package winner
   :elpaca nil

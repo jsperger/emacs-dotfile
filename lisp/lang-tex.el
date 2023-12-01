@@ -207,11 +207,6 @@
   (tyrant-def "aC" 'citar-open)
  )
 
-(use-package citar-embark
-    :after citar embark
-    :config
-    (citar-embark-mode))
-
 (provide 'lang-tex)
 
 ;;; lang-tex.el ends here
