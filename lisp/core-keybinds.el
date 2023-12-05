@@ -57,6 +57,7 @@
     "aoc"     'obsidian-capture
     "aoj"     'obsidian-jump
     "aos"     'obsidian-search
+    "at"      'eat
     "aP"      'proced
 
     "b"       (cons "buffers" (make-sparse-keymap))

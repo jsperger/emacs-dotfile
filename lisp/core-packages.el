@@ -52,5 +52,11 @@
   :elpaca t
   :ensure t)
 
+(use-package eat)
+
+(use-package jinx
+  :disabled
+  :hook (TeX-mode . jinx-mode) )
+
 (provide 'core-packages)
 ;;; core-packages.el ends here
