@@ -131,6 +131,25 @@
   (setq dabbrev-abbrev-char-regexp "[A-Za-z-_]"
         dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
+(use-package default-font-presets
+  :disabled
+            :commands
+  (default-font-presets-forward
+   default-font-presets-backward
+   default-font-presets-choose
+   default-font-presets-scale-increase
+   default-font-presets-scale-decrease
+   default-font-presets-scale-fit
+   default-font-presets-scale-reset)
+
+  :config
+  (setq default-font-presets-list
+    (list
+      "JetBrains Mono:weight=medium"
+      "Fira Code Medium 13"
+      "Source Code Pro Medium 10"
+      )))
+
 (use-package desktop
   :elpaca nil
   :commands restart-emacs-without-desktop
@@ -336,6 +355,7 @@ the unwritable tidbits."
         save-interprogram-paste-before-kill t))
 
 (use-package whitespace
+  :disabled
   :elpaca nil
   :hook ((prog-mode . show-trailing-whitespace)
          (diff-mode . whitespace-mode))
