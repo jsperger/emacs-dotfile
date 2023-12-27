@@ -82,13 +82,19 @@
   :elpaca t
   :if (display-graphic-p)
   :custom (fira-code-mode-disabled-ligatures '(
-            "[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" "!="
-            ":" ";" ": " ".." "<-" "%%")) ;; List of ligatures to turn off
+                                               "[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" "!="
+                                               ":" ";" ": " ".." "<-" "%%")) ;; List of ligatures to turn off
   :hook prog-mode ;; Enables fira-code-mode automatically for programming major modes
   )
 
 (use-package bookmark-in-project
   :elpaca t)
+
+(use-package golden-ratio
+  :elpaca t
+  :ensure t
+  :config (golden-ratio-mode nil))
+
 
 (provide 'editor-ui)
 ;;; editor-ui.el ends here

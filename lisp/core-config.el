@@ -382,10 +382,5 @@ the unwritable tidbits."
   :after all-the-icons
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 
-(use-package golden-ratio
-  :elpaca t
-  :ensure t
-  :config (golden-ratio-mode 1))
-
 (provide 'core-config)
  ;;; core-config.el ends here
