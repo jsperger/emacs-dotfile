@@ -22,6 +22,10 @@
 (use-package org-contrib
   :after org)
 
+(use-package djvu)
+
+(use-package nov)
+
 (use-package org-pdftools
   :after org pdftools)
 
