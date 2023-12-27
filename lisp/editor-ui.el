@@ -78,6 +78,7 @@
   (advice-add 'compilation-filter :around #'compilation-filter@around))
 
 (use-package fira-code-mode
+  :disabled
   :elpaca t
   :if (display-graphic-p)
   :custom (fira-code-mode-disabled-ligatures '(
