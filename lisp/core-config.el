@@ -15,7 +15,7 @@
       user-mail-address "josp@duck.com")
 
 (defvar default-font "JetBrains Mono")
-(defvar font-size 18)
+(defvar font-size 11)
 (defvar font-weight 'medium)
 (defvar unicode-font "Noto Sans CJK SC")
 (defvar unicode-scale (/ 16.0 font-size))
@@ -41,9 +41,6 @@
     (set-fontset-font t 'emoji emoji-font nil 'prepend)
     (set-fontset-font t 'symbol symbol-font nil 'prepend)))
 
-(add-hook 'after-init-hook #'setup-font)
-
-
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil
         frame-resize-pixelwise t))
@@ -63,7 +60,7 @@
 
 ;; highlight current line
 (global-hl-line-mode 1)
-; prettify symbols
+                                        ; prettify symbols
 (global-prettify-symbols-mode 1)
 
 ;; Single space between sentences is more widespread than double
@@ -133,7 +130,7 @@
 
 (use-package default-font-presets
   :disabled
-            :commands
+  :commands
   (default-font-presets-forward
    default-font-presets-backward
    default-font-presets-choose
@@ -144,11 +141,11 @@
 
   :config
   (setq default-font-presets-list
-    (list
-      "JetBrains Mono:weight=medium"
-      "Fira Code Medium 13"
-      "Source Code Pro Medium 10"
-      )))
+        (list
+         "JetBrains Mono:weight=medium"
+         "Fira Code Medium 13"
+         "Source Code Pro Medium 10"
+         )))
 
 (use-package desktop
   :elpaca nil
@@ -214,7 +211,7 @@
 (use-package files
   :elpaca nil
   :hook (before-save . delete-trailing-whitespace)
- :config
+  :config
   ;; Prompt to open file literally if large file.
   (defun check-large-file ()
     "Check when opening large files - literal file open."
@@ -254,7 +251,7 @@
   :elpaca nil
   :hook (prog-mode . flymake-mode)
   :init (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
-)
+  )
 
 (use-package newcomment
   :elpaca nil
@@ -360,7 +357,7 @@ the unwritable tidbits."
   :hook ((prog-mode . show-trailing-whitespace)
          (diff-mode . whitespace-mode))
   :config
-    (setq show-trailing-whitespace t))
+  (setq show-trailing-whitespace t))
 
 (use-package winner
   :elpaca nil
