@@ -105,10 +105,6 @@ reuse it's window, otherwise create new one."
   :elpaca t
   :general (tyrant-def "bf" 'reveal-in-osx-finder))
 
-(use-package reformatter
-  :elpaca t
-  :defer t)
-
 (use-package sideline
   :elpaca t
   :defer t
@@ -125,6 +121,7 @@ reuse it's window, otherwise create new one."
   :elpaca t
   :config
   (setq terminal-here-mac-terminal-command 'iterm2
+        terminal-here-linux-terminal-command 'alacritty
         terminal-here-project-root-function (lambda () (project-root (project-current t))))
   :general
   (tyrant-def
@@ -146,6 +143,7 @@ reuse it's window, otherwise create new one."
   (advice-add #'undohist-recover-safe :around #'undohist-recover-safe@around))
 
 (use-package xr
+  ;; Convert string regexp to rx notation
   :elpaca t
   :defer t)
 
@@ -219,6 +217,15 @@ stays on current"
     "b8" 'buffer-to-window-8
     "b9" 'buffer-to-window-9))
 
+;; (use-package prettier)
+
+;; (use-package reformatter
+;;   :elpaca t
+;;   :defer t)
+
+(use-package apheleia
+  :config (apheleia-global-mode +1)
+)
 
 (provide 'editor-misc)
 ;;; editor-misc.el ends here
