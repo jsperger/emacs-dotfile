@@ -14,9 +14,10 @@
 (setq user-full-name "John Sperger"
       user-mail-address "josp@duck.com")
 
-(defvar default-font "JetBrains Mono")
-(defvar font-size 18)
-(defvar font-weight 'medium)
+(defvar default-font-family "JetBrains Mono NL")
+(defvar font-size 15)
+(defvar default-font-width 'normal)
+(defvar default-font-weight 'medium)
 (defvar unicode-font "Noto Sans CJK SC")
 (defvar unicode-scale (/ 16.0 font-size))
 (defvar emoji-font "Noto Color Emoji")
@@ -31,18 +32,19 @@
         emoji-font "Apple Color Emoji"
         symbol-font "Apple Symbols"))
 
-(defun setup-font ()
-  (set-face-attribute 'default nil :font (font-spec :family default-font :size font-size :weight font-weight))
-
-  (when (fboundp 'set-fontset-font)
+(defun setup-font (&rest args)
+  (set-face-attribute 'default nil
+                      :family default-font-family
+                      :width default-font-width
+                      :height (* font-size 10)  ; The height in Emacs is usually specified in tenths of a point.
+                      :weight default-font-weight)
+ (when (fboundp 'set-fontset-font)
     (dolist (charset '(kana han cjk-misc bopomofo))
       (set-fontset-font t charset unicode-font))
     (add-to-list 'face-font-rescale-alist `(,unicode-font . ,unicode-scale))
     (set-fontset-font t 'emoji emoji-font nil 'prepend)
-    (set-fontset-font t 'symbol symbol-font nil 'prepend)))
-
-(add-hook 'after-init-hook #'setup-font)
-
+    (set-fontset-font t 'symbol symbol-font nil 'prepend))
+)
 
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil
@@ -161,7 +163,7 @@
                                (desktop-full-file-name)))
         desktop-lazy-verbose nil
         desktop-load-locked-desktop t
-        desktop-restore-eager 1
+        desktop-restore-eager 3
         desktop-save t)
 
   (dolist (param '(foreground-color background-color background-mode font cursor-color mouse-color))
@@ -388,7 +390,8 @@ the unwritable tidbits."
 (use-package golden-ratio
   :elpaca t
   :ensure t
-  :config (golden-ratio-mode 1))
+;; :config (golden-ratio-mode 1)
+  )
 
 (provide 'core-config)
  ;;; core-config.el ends here
