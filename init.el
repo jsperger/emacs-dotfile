@@ -73,11 +73,11 @@
 
 (require 'lang-misc)
 (require 'lang-org)
+(require 'lang-web)
 (require 'lang-emacs-lisp)
 
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
-
 
 (provide 'init)
 ;;; init.el ends here
