@@ -39,11 +39,9 @@
 (use-package writeroom-mode
   :config
   (setq split-width-threshold 120
-
         writeroom-width 128
         writeroom-fringes-outside-margins nil
         writeroom-global-effects nil
-        writeroom-major-modes '(text-mode prog-mode conf-mode special-mode Info-mode dired-mode)
         writeroom-major-modes-exceptions '(process-menu-mode proced-mode backtrace-mode)
         writeroom-maximize-window t
         writeroom-mode-line t
@@ -77,14 +75,15 @@
     (funcall fn proc (xterm-color-filter string)))
   (advice-add 'compilation-filter :around #'compilation-filter@around))
 
-(use-package fira-code-mode
-  :elpaca t
-  :if (display-graphic-p)
-  :custom (fira-code-mode-disabled-ligatures '(
-            "[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" "!="
-            ":" ";" ": " ".." "<-" "%%")) ;; List of ligatures to turn off
-  :hook prog-mode ;; Enables fira-code-mode automatically for programming major modes
-  )
+;; (use-package fira-code-mode
+;;   :disabled
+;;   :elpaca t
+;;   :if (display-graphic-p)
+;;   :custom (fira-code-mode-disabled-ligatures '(
+;;             "[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" "!="
+;;             ":" ";" ": " ".." "<-" "%%")) ;; List of ligatures to turn off
+;;   :hook prog-mode ;; Enables fira-code-mode automatically for programming major modes
+;;   )
 
 (use-package bookmark-in-project
   :elpaca t)
