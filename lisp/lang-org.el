@@ -8,10 +8,6 @@
 
 ;;; Code:
 
-(use-package easy-hugo
-  :elpaca t
-  :ensure t)
-
 (use-package org
   :ensure t
   )
@@ -27,6 +23,10 @@
 
 (use-package evil-org
   :after org)
+
+(use-package djvu)
+
+(use-package nov)
 
 (use-package org-noter
   :after org)
