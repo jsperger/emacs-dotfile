@@ -75,7 +75,7 @@
 (require 'lang-org)
 (require 'lang-web)
 (require 'lang-emacs-lisp)
-
+(require 'lang-rust)
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 

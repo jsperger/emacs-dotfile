@@ -75,6 +75,8 @@
     (funcall fn proc (xterm-color-filter string)))
   (advice-add 'compilation-filter :around #'compilation-filter@around))
 
+
+;; Commented out because it didn't seem to want to respect being disabled
 ;; (use-package fira-code-mode
 ;;   :disabled
 ;;   :elpaca t
@@ -85,8 +87,15 @@
 ;;   :hook prog-mode ;; Enables fira-code-mode automatically for programming major modes
 ;;   )
 
+
 (use-package bookmark-in-project
   :elpaca t)
+
+(use-package golden-ratio
+  :elpaca t
+  :ensure t
+  :config (golden-ratio-mode nil))
+
 
 (provide 'editor-ui)
 ;;; editor-ui.el ends here

@@ -1,6 +1,0 @@
-latex-mode
-
-(frame "\\begin{frame}{}" r> n> "\\end{frame}")
-(assumption "\\begin{assumption}[]" r> n> "\\end{assumption}")
-(frametwo "\\begin{frame}{" p "}" r> n> "\\end{frame}")
-(figure "\\begin{figure}" n> "\\centering" n> "\\insertgraphics{}" r> n> "\\end{figure}")

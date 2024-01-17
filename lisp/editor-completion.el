@@ -112,29 +112,29 @@
 
   (defvar consult--source-project-file
     `(:name     "Project File"
-      :narrow   ?f
-      :category file
-      :face     consult-file
-      :history  file-name-history
-      :state    ,#'consult--file-state
-      :enabled  ,(lambda () consult-project-function)
-      :items
-      ,(lambda ()
-         (when-let (project (project-current t))
-           (let* ((all-files (project-files project))
-                  (common-parent-directory
-                   (let ((common-prefix (try-completion "" all-files)))
-                     (if (> (length common-prefix) 0)
-                         (file-name-directory common-prefix))))
-                  (cpd-length (length common-parent-directory))
-                  items)
-             (print all-files)
-             (dolist (file all-files items)
-               (let ((part (substring file cpd-length)))
-                 (when (equal part "") (setq part "./"))
-                 (put-text-property 0 1 'multi-category `(file . ,file) part)
-                 (push part items))))))
-      "Project file candidate source for `consult-buffer'."))
+                :narrow   ?f
+                :category file
+                :face     consult-file
+                :history  file-name-history
+                :state    ,#'consult--file-state
+                :enabled  ,(lambda () consult-project-function)
+                :items
+                ,(lambda ()
+                   (when-let (project (project-current t))
+                     (let* ((all-files (project-files project))
+                            (common-parent-directory
+                             (let ((common-prefix (try-completion "" all-files)))
+                               (if (> (length common-prefix) 0)
+                                   (file-name-directory common-prefix))))
+                            (cpd-length (length common-parent-directory))
+                            items)
+                       (print all-files)
+                       (dolist (file all-files items)
+                         (let ((part (substring file cpd-length)))
+                           (when (equal part "") (setq part "./"))
+                           (put-text-property 0 1 'multi-category `(file . ,file) part)
+                           (push part items))))))
+                "Project file candidate source for `consult-buffer'."))
 
   (defvar consult--source-project-file-hidden
     `(:hidden t :narrow (?f . "Project File") ,@consult--source-project-file)
@@ -238,9 +238,9 @@ targets."
   (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package citar-embark
-    :after embark citar
-    :config
-    (citar-embark-mode))
+  :after embark citar
+  :config
+  (citar-embark-mode))
 
 
 (use-package wgrep
@@ -251,7 +251,7 @@ targets."
   :elpaca (:files (:defaults "extensions/*.el"))
   :demand t
   :init
- (setq completion-cycle-threshold 3
+  (setq completion-cycle-threshold 3
         tab-always-indent 'complete
         tab-first-completion 'eol
         corfu-auto t
@@ -275,21 +275,21 @@ targets."
                   (general-def 'insert corfu-map "<escape>" 'nil))))
 
   (use-package corfu-history
-   :elpaca nil
-   :hook (global-corfu-mode . corfu-history-mode))
+    :elpaca nil
+    :hook (global-corfu-mode . corfu-history-mode))
 
   (use-package corfu-popupinfo
-     :elpaca nil
-     :hook (global-corfu-mode . corfu-popupinfo-mode)
-     :config
-     (set-face-attribute 'corfu-popupinfo nil :height 0.95))
+    :elpaca nil
+    :hook (global-corfu-mode . corfu-popupinfo-mode)
+    :config
+    (set-face-attribute 'corfu-popupinfo nil :height 0.95))
 
   :general
   (corfu-map
    "RET"    nil
    "M-RET"  'corfu-quick-insert
    "S-SPC"  'corfu-insert-separator)
-)
+  )
 
 (use-package cape
   :elpaca t
@@ -321,7 +321,7 @@ targets."
   :hook ((text-mode prog-mode) . tempel-setup-capf)
   :init
   (setq tempel-trigger-prefix "<"
-        tempel-path (no-littering-expand-etc-file-name "templates"))
+        tempel-path "~/.config/emacs/templates/*.eld")
   :config
   (defun tempel-setup-capf ()
     (setq-local completion-at-point-functions
