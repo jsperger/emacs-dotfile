@@ -36,6 +36,7 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
+
 ;; Install use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
@@ -43,10 +44,40 @@
   ;; Assume :elpaca t unless otherwise specified.
   (setq elpaca-use-package-by-default t))
 
-
 ;; Block until current queue processed.
 (elpaca-wait)
 
+;; Seq update workaround
+(defun +elpaca-unload-seq (e)
+  (and (featurep 'seq) (unload-feature 'seq t))
+  (elpaca--continue-build e))
+
+;; You could embed this code directly in the recipe, I just abstracted it into a function.
+(defun +elpaca-seq-build-steps ()
+  (append (butlast (if (file-exists-p (expand-file-name "seq" elpaca-builds-directory))
+                       elpaca--pre-built-steps elpaca-build-steps))
+          (list '+elpaca-unload-seq 'elpaca--activate-package)))
+
+(elpaca `(seq :build ,(+elpaca-seq-build-steps)))
+
+
+;;; Temp workaround TODO: periodically check and see if this has been fixed
+(use-package jsonrpc
+  :elpaca t)
+
+(elpaca-wait)
+
+(setq package--builtin-versions (reverse package--builtin-versions))
+(use-package eldoc
+  :after jsonrpc
+  :preface
+  (unload-feature 'eldoc t)
+  (setq custom-delayed-init-variables '())
+  (defvar global-eldoc-mode nil)
+  :config
+  (global-eldoc-mode)
+  )
+;;; end workaround
 ;;;;;;;;;;;;;;
 ;; Key Bindings
 ;;
