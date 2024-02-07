@@ -88,12 +88,9 @@
 ;;   )
 
 
-(use-package bookmark-in-project
-  :elpaca t)
+(use-package bookmark-in-project)
 
 (use-package golden-ratio
-  :elpaca t
-  :ensure t
   :config (golden-ratio-mode nil))
 
 

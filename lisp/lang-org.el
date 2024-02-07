@@ -28,10 +28,6 @@
 (use-package evil-org
   :after org)
 
-(use-package djvu)
-
-(use-package nov)
-
 (use-package org-noter
   :after org)
 
