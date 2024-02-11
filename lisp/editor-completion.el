@@ -11,7 +11,7 @@
 
 
 (use-package vertico
-  :elpaca (:files (:defaults "extensions/*.el"))
+  :ensure (:files (:defaults "extensions/*.el"))
   :config
   (setq vertico-cycle t)
 
@@ -30,7 +30,7 @@
 
 
   (use-package vertico-buffer
-    :elpaca nil
+    :ensure nil
     :after vertico
     :no-require
     :hook (vertico-mode . vertico-buffer-mode)
@@ -40,7 +40,7 @@
                                           (side . top))))
 
   (use-package vertico-directory
-    :elpaca nil
+    :ensure nil
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
     :general
     (vertico-map "RET"   'vertico-directory-enter
@@ -48,7 +48,7 @@
                  "M-DEL" 'vertico-directory-delete-word))
 
   (use-package vertico-quick
-    :elpaca nil
+    :ensure nil
     :general
     (vertico-map "C-<return>" 'vertico-quick-exit)))
 
@@ -56,11 +56,9 @@
 (elpaca-wait)
 
 
-(use-package marginalia
-  :elpaca t)
+(use-package marginalia)
 
 (use-package orderless
-  :elpaca t
   :defer t
   :init
   (setq completion-styles '(orderless basic)
@@ -87,7 +85,6 @@
 
 
 (use-package consult
-  :elpaca t
   :init
   (advice-add #'project-find-regexp :override #'consult-ripgrep)
   (advice-add #'project-switch-to-buffer :override #'consult-project-buffer)
@@ -163,7 +160,7 @@
    [remap consult-imenu-multi] 'consult-org-agenda))
 
 (use-package embark
-  :elpaca (:files (:defaults *.el))
+  :ensure (:files (:defaults *.el))
   :init
   (with-eval-after-load 'avy
     (defun avy-action-embark (pt)
@@ -232,23 +229,13 @@ targets."
             "M-." 'embark-dwim))
 
 (use-package embark-consult
-  :demand t
-  :after (consult embark)
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-(use-package citar-embark
-  :after embark citar
-  :config
-  (citar-embark-mode))
-
-
-(use-package wgrep
-  :elpaca t
-  :defer t)
+(use-package wgrep)
 
 (use-package corfu
-  :elpaca (:files (:defaults "extensions/*.el"))
+  :ensure (:files (:defaults "extensions/*.el"))
   :demand t
   :init
   (setq completion-cycle-threshold 3
@@ -275,11 +262,11 @@ targets."
                   (general-def 'insert corfu-map "<escape>" 'nil))))
 
   (use-package corfu-history
-    :elpaca nil
+    :ensure nil
     :hook (global-corfu-mode . corfu-history-mode))
 
   (use-package corfu-popupinfo
-    :elpaca nil
+    :ensure nil
     :hook (global-corfu-mode . corfu-popupinfo-mode)
     :config
     (set-face-attribute 'corfu-popupinfo nil :height 0.95))
@@ -292,22 +279,17 @@ targets."
   )
 
 (use-package cape
-  :elpaca t
-  :defer t
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
 (use-package prescient
-  :elpaca t
   :init
   (use-package vertico-prescient
-    :elpaca t
     :hook (vertico-mode . vertico-prescient-mode)
     :init
     (setq vertico-prescient-enable-filtering nil))
   (use-package corfu-prescient
-    :elpaca t
     :hook (corfu-mode . corfu-prescient-mode)
     :init
     (setq corfu-prescient-enable-filtering nil))
@@ -317,7 +299,6 @@ targets."
 
 
 (use-package tempel
-  :elpaca t
   :hook ((text-mode prog-mode) . tempel-setup-capf)
   :init
   (setq tempel-trigger-prefix "<"
@@ -343,7 +324,6 @@ Just put this function in `hippie-expand-try-functions-list'."
   (setq read-process-output-max (* 1024 1024))
 
   (use-package yasnippet
-    :elpaca t
     :init
     (setq yas-minor-mode-map nil))
   :config
@@ -377,7 +357,6 @@ Just put this function in `hippie-expand-try-functions-list'."
   (tyrant-def "cE" 'eglot))
 
 (use-package all-the-icons-completion
-  :elpaca t
   :after (marginalia all-the-icons)
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :init
@@ -389,7 +368,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 
 (use-package doom-snippets
   :disabled
-  :elpaca (:host github
+  :ensure (:host github
                  :repo "doomemacs/snippets")
   :after yasnippet
   )

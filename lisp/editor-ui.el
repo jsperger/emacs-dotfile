@@ -66,7 +66,6 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package xterm-color
-  :elpaca t
   :defer t
   :init
   (setq compilation-environment '("TERM=xterm-256color"))
@@ -79,7 +78,6 @@
 ;; Commented out because it didn't seem to want to respect being disabled
 ;; (use-package fira-code-mode
 ;;   :disabled
-;;   :elpaca t
 ;;   :if (display-graphic-p)
 ;;   :custom (fira-code-mode-disabled-ligatures '(
 ;;             "[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" "!="

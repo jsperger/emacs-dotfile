@@ -9,13 +9,13 @@
 ;;; Code:
 
 (use-package vc
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   (setq vc-follow-symlinks t))
 
 (use-package magit
-  :elpaca (:files (:defaults "lisp/*.el" :exclude "lisp/magit-libgit.el" "lisp/magit-libgit-pkg"))
+  :ensure (:files (:defaults "lisp/*.el" :exclude "lisp/magit-libgit.el" "lisp/magit-libgit-pkg"))
   :defer t
   :init
   (setq magit-define-global-key-bindings nil)
@@ -57,7 +57,7 @@
     "gU"  'magit-unstage-file))
 
 (use-package forge
-  :elpaca t
+  :ensure t
   :defer t
   :after magit
   :init
@@ -65,7 +65,7 @@
         forge-database-connector 'sqlite-builtin))
 
 (use-package transient
-  :elpaca t
+  :ensure t
   :defer t
   :after vc magit
   :config
@@ -73,13 +73,13 @@
   (general-def transient-sticky-map "q" 'transient-quit-seq))
 
 (use-package browse-at-remote
-  :elpaca t
+  :ensure t
   :after vc magit
   :general
   (tyrant-def "go" 'browse-at-remote))
 
 (use-package diff-hl
-  :elpaca t
+  :ensure t
   :after vc magit
   :config
   (setq diff-hl-side 'right)
@@ -93,12 +93,12 @@
     "] h" '(diff-hl-next-hunk :jump t)))
 
 (use-package git-modes
-  :elpaca t
+  :ensure t
   :after vc magit
   :defer t)
 
 ;; (use-package git-timemachine
-;;   :elpaca t
+;;   :ensure t
 ;;   :config
 ;;   (general-def git-timemachine-mode-map
 ;;     "gt" '(:ignore t :which-key "git-timemachine"))
@@ -106,7 +106,7 @@
 ;;   (tyrant-def "gt" 'git-timemachine))
 
 (use-package git-link
-  :elpaca t
+  :ensure t
   :after vc magit
   :config
   (setq git-link-open-in-browser t)
@@ -132,7 +132,7 @@
     "gLh" 'git-link-homepage))
 
 (use-package gitignore-templates
-  :elpaca t
+  :ensure t
   :after vc magit
   :config
   (setq gitignore-templates-api 'github)

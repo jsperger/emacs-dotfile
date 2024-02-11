@@ -9,7 +9,6 @@
 ;;; Code:
 
 (use-package easy-hugo
-  :elpaca t
   :config
   (setq
    easy-hugo-basedir "~/work/code/websites/jsperger/"

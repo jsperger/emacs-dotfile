@@ -39,13 +39,13 @@
                       :width default-font-width
                       :height (* font-size 10)  ; The height in Emacs is usually specified in tenths of a point.
                       :weight default-font-weight)
- (when (fboundp 'set-fontset-font)
+  (when (fboundp 'set-fontset-font)
     (dolist (charset '(kana han cjk-misc bopomofo))
       (set-fontset-font t charset unicode-font))
     (add-to-list 'face-font-rescale-alist `(,unicode-font . ,unicode-scale))
     (set-fontset-font t 'emoji emoji-font nil 'prepend)
     (set-fontset-font t 'symbol symbol-font nil 'prepend))
-)
+  )
 
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil
@@ -122,13 +122,13 @@
 
 
 (use-package autorevert
-  :elpaca nil
+  :ensure nil
   :config
   (setq global-auto-revert-non-file-buffers t
         auto-revert-verbose nil))
 
 (use-package dabbrev
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   (setq dabbrev-abbrev-char-regexp "[A-Za-z-_]"
@@ -154,7 +154,7 @@
          )))
 
 (use-package desktop
-  :elpaca nil
+  :ensure nil
   :commands restart-emacs-without-desktop
   :init (desktop-save-mode)
   :config
@@ -177,7 +177,7 @@
   (advice-add 'desktop-read :around #'desktop-read@inhibit-message))
 
 (use-package dired
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   (when (eq system-type 'darwin) ;on mac use external ls from homebrew gnutils
@@ -191,20 +191,20 @@
         dired-vc-rename-file t))
 
 (use-package display-line-numbers
-  :elpaca nil
+  :ensure nil
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
   :config
   (setq-default display-line-numbers-type 'relative
                 display-line-numbers-width-start t))
 
 (use-package doc-view
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   (setq doc-view-resolution 400))
 
 (use-package ediff
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   (setq-default ediff-window-setup-function 'ediff-setup-windows-plain
@@ -212,10 +212,10 @@
                 ediff-merge-split-window-function 'split-window-horizontally))
 
 (use-package elec-pair
-  :elpaca nil)
+  :ensure nil)
 
 (use-package files
-  :elpaca nil
+  :ensure nil
   :hook (before-save . delete-trailing-whitespace)
   :config
   ;; Prompt to open file literally if large file.
@@ -254,13 +254,13 @@
   (add-to-list 'find-file-not-found-functions 'make-directory-maybe nil #'eq))
 
 (use-package flymake
-  :elpaca nil
+  :ensure nil
   :hook (prog-mode . flymake-mode)
   :init (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
   )
 
 (use-package newcomment
-  :elpaca nil
+  :ensure nil
   :commands comment-or-uncomment
   :config
   (defun comment-or-uncomment (n)
@@ -274,7 +274,7 @@
        (line-beginning-position) (line-end-position n)))))
 
 (use-package project
-  :elpaca nil
+  :ensure nil
   :defer t
   :config
   (setq project-vc-merge-submodules nil
@@ -300,13 +300,13 @@
   (add-to-list 'project-find-functions 'project-try-root t))
 
 (use-package recentf
-  :elpaca nil
+  :ensure nil
   :config
   (setq recentf-auto-cleanup 'never
         recentf-max-saved-items 100))
 
 (use-package savehist
-  :elpaca nil
+  :ensure nil
   :config
   (setq enable-recursive-minibuffers t ; allow commands in minibuffers
         history-length 100
@@ -340,14 +340,14 @@ the unwritable tidbits."
                           (cl-remove-if-not #'savehist-printable register-alist)))))
 
 (use-package saveplace
-  :elpaca nil)
+  :ensure nil)
 
 (use-package server
-  :elpaca nil
+  :ensure nil
   :commands (server-running-p))
 
 (use-package simple
-  :elpaca nil
+  :ensure nil
   :config
   (setq column-number-mode t
         delete-trailing-lines nil
@@ -359,14 +359,14 @@ the unwritable tidbits."
 
 (use-package whitespace
   :disabled
-  :elpaca nil
+  :ensure nil
   :hook ((prog-mode . show-trailing-whitespace)
          (diff-mode . whitespace-mode))
   :config
   (setq show-trailing-whitespace t))
 
 (use-package winner
-  :elpaca nil
+  :ensure nil
   :commands (winner-undo winner-redo)
   :init
   (setq winner-dont-bind-my-keys t)
@@ -374,17 +374,14 @@ the unwritable tidbits."
   (setq winner-boring-buffers-regexp "\\*.*\\*"))
 
 (use-package all-the-icons
-  :elpaca t
   :if (display-graphic-p))
 
 
 (use-package all-the-icons-dired
-  :elpaca t
   :after all-the-icons
   :hook (dired-mode-hook . all-the-icons-dired-mode))
 
 (use-package all-the-icons-ibuffer
-  :elpaca t
   :after all-the-icons
   :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 

@@ -8,19 +8,15 @@
 
 ;;; Code:
 (use-package dumb-jump
-  :elpaca t
-  :defer t
   :init
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   (setq dumb-jump-selector 'completing-read))
 
 (use-package gcmh
-  :elpaca t
   :config
   (setq gcmh-high-cons-threshold #x1200000))
 
 (use-package helpful
-  :elpaca t
   :config
   (defun helpful-reuse-window (buffer-or-name)
     "Switch to helpful BUFFER-OR-NAME.
@@ -44,7 +40,6 @@ reuse it's window, otherwise create new one."
    [remap describe-variable] 'helpful-variable))
 
 (use-package link-hint
-  :elpaca t
   :config
   (setq link-hint-restore nil)
   :general
@@ -68,7 +63,6 @@ reuse it's window, otherwise create new one."
     "jy" 'link-hint-copy-link))
 
 (use-package pandoc-mode
-  :elpaca t
   :hook (pandoc-mode . pandoc-load-default-settings)
   :commands pandoc
   :config
@@ -80,7 +74,6 @@ reuse it's window, otherwise create new one."
     (pandoc-main-hydra/body)))
 
 (use-package popper
-  :elpaca t
   :config
   (setq popper-display-control nil
         popper-reference-buffers
@@ -102,15 +95,11 @@ reuse it's window, otherwise create new one."
 
 (use-package reveal-in-osx-finder
   :if (eq system-type 'darwin)
-  :elpaca t
   :general (tyrant-def "bf" 'reveal-in-osx-finder))
 
 (use-package sideline
-  :elpaca t
-  :defer t
   :init
   (use-package sideline-flymake
-    :elpaca t
     :hook (flymake-mode . sideline-mode)
     :init
     (setq sideline-backends-right '(sideline-flymake))
@@ -118,7 +107,6 @@ reuse it's window, otherwise create new one."
               (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
 
 (use-package terminal-here
-  :elpaca t
   :config
   (setq terminal-here-mac-terminal-command 'iterm2
         terminal-here-linux-terminal-command 'alacritty
@@ -130,10 +118,8 @@ reuse it's window, otherwise create new one."
 
 (use-package treesit-auto
   :when (and (fboundp 'treesit-available-p) (treesit-available-p))
-  :elpaca t
-)
+  )
 (use-package undohist
-  :elpaca t
   :config
   (add-to-list 'undohist-ignored-files "EDITMSG")
 
@@ -144,11 +130,9 @@ reuse it's window, otherwise create new one."
 
 (use-package xr
   ;; Convert string regexp to rx notation
-  :elpaca t
   :defer t)
 
 (use-package winum
-  :elpaca t
   :init
   (with-eval-after-load 'which-key
     (push '((nil . "winum-select-window-[1-9]") . t) which-key-replacement-alist)
@@ -225,7 +209,7 @@ stays on current"
 
 (use-package apheleia
   :config (apheleia-global-mode +1)
-)
+  )
 
 (provide 'editor-misc)
 ;;; editor-misc.el ends here

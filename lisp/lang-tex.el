@@ -11,18 +11,18 @@
 (defvar bib-file-location "~/obsidian/obsidian-biblatex.bib")
 
 (use-package pdf-tools
-  :elpaca (:post-build (pdf-tools-install))
+  :ensure (:post-build (pdf-tools-install))
   :after tablist
   :config
-        ;; open pdfs scaled to fit page
-        (setq-default pdf-view-display-size 'fit-page)
-        ;; more fine-grained zooming
-        (setq pdf-view-resize-factor 1.1)
-        ;; automatically annotate highlights
-        (setq pdf-annot-activate-created-annotations t))
+  ;; open pdfs scaled to fit page
+  (setq-default pdf-view-display-size 'fit-page)
+  ;; more fine-grained zooming
+  (setq pdf-view-resize-factor 1.1)
+  ;; automatically annotate highlights
+  (setq pdf-annot-activate-created-annotations t))
 
 (use-package bibtex
-  :elpaca nil
+  :ensure nil
   )
 
 (use-package citar
@@ -42,13 +42,18 @@
       "f" #'citar-open
       "n" #'citar-open-notes)
     (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map)))
-   :config
+  :config
   (defun citar-setup-capf ()
     "add `citar-capf' to `completion-at-point-functions'"
     (add-to-list 'completion-at-point-functions #'citar-capf))
   :general
   (tyrant-def "aC" 'citar-open)
- )
+  )
+
+(use-package citar-embark
+  :config
+  (citar-embark-mode))
+
 
 (provide 'lang-tex)
 

@@ -9,7 +9,7 @@
 ;;; Code:
 
 (use-package markdown-mode
-  :elpaca t
+  :ensure t
   :defer t
   :config
   (setq markdown-fontify-code-blocks-natively t)
@@ -105,11 +105,9 @@
     "M-l"      'markdown-demote))
 
 (use-package markdown-preview-mode
-  :elpaca t
   :after markdown-mode)
 
 (use-package csv-mode
-  :elpaca t
   :mode (".csv" . csv-mode)
   :config
   (add-hook 'csv-mode-hook 'csv-guess-set-separator)
@@ -136,14 +134,13 @@
             (t "~/obsidian"))) ;; default path if neither macOS nor Linux
 
 (use-package obsidian
-  :elpaca t
   :config
   (obsidian-specify-path obsidian-path)
   (global-obsidian-mode t)
   :custom
   ;; This directory will be used for `obsidian-capture' if set.
   (obsidian-inbox-directory "Inbox")
-)
+  )
 
 (provide 'lang-misc)
 ;;; lang-misc.el ends here

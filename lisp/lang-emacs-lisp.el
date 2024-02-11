@@ -9,7 +9,7 @@
 ;;; Code:
 
 (use-package elisp-mode
-  :elpaca nil
+  :ensure nil
   :config
   (despot-def :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
     "'"  'ielm
@@ -25,7 +25,6 @@
     "tq" 'ert))
 
 (use-package eval-sexp-fu
-  :elpaca t
   :hook (emacs-lisp-mode . eval-sexp-fu-flash-mode))
 
 
