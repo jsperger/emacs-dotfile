@@ -47,66 +47,56 @@
 ;; Block until current queue processed.
 (elpaca-wait)
 
-;; Seq update workaround
-(defun +elpaca-unload-seq (e)
-  (and (featurep 'seq) (unload-feature 'seq t))
-  (elpaca--continue-build e))
+;;;;;;;;;;;;;;
+;; Auctex + Vertico
+;;
+;;
 
-;; You could embed this code directly in the recipe, I just abstracted it into a function.
-(defun +elpaca-seq-build-steps ()
-  (append (butlast (if (file-exists-p (expand-file-name "seq" elpaca-builds-directory))
-                       elpaca--pre-built-steps elpaca-build-steps))
-          (list '+elpaca-unload-seq 'elpaca--activate-package)))
-
-(elpaca `(seq :build ,(+elpaca-seq-build-steps)))
-
-
-;;; Temp workaround TODO: periodically check and see if this has been fixed
-(use-package jsonrpc
-  :elpaca t)
-
+(use-package auctex :defer t
+  :ensure (:pre-build (("./autogen.sh")
+                       ("./configure"
+                        "--without-texmf-dir"
+                        "--with-packagelispdir=./"
+                        "--with-packagedatadir=./")
+                       ("make"))
+                      :build (:not elpaca--compile-info) ;; Make will take care of this step
+                      :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
+                      :version (lambda (_) (require 'tex-site) AUCTeX-version)))
 (elpaca-wait)
 
-(setq package--builtin-versions (reverse package--builtin-versions))
-(use-package eldoc
-  :after jsonrpc
-  :preface
-  (unload-feature 'eldoc t)
-  (setq custom-delayed-init-variables '())
-  (defvar global-eldoc-mode nil)
-  :config
-  (global-eldoc-mode)
-  )
-;;; end workaround
 ;;;;;;;;;;;;;;
 ;; Key Bindings
 ;;
 ;; Load path
 ;; optimize: force "lisp"" and "site-lisp" at the head to reduce the startup time.
+
 (dolist (dir '("lisp"))
   (push (expand-file-name dir user-emacs-directory) load-path))
 
 (require 'core-keybinds)
 (elpaca-wait)
-(require 'lang-tex)
-(elpaca-wait)
-(require 'editor-themes)
-(elpaca-wait)
+
 
 (require 'core-packages)
 (require 'core-config)
 (require 'core-funcs)
+(elpaca-wait)
 
 (require 'editor-completion)
+(require 'editor-themes)
 (require 'editor-misc)
 (require 'editor-ui)
+(elpaca-wait)
 (require 'editor-vc)
 
 (require 'lang-misc)
+(require 'lang-tex)
 (require 'lang-org)
 (require 'lang-web)
 (require 'lang-emacs-lisp)
 (require 'lang-rust)
+
+;; After-init hooks + custom
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 
