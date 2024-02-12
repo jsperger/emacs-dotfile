@@ -1,2 +1,7 @@
 # Folders
 /elpaca
+/auto-save-list/
+
+# Temp files
+*~
+/eln-cache/

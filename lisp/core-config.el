@@ -15,9 +15,9 @@
       user-mail-address "josp@duck.com")
 
 (defvar default-font-family "JetBrains Mono NL")
-(defvar font-size 15)
+(defvar font-size 12)
 (defvar default-font-width 'normal)
-(defvar default-font-weight 'medium)
+(defvar default-font-weight 'regular)
 
 (defvar unicode-font "Noto Sans CJK SC")
 (defvar unicode-scale (/ 16.0 font-size))
