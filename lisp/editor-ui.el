@@ -11,15 +11,34 @@
 (use-package doom-modeline
   :config
   (setq inhibit-compacting-font-caches t
-
         doom-modeline-height 0
         doom-modeline-buffer-file-name-style 'auto
         doom-modeline-project-detection 'project
 
+        doom-modeline-icon t
+        doom-modeline-major-mode-icon t
+
         doom-modeline-gnus nil
-        doom-modeline-icon nil
         doom-modeline-irc nil
         doom-modeline-persp-name nil))
+
+
+(use-package spacious-padding
+  :config
+  (setq spacious-padding-widths
+        '( internal-border-width 30
+           header-line-width 4
+           mode-line-width 6
+           tab-width 4
+           right-divider-width 60
+           scroll-bar-width 8))
+  )
+
+(use-package fontaine
+  :disabled)
+
+(use-package nano-modeline
+  :disabled)
 
 (use-package shackle
   :config
