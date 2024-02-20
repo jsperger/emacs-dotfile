@@ -166,9 +166,12 @@
     "sb"      'flyspell-buffer
     "sn"      'flyspell-goto-next-error
     "sr"      'flyspell-region
+    "sc"      'jinx-correct
+    "sC" 'jinx-correct-nearest
+    "sj" 'jinx-next
 
     "r"       (cons "replace" (make-sparse-keymap))
-;; Ask = query
+    ;; Ask = query
     "ra"      'query-replace
     "rs"      'replace-string
     "rr"      'replace-string-in-region
@@ -181,6 +184,7 @@
     "Td"      'toggle-debug-on-error
     "Tf"      'display-fill-column-indicator-mode
     "Tg"      'golden-ratio-mode
+    "Tj"      'jinx-mode
     "Tl"      'toggle-truncate-lines
     "Tm"      'flymake-mode
     "Tn"      'display-line-numbers-mode
@@ -252,7 +256,7 @@
                         (interactive)
                         (let ((prev-pos (point)))
                           (forward-visible-line 0)
-                         (delete-region (point) prev-pos)
+                          (delete-region (point) prev-pos)
                           (indent-according-to-mode))))))
 
 (elpaca-wait)

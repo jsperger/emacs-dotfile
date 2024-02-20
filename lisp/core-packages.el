@@ -56,9 +56,7 @@
 
 (use-package eat)
 
-(use-package jinx
-  :disabled
-  :hook (TeX-mode . jinx-mode) )
+(use-package jinx)
 
 (provide 'core-packages)
 ;;; core-packages.el ends here
