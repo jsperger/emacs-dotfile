@@ -52,6 +52,16 @@
 ;;
 ;;
 
+(use-package jsonrpc)
+
+(use-package eldoc
+  :preface
+    (unload-feature 'eldoc t)
+    (setq custom-delayed-init-variables '())
+    (defvar global-eldoc-mode nil)
+    :config
+    (global-eldoc-mode))
+
 (use-package auctex :defer t
   :ensure (:pre-build (("./autogen.sh")
                        ("./configure"
