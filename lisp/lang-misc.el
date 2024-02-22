@@ -130,7 +130,7 @@
       (cond ((eq system-type 'darwin)
              "~/pCloud Drive/Obsidian")
             ((eq system-type 'gnu/linux)
-             "~/pCloudDrive/Obsidian")
+             "~/obsidian")
             (t "~/obsidian"))) ;; default path if neither macOS nor Linux
 
 (use-package obsidian
