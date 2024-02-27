@@ -164,7 +164,7 @@
                                (desktop-full-file-name)))
         desktop-lazy-verbose nil
         desktop-load-locked-desktop t
-        desktop-restore-eager 3
+        desktop-restore-eager nil
         desktop-save t)
 
   (dolist (param '(foreground-color background-color background-mode font cursor-color mouse-color))

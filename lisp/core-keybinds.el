@@ -49,6 +49,7 @@
     "SPC"     '("M-x" . execute-extended-command)
     "TAB"     '("last buffer" . alternate-buffer)
     "!"       '("shell cmd" . shell-command)
+    "i"       '("Tempel insert" . tempel-insert)
 
     "a"       (cons "applications" (make-sparse-keymap))
     "ac"      'calc-dispatch
@@ -176,24 +177,24 @@
     "rs"      'replace-string
     "rr"      'replace-string-in-region
 
-    "t"       (cons "tempel" (make-sparse-keymap))
-    "ti"      'tempel-insert
+    ;; "t"       (cons "tempel" (make-sparse-keymap))
+    ;; "ti"      'tempel-insert
 
-    "T"       (cons "toggles" (make-sparse-keymap))
-    "Ta"      'auto-fill-mode
-    "Td"      'toggle-debug-on-error
-    "Tf"      'display-fill-column-indicator-mode
-    "Tg"      'golden-ratio-mode
-    "Tj"      'jinx-mode
-    "Tl"      'toggle-truncate-lines
-    "Tm"      'flymake-mode
-    "Tn"      'display-line-numbers-mode
-    "To"      'global-obsidian-mode
-    "Tp"      'pdf-view-mode
-    "Ts"      'flyspell-mode
-    "TT"      'TeX-latex-mode
-    "Tw"      'whitespace-mode
-    "TW"      'toggle-word-wrap
+    "t"       (cons "toggles" (make-sparse-keymap))
+    "ta"      'auto-fill-mode
+    "td"      'toggle-debug-on-error
+    "tf"      'display-fill-column-indicator-mode
+    "tg"      'golden-ratio-mode
+    "tj"      'jinx-mode
+    "tl"      'toggle-truncate-lines
+    "tm"      'flymake-mode
+    "tn"      'display-line-numbers-mode
+    "to"      'global-obsidian-mode
+    "tp"      'pdf-view-mode
+    "ts"      'flyspell-mode
+    "tt"      'TeX-latex-mode
+    "tw"      'whitespace-mode
+    "tW"      'toggle-word-wrap
 
     "u"       '("universal arg" . universal-argument)
 
