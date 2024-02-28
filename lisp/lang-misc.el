@@ -142,5 +142,7 @@
   (obsidian-inbox-directory "Inbox")
   )
 
+(use-package writegood-mode)
+
 (provide 'lang-misc)
 ;;; lang-misc.el ends here
