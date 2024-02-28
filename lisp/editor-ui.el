@@ -34,9 +34,6 @@
            scroll-bar-width 8))
   )
 
-(use-package fontaine
-  :disabled)
-
 (use-package nano-modeline
   :disabled)
 

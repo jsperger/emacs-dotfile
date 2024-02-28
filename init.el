@@ -93,7 +93,7 @@
 (elpaca-wait)
 
 (require 'editor-completion)
-(require 'editor-themes)
+(require 'editor-fonts-themes)
 (require 'editor-misc)
 (require 'editor-ui)
 (elpaca-wait)

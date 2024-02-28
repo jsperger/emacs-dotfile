@@ -14,39 +14,6 @@
 (setq user-full-name "John Sperger"
       user-mail-address "josp@duck.com")
 
-(defvar default-font-family "JetBrains Mono NL")
-(defvar font-size 12)
-(defvar default-font-width 'normal)
-(defvar default-font-weight 'regular)
-
-(defvar unicode-font "Noto Sans CJK SC")
-(defvar unicode-scale (/ 16.0 font-size))
-(defvar emoji-font "Noto Color Emoji")
-(defvar symbol-font "Noto Sans Symbols")
-
-(when (eq system-type 'darwin)
-  (setq ns-pop-up-frames nil
-        frame-resize-pixelwise t
-        font-size 12)
-
-  (setq unicode-font "Noto Sans CJK SC"
-        emoji-font "Apple Color Emoji"
-        symbol-font "Apple Symbols"))
-
-(defun setup-font (&rest args)
-  (set-face-attribute 'default nil
-                      :family default-font-family
-                      :width default-font-width
-                      :height (* font-size 10)  ; The height in Emacs is usually specified in tenths of a point.
-                      :weight default-font-weight)
-  (when (fboundp 'set-fontset-font)
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      (set-fontset-font t charset unicode-font))
-    (add-to-list 'face-font-rescale-alist `(,unicode-font . ,unicode-scale))
-    (set-fontset-font t 'emoji emoji-font nil 'prepend)
-    (set-fontset-font t 'symbol symbol-font nil 'prepend))
-  )
-
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil
         frame-resize-pixelwise t))
