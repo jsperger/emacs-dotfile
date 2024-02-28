@@ -1,0 +1,11 @@
+* TODO visual-fill-column
+
+- Change defaults in lisp file instead of customize
+- enable global visual-fill-column
+- figure out the correct column width and amount of extra space on the sides I want
+
+
+* TODO line number
+ - fix the scroll issue with variable pitch fonts caused by when line number for the
+   current line has more digits than the other line numbers on screen (it
+   usually does because current line is absolute and others are relative)
