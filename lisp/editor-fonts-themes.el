@@ -8,6 +8,10 @@
 
 ;;; Code:
 
+;;;;
+;; Hooks for after loading a theme
+;;
+
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
 
@@ -25,6 +29,37 @@
           (defun bolder-faces ()
             (set-face-attribute 'font-lock-function-name-face nil :weight 'semi-bold)
             (set-face-attribute 'font-lock-keyword-face nil :weight 'semi-bold)))
+
+
+(add-hook 'after-load-theme-hook
+          (defun customize-tab-bar ()
+            "Customize tab-bar faces."
+            (set-face-attribute 'tab-bar nil
+                                :foreground 'unspecified
+                                :background 'unspecified
+                                :box `(:line-width (-1 . 4) :color ,(face-background 'default))
+                                :inherit 'unspecified)
+            (set-face-attribute 'tab-bar-tab nil
+                                :weight 'bold
+                                :box 'unspecified
+                                :foreground 'unspecified
+                                :background 'unspecified
+                                :inherit 'unspecified)
+            (set-face-attribute 'tab-bar-tab-inactive nil
+                                :box 'unspecified
+                                :foreground 'unspecified
+                                :background 'unspecified
+                                :inherit 'unspecified)))
+
+(add-hook 'after-load-theme-hook
+          (defun unscale-outlines ()
+            (dolist (outline-number (number-sequence 1 8))
+              (let ((outline (intern (format "outline-%d" outline-number))))
+                (set-face-attribute outline nil :height 1.0)))))
+
+;;;;
+;; Font Defaults
+;;
 
 (defvar default-font-family "JetBrains Mono NL")
 (defvar font-size 12)
@@ -59,33 +94,10 @@
     (set-fontset-font t 'symbol symbol-font nil 'prepend))
   )
 
-
-;; (add-hook 'after-load-theme-hook
-;;           (defun customize-tab-bar ()
-;;             "Customize tab-bar faces."
-;;             (set-face-attribute 'tab-bar nil
-;;                                 :foreground 'unspecified
-;;                                 :background 'unspecified
-;;                                 :box `(:line-width (-1 . 4) :color ,(face-background 'default))
-;;                                 :inherit 'unspecified)
-;;             (set-face-attribute 'tab-bar-tab nil
-;;                                 :weight 'bold
-;;                                 :box 'unspecified
-;;                                 :foreground 'unspecified
-;;                                 :background 'unspecified
-;;                                 :inherit 'unspecified)
-;;             (set-face-attribute 'tab-bar-tab-inactive nil
-;;                                 :box 'unspecified
-;;                                 :foreground 'unspecified
-;;                                 :background 'unspecified
-;;                                 :inherit 'unspecified)))
-
-;; TODO: Causes an error to be thrown. Maybe outline comes from a package?
-;; (add-hook 'after-load-theme-hook
-;;           (defun unscale-outlines ()
-;;             (dolist (outline-number (number-sequence 1 8))
-;;               (let ((outline (intern (format "outline-%d" outline-number))))
-;;                 (set-face-attribute outline nil :height 1.0)))))
+;;;;
+;; Packages
+;;
+;;;;
 
 (use-package fontaine)
 
