@@ -67,6 +67,12 @@
     "wc" 'writeroom-mode
     "wC" 'global-writeroom-mode))
 
+(use-package visual-fill-column
+  :config
+  (setq-default visual-fill-column-center-text t)
+  (setq visual-fill-column-extra-text-width '(5 . 5))
+  )
+
 (use-package hl-todo)
 
 (use-package highlight-parentheses
