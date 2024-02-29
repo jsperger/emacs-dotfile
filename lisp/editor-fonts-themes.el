@@ -113,5 +113,7 @@
 
 (use-package ef-themes)
 
+(use-package gruvbox-theme)
+
 (provide 'editor-fonts-themes)
 ;;; editor-themes.el ends here
