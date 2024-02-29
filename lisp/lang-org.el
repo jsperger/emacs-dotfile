@@ -9,7 +9,110 @@
 ;;; Code:
 
 (use-package org
-  :ensure t
+  :config
+  (setq org-directory "~/obsidian/org/"
+        org-inbox-file (concat org-directory "inbox.org")
+        org-default-notes-file org-inbox-file
+        org-project-file (concat org-directory "projects.org")
+        )
+  (use-package oc
+    :ensure nil
+    :config
+    (setq org-cite-export-processors '((beamer natbib)
+                                       (latex biblatex)
+                                       (t csl))
+          org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
+
+
+  (despot-def org-mode-map
+    "'"     'org-edit-special
+    ","     'org-ctrl-c-ctrl-c
+    "*"     'org-ctrl-c-star
+    "-"     'org-ctrl-c-minus
+    "#"     'org-update-statistics-cookies
+    "RET"   'org-ctrl-c-ret
+    "M-RET" 'org-meta-return
+    "i"     (cons "insert" (make-sparse-keymap))
+    "ib"    'org-insert-structure-template
+    "ic"    'org-cite-insert
+    "id"    'org-insert-drawer
+    "if"    'org-footnote-new
+    "ih"    'org-insert-heading
+    "iH"    'org-insert-heading-after-current
+    "ii"    'org-id-get-create
+    "iI"    'org-insert-item
+    "il"    'org-insert-link
+    "in"    'org-add-note
+    "ip"    'org-set-property
+    "is"    'org-insert-subheading
+    "it"    'org-set-tags-command
+    "t"     (cons "tables" (make-sparse-keymap))
+    "ta"    'org-table-align
+    "tb"    'org-table-blank-field
+    "tc"    'org-table-convert
+    "td"    (cons "delete" (make-sparse-keymap))
+    "tdc"   'org-table-delete-column
+    "tdr"   'org-table-kill-row
+    "te"    'org-table-eval-formula
+    "tE"    'org-table-export
+    "tf"    'org-table-field-info
+    "th"    'org-table-previous-field
+    "tH"    'org-table-move-column-left
+    "ti"    (cons "insert" (make-sparse-keymap))
+    "tic"   'org-table-insert-column
+    "tih"   'org-table-insert-hline
+    "tiH"   'org-table-hline-and-move
+    "tir"   'org-table-insert-row
+    "tI"    'org-table-import
+    "tj"    'org-table-next-row
+    "tJ"    'org-table-move-row-down
+    "tK"    'org-table-move-row-up
+    "tl"    'org-table-next-field
+    "tL"    'org-table-move-column-right
+    "tn"    'org-table-create
+    "tN"    'org-table-create-with-table.el
+    "tp"    'org-plot/gnuplot
+    "tr"    'org-table-recalculate
+    "ts"    'org-table-sort-lines
+    "tt"    (cons "toggles" (make-sparse-keymap))
+    "ttf"   'org-table-toggle-formula-debugger
+    "tto"   'org-table-toggle-coordinate-overlays
+    "tw"    'org-table-wrap-region
+    "T"     (cons "toggles" (make-sparse-keymap))
+    "Tc"    'org-toggle-checkbox
+    "Te"    'org-toggle-pretty-entities
+    "Ti"    'org-toggle-inline-images
+    "Tl"    'org-toggle-link-display
+    "Tt"    'org-show-todo-tree
+    "Tx"    'org-latex-preview
+    "x"     (cons "text" (make-sparse-keymap))
+    "xb"    'org-bold
+    "xc"    'org-code
+    "xi"    'org-italic
+    "xo"    'org-open-at-point
+    "xr"    'org-clear
+    "xs"    'org-strike-through
+    "xu"    'org-underline
+    "xv"    'org-verbatim)
+
+  (general-def 'normal org-mode-map "RET" 'org-open-at-point)
+
+  :general
+  (tyrant-def
+    "o"      (cons "org" (make-sparse-keymap))
+    "o/"     'org-occur-in-agenda-files
+    "oa"     'org-agenda
+    "oc"     'org-capture
+    "oC"     (cons "clock" (make-sparse-keymap))
+    "oCc"    'org-clock-cancel
+    "oCg"    'org-clock-goto
+    "oCi"    'org-clock-in-last
+    "oCj"    'org-clock-jump-to-current-clock
+    "oCo"    'org-clock-out
+    "oCr"    'org-resolve-clocks
+    "od"     'open-org-default-notes-file
+    "ol"     'org-store-link
+    "op"     'open-org-project-file)
   )
 
 (use-package org-modern
@@ -42,7 +145,10 @@
   :after org pdftools)
 
 (use-package evil-org
-  :after org)
+  :hook (org-mode . evil-org-mode)
+  :config
+  (setq evil-org-key-theme '(navigation insert textobjects additional todo heading))
+  )
 
 (use-package org-noter
   :after org)
