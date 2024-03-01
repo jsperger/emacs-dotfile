@@ -302,7 +302,7 @@ targets."
   :hook ((text-mode prog-mode) . tempel-setup-capf)
   :init
   (setq tempel-trigger-prefix "<"
-        tempel-path "~/.config/emacs/templates/*.eld")
+        tempel-path "~/.emacs.d/etc/templates/*.eld")
   :config
   (defun tempel-setup-capf ()
     (setq-local completion-at-point-functions
