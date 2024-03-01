@@ -54,6 +54,7 @@
     "a"       (cons "applications" (make-sparse-keymap))
     "ac"      'calc-dispatch
     "ap"      'list-processes
+    "ad"      'todoist
     "ao"      (cons "obsidian" (make-sparse-keymap))
     "aoc"     'obsidian-capture
     "aoj"     'obsidian-jump
