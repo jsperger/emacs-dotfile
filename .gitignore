@@ -5,3 +5,15 @@
 # Temp files
 *~
 /eln-cache/
+/.emacs.desktop
+/.emacs.desktop.lock
+/elpa/
+/history
+/recentf
+/tree-sitter/
+/undohist/
+*.el#
+/tramp
+/transient/
+/places
+/elgrep-data.el

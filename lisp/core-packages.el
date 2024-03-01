@@ -58,5 +58,7 @@
 
 (use-package jinx)
 
+(use-package flymake-proselint)
+
 (provide 'core-packages)
 ;;; core-packages.el ends here
