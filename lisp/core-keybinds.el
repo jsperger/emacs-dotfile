@@ -226,6 +226,10 @@
     "wV"      'split-window-horizontally
     "wv"      'split-window-horizontally-and-focus
     "w="      'balance-windows
+    "w <left>" 'shrink-window-horizontally
+    "w <down>" 'shrink-window
+    "w <up>"   'enlarge-window
+    "w <right>" 'enlarge-window-horizontally
     )
 
   (general-def
