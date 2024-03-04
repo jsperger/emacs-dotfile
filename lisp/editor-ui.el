@@ -26,12 +26,14 @@
 (use-package spacious-padding
   :config
   (setq spacious-padding-widths
-        '( internal-border-width 30
+        '( internal-border-width 10
            header-line-width 4
            mode-line-width 6
            tab-width 4
-           right-divider-width 60
-           scroll-bar-width 8))
+           right-divider-width 20
+           scroll-bar-width 8)
+        )
+  (setq spacious-padding-subtle-mode-line t)
   )
 
 (use-package nano-modeline
@@ -40,8 +42,9 @@
 (use-package shackle
   :config
   (setq shackle-default-size 0.4
-        shackle-rules `((help-mode                       :select t :align right :size ,fill-column)
-                        (helpful-mode                    :select t :align right :size ,fill-column)
+        shackle-rules `(
+                        (help-mode :select t :align right :size ,fill-column)
+                        (helpful-mode :select t :align right :size ,fill-column)
                         ("*Messages*"                    :select t :align t)
                         ("*eldoc*"                       :align t)
                         (special-mode                    :align t)
@@ -50,7 +53,8 @@
                         (flymake-diagnostics-buffer-mode :align t)
                         ("*Shell Command Output*"        :align t)
                         ("*Async Shell Command*"         :align t)
-                        ("\\*EGLOT.*"                    :select t :align right :size ,fill-column :regexp t))))
+                        ("\\*EGLOT.*" :select t :align right :size ,
+                         fill-column :regexp t))))
 
 (use-package writeroom-mode
   :config
