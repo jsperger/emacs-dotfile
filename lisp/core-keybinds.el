@@ -190,7 +190,8 @@
     "tl"      'toggle-truncate-lines
     "tm"      'flymake-mode
     "tn"      'display-line-numbers-mode
-    "to"      'global-obsidian-mode
+    "to"      'outline-minor-mode
+    "tO"      'global-obsidian-mode
     "tp"      'pdf-view-mode
     "tr"      'writegood-mode
     "ts"      'flyspell-mode
