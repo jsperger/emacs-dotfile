@@ -10,7 +10,6 @@
 
 (use-package markdown-mode
   :ensure t
-  :defer t
   :config
   (setq markdown-fontify-code-blocks-natively t)
 
@@ -126,12 +125,7 @@
   )
 
 ;; hacky solution to the fact that the path is different on mac/linux
-(setq obsidian-path
-      (cond ((eq system-type 'darwin)
-             "~/pCloud Drive/Obsidian")
-            ((eq system-type 'gnu/linux)
-             "~/obsidian")
-            (t "~/obsidian"))) ;; default path if neither macOS nor Linux
+(setq obsidian-path "~/obsidian")
 
 (use-package obsidian
   :config

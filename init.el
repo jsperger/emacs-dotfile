@@ -62,16 +62,7 @@
 ;;    :config
 ;;    (global-eldoc-mode))
 
-(use-package auctex :defer t
-  :ensure (:pre-build (("./autogen.sh")
-                       ("./configure"
-                        "--without-texmf-dir"
-                        "--with-packagelispdir=./"
-                        "--with-packagedatadir=./")
-                       ("make"))
-                      :build (:not elpaca--compile-info) ;; Make will take care of this step
-                      :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
-                      :version (lambda (_) (require 'tex-site) AUCTeX-version)))
+
 (elpaca-wait)
 
 ;;;;;;;;;;;;;;
