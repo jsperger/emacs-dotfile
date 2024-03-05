@@ -194,7 +194,7 @@
     "tp"      'pdf-view-mode
     "tr"      'writegood-mode
     "ts"      'flyspell-mode
-    "tt"      'TeX-latex-mode
+    "tt"      'LateX-mode
     "tw"      'whitespace-mode
     "tW"      'toggle-word-wrap
 
@@ -313,11 +313,11 @@
         ((emacs-lisp-mode lisp-mode) . lisp-indent-offset)
         (enh-ruby-mode . enh-ruby-indent-level)
         (erlang-mode . erlang-indent-level)
+        (ess-mode . ess-indent-level)
         (js2-mode . js2-basic-offset)
         (js3-mode . js3-indent-level)
         ((js-mode json-mode) . js-indent-level)
-        (latex-mode . (LaTeX-indent-level tex-indent-basic))
-        (TeX-latex-mode . (LaTeX-indent-level tex-indent-basic))
+        (LaTeX-mode . (LaTeX-indent-level tex-indent-basic))
         (livescript-mode . livescript-tab-width)
         (mustache-mode . mustache-basic-offset)
         (nxml-mode . nxml-child-indent)

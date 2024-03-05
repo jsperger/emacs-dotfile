@@ -27,7 +27,7 @@
 
 (use-package citar
   :after bibtex
-  :hook ((org-mode latex-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
+  :hook ((org-mode LaTeX-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
   :init
   (with-eval-after-load 'embark
     (defun bibtex-key-embark ()
