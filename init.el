@@ -52,7 +52,7 @@
 ;;
 ;;
 
-;; (use-package jsonrpc)
+(use-package jsonrpc)
 
 ;;(use-package eldoc
 ;;  :preface
@@ -90,8 +90,8 @@
 (elpaca-wait)
 (require 'editor-vc)
 
-(require 'lang-misc)
 (require 'lang-tex)
+(require 'lang-misc)
 (require 'lang-org)
 (require 'lang-web)
 (require 'lang-emacs-lisp)

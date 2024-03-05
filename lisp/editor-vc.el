@@ -58,8 +58,7 @@
 
 (use-package forge
   :ensure t
-  :defer t
-  :after magit
+  :after markdown-mode magit
   :init
   (setq forge-add-default-bindings nil
         forge-database-connector 'sqlite-builtin))
