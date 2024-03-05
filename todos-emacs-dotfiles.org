@@ -14,3 +14,6 @@
    current line has more digits than the other line numbers on screen (it
    usually does because current line is absolute and others are relative)
 
+** TODO Auctex
+ - Move customization from customs.el to lang-tex.el
+ -see if anything from CDLaTeX is worth using and remap the keybinds to evil format
