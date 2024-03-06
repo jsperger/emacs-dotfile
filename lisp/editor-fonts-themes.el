@@ -109,26 +109,11 @@
 
 (use-package nano-theme)
 
-(use-package nano-modeline
-  :disabled
-  :hook
-  (prog-mode-hook          . nano-modeline-prog-mode)
-  (text-mode-hook          . nano-modeline-text-mode)
-  (org-mode-hook           . nano-modeline-org-mode)
-  (pdf-view-mode-hook      . nano-modeline-pdf-mode)
-  (mu4e-headers-mode-hook  . nano-modeline-mu4e-headers-mode)
-  (mu4e-view-mode-hook     . nano-modeline-mu4e-message-mode)
-  (elfeed-show-mode-hook   . nano-modeline-elfeed-entry-mode)
-  (elfeed-search-mode-hook . nano-modeline-elfeed-search-mode)
-  (term-mode-hook          . nano-modeline-term-mode)
-  (xwidget-webkit-mode-hook  . nano-modeline-xwidget-mode)
-  (messages-buffer-mode-hook . nano-modeline-message-mode)
-  (org-capture-mode-hook   . nano-modeline-org-capture-mode)
-  (org-agenda-mode-hook    . nano-modeline-org-agenda-mode))
-
 (use-package ef-themes)
 
-(use-package catppuccin-theme)
+(use-package catppuccin-theme
+  :config
+  (setq catppuccin-enlarge-headings nil))
 
 (use-package doom-themes)
 

@@ -156,6 +156,21 @@
 (use-package org-noter-pdftools
   :after org-noter pdftools)
 
+(use-package ox-pandoc)
+
+(use-package todoist
+  :config
+  (setq todoist-backing-buffer "~/obsidian/org/todoist")
+
+  (despot-def todoist-mode-map
+    "t"     'todoist-task-menu
+    "p"     'todoist-project-menu
+    "n"     'todoist-new-task
+    "c"      'todoist-close-task
+    "u"      'todoist-update-task
+    "U"      'todoist-update-project)
+
+  )
 ;; (use-package fold-dwim-org
 ;;   :after org)
 
