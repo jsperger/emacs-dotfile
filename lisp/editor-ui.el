@@ -74,7 +74,7 @@
 (use-package visual-fill-column
   :config
   (setq-default visual-fill-column-center-text t)
-  (setq visual-fill-column-extra-text-width '(5 . 5))
+  (setq visual-fill-column-extra-text-width '(4 . 2))
   )
 
 (use-package hl-todo)

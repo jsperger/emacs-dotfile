@@ -1,10 +1,6 @@
-;; The below doesn't work. Only leaving it here temporarily so I remember failed attempts
-;; Hacky workaround attempt
-;; Issue: after loading a tex file still need to run M-x TeX-latex-mode
-;; (add-to-list 'auto-mode-alist '("\\.tex\\'" . Tex-latex-mode))
-
-
-
+;; These are here because for some reason the hooks don't seem to work
+;; when entering LaTeX-mode unless these files are loaded first
+;; TODO: Fix latex hook weirdness
 (load "latex.el" nil nil t)
 (load "preview-latex.el" nil nil t)
 
@@ -13,7 +9,7 @@
 (setq-default TeX-master nil
               TeX-command "LaTeX"
               TeX-engine 'luatex
-  		      preview-scale 1.4
+  		      preview-scale 1.1
               preview-scale-function
               (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
 
@@ -117,7 +113,6 @@
 
 (setup-font)
 
-(load-theme 'doom-nord-aurora)
 ;; (message "Checkpoint: %s" "hooks: after load theme")
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

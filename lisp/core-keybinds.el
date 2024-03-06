@@ -20,7 +20,6 @@
 
 (use-package general
   :demand t
-  :after evil
   :config
   (setq general-emit-autoloads nil)
 
@@ -79,6 +78,14 @@
     "cr"      'recompile
     "cx"      'kill-compilation
     "c="      'indent-region-or-buffer
+
+    "e"       (cons "elpaca" (make-sparse-keymap))
+    "ef"      'elpaca-fetch-all
+    "eF"      'elpaca-fetch
+    "el"      'elpaca-log
+    "em"      'elpaca-manager
+    "eu"      'elpaca-merge ;; update equivalent
+    ;; Intentional no bind for merge-all
 
     "f"       (cons "files" (make-sparse-keymap))
     "fC"      '("copy-file" . write-file)
@@ -169,6 +176,14 @@
     "sn"      'flyspell-goto-next-error
     "sr"      'flyspell-region
     "sc"      'jinx-correct
+    "sC"      'jinx-correct-nearest
+    "sj"      'jinx-next
+
+    "s"       (cons "spelling" (make-sparse-keymap))
+    "sb"      'flyspell-buffer
+    "sn"      'flyspell-goto-next-error
+    "sr"      'flyspell-region
+    "sc"      'jinx-correct
     "sC" 'jinx-correct-nearest
     "sj" 'jinx-next
 
@@ -190,13 +205,15 @@
     "tl"      'toggle-truncate-lines
     "tm"      'flymake-mode
     "tn"      'display-line-numbers-mode
-    "to"      'global-obsidian-mode
+    "to"      'outline-minor-mode
+    "tO"      'global-obsidian-mode
     "tp"      'pdf-view-mode
     "tr"      'writegood-mode
     "ts"      'flyspell-mode
     "tt"      'LateX-mode
     "tw"      'whitespace-mode
     "tW"      'toggle-word-wrap
+    "tz"      'TeX-fold-mode
 
     "u"       '("universal arg" . universal-argument)
 
