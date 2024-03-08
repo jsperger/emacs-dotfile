@@ -101,25 +101,6 @@
   (setq dabbrev-abbrev-char-regexp "[A-Za-z-_]"
         dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
-(use-package default-font-presets
-  :disabled
-  :commands
-  (default-font-presets-forward
-   default-font-presets-backward
-   default-font-presets-choose
-   default-font-presets-scale-increase
-   default-font-presets-scale-decrease
-   default-font-presets-scale-fit
-   default-font-presets-scale-reset)
-
-  :config
-  (setq default-font-presets-list
-        (list
-         "JetBrains Mono:weight=medium"
-         "Fira Code Medium 13"
-         "Source Code Pro Medium 10"
-         )))
-
 (use-package desktop
   :ensure nil
   :commands restart-emacs-without-desktop
