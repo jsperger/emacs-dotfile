@@ -135,25 +135,69 @@
     "jg"      'avy-goto-char-timer
     "jo"      'obsidian-jump
 
-    "l"       (cons "layouts" tab-prefix-map)
-    "ld"      'tab-bar-close-tab
-    "lD"      'tab-bar-close-other-tabs
-    "lg"      'tab-bar-change-tab-group
-    "lm"      'tab-bar-move-tab-to
-    "lM"      'tab-bar-move-tab-to-group
-    "ll"      'tab-bar-switch-to-tab
-    "lR"      'tab-bar-rename-tab
-    "lt"      'other-tab-prefix
-    "lu"      'tab-bar-undo-close-tab
-    "l1"      '("select tab 1..8" . tab-bar-select-tab)
-    "l2"      'tab-bar-select-tab
-    "l3"      'tab-bar-select-tab
-    "l4"      'tab-bar-select-tab
-    "l5"      'tab-bar-select-tab
-    "l6"      'tab-bar-select-tab
-    "l7"      'tab-bar-select-tab
-    "l8"      'tab-bar-select-tab
-    "l TAB"   'tab-bar-switch-to-last-tab
+    "l"       (cons "ellama" (make-sparse-keymap))
+    "lc"      (cons "code" (make-sparse-keymap))
+    "lcc"     'ellama-code-complete
+    "lca"     'ellama-code-add
+    "lce"     'ellama-code-edit
+    "lci"     'ellama-code-improve
+    "lcr"     'ellama-code-review
+    "ls"      (cons "summarize & session" (make-sparse-keymap))
+    "lss"    'ellama-summarize
+    "lsw"    'ellama-summarize-webpage
+    "lsl"    'ellama-load-session
+    "lsr"    'ellama-session-rename
+    "lsd"    'ellama-session-remove
+    "lsa"    'ellama-session-switch
+    "li"      (cons "improve" (make-sparse-keymap))
+    "liw"    'ellama-improve-wording
+    "lig"    'ellama-improve-grammar
+    "lic"    'ellama-improve-conciseness
+    "lm"      (cons "make" (make-sparse-keymap))
+    "lml"    'ellama-make-list
+    "lmt"    'ellama-make-table
+    "lmf"    'ellama-make-format
+    "la"      (cons "ask & chat" (make-sparse-keymap))
+    "laa"    'ellama-ask-about
+    "lai"    'ellama-chat
+    "lal"    'ellama-ask-line
+    "las"    'ellama-ask-selection
+    "lt"      (cons "translate" (make-sparse-keymap))
+    "ltt"    'ellama-translate
+    "ltb"    'ellama-translate-buffer
+    "lte"    'ellama-chat-translation-enable
+    "ltd"    'ellama-chat-translation-disable
+    "ltc"    'ellama-complete
+    "ld"      (cons "define" (make-sparse-keymap))
+    "ldw"    'ellama-define-word
+    "lx"      (cons "context" (make-sparse-keymap))
+    "lxb"    'ellama-context-add-buffer
+    "lxf"    'ellama-context-add-file
+    "lxs"    'ellama-context-add-selection
+    "lxi"    'ellama-context-add-info-node
+    "lp"      (cons "provider" (make-sparse-keymap))
+    "lps"    'ellama-provider-select
+
+
+    "L"       (cons "Layouts" tab-prefix-map)
+    "Ld"      'tab-bar-close-tab
+    "LD"      'tab-bar-close-other-tabs
+    "Lg"      'tab-bar-change-tab-group
+    "Lm"      'tab-bar-move-tab-to
+    "LM"      'tab-bar-move-tab-to-group
+    "Ll"      'tab-bar-switch-to-tab
+    "LR"      'tab-bar-rename-tab
+    "Lt"      'other-tab-prefix
+    "Lu"      'tab-bar-undo-close-tab
+    "L1"      '("select tab 1..8" . tab-bar-select-tab)
+    "L2"      'tab-bar-select-tab
+    "L3"      'tab-bar-select-tab
+    "L4"      'tab-bar-select-tab
+    "L5"      'tab-bar-select-tab
+    "L6"      'tab-bar-select-tab
+    "L7"      'tab-bar-select-tab
+    "L8"      'tab-bar-select-tab
+    "L TAB"   'tab-bar-switch-to-last-tab
 
     "m"       (cons "major mode" (make-sparse-keymap))
 
