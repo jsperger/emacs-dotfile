@@ -1,4 +1,7 @@
-;;;; init.el  -*- lexical-binding: t; -*-
+;;; init.el --- Summary -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+
 (defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -88,15 +91,16 @@
 (require 'editor-misc)
 (require 'editor-ui)
 (elpaca-wait)
+(require 'lang-tex)
 (require 'editor-vc)
 
-(require 'lang-tex)
 (require 'lang-misc)
 (require 'lang-org)
 (require 'lang-web)
 (require 'lang-emacs-lisp)
 (require 'lang-rust)
 (require 'lang-r)
+(require 'lang-llm)
 
 ;; After-init hooks + custom
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
