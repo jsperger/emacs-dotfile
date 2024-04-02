@@ -35,6 +35,7 @@
 
 
 ;; After-init hooks packages
+(pixel-scroll-precision-mode)
 (electric-pair-mode)
 (recentf-mode)
 (savehist-mode)

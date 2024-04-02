@@ -15,8 +15,8 @@
         doom-modeline-buffer-file-name-style 'auto
         doom-modeline-project-detection 'project
 
-        doom-modeline-icon t
-        doom-modeline-major-mode-icon t
+        doom-modeline-icon nil
+        doom-modeline-major-mode-icon nil
 
         doom-modeline-gnus nil
         doom-modeline-irc nil

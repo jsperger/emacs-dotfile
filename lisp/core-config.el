@@ -25,8 +25,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; change `tab-width' and `fill-column'
-(setq-default tab-width 4
-              fill-column 80)
+(setq-default fill-column 80)
 
 ;; no beep
 (setq ring-bell-function 'ignore)
@@ -40,8 +39,8 @@
 (setq sentence-end-double-space nil)
 
 ;; smooth scrolling
-(setq scroll-conservatively 101
-      scroll-margin 2)
+;; (setq scroll-conservatively 101
+;;       scroll-margin 2)
 
 ;; Highlight and allow to open http link at point in programming buffers
 ;; goto-address-prog-mode only highlights links in strings and comments
