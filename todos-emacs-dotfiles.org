@@ -8,7 +8,6 @@
 - enable global visual-fill-column
 - figure out the correct column width and amount of extra space on the sides I want
 
-
 ** TODO line number
  - fix the scroll issue with variable pitch fonts caused by when line number for the
    current line has more digits than the other line numbers on screen (it
@@ -17,3 +16,11 @@
 ** TODO Auctex
  - Move customization from customs.el to lang-tex.el
  -see if anything from CDLaTeX is worth using and remap the keybinds to evil format
+*  Notes On Removed Packages
+** desktop
+Disabled because it doesn't always play nice with elpaca. It seems it'll resume
+and load packages associated with the current buffer before the elpaca init
+runs.
+** fold-dwim-org
+Disabled for many months, name is illustrative but don't recall using it.
+** org-contrib

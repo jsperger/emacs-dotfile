@@ -115,6 +115,69 @@
     "op"     'open-org-project-file)
   )
 
+(use-package evil-org
+  :hook (org-mode . evil-org-mode)
+  :config
+  (setq evil-org-key-theme '(navigation insert textobjects additional todo heading))
+  )
+
+
+;;;
+;;; Filetype Extensions
+;;;
+
+(use-package nov) ; epub
+(use-package djvu) ; djvu
+(use-package org-pdftools ; pdf
+  :after org pdftools)
+
+
+
+;;;
+;;; Functionality Add-ons
+;;;
+
+;; Org-transclusion lets you insert a copy of text content via a file link or ID
+;; link within an Org file. It lets you have the same content present in
+;; different buffers at the same time without copy-and-pasting it.
+(use-package org-transclusion
+  :after org)
+
+;; Orphanage - collection of Unmaintained org add-ons
+(use-package org-contrib
+  :disabled
+  :after org)
+
+(use-package org-noter
+  :after org)
+
+(use-package org-noter-pdftools
+  :after org-noter pdftools)
+
+(use-package todoist
+  :config
+  (setq todoist-backing-buffer "~/obsidian/org/todoist")
+
+  (despot-def todoist-mode-map
+    "t"     'todoist-task-menu
+    "p"     'todoist-project-menu
+    "n"     'todoist-new-task
+    "c"      'todoist-close-task
+    "u"      'todoist-update-task
+    "U"      'todoist-update-project)
+
+  )
+
+;;;
+;;; Exporters:
+;;;
+
+(use-package ox-pandoc)
+
+;;;
+;;; Appearance:
+;;;
+
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
   :config
@@ -130,49 +193,6 @@
    org-hide-emphasis-markers t
    org-pretty-entities t
    org-ellipsis "…"))
-
-(use-package org-transclusion
-  :after org)
-
-(use-package org-contrib
-  :after org)
-
-(use-package djvu)
-
-(use-package nov)
-
-(use-package org-pdftools
-  :after org pdftools)
-
-(use-package evil-org
-  :hook (org-mode . evil-org-mode)
-  :config
-  (setq evil-org-key-theme '(navigation insert textobjects additional todo heading))
-  )
-
-(use-package org-noter
-  :after org)
-
-(use-package org-noter-pdftools
-  :after org-noter pdftools)
-
-(use-package ox-pandoc)
-
-(use-package todoist
-  :config
-  (setq todoist-backing-buffer "~/obsidian/org/todoist")
-
-  (despot-def todoist-mode-map
-    "t"     'todoist-task-menu
-    "p"     'todoist-project-menu
-    "n"     'todoist-new-task
-    "c"      'todoist-close-task
-    "u"      'todoist-update-task
-    "U"      'todoist-update-project)
-
-  )
-;; (use-package fold-dwim-org
-;;   :after org)
 
 (provide 'lang-org)
 ;;; lang-org.el ends here
