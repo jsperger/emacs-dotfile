@@ -107,8 +107,6 @@
 ;; (use-package nano-theme
 ;;  :disabled)
 
-(use-package nano-theme)
-
 (use-package ef-themes)
 
 (use-package catppuccin-theme

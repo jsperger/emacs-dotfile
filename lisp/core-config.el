@@ -101,6 +101,7 @@
         dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
 (use-package desktop
+  :disabled
   :ensure nil
   :commands restart-emacs-without-desktop
   :init (desktop-save-mode)
