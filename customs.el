@@ -57,16 +57,19 @@
 (evil-owl-mode)
 (evil-snipe-mode)
 (doom-modeline-mode)
+
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after evil"))
 (shackle-mode)
 (global-hl-todo-mode)
 (global-diff-hl-mode)
 (global-auto-revert-mode)
-(when my-debug-mode (message "Checkpoint: %s" "hooks: before auto complete"))
+
+(when my-debug-mode (message "Checkpoint: %s" "hooks: before completion modes"))
 (vertico-mode)
 (marginalia-mode)
 (global-corfu-mode)
 (prescient-persist-mode)
+
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after auto complete"))
 (gcmh-mode)
 (popper-mode)
@@ -74,6 +77,10 @@
 (global-treesit-auto-mode)
 (undohist-initialize)
 (winum-mode)
+(global-visual-fill-column-mode)
+
+(setq golden-ratio-mode nil)
+
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
 
 
@@ -88,7 +95,8 @@
  ;; If there is more than one, they won't work right.
  '(byte-compile-delete-errors t)
  '(custom-safe-themes
-   '("ed1b7b4db911724b2767d4b6ad240f5f238a6c07e98fff8823debcfb2f7d820a"
+   '("6b839977baf10a65d9d7aed6076712aa2c97145f45abfa3bad1de9d85bc62a0e"
+     "ed1b7b4db911724b2767d4b6ad240f5f238a6c07e98fff8823debcfb2f7d820a"
      "0664443859604a53d2257701f034459edf8eab3cc2be50c7d8ae36740fe35578"
      "b5b6396361db4bee9b0c0d7ea678b96b3b55e4217c610038c8d289eb05c426ef"
      "4c7228157ba3a48c288ad8ef83c490b94cb29ef01236205e360c2c4db200bb18"
