@@ -52,6 +52,15 @@
 (elpaca-wait)
 
 ;;;;;;;;;;;;;;
+;; Debugging assistant
+;;
+;;
+
+(defvar my-debug-mode nil
+  "Toggle debugging messages. Set to t to enable, nil to disable.")
+
+
+;;;;;;;;;;;;;;
 ;; Auctex + Vertico
 ;;
 ;;
