@@ -130,9 +130,10 @@
   :config
   (when (eq system-type 'darwin) ;on mac use external ls from homebrew gnutils
     (setq ls-lisp-use-insert-directory-program t
-          insert-directory-program "/usr/local/opt/coreutils/libexec/gnubin/ls"))
+          insert-directory-program "/opt/homebrew/opt/coreutils/libexec/gnubin/ls"))
   (setq dired-listing-switches "-aBhl --group-directories-first")
   (setq dired-auto-revert-buffer t
+        dired-kill-when-opening-new-dired-buffer  t
         dired-create-destination-dirs 'always
         dired-do-revert-buffer t
         dired-dwim-target t
