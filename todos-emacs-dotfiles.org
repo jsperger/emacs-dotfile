@@ -1,6 +1,7 @@
 * Major projects
 ** Create a literate config using org-mode
 
+
 * Package and Custom Settings
 ** TODO visual-fill-column
 
@@ -16,6 +17,20 @@
 ** TODO Auctex
  - Move customization from customs.el to lang-tex.el
  -see if anything from CDLaTeX is worth using and remap the keybinds to evil format
+
+
+* Packages to watch
+** Packages to try when time is permitting
+
+** Currently bugged
+*** nord-theme
+Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
+
+(use-package nord-theme)
+(use-package nordic-night-theme)
+
+
+
 *  Notes On Removed Packages
 ** desktop
 Disabled because it doesn't always play nice with elpaca. It seems it'll resume
