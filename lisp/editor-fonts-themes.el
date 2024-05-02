@@ -99,26 +99,47 @@
 ;;
 ;;;;
 
-(use-package fontaine)
-
+(use-package fontaine
+  :config
+  (setq fontaine-presets
+        '((t
+           :default-weight normal
+           :default-height 140
+           :fixed-pitch-family "JetBrains Mono NL"
+           :variable-pitch-family "Heliotrope OT"
+           :variable-pitch-height 1.05
+           :bold-family nil ; use whatever the underlying face has
+           :bold-weight bold)
+          (regular
+           :default-family "Iosevka Comfy"
+           :default-weight normal
+           :default-height 140)
+          (duo
+           :default-family "iA Writer Duospace")
+          (fira-mono
+           :default-family "Fira Mono")
+          (JetBrains
+           :default-family "JetBrains Mono NL"))
+        )
+)
 
 ;;; Theme packages
 
-;; (use-package nano-theme
-;;  :disabled)
+  ;; (use-package nano-theme
+  ;;  :disabled)
 
-(use-package ef-themes)
+  (use-package ef-themes)
 
-(use-package catppuccin-theme
-  :config
-  (setq catppuccin-enlarge-headings nil))
+  (use-package catppuccin-theme
+    :config
+    (setq catppuccin-enlarge-headings nil))
 
-(use-package doom-themes)
+  (use-package doom-themes)
 
-(use-package gruvbox-theme)
+  (use-package gruvbox-theme)
 
-(use-package solarized-theme)
+  (use-package solarized-theme)
 
 
-(provide 'editor-fonts-themes)
+  (provide 'editor-fonts-themes)
 ;;; editor-themes.el ends here
