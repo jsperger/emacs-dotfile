@@ -117,6 +117,15 @@
 (use-package golden-ratio
   :config (golden-ratio-mode nil))
 
+(use-package bicycle
+  :hook ((prog-mode . outline-minor-mode)
+         (prog-mode . hs-minor-mode))
+  :general
+  (tyrant-def
+    "t TAB" 'bicycle-cycle
+    "t <backtab>" 'bicycle-cycle-global
+    )
+  )
 
 (provide 'editor-ui)
 ;;; editor-ui.el ends here
