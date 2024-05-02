@@ -1,6 +1,7 @@
 LaTeX-mode latex-mode
 
 (frame "\\begin{frame}{}" r> n> "\\end{frame}")
+(vf "\\vfill \n")
 (vp "\\vfill \\pause \n")
 ;; taken from https://github.com/minad/tempel/blob/5b09f612cfd805dba5e90bf06580583cab045499/README.org#template-file-format
 ;; part of tempel-collection but it doesn't want to recognize
