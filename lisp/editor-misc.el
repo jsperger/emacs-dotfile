@@ -108,7 +108,8 @@ reuse it's window, otherwise create new one."
 
 (use-package terminal-here
   :config
-  (setq terminal-here-mac-terminal-command 'iterm2
+  (setq terminal-here-mac-terminal-command  (lambda (dir)
+                                              (list "open" "-a" "Alacritty" "--args" "--working-directory" (expand-file-name dir)))
         terminal-here-linux-terminal-command 'alacritty
         terminal-here-project-root-function (lambda () (project-root (project-current t))))
   :general
@@ -210,6 +211,8 @@ stays on current"
 (use-package apheleia
   :config (apheleia-global-mode +1)
   )
+
+;; (use-package biome)
 
 (provide 'editor-misc)
 ;;; editor-misc.el ends here
