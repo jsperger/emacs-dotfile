@@ -8,7 +8,8 @@
 
 ;;; Code:
 
-(use-package ellama)
+(if (eq system-type 'gnu/linux) (use-package ellama))
+
 
 
 (provide 'lang-llm)

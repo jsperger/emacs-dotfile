@@ -54,7 +54,9 @@
 
 (use-package unfill)
 
-(use-package eat)
+(if (eq system-type 'gnu/linux)
+    (use-package eat)
+  )
 
 (use-package jinx)
 
