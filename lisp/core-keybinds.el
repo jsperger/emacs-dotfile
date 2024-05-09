@@ -245,6 +245,7 @@
     "td"      'toggle-debug-on-error
     "tf"      'display-fill-column-indicator-mode
     "tg"      'golden-ratio-mode
+    "th"      'hs-minor-mode
     "tj"      'jinx-mode
     "tl"      'toggle-truncate-lines
     "tm"      'flymake-mode

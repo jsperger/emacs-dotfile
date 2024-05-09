@@ -32,6 +32,11 @@
     "#"     'org-update-statistics-cookies
     "RET"   'org-ctrl-c-ret
     "M-RET" 'org-meta-return
+    "e"     (cons "export" (make-sparse-keymap))
+    "ee"    'org-export-dispatch
+    "eb"    'org-beamer-export-to-pdf
+    "el"    'org-latex-export-to-latex
+    "ep"    'org-latex-export-to-pdf
     "i"     (cons "insert" (make-sparse-keymap))
     "ib"    'org-insert-structure-template
     "ic"    'org-cite-insert
