@@ -67,6 +67,8 @@
 
 (use-package jsonrpc)
 
+(use-package track-changes)
+
 (use-package eldoc
   :preface
   (unload-feature 'eldoc t)
