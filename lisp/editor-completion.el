@@ -154,7 +154,7 @@
     "fl" '("locate-files" . consult-find)
     "jj" '("search lines" . consult-line)
     "jJ" '("search lines a/ buffers" . consult-line-multi)
-    "Tt" 'consult-minor-mode-menu)
+    )
   (org-mode-map
    [remap consult-imenu]       'consult-org-heading
    [remap consult-imenu-multi] 'consult-org-agenda))

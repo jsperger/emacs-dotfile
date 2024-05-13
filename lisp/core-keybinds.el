@@ -133,6 +133,7 @@
     "jb"      'bookmark-jump
     "ji"      'imenu
     "jg"      'avy-goto-char-timer
+    "jn"      'mindstream-new
     "jo"      'obsidian-jump
 
     "l"       (cons "ellama" (make-sparse-keymap))
@@ -242,6 +243,7 @@
 
     "t"       (cons "toggles" (make-sparse-keymap))
     "ta"      'auto-fill-mode
+    "tc" 'consult-minor-mode-menu
     "td"      'toggle-debug-on-error
     "tf"      'display-fill-column-indicator-mode
     "tg"      'golden-ratio-mode
