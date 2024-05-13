@@ -28,12 +28,11 @@ fine from command line.
 ** TODO Auctex
  - Move customization from customs.el to lang-tex.el
  -see if anything from CDLaTeX is worth using and remap the keybinds to evil format
-<<<<<<< Updated upstream
-
 
 * Packages to watch
 ** Packages to try when time is permitting
-
+*** org-anki
+Synch org notes and anki. Only does basic and cloze, but that's all I use.
 ** Currently bugged
 *** nord-theme
 Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
@@ -41,10 +40,10 @@ Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
 (use-package nord-theme)
 (use-package nordic-night-theme)
 
-
-
-=======
 * Packages to test out
+** mindstream
+Simple efficient note taker that minimizes friction e.g. due to having to name a temp file
+https://countvajhula.github.io/mindstream/
 ** benchmark-init
 Benchmarking tools for emacs init and startup time
 ** indent-control

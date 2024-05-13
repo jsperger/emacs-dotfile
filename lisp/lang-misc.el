@@ -136,6 +136,8 @@
   (obsidian-inbox-directory "Inbox")
   )
 
+(use-package mindstream)
+
 (use-package writegood-mode)
 
 (provide 'lang-misc)

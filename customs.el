@@ -79,6 +79,8 @@
 (winum-mode)
 (global-visual-fill-column-mode)
 
+(mindstream-mode)
+
 (setq golden-ratio-mode nil)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
