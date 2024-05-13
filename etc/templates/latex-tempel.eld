@@ -1,4 +1,4 @@
-LaTeX-mode latex-mode
+LaTeX-mode latex-mode org-mode
 
 (frame "\\begin{frame}{}" r> n> "\\end{frame}")
 (vf "\\vfill \n")
@@ -33,3 +33,33 @@ LaTeX-mode latex-mode
 (trivlist "\\begin{trivlist}\n" r> n> "\\end{trivlist}")
 (verbatim "\\begin{verbatim}\n" r> n> "\\end{verbatim}")
 (verbatimm "\\begin{verbatim*}\n" r> n> "\\end{verbatim*}")
+
+;; Beamer
+(columns "\\begin{columns}
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\hfill
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\end{columns}")
+
+(col-img-r "\\begin{columns}
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\begin{column}{0.5\\textwidth}
+    \\begin{center}
+     \\includegraphics[width=\\textwidth]{}
+     \\end{center}
+\\end{column}
+\\end{columns}")
+
+(col-img-l "\\begin{columns}
+\\begin{column}{0.5\\textwidth}
+    \\begin{center}
+     \\includegraphics[width=\\textwidth]{}
+     \\end{center}
+\\end{column}
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\end{columns}")
+

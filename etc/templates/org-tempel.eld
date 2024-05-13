@@ -26,3 +26,34 @@ org-mode
   "#+BABEL: :session *R* :cache yes :results output graphics :exports both :tangle yes" n
   "-----"
   )
+
+;; Beamer - TODO: Figure out how to use latex inserts in org
+;; to avoid copy pasting
+(columns "\\begin{columns}
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\hfill
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\end{columns}")
+
+(col-img-r "\\begin{columns}
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\begin{column}{0.5\\textwidth}
+    \\begin{center}
+     \\includegraphics[width=\\textwidth]{}
+     \\end{center}
+\\end{column}
+\\end{columns}")
+
+(col-img-l "\\begin{columns}
+\\begin{column}{0.5\\textwidth}
+    \\begin{center}
+     \\includegraphics[width=\\textwidth]{}
+     \\end{center}
+\\end{column}
+\\begin{column}{0.5\\textwidth}
+\\end{column}
+\\end{columns}")
+
