@@ -61,7 +61,7 @@
 ;; Font Defaults
 ;;
 
-(defvar default-font-family "JetBrains Mono NL")
+(defvar default-font-family "iA Writer Duospace")
 (defvar font-size 12)
 (defvar default-font-width 'normal)
 (defvar default-font-weight 'regular)
@@ -74,7 +74,7 @@
 (when (eq system-type 'darwin)
   (setq ns-pop-up-frames nil
         frame-resize-pixelwise t
-        font-size 12)
+        font-size 15)
 
   (setq unicode-font "Noto Sans CJK SC"
         emoji-font "Apple Color Emoji"
@@ -135,6 +135,8 @@
     (setq catppuccin-enlarge-headings nil))
 
   (use-package doom-themes)
+
+(use-package modus-themes)
 
   (use-package gruvbox-theme)
 
