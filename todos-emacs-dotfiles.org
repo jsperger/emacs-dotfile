@@ -29,6 +29,9 @@ fine from command line.
  - Move customization from customs.el to lang-tex.el
  -see if anything from CDLaTeX is worth using and remap the keybinds to evil format
 
+** TODO Preview
+Switch preview to use libsvgm for svg instead of png previews. See if that actually makes previews not look like ass.
+In general: make previews not look like ass.
 * Packages to watch
 ** Packages to try when time is permitting
 *** org-anki
