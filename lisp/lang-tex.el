@@ -21,6 +21,13 @@
                       :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
                       :version (lambda (_) (require 'tex-site) AUCTeX-version))
   :mode ("\\.tex\\'" . LaTeX-mode)
+  :hook (LaTeX-mode . hs-minor-mode)
+  (LaTeX-mode . outline-minor-mode)
+  (LaTeX-mode . auto-fill-mode)
+  (LaTeX-mode . TeX-fold-mode)
+                                        ; TODO: figure out why these fail but single line declarations are working
+  ;;  :hook (LaTeX-mode . (outline-minor-mode hs-minor-mode)) ;fails
+  ;;  :hook (LaTeX-mode . (outline-minor-mode hs-minor-mode auto-fill-mode)) also fails
   :general
   (despot-def (TeX-latex-mode-map)
     :major-modes '(TeX-tex-mode LaTeX-mode)
