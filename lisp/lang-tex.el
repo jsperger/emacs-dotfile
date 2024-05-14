@@ -69,12 +69,22 @@
   (despot-def LaTeX-mode-map
     :major-modes '(LaTeX-mode)
     "."                'LaTeX-mark-environment              ;; C-c .
+    ","             'TeX-command-master
+    ;; TeX-command-run-all runs compile and open the viewer
+    "a"             'TeX-command-run-all                       ;; C-c C-a
+    "b"             'TeX-build
+    "c"             'TeX-clean
     "e"                'LaTeX-environment                   ;; C-c C-e
     "f"                (cons "fill" (make-sparse-keymap))
     "fe"               'LaTeX-fill-environment              ;; C-c C-q C-e
     "fp"               'LaTeX-fill-paragraph                ;; C-c C-q C-p
     "fr"               'LaTeX-fill-region                   ;; C-c C-q C-r
     "fs"               'LaTeX-fill-section                  ;; C-c C-q C-s
+    "h"             'TeX-doc
+    "k"             'TeX-kill-job                              ;; C-c C-k
+    "l"             'TeX-recenter-output-buffer                ;; C-c C-l
+    "n"             'TeX-next-error                            ;; C-c `
+    "N"             'TeX-previous-error                        ;; M-g p
     "p"                (cons "preview" (make-sparse-keymap))
     "pb"               'preview-buffer
     "pc"               'preview-clearout
@@ -98,7 +108,31 @@
     "xfu"              'font-upright
     "xi"               'font-italic
     "xr"               'font-clear
-    "xo"               'font-oblique)
+    "xo"               'font-oblique
+    "v"             'TeX-view                                  ;; C-c C-v
+    "x"             (cons "text/fonts" (make-sparse-keymap))
+    "xb"            'font-bold
+    "xc"            'font-code
+    "xe"            'font-emphasis
+    "xi"            'font-italic
+    "xr"            'font-clear
+    "xo"            'font-oblique
+    "xf"            (cons "fonts" (make-sparse-keymap))
+    "xfc"           'font-small-caps
+    "xff"           'font-sans-serif
+    "xfr"           'font-serif
+    "z"             (cons "fold" (make-sparse-keymap))
+    "z="            'TeX-fold-math
+    "zb"            'TeX-fold-buffer
+    "zB"            'TeX-fold-clearout-buffer
+    "ze"            'TeX-fold-env
+    "zI"            'TeX-fold-clearout-item
+    "zm"            'TeX-fold-macro
+    "zp"            'TeX-fold-paragraph
+    "zP"            'TeX-fold-clearout-paragraph
+    "zr"            'TeX-fold-region
+    "zR"            'TeX-fold-clearout-region
+    "zz"            'TeX-fold-dwim)
   )
 
 (use-package pdf-tools
