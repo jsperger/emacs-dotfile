@@ -14,6 +14,7 @@
         org-inbox-file (concat org-directory "inbox.org")
         org-default-notes-file org-inbox-file
         org-project-file (concat org-directory "projects.org")
+        org-confirm-babel-evaluate nil
         )
   (use-package oc
     :ensure nil
@@ -32,6 +33,29 @@
     "#"     'org-update-statistics-cookies
     "RET"   'org-ctrl-c-ret
     "M-RET" 'org-meta-return
+    "b"     (cons "babel" (make-sparse-keymap))
+    "ba"    'org-babel-sha1-hash
+    "bb"    'org-babel-execute-buffer
+    "bc"    'org-babel-check-src-block
+    "bd"    'org-babel-demarcate-block
+    "be"    'org-babel-execute-maybe
+    "bf"    'org-babel-tangle-file
+    "bg"    'org-babel-goto-named-src-block
+    "bh"    'org-babel-describe-bindings
+    "bi"    'org-babel-lob-ingest
+    "bI"    'org-babel-view-src-block-info
+    "bj"    'org-babel-insert-header-arg
+    "bl"    'org-babel-load-in-session
+    "bn"    'org-babel-next-src-block
+    "bo"    'org-babel-open-src-block-result
+    "bp"    'org-babel-previous-src-block
+    "br"    'org-babel-goto-named-result
+    "bs"    'org-babel-execute-subtree
+    "bt"    'org-babel-tangle
+    "bu"    'org-babel-goto-src-block-head
+    "bv"    'org-babel-expand-src-block
+    "bx"    'org-babel-do-key-sequence-in-edit-buffer
+    "bz"    'org-babel-switch-to-session
     "e"     (cons "export" (make-sparse-keymap))
     "ee"    'org-export-dispatch
     "eb"    'org-beamer-export-to-pdf
@@ -198,6 +222,9 @@
    org-hide-emphasis-markers t
    org-pretty-entities t
    org-ellipsis "…"))
+
+;; (use-package org-anki
+;;   :disabled)
 
 (provide 'lang-org)
 ;;; lang-org.el ends here
