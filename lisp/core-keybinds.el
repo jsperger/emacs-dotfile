@@ -86,6 +86,48 @@
     "em"      'elpaca-manager
     "eu"      'elpaca-merge ;; update equivalent
     ;; Intentional no bind for merge-all
+    "E"       (cons "Ellama" (make-sparse-keymap))
+    "Ec"      (cons "code" (make-sparse-keymap))
+    "Ecc"     'ellama-code-complete
+    "Eca"     'ellama-code-add
+    "Ece"     'ellama-code-edit
+    "Eci"     'ellama-code-improve
+    "Ecr"     'ellama-code-review
+    "Es"      (cons "summarize & session" (make-sparse-keymap))
+    "Ess"    'ellama-summarize
+    "Esw"    'ellama-summarize-webpage
+    "Esl"    'ellama-load-session
+    "Esr"    'ellama-session-rename
+    "Esd"    'ellama-session-remove
+    "Esa"    'ellama-session-switch
+    "Ei"      (cons "improve" (make-sparse-keymap))
+    "Eiw"    'ellama-improve-wording
+    "Eig"    'ellama-improve-grammar
+    "Eic"    'ellama-improve-conciseness
+    "Em"      (cons "make" (make-sparse-keymap))
+    "Eml"    'ellama-make-list
+    "Emt"    'ellama-make-table
+    "Emf"    'ellama-make-format
+    "Ea"      (cons "ask & chat" (make-sparse-keymap))
+    "Eaa"    'ellama-ask-about
+    "Eai"    'ellama-chat
+    "Eal"    'ellama-ask-line
+    "Eas"    'ellama-ask-selection
+    "Et"      (cons "translate" (make-sparse-keymap))
+    "Ett"    'ellama-translate
+    "Etb"    'ellama-translate-buffer
+    "Ete"    'ellama-chat-translation-enable
+    "Etd"    'ellama-chat-translation-disable
+    "Etc"    'ellama-complete
+    "Ed"      (cons "define" (make-sparse-keymap))
+    "Edw"    'ellama-define-word
+    "Ex"      (cons "context" (make-sparse-keymap))
+    "Exb"    'ellama-context-add-buffer
+    "Exf"    'ellama-context-add-file
+    "Exs"    'ellama-context-add-selection
+    "Exi"    'ellama-context-add-info-node
+    "Ep"      (cons "provider" (make-sparse-keymap))
+    "Eps"    'ellama-provider-select
 
     "f"       (cons "files" (make-sparse-keymap))
     "fC"      '("copy-file" . write-file)
@@ -136,69 +178,14 @@
     "jn"      'mindstream-new
     "jo"      'obsidian-jump
 
-    "l"       (cons "ellama" (make-sparse-keymap))
-    "lc"      (cons "code" (make-sparse-keymap))
-    "lcc"     'ellama-code-complete
-    "lca"     'ellama-code-add
-    "lce"     'ellama-code-edit
-    "lci"     'ellama-code-improve
-    "lcr"     'ellama-code-review
-    "ls"      (cons "summarize & session" (make-sparse-keymap))
-    "lss"    'ellama-summarize
-    "lsw"    'ellama-summarize-webpage
-    "lsl"    'ellama-load-session
-    "lsr"    'ellama-session-rename
-    "lsd"    'ellama-session-remove
-    "lsa"    'ellama-session-switch
-    "li"      (cons "improve" (make-sparse-keymap))
-    "liw"    'ellama-improve-wording
-    "lig"    'ellama-improve-grammar
-    "lic"    'ellama-improve-conciseness
-    "lm"      (cons "make" (make-sparse-keymap))
-    "lml"    'ellama-make-list
-    "lmt"    'ellama-make-table
-    "lmf"    'ellama-make-format
-    "la"      (cons "ask & chat" (make-sparse-keymap))
-    "laa"    'ellama-ask-about
-    "lai"    'ellama-chat
-    "lal"    'ellama-ask-line
-    "las"    'ellama-ask-selection
-    "lt"      (cons "translate" (make-sparse-keymap))
-    "ltt"    'ellama-translate
-    "ltb"    'ellama-translate-buffer
-    "lte"    'ellama-chat-translation-enable
-    "ltd"    'ellama-chat-translation-disable
-    "ltc"    'ellama-complete
-    "ld"      (cons "define" (make-sparse-keymap))
-    "ldw"    'ellama-define-word
-    "lx"      (cons "context" (make-sparse-keymap))
-    "lxb"    'ellama-context-add-buffer
-    "lxf"    'ellama-context-add-file
-    "lxs"    'ellama-context-add-selection
-    "lxi"    'ellama-context-add-info-node
-    "lp"      (cons "provider" (make-sparse-keymap))
-    "lps"    'ellama-provider-select
-
-
-    "L"       (cons "Layouts" tab-prefix-map)
-    "Ld"      'tab-bar-close-tab
-    "LD"      'tab-bar-close-other-tabs
-    "Lg"      'tab-bar-change-tab-group
-    "Lm"      'tab-bar-move-tab-to
-    "LM"      'tab-bar-move-tab-to-group
-    "Ll"      'tab-bar-switch-to-tab
-    "LR"      'tab-bar-rename-tab
-    "Lt"      'other-tab-prefix
-    "Lu"      'tab-bar-undo-close-tab
-    "L1"      '("select tab 1..8" . tab-bar-select-tab)
-    "L2"      'tab-bar-select-tab
-    "L3"      'tab-bar-select-tab
-    "L4"      'tab-bar-select-tab
-    "L5"      'tab-bar-select-tab
-    "L6"      'tab-bar-select-tab
-    "L7"      'tab-bar-select-tab
-    "L8"      'tab-bar-select-tab
-    "L TAB"   'tab-bar-switch-to-last-tab
+    "l"  (cons "eglot" (make-sparse-keymap))
+    "la" 'eglot-code-actions
+    "lb" 'eglot-events-buffer
+    "lr" 'eglot-rename
+    "lR" 'eglot-reconnect
+    "lx" 'eglot-shutdown
+    "lX" 'eglot-shutdown-all
+    "l=" 'eglot-format
 
     "m"       (cons "major mode" (make-sparse-keymap))
 
