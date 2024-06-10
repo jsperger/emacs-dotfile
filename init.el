@@ -69,13 +69,24 @@
 
 (use-package track-changes)
 
-(use-package eldoc
-  :preface
-  (unload-feature 'eldoc t)
-  (setq custom-delayed-init-variables '())
-  (defvar global-eldoc-mode nil)
-  :config
-  (global-eldoc-mode))
+
+;; Eldoc workaround
+(unload-feature 'eldoc t) ;; Unload built-in eldoc
+(setq custom-delayed-init-variables '())
+(defvar global-eldoc-mode nil)
+(elpaca eldoc
+  (require 'eldoc)
+  (global-eldoc-mode) ;; This is usually enabled by default by Emacs
+  )
+
+;; use-package version of eldoc workaround
+;; (use-package eldoc
+;;   :preface
+;;   (unload-feature 'eldoc t)
+;;   (setq custom-delayed-init-variables '())
+;;   (defvar global-eldoc-mode nil)
+;;   :config
+;;   (global-eldoc-mode))
 
 
 (elpaca-wait)
