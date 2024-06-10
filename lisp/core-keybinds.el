@@ -50,10 +50,11 @@
     "!"       '("shell cmd" . shell-command)
     "i"       '("Tempel insert" . tempel-insert)
 
-    "a"       (cons "applications" (make-sparse-keymap))
+    "a"       (cons "apps" (make-sparse-keymap))
     "ac"      'calc-dispatch
     "ap"      'list-processes
     "ad"      'todoist
+    "af"      'fontaine-set-preset
     "ao"      (cons "obsidian" (make-sparse-keymap))
     "aoc"     'obsidian-capture
     "aoj"     'obsidian-jump
@@ -145,7 +146,7 @@
     "fvf"     'add-file-local-variable
     "fvp"     'add-file-local-variable-prop-line
 
-    "F"       (cons "frame" (make-sparse-keymap))
+    "F"       (cons "Frame" (make-sparse-keymap))
     "Fd"      'delete-frame
     "FD"      'delete-other-frames
     "Fn"      'make-frame
@@ -230,6 +231,7 @@
 
     "t"       (cons "toggles" (make-sparse-keymap))
     "ta"      'auto-fill-mode
+    "tb"      'global-obsidian-mode
     "tc" 'consult-minor-mode-menu
     "td"      'toggle-debug-on-error
     "tf"      'display-fill-column-indicator-mode
@@ -240,14 +242,35 @@
     "tm"      'flymake-mode
     "tn"      'display-line-numbers-mode
     "to"      'outline-minor-mode
-    "tO"      'global-obsidian-mode
+    "tO"      'org-modern-mode
     "tp"      'pdf-view-mode
     "tr"      'writegood-mode
     "ts"      'flyspell-mode
     "tt"      'LateX-mode
+    "tv"      'visual-fill-column-mode
     "tw"      'whitespace-mode
     "tW"      'toggle-word-wrap
     "tz"      'TeX-fold-mode
+
+    "T"       (cons "Tabs" tab-prefix-map)
+    "Td"      'tab-bar-close-tab
+    "TD"      'tab-bar-close-other-tabs
+    "Tg"      'tab-bar-change-tab-group
+    "Tm"      'tab-bar-move-tab-to
+    "TM"      'tab-bar-move-tab-to-group
+    "Tl"      'tab-bar-switch-to-tab
+    "TR"      'tab-bar-rename-tab
+    "Tt"      'other-tab-prefix
+    "Tu"      'tab-bar-undo-close-tab
+    "T1"      '("select tab 1..8" . tab-bar-select-tab)
+    "T2"      'tab-bar-select-tab
+    "T3"      'tab-bar-select-tab
+    "T4"      'tab-bar-select-tab
+    "T5"      'tab-bar-select-tab
+    "T6"      'tab-bar-select-tab
+    "T7"      'tab-bar-select-tab
+    "T8"      'tab-bar-select-tab
+    "T TAB"   'tab-bar-switch-to-last-tab
 
     "u"       '("universal arg" . universal-argument)
 
