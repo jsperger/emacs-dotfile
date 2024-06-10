@@ -5,8 +5,8 @@
 ;; These are here because for some reason the hooks don't seem to work
 ;; when entering LaTeX-mode unless these files are loaded first
 ;; TODO: Fix latex hook weirdness
-(load "latex.el" nil nil t)
-(load "preview-latex.el" nil nil t)
+                                        ;(load "latex.el" nil nil t)
+                                        ;(load "preview-latex.el" nil nil t)
 
 (when my-debug-mode
   (message "Checkpoint: %s" "latex el"))

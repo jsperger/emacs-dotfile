@@ -139,6 +139,9 @@
         dired-dwim-target t
         dired-vc-rename-file t))
 
+;; (use-package casual-dired
+;;   :bind (:map dired-mode-map ("C-o" . 'casual-dired-tmenu)))
+
 (use-package display-line-numbers
   :ensure nil
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
