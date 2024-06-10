@@ -9,10 +9,10 @@
 ;;; Code:
 
 (use-package ess
-  :hook ((r-mode R-mode) . 'eglot-ensure)
+  :hook ((r-mode R-mode ess-r-mode) . 'eglot-ensure)
   :config
-  (despot-def (r-mode-map)
-    :major-modes '(R-mode r-mode)
+  (despot-def (ess-r-mode-map)
+    :major-modes 'ess-r-mode
     "b"            'ess-eval-buffer
     "c" 'ess-eval-region-or-function-or-paragraph
     "TAB" 'ess-install-library
@@ -22,6 +22,8 @@
   )
 
 (use-package ess-view-data)
+
+(use-package poly-R)
 
 (provide 'lang-r)
 ;;; lang-rust.el ends here
