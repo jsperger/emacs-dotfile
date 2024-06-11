@@ -180,6 +180,7 @@
   :config
   (citar-embark-mode))
 
+(use-package preview-dvisvgm)
 
 (provide 'lang-tex)
 

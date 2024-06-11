@@ -1,5 +1,17 @@
-LaTeX-mode latex-mode org-mode
+LaTeX-mode latex-mode org-mode markdown-mode
 
+
+;; TODO: figure out how to make evil and tempel play nice
+;; Issue: I'm inserting templates while in visual model
+;; and can't edit a template after inserting until entering insert mode.
+;; This is an issue because it seems to create multiple cursors.
+;; also ugly text colors
+;; Example: (section "\\section{" p "}")
+;; Expected: \section{<type_here>}
+;; Result: \section{normal-mode with second second cursor for typing}
+(section "\\section{}")
+(subsection "\\subsection{}")
+(ssection "\\subsection{}")
 (frame "\\begin{frame}{}" r> n> "\\end{frame}")
 (vf "\\vfill \n")
 (vp "\\vfill \\pause \n")

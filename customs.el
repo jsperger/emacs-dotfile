@@ -10,7 +10,6 @@
 ;; doesn't seem to be on mac
 ;;(load "latex.el" nil nil t)
 ;;(load "preview-latex.el" nil nil t)
-
 (when my-debug-mode
   (message "Checkpoint: %s" "latex el"))
 (add-to-list
