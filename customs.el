@@ -5,11 +5,17 @@
 ;; These are here because for some reason the hooks don't seem to work
 ;; when entering LaTeX-mode unless these files are loaded first
 ;; TODO: Fix latex hook weirdness
-(load "latex.el" nil nil t)
-(load "preview-latex.el" nil nil t)
+
+;; Not sure if this is still needed
+;; doesn't seem to be on mac
+;;(load "latex.el" nil nil t)
+;;(load "preview-latex.el" nil nil t)
 
 (when my-debug-mode
   (message "Checkpoint: %s" "latex el"))
+(add-to-list
+ 'treesit-language-source-alist
+ '(r "https://github.com/r-lib/tree-sitter-r" "next"))
 
 (setq-default TeX-master nil
               TeX-command "LaTeX"
