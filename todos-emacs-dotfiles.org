@@ -43,27 +43,29 @@ Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
 (use-package nord-theme)
 (use-package nordic-night-theme)
 
-* Packages to test out
-** mindstream
+* Package Notes
+** Packages to Test
+*** arxiv-mode
+Access arxiv in emacs.
+Not sure if it has functionality I care about (easily download tex files)a
+*** benchmark-init
+Benchmarking tools for emacs init and startup time
+*** crux
+Bunch of utility functions for emacs quality of life stuff
+*** indent-control
+Interface that combine all the indentation variables from each major mode to one giant list.
+*** mindstream
 Simple efficient note taker that minimizes friction e.g. due to having to name a temp file
 https://countvajhula.github.io/mindstream/
-** benchmark-init
-Benchmarking tools for emacs init and startup time
-** indent-control
-Interface that combine all the indentation variables from each major mode to one giant list.
-** crux
-Bunch of utility functions for emacs quality of life stuff
-** arxiv-mode
-Access arxiv in emacs.
-Not sure if it has functionality I care about (easily download tex files)
-** bicycle
-Cycle outline and code visibility. Can combine outline and hs modes.
->>>>>>> Stashed changes
-*  Notes On Removed Packages
-** desktop
+** Added Packages
+**** bicycle
+Purpose: Cycle outline and code visibility. Can combine outline and hs modes.
+Status: Added sometime before September 2024 (long before)
+** Removed Packages
+**** desktop
 Disabled because it doesn't always play nice with elpaca. It seems it'll resume
 and load packages associated with the current buffer before the elpaca init
 runs.
-** fold-dwim-org
+**** fold-dwim-org
 Disabled for many months, name is illustrative but don't recall using it.
-** org-contrib
+**** org-contrib
