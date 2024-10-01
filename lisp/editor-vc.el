@@ -141,6 +141,9 @@
     "gIn" 'gitignore-templates-new-file
     "gIi" 'gitignore-templates-insert))
 
+(use-package magit-todos
+  :after magit
+  :config (magit-todos-mode 1))
 
 (provide 'editor-vc)
 ;;; editor-vc.el ends here
