@@ -9,6 +9,14 @@
 ;; Inhibit package initialize
 (setq package-enable-at-startup nil)
 
+(setq elpaca-menu-functions '(elpaca-menu-extensions
+                              elpaca-menu-non-gnu-devel-elpa
+                              elpaca-menu-gnu-devel-elpa
+                              elpaca-menu-org
+                              elpaca-menu-melpa
+                              elpaca-menu-non-gnu-elpa
+                              elpaca-menu-gnu-elpa))
+
 ;; Inhibit resizing frame
 (setq frame-inhibit-implied-resize t)
 
