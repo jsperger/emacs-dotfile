@@ -10,16 +10,16 @@
 
 (defvar bib-file-location "~/obsidian/obsidian-biblatex.bib")
 
-(use-package auctex :defer t
-  :ensure (:pre-build (("./autogen.sh")
-                       ("./configure"
-                        "--without-texmf-dir"
-                        "--with-packagelispdir=./"
-                        "--with-packagedatadir=./")
-                       ("make"))
-                      :build (:not elpaca--compile-info) ;; Make will take care of this step
-                      :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
-                      :version (lambda (_) (require 'tex-site) AUCTeX-version))
+(use-package auctex
+  :defer t
+  :ensure
+  (:repo "https://git.savannah.gnu.org/git/auctex.git"
+         :branch "main"
+         :pre-build (("make" "elpa"))
+         :build (:not elpaca--compile-info) ;; Make will take care of this step
+         :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
+         :version (lambda (_) (require 'tex-site) AUCTeX-version))
+
   :mode ("\\.tex\\'" . LaTeX-mode)
   :hook (LaTeX-mode . hs-minor-mode)
   (LaTeX-mode . outline-minor-mode)
