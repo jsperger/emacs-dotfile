@@ -1,8 +1,9 @@
-* Major projects
-** Create a literate config using org-mode
+* Projects
+** Major projects
+*** Create a literate config using org-mode
 
-* Minor projects
-** Update to use elpaca ':wait' recipe keyword
+** Minor projects
+*** Update to use elpaca ':wait' recipe keyword
 Replace most of the (elpaca-wait) commands scattered throughout with
 `:wait` recipes in the relevant packages
 ** Figure out Mac environment issues
@@ -13,43 +14,67 @@ some packages weren't available or something.
 Similarly emacs says pandoc isn't installed when launched from launcher, but is
 fine from command line.
 
-* Package and Custom Settings
-** TODO visual-fill-column
+** Package and Custom Settings TODOs
+*** TODO visual-fill-column
 
 - Change defaults in lisp file instead of customize
 - enable global visual-fill-column
 - figure out the correct column width and amount of extra space on the sides I want
 
-** TODO line number
+*** TODO line number
  - fix the scroll issue with variable pitch fonts caused by when line number for the
    current line has more digits than the other line numbers on screen (it
    usually does because current line is absolute and others are relative)
 
-** TODO Auctex
+*** TODO Auctex
    * [X]  Move customization from customs.el to lang-tex.el
    * [ ] see if anything from CDLaTeX is worth using and remap the keybinds to evil format
 
-** TODO Preview
+*** TODO Preview
 Switch preview to use libsvgm for svg instead of png previews. See if that actually makes previews not look like ass.
 In general: make previews not look like ass.
-* Packages to watch
-** Packages to try when time is permitting
-*** org-anki
-Synch org notes and anki. Only does basic and cloze, but that's all I use.
-** Currently bugged
-*** nord-theme
+
+
+* Packages
+** Currently Testing
+*** magit-todos
+Collects TODO and other keywords in a project's files and displays them in magit's summary
+
+*** latex-extra
+https://github.com/Malabarba/latex-extra
+Small QoL changes to fill-indent, tab folding, and navigation
+*** eglot-tempel
+https://github.com/fejfighter/eglot-tempel
+*** sicp
+Silly way to read Structure and Interpretation of Computer Programs
+
+** Packages to watch for updates
+*** Currently Bugged packages
+**** nord-theme
 Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
 
 (use-package nord-theme)
 (use-package nordic-night-theme)
 
-* Package Notes
+*** In development (e.g.features I want not ready)
 ** Packages to Test
 *** arxiv-mode
 Access arxiv in emacs.
 Not sure if it has functionality I care about (easily download tex files)a
 *** benchmark-init
 Benchmarking tools for emacs init and startup time
+*** combobulate
+https://github.com/mickeynp/combobulate
+Structured editing and movement based on tree-sitter
+```
+Combobulate is a package that adds structured editing and movement to a wide
+range of programming languages. Unlike most programming major modes that use
+error-prone imperative code and regular expressions to determine what's what in
+your code, Combobulate uses Emacs 29's tree-sitter library. Tree-sitter
+maintains a concrete syntax tree of your code; it gives Combobulate absolute
+clarity of all aspects of your code, enabling more correct movement and editing
+than you would otherwise have.
+```
 *** crux
 Bunch of utility functions for emacs quality of life stuff
 *** indent-control
@@ -57,11 +82,15 @@ Interface that combine all the indentation variables from each major mode to one
 *** mindstream
 Simple efficient note taker that minimizes friction e.g. due to having to name a temp file
 https://countvajhula.github.io/mindstream/
-** Added Packages
+*** org-anki
+Synch org notes and anki. Only does basic and cloze, but that's all I use.
+
+** Notes on packages that were tested, added, or removed
+*** Added Packages
 **** bicycle
 Purpose: Cycle outline and code visibility. Can combine outline and hs modes.
 Status: Added sometime before September 2024 (long before)
-** Removed Packages
+*** Removed Packages
 **** desktop
 Disabled because it doesn't always play nice with elpaca. It seems it'll resume
 and load packages associated with the current buffer before the elpaca init
