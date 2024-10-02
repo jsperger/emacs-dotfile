@@ -100,9 +100,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-indent-close-delimiters "]")
+ '(TeX-indent-open-delimiters "[")
  '(byte-compile-delete-errors t)
  '(custom-safe-themes
-   '("6b839977baf10a65d9d7aed6076712aa2c97145f45abfa3bad1de9d85bc62a0e"
+   '("7c7026a406042e060bce2b56c77d715c3a4e608c31579d336cb825b09e60e827"
+     "7342266ffff707cc104313c9153342e44a47a9f22ed7157e4893aac74091ad27"
+     "28d91e89883df5dd87c7da27f6a15e8e41bb92a0c1341eaa9f397ed67b10b21d"
+     "ba323a013c25b355eb9a0550541573d535831c557674c8d59b9ac6aa720c21d3"
+     "6b839977baf10a65d9d7aed6076712aa2c97145f45abfa3bad1de9d85bc62a0e"
      "ed1b7b4db911724b2767d4b6ad240f5f238a6c07e98fff8823debcfb2f7d820a"
      "0664443859604a53d2257701f034459edf8eab3cc2be50c7d8ae36740fe35578"
      "b5b6396361db4bee9b0c0d7ea678b96b3b55e4217c610038c8d289eb05c426ef"
@@ -125,8 +131,7 @@
  '(package-native-compile t)
  '(safe-local-variable-values '((TeX-master . t)))
  '(temporary-file-directory "~/.tmp")
- '(visual-fill-column-extra-text-width '(4 . 5))
- '(safe-local-variable-values '((TeX-master . t))))
+ '(visual-fill-column-extra-text-width '(4 . 5)))
 
 
 
