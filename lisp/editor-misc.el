@@ -120,6 +120,9 @@ reuse it's window, otherwise create new one."
 (use-package treesit-auto
   :when (and (fboundp 'treesit-available-p) (treesit-available-p))
   )
+
+(use-package tree-sitter-langs)
+
 (use-package undohist
   :config
   (add-to-list 'undohist-ignored-files "EDITMSG")
@@ -209,8 +212,10 @@ stays on current"
 ;;   :defer t)
 
 (use-package apheleia
-  :config (apheleia-global-mode +1)
+  :config (setq apheleia-global-mode nil)
   )
+
+(use-package emacs-elisp-autofmt)
 
 ;; (use-package biome)
 
