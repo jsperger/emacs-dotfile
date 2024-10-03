@@ -110,16 +110,26 @@
            :variable-pitch-height 1.05
            :bold-family nil ; use whatever the underlying face has
            :bold-weight bold)
+
           (iosevka
            :default-family "Iosevka Comfy"
            :default-weight normal
            :default-height 130)
+
           (duo
            :default-family "iA Writer Duospace")
+
+          (quattro
+           :default-family "iA Writer Quattro V")
+
           (fira-mono
            :default-family "Fira Mono")
+
           (JetBrains
-           :default-family "JetBrains Mono NL"))
+           :default-family "JetBrains Mono NL")
+
+          (plex
+           :default-family "IBM Plex Mono"))
         )
   )
 
