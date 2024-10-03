@@ -60,7 +60,7 @@ Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
 ** Packages to Test
 *** arxiv-mode
 Access arxiv in emacs.
-Not sure if it has functionality I care about (easily download tex files)a
+Not sure if it has functionality I care about (easily download tex files)
 *** benchmark-init
 Benchmarking tools for emacs init and startup time
 *** combobulate
@@ -77,6 +77,9 @@ than you would otherwise have.
 ```
 *** crux
 Bunch of utility functions for emacs quality of life stuff
+*** evil-textobj-tree-sitter
+https://github.com/meain/evil-textobj-tree-sitter
+tree-sitter type movement with evil and text
 *** indent-control
 Interface that combine all the indentation variables from each major mode to one giant list.
 *** mindstream
