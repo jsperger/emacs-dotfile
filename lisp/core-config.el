@@ -146,8 +146,8 @@
   :ensure nil
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
   :config
-  (setq-default display-line-numbers-type 'relative
-                display-line-numbers-width-start t))
+  (setq-default display-line-numbers-type t
+                display-line-numbers-width-start 100))
 
 (use-package doc-view
   :ensure nil
