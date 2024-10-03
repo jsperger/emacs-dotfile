@@ -135,6 +135,9 @@
     "zz"            'TeX-fold-dwim)
   )
 
+(use-package latex-extra
+  :hook (LaTeX-mode . latex-extra-mode))
+
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
   :after tablist
