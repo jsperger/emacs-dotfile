@@ -10,14 +10,15 @@
 (setq package-enable-at-startup nil)
 
 ;; Set elpaca-menu-functions in priority order (I think)
-;; i.e. devel preferred over standard, we're living on the edge
-(setq elpaca-menu-functions '(elpaca-menu-extensions
+;; e.g. melpa over devel 
+(setq elpaca-menu-functions '(elpaca-menu-melpa
+                              elpaca-menu-non-gnu-elpa
+                              elpaca-menu-gnu-elpa
+			      elpaca-menu-extensions
                               elpaca-menu-non-gnu-devel-elpa
                               elpaca-menu-gnu-devel-elpa
                               elpaca-menu-org
-                              elpaca-menu-melpa
-                              elpaca-menu-non-gnu-elpa
-                              elpaca-menu-gnu-elpa))
+   ))
 
 ;; Inhibit resizing frame
 (setq frame-inhibit-implied-resize t)
