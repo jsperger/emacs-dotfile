@@ -9,6 +9,8 @@
 ;; Inhibit package initialize
 (setq package-enable-at-startup nil)
 
+;; Set elpaca-menu-functions in priority order (I think)
+;; i.e. devel preferred over standard, we're living on the edge
 (setq elpaca-menu-functions '(elpaca-menu-extensions
                               elpaca-menu-non-gnu-devel-elpa
                               elpaca-menu-gnu-devel-elpa
@@ -30,3 +32,10 @@
 (push '(internal-border-width . 0) default-frame-alist)
 (when (featurep 'ns)
   (push '(ns-transparent-titlebar . t) default-frame-alist))
+
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
