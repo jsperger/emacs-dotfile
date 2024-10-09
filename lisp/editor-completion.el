@@ -356,6 +356,9 @@ Just put this function in `hippie-expand-try-functions-list'."
   :general
   (tyrant-def "cE" 'eglot))
 
+(use-package consult-eglot
+  :after consult)
+
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
