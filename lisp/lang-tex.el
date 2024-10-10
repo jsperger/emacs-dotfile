@@ -27,6 +27,7 @@
                                         ; TODO: figure out why these fail but single line declarations are working
   ;;  :hook (LaTeX-mode . (outline-minor-mode hs-minor-mode)) ;fails
   ;;  :hook (LaTeX-mode . (outline-minor-mode hs-minor-mode auto-fill-mode)) also fails
+    (LaTeX-mode . LaTeX-math-mode)
   :general
   (despot-def (TeX-latex-mode-map)
     :major-modes '(TeX-tex-mode LaTeX-mode)
