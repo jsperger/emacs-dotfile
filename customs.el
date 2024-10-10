@@ -11,7 +11,7 @@
 (setq-default TeX-master nil
               TeX-command "LaTeX"
               TeX-engine 'luatex
-  	      preview-scale 1.1
+  	      preview-scale 1.0
               preview-scale-function
               (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
 
@@ -38,6 +38,8 @@
 
 ;;; After-init hooks packages
 
+;; PATH setting
+(exec-path-from-shell-initialize)
 ;; general emacs settings
 (pixel-scroll-precision-mode)
 (electric-pair-mode)
@@ -73,8 +75,6 @@
 (global-treesit-auto-mode)
 (undohist-initialize)
 (winum-mode)
-
-;; (mindstream-mode)
 
 (setq golden-ratio-mode nil)
 
@@ -119,6 +119,7 @@
      "524fa911b70d6b94d71585c9f0c5966fe85fb3a9ddd635362bfabd1a7981a307"
      "23841f54afd15fe850da8b37f2bb5813a873f53ed528024b0becb486ad8b01b3" default))
  '(package-native-compile t)
+ '(package-selected-packages '(diff-hl eglot git-modes markdown-mode))
  '(safe-local-variable-values '((TeX-master . t)))
  '(temporary-file-directory "~/.tmp")
  )
