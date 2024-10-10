@@ -118,8 +118,11 @@ reuse it's window, otherwise create new one."
     "p \'" 'terminal-here-project-launch))
 
 (use-package treesit-auto
-  :when (and (fboundp 'treesit-available-p) (treesit-available-p))
-  )
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 (use-package tree-sitter-langs)
 
