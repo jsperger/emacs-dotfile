@@ -20,7 +20,8 @@
 
         doom-modeline-gnus nil
         doom-modeline-irc nil
-        doom-modeline-persp-name nil))
+        doom-modeline-persp-name nil)
+  :custom (doom-modeline-mode 1))
 
 
 (use-package spacious-padding
@@ -41,6 +42,7 @@
 
 (use-package shackle
   :config
+  (shackle-mode 1)
   (setq shackle-default-size 0.4
         shackle-rules `(
                         (help-mode :select t :align right :size ,fill-column)
@@ -72,9 +74,10 @@
     "wC" 'global-writeroom-mode))
 
 (use-package visual-fill-column
-  :config
-  (setq-default visual-fill-column-center-text t)
-  (setq visual-fill-column-extra-text-width '(4 . 2))
+  :custom
+  (global-visual-fill-column-mode 1 "Enable global mode")
+   (visual-fill-column-center-text t "Center instead of beginning at margin")
+   (visual-fill-column-extra-text-width '(4 . 2))
   )
 
 (use-package hl-todo)
@@ -92,7 +95,6 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package xterm-color
-  :defer t
   :init
   (setq compilation-environment '("TERM=xterm-256color"))
 

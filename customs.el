@@ -49,14 +49,13 @@
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before evil"))
 ;; evil settings
-(evil-mode)
 (evil-collection-init)
 (evil-owl-mode)
 (evil-snipe-mode)
-(doom-modeline-mode)
+;;(doom-modeline-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after evil"))
-(shackle-mode)
+;; (shackle-mode)
 (global-hl-todo-mode)
 (global-diff-hl-mode)
 (global-auto-revert-mode)
@@ -74,9 +73,8 @@
 (global-treesit-auto-mode)
 (undohist-initialize)
 (winum-mode)
-(global-visual-fill-column-mode)
 
-(mindstream-mode)
+;; (mindstream-mode)
 
 (setq golden-ratio-mode nil)
 
@@ -123,7 +121,7 @@
  '(package-native-compile t)
  '(safe-local-variable-values '((TeX-master . t)))
  '(temporary-file-directory "~/.tmp")
- '(visual-fill-column-extra-text-width '(4 . 5)))
+ )
 
 
 

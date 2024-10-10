@@ -355,7 +355,8 @@
         evil-want-C-u-scroll t
         hs-minor-mode-map nil)
   :config
-  (setq evil-cross-lines t
+  (evil-mode 1)
+  (setopt evil-cross-lines t
         evil-kill-on-visual-paste nil
         evil-move-beyond-eol t
         evil-want-C-i-jump t

@@ -20,8 +20,7 @@
                                          "XDG_CONFG_HOME" "XDG_STATE_HOME"))
   (exec-path-from-shell-initialize))
 
-(use-package no-littering
-  :defer t)
+(use-package no-littering)
 
 ;; A few more useful configurations...
 (use-package emacs
@@ -58,7 +57,24 @@
     (use-package eat)
   )
 
-(use-package jinx)
+(use-package jinx
+  :after evil
+  :hook (text-mode . jinx-mode)
+  :config
+  (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
+  (with-eval-after-load 'vertico-multiform
+    (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20))))
+  (with-eval-after-load 'evil
+    (evil-define-motion evil-prev-jinx-error (count)
+      "Go to the COUNT'th spelling mistake preceding point."
+      :jump t (jinx-previous (or count 1)))
+    (evil-define-motion evil-next-jinx-error (count)
+      "Go to the COUNT'th spelling mistake after point."
+      :jump t (jinx-next (or count 1))))
+  :general
+  ([remap ispell-word] 'jinx-correct-word
+   [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
+   [remap evil-next-flyspell-error] 'evil-next-jinx-error))
 
 (use-package flymake-proselint)
 
