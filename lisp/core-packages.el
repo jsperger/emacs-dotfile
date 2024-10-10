@@ -20,8 +20,7 @@
                                          "XDG_CONFG_HOME" "XDG_STATE_HOME"))
   (exec-path-from-shell-initialize))
 
-(use-package no-littering
-  :defer t)
+(use-package no-littering)
 
 ;; A few more useful configurations...
 (use-package emacs

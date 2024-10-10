@@ -11,7 +11,6 @@
 (defvar bib-file-location "~/obsidian/obsidian-biblatex.bib")
 
 (use-package auctex
-  :defer t
   :ensure
   (:repo "https://git.savannah.gnu.org/git/auctex.git"
          :branch "main"

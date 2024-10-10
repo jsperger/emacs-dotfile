@@ -132,9 +132,7 @@ reuse it's window, otherwise create new one."
       (funcall fn)))
   (advice-add #'undohist-recover-safe :around #'undohist-recover-safe@around))
 
-(use-package xr
-  ;; Convert string regexp to rx notation
-  :defer t)
+(use-package xr)  ;; Convert string regexp to rx notation
 
 (use-package winum
   :init
@@ -207,15 +205,14 @@ stays on current"
 
 ;; (use-package prettier)
 
-;; (use-package reformatter
-;;   :elpaca t
-;;   :defer t)
+;; (use-package reformatter)
 
 (use-package apheleia
   :config (setq apheleia-global-mode nil)
   )
 
-(use-package emacs-elisp-autofmt)
+(use-package emacs-elisp-autofmt
+  :disabled)
 
 ;; (use-package biome)
 

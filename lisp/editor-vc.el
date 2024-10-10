@@ -65,7 +65,6 @@
 
 (use-package transient
   :ensure t
-  :defer t
   :after vc magit
   :config
   (general-def transient-base-map   "q" 'transient-quit-one)
@@ -93,8 +92,7 @@
 
 (use-package git-modes
   :ensure t
-  :after vc magit
-  :defer t)
+  :after vc magit)
 
 ;; (use-package git-timemachine
 ;;   :ensure t

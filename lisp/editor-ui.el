@@ -92,7 +92,6 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package xterm-color
-  :defer t
   :init
   (setq compilation-environment '("TERM=xterm-256color"))
 

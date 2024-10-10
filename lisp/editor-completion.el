@@ -59,7 +59,6 @@
 (use-package marginalia)
 
 (use-package orderless
-  :defer t
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil)
