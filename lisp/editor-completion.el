@@ -1,4 +1,3 @@
-
 ;;; editor-completion.el --- -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020-2023  Tianshu Wang
@@ -11,15 +10,7 @@
 
 
 (use-package vertico
-  :ensure (:files (:defaults "extensions/*.el"))
-  :config
-  (setq vertico-cycle t)
-
-  ;; Hide commands in M-x which do not work in the current mode.
-  (setq read-extended-command-predicate
-        #'command-completion-default-include-p)
-
-  (defun crm-indicator (args)
+  :preface (defun crm-indicator (args)
     (cons (format "[CRM%s] %s"
                   (if (string-match "\\*\\(.\\)" crm-separator)
                       (match-string 1 crm-separator)
@@ -27,6 +18,16 @@
                   (car args))
           (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+
+
+  :ensure (:files (:defaults "extensions/*.el"))
+  :config
+  (setq vertico-cycle t)
+
+  ;; Hide commands in M-x which do not work in the current mode.
+  (setq read-extended-command-predicate
+        #'command-completion-default-include-p)
 
 
   (use-package vertico-buffer
@@ -50,7 +51,12 @@
   (use-package vertico-quick
     :ensure nil
     :general
-    (vertico-map "C-<return>" 'vertico-quick-exit)))
+    (vertico-map "C-<return>" 'vertico-quick-exit))
+
+  (use-package vertico-multiform
+    :ensure nil
+    :hook (vertico-mode . vertico-multiform-mode))
+  )
 
 
 (elpaca-wait)
