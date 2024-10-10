@@ -136,7 +136,8 @@
   (obsidian-inbox-directory "Inbox")
   )
 
-(use-package mindstream)
+(use-package mindstream
+	     :disabled)
 
 (use-package writegood-mode)
 
