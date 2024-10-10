@@ -3,6 +3,7 @@
 *** Create a literate config using org-mode
 
 ** Minor projects
+*** Figure out if `eval-after-load` works with elpaca
 *** replace setq in config
 `setq` seems like it should be replaced by either
 `setopt` for global https://www.reddit.com/r/emacs/comments/178em7u/comment/k5077cy/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1
