@@ -3,6 +3,16 @@
 *** Create a literate config using org-mode
 
 ** Minor projects
+*** replace setq in config
+`setq` seems like it should be replaced by either
+`setopt` for global https://www.reddit.com/r/emacs/comments/178em7u/comment/k5077cy/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1
+`setq-local`
+
+`setq` doesn't run setter functions associated with a variable
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Setting-Variables.html#index-setopt
+
+nb: setopt shouldn't be used for programming, just init files because it's much less efficient
+
 *** Update to use elpaca ':wait' recipe keyword
 Replace most of the (elpaca-wait) commands scattered throughout with
 `:wait` recipes in the relevant packages
@@ -88,6 +98,9 @@ https://countvajhula.github.io/mindstream/
 *** org-anki
 Synch org notes and anki. Only does basic and cloze, but that's all I use.
 
+*** projection
+https://github.com/mohkale/projection
+projectile like features on top of emacs built-in project.el
 ** Notes on packages that were tested, added, or removed
 *** Added Packages
 **** bicycle
@@ -101,3 +114,27 @@ runs.
 **** fold-dwim-org
 Disabled for many months, name is illustrative but don't recall using it.
 **** org-contrib
+
+* Snippets
+** Jinx
+https://github.com/tshu-w/.emacs.d/blob/7de113f9f05523f4abeda8c83f2dabe2f21cb6b2/lisp/editor-misc.el#L239
+#+begin_src elisp
+(use-package jinx
+  :straight t
+  :hook (text-mode . jinx-mode)
+  :config
+  (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
+  (with-eval-after-load 'vertico-multiform
+    (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20))))
+  (with-eval-after-load 'evil
+    (evil-define-motion evil-prev-jinx-error (count)
+      "Go to the COUNT'th spelling mistake preceding point."
+      :jump t (jinx-previous (or count 1)))
+    (evil-define-motion evil-next-jinx-error (count)
+      "Go to the COUNT'th spelling mistake after point."
+      :jump t (jinx-next (or count 1))))
+  :general
+  ([remap ispell-word] 'jinx-correct-word
+   [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
+   [remap evil-next-flyspell-error] 'evil-next-jinx-error))
+#+end_src
