@@ -40,6 +40,7 @@
   (advice-add 'magit-blame-addition           :after #'org-reveal-advice)
   (advice-add 'magit-diff-visit-file          :after #'org-reveal-advice)
   (advice-add 'magit-diff-visit-worktree-file :after #'org-reveal-advice)
+ 
   :general
   (tyrant-def
     "g"   (cons "git" (make-sparse-keymap))
@@ -138,6 +139,7 @@
     "gIi" 'gitignore-templates-insert))
 
 (use-package magit-todos
+  :disabled
   :after magit
   :config (magit-todos-mode 1))
 
