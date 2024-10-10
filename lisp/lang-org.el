@@ -226,5 +226,8 @@
 ;; (use-package org-anki
 ;;   :disabled)
 
+(use-package ob-mermaid
+  :after org)
+
 (provide 'lang-org)
 ;;; lang-org.el ends here
