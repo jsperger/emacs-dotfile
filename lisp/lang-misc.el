@@ -140,5 +140,7 @@
 
 (use-package writegood-mode)
 
+(use-package sicp)
+
 (provide 'lang-misc)
 ;;; lang-misc.el ends here
