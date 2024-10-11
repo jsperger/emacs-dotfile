@@ -74,6 +74,8 @@ Access arxiv in emacs.
 Not sure if it has functionality I care about (easily download tex files)
 *** benchmark-init
 Benchmarking tools for emacs init and startup time
+*** consult-eglot https://github.com/mohkale/consult-eglot
+
 *** combobulate
 https://github.com/mickeynp/combobulate
 Structured editing and movement based on tree-sitter
@@ -86,8 +88,14 @@ maintains a concrete syntax tree of your code; it gives Combobulate absolute
 clarity of all aspects of your code, enabling more correct movement and editing
 than you would otherwise have.
 ```
+*** dape https://github.com/svaante/dape
+Debug adapter protocol. Like language server protocol for debugging.
+**** R debugger https://github.com/ManuelHentschel/VSCode-R-Debugger
 *** crux
 Bunch of utility functions for emacs quality of life stuff
+*** eglot-tempel
+Use tempel instead of yasnippet with eglot
+*** evil-tex https://github.com/iyefrat/evil-tex
 *** evil-textobj-tree-sitter
 https://github.com/meain/evil-textobj-tree-sitter
 tree-sitter type movement with evil and text
