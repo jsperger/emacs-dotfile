@@ -140,6 +140,7 @@
     "gIi" 'gitignore-templates-insert))
 
 (use-package magit-todos
+  :disabled
   :after magit
   :config (magit-todos-mode 1))
 
