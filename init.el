@@ -124,6 +124,7 @@
 (require 'lang-rust)
 (require 'lang-r)
 (require 'lang-llm)
+(require 'lang-lisp)
 
 ;; After-init hooks + custom
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
