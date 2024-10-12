@@ -136,7 +136,7 @@
 ;; (setup-font)
 ;; Set the last preset or fall back to desired style from `fontaine-presets'
 ;; (the `regular' in this case).
-(fontaine-set-preset (or (fontaine-restore-latest-preset) 'regular))
+(fontaine-set-preset (or (fontaine-restore-latest-preset) 't))
 
 ;; For persisting settings
 (fontaine-mode 1)
