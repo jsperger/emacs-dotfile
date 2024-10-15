@@ -47,6 +47,9 @@
   (setq read-extended-command-predicate
         #'command-completion-default-include-p)
 
+  ;; Emacs 30:
+  (setopt text-mode-ispell-word-completion nil)
+
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t)
   )
