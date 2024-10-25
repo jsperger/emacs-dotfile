@@ -183,7 +183,8 @@
   :config
   (citar-embark-mode))
 
-(use-package preview-dvisvgm)
+(use-package preview-dvisvgm
+  :after auctex)
 
 (provide 'lang-tex)
 
