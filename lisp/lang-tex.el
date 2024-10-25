@@ -136,6 +136,7 @@
   )
 
 (use-package latex-extra
+  :after auctex
   :hook (LaTeX-mode . latex-extra-mode))
 
 (use-package pdf-tools
@@ -183,7 +184,8 @@
   :config
   (citar-embark-mode))
 
-(use-package preview-dvisvgm)
+(use-package preview-dvisvgm
+  :after auctex)
 
 (provide 'lang-tex)
 
