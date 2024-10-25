@@ -13,11 +13,11 @@
 ;; e.g. melpa over devel
 (setq elpaca-menu-functions '(elpaca-menu-org
                               elpaca-menu-melpa
-                              elpaca-menu-non-gnu-elpa
                               elpaca-menu-gnu-elpa
+                              elpaca-menu-non-gnu-elpa
 			      elpaca-menu-extensions
-                              elpaca-menu-non-gnu-devel-elpa
                               elpaca-menu-gnu-devel-elpa
+                              elpaca-menu-non-gnu-devel-elpa
    ))
 
 ;; Inhibit resizing frame
