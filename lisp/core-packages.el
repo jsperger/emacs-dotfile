@@ -11,7 +11,7 @@
   exec-path-from-shell-variables
   exec-path-from-shell-initialize
   :init
-  (setq exec-path-from-shell-arguments nil
+  (setq
         exec-path-from-shell-variables '(
                                          "PATH" "MANPATH" "GNUPGHOME" "SSH_AUTH_SOCK"
                                          "SSH_AGENT_PID" "GPG_AGENT_INFO"
