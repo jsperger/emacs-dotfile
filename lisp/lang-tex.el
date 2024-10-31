@@ -34,7 +34,7 @@
     ","             'TeX-command-master
     ;; TeX-command-run-all runs compile and open the viewer
     "a"             'TeX-command-run-all                       ;; C-c C-a
-    "b"             'TeX-build
+    "b"             'TeX-command-menu ;TODO: replace with latexmk
     "c"             'TeX-clean
     "h"             'TeX-doc
     "k"             'TeX-kill-job                              ;; C-c C-k
@@ -133,6 +133,9 @@
     "zr"            'TeX-fold-region
     "zR"            'TeX-fold-clearout-region
     "zz"            'TeX-fold-dwim)
+
+  :config
+  (setopt TeX-engine 'luatex)
   )
 
 (use-package latex-extra
@@ -143,19 +146,20 @@
   :ensure (:post-build (pdf-tools-install))
   :after tablist
   :config
-  ;; open pdfs scaled to fit page
-  (setq-default pdf-view-display-size 'fit-page)
-  ;; more fine-grained zooming
-  (setq pdf-view-resize-factor 1.1)
-  ;; automatically annotate highlights
-  (setq pdf-annot-activate-created-annotations t))
+
+  (setopt pdf-view-display-size 'fit-page ; open pdfs scaled to fit page
+          pdf-view-resize-factor 1.1   ; more fine-grained zooming
+          pdf-annot-activate-created-annotations t ; automatically annotate highlights
+          )
+
+)
 
 (use-package bibtex
   :ensure nil
   )
 
 (use-package citar
-  :after bibtex
+  :after bibtex auctex
   :hook ((org-mode LaTeX-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
   :init
   (with-eval-after-load 'embark
@@ -185,6 +189,7 @@
   (citar-embark-mode))
 
 (use-package preview-dvisvgm
+  :ensure (:version (lambda (_) (require 'tex-site) AUCTeX-version))
   :after auctex)
 
 (provide 'lang-tex)

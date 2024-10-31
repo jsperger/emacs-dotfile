@@ -8,23 +8,23 @@
  'treesit-language-source-alist
  '(r "https://github.com/r-lib/tree-sitter-r" "next"))
 
-(setq-default TeX-master nil
-              TeX-command "LaTeX"
-              TeX-engine 'luatex
-  	      preview-scale 1.0
-              preview-scale-function
-              (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
+;; (setq-default TeX-master nil
+;;               TeX-command "LaTeX"
+;;               TeX-engine 'luatex
+;;   	      preview-scale 1.0
+;;               preview-scale-function
+;;               (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
 
-(setq preview-auto-cache-preamble nil
-      TeX-parse-self t
-      TeX-save-query nil
-      TeX-source-correlate-start-server t
-      LaTeX-fill-break-at-separators nil)
+;; (setq preview-auto-cache-preamble nil
+;;       TeX-parse-self t
+;;       TeX-save-query nil
+;;       TeX-source-correlate-start-server t
+;;       LaTeX-fill-break-at-separators nil)
 
-(setq bibtex-file-path "~/obsidian/"
-      bibtex-files '("obsidian-biblatex.bib")
-      bibtex-align-at-equal-sign t
-      bibtex-dialect 'bibtex)
+;; (setq bibtex-file-path "~/obsidian/"
+;;       bibtex-files '("obsidian-biblatex.bib")
+;;       bibtex-align-at-equal-sign t
+;;       bibtex-dialect 'bibtex)
 
 (setq citar-at-point-function 'embark-act
       citar-bibliography bib-file-location
