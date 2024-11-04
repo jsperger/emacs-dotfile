@@ -3,6 +3,15 @@
 *** Create a literate config using org-mode
 
 ** Minor projects
+*** Figure out how to get `preview-dvisvgm` and `latex-extra` to work correctly out of the box
+Fail because they rely on auctex-version (capitalization not correct), but that
+variable isn't defined until auctex is launched (terminology right?).  Putting
+:after auctex doesn't seem to be enough.
+
+Current workaround: open a tex file to instantiate auctex-version
+`elpaca-delete` the two packages
+Install through elpaca-manager
+
 *** Figure out if `eval-after-load` works with elpaca
 *** replace setq in config
 `setq` seems like it should be replaced by either
