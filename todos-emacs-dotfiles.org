@@ -3,6 +3,14 @@
 *** Create a literate config using org-mode
 
 ** Standard projects
+*** Figure out Mac environment issues
+pdf-tools build failed when emacs was launched from the launcher but succeeded
+when emacs was launched from the command line. Forgot to copy the message but
+some packages weren't available or something.
+
+Similarly emacs says pandoc isn't installed when launched from launcher, but is
+fine from command line.
+
 *** Figure out why obsidian package isn't working
 
 
@@ -28,18 +36,9 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Setting-Variables.html
 
 nb: setopt shouldn't be used for programming, just init files because it's much less efficient
 
-** Minor projects
 *** Update to use elpaca ':wait' recipe keyword
 Replace most of the (elpaca-wait) commands scattered throughout with
 `:wait` recipes in the relevant packages
-** Figure out Mac environment issues
-pdf-tools build failed when emacs was launched from the launcher but succeeded
-when emacs was launched from the command line. Forgot to copy the message but
-some packages weren't available or something.
-
-Similarly emacs says pandoc isn't installed when launched from launcher, but is
-fine from command line.
-
 ** Package and Custom Settings TODOs
 *** TODO visual-fill-column
 
