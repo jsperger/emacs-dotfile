@@ -232,7 +232,7 @@
     "t"       (cons "toggles" (make-sparse-keymap))
     "ta"      'auto-fill-mode
     "tb"      'global-obsidian-mode
-    "tc" 'consult-minor-mode-menu
+    "tc"      'consult-minor-mode-menu
     "td"      'toggle-debug-on-error
     "tf"      'display-fill-column-indicator-mode
     "tg"      'golden-ratio-mode
