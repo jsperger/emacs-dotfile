@@ -1,8 +1,8 @@
 * Projects
 ** Major projects
 *** Create a literate config using org-mode
-
-** Minor projects
+** Standard projects
+*** Figure out why obsidian package isn't working
 *** Figure out if `eval-after-load` works with elpaca
 *** replace setq in config
 `setq` seems like it should be replaced by either
@@ -14,6 +14,7 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Setting-Variables.html
 
 nb: setopt shouldn't be used for programming, just init files because it's much less efficient
 
+** Minor projects
 *** Update to use elpaca ':wait' recipe keyword
 Replace most of the (elpaca-wait) commands scattered throughout with
 `:wait` recipes in the relevant packages
@@ -48,6 +49,7 @@ In general: make previews not look like ass.
 
 * Packages
 ** Currently Testing
+*** denote
 *** magit-todos
 Collects TODO and other keywords in a project's files and displays them in magit's summary
 
