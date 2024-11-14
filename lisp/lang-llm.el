@@ -8,7 +8,10 @@
 
 ;;; Code:
 
-(if (eq system-type 'gnu/linux) (use-package ellama))
+(if (eq system-type 'gnu/linux)
+    (use-package ellama
+      :config
+      (setopt ellama-language "English")))
 
 
 
