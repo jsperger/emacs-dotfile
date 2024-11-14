@@ -156,7 +156,14 @@
 ;;;
 
 (use-package nov) ; epub
-(use-package djvu) ; djvu
+
+
+(elpaca (djvu
+         :host github
+         :repo "emacsmirror/djvu"
+         :inherit nil) )
+
+
 (use-package org-pdftools ; pdf
   :after org pdftools)
 

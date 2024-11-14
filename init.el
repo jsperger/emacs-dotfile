@@ -88,9 +88,19 @@
 ;;   :config
 ;;   (global-eldoc-mode))
 
+(elpaca (queue
+         :depth 1
+         :host github
+         :repo "emacsmirror/queue"
+         :inherit nil) )
+
+(elpaca (plz
+         :depth 1
+         :host github
+         :repo "emacsmirror/plz"
+         :inherit nil) )
 
 (elpaca-wait)
-
 ;;;;;;;;;;;;;;
 ;; Key Bindings
 ;;
