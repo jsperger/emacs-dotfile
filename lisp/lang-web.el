@@ -14,6 +14,8 @@
    easy-hugo-basedir "~/work/code/websites/jsperger/"
    ))
 
+(use-package mermaid-mode)
+
 (use-package toml)
 
 (provide 'lang-web)
