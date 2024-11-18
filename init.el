@@ -129,6 +129,7 @@
 (elpaca-wait)
 (require 'lang-tex)
 (require 'editor-vc)
+(require 'editor-projects)
 
 (require 'lang-misc)
 (require 'lang-org)
