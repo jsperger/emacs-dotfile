@@ -126,6 +126,7 @@
 (require 'editor-fonts-themes)
 (require 'editor-misc)
 (require 'editor-ui)
+(require 'editor-notes)
 (elpaca-wait)
 (require 'lang-tex)
 (require 'editor-vc)

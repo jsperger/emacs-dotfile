@@ -1,19 +1,23 @@
-# Folders
+# Core Folders
 /elpaca
-/auto-save-list/
+/elpa/
+/var/
 
 # Temp files
 *~
+*.el#
 /eln-cache/
 /.emacs.desktop
 /.emacs.desktop.lock
-/elpa/
+
+# Package-created files and folders
+/auto-save-list/
 /history
 /recentf
 /tree-sitter/
 /undohist/
-*.el#
 /tramp
 /transient/
 /places
 /elgrep-data.el
+/fontaine-latest-state.eld

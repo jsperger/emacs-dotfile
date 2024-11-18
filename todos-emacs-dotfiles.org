@@ -2,7 +2,18 @@
 ** Major projects
 *** Create a literate config using org-mode
 
-** Minor projects
+** Standard projects
+*** Figure out Mac environment issues
+pdf-tools build failed when emacs was launched from the launcher but succeeded
+when emacs was launched from the command line. Forgot to copy the message but
+some packages weren't available or something.
+
+Similarly emacs says pandoc isn't installed when launched from launcher, but is
+fine from command line.
+
+*** Figure out why obsidian package isn't working
+
+
 *** Figure out how to get `preview-dvisvgm` and `latex-extra` to work correctly out of the box
 Fail because they rely on auctex-version (capitalization not correct), but that
 variable isn't defined until auctex is launched (terminology right?).  Putting
@@ -12,7 +23,9 @@ Current workaround: open a tex file to instantiate auctex-version
 `elpaca-delete` the two packages
 Install through elpaca-manager
 
+
 *** Figure out if `eval-after-load` works with elpaca
+** Minor projects
 *** replace setq in config
 `setq` seems like it should be replaced by either
 `setopt` for global https://www.reddit.com/r/emacs/comments/178em7u/comment/k5077cy/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1
@@ -26,14 +39,6 @@ nb: setopt shouldn't be used for programming, just init files because it's much 
 *** Update to use elpaca ':wait' recipe keyword
 Replace most of the (elpaca-wait) commands scattered throughout with
 `:wait` recipes in the relevant packages
-** Figure out Mac environment issues
-pdf-tools build failed when emacs was launched from the launcher but succeeded
-when emacs was launched from the command line. Forgot to copy the message but
-some packages weren't available or something.
-
-Similarly emacs says pandoc isn't installed when launched from launcher, but is
-fine from command line.
-
 ** Package and Custom Settings TODOs
 *** TODO visual-fill-column
 
@@ -57,6 +62,7 @@ In general: make previews not look like ass.
 
 * Packages
 ** Currently Testing
+*** denote
 *** magit-todos
 Collects TODO and other keywords in a project's files and displays them in magit's summary
 
