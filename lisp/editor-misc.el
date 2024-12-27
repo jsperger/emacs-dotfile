@@ -73,38 +73,9 @@ reuse it's window, otherwise create new one."
     (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
     (pandoc-main-hydra/body)))
 
-(use-package popper
-  :config
-  (setq popper-display-control nil
-        popper-reference-buffers
-        '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          "\\*eldoc\\*"
-          "^\\*EGLOT"
-          help-mode
-          helpful-mode
-          compilation-mode
-          process-menu-mode
-          special-mode
-          flymake-diagnostics-buffer-mode))
-  :general
-  (tyrant-def
-    ";" 'popper-toggle
-    ":" 'popper-kill-latest-popup))
-
 (use-package reveal-in-osx-finder
   :if (eq system-type 'darwin)
   :general (tyrant-def "bf" 'reveal-in-osx-finder))
-
-(use-package sideline
-  :init
-  (use-package sideline-flymake
-    :hook (flymake-mode . sideline-mode)
-    :init
-    (setq sideline-backends-right '(sideline-flymake))
-    (add-hook 'flymake-mode-hook
-              (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
 
 (use-package terminal-here
   :config
