@@ -79,7 +79,8 @@
    [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
    [remap evil-next-flyspell-error] 'evil-next-jinx-error))
 
-(use-package flymake-proselint)
+(use-package flymake-proselint
+  :disabled)
 
 (provide 'core-packages)
 ;;; core-packages.el ends here
