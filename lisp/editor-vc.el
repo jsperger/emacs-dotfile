@@ -56,7 +56,7 @@
     "gU"  'magit-unstage-file))
 
 (use-package forge
-  :ensure t
+  :disabled
   :after markdown-mode magit
   :init
   (setq forge-add-default-bindings nil
