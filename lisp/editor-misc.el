@@ -62,17 +62,6 @@ reuse it's window, otherwise create new one."
     "jL" 'link-hint-open-multiple-links
     "jy" 'link-hint-copy-link))
 
-(use-package pandoc-mode
-  :hook (pandoc-mode . pandoc-load-default-settings)
-  :commands pandoc
-  :config
-  (defun pandoc ()
-    "Start pandoc for the buffer and open the menu"
-    (interactive)
-    ;; only run pandoc-mode if not active, as it resets pandoc--local-settings
-    (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
-    (pandoc-main-hydra/body)))
-
 (use-package reveal-in-osx-finder
   :if (eq system-type 'darwin)
   :general (tyrant-def "bf" 'reveal-in-osx-finder))

@@ -8,6 +8,8 @@
 
 ;;; Code:
 
+
+;;; Miscellaneous modes
 (use-package markdown-mode
   :ensure t
   :config
@@ -123,6 +125,21 @@
     "t" 'csv-transpose
     )
   )
+
+(use-package pandoc-mode
+  :hook (pandoc-mode . pandoc-load-default-settings)
+  :commands pandoc
+  :config
+  (defun pandoc ()
+    "Start pandoc for the buffer and open the menu"
+    (interactive)
+    ;; only run pandoc-mode if not active, as it resets pandoc--local-settings
+    (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
+    (pandoc-main-hydra/body)))
+
+;; Utilities and misc
+;;
+;;
 
 ;; hacky solution to the fact that the path is different on mac/linux
 (setq obsidian-path "~/obsidian")
