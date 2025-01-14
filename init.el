@@ -2,8 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq elpaca-core-date '(202410026)) ;; This version of Emacs was built on
-
 ;; Elpaca installer https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
 (defvar elpaca-installer-version 0.8)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
