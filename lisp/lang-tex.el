@@ -144,7 +144,6 @@
 
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
-  :after tablist
   :config
 
   (setopt pdf-view-display-size 'fit-page ; open pdfs scaled to fit page
