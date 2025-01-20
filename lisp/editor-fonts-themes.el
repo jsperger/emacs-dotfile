@@ -104,19 +104,23 @@
   (setq fontaine-presets
         '((t
            :default-weight normal
-           :default-height 130
+           :default-height 150
            :fixed-pitch-family "JetBrains Mono NL"
            :variable-pitch-family "Heliotrope OT"
            :variable-pitch-height 1.05
            :bold-family nil ; use whatever the underlying face has
            :bold-weight bold)
 
-          (iosevka
-           :default-family "Iosevka Comfy"
-           :default-weight normal
-           :default-height 130)
+          (12pt :default-height 120)
+          (14pt :default-height 140)
+          (15pt :default-height 150)
+          (16pt :default-height 160)
 
-          (duo
+          (iosevka-comfy
+           :default-family "Iosevka Comfy"
+           :default-weight normal)
+
+          (duospace
            :default-family "iA Writer Duospace")
 
           (quattro
@@ -125,10 +129,10 @@
           (fira-mono
            :default-family "Fira Mono")
 
-          (JetBrains
+          (jetbrains-mono
            :default-family "JetBrains Mono NL")
 
-          (plex
+          (plex-mono
            :default-family "IBM Plex Mono"))
         )
   )
