@@ -24,5 +24,7 @@
 
   )
 
+(use-package chronometrist)
+
 (provide 'editor-projects)
 ;;; editor-projects.el ends here
