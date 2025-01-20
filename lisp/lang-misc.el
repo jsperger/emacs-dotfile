@@ -11,7 +11,6 @@
 
 ;;; Miscellaneous modes
 (use-package markdown-mode
-  :ensure t
   :config
   (setq markdown-fontify-code-blocks-natively t)
 

@@ -63,20 +63,17 @@
         forge-database-connector 'sqlite-builtin))
 
 (use-package transient
-  :ensure t
   :after vc magit
   :config
   (general-def transient-base-map   "q" 'transient-quit-one)
   (general-def transient-sticky-map "q" 'transient-quit-seq))
 
 (use-package browse-at-remote
-  :ensure t
   :after vc magit
   :general
   (tyrant-def "go" 'browse-at-remote))
 
 (use-package diff-hl
-  :ensure t
   :after vc magit
   :config
   (setq diff-hl-side 'right)
@@ -90,7 +87,6 @@
     "] h" '(diff-hl-next-hunk :jump t)))
 
 (use-package git-modes
-  :ensure t
   :after vc magit)
 
 ;; (use-package git-timemachine
@@ -102,7 +98,6 @@
 ;;   (tyrant-def "gt" 'git-timemachine))
 
 (use-package git-link
-  :ensure t
   :after vc magit
   :config
   (setq git-link-open-in-browser t)
@@ -128,7 +123,6 @@
     "gLh" 'git-link-homepage))
 
 (use-package gitignore-templates
-  :ensure t
   :after vc magit
   :config
   (setq gitignore-templates-api 'github)
