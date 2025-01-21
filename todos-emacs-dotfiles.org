@@ -76,6 +76,10 @@ Silly way to read Structure and Interpretation of Computer Programs
 
 ** Packages to watch for updates
 *** Currently Bugged packages
+**** terminal-here
+- [ ] kitty issue with changing directory on mac / broader mac issues [[https://github.com/davidshepherd7/terminal-here/issues/45][Github
+  Custom arguments and commands not working on macos  #45 ]]
+
 **** nord-theme
 Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
 
