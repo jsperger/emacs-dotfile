@@ -11,24 +11,24 @@
 (set-language-environment 'utf-8)
 (set-default-coding-systems 'utf-8)
 
-(setq user-full-name "John Sperger"
+(setopt user-full-name "John Sperger"
       user-mail-address "josp@duck.com")
 
 (when (eq system-type 'darwin)
-  (setq ns-pop-up-frames nil
+  (setopt ns-pop-up-frames nil
         frame-resize-pixelwise t))
 
-(setq initial-scratch-message nil   ;; "make scratch buffer empty"
+(setopt initial-scratch-message nil   ;; "make scratch buffer empty"
       inhibit-startup-message t)    ;; "disable splash screen"
 
 ;; use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
+(setopt indent-tabs-mode nil)
 
 ;; change `tab-width' and `fill-column'
-(setq-default fill-column 80)
+(setopt fill-column 80)
 
 ;; no beep
-(setq ring-bell-function 'ignore)
+(setopt ring-bell-function 'ignore)
 
 ;; highlight current line
 (global-hl-line-mode 1)
@@ -36,7 +36,7 @@
 (global-prettify-symbols-mode 1)
 
 ;; Single space between sentences is more widespread than double
-(setq sentence-end-double-space nil)
+(setopt sentence-end-double-space nil)
 
 ;; smooth scrolling
 ;; (setq scroll-conservatively 101
@@ -52,29 +52,29 @@
 
 
 ;; scroll compilation to first error or end
-(setq compilation-scroll-output 'first-error)
+(setopt compilation-scroll-output 'first-error)
 
 ;; Use system trash for file deletion.
-(setq delete-by-moving-to-trash t)
+(setopt delete-by-moving-to-trash t)
 
 ;; autosave each change
-(setq bookmark-save-flag 1)
+(setopt bookmark-save-flag 1)
 
 ;; keep focus while navigating help buffers
-(setq help-window-select t)
+(setopt help-window-select t)
 
 ;; When emacs asks for "yes" or "no", let "y" or "n" suffice
 ;; (fset 'yes-or-no-p 'y-or-n-p)
-(setq use-short-answers t)
+(setopt use-short-answers t)
 
 ;; don't load outdated compiled files.
-(setq load-prefer-newer t)
+(setopt load-prefer-newer t)
 
 ;; don't save duplicates in kill-ring
-(setq kill-do-not-save-duplicates t)
+(setopt kill-do-not-save-duplicates t)
 
 ;; break lines after more characters
-(setq word-wrap-by-category t)
+(setopt word-wrap-by-category t)
 
 (defun server-remove-kill-buffer-hook ()
   "Remove prompt if the file is opened in other clients."
@@ -82,7 +82,7 @@
 (add-hook 'server-visit-hook #'server-remove-kill-buffer-hook)
 
 ;; Do not allow the cursor in the minibuffer prompt
-(setq minibuffer-prompt-properties
+(setopt minibuffer-prompt-properties
       '(read-only t cursor-intangible t face minibuffer-prompt))
 (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
@@ -90,14 +90,14 @@
 (use-package autorevert
   :ensure nil
   :config
-  (setq global-auto-revert-non-file-buffers t
+  (setopt global-auto-revert-non-file-buffers t
         auto-revert-verbose nil))
 
 (use-package dabbrev
   :ensure nil
   :defer t
   :config
-  (setq dabbrev-abbrev-char-regexp "[A-Za-z-_]"
+  (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
         dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
 (use-package desktop
@@ -107,7 +107,7 @@
   :init (desktop-save-mode)
   :config
   ;; inhibit no-loaded prompt
-  (setq desktop-file-modtime (file-attribute-modification-time
+  (setopt desktop-file-modtime (file-attribute-modification-time
                               (file-attributes
                                (desktop-full-file-name)))
         desktop-lazy-verbose nil
@@ -129,10 +129,10 @@
   :defer t
   :config
   (when (eq system-type 'darwin) ;on mac use external ls from homebrew gnutils
-    (setq ls-lisp-use-insert-directory-program t
+    (setopt ls-lisp-use-insert-directory-program t
           insert-directory-program "/opt/homebrew/opt/coreutils/libexec/gnubin/ls"))
-  (setq dired-listing-switches "-aBhl --group-directories-first")
-  (setq dired-auto-revert-buffer t
+  (setopt dired-listing-switches "-aBhl --group-directories-first")
+  (setopt dired-auto-revert-buffer t
         dired-kill-when-opening-new-dired-buffer  t
         dired-create-destination-dirs 'always
         dired-do-revert-buffer t
@@ -146,20 +146,20 @@
   :ensure nil
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
   :config
-  (setq-default display-line-numbers-type t
+  (setopt display-line-numbers-type t
                 display-line-numbers-width-start 100))
 
 (use-package doc-view
   :ensure nil
   :defer t
   :config
-  (setq doc-view-resolution 400))
+  (setopt doc-view-resolution 400))
 
 (use-package ediff
   :ensure nil
   :defer t
   :config
-  (setq-default ediff-window-setup-function 'ediff-setup-windows-plain
+  (setopt ediff-window-setup-function 'ediff-setup-windows-plain
                 ediff-split-window-function 'split-window-horizontally
                 ediff-merge-split-window-function 'split-window-horizontally))
 
@@ -186,7 +186,7 @@
              (y-or-n-p (format (concat "%s is a large file, open literally to "
                                        "avoid performance issues?")
                                filename)))
-        (setq buffer-read-only t)
+        (setopt buffer-read-only t)
         (buffer-disable-undo)
         (fundamental-mode))))
   (add-hook 'find-file-hook #'check-large-file)
@@ -229,7 +229,7 @@
   :ensure nil
   :defer t
   :config
-  (setq project-vc-merge-submodules nil
+  (setopt project-vc-merge-submodules nil
         project-switch-commands '((project-switch-to-buffer "Find buffer")
                                   (project-find-file "Find file")
                                   (project-find-regexp "Find regexp")
@@ -254,13 +254,13 @@
 (use-package recentf
   :ensure nil
   :config
-  (setq recentf-auto-cleanup 'never
+  (setopt recentf-auto-cleanup 'never
         recentf-max-saved-items 100))
 
 (use-package savehist
   :ensure nil
   :config
-  (setq enable-recursive-minibuffers t ; allow commands in minibuffers
+  (setopt enable-recursive-minibuffers t ; allow commands in minibuffers
         history-length 100
         savehist-autosave-interval nil
         savehist-additional-variables '(evil-jumps-history
@@ -301,7 +301,7 @@ the unwritable tidbits."
 (use-package simple
   :ensure nil
   :config
-  (setq column-number-mode t
+  (setopt column-number-mode t
         delete-trailing-lines nil
         eval-expression-print-length nil
         eval-expression-print-level nil
@@ -315,15 +315,15 @@ the unwritable tidbits."
   :hook ((prog-mode . show-trailing-whitespace)
          (diff-mode . whitespace-mode))
   :config
-  (setq show-trailing-whitespace t))
+  (setopt show-trailing-whitespace t))
 
 (use-package winner
   :ensure nil
   :commands (winner-undo winner-redo)
   :init
-  (setq winner-dont-bind-my-keys t)
+  (setopt winner-dont-bind-my-keys t)
   :config
-  (setq winner-boring-buffers-regexp "\\*.*\\*"))
+  (setopt winner-boring-buffers-regexp "\\*.*\\*"))
 
 (use-package all-the-icons
   :if (display-graphic-p))
