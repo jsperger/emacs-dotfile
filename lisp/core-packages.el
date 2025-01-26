@@ -64,7 +64,17 @@
   :after evil
   :hook (text-mode . jinx-mode)
   :config
+  ;; add-to-list notably only accepts one item at a time. It also checks if the
+  ;; item is already there, and prepends rather than appends items by default.
+  ;; Regular expressions to exclude from jinx results (t for always, otherwise
+  ;; by mode)
   (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
+  (add-to-list 'jinx-exclude-regexps '(LaTeX-mode "\\s*\\\\input{[^}]+}\\s*"))
+
+  ;; Modes where camelCase or PascalCase words should be accepted.
+  (add-to-list 'jinx-camel-modes 'R-mode)
+  (add-to-list 'jinx-camel-modes 'ess-r-mode)
+
   (with-eval-after-load 'vertico-multiform
     (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20))))
   (with-eval-after-load 'evil
