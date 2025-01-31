@@ -121,6 +121,8 @@
 (elpaca-wait)
 
 (require 'editor-completion)
+(require 'editor-lsp)
+
 (require 'editor-fonts-themes)
 (require 'editor-misc)
 (require 'editor-ui)

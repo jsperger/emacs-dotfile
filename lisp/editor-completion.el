@@ -19,8 +19,6 @@
           (cdr args)))
   (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
 
-
-
   :ensure (:files (:defaults "extensions/*.el"))
   :config
   (setq vertico-cycle t)
@@ -322,48 +320,6 @@ Just put this function in `hippie-expand-try-functions-list'."
       (undo 1)))
   (add-to-list 'hippie-expand-try-functions-list #'tempel-hippie-try-expand t))
 
-(use-package eglot
-  :commands expand-absolute-name
-  :hook (eglot-managed-mode .  yas-minor-mode)
-  :init
-  (setq read-process-output-max (* 1024 1024))
-
-  (use-package yasnippet
-    :init
-    (setq yas-minor-mode-map nil))
-  :config
-  (setq eglot-stay-out-of '(company)
-        eglot-connect-timeout 10
-        eglot-ignored-server-capabilities nil)
-
-  (defun expand-absolute-name (name)
-    (if (file-name-absolute-p name)
-        (tramp-file-local-name
-         (expand-file-name
-          (concat (file-remote-p default-directory) name)))
-      name))
-
-  (general-def eglot--managed-mode
-    :states '(normal insert motion emacs)
-    :keymaps 'override
-    :prefix-map 'tyrant-eglot-map
-    :definer 'minor-mode
-    :prefix "SPC"
-    :non-normal-prefix "S-SPC"
-    "ce"  (cons "eglot" (make-sparse-keymap))
-    "cea" 'eglot-code-actions
-    "ceb" 'eglot-events-buffer
-    "cer" 'eglot-rename
-    "ceR" 'eglot-reconnect
-    "cex" 'eglot-shutdown
-    "ceX" 'eglot-shutdown-all
-    "ce=" 'eglot-format)
-  :general
-  (tyrant-def "cE" 'eglot))
-
-(use-package consult-eglot
-  :after consult)
-
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
@@ -373,6 +329,14 @@ Just put this function in `hippie-expand-try-functions-list'."
 
 (use-package tempel-collection
   :after tempel)
+
+(use-package eglot-tempel
+  :hook (eglot-managed-mode .  eglot-tempel-mode)
+)
+
+
+
+;;; Zone of disabled packages
 
 (use-package doom-snippets
   :disabled
