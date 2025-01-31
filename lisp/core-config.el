@@ -25,7 +25,8 @@
 (setopt indent-tabs-mode nil)
 
 ;; change `tab-width' and `fill-column'
-(setopt fill-column 80)
+(setopt tab-width 2
+ fill-column 80)
 
 ;; no beep
 (setopt ring-bell-function 'ignore)
