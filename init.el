@@ -135,7 +135,6 @@
 (require 'lang-misc)
 (require 'lang-org)
 (require 'lang-web)
-(require 'lang-emacs-lisp)
 (require 'lang-rust)
 (require 'lang-r)
 (require 'lang-llm)
