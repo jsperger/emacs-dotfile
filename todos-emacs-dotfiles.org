@@ -25,6 +25,8 @@ Install through elpaca-manager
 
 
 *** Figure out if `eval-after-load` works with elpaca
+2025-02-01 I think it does, it's just that it might not be called until the package is loaded after opening a file. Can't use it for initialization stuff/config?
+it's that after-init hooks don't
 ** Minor projects
 *** replace setq in config
 `setq` seems like it should be replaced by either
