@@ -5,7 +5,6 @@
 ;;; Code:
 
 (use-package slime
-  :hook ((r-mode R-mode ess-r-mode) . 'eglot-ensure)
   :config
   (despot-def (slime-mode-map)
     :major-modes 'slime-mode
