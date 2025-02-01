@@ -69,7 +69,6 @@
 (prescient-persist-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after auto complete"))
-(gcmh-mode)
 (popper-mode)
 (popper-echo-mode)
 (global-treesit-auto-mode)

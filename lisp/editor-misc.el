@@ -12,10 +12,6 @@
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   (setq dumb-jump-selector 'completing-read))
 
-(use-package gcmh
-  :config
-  (setq gcmh-high-cons-threshold #x1200000))
-
 (use-package helpful
   :config
   (defun helpful-reuse-window (buffer-or-name)

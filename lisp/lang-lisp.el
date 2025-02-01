@@ -32,9 +32,6 @@
     "tb" 'ert-run-tests-buffer
     "tq" 'ert))
 
-(use-package eval-sexp-fu
-  :hook (emacs-lisp-mode . eval-sexp-fu-flash-mode))
-
 
 (provide 'lang-lisp)
 ;; Local Variables:
