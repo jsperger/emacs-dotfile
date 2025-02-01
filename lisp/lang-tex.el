@@ -144,6 +144,7 @@
 
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
+  :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
   :config
 
   (setopt pdf-view-display-size 'fit-page ; open pdfs scaled to fit page
