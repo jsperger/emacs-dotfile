@@ -1,4 +1,4 @@
-;;; init.el --- Summary -*- lexical-binding: t; -*-
+;;; editor-lsp.el -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -90,4 +90,8 @@
 
 
 (provide 'editor-lsp)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; End:
 ;;; editor-lsp.el ends here

@@ -160,4 +160,9 @@
 (use-package sicp)
 
 (provide 'lang-misc)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; lang-misc.el ends here

@@ -394,4 +394,9 @@ a dedicated window."
 
 
 (provide 'core-funcs)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; core-funcs.el ends here

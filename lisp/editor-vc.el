@@ -138,4 +138,9 @@
   :config (magit-todos-mode 1))
 
 (provide 'editor-vc)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; editor-vc.el ends here

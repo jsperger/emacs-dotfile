@@ -161,4 +161,9 @@
 
 
 (provide 'editor-ui)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; editor-ui.el ends here

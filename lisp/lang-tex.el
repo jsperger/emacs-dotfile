@@ -192,5 +192,9 @@
   :after auctex)
 
 (provide 'lang-tex)
-
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; lang-tex.el ends here
