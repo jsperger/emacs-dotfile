@@ -40,6 +40,11 @@
   :general
   (tyrant-def "cE" 'eglot))
 
+(use-package treesit
+  :ensure nil)
+
+(use-package tree-sitter-langs)
+
 (use-package consult-eglot
   :after consult)
 
@@ -93,5 +98,6 @@
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
+;; no-update-autoloads: t
 ;; End:
 ;;; editor-lsp.el ends here

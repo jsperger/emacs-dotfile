@@ -73,15 +73,6 @@ reuse it's window, otherwise create new one."
     "\'"   'terminal-here-launch
     "p \'" 'terminal-here-project-launch))
 
-(use-package treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
-
-(use-package tree-sitter-langs)
-
 (use-package undohist
   :config
   (add-to-list 'undohist-ignored-files "EDITMSG")

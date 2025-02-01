@@ -71,11 +71,10 @@
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after auto complete"))
 (popper-mode)
 (popper-echo-mode)
-(global-treesit-auto-mode)
 (undohist-initialize)
 (winum-mode)
 
-(setq golden-ratio-mode nil)
+(setopt golden-ratio-mode nil)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
 
