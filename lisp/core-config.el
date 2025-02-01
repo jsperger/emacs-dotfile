@@ -24,17 +24,26 @@
 ;; use spaces instead of tabs
 (setopt indent-tabs-mode nil)
 
-;; change `tab-width' and `fill-column'
-(setopt tab-width 2
- fill-column 80)
+;; change editor ui options
+(setopt tab-width 2 ; tab-width default 2 instead of 4
+        fill-column 80 ; fill-column default 80 chars
+        global-hl-line-mode t ; highlight current line
+        global-prettify-symbols-mode t) ;prettify symbols
+
+;; ;; highlight current line
+;; (global-hl-line-mode 1)
+;; ;; prettify symbols
+;; (global-prettify-symbols-mode 1)
+
+
 
 ;; no beep
 (setopt ring-bell-function 'ignore)
 
-;; highlight current line
-(global-hl-line-mode 1)
-                                        ; prettify symbols
-(global-prettify-symbols-mode 1)
+;; increases undo limit
+(setopt undo-limit 67108864 ; 64mb.
+      undo-strong-limit 100663296 ; 96mb.
+      undo-outer-limit 1006632960) ; 960mb.
 
 ;; Single space between sentences is more widespread than double
 (setopt sentence-end-double-space nil)
