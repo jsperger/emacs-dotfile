@@ -3,6 +3,11 @@
 *** Create a literate config using org-mode
 
 ** Standard projects
+*** DONE Figure out how to remove manual step in packages requiring `AUCTeX-version`
+preview-dvisvgm
+latex-extra
+
+Solution: AUCTeX-version declared in a new location, changed recipe https://github.com/jsperger/emacs-dotfile/commit/77e946c
 *** Figure out Mac environment issues
 pdf-tools build failed when emacs was launched from the launcher but succeeded
 when emacs was launched from the command line. Forgot to copy the message but
