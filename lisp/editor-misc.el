@@ -58,9 +58,12 @@ reuse it's window, otherwise create new one."
     "jL" 'link-hint-open-multiple-links
     "jy" 'link-hint-copy-link))
 
-(use-package reveal-in-osx-finder
-  :if (eq system-type 'darwin)
-  :general (tyrant-def "bf" 'reveal-in-osx-finder))
+(use-package reveal-in-folder
+  :general (tyrant-def "bf" 'reveal-in-folder))
+
+;; (use-package reveal-in-osx-finder
+;;   :if (eq system-type 'darwin)
+;;   :general (tyrant-def "bf" 'reveal-in-osx-finder))
 
 (use-package terminal-here
   :config
@@ -159,6 +162,7 @@ stays on current"
 
 (use-package apheleia
   :config (setq apheleia-global-mode nil)
+;;  :custom (apheleia-global-mode nil)
   )
 ;; (use-package biome)
 
