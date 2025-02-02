@@ -7,14 +7,6 @@
   :init
   (setq read-process-output-max (* 1024 1024))
 
-  ;; (use-package yasnippet
-  ;;   :init
-  ;;   (setq yas-minor-mode-map nil))
-  ;; :config
-  ;; (setq eglot-stay-out-of '(company)
-  ;;       eglot-connect-timeout 10
-  ;;       eglot-ignored-server-capabilities nil)
-
   (defun expand-absolute-name (name)
     (if (file-name-absolute-p name)
         (tramp-file-local-name

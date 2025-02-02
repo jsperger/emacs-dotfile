@@ -336,15 +336,6 @@ Just put this function in `hippie-expand-try-functions-list'."
 
 
 
-;;; Zone of disabled packages
-
-(use-package doom-snippets
-  :disabled
-  :ensure (:host github
-                 :repo "doomemacs/snippets")
-  :after yasnippet
-  )
-
 (provide 'editor-completion)
 ;; Local Variables:
 ;; no-byte-compile: t

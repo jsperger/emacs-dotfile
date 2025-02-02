@@ -160,10 +160,6 @@ stays on current"
 (use-package apheleia
   :config (setq apheleia-global-mode nil)
   )
-
-(use-package emacs-elisp-autofmt
-  :disabled)
-
 ;; (use-package biome)
 
 (provide 'editor-misc)
