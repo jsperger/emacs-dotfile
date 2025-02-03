@@ -163,7 +163,7 @@
     "hk"      'describe-key
     "hK"      'describe-keymap
     "hm"      'describe-mode
-    "hM"      'woman
+    "hM"      'man
     "hp"      'describe-package
     "ht"      'describe-text-properties
     "hv"      'describe-variable
