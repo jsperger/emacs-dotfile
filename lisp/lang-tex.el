@@ -148,10 +148,10 @@
   :config
 
   (setopt pdf-view-display-size 'fit-page ; open pdfs scaled to fit page
+          pdf-view-use-scaling t ; hi-dpi support
           pdf-view-resize-factor 1.1   ; more fine-grained zooming
           pdf-annot-activate-created-annotations t ; automatically annotate highlights
           )
-
 )
 
 (use-package bibtex
