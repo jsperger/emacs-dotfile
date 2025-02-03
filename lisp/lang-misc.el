@@ -12,7 +12,7 @@
 ;;; Miscellaneous modes
 (use-package markdown-mode
   :config
-  (setq markdown-fontify-code-blocks-natively t)
+  (setopt markdown-fontify-code-blocks-natively t)
 
   (despot-def markdown-mode-map
     "RET"   'markdown-do

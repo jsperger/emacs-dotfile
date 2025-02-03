@@ -26,7 +26,7 @@
 ;;       bibtex-align-at-equal-sign t
 ;;       bibtex-dialect 'bibtex)
 
-(setq citar-at-point-function 'embark-act
+(setopt citar-at-point-function 'embark-act
       citar-bibliography bib-file-location
       citar-library-paths `(,(concat bibtex-file-path "files/"))
       citar-file-open-functions '(("html" . citar-file-open-external)
