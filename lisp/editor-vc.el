@@ -19,7 +19,7 @@
   (with-eval-after-load 'project
     (define-key project-prefix-map "m" #'magit-project-status)
     (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
-  
+
   :config
   (setq magit-diff-refine-hunk t
         magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
@@ -40,7 +40,7 @@
   (advice-add 'magit-blame-addition           :after #'org-reveal-advice)
   (advice-add 'magit-diff-visit-file          :after #'org-reveal-advice)
   (advice-add 'magit-diff-visit-worktree-file :after #'org-reveal-advice)
- 
+
   :general
   (tyrant-def
     "g"   (cons "git" (make-sparse-keymap))
@@ -56,11 +56,9 @@
     "gU"  'magit-unstage-file))
 
 (use-package forge
-  :disabled
   :after markdown-mode magit
   :init
-  (setq forge-add-default-bindings nil
-        forge-database-connector 'sqlite-builtin))
+  (setq forge-add-default-bindings nil))
 
 (use-package transient
   :after vc magit
