@@ -148,10 +148,10 @@ initialized with the current directory instead of filename."
 (defun open-file-in-external-app (file-path)
   "Open FILE-PATH in external application."
   (cond
-   ((eq system-type 'windows-nt)
+   (IS-WINDOWS
     (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path)))
-   ((eq system-type 'darwin) (shell-command (format "open \"%s\"" file-path)))
-   ((eq system-type 'gnu/linux) (let ((process-connection-type nil))
+   (IS-MAC (shell-command (format "open \"%s\"" file-path)))
+   (IS-LINUX (let ((process-connection-type nil))
                                   (start-process "" nil "xdg-open" file-path)))))
 
 (defun open-file-or-directory-in-external-app (arg)

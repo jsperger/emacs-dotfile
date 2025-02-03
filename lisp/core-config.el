@@ -14,7 +14,9 @@
 (setopt user-full-name "John Sperger"
       user-mail-address "josp@duck.com")
 
-(when (eq system-type 'darwin)
+(when IS-WINDOWS (print "How did I get here?"))
+
+(when IS-MAC
   (setopt ns-pop-up-frames nil
         frame-resize-pixelwise t))
 
@@ -138,7 +140,7 @@
   :ensure nil
   :defer t
   :config
-  (when (eq system-type 'darwin) ;on mac use external ls from homebrew gnutils
+  (when IS-MAC ;on mac use external ls from homebrew gnutils
     (setopt ls-lisp-use-insert-directory-program t
           insert-directory-program "/opt/homebrew/opt/coreutils/libexec/gnubin/ls"))
   (setopt dired-listing-switches "-aBhl --group-directories-first")

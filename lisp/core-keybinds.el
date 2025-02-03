@@ -317,7 +317,7 @@
             (interactive "P")
             (scroll-other-window (- (or arg 1)))))
 
-  (when (eq system-type 'darwin)
+  (when IS-MAC
     (general-def
       "s-`"   'other-frame
       "s-a"   'mark-whole-buffer

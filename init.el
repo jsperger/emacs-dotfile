@@ -102,6 +102,17 @@
          :inherit nil) )
 
 (elpaca-wait)
+
+
+;;;;;;;;;;;;;;
+;; Define constants for use throughout config
+;;
+(defconst IS-MAC (eq system-type 'darwin))
+(defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
+(defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
+
+
+
 ;;;;;;;;;;;;;;
 ;; Key Bindings
 ;;
