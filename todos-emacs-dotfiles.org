@@ -32,6 +32,10 @@ Install through elpaca-manager
 *** Figure out if `eval-after-load` works with elpaca
 2025-02-01 I think it does, it's just that it might not be called until the package is loaded after opening a file. Can't use it for initialization stuff/config?
 it's that after-init hooks don't
+*** center text in visual-line-mode-fill-column
+https://codeberg.org/joostkremers/visual-fill-column/issues/7
+Margins are unequal and there doesn't seem to be an easy way to customize this
+with package options. Hackish way is to set a negative number for 'Visual Fill Column Extra Text Width'
 ** Minor projects
 *** replace setq in config
 `setq` seems like it should be replaced by either
@@ -67,12 +71,49 @@ Switch preview to use libsvgm for svg instead of png previews. See if that actua
 In general: make previews not look like ass.
 
 
+
 * Packages
+:PROPERTIES:
+:TOC: :include descendants
+:END:
+
+:CONTENTS:
+- [[#currently-testing][Currently Testing]]
+  - [[#denote][denote]]
+  - [[#latex-extra][latex-extra]]
+  - [[#eglot-tempel][eglot-tempel]]
+  - [[#sicp][sicp]]
+- [[#check-updates---currently-bugged-packages][Check Updates - Currently Bugged packages]]
+  - [[#magit-todos-2024-sept-ish-i-should-really-date-these][magit-todos (2024-sept-ish I should really date these)]]
+  - [[#terminal-here][terminal-here]]
+  - [[#nord-theme][nord-theme]]
+- [[#check-updates---in-development-egfeatures-i-want-not-ready][Check updates - In development (e.g.features I want not ready)]]
+- [[#packages-to-test][Packages to Test]]
+  - [[#arxiv-mode][arxiv-mode]]
+  - [[#benchmark-init][benchmark-init]]
+  - [[#consult-eglot-httpsgithubcommohkaleconsult-eglot][consult-eglot https://github.com/mohkale/consult-eglot]]
+  - [[#combobulate][combobulate]]
+  - [[#dape-httpsgithubcomsvaantedape][dape https://github.com/svaante/dape]]
+    - [[#r-debugger-httpsgithubcommanuelhentschelvscode-r-debugger][R debugger https://github.com/ManuelHentschel/VSCode-R-Debugger]]
+  - [[#crux][crux]]
+  - [[#eglot-tempel][eglot-tempel]]
+  - [[#evil-tex-httpsgithubcomiyefratevil-tex][evil-tex https://github.com/iyefrat/evil-tex]]
+  - [[#evil-textobj-tree-sitter][evil-textobj-tree-sitter]]
+  - [[#indent-control][indent-control]]
+  - [[#mindstream][mindstream]]
+  - [[#org-anki][org-anki]]
+  - [[#projection][projection]]
+- [[#notes-on-packages-that-were-tested-added-or-removed][Notes on packages that were tested, added, or removed]]
+  - [[#added-packages][Added Packages]]
+    - [[#bicycle][bicycle]]
+  - [[#removed-packages][Removed Packages]]
+    - [[#desktop][desktop]]
+    - [[#fold-dwim-org][fold-dwim-org]]
+    - [[#org-contrib][org-contrib]]
+:END:
+
 ** Currently Testing
 *** denote
-*** magit-todos
-Collects TODO and other keywords in a project's files and displays them in magit's summary
-
 *** latex-extra
 https://github.com/Malabarba/latex-extra
 Small QoL changes to fill-indent, tab folding, and navigation
@@ -81,19 +122,22 @@ https://github.com/fejfighter/eglot-tempel
 *** sicp
 Silly way to read Structure and Interpretation of Computer Programs
 
-** Packages to watch for updates
-*** Currently Bugged packages
-**** terminal-here
+
+** Check Updates - Currently Bugged packages
+*** magit-todos (2024-sept-ish I should really date these)
+
+Collects TODO and other keywords in a project's files and displays them in magit's summary
+
+*** terminal-here
 - [ ] kitty issue with changing directory on mac / broader mac issues [[https://github.com/davidshepherd7/terminal-here/issues/45][Github
   Custom arguments and commands not working on macos  #45 ]]
 
-**** nord-theme
+*** nord-theme
 Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
 
 (use-package nord-theme)
 (use-package nordic-night-theme)
-
-*** In development (e.g.features I want not ready)
+** Check updates - In development (e.g.features I want not ready)
 ** Packages to Test
 *** arxiv-mode
 Access arxiv in emacs.
@@ -149,6 +193,7 @@ runs.
 **** fold-dwim-org
 Disabled for many months, name is illustrative but don't recall using it.
 **** org-contrib
+
 
 * Snippets
 ** Jinx

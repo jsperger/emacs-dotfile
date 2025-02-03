@@ -190,6 +190,9 @@
 (use-package org-noter-pdftools
   :after org-noter pdftools)
 
+(use-package org-make-toc
+  :after org)
+
 ;;;
 ;;; Exporters:
 ;;;
