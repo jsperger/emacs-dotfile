@@ -196,6 +196,12 @@
 
 (use-package ox-pandoc)
 
+;; (use-package org-anki
+;;   :disabled)
+
+(use-package ob-mermaid
+  :after org)
+
 ;;;
 ;;; Appearance:
 ;;;
@@ -215,12 +221,6 @@
    org-hide-emphasis-markers t
    org-pretty-entities t
    org-ellipsis "…"))
-
-;; (use-package org-anki
-;;   :disabled)
-
-(use-package ob-mermaid
-  :after org)
 
 (provide 'lang-org)
 ;; Local Variables:

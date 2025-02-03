@@ -2,6 +2,20 @@
 ;;; Commentary:
 ;;; Code:
 
+;;; Built-in packages
+
+(use-package treesit
+  :ensure nil)
+
+
+(use-package repeat
+  :ensure nil
+  :hook (dape-mode . repeat-mode)
+  ;; Enable repeat mode for more ergonomic `dape' use
+  )
+
+;;; Additional Packages
+
 (use-package eglot
   :commands expand-absolute-name
   :init
@@ -32,13 +46,13 @@
   :general
   (tyrant-def "cE" 'eglot))
 
-(use-package treesit
-  :ensure nil)
-
 (use-package tree-sitter-langs)
 
 (use-package consult-eglot
   :after consult)
+
+(use-package consult-eglot-embark
+  :hook ('eglot-ensure . consult-eglot-embark-mode))
 
 (use-package dape
 ;;  :preface
@@ -77,12 +91,6 @@
 
   ;; Projectile users
   ;; (setq dape-cwd-function 'projectile-project-root)
-)
-
-;; Enable repeat mode for more ergonomic `dape' use
-(use-package repeat
-  :ensure nil
-  :hook (dape-mode . repeat-mode)
 )
 
 
