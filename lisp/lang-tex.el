@@ -139,6 +139,7 @@
   )
 
 (use-package latex-extra
+  :disabled
   :after auctex
   :hook (LaTeX-mode . latex-extra-mode))
 
@@ -189,6 +190,7 @@
   (citar-embark-mode))
 
 (use-package preview-dvisvgm
+  :disabeld
   :after auctex)
 
 (provide 'lang-tex)
