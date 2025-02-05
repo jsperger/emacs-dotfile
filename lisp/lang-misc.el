@@ -124,16 +124,15 @@
 ;;
 ;;
 
-;; hacky solution to the fact that the path is different on mac/linux
-(setq obsidian-path "~/obsidian")
 
 (use-package obsidian
+  :disabled
   :config
-  (obsidian-specify-path obsidian-path)
-  (global-obsidian-mode t)
+  (obsidian-specify-path "~/obsidian")
   :custom
-  ;; This directory will be used for `obsidian-capture' if set.
+;; This directory will be used for `obsidian-capture' if set.
   (obsidian-inbox-directory "Inbox")
+  (global-obsidian-mode t)
   )
 
 (use-package writegood-mode)
@@ -141,6 +140,7 @@
 (use-package sicp)
 
 (provide 'lang-misc)
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
