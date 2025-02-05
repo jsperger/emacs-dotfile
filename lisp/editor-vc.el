@@ -58,7 +58,8 @@
 (use-package forge
   :after markdown-mode magit
   :init
-  (setq forge-add-default-bindings nil))
+  (setopt forge-add-default-bindings nil
+          forge-database-connector 'sqlite-builtin))
 
 (use-package transient
   :after vc magit
