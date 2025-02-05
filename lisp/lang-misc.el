@@ -8,7 +8,6 @@
 
 ;;; Code:
 
-
 ;;; Miscellaneous modes
 (use-package markdown-mode
   :config
@@ -102,11 +101,9 @@
     "M-h"      'markdown-promote
     "M-j"      'markdown-move-down
     "M-k"      'markdown-move-up
-    "M-l"      'markdown-demote))
-
-(use-package markdown-preview-mode
-  :after markdown-mode)
+    "M-l"      'markdown-demote)
   )
+
 
 (use-package pandoc-mode
   :hook (pandoc-mode . pandoc-load-default-settings)
