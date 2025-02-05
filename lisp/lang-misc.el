@@ -9,7 +9,10 @@
 ;;; Code:
 
 ;;; Miscellaneous modes
+
 (use-package markdown-mode
+  :init (setq markdown-command "multimarkdown")
+  :mode ("README\\.md\\'" . gfm-mode)
   :config
   (setopt markdown-fontify-code-blocks-natively t)
 
@@ -115,6 +118,7 @@
     ;; only run pandoc-mode if not active, as it resets pandoc--local-settings
     (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
     (pandoc-main-hydra/body)))
+
 
 ;; Utilities and misc
 ;;
