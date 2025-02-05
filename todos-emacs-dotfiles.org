@@ -1,6 +1,19 @@
 * Projects
-** Major projects
-*** Create a literate config using org-mode
+** Create a package or functionality to mimic ia writer
+*** (Grammatical) syntax highlighting - look at things like
+https://github.com/retextjs/retext
+https://github.com/retextjs/awesome-retext
+https://edu.visl.dk/visl/en/info/engsymbol.html
+https://github.com/syntax-tree/nlcst
+https://github.com/syntax-tree/unist
+
+*** focus on current paragraph/sentence/code block etc.
+https://github.com/larstvei/Focus
+
+*** possibly relevant
+https://github.com/alexispurslane/motion-selection-mode
+
+** Create a literate config using org-mode
 
 ** Standard projects
 *** DONE Figure out how to remove manual step in packages requiring `AUCTeX-version`
@@ -65,6 +78,11 @@ Replace most of the (elpaca-wait) commands scattered throughout with
 *** TODO Auctex
    * [X]  Move customization from customs.el to lang-tex.el
    * [ ] see if anything from CDLaTeX is worth using and remap the keybinds to evil format
+   - [ ] figure out how to bind LaTeXMk instead of having to use `TeX-Command-Master`
+Looks like this is what gets passed when you run it:
+          ("LaTeXMk"
+  "latexmk %(latexmk-out) %(file-line-error) %(output-dir) %`%(extraopts) %S%(mode)%' %t"
+  TeX-run-format nil (LaTeX-mode docTeX-mode) :help "Run LaTeXMk")
 
 *** TODO Preview
 Switch preview to use libsvgm for svg instead of png previews. See if that actually makes previews not look like ass.
