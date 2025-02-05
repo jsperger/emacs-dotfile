@@ -66,12 +66,8 @@
 ;;
 ;;
 
-(use-package jsonrpc)
-
-(use-package track-changes)
-
-
 ;; Eldoc workaround
+;; https://github.com/progfolio/elpaca/issues/398
 (unload-feature 'eldoc t) ;; Unload built-in eldoc
 (setq custom-delayed-init-variables '())
 (defvar global-eldoc-mode nil)
@@ -79,6 +75,12 @@
   (require 'eldoc)
   (global-eldoc-mode) ;; This is usually enabled by default by Emacs
   )
+
+;;(use-package jsonrpc)
+(use-package jsonrpc :ensure (:wait t) )
+(use-package track-changes)
+(use-package sqlite
+  :ensure nil)
 
 ;; use-package version of eldoc workaround
 ;; (use-package eldoc
