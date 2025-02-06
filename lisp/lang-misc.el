@@ -125,16 +125,6 @@
 ;;
 
 
-(use-package obsidian
-  :disabled
-  :config
-  (obsidian-specify-path "~/obsidian")
-  :custom
-;; This directory will be used for `obsidian-capture' if set.
-  (obsidian-inbox-directory "Inbox")
-  (global-obsidian-mode t)
-  )
-
 (use-package writegood-mode)
 
 (use-package sicp)
