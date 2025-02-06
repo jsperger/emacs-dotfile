@@ -125,22 +125,22 @@
   (push (expand-file-name dir user-emacs-directory) load-path))
 
 (require 'core-keybinds)
-(elpaca-wait)
+(require 'editor-completion)
+;;(elpaca-wait)
 
 
 (require 'core-packages)
 (require 'core-config)
 (require 'core-funcs)
-(elpaca-wait)
+;; (elpaca-wait)
 
-(require 'editor-completion)
 (require 'editor-lsp)
 
 (require 'editor-fonts-themes)
 (require 'editor-misc)
 (require 'editor-ui)
 (require 'tools-notes)
-(elpaca-wait)
+;; (elpaca-wait)
 (require 'lang-tex)
 (require 'editor-vc)
 (require 'editor-projects)
