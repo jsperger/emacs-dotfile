@@ -145,6 +145,8 @@
 (require 'editor-vc)
 (require 'editor-projects)
 
+(require 'tools-reading)
+
 (require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-web)

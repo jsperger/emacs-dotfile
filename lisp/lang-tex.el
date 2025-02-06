@@ -143,18 +143,6 @@
   :after auctex
   :hook (LaTeX-mode . latex-extra-mode))
 
-(use-package pdf-tools
-  :ensure (:post-build (pdf-tools-install))
-  :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
-  :config
-
-  (setopt pdf-view-display-size 'fit-page ; open pdfs scaled to fit page
-          pdf-view-use-scaling t ; hi-dpi support
-          pdf-view-resize-factor 1.1   ; more fine-grained zooming
-          pdf-annot-activate-created-annotations t ; automatically annotate highlights
-          )
-)
-
 (use-package bibtex
   :ensure nil
   )

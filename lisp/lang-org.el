@@ -151,23 +151,6 @@
   )
 
 
-;;;
-;;; Filetype Extensions
-;;;
-
-(use-package nov) ; epub
-
-
-(elpaca (djvu
-         :host github
-         :repo "emacsmirror/djvu"
-         :inherit nil) )
-
-
-(use-package org-pdftools ; pdf
-  :after org pdftools)
-
-
 
 ;;;
 ;;; Functionality Add-ons
