@@ -1,4 +1,4 @@
-;;; lang-misc.el --- -*- lexical-binding: t; -*-
+;;; lang-markdown.el --- -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020-2023  Tianshu Wang, (C) 2023-2024  John Sperger
 
@@ -107,33 +107,11 @@
     "M-l"      'markdown-demote)
   )
 
-
-(use-package pandoc-mode
-  :hook (pandoc-mode . pandoc-load-default-settings)
-  :commands pandoc
-  :config
-  (defun pandoc ()
-    "Start pandoc for the buffer and open the menu"
-    (interactive)
-    ;; only run pandoc-mode if not active, as it resets pandoc--local-settings
-    (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
-    (pandoc-main-hydra/body)))
-
-
-;; Utilities and misc
-;;
-;;
-
-
-(use-package writegood-mode)
-
-(use-package sicp)
-
-(provide 'lang-misc)
+(provide 'lang-markdown)
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; lang-misc.el ends here
+;;; lang-markdown.el ends here

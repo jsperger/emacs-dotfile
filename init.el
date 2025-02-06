@@ -145,7 +145,7 @@
 (require 'editor-vc)
 (require 'editor-projects)
 
-(require 'lang-misc)
+(require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-web)
 (require 'lang-rust)
