@@ -11,8 +11,10 @@
 ;;; Miscellaneous modes
 
 (use-package markdown-mode
-  :init (setq markdown-command "multimarkdown")
   :mode ("README\\.md\\'" . gfm-mode)
+	("\\.qmd\\'" . markdown-mode)
+  :init
+	(setopt markdown-command "multimarkdown")
   :config
   (setopt markdown-fontify-code-blocks-natively t)
 
