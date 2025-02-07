@@ -4,10 +4,28 @@
 
 (when my-debug-mode
   (message "Checkpoint: %s" "latex el"))
+
 (add-to-list
  'treesit-language-source-alist
  '(r "https://github.com/r-lib/tree-sitter-r" "next"))
 
+;; Not working.
+;; (defun my-adjust-visual-fill-column-for-variable-pitch ()
+;;   "Adjust visual fill column for variable pitch mode."
+;;   (when variable-pitch-mode
+;;     ;; Set a different visual fill column for variable pitch mode
+;;     (setq visual-fill-column-width 60)
+;; ))
+
+;; (defun my-disable-visual-fill-column-for-variable-pitch ()
+;;   "Disable visual fill column adjustments for variable pitch mode."
+;;   (when (and variable-pitch-mode
+;;              (bound-and-true-p visual-fill-column-mode))
+;;     ;; Disable visual fill column mode when exiting variable pitch
+;;     (setq visual-fill-column-width nil)))
+
+;; (add-hook 'variable-pitch-mode-hook #'my-adjust-visual-fill-column-for-variable-pitch)
+;; (add-hook 'text-scale-mode-hook 'my-disable-visual-fill-column-for-variable-pitch)
 ;; (setq-default TeX-master nil
 ;;               TeX-command "LaTeX"
 ;;               TeX-engine 'luatex
