@@ -30,7 +30,7 @@
 (setopt tab-width 2 ; tab-width default 2 instead of 4
         fill-column 80 ; fill-column default 80 chars
         global-hl-line-mode t ; highlight current line
-        global-prettify-symbols-mode t) ;prettify symbols
+        )
 
 ;; ;; highlight current line
 ;; (global-hl-line-mode 1)
@@ -356,4 +356,4 @@ the unwritable tidbits."
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
- ;;; core-config.el ends here
+;;; core-config.el ends here
