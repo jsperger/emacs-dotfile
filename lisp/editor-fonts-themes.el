@@ -57,6 +57,14 @@
               (let ((outline (intern (format "outline-%d" outline-number))))
                 (set-face-attribute outline nil :height 1.0)))))
 
+(add-hook 'after-load-theme-hook
+					(defun my-disable-flymake-underline ()
+						"Disable underlining for Flymake faces while keeping theme colors."
+						(custom-set-faces
+						 `(flymake-error ((t (:underline nil :inherit default))))
+						 `(flymake-note ((t (:underline nil :inherit default))))
+						 `(flymake-warning ((t (:underline nil :inherit default))))))
+					)
 ;;;;
 ;; Packages
 ;;
