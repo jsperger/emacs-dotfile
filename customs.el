@@ -71,7 +71,6 @@
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after auto complete"))
 (popper-mode)
 (popper-echo-mode)
-(undohist-initialize)
 (winum-mode)
 
 (setopt golden-ratio-mode nil)

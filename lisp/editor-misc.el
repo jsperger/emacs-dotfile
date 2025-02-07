@@ -72,14 +72,21 @@ reuse it's window, otherwise create new one."
     "\'"   'terminal-here-launch
     "p \'" 'terminal-here-project-launch))
 
-(use-package undohist
-  :config
-  (add-to-list 'undohist-ignored-files "EDITMSG")
 
-  (defun undohist-recover-safe@around (fn)
-    (cl-letf (((symbol-function 'yes-or-no-p) (lambda (p) nil)))
-      (funcall fn)))
-  (advice-add #'undohist-recover-safe :around #'undohist-recover-safe@around))
+;; Deprecated per https://github.com/emacsorphanage/undohist?tab=readme-ov-file
+;; (use-package undohist
+;;   :config
+;;   (add-to-list 'undohist-ignored-files "EDITMSG")
+
+;;   (defun undohist-recover-safe@around (fn)
+;;     (cl-letf (((symbol-function 'yes-or-no-p) (lambda (p) nil)))
+;;       (funcall fn)))
+;;   (advice-add #'undohist-recover-safe :around #'undohist-recover-safe@around))
+
+(use-package undo-fu-session
+	:custom
+	(undo-fu-session-global-mode)
+	)
 
 (use-package xr)  ;; Convert string regexp to rx notation
 
