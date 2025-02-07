@@ -139,6 +139,14 @@
 (use-package hl-todo
   :custom (global-hl-todo-mode 't))
 
+;;;
+;; --- Font Locking Utilities ---
+;;;
+
+(use-package font-lock-studio)
+
+(use-package highlight-refontification)
+
 (provide 'editor-fonts-themes)
 ;; Local Variables:
 ;; no-byte-compile: t
