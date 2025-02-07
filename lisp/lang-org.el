@@ -177,6 +177,19 @@
   :after org)
 
 ;;;
+;; --- Diagramming Tools
+;;;
+
+(use-package chatu
+  :hook ((org-mode markdown-mode) . chatu-mode)
+  :commands (chatu-add
+             chatu-open)
+  :custom ((chatu-input-dir "./draws")
+           (chatu-output-dir "./draws_out")))
+
+(use-package pikchr-mode)
+
+;;;
 ;;; Exporters:
 ;;;
 
