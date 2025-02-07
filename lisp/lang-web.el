@@ -1,4 +1,4 @@
-;;; lang-org.el --- -*- lexical-binding: t; -*-
+;;; lang-web.el --- -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023  John Sperger
 
