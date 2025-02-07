@@ -2,12 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
-(elpaca (djvu
-         :host github
-         :repo "emacsmirror/djvu"
-         :inherit nil) )
+;;;
+;; --- File-type handlers ---
+;;;
 
-(use-package nov) ; epub
+(use-package djvu)
 
 (use-package org-pdftools ; pdf
   :after org pdftools)
