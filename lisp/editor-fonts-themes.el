@@ -82,10 +82,16 @@
            :bold-family nil ; use whatever the underlying face has
            :bold-weight bold)
 
+					;; Presets to change point size only
+          (10pt :default-height 100)
+          (11pt :default-height 110)
           (12pt :default-height 120)
+          (13pt :default-height 130)
           (14pt :default-height 140)
           (15pt :default-height 150)
           (16pt :default-height 160)
+					(17pt :default-height 170)
+					(18pt :default-height 180)
 
           (iosevka-comfy
            :default-family "Iosevka Comfy"
