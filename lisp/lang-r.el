@@ -9,8 +9,31 @@
 ;;; Code:
 
 (use-package ess
-  :hook ((r-mode R-mode ess-r-mode) . 'eglot-ensure)
-  :config
+  :mode ("\\([rR]\\)\\'" . R-mode)
+  :hook ((R-mode ess-r-mode) . 'eglot-ensure)
+	(ess-r-help-mode . evil-mode)
+  :init
+	(setopt ess-set-style t
+					comint-scroll-to-bottom-on-input t
+					comint-scroll-to-bottom-on-output t
+					ess-indent-offset 2)
+	:custom
+	(ess-indent-offset 2)
+	(ess-own-style-list '((ess-indent-offset . 2)
+															(ess-offset-arguments . open-delim)
+															(ess-offset-arguments-newline . prev-call)
+															(ess-offset-block . prev-line)
+															(ess-offset-continued . straight)
+															(ess-align-nested-calls "ifelse")
+															(ess-align-arguments-in-calls "function[ 	]*(")
+															(ess-align-continuations-in-calls . t)
+															(ess-align-blocks control-flow)
+															(ess-indent-from-lhs arguments fun-decl-opening)
+															(ess-indent-from-chain-start . t)
+															(ess-indent-with-fancy-comments . t)))
+	(ess-style 'OWN)
+	:config
+
   (despot-def (ess-r-mode-map)
     :major-modes 'ess-r-mode
     "b"            'ess-eval-buffer
