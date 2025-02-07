@@ -8,7 +8,10 @@
 
 ;;; Code:
 
-(use-package binder)
+(use-package binder
+  :disabled)
+;; Seems to mostly be for plain text files, at least it didn't seem to like
+;; when I added tex files.
 
 (use-package todoist
   :config
@@ -23,6 +26,8 @@
     "U"      'todoist-update-project)
 
   )
+
+(use-package bookmark-in-project)
 
 (use-package chronometrist)
 
