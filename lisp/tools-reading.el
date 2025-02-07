@@ -8,14 +8,24 @@
 
 (use-package djvu)
 
-(use-package org-pdftools ; pdf
+;; epub
+(use-package nov
+	:mode ("\\.epub\\'" . nov-mode)
+	:hook (nov-mode . visual-line-fill-column-mode)
+	:init
+	(setopt nov-text-width t
+					visual-fill-column-center-text t)
+	:config
+	(setq-local visual-fill-column-width 60)
+)
+
+(use-package org-pdftools
   :after org pdftools)
 
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
   :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
-  :config
-
+  :init
   (setopt pdf-view-display-size 'fit-page ; open pdfs scaled to fit page
           pdf-view-use-scaling t ; hi-dpi support
           pdf-view-resize-factor 1.1   ; more fine-grained zooming
