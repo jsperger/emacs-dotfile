@@ -76,7 +76,7 @@
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after evil"))
 ;; (shackle-mode)
-(global-hl-todo-mode)
+;; (global-hl-todo-mode)
 (global-diff-hl-mode)
 (global-auto-revert-mode)
 

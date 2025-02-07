@@ -131,6 +131,14 @@
 (use-package solarized-theme)
 
 
+
+;;;
+;; --- Font Locking / Decoration ---
+;;;
+
+(use-package hl-todo
+  :custom (global-hl-todo-mode 't))
+
 (provide 'editor-fonts-themes)
 ;; Local Variables:
 ;; no-byte-compile: t
