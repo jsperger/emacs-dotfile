@@ -162,6 +162,10 @@ stays on current"
   )
 ;; (use-package biome)
 
+(use-package rg)
+
+(use-package elgrep)
+
 (provide 'editor-misc)
 ;; Local Variables:
 ;; no-byte-compile: t

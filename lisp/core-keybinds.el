@@ -139,6 +139,7 @@
     "fj"      'dired-jump
     "fJ"      'dired-jump-other-window
     "fo"      'open-file-or-directory-in-external-app
+		"fr"      'rg
     "fR"      'rename-current-buffer-file
     "fs"      'save-buffer
     "fv"      (cons "variables" (make-sparse-keymap))
