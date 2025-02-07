@@ -20,7 +20,8 @@ https://github.com/alexispurslane/motion-selection-mode
 preview-dvisvgm
 latex-extra
 
-Solution: AUCTeX-version declared in a new location, changed recipe https://github.com/jsperger/emacs-dotfile/commit/77e946c
+***** Solution:
+AUCTeX-version declared in a new location, changed recipe https://github.com/jsperger/emacs-dotfile/commit/77e946c
 *** Figure out Mac environment issues
 pdf-tools build failed when emacs was launched from the launcher but succeeded
 when emacs was launched from the command line. Forgot to copy the message but
@@ -41,16 +42,43 @@ Current workaround: open a tex file to instantiate auctex-version
 `elpaca-delete` the two packages
 Install through elpaca-manager
 
-
-*** Figure out if `eval-after-load` works with elpaca
-2025-02-01 I think it does, it's just that it might not be called until the package is loaded after opening a file. Can't use it for initialization stuff/config?
-it's that after-init hooks don't
 *** center text in visual-line-mode-fill-column
 https://codeberg.org/joostkremers/visual-fill-column/issues/7
 Margins are unequal and there doesn't seem to be an easy way to customize this
 with package options. Hackish way is to set a negative number for 'Visual Fill Column Extra Text Width'
-** Minor projects
-*** replace setq in config
+
+*** Ensure Correct Settings Hygiene
+ - [ ] `:init` vs. `:config` vs `:custom`
+ - [ ] `setq` vs. `setq-local` vs. `setq-default` vs. `setopt` vs. `:custom`
+   In config files I think
+
+ -    `setq` and `setq-default` should not be used
+ -  `setq-local` should be used for buffer local variables
+ -  Default variables it's user's choice between `setopt` in :init or :config as
+   appropriate or :custom
+ - init is before package load, config is after
+Zone of less confidence:
+ - if the package uses a variable to set other variables then configure it init?
+ - if the package just uses the variable at runtime (wrong term I'm sure) then
+   config?
+ - example from recent experience: some of indentation / formatting
+   /font-locking config stuff in ess checks the config variable in the beginning
+   and then sets a bunch of other variables based on it. If you change this
+   config variable the children don't update so you need to set it in init. Some
+   of this is probably bad code, might be other better reasons tho
+
+  - [ ] options that should be set in init vs config
+
+**** Figure out if `eval-after-load` works with elpaca
+2025-02-01 I think it does, it's just that it might not be called until the package is loaded after opening a file. Can't use it for initialization stuff/config?
+it's that after-init hooks don't
+
+2025-02-06 Now less certain, I'm definitely a bit confused about the difference
+between :config (settings after loading a package) and eval-after-load (?after
+loading a file? Is this for stuff you want to do after loading a file with a
+certain extension but distinct from mode hooks?)
+
+**** replace setq in config
 `setq` seems like it should be replaced by either
 `setopt` for global https://www.reddit.com/r/emacs/comments/178em7u/comment/k5077cy/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1
 `setq-local`
@@ -60,6 +88,86 @@ https://www.gnu.org/software/emacs/manual/html_node/elisp/Setting-Variables.html
 
 nb: setopt shouldn't be used for programming, just init files because it's much less efficient
 
+Discussion of `:custom:` `setq` `setopt`
+https://old.reddit.com/r/emacs/comments/18gdqyq/when_should_usepackage_custom_or_setopt_be_used/
+#+begin_quote
+use-package is older than setopt. Setopt is a macro for setting user-options, which was just introduced in the latest Emacs release. Use-package has been around as a separate Emacs extension for many years. But, like setopt, use-package was only added to the core of Emacs in version 29.1.
+
+Use-package is a more complex macro that does a lot more than just set user-options. Not everyone uses it, but it is very popular. It provides a way to minimize typing and perhaps have a more visually appealing syntax for your config, but it's completely optional.
+
+There are many different ways to set user options. You already know about setopt and use-package's :custom keyword. There are also: - customize-set-variable - custom-set-variables (which you actually shouldn't manipulate directly) - M-x customize-variable and other entry-points to the Emacs Customization UI, which you can use to interactively set and/or save user-options. When you use this interface, Emacs saves your settings by changing the above-mentioned "custom-set-variables" form in your custom-file (which by default, is your init-file).
+
+I happen to like the syntax of setopt, because you can basically throw a bunch of variable-value pairs into it and not have to worry about wrapping each pair in parentheses.
+
+There's nothing cringe about your config. How you organize it is up to you and you alone. There are about ten different ways you could have written what you've got. The way you did it should work fine.
+
+If you want to make full use of use-package for the evil-mode portion, I suppose you could do something like this:
+
+(use-package evil
+  :custom (evil-mode t))
+
+Or this:
+
+(use-package evil
+  :init
+  (setopt evil-mode t))
+
+Or this:
+
+(use-package evil
+  :init
+  (evil-mode 1))
+
+Or even just "M-x customize-variable RET evil-mode RET", then make sure it's turned on and click the "Apply & Save" button.
+
+Any of these should have the same effect, but what you've got is also fine.
+#+end_quote
+
+#+begin_quote
+Thank you for your very detailed and insightful comment. I tried all of the three code blocks but only the last one works as expected. All three of them modify the evil-mode variable correctly however only the third one enables evil-mode at startup. It seems like it only works if this option is set after starting the package like with use-packages's :config option rather than :init or :custom. Why is this? Is this always the case with user options?
+#+end_quote
+
+#+begin_quote
+
+
+    only the last one works as expected.
+
+By chance, do you have use-package-always-defer enabled?
+
+Turning on a minor mode will almost always work using the customize system. However, the package has to get loaded in order for the customized setting to have any effect.
+
+By default, use-package immediately loads a package whenever that package's use-package form is evaluated. But this changes if you use any of these keywords: :hook, :commands, :bind, :bind*, :bind-keymap, :bind-keymap*, :mode, and :interpreter. In those cases, use-package sets up an autoload, causing the package to load when the conditions set by those keywords have been met. That helps reduce the startup time when Emacs is loading your init file, since packages only get loaded when they're needed.
+
+Another circumstance when use-package won't load a package immediately is if you use :defer t. In that case, you are telling use-package to simply not worry about loading the package. Typically, you would do this when you know of some other circumstance that will cause a package to load.
+
+If you've set use-package-always-defer to a non-nil value, use-package will treat :defer t as the default setting, meaning that it will not load any packages immediately except where you've added :demand t to a use-package form.
+
+(evil-mode 1) can work even if use-package doesn't load evil, because it's a function-call, which has been defined by the package authors themselves to autoload Evil. So when you call it, it loads the package and doesn't need use-package to load it. You can see where the autoload is created in evil-core.el.
+
+It's customary for any important command or mode in a package to be defined with an autoload. This simplifies configuration for users, so that you can just call the function without worrying whether the package already loaded or not.
+
+On the other hand, you can set a user-option whenever you want, but it won't have any effect until the package that defines that setting has loaded. I've encountered a user-option that autoloaded a package before, but that's unusual and not the conventional behavior.
+
+So in the first two use-package forms, we were just customizing the value of evil-mode to a non-nil value. That enables evil-mode as soon as the package loads, or immediately if it's already loaded.
+
+But the third form does something slightly different. It calls evil-mode as a function. If Evil hasn't loaded yet, there's an autoload already in place, and this causes the package to load whenever you call that function. That autoload was created by package.el when you installed Evil and it saw the ;;;###autoload cookie. So it will make sure the package loads, regardless of how you've set up use-package.
+
+EDIT: Actually, getting into the weeds a bit and looking at the documentation for define-minor-mode and define-globalized-minor-mode, it looks like an ;;;###autoload cookie would normally cause a globalized minor-mode (such as evil-mode) to autoload even just by customizing it as a user-option. But the autoload for evil-mode looks like it was written in a way that prevents it from autoloading as a user-option. Instead of placing the autoload cookie directly before the mode's definition (a call to define-globalized-minor-mode), it's placed in front of a specific call to the autoload function, which only sets up the evil-mode function for autoloading. Not sure if that was an intentional design-decision or a by-product of them wanting to autoload a different file. Anyway, probably more than you wanted or needed to know, but I ended up learning something new.
+#+end_quote
+
+Different poster
+#+begin_quote
+    Yeah i know, very sad and cringe. Please help :'(
+
+Im sorry you feel that way. Trust me, wallowing in self flagellation shan't help you.
+
+Use-package :custom and setopt do the same thing, it's entirely a matter of which syntax you prefer (I'm partial to :custom myself). Setopt is newer so it's probable that fewer people use it.
+
+Also: in your config quoted at the end, you should put the stuff related to evil inside the use-package block. :config is better if the package has to be loaded first, as in this case (evil provides the setter function for its customize option).
+
+#+end_quote
+
+** Minor projects
 *** Update to use elpaca ':wait' recipe keyword
 Replace most of the (elpaca-wait) commands scattered throughout with
 `:wait` recipes in the relevant packages
