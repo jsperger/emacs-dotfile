@@ -91,17 +91,9 @@
 ;;   :config
 ;;   (global-eldoc-mode))
 
-(elpaca (queue
-         :depth 1
-         :host github
-         :repo "emacsmirror/queue"
-         :inherit nil) )
+(use-package queue)
 
-(elpaca (plz
-         :depth 1
-         :host github
-         :repo "emacsmirror/plz"
-         :inherit nil) )
+(use-package plz)
 
 (elpaca-wait)
 
