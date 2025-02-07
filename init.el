@@ -132,7 +132,7 @@
 (require 'editor-misc)
 (require 'editor-ui)
 (require 'tools-notes)
-;; (elpaca-wait)
+
 (require 'lang-tex)
 (require 'editor-vc)
 (require 'editor-projects)
