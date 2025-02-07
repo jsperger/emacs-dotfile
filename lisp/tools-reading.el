@@ -23,6 +23,15 @@
           )
 )
 
+;;;
+;; --- Documentation ---
+;;;
+
+(use-package dash-docs)
+
+(use-package consult-dash
+  :after (consult dash-docs))
+
 ;; Structure and interpretation of computer programs
 ;; in package form?
 (use-package sicp)
