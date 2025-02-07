@@ -93,15 +93,10 @@
 					(17pt :default-height 170)
 					(18pt :default-height 180)
 
+					;; Monospace fonts
           (iosevka-comfy
            :default-family "Iosevka Comfy"
            :default-weight normal)
-
-          (duospace
-           :default-family "iA Writer Duospace")
-
-          (quattro
-           :default-family "iA Writer Quattro V")
 
           (fira-mono
            :default-family "Fira Mono")
@@ -110,7 +105,27 @@
            :default-family "JetBrains Mono NL")
 
           (plex-mono
-           :default-family "IBM Plex Mono"))
+           :default-family "IBM Plex Mono")
+
+					;; Quasi-monospace fonts
+          (duospace
+           :default-family "iA Writer Duospace")
+
+          (quattro
+           :default-family "iA Writer Quattro V")
+
+					;; Variable pitch fonts
+					(vp-heliotrope
+					 :variable-pitch-family "Heliotrope OT"
+					 :variable-pitch-height 1.05)
+
+					(vp-avenir
+					 :variable-pitch-family "Avenir"
+					 :default-weight book)
+
+					(vp-minion
+					 :variable-pitch-family "Minion 3")
+					)
         )
   )
 
