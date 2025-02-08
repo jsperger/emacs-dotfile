@@ -372,6 +372,9 @@
 
   (evil-set-undo-system 'undo-redo)
 
+	;; think this is a problem because evil is loaded early and
+	;; doesn't seem to be picking up config changes in some mode use-package
+	;; declarations e.g. ess-indent-offset
   (progn
     ;; Thanks to `editorconfig-emacs' for many of these
     (defvar evil-indent-variable-alist
@@ -388,7 +391,7 @@
         ((emacs-lisp-mode lisp-mode) . lisp-indent-offset)
         (enh-ruby-mode . enh-ruby-indent-level)
         (erlang-mode . erlang-indent-level)
-        (ess-mode . ess-indent-level)
+        (ess-mode . ess-indent-offset)
         (js2-mode . js2-basic-offset)
         (js3-mode . js3-indent-level)
         ((js-mode json-mode) . js-indent-level)
