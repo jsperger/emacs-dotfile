@@ -17,16 +17,16 @@
 ;;; Additional Packages
 
 (use-package eglot
-  :commands expand-absolute-name
+;;  :commands expand-absolute-name
   :init
   (setq read-process-output-max (* 1024 1024))
 
-  (defun expand-absolute-name (name)
-    (if (file-name-absolute-p name)
-        (tramp-file-local-name
-         (expand-file-name
-          (concat (file-remote-p default-directory) name)))
-      name))
+  ;; (defun expand-absolute-name (name)
+  ;;   (if (file-name-absolute-p name)
+  ;;       (tramp-file-local-name
+  ;;        (expand-file-name
+  ;;         (concat (file-remote-p default-directory) name)))
+  ;;     name))
 
   (general-def eglot--managed-mode
     :states '(normal insert motion emacs)
