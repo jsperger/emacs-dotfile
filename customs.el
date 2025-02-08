@@ -141,9 +141,11 @@
      "23841f54afd15fe850da8b37f2bb5813a873f53ed528024b0becb486ad8b01b3" default))
  '(package-native-compile t)
  '(package-selected-packages '(diff-hl eglot git-modes markdown-mode))
+ '(indent-tabs-mode t)
  '(safe-local-variable-values '((TeX-master . t)))
  '(temporary-file-directory "~/.tmp")
  )
+ '(standard-indent 2)
 
 
 
