@@ -80,19 +80,6 @@
    (visual-fill-column-extra-text-width '(4 . 2))
   )
 
-(use-package hl-todo)
-
-(use-package highlight-parentheses
-  :hook (prog-mode . highlight-parentheses-mode)
-  :config
-  ;; (setq highlight-parentheses-colors '("Springgreen3"
-  ;;                                      "IndianRed1"
-  ;;                                      "IndianRed3"
-  ;;                                      "IndianRed4"))
-  (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold))
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package xterm-color
   :init
