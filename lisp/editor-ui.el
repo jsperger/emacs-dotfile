@@ -101,8 +101,6 @@
 ;;   )
 
 
-(use-package bookmark-in-project)
-
 (use-package golden-ratio
   :config (golden-ratio-mode nil))
 
