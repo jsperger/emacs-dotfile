@@ -345,7 +345,7 @@
 
 (use-package evil
   :demand t
-  :hook ((prog-mode . hs-minor-mode))
+  :hook ((prog-mode . hs-minor-mode)) ;why is this here?
   :init
   (setq evil-want-keybinding nil
         evil-symbol-word-search t
