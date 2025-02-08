@@ -70,9 +70,9 @@
     :major-modes '(LaTeX-mode)
     "."                'LaTeX-mark-environment              ;; C-c .
     ","             'TeX-command-master
-    ;; TeX-command-run-all runs compile and open the viewer
-    "a"             'TeX-command-run-all                       ;; C-c C-a
-    "b"             'TeX-build
+    ;; TeX-command-run-all runs compile and open the system viewer
+    "a"             'TeX-command-run-all      ;; C-c C-a
+   ;;  "b"             'TeX-build
     "c"             'TeX-clean
     "e"                'LaTeX-environment                   ;; C-c C-e
     "f"                (cons "fill" (make-sparse-keymap))
