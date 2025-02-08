@@ -1,4 +1,4 @@
-emacs-lisp-mode
+emacs-lisp-mode elisp-mode
 
 (comment-line-40 ";; -------------------------------------" n)
 
