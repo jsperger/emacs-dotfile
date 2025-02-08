@@ -85,24 +85,6 @@
     "wc" 'writeroom-mode
     "wC" 'global-writeroom-mode))
 
-(use-package xterm-color
-  :init
-  (setq compilation-environment '("TERM=xterm-256color"))
-
-  (defun compilation-filter@around (fn proc string)
-    (funcall fn proc (xterm-color-filter string)))
-  (advice-add 'compilation-filter :around #'compilation-filter@around))
-
-
-;; Commented out because it didn't seem to want to respect being disabled
-;; (use-package fira-code-mode
-;;   :disabled
-;;   :if (display-graphic-p)
-;;   :custom (fira-code-mode-disabled-ligatures '(
-;;             "[]" "#{" "#(" "#_" "#_(" "x" ">>" "<<" "\\" "==" ">>>" "<<<" "!="
-;;             ":" ";" ": " ".." "<-" "%%")) ;; List of ligatures to turn off
-;;   :hook prog-mode ;; Enables fira-code-mode automatically for programming major modes
-;;   )
 
 
 ;;;
