@@ -5,39 +5,29 @@
 ;; Author: Tianshu Wang <wang@tianshu.me>
 
 ;;; Commentary:
+;; Organized by
+;; Buffers
+;; Frames / Tabs / Windows
+;; Modeline
+;; Decoration (not including fonts or themes)
+;;;
 
 ;;; Code:
 
-(use-package doom-modeline
-  :config
-  (setq inhibit-compacting-font-caches t
-        doom-modeline-height 0
-        doom-modeline-buffer-file-name-style 'auto
-        doom-modeline-project-detection 'project
-
-        doom-modeline-icon nil
-        doom-modeline-major-mode-icon nil
-
-        doom-modeline-gnus nil
-        doom-modeline-irc nil
-        doom-modeline-persp-name nil)
-  :custom (doom-modeline-mode 1))
-
-
-(use-package spacious-padding
-  :config
-  (setq spacious-padding-widths
-        '( internal-border-width 10
-           header-line-width 4
-           mode-line-width 6
-           tab-width 4
-           right-divider-width 20
-           scroll-bar-width 8)
-        )
-  (setq spacious-padding-subtle-mode-line t)
+;;;
+;; --- Buffers ---
+;;;
+(use-package bicycle
+  :hook ((prog-mode . outline-minor-mode)
+         (prog-mode . hs-minor-mode))
+  :general
+  (tyrant-def
+    "t TAB" 'bicycle-cycle
+    "t <backtab>" 'bicycle-cycle-global
+    )
   )
 
-(use-package nano-modeline
+(use-package indent-control
   :disabled)
 
 (use-package shackle
@@ -58,7 +48,29 @@
                         ("\\*EGLOT.*" :select t :align right :size ,
                          fill-column :regexp t))))
 
+(use-package spacious-padding
+  :config
+  (setq spacious-padding-widths
+        '( internal-border-width 10
+           header-line-width 4
+           mode-line-width 6
+           tab-width 4
+           right-divider-width 20
+           scroll-bar-width 8)
+        )
+  (setq spacious-padding-subtle-mode-line t)
+  )
+
+
+(use-package visual-fill-column
+  :custom
+  (global-visual-fill-column-mode 1 "Enable global mode")
+  (visual-fill-column-center-text t "Center instead of beginning at margin")
+  (visual-fill-column-extra-text-width '(4 . 2))
+  )
+
 (use-package writeroom-mode
+  :disabled
   :config
   (setq split-width-threshold 120
         writeroom-width 128
@@ -72,14 +84,6 @@
   (tyrant-def
     "wc" 'writeroom-mode
     "wC" 'global-writeroom-mode))
-
-(use-package visual-fill-column
-  :custom
-  (global-visual-fill-column-mode 1 "Enable global mode")
-   (visual-fill-column-center-text t "Center instead of beginning at margin")
-   (visual-fill-column-extra-text-width '(4 . 2))
-  )
-
 
 (use-package xterm-color
   :init
@@ -101,18 +105,11 @@
 ;;   )
 
 
+;;;
+;; --- Frames / Tabs / Windows ---
+;;;
 (use-package golden-ratio
   :config (golden-ratio-mode nil))
-
-(use-package bicycle
-  :hook ((prog-mode . outline-minor-mode)
-         (prog-mode . hs-minor-mode))
-  :general
-  (tyrant-def
-    "t TAB" 'bicycle-cycle
-    "t <backtab>" 'bicycle-cycle-global
-    )
-  )
 
 
 (use-package popper
@@ -179,6 +176,33 @@
 	;; ;; Store all project sessions in a specific directory
 	;; (setq tabspaces-session-project-session-store "~/.emacs.d/tabspaces-sessions/")
   )
+
+
+;;;
+;; --- Modeline ---
+;;;
+(use-package doom-modeline
+  :config
+  (setq inhibit-compacting-font-caches t
+        doom-modeline-height 0
+        doom-modeline-buffer-file-name-style 'auto
+        doom-modeline-project-detection 'project
+
+        doom-modeline-icon nil
+        doom-modeline-major-mode-icon nil
+
+        doom-modeline-gnus nil
+        doom-modeline-irc nil
+        doom-modeline-persp-name nil)
+  :custom (doom-modeline-mode 1))
+
+(use-package nano-modeline
+  :disabled)
+
+;;;
+;; Decoration (not including fonts or themes)
+;;;
+
 
 
 (provide 'editor-ui)
