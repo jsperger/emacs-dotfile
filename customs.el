@@ -44,12 +44,12 @@
 ;;       bibtex-align-at-equal-sign t
 ;;       bibtex-dialect 'bibtex)
 
-(setopt citar-at-point-function 'embark-act
-      citar-bibliography bib-file-location
-      citar-library-paths `(,(concat bibtex-file-path "files/"))
-      citar-file-open-functions '(("html" . citar-file-open-external)
-                                  ("pdf" . citar-file-open-external)
-                                  (t . find-file)))
+;; (setopt citar-at-point-function 'embark-act
+;;       citar-bibliography bib-file-location
+;;       citar-library-paths `(,(concat bibtex-file-path "files/"))
+;;       citar-file-open-functions '(("html" . citar-file-open-external)
+;;                                   ("pdf" . citar-file-open-external)
+;;                                   (t . find-file)))
 
 (when my-debug-mode (message "Checkpoint: %s" "set q"))
 
