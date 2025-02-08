@@ -356,14 +356,13 @@
 					evil-want-C-u-scroll t
 					hs-minor-mode-map nil)
   :config
-  (evil-mode 1)
   (setopt evil-cross-lines t
         evil-kill-on-visual-paste nil
         evil-move-beyond-eol t
         evil-want-C-i-jump t
         evil-want-fine-undo t
-        evil-v$-excludes-newline t)
-
+        evil-v$-excludes-newline t
+				evil-mode t)
   (setopt evil-normal-state-cursor  '("DarkGoldenrod2" box)
         evil-insert-state-cursor  '("chartreuse3" (bar . 2))
         evil-emacs-state-cursor   '("SkyBlue2" box)
