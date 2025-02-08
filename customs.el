@@ -162,7 +162,7 @@
 ;; For persisting settings
 (fontaine-mode 1)
 ;; For persisting font after loading theme This might be redundant with the above.
-(add-hook 'enable-theme-functions #'fontaine-apply-current-preset)
+;; (add-hook 'enable-theme-functions #'fontaine-apply-current-preset)
 (load-theme 'doom-nord)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
