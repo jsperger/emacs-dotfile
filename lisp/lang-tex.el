@@ -8,7 +8,10 @@
 
 ;;; Code:
 
-(defvar bib-file-location "~/obsidian/obsidian-biblatex.bib")
+;; commenting rather than deleting for now (2025-02-07)
+;; not sure if it's useful to have this as a var so bibtex and citar
+;; use a variable rather than individual declarations
+;; (defvar bib-file-location "~/obsidian/obsidian-biblatex.bib")
 
 (use-package auctex
   :ensure
@@ -164,13 +167,20 @@
       "f" #'citar-open
       "n" #'citar-open-notes)
     (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map)))
+
   :config
   (defun citar-setup-capf ()
     "add `citar-capf' to `completion-at-point-functions'"
     (add-to-list 'completion-at-point-functions #'citar-capf))
+
   :general
   (tyrant-def "aC" 'citar-open)
+
+  :custom
+  (citar-at-point-function 'embark-act)
+  (citar-bibliography '("~/obsidian/obsidian-biblatex.bib"))
   )
+
 
 (use-package citar-embark
   :after citar embark
