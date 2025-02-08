@@ -46,7 +46,8 @@
 
 (use-package ess-view-data)
 
-(use-package poly-R)
+(use-package poly-R
+  :disabled)
 
 (provide 'lang-r)
 
