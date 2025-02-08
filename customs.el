@@ -107,7 +107,6 @@
  ;; If there is more than one, they won't work right.
  '(TeX-indent-close-delimiters "]")
  '(TeX-indent-open-delimiters "[")
- '(byte-compile-delete-errors t)
  '(custom-safe-themes
    '("de4382be014e101c135c3d7c638a488e5cb843fa61554008f08e7bec1bc1abb6"
      "f90edafccd777cd3df7b88bb5bb72931d8cbd5ef92423fbca0c3bc344e03f1e2"
@@ -139,13 +138,10 @@
      "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3"
      "524fa911b70d6b94d71585c9f0c5966fe85fb3a9ddd635362bfabd1a7981a307"
      "23841f54afd15fe850da8b37f2bb5813a873f53ed528024b0becb486ad8b01b3" default))
- '(package-native-compile t)
- '(package-selected-packages '(diff-hl eglot git-modes markdown-mode))
  '(indent-tabs-mode t)
  '(safe-local-variable-values '((TeX-master . t)))
- '(temporary-file-directory "~/.tmp")
- )
  '(standard-indent 2)
+ '(trusted-content '("~/.emacs.d/" "~/projects/")))
 
 
 
