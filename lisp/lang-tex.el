@@ -187,8 +187,8 @@
   :config
   (citar-embark-mode))
 
+;; surprised this isn't an option in auctex
 (use-package preview-dvisvgm
-  :disabeld
   :after auctex)
 
 (provide 'lang-tex)
