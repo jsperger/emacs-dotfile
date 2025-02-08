@@ -191,6 +191,25 @@
 (use-package preview-dvisvgm
   :after auctex)
 
+;;;
+;; --- Packages to trial
+;;;
+
+(use-package xenops
+	:disabled)
+
+(use-package cdlatex
+	:disabled)
+
+(use-package latex-table-wizard
+	:disabled)
+
+(use-package evil-tex
+	:disabled)
+
+(use-package latex-extra
+	:disabled)
+
 (provide 'lang-tex)
 ;; Local Variables:
 ;; no-byte-compile: t
