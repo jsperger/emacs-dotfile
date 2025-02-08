@@ -347,14 +347,14 @@
   :demand t
   :hook ((prog-mode . hs-minor-mode)) ;why is this here?
   :init
-  (setq evil-want-keybinding nil
-        evil-symbol-word-search t
-        evil-ex-search-vim-style-regexp t
-        evil-search-module 'evil-search
-        evil-magic 'very-magic
-        evil-want-C-u-delete t
-        evil-want-C-u-scroll t
-        hs-minor-mode-map nil)
+	(setopt evil-want-keybinding nil
+					evil-symbol-word-search t
+					evil-ex-search-vim-style-regexp t
+					evil-search-module 'evil-search
+					evil-magic 'very-magic
+					evil-want-C-u-delete t
+					evil-want-C-u-scroll t
+					hs-minor-mode-map nil)
   :config
   (evil-mode 1)
   (setopt evil-cross-lines t
@@ -364,7 +364,7 @@
         evil-want-fine-undo t
         evil-v$-excludes-newline t)
 
-  (setq evil-normal-state-cursor  '("DarkGoldenrod2" box)
+  (setopt evil-normal-state-cursor  '("DarkGoldenrod2" box)
         evil-insert-state-cursor  '("chartreuse3" (bar . 2))
         evil-emacs-state-cursor   '("SkyBlue2" box)
         evil-replace-state-cursor '("chocolate" (hbar . 2))
