@@ -44,6 +44,16 @@
     )
   )
 
+(use-package essgd
+	;; TODO: add hook
+	;; wrong, the mode is for the buffer with the plot
+	;; :hook (inferior-ess-r-mode . essgd-mode)
+	;; want to call the function essgd-start when
+	;; run-ess-r is called or something
+
+	;; TODO: Fix keybinds to work with evil
+	)
+
 (use-package ess-view-data)
 
 (use-package poly-R
