@@ -140,9 +140,45 @@
   (use-package sideline-flymake
     :hook (flymake-mode . sideline-mode)
     :init
-    (setq sideline-backends-right '(sideline-flymake))
+    (setopt sideline-backends-right '(sideline-flymake))
     (add-hook 'flymake-mode-hook
               (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
+
+(use-package tabspaces
+  :disabled
+  :hook (prog-mode . tabspaces-mode)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "Default")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*"))
+  (tabspaces-initialize-project-with-todo t)
+  (tabspaces-todo-file-name "project-todo.org")
+  ;; sessions
+  (tabspaces-session t)
+  (tabspaces-session-auto-restore t)
+  (tab-bar-new-tab-choice "*scratch*")
+
+	;; (defvar tabspaces-command-map
+	;;   (let ((map (make-sparse-keymap)))
+	;;     (define-key map (kbd "C") 'tabspaces-clear-buffers)
+	;;     (define-key map (kbd "b") 'tabspaces-switch-to-buffer)
+	;;     (define-key map (kbd "d") 'tabspaces-close-workspace)
+	;;     (define-key map (kbd "k") 'tabspaces-kill-buffers-close-workspace)
+	;;     (define-key map (kbd "o") 'tabspaces-open-or-create-project-and-workspace)
+	;;     (define-key map (kbd "r") 'tabspaces-remove-current-buffer)
+	;;     (define-key map (kbd "R") 'tabspaces-remove-selected-buffer)
+	;;     (define-key map (kbd "s") 'tabspaces-switch-or-create-workspace)
+	;;     (define-key map (kbd "t") 'tabspaces-switch-buffer-and-tab)
+	;;     map)
+  ;;   "Keymap for tabspace/workspace commands after `tabspaces-keymap-prefix'.")
+
+	;;   ;; Store in project directories (default)
+	;; (setq tabspaces-session-project-session-store 'project)
+
+	;; ;; Store all project sessions in a specific directory
+	;; (setq tabspaces-session-project-session-store "~/.emacs.d/tabspaces-sessions/")
+  )
 
 
 (provide 'editor-ui)
