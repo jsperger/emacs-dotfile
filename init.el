@@ -137,6 +137,7 @@
 (require 'editor-vc)
 (require 'editor-projects)
 
+(require 'evil-addons)
 (require 'tools-reading)
 
 (require 'lang-markdown)

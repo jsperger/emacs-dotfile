@@ -375,6 +375,8 @@
 	;; think this is a problem because evil is loaded early and
 	;; doesn't seem to be picking up config changes in some mode use-package
 	;; declarations e.g. ess-indent-offset
+
+	;;TODO: Figure out where/when this came from. Questioning if this list is still necessary
   (progn
     ;; Thanks to `editorconfig-emacs' for many of these
     (defvar evil-indent-variable-alist
@@ -464,37 +466,6 @@
   (general-def 'insert [remap evil-complete-previous] 'hippie-expand))
 
 (elpaca-wait)
-
-(use-package evil-collection
-  :init
-  (add-hook 'org-agenda-mode-hook
-            (lambda () (evil-collection-unimpaired-mode -1))))
-
-(use-package evil-owl
-  :config
-  (add-to-list 'display-buffer-alist
-               '("*evil-owl*"
-                 (display-buffer-in-side-window)
-                 (side . bottom)
-                 (window-height . 0.3)))
-  (setq evil-owl-idle-delay 0.5))
-
-(use-package evil-snipe
-  :hook ((evil-snipe-mode . evil-snipe-override-mode))
-  :config
-  (setq evil-snipe-spillover-scope 'whole-buffer)
-  (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
-
-(use-package evil-surround
-  :hook ((text-mode prog-mode conf-mode) . evil-surround-mode)
-  :config
-  (add-hook 'emacs-lisp-mode-hook
-            (lambda ()
-              (push '(?` . ("`" . "'")) evil-surround-pairs-alist)))
-  ;; `s' for surround instead of `subtitute'
-  (general-def 'visual evil-surround-mode-map
-    "s" 'evil-surround-region
-    "S" 'evil-substitute))
 
 (provide 'core-keybinds)
 ;; Local Variables:
