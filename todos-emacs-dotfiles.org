@@ -168,9 +168,14 @@ Also: in your config quoted at the end, you should put the stuff related to evil
 #+end_quote
 
 ** Minor projects
-*** Update to use elpaca ':wait' recipe keyword
-Replace most of the (elpaca-wait) commands scattered throughout with
+- [X] Fix display of third indent character in org-modern
+  Solution: Add `(set-face-attribute 'org-modern-symbol nil :family "Iosevka")`
+  to org-modern config
+- [X] Update to use elpaca ':wait' recipe keyword
+Replace (elpaca-wait) commands scattered throughout with
 `:wait` recipes in the relevant packages
+
+Solution notes: Turns out only general (and maybe jsonrpc) really needed it.
 ** Package and Custom Settings TODOs
 *** TODO visual-fill-column
 
