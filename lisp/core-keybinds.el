@@ -19,7 +19,8 @@
   (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
 
 (use-package general
-  :demand t
+	:ensure (:wait t)
+	:demand t
   :config
   (setq general-emit-autoloads nil)
 
@@ -341,8 +342,6 @@
                           (delete-region (point) prev-pos)
                           (indent-according-to-mode))))))
 
-(elpaca-wait)
-
 (use-package evil
   :demand t
   :hook ((prog-mode . hs-minor-mode)) ;why is this here?
@@ -464,8 +463,6 @@
 
   (general-def 'normal "zf" 'reposition-window)
   (general-def 'insert [remap evil-complete-previous] 'hippie-expand))
-
-(elpaca-wait)
 
 (provide 'core-keybinds)
 ;; Local Variables:

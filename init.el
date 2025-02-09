@@ -61,11 +61,6 @@
   "Toggle debugging messages. Set to t to enable, nil to disable.")
 
 
-;;;;;;;;;;;;;;
-;; Auctex + Vertico
-;;
-;;
-
 ;; Eldoc workaround
 ;; https://github.com/progfolio/elpaca/issues/398
 (unload-feature 'eldoc t) ;; Unload built-in eldoc
@@ -76,7 +71,6 @@
   (global-eldoc-mode) ;; This is usually enabled by default by Emacs
   )
 
-;;(use-package jsonrpc)
 (use-package jsonrpc :ensure (:wait t) )
 (use-package track-changes)
 (use-package sqlite
@@ -94,9 +88,6 @@
 (use-package queue)
 
 (use-package plz)
-
-(elpaca-wait)
-
 
 ;;;;;;;;;;;;;;
 ;; Define constants for use throughout config
@@ -118,13 +109,11 @@
 
 (require 'core-keybinds)
 (require 'editor-completion)
-;;(elpaca-wait)
 
 
 (require 'core-packages)
 (require 'core-config)
 (require 'core-funcs)
-;; (elpaca-wait)
 
 (require 'editor-lsp)
 

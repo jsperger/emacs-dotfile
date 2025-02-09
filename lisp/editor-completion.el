@@ -56,10 +56,6 @@
     :hook (vertico-mode . vertico-multiform-mode))
   )
 
-
-(elpaca-wait)
-
-
 (use-package marginalia)
 
 (use-package orderless
