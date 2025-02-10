@@ -54,6 +54,8 @@
   (use-package vertico-multiform
     :ensure nil
     :hook (vertico-mode . vertico-multiform-mode))
+
+	:hook (elpaca-after-init . vertico-mode)
   )
 
 (use-package marginalia)
@@ -275,6 +277,8 @@ targets."
    "RET"    nil
    "M-RET"  'corfu-quick-insert
    "S-SPC"  'corfu-insert-separator)
+
+	:custom (global-corfu-mode t)
   )
 
 (use-package cape
@@ -293,8 +297,9 @@ targets."
     :init
     (setq corfu-prescient-enable-filtering nil))
   :config
-  (setq prescient-sort-full-matches-first t
-        prescient-sort-length-enable nil))
+  (setopt prescient-sort-full-matches-first t
+					prescient-sort-length-enable nil)
+	:custom (prescient-persist-mode t))
 
 
 (use-package tempel
@@ -319,8 +324,8 @@ Just put this function in `hippie-expand-try-functions-list'."
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  :init
-  (all-the-icons-completion-mode))
+  (marginalia-mode . all-the-icons-completion-mode)
+	:custom (marginalia-mode t))
 
 
 (use-package tempel-collection
