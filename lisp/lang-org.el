@@ -208,6 +208,7 @@
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
   :config
+	(set-face-attribute 'org-modern-symbol nil :family "Iosevka")
   (setq
    ;; Edit settings
    org-auto-align-tags nil
