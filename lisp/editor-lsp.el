@@ -107,6 +107,7 @@
 (provide 'editor-lsp)
 ;; Local Variables:
 ;; no-byte-compile: t
+;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
 ;;; editor-lsp.el ends here
