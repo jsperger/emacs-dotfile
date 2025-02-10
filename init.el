@@ -144,6 +144,13 @@
 
 (provide 'init)
 
+;;; DANGER ZONE
+;; Respect the no-byte-compile local variable
+;; !Config files should not be byte compiled!
+;; Emacs will compile package lisp JIT (or when building for packages in base
+;; emacs when building emacs with the -native-compile=aot flag)
+;;;
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

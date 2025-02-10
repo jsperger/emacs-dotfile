@@ -85,7 +85,7 @@ reuse it's window, otherwise create new one."
 
 (use-package undo-fu-session
 	:custom
-	(undo-fu-session-global-mode)
+	(undo-fu-session-global-mode t)
 	)
 
 (use-package xr)  ;; Convert string regexp to rx notation
