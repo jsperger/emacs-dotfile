@@ -82,6 +82,10 @@
            :bold-family nil ; use whatever the underlying face has
            :bold-weight bold)
 
+					;;;
+					;; Universal presets
+					;;;
+
 					;; Presets to change point size only
           (10pt :default-height 100)
           (11pt :default-height 110)
@@ -92,6 +96,30 @@
           (16pt :default-height 160)
 					(17pt :default-height 170)
 					(18pt :default-height 180)
+
+					;; Line spacing is additional line spacing, not total line spacing
+					;; (i.e. 0 is the default)
+					;; Meaning differs depending on whether it is an integer or float
+					;; Integer = additional pixels to add
+					;; Floating point = additional spacing proportional to point size
+					(lsd :line-space 0)
+					;; line spacing pixels
+					(lsp1 :line-spacing 1)
+					(lsp2 :line-spacing 2)
+					(lsp3 :line-spacing 3)
+					(lsp4 :line-spacing 4)
+					(lsp5 :line-spacing 5)
+					;; line spacing scaling
+					(lss05 :line-spacing 0.05)
+					(lss10 :line-spacing 0.10)
+					(lss15 :line-spacing 0.15)
+					(lss20 :line-spacing 0.20)
+					(lss25 :line-spacing 0.25)
+					(lss30 :line-spacing 0.30)
+
+					;;;
+					;; Font presets
+					;;;
 
 					;; Monospace fonts
           (iosevka-comfy
