@@ -72,110 +72,113 @@
 
 (use-package fontaine
   :config
-  (setq fontaine-presets
-        '((t
-           :default-weight normal
-           :default-height 150
-           :fixed-pitch-family "JetBrains Mono NL"
-           :variable-pitch-family "Heliotrope OT"
-           :variable-pitch-height 1.05
-           :bold-family nil ; use whatever the underlying face has
-           :bold-weight bold)
+  (setopt fontaine-presets
+					'((t
+						 :default-weight normal
+						 :default-height 150
+						 :fixed-pitch-family "JetBrains Mono NL"
+						 :variable-pitch-family "Heliotrope OT"
+						 :variable-pitch-height 1.05
+						 :bold-family nil ; use whatever the underlying face has
+						 :bold-weight bold)
 
 					;;;
-					;; Universal presets
+						;; Universal presets
 					;;;
 
-					;; Presets to change point size only
-          (10pt :default-height 100)
-          (11pt :default-height 110)
-          (12pt :default-height 120)
-          (13pt :default-height 130)
-          (14pt :default-height 140)
-          (15pt :default-height 150)
-          (16pt :default-height 160)
-					(17pt :default-height 170)
-					(18pt :default-height 180)
+						;; Presets to change point size only
+						(10pt :default-height 100)
+						(11pt :default-height 110)
+						(12pt :default-height 120)
+						(13pt :default-height 130)
+						(14pt :default-height 140)
+						(15pt :default-height 150)
+						(16pt :default-height 160)
+						(17pt :default-height 170)
+						(18pt :default-height 180)
 
-					;; Line spacing is additional line spacing, not total line spacing
-					;; (i.e. 0 is the default)
-					;; Meaning differs depending on whether it is an integer or float
-					;; Integer = additional pixels to add
-					;; Floating point = additional spacing proportional to point size
-					(lsd :line-space 0)
-					;; line spacing pixels
-					(lsp1 :line-spacing 1)
-					(lsp2 :line-spacing 2)
-					(lsp3 :line-spacing 3)
-					(lsp4 :line-spacing 4)
-					(lsp5 :line-spacing 5)
-					;; line spacing scaling
-					(lss05 :line-spacing 0.05)
-					(lss10 :line-spacing 0.10)
-					(lss15 :line-spacing 0.15)
-					(lss20 :line-spacing 0.20)
-					(lss25 :line-spacing 0.25)
-					(lss30 :line-spacing 0.30)
+						;; Line spacing is additional line spacing, not total line spacing
+						;; (i.e. 0 is the default)
+						;; Meaning differs depending on whether it is an integer or float
+						;; Integer = additional pixels to add
+						;; Floating point = additional spacing proportional to point size
+						(lsd :line-space 0)
+						;; line spacing pixels
+						(lsp1 :line-spacing 1)
+						(lsp2 :line-spacing 2)
+						(lsp3 :line-spacing 3)
+						(lsp4 :line-spacing 4)
+						(lsp5 :line-spacing 5)
+						;; line spacing scaling
+						(lss05 :line-spacing 0.05)
+						(lss10 :line-spacing 0.10)
+						(lss15 :line-spacing 0.15)
+						(lss20 :line-spacing 0.20)
+						(lss25 :line-spacing 0.25)
+						(lss30 :line-spacing 0.30)
 
 					;;;
-					;; Font presets
+						;; Font presets
 					;;;
 
-					;; Monospace fonts
-          (iosevka-comfy
-           :default-family "Iosevka Comfy"
-           :default-weight normal)
+						;; Monospace fonts
+						(iosevka-comfy
+						 :default-family "Iosevka Comfy"
+						 :default-weight normal)
 
-          (fira-mono
-           :default-family "Fira Mono")
+						(fira-mono
+						 :default-family "Fira Mono")
 
-          (jetbrains-mono
-           :default-family "JetBrains Mono NL")
+						(jetbrains-mono
+						 :default-family "JetBrains Mono NL")
 
-          (plex-mono
-           :default-family "IBM Plex Mono")
+						(plex-mono
+						 :default-family "IBM Plex Mono")
 
-					(dank-mono
-					 :default-family "Dank Mono")
+						(dank-mono
+						 :default-family "Dank Mono")
 
-					(hack
-					 :default-family "Hack Nerd Font")
+						(hack
+						 :default-family "Hack Nerd Font")
 
-					;; think inter is proportional not mono
-					(inter
-					 :default-family "Inter")
+						;; think inter is proportional not mono
+						(inter
+						 :default-family "Inter")
 
-					(xenon
-					 :default-family "Monaspace Xenon")
+						(xenon
+						 :default-family "Monaspace Xenon")
 
-(input-mono
-:default-family "Input Mono")
-					;; Quasi-monospace fonts
-          (duospace
-           :default-family "iA Writer Duospace")
+						(input-mono
+						 :default-family "Input Mono")
+						;; Quasi-monospace fonts
+						(duospace
+						 :default-family "iA Writer Duospace")
 
-          (quattro
-           :default-family "iA Writer Quattro V")
+						(quattro
+						 :default-family "iA Writer Quattro V")
 
-					;; Variable pitch fonts
-(serif-input
-:variable-pitch-family "Input Serif")
+						;; Variable pitch fonts
+						(serif-input
+						 :variable-pitch-family "Input Serif")
 
-(sans-input
-:variable-pitch-family "Input Sans")
+						(sans-input
+						 :variable-pitch-family "Input Sans")
 
-					(vp-heliotrope
-					 :variable-pitch-family "Heliotrope OT"
-					 :variable-pitch-height 1.05)
+						(vp-heliotrope
+						 :variable-pitch-family "Heliotrope OT"
+						 :variable-pitch-height 1.05)
 
-					(vp-avenir
-					 :variable-pitch-family "Avenir"
-					 :default-weight book)
+						(vp-avenir
+						 :variable-pitch-family "Avenir"
+						 :default-weight book)
 
-					(vp-minion
-					 :variable-pitch-family "Minion 3")
+						(vp-minion
+						 :variable-pitch-family "Minion 3")
+						)
 					)
-        )
+	;;	:hook (elpaca-after-init . (fontaine-set-preset (or (fontaine-restore-latest-preset) 'regular)))
+	:hook (elpaca-after-init . fontaine-mode)
+	:custom (fontaine-mode t)
   )
 
 ;;; Theme packages

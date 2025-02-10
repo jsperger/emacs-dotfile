@@ -133,13 +133,14 @@
 ;; (setup-font)
 ;; Set the last preset or fall back to desired style from `fontaine-presets'
 ;; (the `regular' in this case).
-(fontaine-set-preset (or (fontaine-restore-latest-preset) 't))
+;; (fontaine-set-preset (or (fontaine-restore-latest-preset) 't))
 
-;; For persisting settings
-(fontaine-mode 1)
-;; For persisting font after loading theme This might be redundant with the above.
+;; ;; For persisting settings
+;; (fontaine-mode 1)
+;; ;
+																				; For persisting font after loading theme This might be redundant with the above.
 ;; (add-hook 'enable-theme-functions #'fontaine-apply-current-preset)
-(load-theme 'doom-nord)
+;; (load-theme 'doom-nord)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
 (custom-set-faces
