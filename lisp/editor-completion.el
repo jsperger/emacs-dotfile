@@ -340,6 +340,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 (provide 'editor-completion)
 ;; Local Variables:
 ;; no-byte-compile: t
+;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
 ;;; editor-completion.el ends here

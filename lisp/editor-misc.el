@@ -177,6 +177,7 @@ stays on current"
 (provide 'editor-misc)
 ;; Local Variables:
 ;; no-byte-compile: t
+;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
 ;;; editor-misc.el ends here
