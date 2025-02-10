@@ -104,8 +104,7 @@
 	:defer t
   :config
   (setopt global-auto-revert-non-file-buffers t
-					auto-revert-verbose nil)
-	:custom (global-auto-revert-mode t))
+        auto-revert-verbose nil))
 
 (use-package dabbrev
   :ensure nil
@@ -180,8 +179,7 @@
 
 (use-package elec-pair
   :ensure nil
-	:custom
-	(electric-pair-mode t))
+	:defer t)
 
 (use-package files
   :ensure nil
@@ -276,10 +274,7 @@
 	:defer t
   :config
   (setopt recentf-auto-cleanup 'never
-					recentf-max-saved-items 100)
-	:custom
-	(recentf-mode t)
-	)
+        recentf-max-saved-items 100))
 
 (use-package savehist
   :ensure nil
@@ -314,14 +309,11 @@ the unwritable tidbits."
               ;; `savehist-save-hook' in. We don't want to actually remove the
               ;; unserializable registers in the current session!
               (setq-local register-alist
-                          (cl-remove-if-not #'savehist-printable register-alist))))
-:custom (savehist-mode t)
-	)
+                          (cl-remove-if-not #'savehist-printable register-alist)))))
 
 (use-package saveplace
   :ensure nil
-	:defer t
-	:custom (save-place-mode t))
+	:defer t)
 
 (use-package server
   :ensure nil
@@ -353,8 +345,7 @@ the unwritable tidbits."
   :init
   (setopt winner-dont-bind-my-keys t)
   :config
-  (setopt winner-boring-buffers-regexp "\\*.*\\*")
-	:custom (winner-mode t))
+  (setopt winner-boring-buffers-regexp "\\*.*\\*"))
 
 (use-package all-the-icons
   :if (display-graphic-p))

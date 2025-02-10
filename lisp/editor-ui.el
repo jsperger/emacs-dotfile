@@ -104,7 +104,7 @@
 ;; --- Frames / Tabs / Windows ---
 ;;;
 (use-package golden-ratio
-  :custom (golden-ratio-mode nil))
+  :config (golden-ratio-mode nil))
 
 
 (use-package popper
@@ -125,9 +125,7 @@
   :general
   (tyrant-def
     ";" 'popper-toggle
-    ":" 'popper-kill-latest-popup)
-	:custom (popper-mode t)
-	(popper-echo-mode t))
+    ":" 'popper-kill-latest-popup))
 
 (use-package sideline
   :init

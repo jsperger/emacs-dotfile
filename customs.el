@@ -52,22 +52,42 @@
 
 ;;; After-init hooks packages
 
-
+;; PATH setting
+(exec-path-from-shell-initialize)
 ;; general emacs settings
 (pixel-scroll-precision-mode)
+(electric-pair-mode)
+(recentf-mode)
+(savehist-mode)
+(save-place-mode)
+(winner-mode)
+(which-key-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before evil"))
 ;; evil settings
+(evil-collection-init)
+(evil-owl-mode)
 (evil-snipe-mode)
 ;;(doom-modeline-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after evil"))
 ;; (shackle-mode)
 ;; (global-hl-todo-mode)
+(global-diff-hl-mode)
+(global-auto-revert-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before completion modes"))
+(vertico-mode)
+(marginalia-mode)
+(global-corfu-mode)
+(prescient-persist-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after auto complete"))
+(popper-mode)
+(popper-echo-mode)
+(winum-mode)
+
+(setopt golden-ratio-mode nil)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
 
@@ -119,14 +139,13 @@
 ;; (setup-font)
 ;; Set the last preset or fall back to desired style from `fontaine-presets'
 ;; (the `regular' in this case).
-;; (fontaine-set-preset (or (fontaine-restore-latest-preset) 't))
+(fontaine-set-preset (or (fontaine-restore-latest-preset) 't))
 
-;; ;; For persisting settings
-;; (fontaine-mode 1)
-;; ;
-																				; For persisting font after loading theme This might be redundant with the above.
+;; For persisting settings
+(fontaine-mode 1)
+;; For persisting font after loading theme This might be redundant with the above.
 ;; (add-hook 'enable-theme-functions #'fontaine-apply-current-preset)
-;; (load-theme 'doom-nord)
+(load-theme 'doom-nord)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
 (custom-set-faces

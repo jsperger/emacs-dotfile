@@ -81,8 +81,7 @@
 
   (general-def 'normal
     "[ h" '(diff-hl-previous-hunk :jump t)
-    "] h" '(diff-hl-next-hunk :jump t))
-	:custom (global-diff-hl-mode t))
+    "] h" '(diff-hl-next-hunk :jump t)))
 
 (use-package git-modes
   :after vc magit)
