@@ -27,6 +27,19 @@
     )
   )
 
+;; Make folded outline highlighting go to the end of the line, not the ellipsis
+;; https://github.com/tarsius/outline-minor-faces
+(use-package outline-minor-faces
+  :after outline
+  :config (add-hook 'outline-minor-mode-hook
+                    #'outline-minor-faces-mode))
+
+;; https://github.com/tarsius/backline
+(use-package backline
+  :after outline
+  :config (advice-add 'outline-flag-region :after 'backline-update))
+
+
 (use-package indent-control
   :disabled)
 
