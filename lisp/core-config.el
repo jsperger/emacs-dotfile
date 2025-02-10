@@ -179,7 +179,8 @@
 
 (use-package elec-pair
   :ensure nil
-	:defer t)
+	:custom
+	(electric-pair-mode t))
 
 (use-package files
   :ensure nil
