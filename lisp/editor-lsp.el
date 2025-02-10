@@ -5,11 +5,19 @@
 ;;; Built-in packages
 
 (use-package treesit
-  :ensure nil)
+  :ensure nil
+	:defer t
+	:config
+	(add-to-list
+ 'treesit-language-source-alist
+ '(r "https://github.com/r-lib/tree-sitter-r" "next"))
+
+)
 
 
 (use-package repeat
   :ensure nil
+	:defer t
   :hook (dape-mode . repeat-mode)
   ;; Enable repeat mode for more ergonomic `dape' use
   )
@@ -46,12 +54,14 @@
   :general
   (tyrant-def "cE" 'eglot))
 
-(use-package tree-sitter-langs)
+(use-package tree-sitter-langs
+	:disabled)
 
 (use-package consult-eglot
-  :after consult)
+  :after eglot consult)
 
 (use-package consult-eglot-embark
+	:after consult eglot embark
   :hook ('eglot-ensure . consult-eglot-embark-mode))
 
 (use-package dape

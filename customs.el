@@ -5,10 +5,6 @@
 (when my-debug-mode
   (message "Checkpoint: %s" "latex el"))
 
-(add-to-list
- 'treesit-language-source-alist
- '(r "https://github.com/r-lib/tree-sitter-r" "next"))
-
 ;; Not working.
 ;; (defun my-adjust-visual-fill-column-for-variable-pitch ()
 ;;   "Adjust visual fill column for variable pitch mode."
