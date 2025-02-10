@@ -101,6 +101,7 @@
 
 (use-package autorevert
   :ensure nil
+	:defer t
   :config
   (setopt global-auto-revert-non-file-buffers t
         auto-revert-verbose nil))
@@ -156,6 +157,7 @@
 
 (use-package display-line-numbers
   :ensure nil
+	:defer t
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
   :config
   (setopt display-line-numbers-type t
@@ -176,11 +178,13 @@
                 ediff-merge-split-window-function 'split-window-horizontally))
 
 (use-package elec-pair
-  :ensure nil)
+  :ensure nil
+	:defer t)
 
 (use-package files
   :ensure nil
-  :hook (before-save . delete-trailing-whitespace)
+	:defer t
+;;  :hook (before-save . delete-trailing-whitespace)
   :config
   ;; Prompt to open file literally if large file.
   (defun check-large-file ()
@@ -219,12 +223,14 @@
 
 (use-package flymake
   :ensure nil
+	:defer t
   :hook (prog-mode . flymake-mode)
   :init (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
   )
 
 (use-package newcomment
   :ensure nil
+	:defer t
   :commands comment-or-uncomment
   :config
   (defun comment-or-uncomment (n)
@@ -265,12 +271,14 @@
 
 (use-package recentf
   :ensure nil
+	:defer t
   :config
   (setopt recentf-auto-cleanup 'never
         recentf-max-saved-items 100))
 
 (use-package savehist
   :ensure nil
+	:defer t
   :config
   (setopt enable-recursive-minibuffers t ; allow commands in minibuffers
         history-length 100
@@ -304,7 +312,8 @@ the unwritable tidbits."
                           (cl-remove-if-not #'savehist-printable register-alist)))))
 
 (use-package saveplace
-  :ensure nil)
+  :ensure nil
+	:defer t)
 
 (use-package server
   :ensure nil
@@ -312,6 +321,7 @@ the unwritable tidbits."
 
 (use-package simple
   :ensure nil
+	:defer t
   :config
   (setopt column-number-mode t
         delete-trailing-lines nil
@@ -322,15 +332,15 @@ the unwritable tidbits."
         save-interprogram-paste-before-kill t))
 
 (use-package whitespace
-  :disabled
   :ensure nil
-  :hook ((prog-mode . show-trailing-whitespace)
+	:defer t
+  :hook (;(prog-mode . whitespace-mode)
          (diff-mode . whitespace-mode))
-  :config
-  (setopt show-trailing-whitespace t))
+ )
 
 (use-package winner
   :ensure nil
+	:defer t
   :commands (winner-undo winner-redo)
   :init
   (setopt winner-dont-bind-my-keys t)
