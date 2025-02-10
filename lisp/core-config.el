@@ -275,7 +275,10 @@
 	:defer t
   :config
   (setopt recentf-auto-cleanup 'never
-        recentf-max-saved-items 100))
+					recentf-max-saved-items 100)
+	:custom
+	(recentf-mode t)
+	)
 
 (use-package savehist
   :ensure nil
