@@ -313,11 +313,14 @@ the unwritable tidbits."
               ;; `savehist-save-hook' in. We don't want to actually remove the
               ;; unserializable registers in the current session!
               (setq-local register-alist
-                          (cl-remove-if-not #'savehist-printable register-alist)))))
+                          (cl-remove-if-not #'savehist-printable register-alist))))
+:custom (savehist-mode t)
+	)
 
 (use-package saveplace
   :ensure nil
-	:defer t)
+	:defer t
+	:custom (save-place-mode t))
 
 (use-package server
   :ensure nil
