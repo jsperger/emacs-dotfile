@@ -362,7 +362,7 @@ the unwritable tidbits."
 
 (use-package all-the-icons-dired
   :after all-the-icons
-  :hook (dired-mode-hook . all-the-icons-dired-mode))
+  :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package all-the-icons-ibuffer
   :after all-the-icons
