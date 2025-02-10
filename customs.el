@@ -55,8 +55,6 @@
 
 ;; general emacs settings
 (pixel-scroll-precision-mode)
-(savehist-mode)
-(save-place-mode)
 (winner-mode)
 (which-key-mode)
 
