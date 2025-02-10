@@ -135,6 +135,21 @@
           (plex-mono
            :default-family "IBM Plex Mono")
 
+					(dank-mono
+					 :default-family "Dank Mono")
+
+					(hack
+					 :default-family "Hack Nerd Font")
+
+					;; think inter is proportional not mono
+					(inter
+					 :default-family "Inter")
+
+					(xenon
+					 :default-family "Monaspace Xenon")
+
+(input-mono
+:default-family "Input Mono")
 					;; Quasi-monospace fonts
           (duospace
            :default-family "iA Writer Duospace")
@@ -143,6 +158,12 @@
            :default-family "iA Writer Quattro V")
 
 					;; Variable pitch fonts
+(serif-input
+:variable-pitch-family "Input Serif")
+
+(sans-input
+:variable-pitch-family "Input Sans")
+
 					(vp-heliotrope
 					 :variable-pitch-family "Heliotrope OT"
 					 :variable-pitch-height 1.05)
