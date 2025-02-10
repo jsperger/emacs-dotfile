@@ -1,5 +1,8 @@
 ;;; core-packages.el --- -*- lexical-binding: t; -*-
 ;;; Commentary: Packages
+;; Note to future self: :defer t is needed to defer loading when elpaca nil is
+;; specified.
+
 ;;;
 ;;; Code:
 
