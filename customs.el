@@ -52,8 +52,7 @@
 
 ;;; After-init hooks packages
 
-;; PATH setting
-(exec-path-from-shell-initialize)
+
 ;; general emacs settings
 (pixel-scroll-precision-mode)
 (electric-pair-mode)
