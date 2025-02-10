@@ -9,16 +9,18 @@
 (use-package evil-collection
   :init
   (add-hook 'org-agenda-mode-hook
-            (lambda () (evil-collection-unimpaired-mode -1))))
+            (lambda () (evil-collection-unimpaired-mode -1)))
+	:hook (elpaca-after-init . evil-collection-init))
 
 (use-package evil-owl
-  :config
+  :init
   (add-to-list 'display-buffer-alist
                '("*evil-owl*"
                  (display-buffer-in-side-window)
                  (side . bottom)
                  (window-height . 0.3)))
-  (setopt evil-owl-idle-delay 0.5))
+  (setopt evil-owl-idle-delay 0.5)
+	:hook (elpaca-after-init . evil-owl-mode))
 
 (use-package evil-snipe
   :hook ((evil-snipe-mode . evil-snipe-override-mode))
@@ -37,6 +39,10 @@
     "s" 'evil-surround-region
     "S" 'evil-substitute))
 
+;; TODO: make \math*{} commands e.g. \mathbf{} use
+;; \sym*{} instead for unicode-math compatibility
+(use-package evil-tex
+	:hook (LaTeX-mode . evil-tex-mode))
 
 (provide 'evil-addons)
 ;;; evil-addons.el ends here
