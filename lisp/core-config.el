@@ -352,7 +352,8 @@ the unwritable tidbits."
   :init
   (setopt winner-dont-bind-my-keys t)
   :config
-  (setopt winner-boring-buffers-regexp "\\*.*\\*"))
+  (setopt winner-boring-buffers-regexp "\\*.*\\*")
+	:custom (winner-mode t))
 
 (use-package all-the-icons
   :if (display-graphic-p))

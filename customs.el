@@ -55,7 +55,6 @@
 
 ;; general emacs settings
 (pixel-scroll-precision-mode)
-(winner-mode)
 (which-key-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before evil"))
