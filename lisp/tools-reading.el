@@ -34,6 +34,13 @@
 )
 
 ;;;
+;; --- Readling List ---
+;;;
+
+(use-package pocket-reader
+	:disabled)
+
+;;;
 ;; --- Documentation ---
 ;;;
 
