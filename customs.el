@@ -68,9 +68,6 @@
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before completion modes"))
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after auto complete"))
-(winum-mode)
-
-(setopt golden-ratio-mode nil)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
 
