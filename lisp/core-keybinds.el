@@ -52,6 +52,11 @@
     "!"       '("shell cmd" . shell-command)
     "i"       '("Tempel insert" . tempel-insert)
 
+		","       (cons "config" (make-sparse-keymap))
+		",d"      'describe-face
+    ",f"      'fontaine-set-preset
+		",t"      'consult-theme
+
     "a"       (cons "apps" (make-sparse-keymap))
     "ac"      'calc-dispatch
     "ap"      'list-processes
@@ -61,7 +66,8 @@
     "aoc"     'obsidian-capture
     "aoj"     'obsidian-jump
     "aos"     'obsidian-search
-    "at"      'eat
+		"at"      'consult-theme
+    "aT"      'eat
     "aP"      'proced
 
     "b"       (cons "buffers" (make-sparse-keymap))
