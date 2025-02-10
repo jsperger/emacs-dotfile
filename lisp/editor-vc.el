@@ -11,7 +11,7 @@
 (use-package vc
   :ensure nil
   :config
-  (setq vc-follow-symlinks t))
+  (setopt vc-follow-symlinks t))
 
 (use-package magit
   :init
@@ -21,7 +21,7 @@
     (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
 
   :config
-  (setq magit-diff-refine-hunk t
+  (setopt magit-diff-refine-hunk t
         magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
         magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
         magit-save-repository-buffers 'dontask)
@@ -73,13 +73,11 @@
   (tyrant-def "go" 'browse-at-remote))
 
 (use-package diff-hl
-  :after vc magit
+  :after vc magit 
+	:hook (magit-pre-refresh . diff-hl-magit-pre-refresh)
+	(magit-post-refresh . diff-hl-magit-post-refresh)
   :config
-  (setq diff-hl-side 'right)
-
-  (with-eval-after-load 'magit
-    (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+  (setopt diff-hl-side 'right)
 
   (general-def 'normal
     "[ h" '(diff-hl-previous-hunk :jump t)

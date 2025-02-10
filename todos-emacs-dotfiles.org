@@ -1,3 +1,11 @@
+* Notes on functionality I can't believe I didn't know earlier
+** consult
+holy shit this does so much more than I realized
+*** consult narrowing prefixes
+- f: file
+- p: project
+- l:
+  - m: bookmark
 * Projects
 ** Create a package or functionality to mimic ia writer
 *** (Grammatical) syntax highlighting - look at things like

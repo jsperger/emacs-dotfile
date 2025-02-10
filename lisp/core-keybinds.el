@@ -344,9 +344,8 @@
                           (indent-according-to-mode))))))
 
 (use-package evil
-  :demand t
-  :hook ((prog-mode . hs-minor-mode)) ;why is this here?
-  :init
+	:hook ((prog-mode . hs-minor-mode)) ;why is this here?
+	:init
 	(setopt evil-want-keybinding nil
 					evil-symbol-word-search t
 					evil-ex-search-vim-style-regexp t

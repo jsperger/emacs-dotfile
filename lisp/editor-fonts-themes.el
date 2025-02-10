@@ -186,20 +186,21 @@
 ;; (use-package nano-theme
 ;;  :disabled)
 
-(use-package ef-themes)
 
 (use-package catppuccin-theme
   :config
-  (setq catppuccin-enlarge-headings nil))
+  (setopt catppuccin-enlarge-headings nil))
 
 (use-package doom-themes)
 
-(use-package nordic-night-theme
-  :disabled)
+(use-package ef-themes)
+
+(use-package gruvbox-theme)
+
+(use-package nordic-night-theme)
 
 (use-package modus-themes)
 
-(use-package gruvbox-theme)
 
 (use-package solarized-theme)
 
@@ -223,6 +224,13 @@
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
+
+;; https://github.com/tarsius/paren-face
+;; Parentheses dimming
+(use-package paren-face
+	;;	:hook (elisp-mode . paren-face-mode)
+:custom (global-paren-face-mode t)
+	)
 
 ;;;
 ;; --- Font Locking Utilities ---
