@@ -112,7 +112,9 @@
   :general
   (tyrant-def
     ";" 'popper-toggle
-    ":" 'popper-kill-latest-popup))
+    ":" 'popper-kill-latest-popup)
+	:custom (popper-mode t)
+	(popper-echo-mode t))
 
 (use-package sideline
   :init
