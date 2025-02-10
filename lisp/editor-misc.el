@@ -157,8 +157,7 @@ stays on current"
     "b6" 'buffer-to-window-6
     "b7" 'buffer-to-window-7
     "b8" 'buffer-to-window-8
-    "b9" 'buffer-to-window-9)
-	:custom (winum-mode t))
+    "b9" 'buffer-to-window-9))
 
 ;; (use-package prettier)
 

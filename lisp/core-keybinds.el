@@ -16,8 +16,7 @@
         which-key-sort-order 'which-key-key-order-alpha
         which-key-allow-evil-operators t)
 
-  (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist)
-	:custom (which-key-mode t))
+  (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
 
 (use-package general
 	:ensure (:wait t)
