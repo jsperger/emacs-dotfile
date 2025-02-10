@@ -91,7 +91,7 @@
 ;; --- Frames / Tabs / Windows ---
 ;;;
 (use-package golden-ratio
-  :config (golden-ratio-mode nil))
+  :custom (golden-ratio-mode nil))
 
 
 (use-package popper
