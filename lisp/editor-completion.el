@@ -233,13 +233,24 @@ targets."
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
+(use-package consult-dir
+	:general
+    (vertico-map "C-d"   'consult-dir
+                 "C-j"   'consult-dir-jump-file))
+
+(use-package consult-gh-forge
+:after consult-gh
+:custom
+(consult-gh-forge-mode +1))
+
+
 (use-package wgrep)
 
 (use-package corfu
   :ensure (:files (:defaults "extensions/*.el"))
   :demand t
   :init
-  (setq completion-cycle-threshold 3
+  (setopt completion-cycle-threshold 3
         tab-always-indent 'complete
         tab-first-completion 'eol
         corfu-auto t
