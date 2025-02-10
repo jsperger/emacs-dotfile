@@ -64,7 +64,6 @@
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after evil"))
 ;; (shackle-mode)
 ;; (global-hl-todo-mode)
-(global-auto-revert-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before completion modes"))
 (vertico-mode)

@@ -104,7 +104,8 @@
 	:defer t
   :config
   (setopt global-auto-revert-non-file-buffers t
-        auto-revert-verbose nil))
+					auto-revert-verbose nil)
+	:custom (global-auto-revert-mode t))
 
 (use-package dabbrev
   :ensure nil
