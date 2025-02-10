@@ -55,7 +55,6 @@
 
 ;; general emacs settings
 (pixel-scroll-precision-mode)
-(electric-pair-mode)
 (recentf-mode)
 (savehist-mode)
 (save-place-mode)
