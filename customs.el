@@ -58,8 +58,6 @@
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before evil"))
 ;; evil settings
-(evil-collection-init)
-(evil-owl-mode)
 (evil-snipe-mode)
 ;;(doom-modeline-mode)
 
