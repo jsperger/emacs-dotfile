@@ -40,8 +40,6 @@
   (setopt enable-recursive-minibuffers t)
 (use-package unfill)
 
-(if (eq system-type 'gnu/linux)
-    (use-package eat)
 	(set-language-environment 'utf-8)
 	(set-default-coding-systems 'utf-8)
 
@@ -119,6 +117,9 @@
 		 "XDG_CONFG_HOME" "XDG_STATE_HOME"))
 	:custom
 	(exec-path-from-shell-initialize))
+
+(use-package eat)
+
 (use-package no-littering)
 
 (provide 'core-packages)
