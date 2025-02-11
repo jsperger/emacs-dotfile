@@ -141,7 +141,7 @@
     "fC"      '("copy-file" . write-file)
     "fD"      'delete-current-buffer-file
     "fe"      'find-library
-    "fE"      'sudo-edit
+;    "fE"      'sudo-edit
     "ff"      'find-file
     "fj"      'dired-jump
     "fJ"      'dired-jump-other-window
