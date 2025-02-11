@@ -19,9 +19,6 @@
 	(setq-local visual-fill-column-width 60)
 )
 
-(use-package org-pdftools
-  :after org pdftools)
-
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
 	:mode ("\\.pdf\\'" . pdf-view-mode)
