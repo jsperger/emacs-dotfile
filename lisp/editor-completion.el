@@ -343,6 +343,7 @@ Just put this function in `hippie-expand-try-functions-list'."
   :after tempel)
 
 (use-package eglot-tempel
+	:disabled
   :hook (eglot-managed-mode .  eglot-tempel-mode)
 )
 
