@@ -171,6 +171,17 @@
 ;; Decoration (not including fonts or themes)
 ;;;
 
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :after all-the-icons
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package all-the-icons-ibuffer
+  :after all-the-icons
+  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
+
 (use-package kind-icon
   :after corfu
   :custom
