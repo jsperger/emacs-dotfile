@@ -9,13 +9,17 @@
 ;;; Code:
 
 (use-package org
-  :config
+  :init
   (setq org-directory "~/obsidian/org/"
         org-inbox-file (concat org-directory "inbox.org")
         org-default-notes-file org-inbox-file
         org-project-file (concat org-directory "projects.org")
         org-confirm-babel-evaluate nil
         )
+	:config
+	(setopt org-latex-bib-compiler "biber"
+					org-latex-compiler "lualatex")
+
   (use-package oc
     :ensure nil
     :config
