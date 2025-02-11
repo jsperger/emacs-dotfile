@@ -24,12 +24,14 @@
 
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
+	:mode ("\\.pdf\\'" . pdf-view-mode)
   :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
   :init
   (setopt pdf-view-display-size 'fit-page ; open pdfs scaled to fit page
-          pdf-view-use-scaling t ; hi-dpi support
+     ;;     pdf-view-use-scaling t ; hi-dpi support now default https://pdftools.wiki/20ef86be
           pdf-view-resize-factor 1.1   ; more fine-grained zooming
           pdf-annot-activate-created-annotations t ; automatically annotate highlights
+					pdf-view-use-unicode-ligther nil
           )
 )
 
@@ -58,4 +60,5 @@
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
+;; End:
 ;;; tools-reading.el ends here
