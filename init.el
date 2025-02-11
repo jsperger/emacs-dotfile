@@ -128,6 +128,7 @@
 
 (require 'evil-addons)
 (require 'tools-reading)
+(require 'tools-writing)
 
 (require 'lang-markdown)
 (require 'lang-org)
