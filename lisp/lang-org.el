@@ -213,13 +213,16 @@ With a prefix ARG, remove start location."
   :custom ((chatu-input-dir "./draws")
            (chatu-output-dir "./draws_out")))
 
-(use-package pikchr-mode)
+(use-package pikchr-mode
+		:mode ("\\.pikchr\\'" . pikchr-mode))
 
 ;;;
 ;;; Exporters:
 ;;;
 
-(use-package ox-pandoc)
+(use-package ox-pandoc
+	:after org
+	:hook (org-mode . org-pandoc-startup-check))
 
 ;; (use-package org-anki
 ;;   :disabled)
