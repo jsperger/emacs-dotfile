@@ -11,12 +11,15 @@
 (use-package ess
   :mode ("\\([rR]\\)\\'" . R-mode)
   :hook ((R-mode ess-r-mode) . 'eglot-ensure)
-	(ess-r-help-mode . evil-mode)
+;;	(ess-r-help-mode . evil-mode)
   :init
 	(setopt ess-set-style t
 					comint-scroll-to-bottom-on-input t
 					comint-scroll-to-bottom-on-output t
 					ess-indent-offset 2)
+	(add-hook 'inferior-ess-mode-hook
+						(lambda ()
+							(add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
 	:custom
 	(ess-indent-offset 2)
 	(ess-own-style-list '((ess-indent-offset . 2)
@@ -45,6 +48,7 @@
   )
 
 (use-package essgd
+	:hook (inferior-ess-r-mode . essgd-start)
 	;; TODO: add hook
 	;; wrong, the mode is for the buffer with the plot
 	;; :hook (inferior-ess-r-mode . essgd-mode)
@@ -54,7 +58,8 @@
 	;; TODO: Fix keybinds to work with evil
 	)
 
-(use-package ess-view-data)
+(use-package ess-view-data
+	:disabled)
 
 (use-package poly-R
   :disabled)
