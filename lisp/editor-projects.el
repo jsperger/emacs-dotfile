@@ -14,6 +14,7 @@
 ;; when I added tex files.
 
 (use-package todoist
+	:disabled
   :config
   (setq todoist-backing-buffer "~/obsidian/org/todoist")
 
@@ -37,6 +38,8 @@
   :bind ( :map ctl-x-map
           ("p" . disproject-dispatch)))
 
+(use-package perject
+	:disabled)
 
 (use-package projection
   :disabled
