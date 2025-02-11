@@ -104,7 +104,8 @@
  '(TeX-indent-close-delimiters "]")
  '(TeX-indent-open-delimiters "[")
  '(custom-safe-themes
-	 '("4c16a8be2f20a68f0b63979722676a176c4f77e2216cc8fe0ea200f597ceb22e"
+	 '("59c36051a521e3ea68dc530ded1c7be169cd19e8873b7994bfc02a216041bf3b"
+		 "4c16a8be2f20a68f0b63979722676a176c4f77e2216cc8fe0ea200f597ceb22e"
 		 "2b0fcc7cc9be4c09ec5c75405260a85e41691abb1ee28d29fcd5521e4fca575b"
 		 "7fea145741b3ca719ae45e6533ad1f49b2a43bf199d9afaee5b6135fd9e6f9b8"
 		 "53b6ea82cb4aa7547d3667b5a007638ff4a2bf877883e440ff3acd82e7bbdabc"
@@ -145,7 +146,7 @@
 (fontaine-mode 1)
 ;; For persisting font after loading theme This might be redundant with the above.
 ;; (add-hook 'enable-theme-functions #'fontaine-apply-current-preset)
-(load-theme 'doom-nord)
+(load-theme 'ef-dream)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
 (custom-set-faces
