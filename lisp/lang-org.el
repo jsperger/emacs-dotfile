@@ -144,13 +144,6 @@
     "op"     'open-org-project-file)
   )
 
-(use-package evil-org
-  :hook (org-mode . evil-org-mode)
-  :config
-  (setq evil-org-key-theme '(navigation insert textobjects additional todo heading))
-  )
-
-
 
 ;;;
 ;;; Functionality Add-ons

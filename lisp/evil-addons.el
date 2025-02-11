@@ -11,6 +11,12 @@
   (add-hook 'org-agenda-mode-hook
             (lambda () (evil-collection-unimpaired-mode -1))))
 
+(use-package evil-org
+  :hook (org-mode . evil-org-mode)
+  :config
+  (setopt evil-org-key-theme '(navigation insert textobjects additional todo heading))
+  )
+
 (use-package evil-owl
   :config
   (add-to-list 'display-buffer-alist
