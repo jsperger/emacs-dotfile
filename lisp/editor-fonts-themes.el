@@ -129,6 +129,10 @@
 						(fira-mono
 						 :default-family "Fira Mono")
 
+						(fira-code
+						 :default-family "FiraCode Nerd Font"
+						 )
+
 						(jetbrains-mono
 						 :default-family "JetBrains Mono NL")
 
@@ -153,6 +157,47 @@
 						;; Quasi-monospace fonts
 						(duospace
 						 :default-family "iA Writer Duospace")
+
+						(triplicate-mono-b
+						 :default-family "Triplicate B")
+
+						(triplicate-code-b
+						 :default-family "Triplicate B Code")
+
+						(triplicate-poly-b
+						 :default-family "Triplicate B Poly")
+
+						(triplicate-mono-a
+						 :default-family "Triplicate A")
+
+						(triplicate-code-a
+						 :default-family "Triplicate A Code")
+
+						(triplicate-poly-a
+						 :default-family "Triplicate A Poly")
+
+						(header-triplicate
+						 :header-line-family "Triplicate A Caps"
+						 :header-line-height 1.1)
+
+						(triplicate-combo
+						 :default-family "Triplicate A Code"
+						 :variable-pitch-family "Triplicate A Poly"
+						 :header-line-family "Triplicate A Caps"
+						 :header-line-height 1.1
+						 )
+
+						(header-heliotrope
+						 :header-line-family "Heliotrope 4 Caps"
+						 :header-line-height 1.1)
+
+						(header-overpass
+						 :header-line-family "Overpass"
+						 :header-line-height 1.1)
+						
+						(header-null
+						 :header-line-family nil
+						 :header-line-height 1.0)
 
 						(quattro
 						 :default-family "iA Writer Quattro V")
