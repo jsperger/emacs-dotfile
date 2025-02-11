@@ -86,7 +86,15 @@
 	:custom
 	(exec-path-from-shell-initialize))
 
-(use-package eat)
+(use-package benchmark-init
+	:config
+	(add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate))
+
+(use-package daemons
+	:disabled)
+
+(use-package eat
+	:disabled)
 
 (use-package no-littering)
 
