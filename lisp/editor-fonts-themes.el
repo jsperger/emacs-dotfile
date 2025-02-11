@@ -188,7 +188,8 @@
 
 
 (use-package catppuccin-theme
-  :config
+	:disabled ;; slowest theme by a lot
+  :init
   (setopt catppuccin-enlarge-headings nil))
 
 (use-package doom-themes)
@@ -200,7 +201,6 @@
 (use-package nordic-night-theme)
 
 (use-package modus-themes)
-
 
 (use-package solarized-theme)
 
