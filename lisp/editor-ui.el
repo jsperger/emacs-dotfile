@@ -43,6 +43,11 @@
 (use-package indent-control
   :disabled)
 
+(use-package olivetti
+	:hook (text-mode . olivetti-mode)
+	:config
+	(setopt olivetti-style 'fancy))
+
 (use-package shackle
   :config
   (shackle-mode 1)

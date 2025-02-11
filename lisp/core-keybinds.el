@@ -256,6 +256,7 @@
     "ts"      'flyspell-mode
     "tt"      'LateX-mode
     "tv"      'visual-fill-column-mode
+		"tV"      'olivetti-mode
     "tw"      'whitespace-mode
     "tW"      'toggle-word-wrap
     "tz"      'TeX-fold-mode
