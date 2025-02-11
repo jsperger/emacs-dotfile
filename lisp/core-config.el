@@ -8,48 +8,6 @@
 
 ;;; Code:
 
-(set-language-environment 'utf-8)
-(set-default-coding-systems 'utf-8)
-
-(setopt user-full-name "John Sperger"
-      user-mail-address "josp@duck.com")
-
-(when IS-WINDOWS (print "How did I get here?"))
-
-(when IS-MAC
-  (setopt ns-pop-up-frames nil
-        frame-resize-pixelwise t))
-
-(setopt initial-scratch-message nil   ;; "make scratch buffer empty"
-      inhibit-startup-message t)    ;; "disable splash screen"
-
-;; use spaces instead of tabs
-(setopt indent-tabs-mode nil)
-
-;; change editor ui options
-(setopt tab-width 2 ; tab-width default 2 instead of 4
-        fill-column 80 ; fill-column default 80 chars
-        global-hl-line-mode t ; highlight current line
-        )
-
-;; ;; highlight current line
-;; (global-hl-line-mode 1)
-;; ;; prettify symbols
-;; (global-prettify-symbols-mode 1)
-
-
-
-;; no beep
-(setopt ring-bell-function 'ignore)
-
-;; increases undo limit
-(setopt undo-limit 67108864 ; 64mb.
-      undo-strong-limit 100663296 ; 96mb.
-      undo-outer-limit 1006632960) ; 960mb.
-
-;; Single space between sentences is more widespread than double
-(setopt sentence-end-double-space nil)
-
 ;; smooth scrolling
 ;; (setq scroll-conservatively 101
 ;;       scroll-margin 2)
@@ -346,18 +304,6 @@ the unwritable tidbits."
   (setopt winner-dont-bind-my-keys t)
   :config
   (setopt winner-boring-buffers-regexp "\\*.*\\*"))
-
-(use-package all-the-icons
-  :if (display-graphic-p))
-
-
-(use-package all-the-icons-dired
-  :after all-the-icons
-  :hook (dired-mode . all-the-icons-dired-mode))
-
-(use-package all-the-icons-ibuffer
-  :after all-the-icons
-  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
 
 (provide 'core-config)
 

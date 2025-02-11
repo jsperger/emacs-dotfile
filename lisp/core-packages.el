@@ -7,27 +7,10 @@
 ;;; Code:
 
 
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns x pgtk))
-  :defer t
-  :defines exec-path-from-shell-arguments
-  exec-path-from-shell-variables
-  exec-path-from-shell-initialize
-  :init
-  (setq
-        exec-path-from-shell-variables '(
-                                         "PATH" "MANPATH" "GNUPGHOME" "SSH_AUTH_SOCK"
-                                         "SSH_AGENT_PID" "GPG_AGENT_INFO"
-                                         "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"
-                                         "XDG_CACHE_HOME" "XDG_DATA_HOME"
-                                         "XDG_CONFG_HOME" "XDG_STATE_HOME"))
-  (exec-path-from-shell-initialize))
-
-(use-package no-littering)
-
 ;; A few more useful configurations...
 (use-package emacs
   :ensure nil
+
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
   ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
@@ -55,12 +38,38 @@
 
   ;; Enable recursive minibuffers
   (setopt enable-recursive-minibuffers t)
-  )
-
 (use-package unfill)
 
 (if (eq system-type 'gnu/linux)
     (use-package eat)
+	(set-language-environment 'utf-8)
+	(set-default-coding-systems 'utf-8)
+
+
+	:config
+	(setopt user-full-name "John Sperger"
+					user-mail-address "josp@duck.com"
+					initial-scratch-message nil   ; "make scratch buffer empty"
+					inhibit-startup-message t   ; "disable splash screen"
+					tab-width 2 ; tab-width default 2 instead of 4
+					fill-column 80 ; fill-column default 80 chars
+					global-hl-line-mode t ; highlight current line
+					ring-bell-function 'ignore ;no beep
+					undo-limit 67108864 ; increases undo limit 64mb.
+					undo-strong-limit 100663296 ; 96mb.
+					undo-outer-limit 1006632960 ; 960mb.
+					sentence-end-double-space nil ;single space between sentences
+					)
+
+	;;----------------------------------------
+	;; OS-specific configuration
+  ;;----------------------------------------
+
+	(when IS-WINDOWS (print "How did I get here?"))
+
+	(when IS-MAC
+		(setopt ns-pop-up-frames nil
+						frame-resize-pixelwise t))
   )
 
 (use-package jinx
@@ -94,6 +103,23 @@
 
 (use-package flymake-proselint
   :disabled)
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x pgtk))
+  :defer t
+  :defines exec-path-from-shell-arguments
+  exec-path-from-shell-variables
+  exec-path-from-shell-initialize
+  :init
+  (setopt
+   exec-path-from-shell-variables
+	 '("PATH" "MANPATH" "GNUPGHOME" "SSH_AUTH_SOCK"
+		 "SSH_AGENT_PID" "GPG_AGENT_INFO"
+		 "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"
+		 "XDG_CACHE_HOME" "XDG_DATA_HOME"
+		 "XDG_CONFG_HOME" "XDG_STATE_HOME"))
+	:custom
+	(exec-path-from-shell-initialize))
+(use-package no-littering)
 
 (provide 'core-packages)
 ;; Local Variables:
