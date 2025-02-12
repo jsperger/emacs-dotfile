@@ -14,7 +14,8 @@
    easy-hugo-basedir "~/work/code/websites/jsperger/"
    ))
 
-(use-package mermaid-mode)
+(use-package mermaid-mode
+			:mode ("\\.mermaid\\'" . mermaid-mode))
 
 (use-package toml)
 
