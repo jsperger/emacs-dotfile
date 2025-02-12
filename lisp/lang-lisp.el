@@ -5,6 +5,8 @@
 ;;; Code:
 
 (use-package slime
+	:disabled
+;;	:hook (inferior-lisp . slime-mode)
   :config
   (despot-def (slime-mode-map)
     :major-modes 'slime-mode
