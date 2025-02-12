@@ -38,6 +38,7 @@
 (use-package unfill)
   
 (use-package pandoc-mode
+	:disabled
   :hook (pandoc-mode . pandoc-load-default-settings)
   :commands pandoc
   :config
