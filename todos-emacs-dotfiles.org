@@ -185,6 +185,7 @@ Replace (elpaca-wait) commands scattered throughout with
 
 Solution notes: Turns out only general (and maybe jsonrpc) really needed it.
 ** Package and Custom Settings TODOs
+*** TODO replace 'all-the-icons' family of packages with 'nerd-icons'
 *** TODO visual-fill-column
 
 - Change defaults in lisp file instead of customize
