@@ -208,9 +208,11 @@
     "qr"      'restart-emacs
     "qR"      'restart-emacs-without-desktop
     "qf"      'delete-frame
-    "qq"      'save-buffers-kill-terminal
+		"qq"      'delete-frame
     "qQ"      'save-buffers-kill-emacs
     "qs"      'server-shutdown
+		"qS"      'server-save-buffers-kill-terminal
+    "qt"      'save-buffers-kill-terminal
 
     "s"       (cons "spelling" (make-sparse-keymap))
     "sb"      'flyspell-buffer
