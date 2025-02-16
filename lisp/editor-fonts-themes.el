@@ -243,6 +243,8 @@
 
 (use-package gruvbox-theme)
 
+(use-package kaolin-themes)
+
 (use-package nordic-night-theme)
 
 (use-package modus-themes)
