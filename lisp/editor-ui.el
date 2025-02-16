@@ -171,9 +171,12 @@
 ;;doom-modeline-continuous-word-count-modes '(markdown-mode gfm-mode org-mode)
 				)
 	;;	(when IS-MAC (setopt doom-modeline-battery t))
-	:custom (nerd-icon-scale-factor 0.8)
 )
 
+(use-package nerd-icons
+	;;	:hook (doom-modeline-mode)
+	:custom (nerd-icon-scale-factor 0.8)
+)
 ;; Moody https://github.com/tarsius/moody
 ;; Tabs and ribbons for the mode line
 (use-package moody
