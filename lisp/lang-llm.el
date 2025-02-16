@@ -9,6 +9,11 @@
 ;;; Code:
 
 
+(use-package llm
+	;; developer-facing package that gptel and others rely on
+	;; TODO: figure out how to declare providers here so they are available
+	;; to ellama, gptel, or any other front ends
+	)
 
 (use-package ellama
   :disabled
@@ -22,7 +27,6 @@
   )
 
 (use-package gptel
-  :disabled
   :config
   ;; Llama.cpp offers an OpenAI compatible API
 (gptel-make-openai "llama-cpp"          ;Any name
