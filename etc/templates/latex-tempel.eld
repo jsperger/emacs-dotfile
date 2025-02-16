@@ -9,6 +9,8 @@ LaTeX-mode latex-mode org-mode markdown-mode
 ;; Example: (section "\\section{" p "}")
 ;; Expected: \section{<type_here>}
 ;; Result: \section{normal-mode with second second cursor for typing}
+
+(comment-line-40 "%% -------------------------------------" n)
 (section "\\section{}")
 (subsection "\\subsection{}")
 (ssection "\\subsection{}")
