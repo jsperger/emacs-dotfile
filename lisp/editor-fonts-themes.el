@@ -270,13 +270,16 @@
   (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold))
 
 (use-package rainbow-delimiters
+	:disabled
   :hook (prog-mode . rainbow-delimiters-mode))
 
-;; https://github.com/tarsius/paren-face
-;; Parentheses dimming
+
+
 (use-package paren-face
+	;; https://github.com/tarsius/paren-face
+	;; Parentheses dimming
 	;;	:hook (elisp-mode . paren-face-mode)
-:custom (global-paren-face-mode t)
+	:custom (global-paren-face-mode t)
 	)
 
 ;;;
