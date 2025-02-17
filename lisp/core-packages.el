@@ -98,6 +98,14 @@
 
 (use-package no-littering)
 
+(use-package surround
+	:general
+  (tyrant-def
+		"Si" 'surround-insert
+		"Sd" 'surround-kill
+		"Sr" 'surround-replace)
+ )
+
 (provide 'core-packages)
 ;; Local Variables:
 ;; no-byte-compile: t
