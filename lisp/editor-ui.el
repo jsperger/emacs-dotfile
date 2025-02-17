@@ -50,6 +50,10 @@
 (use-package indent-control
   :disabled)
 
+(use-package nocomments-mode
+	:general
+	(tyrant-def
+		"tc" 'nocomments-mode))
 (use-package olivetti
 	:hook (text-mode . olivetti-mode)
 	:config
