@@ -75,6 +75,11 @@
 	:after consult eglot embark
   :hook ('eglot-ensure . consult-eglot-embark-mode))
 
+
+(use-package eldoc-box
+	:disabled ;slow, try again with lsp-bridge
+  :hook (eglot-managed-mode . eldoc-box-hover-mode))
+
 (use-package dape
 	:disabled
 ;;  :preface
