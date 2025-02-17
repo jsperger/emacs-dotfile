@@ -33,7 +33,7 @@
 															(ess-align-blocks control-flow)
 															(ess-indent-from-lhs arguments fun-decl-opening)
 															(ess-indent-from-chain-start . t)
-															(ess-indent-with-fancy-comments . t)))
+															(ess-indent-with-fancy-comments . nil)))
 	(ess-style 'OWN)
 	:config
 
