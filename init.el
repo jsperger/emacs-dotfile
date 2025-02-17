@@ -133,6 +133,7 @@
 (require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-web)
+(require 'lang-python)
 (require 'lang-rust)
 (require 'lang-r)
 (require 'lang-llm)
