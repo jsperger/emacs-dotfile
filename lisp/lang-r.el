@@ -48,7 +48,11 @@
   )
 
 (use-package essgd
-	:hook (inferior-ess-r-mode . essgd-start)
+	:general
+	  (despot-def (ess-r-mode-map)
+			:major-modes 'ess-r-mode
+			"g" 'essgd-start)
+;; :hook (inferior-ess-r-mode . essgd-start)
 	;; TODO: add hook
 	;; wrong, the mode is for the buffer with the plot
 	;; :hook (inferior-ess-r-mode . essgd-mode)
