@@ -110,6 +110,11 @@
 		"Sr" 'surround-replace)
  )
 
+(use-package banner-comment
+	:general
+	(tyrant-def
+		"ab" 'banner-comment))
+
 (provide 'core-packages)
 ;; Local Variables:
 ;; no-byte-compile: t
