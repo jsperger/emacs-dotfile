@@ -49,7 +49,7 @@
     "SPC"     '("M-x" . execute-extended-command)
     "TAB"     '("last buffer" . alternate-buffer)
     "!"       '("shell cmd" . shell-command)
-    "i"       '("Tempel insert" . tempel-insert)
+    "i"       '("insert" . tempel-insert)
 
 		","       (cons "config" (make-sparse-keymap))
 		",d"      'describe-face
@@ -57,9 +57,11 @@
 		",t"      'consult-theme
 
     "a"       (cons "apps" (make-sparse-keymap))
-    "ac"      'calc-dispatch
+;;		"ab" 'banner-comment ; defined in package dec
+		"ac"      'consult-minor-mode-menu
+    "aC"      'calc-dispatch
     "ap"      'list-processes
-    "ad"      'todoist
+;;    "ad"      'todoist
     "af"      'fontaine-set-preset
     ;; "ao"      (cons "obsidian" (make-sparse-keymap))
     ;; "aoc"     'obsidian-capture
@@ -184,9 +186,18 @@
     "jb"      'bookmark-jump
     "ji"      'imenu
     "jg"      'avy-goto-char-timer
-    "jn"      'mindstream-new
-
+    "jn"      'denote
 		;;    "jo"      'obsidian-jump
+
+		
+    "k"       (cons "key" (make-sparse-keymap))
+    "km"      'which-key-show-major-mode
+    "kt"      'which-key-show-top-level
+		"kM"      'which-key-show-minor-mode-keymap
+		"ka"      'which-key-show-keymap ; show [a]ny or [a]ll keymap
+    "kd"      'describe-key
+    "kD"      'describe-keymap
+		
     "l"  (cons "eglot" (make-sparse-keymap))
     "la" 'eglot-code-actions
     "lb" 'eglot-events-buffer
@@ -225,21 +236,19 @@
     "s"       (cons "spelling" (make-sparse-keymap))
     "sb"      'flyspell-buffer
     "sn"      'flyspell-goto-next-error
-    "sr"      'flyspell-region
-    "sc"      'jinx-correct
-    "sC" 'jinx-correct-nearest
-    "sj" 'jinx-next
+		"sr"      'flyspell-region
+		"sc"      'jinx-correct
+		"sC"      'jinx-correct-nearest
+		"sj"      'jinx-next
 
+		
     "r"       (cons "replace" (make-sparse-keymap))
-    ;; Ask = query
-    "ra"      'query-replace
+    "ra"      'query-replace ; Ask = query
     "rs"      'replace-string
     "rr"      'replace-string-in-region
 
-    ;; "t"       (cons "tempel" (make-sparse-keymap))
-    ;; "ti"      'tempel-insert
-
-    "t"       (cons "toggles" (make-sparse-keymap))
+	;=================================== Toggle ==================================
+    "t"       (cons "toggle" (make-sparse-keymap))
     "ta"      'auto-fill-mode
 ;;    "tb"      'global-obsidian-mode
 ;;		"tc"      'nocomments-mode defined-in-package
@@ -284,7 +293,7 @@
     "T8"      'tab-bar-select-tab
     "T TAB"   'tab-bar-switch-to-last-tab
 
-    "u"       '("universal arg" . universal-argument)
+    "u"       '("universal" . universal-argument)
 
     "w"       (cons "windows" (make-sparse-keymap))
     "w TAB"   'alternate-window

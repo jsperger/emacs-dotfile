@@ -69,8 +69,8 @@ reuse it's window, otherwise create new one."
         terminal-here-project-root-function (lambda () (project-root (project-current t))))
   :general
   (tyrant-def
-    "\'"   'terminal-here-launch
-    "p \'" 'terminal-here-project-launch))
+    "\'"   '("terminal here" . terminal-here-launch)
+    "p \'" '("terminal project root" . terminal-here-project-launch)))
 
 
 ;; Deprecated per https://github.com/emacsorphanage/undohist?tab=readme-ov-file
@@ -139,8 +139,7 @@ stays on current"
                  (swap-buffers-to-window ,n t))))))
   :general
   (tyrant-def
-    "0"  '("select window 0 or 10" . winum-select-window-0-or-10)
-    "1"  '("select window 1..9" . winum-select-window-1)
+    "1"  '("window 1..9" . winum-select-window-1)
     "2"  'winum-select-window-2
     "3"  'winum-select-window-3
     "4"  'winum-select-window-4

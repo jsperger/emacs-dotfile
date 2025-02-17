@@ -137,8 +137,8 @@
           flymake-diagnostics-buffer-mode))
   :general
   (tyrant-def
-    ";" 'popper-toggle
-    ":" 'popper-kill-latest-popup))
+    ";" '("pop toggle" . popper-toggle)
+    ":" '("pop kill" . popper-kill-latest-popup)))
 
 (use-package sideline
   :init
