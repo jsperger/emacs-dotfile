@@ -16,7 +16,8 @@
 (use-package magit
   :init
   (setq magit-define-global-key-bindings nil
-					 forge-add-default-bindings nil)
+;;					 forge-add-default-bindings nil
+				)
   (with-eval-after-load 'project
     (define-key project-prefix-map "m" #'magit-project-status)
     (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
@@ -57,9 +58,10 @@
     "gU"  'magit-unstage-file))
 
 (use-package forge
-  :after markdown-mode magit
+	:disabled
+  :after magit
   :init
-  (setopt
+  (setq
 	 auth-sources '("~/.authinfo")
 	 forge-add-default-bindings nil
    forge-database-connector 'sqlite-builtin))
