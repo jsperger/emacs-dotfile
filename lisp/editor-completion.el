@@ -227,15 +227,6 @@ targets."
   (setq prescient-sort-full-matches-first t
         prescient-sort-length-enable nil))
 
-(use-package all-the-icons-completion
-	:disabled
-  :after (marginalia all-the-icons)
-  :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
-  :init
-  (all-the-icons-completion-mode))
-
-
-
 (provide 'editor-completion)
 ;; Local Variables:
 ;; no-byte-compile: t
