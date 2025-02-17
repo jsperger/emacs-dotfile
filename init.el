@@ -116,14 +116,15 @@
 (require 'core-funcs)
 (require 'core-treesit)
 
-(require 'editor-lsp)
 (require 'completion-actions)
 (require 'completion-backends)
 (require 'completion-display)
 (require 'completion-movement)
 (require 'completion-snippets)
 
+;; (require 'editor-lsp)
 
+(require 'tools-lsp-bridge)
 
 (require 'editor-fonts-themes)
 (require 'editor-misc)
