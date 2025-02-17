@@ -232,10 +232,8 @@
 ;;  :disabled)
 
 
-(use-package catppuccin-theme
-	:disabled ;; slowest theme by a lot
-  :init
-  (setopt catppuccin-enlarge-headings nil))
+(use-package catppuccin-theme) ; slow loading 
+
 
 (use-package doom-themes)
 
