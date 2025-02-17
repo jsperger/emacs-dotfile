@@ -48,6 +48,7 @@
   (tyrant-def
     "SPC"     '("M-x" . execute-extended-command)
     "TAB"     '("last buffer" . alternate-buffer)
+		"RET"     '("Switch" . consult-buffer)
     "!"       '("shell cmd" . shell-command)
     "i"       '("insert" . tempel-insert)
 
@@ -61,6 +62,8 @@
 ;;		"ab" 'banner-comment ; defined in package dec
 		"ac"      'consult-minor-mode-menu
     "aC"      'calc-dispatch
+		"ae"      'embark-act
+		"aE"      'embark-act-all
     "ap"      'list-processes
 ;;    "ad"      'todoist
     "af"      'fontaine-set-preset
@@ -195,7 +198,7 @@
     "j"       (cons "jump" (make-sparse-keymap))
     "jb"      'bookmark-jump
     "ji"      'imenu
-    "jg"      'avy-goto-char-timer
+;;    "jg"      'avy-goto-char-timer
     "jn"      'denote
 		;;    "jo"      'obsidian-jump
 

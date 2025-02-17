@@ -54,8 +54,8 @@ reuse it's window, otherwise create new one."
     "o"      'link-hint-open-link)
 
   (tyrant-def
-    "jl" 'link-hint-open-link
-    "jL" 'link-hint-open-multiple-links
+    "jo" 'link-hint-open-link
+    "jO" 'link-hint-open-multiple-links
     "jy" 'link-hint-copy-link))
 
 (use-package reveal-in-folder
@@ -167,10 +167,6 @@ stays on current"
 ;;  :custom (apheleia-global-mode nil)
   )
 ;; (use-package biome)
-
-(use-package rg)
-
-(use-package elgrep)
 
 (provide 'editor-misc)
 ;; Local Variables:

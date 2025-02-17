@@ -117,10 +117,12 @@
 (require 'core-treesit)
 
 (require 'editor-lsp)
-(require 'completion-snippets)
 (require 'completion-actions)
+(require 'completion-backends)
 (require 'completion-display)
 (require 'completion-movement)
+(require 'completion-snippets)
+
 
 
 (require 'editor-fonts-themes)
@@ -134,6 +136,7 @@
 
 (require 'evil-addons)
 (require 'tools-reading)
+(require 'tools-search)
 (require 'tools-writing)
 
 (require 'lang-markdown)
