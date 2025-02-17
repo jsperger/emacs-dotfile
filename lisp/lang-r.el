@@ -66,8 +66,8 @@
 	:disabled)
 
 (use-package poly-R
-  :mode ("\\.qmd\\'" . poly-R-mode)
-	:hook (poly-R-mode . markdown-mode)
+  :mode ("\\.qmd\\'" . poly-markdown+R-mode)
+;;	:hook (poly-markdown+R-mode . markdown-mode)
   )
 
 (provide 'lang-r)
