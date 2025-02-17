@@ -118,6 +118,9 @@
 
 (require 'editor-lsp)
 (require 'completion-snippets)
+(require 'completion-actions)
+(require 'completion-display)
+
 
 (require 'editor-fonts-themes)
 (require 'editor-misc)
