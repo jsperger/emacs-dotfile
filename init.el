@@ -120,6 +120,7 @@
 (require 'completion-snippets)
 (require 'completion-actions)
 (require 'completion-display)
+(require 'completion-movement)
 
 
 (require 'editor-fonts-themes)
