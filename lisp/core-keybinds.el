@@ -61,10 +61,10 @@
     "ap"      'list-processes
     "ad"      'todoist
     "af"      'fontaine-set-preset
-    "ao"      (cons "obsidian" (make-sparse-keymap))
-    "aoc"     'obsidian-capture
-    "aoj"     'obsidian-jump
-    "aos"     'obsidian-search
+    ;; "ao"      (cons "obsidian" (make-sparse-keymap))
+    ;; "aoc"     'obsidian-capture
+    ;; "aoj"     'obsidian-jump
+    ;; "aos"     'obsidian-search
 		"at"      'consult-theme
     "aT"      'eat
     "aP"      'proced
@@ -185,8 +185,8 @@
     "ji"      'imenu
     "jg"      'avy-goto-char-timer
     "jn"      'mindstream-new
-    "jo"      'obsidian-jump
 
+		;;    "jo"      'obsidian-jump
     "l"  (cons "eglot" (make-sparse-keymap))
     "la" 'eglot-code-actions
     "lb" 'eglot-events-buffer
@@ -241,8 +241,9 @@
 
     "t"       (cons "toggles" (make-sparse-keymap))
     "ta"      'auto-fill-mode
-    "tb"      'global-obsidian-mode
-    "tc"      'consult-minor-mode-menu
+;;    "tb"      'global-obsidian-mode
+;;		"tc"      'nocomments-mode defined-in-package
+    "tM"      'consult-minor-mode-menu
     "td"      'toggle-debug-on-error
     "tf"      'display-fill-column-indicator-mode
     "tg"      'golden-ratio-mode
@@ -253,8 +254,8 @@
     "tn"      'display-line-numbers-mode
     "to"      'outline-minor-mode
     "tO"      'org-modern-mode
-    "tp"      'pdf-view-mode
-    "tr"      'writegood-mode
+;;    "tp"      'pdf-view-mode ;probably don't need it since I fixed the :mode def
+;;    "tr"      'writegood-mode
     "ts"      'flyspell-mode
     "tt"      'LateX-mode
     "tv"      'visual-fill-column-mode

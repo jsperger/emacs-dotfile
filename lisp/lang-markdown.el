@@ -60,16 +60,16 @@
     "N"     'markdown-next-link
     "l"     (cons "lists" (make-sparse-keymap))
     "li"    'markdown-insert-list-item
-    "o" (cons "obsidian" (make-sparse-keymap))
-    "oo" 'obsidian-follow-link-at-point
-    "ob" 'obsidian-backlink-jump
-    "ol" 'obsidian-insert-link
-    "ow" 'obsidian-insert-wikilink
-    "oc" 'obsidian-capture
-    "oj" 'obsidian-jump
-    "os" 'obsidian-search
-    "ot" 'obsidian-tag-find
-    "om" 'obsidian-move-file
+    ;; "o" (cons "obsidian" (make-sparse-keymap))
+    ;; "oo" 'obsidian-follow-link-at-point
+    ;; "ob" 'obsidian-backlink-jump
+    ;; "ol" 'obsidian-insert-link
+    ;; "ow" 'obsidian-insert-wikilink
+    ;; "oc" 'obsidian-capture
+    ;; "oj" 'obsidian-jump
+    ;; "os" 'obsidian-search
+    ;; "ot" 'obsidian-tag-find
+    ;; "om" 'obsidian-move-file
     "P"     'markdown-previous-link
     "t"     (cons "table" (make-sparse-keymap))
     "tp"    'markdown-table-move-row-up
