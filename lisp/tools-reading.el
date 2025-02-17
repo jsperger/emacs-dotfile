@@ -39,6 +39,12 @@
 (use-package pocket-reader
 	:disabled)
 
+(use-package biblio
+	:disabled)
+
+(use-package arxiv-mode
+	:disabled)
+
 ;;;
 ;; --- Documentation ---
 ;;;
