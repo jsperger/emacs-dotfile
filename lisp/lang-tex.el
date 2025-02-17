@@ -139,6 +139,8 @@
 
   :config
   (setopt TeX-engine 'luatex)
+	;; https://github.com/vedang/pdf-tools/?tab=readme-ov-file#auto-revert
+	(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
   )
 
 (use-package latex-extra
