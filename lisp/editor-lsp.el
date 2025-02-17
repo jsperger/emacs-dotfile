@@ -67,8 +67,6 @@
   :general
   (tyrant-def "cE" 'eglot))
 
-(use-package tree-sitter-langs
-	:disabled)
 
 (use-package consult-eglot
   :after eglot consult)
