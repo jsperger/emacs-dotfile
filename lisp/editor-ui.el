@@ -54,6 +54,33 @@
 	:general
 	(tyrant-def
 		"tc" 'nocomments-mode))
+
+(use-package outline-indent
+;;	:hook (yaml-ts-mode yaml-mode . outline-indent-minor-mode)
+	:commands outline-indent-minor-mode
+	:custom
+  (outline-indent-ellipsis " ▼ ")
+	:general
+	(tyrant-def
+		"to" 'outline-indent-minor-mode
+
+		;; Really a general folding repository
+    "o"       (cons "outline" (make-sparse-keymap))
+		"oa" '("all open" . outline-indent-open-folds)
+		"oA" '("all closed" . outline-indent-close-folds)
+		"ob" 'bicycle-cycle
+		"oB" 'bicycle-cycle-global
+		"oc" 'outline-indent-close-fold
+		"oj" 'outline-forward-same-level
+		"ok" 'outline-backward-same-level
+		"oh"      'hs-minor-mode
+		"oo" 'outline-indent-open-fold
+		"oO"      'outline-minor-mode
+		"or" 'outline-indent-open-fold-rec
+		"ot" 'bicycle-cycle
+		"oT" 'bicycle-cycle-global
+		"oz"      'TeX-fold-mode))
+
 (use-package olivetti
 	:hook (text-mode . olivetti-mode)
 	:config
