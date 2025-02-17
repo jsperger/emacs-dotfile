@@ -132,20 +132,20 @@
 
   :general
   (tyrant-def
-    "o"      (cons "org" (make-sparse-keymap))
-    "o/"     'org-occur-in-agenda-files
-    "oa"     'org-agenda
-    "oc"     'org-capture
-    "oC"     (cons "clock" (make-sparse-keymap))
-    "oCc"    'org-clock-cancel
-    "oCg"    'org-clock-goto
-    "oCi"    'org-clock-in-last
-    "oCj"    'org-clock-jump-to-current-clock
-    "oCo"    'org-clock-out
-    "oCr"    'org-resolve-clocks
-    "od"     'open-org-default-notes-file
-    "ol"     'org-store-link
-    "op"     'open-org-project-file)
+    "O"      (cons "Org" (make-sparse-keymap))
+    "O/"     'org-occur-in-agenda-files
+    "Oa"     'org-agenda
+    "Oc"     'org-capture
+    "OC"     (cons "clock" (make-sparse-keymap))
+    "OCc"    'org-clock-cancel
+    "OCg"    'org-clock-goto
+    "OCi"    'org-clock-in-last
+    "OCj"    'org-clock-jump-to-current-clock
+    "OCo"    'org-clock-out
+    "OCr"    'org-resolve-clocks
+    "Od"     'open-org-default-notes-file
+    "Ol"     'org-store-link
+    "Op"     'open-org-project-file)
   )
 
 
@@ -219,6 +219,11 @@ With a prefix ARG, remove start location."
 
 (use-package pikchr-mode
 		:mode ("\\.pikchr\\'" . pikchr-mode))
+
+(use-package uniline
+	:general
+(tyrant-def "au" 'uniline-mode)
+	)
 
 ;;;
 ;;; Exporters:
