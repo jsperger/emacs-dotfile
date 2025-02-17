@@ -117,6 +117,7 @@
 (require 'core-treesit)
 
 (require 'editor-lsp)
+(require 'completion-snippets)
 
 (require 'editor-fonts-themes)
 (require 'editor-misc)

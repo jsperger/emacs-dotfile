@@ -303,46 +303,12 @@ targets."
   (setq prescient-sort-full-matches-first t
         prescient-sort-length-enable nil))
 
-
-(use-package tempel
-  :hook ((text-mode prog-mode) . tempel-setup-capf)
-  :init
-  (setq tempel-trigger-prefix "<"
-        tempel-path "~/.emacs.d/etc/templates/*.eld")
-  :config
-  (defun tempel-setup-capf ()
-    (setq-local completion-at-point-functions
-                (cons #'tempel-complete
-                      completion-at-point-functions)))
-
-  (defun tempel-hippie-try-expand (old)
-    "Integrate with hippie expand.
-Just put this function in `hippie-expand-try-functions-list'."
-    (if (not old)
-        (tempel-expand t)
-      (undo 1)))
-  (add-to-list 'hippie-expand-try-functions-list #'tempel-hippie-try-expand t)
-	;; I don't want unexpected changes if I update something from a template, but
-	;; I think I should use tempel-done when I'm done with a template
-	;;	:custom
-	;;	(tempel-auto-reload nil)
-	)
-
 (use-package all-the-icons-completion
 	:disabled
   :after (marginalia all-the-icons)
   :hook (marginalia-mode . all-the-icons-completion-marginalia-setup)
   :init
   (all-the-icons-completion-mode))
-
-
-(use-package tempel-collection
-  :after tempel)
-
-(use-package eglot-tempel
-	:disabled
-  :hook (eglot-managed-mode .  eglot-tempel-mode)
-)
 
 
 
