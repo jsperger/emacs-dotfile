@@ -56,6 +56,7 @@
     ",f"      'fontaine-set-preset
 		",t"      'consult-theme
 
+    ;;================================= applications ============================
     "a"       (cons "apps" (make-sparse-keymap))
 ;;		"ab" 'banner-comment ; defined in package dec
 		"ac"      'consult-minor-mode-menu
@@ -71,6 +72,7 @@
     "aT"      'eat
     "aP"      'proced
 
+		;;================================ buffers =================================
     "b"       (cons "buffers" (make-sparse-keymap))
     "bb"      'switch-to-buffer
     "bB"      'ibuffer
@@ -80,6 +82,7 @@
     "bu"      'reopen-killed-buffer
     "bx"      'kill-buffer-and-window
 
+		;=================================== code ==================================
     "c"       (cons "code" (make-sparse-keymap))
     "cb"      'flymake-show-buffer-diagnostics
     "cc"      'compile
@@ -89,6 +92,7 @@
     "cx"      'kill-compilation
     "c="      'indent-region-or-buffer
 
+	  ;================================== elpaca =================================
     "e"       (cons "elpaca" (make-sparse-keymap))
     "ef"      'elpaca-fetch-all
     "eF"      'elpaca-fetch
@@ -96,6 +100,8 @@
     "em"      'elpaca-manager
     "eu"      'elpaca-merge ;; update equivalent
     ;; Intentional no bind for merge-all
+
+		;================================== Ellama =================================
     "E"       (cons "Ellama" (make-sparse-keymap))
     "Ec"      (cons "code" (make-sparse-keymap))
     "Ecc"     'ellama-code-complete
@@ -139,6 +145,7 @@
     "Ep"      (cons "provider" (make-sparse-keymap))
     "Eps"    'ellama-provider-select
 
+		;================================== files ==================================
     "f"       (cons "files" (make-sparse-keymap))
     "fC"      '("copy-file" . write-file)
     "fD"      'delete-current-buffer-file
@@ -156,12 +163,14 @@
     "fvf"     'add-file-local-variable
     "fvp"     'add-file-local-variable-prop-line
 
+		;================================== Frame ==================================
     "F"       (cons "Frame" (make-sparse-keymap))
     "Fd"      'delete-frame
     "FD"      'delete-other-frames
     "Fn"      'make-frame
     "Fo"      'other-frame
 
+		;=================================== help ==================================
     "h"       (cons "help" (make-sparse-keymap))
     "ha"      'apropos
     "hb"      'describe-bindings
@@ -182,6 +191,7 @@
     "hPk"     'profiler-stop
     "hPr"     'profiler-report
 
+		;=================================== jump ==================================
     "j"       (cons "jump" (make-sparse-keymap))
     "jb"      'bookmark-jump
     "ji"      'imenu
@@ -189,7 +199,7 @@
     "jn"      'denote
 		;;    "jo"      'obsidian-jump
 
-		
+		;=================================== keys ==================================
     "k"       (cons "key" (make-sparse-keymap))
     "km"      'which-key-show-major-mode
     "kt"      'which-key-show-top-level
@@ -197,7 +207,8 @@
 		"ka"      'which-key-show-keymap ; show [a]ny or [a]ll keymap
     "kd"      'describe-key
     "kD"      'describe-keymap
-		
+
+		;================================== eglot ==================================
     "l"  (cons "eglot" (make-sparse-keymap))
     "la" 'eglot-code-actions
     "lb" 'eglot-events-buffer
@@ -207,13 +218,16 @@
     "lX" 'eglot-shutdown-all
     "l=" 'eglot-format
 
+		;============================ major mode prefix ============================
     "m"       (cons "major mode" (make-sparse-keymap))
 
+		;================================= projects ================================
     "p"       (cons "projects" project-prefix-map)
     "pt"      'project-open-in-tab
     "pb"      'bookmark-in-project-toggle
     "pj"      'bookmark-in-project-jump
 
+		;=================================== quit ==================================
     "q"       (cons "quit" (make-sparse-keymap))
     "qd"      'restart-emacs-debug-init
     "qr"      'restart-emacs
@@ -225,6 +239,7 @@
 		"qS"      'server-save-buffers-kill-terminal
     "qt"      'save-buffers-kill-terminal
 
+		;================================= spelling ================================
     "s"       (cons "spelling" (make-sparse-keymap))
     "sb"      'flyspell-buffer
     "sn"      'flyspell-goto-next-error
@@ -233,21 +248,13 @@
     "sC"      'jinx-correct-nearest
     "sj"      'jinx-next
 
-    "s"       (cons "spelling" (make-sparse-keymap))
-    "sb"      'flyspell-buffer
-    "sn"      'flyspell-goto-next-error
-		"sr"      'flyspell-region
-		"sc"      'jinx-correct
-		"sC"      'jinx-correct-nearest
-		"sj"      'jinx-next
-
-		
+		;================================= replace =================================
     "r"       (cons "replace" (make-sparse-keymap))
     "ra"      'query-replace ; Ask = query
     "rs"      'replace-string
     "rr"      'replace-string-in-region
 
-	;=================================== Toggle ==================================
+	;=================================== toggle ==================================
     "t"       (cons "toggle" (make-sparse-keymap))
     "ta"      'auto-fill-mode
 ;;    "tb"      'global-obsidian-mode
@@ -261,7 +268,7 @@
     "tl"      'toggle-truncate-lines
     "tm"      'flymake-mode
     "tn"      'display-line-numbers-mode
-    "to"      'outline-minor-mode
+    "tz"      'outline-minor-mode
     "tO"      'org-modern-mode
 ;;    "tp"      'pdf-view-mode ;probably don't need it since I fixed the :mode def
 ;;    "tr"      'writegood-mode
@@ -273,6 +280,7 @@
     "tW"      'toggle-word-wrap
     "tz"      'TeX-fold-mode
 
+		;=================================== Tabs ==================================
     "T"       (cons "Tabs" tab-prefix-map)
     "Td"      'tab-bar-close-tab
     "TD"      'tab-bar-close-other-tabs
@@ -293,8 +301,10 @@
     "T8"      'tab-bar-select-tab
     "T TAB"   'tab-bar-switch-to-last-tab
 
+		;============================= universal prefix ============================
     "u"       '("universal" . universal-argument)
 
+		;================================= windows =================================
     "w"       (cons "windows" (make-sparse-keymap))
     "w TAB"   'alternate-window
     "w+"      'window-layout-toggle
