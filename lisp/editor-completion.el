@@ -76,11 +76,7 @@
 
   (setq orderless-style-dispatchers '(flex-if-twiddle without-if-bang))
 
-  (advice-add 'company-capf
-              :around
-              (lambda (capf-fn &rest args)
-                (let ((completion-styles '(basic partial-completion substring)))
-                  (apply capf-fn args)))))
+)
 
 
 (use-package consult
