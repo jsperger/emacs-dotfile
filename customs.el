@@ -147,7 +147,9 @@
 (fontaine-mode 1)
 ;; For persisting font after loading theme This might be redundant with the above.
 ;; (add-hook 'enable-theme-functions #'fontaine-apply-current-preset)
-(load-theme 'ef-dream)
+;; (load-theme 'ef-dream)
+;; (load-theme 'doom-nord)
+(load-theme 'doom-monokai-pro)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
 (custom-set-faces
