@@ -260,6 +260,15 @@ With a prefix ARG, remove start location."
    org-pretty-entities t
    org-ellipsis "…"))
 
+(use-package org-side-tree
+	:disabled
+	:hook org-mode
+	:config
+	(setopt org-side-tree-persistent nil
+					org-side-tree-fontify t
+					org-side-tree-enable-folding t)
+)
+
 (provide 'lang-org)
 ;; Local Variables:
 ;; no-byte-compile: t
