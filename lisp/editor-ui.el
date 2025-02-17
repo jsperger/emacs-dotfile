@@ -230,9 +230,11 @@
 
 (use-package nerd-icons-completion
   :after marginalia
+	:hook (marginalia-mode . nerd-icons-completion-mode)
   :config
   (setopt nerd-icons-completion-mode t)
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+;;  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
+	)
 
 (use-package nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
