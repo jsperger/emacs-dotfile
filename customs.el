@@ -80,7 +80,6 @@
 (vertico-mode)
 (marginalia-mode)
 (global-corfu-mode)
-(prescient-persist-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after auto complete"))
 (popper-mode)
