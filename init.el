@@ -114,6 +114,7 @@
 (require 'core-packages)
 (require 'core-config)
 (require 'core-funcs)
+(require 'core-treesit)
 
 (require 'editor-lsp)
 

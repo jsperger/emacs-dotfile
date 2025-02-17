@@ -20,6 +20,13 @@
 ;; enable subword-mode in prog-mode
 (add-hook 'prog-mode-hook #'subword-mode)
 
+(use-package repeat
+  :ensure nil
+	:defer t
+  )
+
+
+
 
 ;; scroll compilation to first error or end
 (setopt compilation-scroll-output 'first-error)
