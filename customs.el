@@ -160,6 +160,10 @@
 
 (when IS-MAC (toggle-frame-fullscreen))
 
+;; Get shell path variables if running as a daemon
+(when (daemonp)
+  (exec-path-from-shell-initialize))
+
 (provide 'customs)
 
 ;; Local Variables:
