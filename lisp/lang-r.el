@@ -10,7 +10,7 @@
 
 (use-package ess
   :mode ("\\([rR]\\)\\'" . R-mode)
-  :hook ((R-mode ess-r-mode) . 'eglot-ensure)
+;;  :hook ((R-mode ess-r-mode) . 'eglot-ensure)
 ;;	(ess-r-help-mode . evil-mode)
   :init
 	(setopt ess-set-style t

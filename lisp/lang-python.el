@@ -12,7 +12,7 @@
 (use-package python-ts-mode
 	:ensure nil
 	:mode ("\\.py\\'" . python-ts-mode)
-	:hook (python-ts-mode . eglot-ensure)
+;;	:hook (python-ts-mode . eglot-ensure)
 	;; ^caused an infinite loop
 
 	:config

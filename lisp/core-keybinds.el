@@ -212,14 +212,14 @@
     "kD"      'describe-keymap
 
 		;================================== eglot ==================================
-    "l"  (cons "eglot" (make-sparse-keymap))
-    "la" 'eglot-code-actions
-    "lb" 'eglot-events-buffer
-    "lr" 'eglot-rename
-    "lR" 'eglot-reconnect
-    "lx" 'eglot-shutdown
-    "lX" 'eglot-shutdown-all
-    "l=" 'eglot-format
+    ;; "l"  (cons "eglot" (make-sparse-keymap))
+    ;; "la" 'eglot-code-actions
+    ;; "lb" 'eglot-events-buffer
+    ;; "lr" 'eglot-rename
+    ;; "lR" 'eglot-reconnect
+    ;; "lx" 'eglot-shutdown
+    ;; "lX" 'eglot-shutdown-all
+    ;; "l=" 'eglot-format
 
 		;============================ major mode prefix ============================
     "m"       (cons "major mode" (make-sparse-keymap))

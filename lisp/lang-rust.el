@@ -9,11 +9,12 @@
 ;;; Code:
 
 (use-package rust-mode
-  :hook (rust-mode . 'eglot-ensure)
+	:mode ("\\.rs\\'" . rust-ts-mode)
+;;  :hook (rust-mode . 'eglot-ensure)
   :config
-    (add-to-list 'eglot-server-programs
-             '((rust-ts-mode rust-mode) .
-               ("rust-analyzer" :initializationOptions (:check (:command "clippy")))))
+    ;; (add-to-list 'eglot-server-programs
+    ;;          '((rust-ts-mode rust-mode) .
+    ;;            ("rust-analyzer" :initializationOptions (:check (:command "clippy")))))
 
   (despot-def (Rust-mode-map)
       :major-modes '(rust-ts-mode rust-mode)
