@@ -4,6 +4,11 @@
 
 (when my-debug-mode
   (message "Checkpoint: %s" "latex el"))
+;; Get shell path variables if running as a daemon
+
+(when (daemonp)
+  (exec-path-from-shell-initialize))
+
 
 ;; Not working.
 ;; (defun my-adjust-visual-fill-column-for-variable-pitch ()
@@ -91,8 +96,8 @@
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
 
 
-(lambda () (unless (server-running-p)
-             (server-start)))
+;; (lambda () (unless (server-running-p)
+;;              (server-start)))
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before custom set variables"))
 
 (custom-set-variables
@@ -161,10 +166,6 @@
  '(flymake-warning ((t (:underline nil :inherit default)))))
 
 (when IS-MAC (toggle-frame-fullscreen))
-
-;; Get shell path variables if running as a daemon
-(when (daemonp)
-  (exec-path-from-shell-initialize))
 
 (provide 'customs)
 

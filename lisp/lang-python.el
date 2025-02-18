@@ -21,6 +21,13 @@
                "basedpyright-langserver" "--stdio"))
 	)
 
+(use-package uv-mode
+	:disabled
+	:hook (python-mode . uv-mode))
+
+(use-package pyenv-mode
+	:disabled)
+
 (provide 'lang-python)
 
 ;; Local Variables:
