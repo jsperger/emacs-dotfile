@@ -6,7 +6,11 @@
 
 (use-package elgrep)
 
-(use-package rg)
+(use-package rg
+	:config
+	(when (and IS-MAC (daemonp))
+  (setopt rg-executable "/opt/homebrew/bin/rg"))
+	)
 
 (use-package wgrep)
 
