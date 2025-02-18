@@ -10,17 +10,31 @@
 
 (use-package yasnippet
 	:hook ((text-mode prog-mode) . yas-minor-mode)
+	:config
+	(setopt yas-global-mode t)
 	)
 
 (use-package yasnippet-snippets)
 
+
+;; (add-to-list 'load-path "/Users/jsperger/code/lsp-bridge")
+;; (use-package lsp-bridge
+;;	:ensure nil
+;; :after markdown-mode	
+;; :config
+;;	(setopt global-lsp-bridge-mode t))
+
+;; (require 'lsp-bridge)
 (use-package lsp-bridge
-	:after yasnippet
-  :ensure (lsp-bridge :type git :host github :repo "manateelazycat/lsp-bridge"
-            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
-            :build (:not compile))
-  :init
-  (global-lsp-bridge-mode))
+	:after yasnippet markdown-mode
+	:ensure (lsp-bridge
+					 :type git :host github :repo "manateelazycat/lsp-bridge"
+					 :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+					 :build (:not elpaca--byte-compile)
+					 					 :post-build (eshell-command "pip3 install epc orjson sexpdata six setuptools paramiko rapidfuzz watchdog packaging -t /Users/jsperger/.emacs.d/elpaca/builds/lsp-bridge"))
+:init
+(setopt global-lsp-bridge-mode t)
+)
 
 
 (provide 'tools-lsp-bridge)
