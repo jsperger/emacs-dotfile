@@ -32,7 +32,9 @@
 					 :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
 					 :build (:not elpaca--byte-compile)
 					 					 :post-build (eshell-command "pip3 install epc orjson sexpdata six setuptools paramiko rapidfuzz watchdog packaging -t /Users/jsperger/.emacs.d/elpaca/builds/lsp-bridge"))
-:init
+	:init
+(setq lsp-bridge-python-command "/Users/jsperger/.emacs.d/var/lsp-bridge-env/bin/python")
+	:config
 (setopt global-lsp-bridge-mode t)
 )
 

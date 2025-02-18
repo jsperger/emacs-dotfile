@@ -124,7 +124,6 @@
 
 ;; (require 'editor-lsp)
 
-(require 'tools-lsp-bridge)
 
 (require 'editor-fonts-themes)
 (require 'editor-misc)
@@ -150,6 +149,7 @@
 (require 'lang-lisp)
 (require 'lang-data-formats)
 
+(require 'tools-lsp-bridge)
 ;; After-init hooks + custom
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
