@@ -239,6 +239,12 @@
 
 (use-package ef-themes)
 
+(use-package flexoki-themes
+  :custom
+  (flexoki-themes-use-bold-keywords t)
+  (flexoki-themes-use-bold-builtins t)
+  (flexoki-themes-use-italic-comments nil))
+
 (use-package gruvbox-theme)
 
 (use-package kaolin-themes)
