@@ -123,7 +123,7 @@
   :config
 	;;  (global-visual-fill-column-mode 1 "Enable global mode")
 	(setopt visual-fill-column-center-text t ; "Center instead of beginning at margin"
-					visual-fill-column-extra-text-width '(4 . 2))
+					visual-fill-column-extra-text-width '(4 . 4))
   )
 
 (use-package writeroom-mode
