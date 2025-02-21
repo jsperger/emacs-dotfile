@@ -8,13 +8,7 @@
 
 ;;; Code:
 
-(use-package yasnippet
-	:hook ((text-mode prog-mode) . yas-minor-mode)
-	:config
-	(setopt yas-global-mode t)
-	)
 
-(use-package yasnippet-snippets)
 
 
 ;; (add-to-list 'load-path "/Users/jsperger/code/lsp-bridge")
