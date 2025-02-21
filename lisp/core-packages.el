@@ -111,8 +111,6 @@
 (use-package eat
 	:disabled)
 
-(use-package no-littering)
-
 (use-package surround
 	:general
   (tyrant-def

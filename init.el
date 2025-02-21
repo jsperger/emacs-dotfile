@@ -73,6 +73,8 @@
 
 (use-package jsonrpc :ensure (:wait t) )
 
+(use-package no-littering :ensure (:wait t))
+
 (use-package track-changes)
 
 ;; use-package version of eldoc workaround
