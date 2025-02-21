@@ -21,22 +21,52 @@
 	(expand-file-name "bin/python" lsp-bridge-venv-path)
   "Path to the python executable in the virtual environment for lsp-bridge.")
 
+;; -------------------------------------
+;; Helper function to setup virtual environment
+;; -------------------------------------
 
-;; (add-to-list 'load-path "/Users/jsperger/code/lsp-bridge")
-;; (use-package lsp-bridge
-;;	:ensure nil
-;; :after markdown-mode	
-;; :config
-;;	(setopt global-lsp-bridge-mode t))
+(defun setup-lsp-bridge-env (venv-path)
+  "Set up a Python virtual environment at VENV-PATH with required packages."
+  (let* ((env-path venv-path))
+    ;; Ensure target directory exists
+    (unless (file-exists-p (file-name-directory env-path))
+      (make-directory (file-name-directory env-path) t))
 
-;; (require 'lsp-bridge)
+    ;; Check if the virtual environment already exists, create it if not
+    (unless (file-directory-p env-path)
+      (message "Creating virtual environment at %s" env-path)
+      (shell-command (format "%s -m venv %s"
+                             (executable-find "python3")
+                             (shell-quote-argument env-path))))
+
+    ;; Activate the virtual environment and install/update packages
+    (let ((activate-script (expand-file-name "bin/activate_this.py" env-path)))
+      (when (file-exists-p activate-script)
+        ;; Use activate_this.py to activate venv in Emacs
+        (load activate-script t t)
+
+        ;; Install or update the required Python packages
+        (message "Installing/updating required Python packages...")
+        (dolist (package '("epc" "orjson" "sexpdata" "six" "setuptools" "paramiko"
+                           "rapidfuzz" "watchdog" "packaging"))
+          (shell-command (format "%s install --upgrade %s"
+                                 (executable-find "pip3")
+                                 package)))
+
+        ;; Deactivate the virtual environment
+        (deactivate-virtualenv)))))
+
+;; -------------------------------------
+;; Helper function to setup virtual environment
+;; -------------------------------------
+
+
 (use-package lsp-bridge
-	:after yasnippet markdown-mode
 	:ensure (lsp-bridge
 					 :type git :host github :repo "manateelazycat/lsp-bridge"
 					 :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
 					 :build (:not elpaca--byte-compile)
-					 					 :post-build (eshell-command "pip3 install epc orjson sexpdata six setuptools paramiko rapidfuzz watchdog packaging -t /Users/jsperger/.emacs.d/elpaca/builds/lsp-bridge"))
+					 					 :post-build (setup-lsp-bridge-env))
 	:init
 	(setq lsp-bridge-python-command lsp-bridge-python-path)
 
