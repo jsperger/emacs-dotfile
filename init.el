@@ -72,9 +72,8 @@
   )
 
 (use-package jsonrpc :ensure (:wait t) )
+
 (use-package track-changes)
-(use-package sqlite
-  :ensure nil)
 
 ;; use-package version of eldoc workaround
 ;; (use-package eldoc
@@ -112,6 +111,7 @@
 
 
 (require 'core-packages)
+(require 'builtin-packages)
 (require 'core-config)
 (require 'core-funcs)
 (require 'core-treesit)

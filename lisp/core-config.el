@@ -20,13 +20,6 @@
 ;; enable subword-mode in prog-mode
 (add-hook 'prog-mode-hook #'subword-mode)
 
-(use-package repeat
-  :ensure nil
-	:defer t
-  )
-
-
-
 
 ;; scroll compilation to first error or end
 (setopt compilation-scroll-output 'first-error)
@@ -63,20 +56,6 @@
       '(read-only t cursor-intangible t face minibuffer-prompt))
 (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-
-(use-package autorevert
-  :ensure nil
-	:defer t
-  :config
-  (setopt global-auto-revert-non-file-buffers t
-        auto-revert-verbose nil))
-
-(use-package dabbrev
-  :ensure nil
-  :defer t
-  :config
-  (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
-        dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
 (use-package desktop
   :disabled
