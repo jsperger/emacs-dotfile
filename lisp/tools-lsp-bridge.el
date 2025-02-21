@@ -8,7 +8,18 @@
 
 ;;; Code:
 
+;; -------------------------------------
+;; Path to virtual environment for lsp-bridge to use
+;; -------------------------------------
 
+;; assumes the no-littering package is being used
+(defvar lsp-bridge-venv-path
+	(no-littering-expand-var-file-name "lsp-bridge-env")
+  "Path to the virtual environment for lsp-bridge.")
+
+(defvar lsp-bridge-python-path
+	(expand-file-name "bin/python" lsp-bridge-venv-path)
+  "Path to the python executable in the virtual environment for lsp-bridge.")
 
 
 ;; (add-to-list 'load-path "/Users/jsperger/code/lsp-bridge")
@@ -27,11 +38,12 @@
 					 :build (:not elpaca--byte-compile)
 					 					 :post-build (eshell-command "pip3 install epc orjson sexpdata six setuptools paramiko rapidfuzz watchdog packaging -t /Users/jsperger/.emacs.d/elpaca/builds/lsp-bridge"))
 	:init
-(setq lsp-bridge-python-command "/Users/jsperger/.emacs.d/var/lsp-bridge-env/bin/python")
-	:config
-(setopt global-lsp-bridge-mode t)
-)
+	(setq lsp-bridge-python-command lsp-bridge-python-path)
 
+	:hook (elpaca-after-init . global-lsp-bridge-mode)
+;;	(lsp-bridge-mode . markdown-mode) ; this can't be right. Need to figure out why lsp-bridge requires markdown-mode
+	:custom (globla-lsp-bridge-mode t)
+)
 
 (provide 'tools-lsp-bridge)
 ;; Local Variables:
