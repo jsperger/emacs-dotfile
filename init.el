@@ -110,7 +110,7 @@
 
 (require 'core-keybinds)
 (require 'editor-completion)
-
+(require 'evil-core)
 
 (require 'core-packages)
 (require 'builtin-packages)
