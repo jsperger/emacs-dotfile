@@ -5,9 +5,10 @@
 ;;; Code:
 
 (use-package slime
-	:disabled
-;;	:hook (inferior-lisp . slime-mode)
+	:hook (elisp-mode . slime-mode)
   :config
+	(setopt inferior-lisp-program "sbcl")
+	(add-hook 'slime-mode-hook (setq-local lsp-bridge-mode -1))
   (despot-def (slime-mode-map)
     :major-modes 'slime-mode
     "b" 'slime-eval-buffer
