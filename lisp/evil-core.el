@@ -8,6 +8,8 @@
 ;;; Code:
 
 (use-package evil
+	:ensure (:wait t)
+	:demand t
 	:hook ((prog-mode . hs-minor-mode)) ;why is this here?
 	:init
 	(setopt evil-want-keybinding nil

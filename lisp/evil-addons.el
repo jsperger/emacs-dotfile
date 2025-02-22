@@ -7,6 +7,7 @@
 
 ;;; Code:
 (use-package evil-collection
+	:hook (elpaca-after-init . evil-collection-init)
   :init
   (add-hook 'org-agenda-mode-hook
             (lambda () (evil-collection-unimpaired-mode -1))))
@@ -18,6 +19,7 @@
   )
 
 (use-package evil-owl
+	:hook (evil-mode . evil-owl-mode)
   :config
   (add-to-list 'display-buffer-alist
                '("*evil-owl*"
@@ -27,7 +29,8 @@
   (setopt evil-owl-idle-delay 0.5))
 
 (use-package evil-snipe
-  :hook ((evil-snipe-mode . evil-snipe-override-mode))
+  :hook (evil-mode . evil-snipe-mode)
+	(evil-snipe-mode . evil-snipe-override-mode)
   :config
   (setopt evil-snipe-spillover-scope 'whole-buffer)
   (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
