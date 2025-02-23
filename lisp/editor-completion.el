@@ -74,6 +74,10 @@
         corfu-preselect 'prompt)
 
   :config
+   ;; Emacs 30 and newer: Disable Ispell completion function.
+   ;; Try `cape-dict' as an alternative.
+  (setopt text-mode-ispell-word-completion nil)
+
   (defun corfu-enable-in-minibuffer ()
     "Enable Corfu in the minibuffer if `completion-at-point' is bound."
     (when (where-is-internal #'completion-at-point (list (current-local-map)))
