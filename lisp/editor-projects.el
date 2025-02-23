@@ -41,10 +41,13 @@
 (use-package perject
 	:disabled)
 
+(use-package perpsective
+	:disabled)
+
 (use-package projection
   :disabled
   ;; Enable the `projection-hook' feature.
-  :hook (after-init . global-projection-hook-mode)
+  :hook (elpaca-after-init . global-projection-hook-mode)
 
   ;; Require projections immediately after project.el.
   :config

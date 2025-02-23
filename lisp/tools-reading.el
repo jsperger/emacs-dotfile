@@ -33,8 +33,31 @@
 )
 
 ;;;
+;; --- Readling Notes ---
+;;;
+(use-package citar-denote
+	:disabled)
+
+(use-package denote-citar-sections
+	:disabled)
+
+;;;
 ;; --- Readling List ---
 ;;;
+
+
+(use-package zotero
+	;; https://gitlab.com/fvdbeek/emacs-zotero
+	:disabled
+  :commands (zotero-browser)
+  :init
+  (require 'zotero-browser)
+	)
+
+
+(use-package zotxt
+;; https://gitlab.com/egh/zotxt-emacs
+	:disabled)
 
 (use-package pocket-reader
 	:disabled)
@@ -43,6 +66,9 @@
 	:disabled)
 
 (use-package arxiv-mode
+	:disabled)
+
+(use-package calibredb
 	:disabled)
 
 ;;;
