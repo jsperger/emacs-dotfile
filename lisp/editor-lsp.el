@@ -7,6 +7,7 @@
 ;;; Additional Packages
 
 (use-package eglot
+	:disabled
 ;  :commands expand-absolute-name
   :init
   (setq read-process-output-max (* 1024 1024))
@@ -38,9 +39,11 @@
 
 
 (use-package consult-eglot
+	:disabled
   :after eglot consult)
 
 (use-package consult-eglot-embark
+	:disabled
 	:after consult eglot embark
   :hook ('eglot-ensure . consult-eglot-embark-mode))
 

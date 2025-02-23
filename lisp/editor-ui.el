@@ -101,8 +101,9 @@
                         (flymake-diagnostics-buffer-mode :align t)
                         ("*Shell Command Output*"        :align t)
                         ("*Async Shell Command*"         :align t)
-                        ("\\*EGLOT.*" :select t :align right :size ,
-                         fill-column :regexp t))))
+;;                        ("\\*EGLOT.*" :select t :align right :size , fill-column :regexp t)
+												))
+	)
 
 (use-package spacious-padding
   :config
