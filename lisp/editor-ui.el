@@ -254,6 +254,8 @@
 	:hook (tab-line-mode . tab-line-nerd-icons-global-mode))
 
 (use-package nerd-icons-corfu
+	:disabled
+;;	:if (global-corfu-mode) ; not defined if corfu isn't on. Need to figure out how to safely try this or an alternative condition
 	:after corfu
 	:init
 	(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)

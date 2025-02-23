@@ -60,6 +60,7 @@
 
 
 (use-package corfu
+	:disabled
   :ensure (:files (:defaults "extensions/*.el"))
 	:hook (text-mode . corfu-mode)
   :init
