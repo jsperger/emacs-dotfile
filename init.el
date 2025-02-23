@@ -61,15 +61,22 @@
   "Toggle debugging messages. Set to t to enable, nil to disable.")
 
 
+;;
+;; 2025-02-22 Disabled eldoc, use built-in
+;; Reason: Error. Not worth fixing at the moment because I was only using elpa versions of
+;; eldoc and jsonrpc because of eglot  
+;; Error:  something about incf not defined. I'm guessing it should use cl-incf;
+;; maybe it should intelligently choose between cl-incf and ts-incf I'm not
+;; sure.
 ;; Eldoc workaround
 ;; https://github.com/progfolio/elpaca/issues/398
-(unload-feature 'eldoc t) ;; Unload built-in eldoc
-(setq custom-delayed-init-variables '())
-(defvar global-eldoc-mode nil)
-(elpaca eldoc
-  (require 'eldoc)
-  (global-eldoc-mode) ;; This is usually enabled by default by Emacs
-  )
+;;(unload-feature 'eldoc t) ;; Unload built-in eldoc
+;;(setq custom-delayed-init-variables '())
+;;(defvar global-eldoc-mode nil)
+;; (elpaca eldoc
+;;   (require 'eldoc)
+;;   (global-eldoc-mode) ;; This is usually enabled by default by Emacs
+;;   )
 
 (use-package jsonrpc :ensure (:wait t) )
 
