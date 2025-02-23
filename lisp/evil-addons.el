@@ -26,6 +26,7 @@
   (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
 
 (use-package evil-surround
+	:disabled
   :hook ((text-mode prog-mode conf-mode) . evil-surround-mode)
   :config
   (add-hook 'emacs-lisp-mode-hook
