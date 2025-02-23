@@ -60,7 +60,7 @@
 ;; Helper function to setup virtual environment
 ;; -------------------------------------
 
-
+;; When using lsp-bridge, please first disable other completion plugins, such as lsp-mode, eglot, company, corfu, etc. lsp-bridge provides a complete solution from the completion backend, completion frontend to multi-backend integration
 (use-package lsp-bridge
 	:ensure (lsp-bridge
 					 :type git :host github :repo "manateelazycat/lsp-bridge"
@@ -71,7 +71,9 @@
 	(setq lsp-bridge-python-command lsp-bridge-python-path)
 
 	:hook (elpaca-after-init . global-lsp-bridge-mode)
-;;	(lsp-bridge-mode . markdown-mode) ; this can't be right. Need to figure out why lsp-bridge requires markdown-mode
+	;;	(lsp-bridge-mode . markdown-mode) ; this can't be right. Need to figure out why lsp-bridge requires markdown-mode
+	:config
+(setopt acm-candidate-match-function 'orderless-flex)
 	:custom (globla-lsp-bridge-mode t)
 )
 
