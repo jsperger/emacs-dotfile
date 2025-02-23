@@ -68,6 +68,7 @@
     "ap"      'list-processes
 ;;    "ad"      'todoist
     "af"      'fontaine-set-preset
+;;		"am"     'manage-minor-mode-table ;in manage-minor-mode-table use-package def
     ;; "ao"      (cons "obsidian" (make-sparse-keymap))
     ;; "aoc"     'obsidian-capture
     ;; "aoj"     'obsidian-jump

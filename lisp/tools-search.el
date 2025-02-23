@@ -14,6 +14,11 @@
 
 (use-package wgrep)
 
+(use-package manage-minor-mode-table
+	:general
+	(tyrant-def "am" 'manage-minor-mode-table)
+ 	)
+
 (provide 'tools-search)
 ;; Local Variables:
 ;; no-byte-compile: t
