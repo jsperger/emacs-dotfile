@@ -249,6 +249,10 @@
 	 inhibit-compacting-font-caches t)
 	)
 
+
+(use-package tab-line-nerd-icons
+	:hook (tab-line-mode . tab-line-nerd-icons-global-mode))
+
 (use-package nerd-icons-corfu
 	:after corfu
 	:init
