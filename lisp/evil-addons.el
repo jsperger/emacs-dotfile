@@ -18,16 +18,6 @@
   (setopt evil-org-key-theme '(navigation insert textobjects additional todo heading))
   )
 
-(use-package evil-owl
-	:hook (evil-mode . evil-owl-mode)
-  :config
-  (add-to-list 'display-buffer-alist
-               '("*evil-owl*"
-                 (display-buffer-in-side-window)
-                 (side . bottom)
-                 (window-height . 0.3)))
-  (setopt evil-owl-idle-delay 0.5))
-
 (use-package evil-snipe
   :hook (evil-mode . evil-snipe-mode)
 	(evil-snipe-mode . evil-snipe-override-mode)
