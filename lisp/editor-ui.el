@@ -88,8 +88,8 @@
 
 (use-package shackle
   :config
-  (shackle-mode 1)
-  (setq shackle-default-size 0.4
+  (setopt shackle-mode t)
+  (setq shackle-default-size 0.3
         shackle-rules `(
                         (help-mode :select t :align right :size ,fill-column)
                         (helpful-mode :select t :align right :size ,fill-column)
