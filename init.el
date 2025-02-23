@@ -158,7 +158,7 @@
 (require 'lang-tex)
 (require 'lang-web)
 
-;; (require 'tools-lsp-bridge)
+(require 'tools-lsp-bridge)
 ;; After-init hooks + custom
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
