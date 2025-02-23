@@ -110,12 +110,14 @@
 
 (require 'core-keybinds)
 (require 'editor-completion)
-(require 'evil-core)
 
-(require 'core-packages)
+(require 'evil-core)
+(require 'evil-addons)
+
 (require 'builtin-packages)
 (require 'core-config)
 (require 'core-funcs)
+(require 'core-packages)
 (require 'core-treesit)
 
 (require 'completion-actions)
@@ -129,29 +131,27 @@
 
 (require 'editor-fonts-themes)
 (require 'editor-misc)
-(require 'editor-ui)
-(require 'tools-notes)
-
-(require 'lang-tex)
-(require 'editor-vc)
 (require 'editor-projects)
+(require 'editor-ui)
+(require 'editor-vc)
 
-(require 'evil-addons)
+(require 'tools-notes)
 (require 'tools-reading)
 (require 'tools-search)
 (require 'tools-writing)
 
+(require 'lang-data-formats)
+(require 'lang-lisp)
+(require 'lang-llm)
 (require 'lang-markdown)
 (require 'lang-org)
-(require 'lang-web)
 (require 'lang-python)
-(require 'lang-rust)
 (require 'lang-r)
-(require 'lang-llm)
-(require 'lang-lisp)
-(require 'lang-data-formats)
+(require 'lang-rust)
+(require 'lang-tex)
+(require 'lang-web)
 
-(require 'tools-lsp-bridge)
+;; (require 'tools-lsp-bridge)
 ;; After-init hooks + custom
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
