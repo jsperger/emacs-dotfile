@@ -61,7 +61,7 @@
 
 (use-package corfu
   :ensure (:files (:defaults "extensions/*.el"))
-  :demand t
+	:hook (text-mode . corfu-mode)
   :init
   (setopt completion-cycle-threshold 3
         tab-always-indent 'complete
@@ -88,11 +88,11 @@
 
   (use-package corfu-history
     :ensure nil
-    :hook (global-corfu-mode . corfu-history-mode))
+    :hook (corfu-mode . corfu-history-mode))
 
   (use-package corfu-popupinfo
     :ensure nil
-    :hook (global-corfu-mode . corfu-popupinfo-mode)
+    :hook (corfu-mode . corfu-popupinfo-mode)
     :config
     (set-face-attribute 'corfu-popupinfo nil :height 0.95))
 
