@@ -74,10 +74,10 @@
    [remap goto-line]           'consult-goto-line
    [remap imenu]               'consult-imenu)
   (tyrant-def
-    "jI" '("imenu-multi" . consult-imenu-multi)
+    "JI" '("imenu-multi" . consult-imenu-multi)
     "fl" '("locate-files" . consult-find)
-    "jj" '("search lines" . consult-line)
-    "jJ" '("search lines a/ buffers" . consult-line-multi)
+    "Jj" '("search lines" . consult-line)
+    "JJ" '("search lines a/ buffers" . consult-line-multi)
     )
   (org-mode-map
    [remap consult-imenu]       'consult-org-heading

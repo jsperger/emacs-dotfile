@@ -11,10 +11,10 @@
 (use-package avy
 	:general
 	(tyrant-def
-		"ja" 'avy-goto-char
-		"jg" 'avy-goto-char-timer
-		"jl" 'avy-goto-line
-		"jw" 'evil-avy-goto-word-1))
+		"Ja" 'avy-goto-char
+		"Jg" 'avy-goto-char-timer
+		"Jl" 'avy-goto-line
+		"Jw" 'evil-avy-goto-word-1))
 
 (use-package embark
   ;; :init

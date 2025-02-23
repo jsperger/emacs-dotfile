@@ -54,9 +54,9 @@ reuse it's window, otherwise create new one."
     "o"      'link-hint-open-link)
 
   (tyrant-def
-    "jo" 'link-hint-open-link
-    "jO" 'link-hint-open-multiple-links
-    "jy" 'link-hint-copy-link))
+    "Jo" 'link-hint-open-link
+    "JO" 'link-hint-open-multiple-links
+    "Jy" 'link-hint-copy-link))
 
 (use-package reveal-in-folder
   :general (tyrant-def "bf" 'reveal-in-folder))

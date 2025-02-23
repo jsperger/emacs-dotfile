@@ -196,12 +196,14 @@
     "hPk"     'profiler-stop
     "hPr"     'profiler-report
 
-		;=================================== jump ==================================
-    "j"       (cons "jump" (make-sparse-keymap))
-    "jb"      'bookmark-jump
-    "ji"      'imenu
+;=================================== jump ==================================
+     "j"       'consult-buffer
+		
+    "J"       (cons "jump" (make-sparse-keymap))
+    "Jb"      'bookmark-jump
+    "Ji"      'imenu
 ;;    "jg"      'avy-goto-char-timer
-    "jn"      'denote
+    "Jn"      'denote
 		;;    "jo"      'obsidian-jump
 
 		;=================================== keys ==================================
