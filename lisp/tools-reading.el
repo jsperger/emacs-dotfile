@@ -33,15 +33,6 @@
 )
 
 ;;;
-;; --- Readling Notes ---
-;;;
-(use-package citar-denote
-	:disabled)
-
-(use-package denote-citar-sections
-	:disabled)
-
-;;;
 ;; --- Readling List ---
 ;;;
 
