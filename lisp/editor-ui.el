@@ -249,8 +249,10 @@
 	)
 
 (use-package nerd-icons-corfu
+	:after corfu
 	:init
 	(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+;;	:hook (corfu-mode . nerd-icons-completion)
 ;; ;; Optionally:
 ;; (setq nerd-icons-corfu-mapping
 ;;       '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
