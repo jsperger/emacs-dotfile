@@ -127,6 +127,7 @@
 		 "f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66"
 		 "34cf3305b35e3a8132a0b1bdf2c67623bc2cb05b125f8d7d26bd51fd16d547ec" default))
  '(indent-tabs-mode t)
+ '(large-file-warning-threshold 100000000)
  '(package-native-compile t)
  '(safe-local-variable-values '((TeX-master . t)))
  '(standard-indent 2)
