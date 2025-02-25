@@ -2,6 +2,7 @@ text-mode
 
 (commit-basic-template "<type>[optional scope]: <description>")
 (cbbuild "build: " r)
+(cbchore "chore: " r)
 (cbdocs "docs: " r)
 (cbfeat "feat: " r)
 (cbfix "fix: " r)
