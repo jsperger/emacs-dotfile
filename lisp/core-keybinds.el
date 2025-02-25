@@ -50,8 +50,8 @@
     "TAB"     '("last buffer" . alternate-buffer)
 		"RET"     '("Switch" . consult-buffer)
     "!"       '("shell cmd" . shell-command)
-		"i"       '("insert" . yas-insert-snippet)
-    "I"       '("insert" . tempel-insert)
+    "i"       '("insert" . tempel-insert)
+		"I"       '("insert" . yas-insert-snippet)
 
 		","       (cons "config" (make-sparse-keymap))
 		",d"      'describe-face
