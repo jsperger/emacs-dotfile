@@ -136,6 +136,7 @@
 ;; (require 'editor-lsp)
 
 
+(require 'editor-font-locking)
 (require 'editor-fonts-themes)
 (require 'editor-misc)
 (require 'editor-projects)
