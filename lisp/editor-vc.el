@@ -55,7 +55,14 @@
     "gm"  'magit-dispatch
     "gs"  'magit-status
     "gS"  'magit-stage-file
-    "gU"  'magit-unstage-file))
+    "gU"  'magit-unstage-file)
+	(despot-def '(magit-status-mode-map)
+		:major-modes '(magit-status-mode)
+    "b"  'magit-blame
+    "c"  'magit-commit
+    "d"  'magit-diff
+		)
+	)
 
 (use-package forge
 	:disabled
@@ -123,6 +130,21 @@
     "gLl" 'git-link
     "gLL" 'git-link-copy-url-only
     "gLh" 'git-link-homepage))
+
+(use-package git-cliff
+	:config
+	;; OPTIONAL
+	;; Integrate to `magit-tag'
+	(with-eval-after-load 'magit-tag
+		(transient-append-suffix 'magit-tag
+			'(1 0 -1)
+			'("c" "changelog" git-cliff-menu)))
+	:general
+	(despot-def '(magit-status-mode-map)
+		:major-modes '(magit-status-mode)
+    "C"  'git-cliff-menu
+		)
+	)
 
 (use-package gitignore-templates
   :after vc magit
