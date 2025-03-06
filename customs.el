@@ -128,6 +128,7 @@
 		 "34cf3305b35e3a8132a0b1bdf2c67623bc2cb05b125f8d7d26bd51fd16d547ec" default))
  '(indent-tabs-mode t)
  '(large-file-warning-threshold 100000000)
+ '(markdown-list-indent-width 2)
  '(package-native-compile t)
  '(safe-local-variable-values '((TeX-master . t)))
  '(standard-indent 2)
