@@ -17,7 +17,7 @@ org-mode
 (gnuplot "#+begin_src gnuplot :var data=" (p "table") " :file " (p "plot.png") n> r> n "#+end_src" :post (org-edit-src-code))
 (elisp "#+begin_src emacs-lisp" n> r> n "#+end_src" :post (org-edit-src-code))
 (inlsrc "src_" p "{" q "}")
-(title "#+title: " p n "#+author: Daniel Mendler" n "#+language: en")
+(title "#+title: " p n "#+author: John Sperger" n "#+language: en")
 (pikchr "#+begin_src pikchr :file " p".svg" n
 n
 "#+end_src" n)
