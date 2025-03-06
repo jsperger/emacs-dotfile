@@ -23,8 +23,8 @@
 	:custom
 	(ess-indent-offset 2)
 	(ess-own-style-list '((ess-indent-offset . 2)
-															(ess-offset-arguments . open-delim)
-															(ess-offset-arguments-newline . prev-call)
+															(ess-offset-arguments . prev-call)
+															(ess-offset-arguments-newline . prev-line)
 															(ess-offset-block . prev-line)
 															(ess-offset-continued . straight)
 															(ess-align-nested-calls "ifelse")
