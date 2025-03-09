@@ -35,6 +35,9 @@
     "tb" 'ert-run-tests-buffer
     "tq" 'ert))
 
+(use-package racket-mode
+	:mode ("\\.rkt\\'" . racket-mode)
+	)
 
 (provide 'lang-lisp)
 ;; Local Variables:
