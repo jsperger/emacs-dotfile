@@ -58,17 +58,17 @@
     ",f"      'fontaine-set-preset
 		",t"      'consult-theme
 
-    ;;================================= applications ============================
+    ;;================================= applications ===========================
     "a"       (cons "apps" (make-sparse-keymap))
-;;		"ab" 'banner-comment ; defined in package dec
+		;;		"ab" 'banner-comment ; defined in package dec
 		"ac"      'consult-minor-mode-menu
     "aC"      'calc-dispatch
 		"ae"      'embark-act
 		"aE"      'embark-act-all
     "ap"      'list-processes
-;;    "ad"      'todoist
+		;;    "ad"      'todoist
     "af"      'fontaine-set-preset
-;;		"am"     'manage-minor-mode-table ;in manage-minor-mode-table use-package def
+		;;		"am"     'manage-minor-mode-table ;in manage-minor-mode-table use-package def
     ;; "ao"      (cons "obsidian" (make-sparse-keymap))
     ;; "aoc"     'obsidian-capture
     ;; "aoj"     'obsidian-jump
@@ -87,7 +87,7 @@
     "bu"      'reopen-killed-buffer
     "bx"      'kill-buffer-and-window
 
-		;=================================== code ==================================
+		;;=================================== code =================================
     "c"       (cons "code" (make-sparse-keymap))
     "cb"      'flymake-show-buffer-diagnostics
     "cc"      'compile
@@ -97,7 +97,7 @@
     "cx"      'kill-compilation
     "c="      'indent-region-or-buffer
 
-	  ;================================== elpaca =================================
+		;;================================== elpaca ================================
     "e"       (cons "elpaca" (make-sparse-keymap))
     "ef"      'elpaca-fetch-all
     "eF"      'elpaca-fetch
@@ -106,56 +106,56 @@
     "eu"      'elpaca-merge ;; update equivalent
     ;; Intentional no bind for merge-all
 
-		;================================== Ellama =================================
-    "E"       (cons "Ellama" (make-sparse-keymap))
-    "Ec"      (cons "code" (make-sparse-keymap))
-    "Ecc"     'ellama-code-complete
-    "Eca"     'ellama-code-add
-    "Ece"     'ellama-code-edit
-    "Eci"     'ellama-code-improve
-    "Ecr"     'ellama-code-review
-    "Es"      (cons "summarize & session" (make-sparse-keymap))
-    "Ess"    'ellama-summarize
-    "Esw"    'ellama-summarize-webpage
-    "Esl"    'ellama-load-session
-    "Esr"    'ellama-session-rename
-    "Esd"    'ellama-session-remove
-    "Esa"    'ellama-session-switch
-    "Ei"      (cons "improve" (make-sparse-keymap))
-    "Eiw"    'ellama-improve-wording
-    "Eig"    'ellama-improve-grammar
-    "Eic"    'ellama-improve-conciseness
-    "Em"      (cons "make" (make-sparse-keymap))
-    "Eml"    'ellama-make-list
-    "Emt"    'ellama-make-table
-    "Emf"    'ellama-make-format
-    "Ea"      (cons "ask & chat" (make-sparse-keymap))
-    "Eaa"    'ellama-ask-about
-    "Eai"    'ellama-chat
-    "Eal"    'ellama-ask-line
-    "Eas"    'ellama-ask-selection
-    "Et"      (cons "translate" (make-sparse-keymap))
-    "Ett"    'ellama-translate
-    "Etb"    'ellama-translate-buffer
-    "Ete"    'ellama-chat-translation-enable
-    "Etd"    'ellama-chat-translation-disable
-    "Etc"    'ellama-complete
-    "Ed"      (cons "define" (make-sparse-keymap))
-    "Edw"    'ellama-define-word
-    "Ex"      (cons "context" (make-sparse-keymap))
-    "Exb"    'ellama-context-add-buffer
-    "Exf"    'ellama-context-add-file
-    "Exs"    'ellama-context-add-selection
-    "Exi"    'ellama-context-add-info-node
-    "Ep"      (cons "provider" (make-sparse-keymap))
-    "Eps"    'ellama-provider-select
+		;;================================== Ellama ================================
+    ;; "E"       (cons "Ellama" (make-sparse-keymap))
+    ;; "Ec"      (cons "code" (make-sparse-keymap))
+    ;; "Ecc"     'ellama-code-complete
+    ;; "Eca"     'ellama-code-add
+    ;; "Ece"     'ellama-code-edit
+    ;; "Eci"     'ellama-code-improve
+    ;; "Ecr"     'ellama-code-review
+    ;; "Es"      (cons "summarize & session" (make-sparse-keymap))
+    ;; "Ess"    'ellama-summarize
+    ;; "Esw"    'ellama-summarize-webpage
+    ;; "Esl"    'ellama-load-session
+    ;; "Esr"    'ellama-session-rename
+    ;; "Esd"    'ellama-session-remove
+    ;; "Esa"    'ellama-session-switch
+    ;; "Ei"      (cons "improve" (make-sparse-keymap))
+    ;; "Eiw"    'ellama-improve-wording
+    ;; "Eig"    'ellama-improve-grammar
+    ;; "Eic"    'ellama-improve-conciseness
+    ;; "Em"      (cons "make" (make-sparse-keymap))
+    ;; "Eml"    'ellama-make-list
+    ;; "Emt"    'ellama-make-table
+    ;; "Emf"    'ellama-make-format
+    ;; "Ea"      (cons "ask & chat" (make-sparse-keymap))
+    ;; "Eaa"    'ellama-ask-about
+    ;; "Eai"    'ellama-chat
+    ;; "Eal"    'ellama-ask-line
+    ;; "Eas"    'ellama-ask-selection
+    ;; "Et"      (cons "translate" (make-sparse-keymap))
+    ;; "Ett"    'ellama-translate
+    ;; "Etb"    'ellama-translate-buffer
+    ;; "Ete"    'ellama-chat-translation-enable
+    ;; "Etd"    'ellama-chat-translation-disable
+    ;; "Etc"    'ellama-complete
+    ;; "Ed"      (cons "define" (make-sparse-keymap))
+    ;; "Edw"    'ellama-define-word
+    ;; "Ex"      (cons "context" (make-sparse-keymap))
+    ;; "Exb"    'ellama-context-add-buffer
+    ;; "Exf"    'ellama-context-add-file
+    ;; "Exs"    'ellama-context-add-selection
+    ;; "Exi"    'ellama-context-add-info-node
+    ;; "Ep"      (cons "provider" (make-sparse-keymap))
+    ;; "Eps"    'ellama-provider-select
 
-		;================================== files ==================================
+		;;================================== files =================================
     "f"       (cons "files" (make-sparse-keymap))
     "fC"      '("copy-file" . write-file)
     "fD"      'delete-current-buffer-file
     "fe"      'find-library
-;    "fE"      'sudo-edit
+																				;    "fE"      'sudo-edit
     "ff"      'find-file
     "fj"      'dired-jump
     "fJ"      'dired-jump-other-window
@@ -168,14 +168,14 @@
     "fvf"     'add-file-local-variable
     "fvp"     'add-file-local-variable-prop-line
 
-		;================================== Frame ==================================
+		;;================================== Frame =================================
     "F"       (cons "Frame" (make-sparse-keymap))
     "Fd"      'delete-frame
     "FD"      'delete-other-frames
     "Fn"      'make-frame
     "Fo"      'other-frame
 
-		;=================================== help ==================================
+		;;=================================== help =================================
     "h"       (cons "help" (make-sparse-keymap))
     "ha"      'apropos
     "hb"      'describe-bindings
@@ -196,17 +196,17 @@
     "hPk"     'profiler-stop
     "hPr"     'profiler-report
 
-;=================================== jump ==================================
-     "j"       'consult-buffer
+		;;=================================== jump ==================================
+    "j"       'consult-buffer
 		
     "J"       (cons "jump" (make-sparse-keymap))
     "Jb"      'bookmark-jump
     "Ji"      'imenu
-;;    "jg"      'avy-goto-char-timer
+		;;    "jg"      'avy-goto-char-timer
     "Jn"      'denote
 		;;    "jo"      'obsidian-jump
 
-		;=================================== keys ==================================
+		;;=================================== keys ==================================
     "k"       (cons "key" (make-sparse-keymap))
     "km"      'which-key-show-major-mode
     "kt"      'which-key-show-top-level
@@ -215,7 +215,7 @@
     "kd"      'describe-key
     "kD"      'describe-keymap
 
-		;================================== eglot ==================================
+		;;================================== eglot =================================
     ;; "l"  (cons "eglot" (make-sparse-keymap))
     ;; "la" 'eglot-code-actions
     ;; "lb" 'eglot-events-buffer
@@ -225,16 +225,16 @@
     ;; "lX" 'eglot-shutdown-all
     ;; "l=" 'eglot-format
 
-		;============================ major mode prefix ============================
+		;;============================ major mode prefix ===========================
     "m"       (cons "major mode" (make-sparse-keymap))
 
-		;================================= projects ================================
+		;;================================= projects ===============================
     "p"       (cons "projects" project-prefix-map)
     "pt"      'project-open-in-tab
     "pb"      'bookmark-in-project-toggle
     "pj"      'bookmark-in-project-jump
 
-		;=================================== quit ==================================
+		;;=================================== quit =================================
     "q"       (cons "quit" (make-sparse-keymap))
     "qd"      'restart-emacs-debug-init
     "qr"      'restart-emacs
@@ -246,7 +246,7 @@
 		"qS"      'server-save-buffers-kill-terminal
     "qt"      'save-buffers-kill-terminal
 
-		;================================= spelling ================================
+		;;================================= spelling ===============================
     "s"       (cons "spelling" (make-sparse-keymap))
     "sb"      'flyspell-buffer
     "sn"      'flyspell-goto-next-error
@@ -255,17 +255,17 @@
     "sC"      'jinx-correct-nearest
     "sj"      'jinx-next
 
-		;================================= replace =================================
+		;;================================= replace ================================
     "r"       (cons "replace" (make-sparse-keymap))
     "ra"      'query-replace ; Ask = query
     "rs"      'replace-string
     "rr"      'replace-string-in-region
 
-	;=================================== toggle ==================================
+		;;=================================== toggle ===============================
     "t"       (cons "toggle" (make-sparse-keymap))
     "ta"      'auto-fill-mode
-;;    "tb"      'global-obsidian-mode
-;;		"tc"      'nocomments-mode defined-in-package
+		;;    "tb"      'global-obsidian-mode
+		;;		"tc"      'nocomments-mode defined-in-package
     "tM"      'consult-minor-mode-menu
     "td"      'toggle-debug-on-error
     "tf"      'display-fill-column-indicator-mode
@@ -287,7 +287,7 @@
     "tW"      'toggle-word-wrap
     "tz"      'TeX-fold-mode
 
-		;=================================== Tabs ==================================
+		;;=================================== Tabs =================================
     "T"       (cons "Tabs" tab-prefix-map)
     "Td"      'tab-bar-close-tab
     "TD"      'tab-bar-close-other-tabs
@@ -308,10 +308,10 @@
     "T8"      'tab-bar-select-tab
     "T TAB"   'tab-bar-switch-to-last-tab
 
-		;============================= universal prefix ============================
+		;;============================= universal prefix ===========================
     "u"       '("universal" . universal-argument)
 
-		;================================= windows =================================
+		;;================================= windows ================================
     "w"       (cons "windows" (make-sparse-keymap))
     "w TAB"   'alternate-window
     "w+"      'window-layout-toggle

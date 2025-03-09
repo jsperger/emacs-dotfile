@@ -239,6 +239,11 @@ With a prefix ARG, remove start location."
 (use-package ob-mermaid
   :after org)
 
+(use-package ox-tufte
+	:after org
+	:disabled
+  )
+
 ;;;
 ;;; Appearance:
 ;;;
@@ -267,7 +272,7 @@ With a prefix ARG, remove start location."
 	(setopt org-side-tree-persistent nil
 					org-side-tree-fontify t
 					org-side-tree-enable-folding t)
-)
+	)
 
 (provide 'lang-org)
 ;; Local Variables:
