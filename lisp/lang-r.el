@@ -47,6 +47,11 @@
     )
   )
 
+(use-package r-ts-mode
+	:hook (R-mode . r-ts-mode)
+	:ensure (r-ts-mode
+					 :type git :host github :repo "nverno/r-ts-mode"))
+
 (use-package essgd
 	:general
 	  (despot-def (ess-r-mode-map)
