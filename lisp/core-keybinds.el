@@ -56,6 +56,7 @@
 		","       (cons "config" (make-sparse-keymap))
 		",d"      'describe-face
     ",f"      'fontaine-set-preset
+		",F"      'menu-set-font
 		",t"      'consult-theme
 
     ;;================================= applications ===========================
@@ -68,6 +69,7 @@
     "ap"      'list-processes
 		;;    "ad"      'todoist
     "af"      'fontaine-set-preset
+		"aF"      'menu-set-font
 		;;		"am"     'manage-minor-mode-table ;in manage-minor-mode-table use-package def
     ;; "ao"      (cons "obsidian" (make-sparse-keymap))
     ;; "aoc"     'obsidian-capture
@@ -276,9 +278,10 @@
     "tm"      'flymake-mode
     "tn"      'display-line-numbers-mode
     "tz"      'outline-minor-mode
-    "tO"      'org-modern-mode
-;;    "tp"      'pdf-view-mode ;probably don't need it since I fixed the :mode def
-;;    "tr"      'writegood-mode
+		"tO"      'org-modern-mode
+		"tp" 'variable-pitch-mode
+		;;    "tp"      'pdf-view-mode ;probably don't need it since I fixed the :mode def
+		;;    "tr"      'writegood-mode
     "ts"      'flyspell-mode
     "tt"      'LateX-mode
     "tv"      'visual-fill-column-mode
