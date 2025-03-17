@@ -24,13 +24,17 @@
 
 
 (use-package obsidian
-  :disabled
   :config
-  (obsidian-specify-path "~/obsidian")
-  :custom
-;; This directory will be used for `obsidian-capture' if set.
-  (obsidian-inbox-directory "Inbox")
-  (global-obsidian-mode t)
+	(setopt obsidian-directory "~/obsidian"
+					obsidian-inbox-directory "Inbox" ;This directory will be used for `obsidian-capture' if set.
+					obsidian-daily-notes-directory "Notes/Time-based Notes/Daily Notes";location for new notes created via obsidian-daily-note
+					obsidian-templates-directory "Resources/Templates";location for obsidian.el to find template files
+					obsidian-daily-note-template "Resources/Templates/Daily Note Template"
+					global-obsidian-mode t
+					obsidian-backlinks-mode nil)
+
+	:general
+	(tyrant-def "aob" 'obsidian-toggle-backlinks-panel)
   )
 
 

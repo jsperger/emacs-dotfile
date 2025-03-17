@@ -72,10 +72,10 @@
     "af"      'fontaine-set-preset
 		"aF"      'menu-set-font
 		;;		"am"     'manage-minor-mode-table ;in manage-minor-mode-table use-package def
-    ;; "ao"      (cons "obsidian" (make-sparse-keymap))
-    ;; "aoc"     'obsidian-capture
-    ;; "aoj"     'obsidian-jump
-    ;; "aos"     'obsidian-search
+     "ao"      (cons "obsidian" (make-sparse-keymap))
+     "aoc"     'obsidian-capture
+     "aoj"     'obsidian-jump
+     "aos"     'obsidian-search
 		"at"      'consult-theme
     "aT"      'eat
     "aP"      'proced
