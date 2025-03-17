@@ -2,6 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package binder
+	;; Seems to mostly be for plain text files, at least it didn't seem to like
+	;; when I added tex files.
+	;; I was wrong: see https://codeberg.org/divyaranjan/binder/issues/1
+	:general
+	(tyrant-def
+		"t;" 'binder-toggle-sidebar
+		"t'"  'binder-reveal-in-sidebar)
+	)
+
 (use-package flymake-proselint
   :disabled)
 
