@@ -48,6 +48,7 @@
   )
 
 (use-package r-ts-mode
+	:disabled
 	:hook (R-mode . r-ts-mode)
 	:ensure (r-ts-mode
 					 :type git :host github :repo "nverno/r-ts-mode"))
