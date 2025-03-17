@@ -44,9 +44,15 @@
    [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
    [remap evil-next-flyspell-error] 'evil-next-jinx-error))
 
-;; TODO Add general keybinds for unfill
-(use-package unfill)
-  
+(use-package unfill
+	;; TODO Add general keybinds for unfill
+	:general
+	(general-def '(normal visual) text-mode-map
+		"g=" 'unfill-region
+		"g+" 'unfill-paragraph
+		"t+" 'unfill-toggle)
+	)
+
 (use-package pandoc-mode
 	:disabled
   :hook (pandoc-mode . pandoc-load-default-settings)
