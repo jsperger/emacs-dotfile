@@ -25,6 +25,13 @@
 ;; Helper function to setup virtual environment
 ;; -------------------------------------
 
+
+;; OPTION 2 (dynamic)
+;; This is a better option if the `pyenv' executable is discoverable on `exec-path':
+(setq lsp-bridge-python-command (string-trim
+                                 (shell-command-to-string "pyenv which python3")))
+
+
 (defun setup-lsp-bridge-env (venv-path)
   "Set up a Python virtual environment at VENV-PATH with required packages."
   (let* ((env-path venv-path))
@@ -66,7 +73,7 @@
 					 :type git :host github :repo "manateelazycat/lsp-bridge"
 					 :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
 					 :build (:not elpaca--byte-compile)
-					 					 :post-build (setup-lsp-bridge-env))
+					 )
 	:init
 	(setq lsp-bridge-python-command lsp-bridge-python-path)
 
