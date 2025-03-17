@@ -166,9 +166,11 @@
 
 
 (use-package org-pdftools
+	:disabled
   :hook (org-mode . org-pdftools-setup-link))
 
 (use-package org-noter-pdftools
+	:disabled
 	:after org-noter
 	:config
 	;; Add a function to ensure precise note is inserted
@@ -240,8 +242,8 @@ With a prefix ARG, remove start location."
   :after org)
 
 (use-package ox-tufte
-	:after org
 	:disabled
+	:after org
   )
 
 ;;;
