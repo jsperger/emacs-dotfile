@@ -80,8 +80,27 @@
 	:hook (elpaca-after-init . global-lsp-bridge-mode)
 	;;	(lsp-bridge-mode . markdown-mode) ; this can't be right. Need to figure out why lsp-bridge requires markdown-mode
 	:config
-(setopt acm-candidate-match-function 'orderless-flex)
-	:custom (globla-lsp-bridge-mode t)
+;; (setopt acm-candidate-match-function 'orderless-flex)
+	:custom (global-lsp-bridge-mode t)
+
+	(use-package acm
+		;; completion mode that's part of lsp-bridge
+		:ensure nil
+		;; TODO: don't use RET for completion in acm-mode
+
+		;; Issue: if the word at point is finished but there's a completion hitting
+		;; RET will replace the word with the completion. For words at the end of
+		;; lines this is frustrating.
+		
+		;; The two attempted solutions below did not work:
+
+		;; Using :bind
+		;;	  :bind (:map acm-mode-map ("RET" . nil))
+
+		;; Using general
+		;; :general
+		;; ("RET" nil)
+		)
 )
 
 (provide 'tools-lsp-bridge)
