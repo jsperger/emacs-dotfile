@@ -234,16 +234,21 @@
 
 (use-package catppuccin-theme) ; slow loading 
 
-
 (use-package doom-themes)
 
 (use-package ef-themes)
 
 (use-package flexoki-themes
+	:disabled
   :custom
   (flexoki-themes-use-bold-keywords t)
   (flexoki-themes-use-bold-builtins t)
   (flexoki-themes-use-italic-comments nil))
+
+(use-package evenok
+;;	interesting idea, requires special setup with https://codeberg.org/mekeor/unspecified-theme
+	:disabled
+	)
 
 (use-package gruvbox-theme)
 

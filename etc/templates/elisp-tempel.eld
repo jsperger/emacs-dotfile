@@ -25,3 +25,9 @@ emacs-lisp-mode elisp-mode
                  ";; no-update-autoloads: t" n
                  ";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name)))
                  " ends here" n)
+
+(footer-vars ";; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:")
