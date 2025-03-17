@@ -52,6 +52,7 @@
     "!"       '("shell cmd" . shell-command)
     "i"       '("insert" . tempel-insert)
 		"I"       '("insert" . yas-insert-snippet)
+		"M" '("bookmark" . bookmark-set)
 
 		","       (cons "config" (make-sparse-keymap))
 		",d"      'describe-face
@@ -154,6 +155,7 @@
 
 		;;================================== files =================================
     "f"       (cons "files" (make-sparse-keymap))
+    "fb"      'rename-current-buffer-file
     "fC"      '("copy-file" . write-file)
     "fD"      'delete-current-buffer-file
     "fe"      'find-library
@@ -163,8 +165,8 @@
     "fJ"      'dired-jump-other-window
     "fo"      'open-file-or-directory-in-external-app
 		"fr"      'rg
-    "fR"      'rename-current-buffer-file
-    "fs"      'save-buffer
+    "fR"      'rg-menu
+		"fs"      'save-buffer
     "fv"      (cons "variables" (make-sparse-keymap))
     "fvd"     'add-dir-local-variable
     "fvf"     'add-file-local-variable
