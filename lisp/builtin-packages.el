@@ -33,6 +33,12 @@
 (use-package sqlite
   :ensure nil)
 
+(use-package glasses
+	:ensure nil
+	:hook (ess-r-mode . glasses-mode)
+	:config
+	(setopt glasses-separate-parentheses-p nil)
+)
 
 (provide 'builtin-packages)
 ;;; builtin-packages.el ends here
