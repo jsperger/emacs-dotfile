@@ -158,14 +158,6 @@ stays on current"
     "b8" 'buffer-to-window-8
     "b9" 'buffer-to-window-9))
 
-;; (use-package prettier)
-
-;; (use-package reformatter)
-
-(use-package apheleia
-  :config (setq apheleia-global-mode nil)
-;;  :custom (apheleia-global-mode nil)
-  )
 ;; (use-package biome)
 
 (defun replace-double-dollar-math ()

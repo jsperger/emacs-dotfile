@@ -145,6 +145,7 @@
 
 (require 'tools-notes)
 (require 'tools-reading)
+(require 'tools-programming)
 (require 'tools-search)
 (require 'tools-writing)
 
