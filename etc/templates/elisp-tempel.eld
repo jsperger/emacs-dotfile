@@ -31,3 +31,12 @@ emacs-lisp-mode elisp-mode
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:")
+
+(footer-emacs-config "
+(provide '" (file-name-base)  ")
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:" n
+";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name))) " ends here")
