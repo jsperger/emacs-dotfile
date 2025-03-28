@@ -142,7 +142,7 @@
                                        fundamental-mode git-commit-mode
                                        image-mode jka-compr pdf-view-mode
                                        tags-table-mode tar-mode)))
-             size (> size (* 1024 1024 1))
+             size (> size (* 1024 1024 20))
              (y-or-n-p (format (concat "%s is a large file, open literally to "
                                        "avoid performance issues?")
                                filename)))
@@ -225,7 +225,7 @@
 	:defer t
   :config
   (setopt enable-recursive-minibuffers t ; allow commands in minibuffers
-        history-length 100
+        history-length 250
         savehist-autosave-interval nil
         savehist-additional-variables '(evil-jumps-history
                                         mark-ring global-mark-ring
