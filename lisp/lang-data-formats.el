@@ -32,6 +32,10 @@
 
 (use-package emacsql)
 
+(use-package json-navigator
+	:disabled
+	)
+
 (provide 'lang-data-formats)
 
 ;; Local Variables:

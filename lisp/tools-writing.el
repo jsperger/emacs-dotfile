@@ -65,6 +65,22 @@
     (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
     (pandoc-main-hydra/body)))
 
+(use-package ox-typst
+	;; https://github.com/jmpunkt/ox-typst
+	:disabled
+  :after org
+	:config
+	;; Org defaults to LaTeX math syntax 
+	;; Should we use typst or Tex math syntax? TeX entails going through pandoc
+	(defvar org-typst-math-use-typst-syntax t)
+	;; 
+	(if org-typst-math-use-typst-syntax
+		(setq org-typst-from-latex-environment #'org-typst-from-latex-with-naive
+					org-typst-from-latex-fragment #'org-typst-from-latex-with-naive)
+(setq org-typst-from-latex-environment #'org-typst-from-latex-with-pandoc
+      org-typst-from-latex-fragment #'org-typst-from-latex-with-pandoc)
+		)
+	)
 
 (use-package writegood-mode)
 
