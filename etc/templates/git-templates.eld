@@ -12,6 +12,11 @@ text-mode
 (cbstyle "style: " r)
 (cbtest "test: " r)
 
+;; Commit emoji template
+(cebuild "🏗️: " r)
+(cechore "🧹: " r)
+(cedocs "📚: " r)
+
 (commit-full-template "<type>[optional scope]: <description>" n>
 											p
 											n>
