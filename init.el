@@ -93,6 +93,8 @@
 ;;   :config
 ;;   (global-eldoc-mode))
 
+(use-package dash)
+
 (use-package queue)
 
 (use-package plz)
@@ -147,6 +149,7 @@
 (require 'tools-reading)
 (require 'tools-programming)
 (require 'tools-search)
+(require 'tools-web)
 (require 'tools-writing)
 
 (require 'lang-data-formats)
