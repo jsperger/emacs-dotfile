@@ -10,18 +10,18 @@
 
 
 (use-package vertico
-  :preface (defun crm-indicator (args)
-    (cons (format "[CRM%s] %s"
-                  (if (string-match "\\*\\(.\\)" crm-separator)
-                      (match-string 1 crm-separator)
-                    "")
-                  (car args))
-          (cdr args)))
-  (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
-
   :ensure (:files (:defaults "extensions/*.el"))
   :config
   (setq vertico-cycle t)
+
+  (when (< emacs-major-version 31)
+    (defun crm-indicator (args)
+      (cons (format "[CRM%s] %s"
+                    (string-replace "[ \t]*" "" crm-separator)
+                    (car args))
+            (cdr args)))
+    (advice-add #'completing-read-multiple :filter-args #'crm-indicator))
+  (add-hook 'rfn-eshadow-update-overlay #'vertico-directory-tidy)
 
   ;; Hide commands in M-x which do not work in the current mode.
   (setq read-extended-command-predicate

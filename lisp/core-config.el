@@ -267,14 +267,14 @@ the unwritable tidbits."
                           (cl-remove-if-not #'savehist-printable register-alist)))))
 
 (use-package saveplace
-  :ensure nil
-	:defer t)
+  :ensure nil)
 
 (use-package server
   :ensure nil
   :commands (server-running-p))
 
 (use-package simple
+	;; basic editing commands for emacs
   :ensure nil
 	:defer t
   :config
