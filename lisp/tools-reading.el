@@ -66,9 +66,11 @@
 ;; --- Documentation ---
 ;;;
 
-(use-package dash-docs)
+(use-package dash-docs
+	:disabled)
 
 (use-package consult-dash
+	:disabled
   :after (consult dash-docs))
 
 ;; Structure and interpretation of computer programs

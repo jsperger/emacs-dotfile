@@ -21,6 +21,13 @@
 (use-package denote-citar-sections
 	:disabled)
 
+(use-package annotate
+	:disabled
+	;; TODO make a keymap for the rest of the annotation commands
+	;; mode toggle not too useful on its own
+	:general
+	(tyrant-def "aa" 'annotate-mode)
+	)
 
 
 (use-package obsidian

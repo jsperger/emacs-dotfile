@@ -11,6 +11,9 @@
   )
 
 (use-package editorconfig
+	;; file format for defining basic coding style for shared projects
+	;; see what's included in base emacs with 30.1
+	:disabled 
   :config
   (editorconfig-mode nil)
 	:general

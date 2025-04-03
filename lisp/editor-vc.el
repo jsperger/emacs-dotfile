@@ -132,6 +132,7 @@
     "gLh" 'git-link-homepage))
 
 (use-package git-cliff
+	:disabled
 	:config
 	;; OPTIONAL
 	;; Integrate to `magit-tag'
