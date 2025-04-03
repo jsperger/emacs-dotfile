@@ -9,14 +9,25 @@
 ;;; Code:
 
 (use-package ox-hugo
-	:disabled)
+	)
 
 (use-package easy-hugo
 	:disabled
-  :config
+  :init
   (setq
-   easy-hugo-basedir "~/work/code/websites/jsperger/"
-   ))
+   easy-hugo-basedir "~/code/website/jsperger-hugo/"
+	 easy-hugo-url "https://jsperger.github.io"
+	 )
+	:config
+	(setopt
+	 easy-hugo-no-help t
+	 )
+	(easy-hugo-enable-menu)
+	:general
+	(tyrant-def "ah" 'easy-hugo-menu)
+	)
+
+(use-package htmlize)
 
 (use-package verb
 	:disabled
