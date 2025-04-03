@@ -12,6 +12,17 @@
 ;; (setq scroll-conservatively 101
 ;;       scroll-margin 2)
 
+(use-package ultra-scroll
+	;; :load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
+	;; :vc (:url "https://github.com/jdtsmith/ultra-scroll") ; For Emacs>=30
+	:ensure (ultra-scroll
+					 :type git :host github :repo "jdtsmith/ultra-scroll")
+  :init
+  (setq scroll-conservatively 101 ; important!
+        scroll-margin 0) 
+  :config
+  (ultra-scroll-mode 1))
+
 ;; Highlight and allow to open http link at point in programming buffers
 ;; goto-address-prog-mode only highlights links in strings and comments
 (add-hook 'prog-mode-hook #'goto-address-prog-mode)

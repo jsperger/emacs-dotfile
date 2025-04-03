@@ -16,7 +16,7 @@ text-mode
 (cebuild "🏗️: " r)
 (cechore "🧹: " r)
 (cedocs "📚: " r)
-
+(cetoolbox "🧰: " r)
 (commit-full-template "<type>[optional scope]: <description>" n>
 											p
 											n>
