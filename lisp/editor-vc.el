@@ -14,22 +14,25 @@
   (setopt vc-follow-symlinks t))
 
 (use-package magit
+	;;	:after evil-collection
+;; didn't work, trying to fix keybind issue, see https://github.com/emacs-evil/evil-collection/issues/543
   :init
-  (setq magit-define-global-key-bindings nil
-;;					 forge-add-default-bindings nil
-				)
-  (with-eval-after-load 'project
-    (define-key project-prefix-map "m" #'magit-project-status)
-    (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
+  (setq
+	 magit-define-global-key-bindings nil
+	 forge-add-default-bindings nil
+	 )
+  ;; (with-eval-after-load 'project
+  ;;   (define-key project-prefix-map "m" #'magit-project-status)
+  ;;   (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
 
+	:hook (magit-diff-mode . (lambda () (toggle-truncate-lines -1)))
   :config
   (setopt magit-diff-refine-hunk t
         magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
         magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
         magit-save-repository-buffers 'dontask)
 
-  (add-hook 'magit-diff-mode-hook (lambda () (toggle-truncate-lines -1)))
-  (add-hook 'magit-process-find-password-functions 'magit-process-password-auth-source)
+  ;; (add-hook 'magit-process-find-password-functions 'magit-process-password-auth-source)
 
   (defun org-reveal-advice (&rest _args)
     "Unfold the org headings for a target line.
@@ -64,14 +67,18 @@
 		)
 	)
 
+(use-package closql)
+
+(use-package ghub)
 (use-package forge
-	:disabled
-  :after magit
+  :after magit 
   :init
   (setq
 	 auth-sources '("~/.authinfo")
-	 forge-add-default-bindings nil
-   forge-database-connector 'sqlite-builtin))
+;;  forge-add-default-bindings nil  must be done before magit is loaded not here
+   forge-database-connector 'sqlite-builtin
+	 )
+	)
 
 (use-package transient
   :after vc magit
@@ -96,6 +103,7 @@
     "] h" '(diff-hl-next-hunk :jump t)))
 
 (use-package git-modes
+	:mode ("\\.gitignore\\'" . gitignore-mode)
   :after vc magit)
 
 ;; (use-package git-timemachine

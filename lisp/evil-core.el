@@ -10,9 +10,10 @@
 (use-package evil
 	:ensure (:wait t)
 	:demand t
-	:hook ((prog-mode . hs-minor-mode)) ;why is this here?
+	:hook ((elpaca-after-init . evil-mode)
+				 (prog-mode . hs-minor-mode)) ;why is this here?
 	:init
-	(setopt evil-want-keybinding nil
+	(setq evil-want-keybinding nil
 					evil-symbol-word-search t
 					evil-ex-search-vim-style-regexp t
 					evil-search-module 'evil-search
@@ -58,7 +59,8 @@
   (add-hook 'evil-normal-state-exit-hook #'evil-ex-nohighlight)
 
   (general-def 'normal "zf" 'reposition-window)
-  (general-def 'insert [remap evil-complete-previous] 'hippie-expand))
+  (general-def 'insert [remap evil-complete-previous] 'hippie-expand)
+	)
 
 
 
