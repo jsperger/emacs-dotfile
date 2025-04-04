@@ -72,7 +72,11 @@ reuse it's window, otherwise create new one."
     "\'"   '("terminal here" . terminal-here-launch)
     "p \'" '("terminal project root" . terminal-here-project-launch)))
 
-
+(use-package vterm
+	:general (tyrant-def
+						 "av" 'vterm
+						 "aV" 'vterm-other-window)
+	)
 ;; Deprecated per https://github.com/emacsorphanage/undohist?tab=readme-ov-file
 ;; (use-package undohist
 ;;   :config
