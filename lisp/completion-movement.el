@@ -84,7 +84,18 @@
    [remap consult-imenu-multi] 'consult-org-agenda)
 	)
 
-
+(use-package consult-todo
+	;; something seems off, it's slow as hell
+	:disabled
+	:after consult
+	:config
+	(defconst consult-todo--narrow
+		'((?t . "TODO")
+			(?f . "FIXME")
+			(?b . "BUG")
+			(?h . "HACK"))
+		"Default mapping of narrow and keywords.")
+	)
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

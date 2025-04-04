@@ -144,16 +144,15 @@
     "wC" 'global-writeroom-mode))
 
 
+;; ============================== Frames ============================== 
+(use-package calle24
+	:disabled
+	:hook (compilation-mode . calle24-refresh-appearance)
+	:config
+	(calle24-refresh-appearance)
+)
 
-;;;
-;; --- Frames / Tabs / Windows ---
-;;;
-(use-package golden-ratio
-  :config (golden-ratio-mode nil))
-
-(use-package eyebrowse
-	:disabled)
-
+;; =============================== Tabs =============================== 
 (use-package activities
 	:disabled
   :init
@@ -173,6 +172,13 @@
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
+
+;; ============================== Windows ============================= 
+(use-package golden-ratio
+  :config (golden-ratio-mode nil))
+
+(use-package eyebrowse
+	:disabled)
 
 (use-package popper
   :config
@@ -204,9 +210,9 @@
               (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
 
 
-;;;
-;; --- Modeline ---
-;;;
+
+;; ============================= Modeline ============================= 
+
 (use-package doom-modeline
 	:hook (elpaca-after-init . doom-modeline-mode)
   :config
