@@ -83,6 +83,10 @@ reuse it's window, otherwise create new one."
 ;;       (funcall fn)))
 ;;   (advice-add #'undohist-recover-safe :around #'undohist-recover-safe@around))
 
+(use-package undo-fu
+	:config
+	(setopt evil-undo-system 'undo-fu))
+
 (use-package undo-fu-session
 	:custom
 	(undo-fu-session-global-mode t)
