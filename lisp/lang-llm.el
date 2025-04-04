@@ -70,8 +70,15 @@
 	)
 
 (use-package aidermacs
-  :bind (("C-c a" . aidermacs-transient-menu))
+	:general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
+  (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
+  (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
+  :custom
+  ; See the Configuration section below
+  (aidermacs-use-architect-mode t)
+  (aidermacs-default-model "sonnet"))
+
 (use-package forge-llm
 	:after forge llm
 	:custom
