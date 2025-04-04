@@ -92,11 +92,8 @@
   (tabspaces-session t)
   (tabspaces-session-auto-restore t)
   (tab-bar-new-tab-choice "*scratch*")
-
-
 	:config
 	;; Filter Buffers for Consult-Buffer
-
 	(with-eval-after-load 'consult
 		;; hide full buffer list (still available with "b" prefix)
 		(consult-customize consult--source-buffer :hidden t :default nil)
@@ -114,7 +111,8 @@
 																	:as #'buffer-name)))
 
 			"Set workspace buffer list for consult-buffer.")
-		(add-to-list 'consult-buffer-sources 'consult--source-workspace))
+		(add-to-list 'consult-buffer-sources 'consult--source-workspace)
+		)
 
 	(defun my--consult-tabspaces ()
 		"Deactivate isolated buffers when not using tabspaces."
@@ -126,10 +124,10 @@
 					(t
 					 ;; reset consult-buffer to show all buffers 
 					 (consult-customize consult--source-buffer :hidden nil :default t)
-					 (setq consult-buffer-sources (remove #'consult--source-workspace consult-buffer-sources)))))
+					 (setq consult-buffer-sources (remove #'consult--source-workspace consult-buffer-sources))))
+		)
 
 	(add-hook 'tabspaces-mode-hook #'my--consult-tabspaces)
-
 	;; (defvar tabspaces-command-map
 	;;   (let ((map (make-sparse-keymap)))
 	;;     (define-key map (kbd "C") 'tabspaces-clear-buffers)
@@ -148,9 +146,57 @@
 	;; (setq tabspaces-session-project-session-store 'project)
 
 	;; ;; Store all project sessions in a specific directory
-	;; (setq tabspaces-session-project-session-store "~/.emacs.d/tabspaces-sessions/")
+	;;(setq tabspaces-session-project-session-store "~/.emacs.d/tabspaces-sessions/")
   )
 
+;; -------------------------------------
+;; Worksapce-type Packages to Investigate
+;; -------------------------------------
+
+;; These would replace tabspaces-mode
+
+
+(use-package activities
+  ;; https://elpa.gnu.org/packages/activities.html
+	:disabled
+	:init
+  (activities-mode)
+  (activities-tabs-mode)
+  ;; Prevent `edebug' default bindings from interfering.
+  (setq edebug-inhibit-emacs-lisp-mode-bindings t)
+
+  :bind
+  (("C-x C-a C-n" . activities-new)
+   ("C-x C-a C-d" . activities-define)
+   ("C-x C-a C-a" . activities-resume)
+   ("C-x C-a C-s" . activities-suspend)
+   ("C-x C-a C-k" . activities-kill)
+   ("C-x C-a RET" . activities-switch)
+   ("C-x C-a b" . activities-switch-buffer)
+   ("C-x C-a g" . activities-revert)
+   ("C-x C-a l" . activities-list))
+	)
+
+(use-package buffler
+	;; https://github.com/alphapapa/bufler.el
+	:disabled
+	)
+
+(use-package perspective
+	;; https://github.com/nex3/perspective-el
+	:disabled
+  :bind
+  ("C-x C-b" . persp-list-buffers)         ; or use a nicer switcher, see below
+  :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))  ; pick your own prefix key here
+  :init
+  (persp-mode))
+
+(use-package burly
+  ;; https://github.com/alphapapa/burly.el
+	;; same author as activities, which they say mostly obsoletes this
+	:disabled
+	)
 
 (provide 'editor-projects)
 ;; Local Variables:
