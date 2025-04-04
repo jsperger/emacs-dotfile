@@ -12,6 +12,9 @@
 	:config
 	(use-package llm-openai
 		:ensure nil)
+
+	(use-package llm-claude
+		:ensure nil)
 	)
 
 (use-package ellama
@@ -69,6 +72,29 @@
 (use-package aidermacs
   :bind (("C-c a" . aidermacs-transient-menu))
   :config
+(use-package forge-llm
+	:after forge llm
+	:custom
+	(forge-llm-llm-provider
+	 (make-llm-claude
+		:key (auth-source-pick-first-password
+					:host "api.anthropic.com"
+					:user "apikey")
+		:chat-model "claude-3-7-sonnet-20250219"
+		)
+	 )
+	 :config
+	 (forge-llm-setup)
+	 :general
+	 (tyrant-def
+		 ;; Generate a PR description (output to separate buffer)
+		 "gg" 'forge-llm-generate-pr-description
+		 ;; Generate a PR description at the current point
+		 "gp" 'forge-llm-generate-pr-description-at-point
+		 ;; Insert the PR template at the current point
+		 "gt" 'forge-llm-insert-template-at-point
+		 )
+	 )
 
 (provide 'lang-llm)
 
