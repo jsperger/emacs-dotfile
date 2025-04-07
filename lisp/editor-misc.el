@@ -96,6 +96,14 @@ reuse it's window, otherwise create new one."
 	(undo-fu-session-global-mode t)
 	)
 
+(use-package password-menu
+	;; was using while debugging authinfo api key stuff
+	:disabled
+	:general
+	(tyrant-def "as" 'password-menu-transient)
+	)
+
+
 (use-package xr)  ;; Convert string regexp to rx notation
 
 (use-package winum

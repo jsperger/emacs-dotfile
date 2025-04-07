@@ -57,16 +57,7 @@
 
 ;;; After-init hooks packages
 
-;; PATH setting
-(exec-path-from-shell-initialize)
 ;; general emacs settings
-(pixel-scroll-precision-mode)
-(electric-pair-mode)
-(recentf-mode)
-(savehist-mode)
-(save-place-mode)
-(winner-mode)
-(which-key-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before evil"))
 ;; evil settings
@@ -78,8 +69,6 @@
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after evil"))
 ;; (shackle-mode)
 ;; (global-hl-todo-mode)
-(global-diff-hl-mode)
-(global-auto-revert-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before completion modes"))
 (vertico-mode)
@@ -89,8 +78,6 @@
 (popper-mode)
 (popper-echo-mode)
 (winum-mode)
-
-(setopt golden-ratio-mode nil)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
 

@@ -13,7 +13,7 @@
 
 (use-package autorevert
   :ensure nil
-	:defer t
+	:hook (elpaca-after-init . global-auto-revert-mode)
   :config
   (setopt global-auto-revert-non-file-buffers t
         auto-revert-verbose nil))

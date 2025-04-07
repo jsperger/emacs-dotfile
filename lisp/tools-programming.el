@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+;; ====================== Formatting and Linting =====================  
+
 (use-package apheleia
   :config (setq apheleia-global-mode nil)
   ;; :custom (apheleia-global-mode nil)
@@ -18,13 +20,6 @@
   (editorconfig-mode nil)
 	:general
 	(tyrant-def "ce" 'editorconfig-mode)
-	)
-
-(use-package password-menu
-	;; was using while debugging authinfo api key stuff
-	:disabled
-	:general
-	(tyrant-def "as" 'password-menu-transient)
 	)
 
 (use-package code-cells

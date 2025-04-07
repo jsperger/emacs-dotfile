@@ -17,6 +17,7 @@ text-mode
 (cechore "🧹: " r)
 (cedocs "📚: " r)
 (cetoolbox "🧰: " r)
+(ceremove "🗑️: " r)
 (cetoggle "🪃: toggle enable/disable" r)
 (commit-full-template "<type>[optional scope]: <description>" n>
 											p

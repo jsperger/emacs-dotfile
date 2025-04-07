@@ -70,6 +70,7 @@
 	:defines	exec-path-from-shell-arguments
 	exec-path-from-shell-variables
 	exec-path-from-shell-initialize
+	:hook (elpaca-after-init . exec-path-from-shell-initialize)
 	:init
   (setq
    exec-path-from-shell-variables
@@ -91,8 +92,7 @@
 		 "XDG_DATA_HOME"
 		 "XDG_CONFG_HOME"
 		 "XDG_STATE_HOME"))
-	:config
-	(add-hook 'elpaca-after-init-hook 'exec-path-from-shell-initialize))
+	)
 
 (use-package dirvish
 	:disabled

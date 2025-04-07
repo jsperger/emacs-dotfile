@@ -21,7 +21,8 @@
   (setq scroll-conservatively 101 ; important!
         scroll-margin 0) 
   :config
-  (ultra-scroll-mode 1))
+  (ultra-scroll-mode 1)
+	)
 
 ;; Highlight and allow to open http link at point in programming buffers
 ;; goto-address-prog-mode only highlights links in strings and comments
@@ -134,7 +135,8 @@
 
 (use-package elec-pair
   :ensure nil
-	:defer t)
+	:defer t
+	:custom (electric-pair-mode 1))
 
 (use-package files
   :ensure nil
@@ -227,13 +229,15 @@
 (use-package recentf
   :ensure nil
 	:defer t
+	:custom (recentf-mode 1)
   :config
   (setopt recentf-auto-cleanup 'never
-        recentf-max-saved-items 100))
+        recentf-max-saved-items 250))
 
 (use-package savehist
   :ensure nil
 	:defer t
+	:custom (savehist-mode 1)
   :config
   (setopt enable-recursive-minibuffers t ; allow commands in minibuffers
         history-length 250
@@ -267,7 +271,8 @@ the unwritable tidbits."
                           (cl-remove-if-not #'savehist-printable register-alist)))))
 
 (use-package saveplace
-  :ensure nil)
+  :ensure nil
+	:custom (save-place-mode 1))
 
 (use-package server
   :ensure nil
@@ -299,6 +304,8 @@ the unwritable tidbits."
   :commands (winner-undo winner-redo)
   :init
   (setopt winner-dont-bind-my-keys t)
+	:custom
+	(winner-mode 1)
   :config
   (setopt winner-boring-buffers-regexp "\\*.*\\*"))
 
