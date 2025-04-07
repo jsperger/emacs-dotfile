@@ -10,9 +10,7 @@
 
 (use-package denote)
 
-;;;
-;; --- Readling Notes ---
-;;;
+;; ========================== Readling Notes =========================  
 (use-package citar-denote
 	:hook (denote-after-new-note . citar-denote-mode)
 	(denote-fontify-links-mode . citar-denote-mode)
@@ -21,14 +19,7 @@
 (use-package denote-citar-sections
 	:disabled)
 
-(use-package annotate
-	:disabled
-	;; TODO make a keymap for the rest of the annotation commands
-	;; mode toggle not too useful on its own
-	:general
-	(tyrant-def "aa" 'annotate-mode)
-	)
-
+;; ============================= Obsidian ============================  
 
 (use-package obsidian
   :config
@@ -43,6 +34,17 @@
 	:general
 	(tyrant-def "aob" 'obsidian-toggle-backlinks-panel)
   )
+
+;; ============================= Disabled ============================  
+
+(use-package annotate
+	:disabled
+	;; TODO make a keymap for the rest of the annotation commands
+	;; mode toggle not too useful on its own
+	:general
+	(tyrant-def "aa" 'annotate-mode)
+	)
+
 
 
 (use-package orgmdb

@@ -93,24 +93,6 @@
       (funcall fn)))
   (advice-add 'desktop-read :around #'desktop-read@inhibit-message))
 
-(use-package dired
-  :ensure nil
-  :defer t
-  :config
-  (when IS-MAC ;on mac use external ls from homebrew gnutils
-    (setopt ls-lisp-use-insert-directory-program t
-          insert-directory-program "/opt/homebrew/opt/coreutils/libexec/gnubin/ls"))
-  (setopt dired-listing-switches "-aBhl --group-directories-first")
-  (setopt dired-auto-revert-buffer t
-        dired-kill-when-opening-new-dired-buffer  t
-        dired-create-destination-dirs 'always
-        dired-do-revert-buffer t
-        dired-dwim-target t
-        dired-vc-rename-file t))
-
-;; (use-package casual-dired
-;;   :bind (:map dired-mode-map ("C-o" . 'casual-dired-tmenu)))
-
 (use-package display-line-numbers
   :ensure nil
 	:defer t

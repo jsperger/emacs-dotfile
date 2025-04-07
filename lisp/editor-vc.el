@@ -95,6 +95,7 @@
   :after vc magit 
 	:hook (magit-pre-refresh . diff-hl-magit-pre-refresh)
 	(magit-post-refresh . diff-hl-magit-post-refresh)
+	:custom (global-diff-hl-mode 1)
   :config
   (setopt diff-hl-side 'right)
 

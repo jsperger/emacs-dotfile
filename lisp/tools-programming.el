@@ -21,7 +21,21 @@
 	:general
 	(tyrant-def "ce" 'editorconfig-mode)
 	)
+;; (use-package prettier)
 
+;; (use-package reformatter)
+
+;; ============================= Typespec ============================  
+
+(use-package typespec-ts-mode
+	:mode ("\\.tsp\\'" . typespec-ts-mode)
+	:config
+	(add-to-list
+ 'treesit-language-source-alist
+ '(typespec "https://github.com/happenslol/tree-sitter-typespec"))
+	)
+
+;; ================== Literate Programming (not org) =================  
 (use-package code-cells
 	;; for working with jupyter notebooks
 	;; seems to require more configuration to work
@@ -33,10 +47,6 @@
 	:disabled
 	:general
 	(trant-def "ci" 'drepl-ipython))
-
-;; (use-package prettier)
-
-;; (use-package reformatter)
 
 
 (provide 'tools-programming)
