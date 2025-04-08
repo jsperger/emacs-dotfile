@@ -9,6 +9,7 @@
 ;;; Code:
 
 (use-package org
+	:commands (org-toggle-hidden-emphasis-markers)
   :init
   (setq org-directory "~/obsidian/org/"
         org-inbox-file (concat org-directory "inbox.org")
@@ -28,6 +29,15 @@
                                        (t csl))
           org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
 
+	(defun org-toggle-hidden-emphasis-markers ()
+	"Toggle whether markup should be hidden in 'org-mode'."
+	(interactive)
+	(if org-hide-emphasis-markers
+			(setopt org-hide-emphasis-markers nil)
+		(setopt org-hide-emphasis-markers t)
+		)
+	(font-lock-update)
+	)
 
   (despot-def org-mode-map
     "'"     'org-edit-special
@@ -116,6 +126,7 @@
     "Te"    'org-toggle-pretty-entities
     "Ti"    'org-toggle-inline-images
     "Tl"    'org-toggle-link-display
+		"Tm"    'org-toggle-hidden-emphasis-markers
     "Tt"    'org-show-todo-tree
     "Tx"    'org-latex-preview
     "x"     (cons "text" (make-sparse-keymap))
