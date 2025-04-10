@@ -9,20 +9,19 @@
 
 ;;; Code:
 
-(use-package python-ts-mode
-	:ensure nil
-	:mode ("\\.py\\'" . python-ts-mode)
-;;	:hook (python-ts-mode . eglot-ensure)
-	;; ^caused an infinite loop
+(use-package python-x
+;;	:hook python-mode
+	)
 
-	:config
-	(add-to-list 'eglot-server-programs
-             '((python-mode python-ts-mode)
-               "basedpyright-langserver" "--stdio"))
+(use-package live-py-mode
+	:general
+	  (despot-def (python-mode-map)
+    :major-modes '(python-mode python-ts-mode)
+    "l" 'live-py-mode
+    )
 	)
 
 (use-package uv-mode
-	:disabled
 	:hook (python-mode . uv-mode))
 
 (use-package pyenv-mode

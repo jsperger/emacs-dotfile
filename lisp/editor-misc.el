@@ -103,6 +103,50 @@ reuse it's window, otherwise create new one."
 	(tyrant-def "as" 'password-menu-transient)
 	)
 
+(use-package substitute
+	:general
+	(tyrant-def
+		"rb" 'substitute-target-in-buffer
+		"rd" 'substitute-target-in-defun
+		"rj" 'substitute-target-below-point
+		"rk" 'substitute-target-above-point)
+	:config
+	;; Set this to nil if you do not like visual feedback on the matching
+	;; target.  Default is t.
+	;; (setq substitute-highlight nil)
+
+	;; Set this to t if you want to always treat the letter casing
+	;; literally.  Otherwise each command accepts a `C-u' prefix
+	;; argument to do this on-demand.
+	;; (setq substitute-fixed-letter-case t)
+
+	;; If you want a message reporting the matches that changed in the
+	;; given context.  We don't do it by default.
+	(add-hook 'substitute-post-replace-functions #'substitute-report-operation)
+
+	;; Use C-c s as a prefix for all Substitute commands.
+	;; (define-key global-map (kbd "C-c s") #'substitute-prefix-map)
+	)
+
+(use-package tmr
+	:general
+	(tyrant-def "aT" 'tmr-tabulated-view)
+	:config
+	;; Set to nil to disable the sound
+	(setq tmr-sound-file "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga")
+
+	;; Desktop notification urgency level
+	(setq tmr-notification-urgency 'normal)
+
+	;; Read the `tmr-descriptions-list' doc string
+	(setq tmr-descriptions-list 'tmr-description-history)
+
+	;; Set global prefix bindings (autoloaded):
+	(define-key global-map "\C-ct" 'tmr-prefix-map)
+
+	;; Alternatively bind tmr command (autoloaded):
+	;; (define-key global-map "\C-ct" 'tmr)
+	)
 
 (use-package xr)  ;; Convert string regexp to rx notation
 
@@ -174,7 +218,17 @@ stays on current"
     "b8" 'buffer-to-window-8
     "b9" 'buffer-to-window-9))
 
-;; (use-package biome)
+(use-package biome
+	:general
+	(tyrant-def "aw" 'biome)
+	:config
+	(setq biome-query-coords
+      '(("Carrboro" 35.91014 -79.07529)
+        ("Philly" 39.95233 -75.16379))
+			)
+	)
+
+
 
 (defun replace-double-dollar-math ()
   "Replace display math $$...$$ with \[...\] in the current buffer."

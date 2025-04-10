@@ -189,6 +189,10 @@
   :config
   (citar-embark-mode))
 
+(use-package ebib
+	:general
+	(tyrant-def "d" 'ebib))
+
 ;; surprised this isn't an option in auctex
 (use-package preview-dvisvgm
   :after auctex)

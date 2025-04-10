@@ -226,6 +226,12 @@
 	:custom (fontaine-mode t)
   )
 
+
+(use-package show-font
+  :bind
+  (("C-c s f" . show-font-select-preview)
+   ("C-c s t" . show-font-tabulated))
+	)
 ;;; Theme packages
 
 ;; (use-package nano-theme

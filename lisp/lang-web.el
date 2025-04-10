@@ -9,6 +9,7 @@
 ;;; Code:
 
 (use-package ox-hugo
+	:disabled
 	)
 
 (use-package easy-hugo

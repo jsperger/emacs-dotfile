@@ -44,6 +44,8 @@
    [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
    [remap evil-next-flyspell-error] 'evil-next-jinx-error))
 
+(use-package freeze-it)
+
 (use-package unfill
 	;; TODO Add general keybinds for unfill
 	:general

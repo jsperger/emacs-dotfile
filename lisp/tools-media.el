@@ -4,11 +4,14 @@
 
 ;;; Commentary:
 
-;; Not incluided in ~init.el~ yet
-
 ;;; Code:
 
-(use-package ready-player)
+(use-package ready-player
+	:general
+	(tyrant-def "ar" 'ready-player-view-player)
+	:config
+	(ready-player-mode +1)
+	)
 
 (provide 'tools-media)
 ;; Local Variables:
