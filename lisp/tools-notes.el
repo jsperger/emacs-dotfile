@@ -8,16 +8,6 @@
 
 ;;; Code:
 
-(use-package denote)
-
-;; ========================== Readling Notes =========================  
-(use-package citar-denote
-	:hook (denote-after-new-note . citar-denote-mode)
-	(denote-fontify-links-mode . citar-denote-mode)
-	)
-
-(use-package denote-citar-sections
-	:disabled)
 
 ;; ============================= Obsidian ============================  
 
