@@ -145,8 +145,10 @@
 (require 'editor-ui)
 (require 'editor-vc)
 
+(require 'tools-denote)
 (require 'tools-notes)
 (require 'tools-reading)
+(require 'tools-media)
 (require 'tools-programming)
 (require 'tools-search)
 (require 'tools-web)
