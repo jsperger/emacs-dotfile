@@ -77,7 +77,6 @@
      "aoj"     'obsidian-jump
      "aos"     'obsidian-search
 		"at"      'consult-theme
-    "aT"      'eat
     "aP"      'proced
 
 		;;================================ buffers =================================

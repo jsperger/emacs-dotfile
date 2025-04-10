@@ -58,6 +58,7 @@
 
   (add-hook 'evil-normal-state-exit-hook #'evil-ex-nohighlight)
 
+	(general-def '(normal motion) "TAB" 'bicycle-cycle)
   (general-def 'normal "zf" 'reposition-window)
   (general-def 'insert [remap evil-complete-previous] 'hippie-expand)
 	)
