@@ -2,7 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Elpaca installer https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
+;; ===================== Elpaca bootstrap install ====================
+;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
 (defvar elpaca-installer-version 0.10)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -41,8 +42,9 @@
     (load "./elpaca-autoloads")))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
+;; ======================== END: elpaca bootstrap ========================
 
-;; Install use-package support
+;; Elpaca use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
   (elpaca-use-package-mode)
@@ -52,16 +54,15 @@
 ;; Block until current queue processed.
 (elpaca-wait)
 
-;;;;;;;;;;;;;;
-;; Debugging assistant
-;;
-;;
+;; ========================= Debugging assistant =========================
+
 
 (defvar my-debug-mode nil
   "Toggle debugging messages. Set to t to enable, nil to disable.")
 
 
-;;
+;; ==================== (Historical) Problem packages ====================
+
 ;; 2025-02-22 Disabled eldoc, use built-in
 ;; Reason: Error. Not worth fixing at the moment because I was only using elpa versions of
 ;; eldoc and jsonrpc because of eglot  
@@ -99,19 +100,13 @@
 
 (use-package plz)
 
-;;;;;;;;;;;;;;
-;; Define constants for use throughout config
-;;
+;; ============== Define constants for use throughout config =============
+
 (defconst IS-MAC (eq system-type 'darwin))
 (defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
 
-
-
-;;;;;;;;;;;;;;
-;; Key Bindings
-;;
-;; Load path
+;; ============================== Load path ==============================
 ;; optimize: force "lisp"" and "site-lisp" at the head to reduce the startup time.
 
 (dolist (dir '("lisp"))
@@ -166,7 +161,8 @@
 (require 'lang-web)
 
 (require 'tools-lsp-bridge)
-;; After-init hooks + custom
+
+;; ====================== After-init hooks + custom ======================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 
