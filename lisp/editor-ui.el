@@ -46,6 +46,12 @@
   :after outline
   :config (advice-add 'outline-flag-region :after 'backline-update))
 
+(use-package focus
+	;;	:hook text-mode
+	:hook visual-line-fill-column-mode
+	:general
+	(tyrant-def "tF" 'focus-mode)
+	)
 
 (use-package indent-control
   :disabled)
@@ -143,7 +149,14 @@
     "wc" 'writeroom-mode
     "wC" 'global-writeroom-mode))
 
-
+(use-package logos
+	;; https://protesilaos.com/emacs/logos
+  ;; a simple “focus mode” which can be applied to any buffer for reading, writing, or even doing a presentation. The buffer can be divided in pages using the page-delimiter, outline structure, or any other pattern
+	:config
+	(setopt olivetti-body-width 0.7
+				olivetti-minimum-body-width 80
+				olivetti-recall-visual-line-mode-entry-state t)
+	)
 ;; ============================== Frames ============================== 
 (use-package calle24
 	:disabled
