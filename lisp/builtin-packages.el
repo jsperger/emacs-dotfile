@@ -32,13 +32,20 @@
   (when IS-MAC ;on mac use external ls from homebrew gnutils
     (setopt ls-lisp-use-insert-directory-program t
           insert-directory-program "/opt/homebrew/opt/coreutils/libexec/gnubin/ls"))
-  (setopt dired-listing-switches "-aBhl --group-directories-first")
+	;;  (setopt dired-listing-switches "-aBhl --group-directories-first")
+	;; below switches added same time as dirvish
+	(setopt dired-listing-switches
+        "-l --almost-all --human-readable --group-directories-first --no-group")
   (setopt dired-auto-revert-buffer t
         dired-kill-when-opening-new-dired-buffer  t
         dired-create-destination-dirs 'always
         dired-do-revert-buffer t
         dired-dwim-target t
-        dired-vc-rename-file t))
+        dired-vc-rename-file t)
+ ;; this command is useful when you want to close the window of `dirvish-side'
+  ;; automatically when opening a file
+  (put 'dired-find-alternate-file 'disabled nil)
+	)
 
 ;; (use-package casual-dired
 ;;   :bind (:map dired-mode-map ("C-o" . 'casual-dired-tmenu)))
