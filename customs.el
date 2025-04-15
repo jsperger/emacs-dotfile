@@ -113,8 +113,17 @@
 		 "ffa78fc746f85d1c88a2d1691b1e37d21832e9a44a0eeee114a00816eabcdaf9"
 		 "f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66"
 		 "34cf3305b35e3a8132a0b1bdf2c67623bc2cb05b125f8d7d26bd51fd16d547ec" default))
+ '(auth-source-debug t)
+ '(banner-comment-width 72)
+ '(custom-safe-themes t)
  '(indent-tabs-mode t)
  '(large-file-warning-threshold 100000000)
+ '(magit-wip-after-apply-mode t)
+ '(magit-wip-after-save-mode t)
+ '(magit-wip-before-change-mode t)
+ '(magit-wip-initial-backup-mode t)
+ '(magit-wip-merge-branch t)
+ '(magit-wip-mode t)
  '(markdown-list-indent-width 2)
  '(package-native-compile t)
  '(safe-local-variable-values '((TeX-master . t)))
