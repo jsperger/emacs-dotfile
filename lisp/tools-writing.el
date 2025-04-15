@@ -9,7 +9,9 @@
 	:general
 	(tyrant-def
 		"t;" 'binder-toggle-sidebar
-		"t'"  'binder-reveal-in-sidebar)
+		"t'"  'binder-reveal-in-sidebar
+		"[" 'binder-previous
+		"]" 'binder-next)
 	)
 
 (use-package flymake-proselint
