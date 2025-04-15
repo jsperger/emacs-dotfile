@@ -39,6 +39,9 @@
 	(font-lock-update)
 	)
 
+	(use-package org-indent
+		:ensure nil)
+	
   (despot-def org-mode-map
     "'"     'org-edit-special
     ","     'org-ctrl-c-ctrl-c
@@ -123,6 +126,8 @@
     "tw"    'org-table-wrap-region
     "T"     (cons "toggles" (make-sparse-keymap))
     "Tc"    'org-toggle-checkbox
+		"Td"    'org-modern-indent-mode
+		"TD"    'org-indent-mode
     "Te"    'org-toggle-pretty-entities
     "Ti"    'org-toggle-inline-images
     "Tl"    'org-toggle-link-display
@@ -168,7 +173,9 @@
 ;; link within an Org file. It lets you have the same content present in
 ;; different buffers at the same time without copy-and-pasting it.
 (use-package org-transclusion
-  :after org)
+  :after org
+
+	)
 
 ;; Orphanage - collection of Unmaintained org add-ons
 (use-package org-contrib
