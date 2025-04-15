@@ -80,7 +80,8 @@
 	:hook (elpaca-after-init . global-lsp-bridge-mode)
 	;;	(lsp-bridge-mode . markdown-mode) ; this can't be right. Need to figure out why lsp-bridge requires markdown-mode
 	:config
-;; (setopt acm-candidate-match-function 'orderless-flex)
+	;; (setopt acm-candidate-match-function 'orderless-flex)
+	(setopt toml-indent-offset 2)
 	:custom (global-lsp-bridge-mode t)
 
 	(use-package acm
