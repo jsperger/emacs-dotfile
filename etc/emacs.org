@@ -1,14 +1,36 @@
 :PROPERTIES:
 :ID:       6CE26267-DAE7-4094-A788-C4D90D0923A0
 #+title: Miscellaneous emacs notes
-subtitle: Lisp Snippets, Debugging, Odds and Ends etc.
+#+subtitle: Lisp Snippets, Debugging, Odds and Ends etc.
 #+author: John Sperger
 #+language: en
 :END:
 * Emacs
+** Font Notes
+[[https://www.x.org/releases/X11R7.6/doc/xorg-docs/specs/XLFD/xlfd.html#fontname][XLFD font convention]] e.g. ~-***-terminus-medium-r-normal-***-14-**-***-***-*c*-*-*~
+#+begin_quote
 
-* Configuration notes
-** Autoload
+
+From the convention page, here we have :
+
+        ~FAMILY_NAME~ : a string that identifies the range or family of typeface designs that are all variations of one basic typographic style. Here : "terminus".
+
+        ~WEIGHT_NAME~ : a string that identifies the font's typographic weight, that is, the nominal blackness of the font. Here "medium".
+
+        ~SLANT~ field : a code-string that indicates the overall posture of the typeface design used in the font. Here : r "Roman Upright design"
+
+        ~SETWIDTH_NAME~ : the font's typographic proportionate width. Here : "normal".
+
+        ~PIXEL_SIZE~ : the body size of the font at a particular POINT_SIZE and RESOLUTION_Y. Here "14".
+
+And the "c" is for "charcell":
+
+        SPACING : a code-string that indicates the escapement class of the font, that is, monospace (fixed pitch), proportional (variable pitch), or charcell (a special monospaced font that conforms to the traditional data-processing character cell font model).
+
+The rest is not specified (replaced with wildcards).
+#+end_quote
+** Configuration notes
+*** Autoload
 [[info:Elisp][Elisp Autoloading]] Autoloading does the opposite of what it sounds like to me.
 Autoloading means that the function is loaded when it's needed (automatically)
 instead of pre-loade
@@ -261,7 +283,7 @@ EDIT: Actually, getting into the weeds a bit and looking at the documentation fo
 
 Different poster
 #+begin_quote
-    Yeah i know, very sad and cringe. Please help :'(
+Yeah i know, very sad and cringe. Please help :'(
 
 Im sorry you feel that way. Trust me, wallowing in self flagellation shan't help you.
 
