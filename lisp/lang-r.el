@@ -36,7 +36,16 @@
 															(ess-indent-with-fancy-comments . nil)))
 	(ess-style 'OWN)
 	:config
+	(defun oc-set-ess-offset ()
+	"Cycle ess-offset-arguments value. Org src block issue"
+	(interactive)
+	(setopt
+			 ess-offset-arguments 'prev-call
+			 ess-offset-arguments-newline 'prev-line)
+	)
 
+
+	:general
   (despot-def (ess-r-mode-map)
     :major-modes 'ess-r-mode
     "b"            'ess-eval-buffer
