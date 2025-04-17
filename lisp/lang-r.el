@@ -22,39 +22,48 @@
 							(add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
 	:custom
 	(ess-indent-offset 2)
-	(ess-own-style-list '((ess-indent-offset . 2)
-															(ess-offset-arguments . prev-call)
-															(ess-offset-arguments-newline . prev-line)
-															(ess-offset-block . prev-line)
-															(ess-offset-continued . straight)
-															(ess-align-nested-calls "ifelse")
-															(ess-align-arguments-in-calls "function[ 	]*(")
-															(ess-align-continuations-in-calls . t)
-															(ess-align-blocks control-flow)
-															(ess-indent-from-lhs arguments fun-decl-opening)
-															(ess-indent-from-chain-start . t)
-															(ess-indent-with-fancy-comments . nil)))
+	(ess-own-style-list '(
+												(ess-indent-offset . 2)
+												(ess-offset-arguments . prev-call)
+												(ess-offset-arguments-newline . prev-line)
+												(ess-offset-block . prev-line)
+												(ess-offset-continued . straight)
+												(ess-align-nested-calls "ifelse")
+												(ess-align-arguments-in-calls "function[ 	]*(")
+												(ess-align-continuations-in-calls . t)
+												(ess-align-blocks control-flow)
+												(ess-indent-from-lhs arguments fun-decl-opening)
+												(ess-indent-from-chain-start . t)
+												(ess-indent-with-fancy-comments . nil))
+											)
 	(ess-style 'OWN)
 	:config
-	(defun oc-set-ess-offset ()
-	"Cycle ess-offset-arguments value. Org src block issue"
-	(interactive)
-	(setopt
-			 ess-offset-arguments 'prev-call
-			 ess-offset-arguments-newline 'prev-line)
-	)
+	(defun oc-set-ess-offset-indent ()
+		"Set ess-offset-arguments values to my preferred defaults. Motivated by an Org src block issue (that  is likely due to a config issue on my end)."
+		(interactive)
+		(setopt
+		 ess-offset-arguments 'prev-call
+		 ess-offset-arguments-newline 'prev-line)
+		)
 
-
+	(defun air-format ()
+		"Run the 'air' formatter in the current directory. Runs asynchronously"
+		(interactive)
+		(async-shell-command "air format .")
+		)
+	
 	:general
-  (despot-def (ess-r-mode-map)
-    :major-modes 'ess-r-mode
-    "b"            'ess-eval-buffer
-    "c" 'ess-eval-region-or-function-or-paragraph
-    "TAB" 'ess-install-library
-    "f" 'ess-eval-function
-    "r" 'run-ess-r
-    )
-  )
+	(despot-def (ess-r-mode-map)
+		:major-modes '(ess-r-mode R-mode)
+		"b" 'ess-eval-buffer
+		"c" 'ess-eval-region-or-function-or-paragraph
+		"TAB" 'ess-install-library
+		"f" 'ess-eval-function
+		"F" 'air-format
+		"r" 'run-ess-r
+		"v" 'oc-set-ess-offset
+		)
+	)
 
 (use-package r-ts-mode
 	:disabled
