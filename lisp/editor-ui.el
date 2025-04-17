@@ -88,27 +88,28 @@
 		"oz"      'TeX-fold-mode))
 
 (use-package olivetti
-	:hook (text-mode . olivetti-mode)
+	:hook ((text-mode prog-mode org-mode) . olivetti-mode)
 	:config
-	(setopt olivetti-style 'fancy))
+	(setopt olivetti-style 'fancy)
+	)
 
 (use-package shackle
-  :config
-  (setopt shackle-mode t)
-  (setq shackle-default-size 0.3
-        shackle-rules `(
-                        (help-mode :select t :align right :size ,fill-column)
-                        (helpful-mode :select t :align right :size ,fill-column)
-                        ("*Messages*"                    :select t :align t)
-                        ("*eldoc*"                       :align t)
-                        (special-mode                    :align t)
-                        (process-menu-mode               :align t)
-                        (compilation-mode                :align t)
-                        (flymake-diagnostics-buffer-mode :align t)
-                        ("*Shell Command Output*"        :align t)
-                        ("*Async Shell Command*"         :align t)
-;;                        ("\\*EGLOT.*" :select t :align right :size , fill-column :regexp t)
-												))
+	:config
+	(setopt shackle-mode t
+					shackle-default-size 0.2
+					shackle-rules `(
+													(help-mode :select t :align right :size ,fill-column)
+													(helpful-mode :select t :align right :size ,fill-column)
+													("*Messages*"                    :select t :align t)
+													("*eldoc*"                       :align t)
+													(special-mode                    :align t)
+													(process-menu-mode               :align t)
+													(compilation-mode                :align t)
+													(flymake-diagnostics-buffer-mode :align t)
+													("*Shell Command Output*"        :align t :size 2)
+													("*Async Shell Command*"         :align t :size 2)
+													;;("\\*EGLOT.*" :select t :align right :size , fill-column :regexp t)
+													))
 	)
 
 (use-package spacious-padding
@@ -188,7 +189,8 @@
 
 ;; ============================== Windows ============================= 
 (use-package golden-ratio
-  :config (golden-ratio-mode nil))
+  :config (setopt golden-ratio-mode nil)
+	)
 
 (use-package eyebrowse
 	:disabled)

@@ -125,6 +125,7 @@
  '(magit-wip-merge-branch t)
  '(magit-wip-mode t)
  '(markdown-list-indent-width 2)
+ '(org-edit-src-content-indentation 0)
  '(package-native-compile t)
  '(safe-local-variable-values '((TeX-master . t)))
  '(standard-indent 2)

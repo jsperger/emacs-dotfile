@@ -24,8 +24,7 @@
   (use-package oc
     :ensure nil
     :config
-    (setq org-cite-export-processors '((beamer natbib)
-                                       (latex biblatex)
+    (setq org-cite-export-processors '((latex biblatex)
                                        (t csl))
           org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
 
@@ -224,7 +223,8 @@ With a prefix ARG, remove start location."
 
 (use-package org-make-toc
 	:hook (org-mode . org-make-toc-mode)
-  :after org)
+  :after org
+	)
 
 ;;;
 ;; --- Diagramming Tools
