@@ -1,0 +1,8 @@
+# Blocklist files/folders in same directory as this .gitignore file
+/*
+
+# Includelist some files
+!.gitignore
+
+!templates/
+!yasnippet/
