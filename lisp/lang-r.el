@@ -21,6 +21,7 @@
 						(lambda ()
 							(add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
 	:custom
+	(inferior-R-args "--no-save")
 	(ess-indent-offset 2)
 	(ess-own-style-list '(
 												(ess-indent-offset . 2)
