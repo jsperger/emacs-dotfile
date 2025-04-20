@@ -108,6 +108,7 @@
 													(flymake-diagnostics-buffer-mode :align t)
 													("*Shell Command Output*"        :align t :size 2)
 													("*Async Shell Command*"         :align t :size 2)
+													("*elpaca-info*" :align t)
 													;;("\\*EGLOT.*" :select t :align right :size , fill-column :regexp t)
 													))
 	)
