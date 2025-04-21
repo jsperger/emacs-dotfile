@@ -40,7 +40,10 @@
 
 	(use-package org-indent
 		:ensure nil)
-	
+	(use-package org-protocol
+		:ensure nil
+		)
+
   (despot-def org-mode-map
     "'"     'org-edit-special
     ","     'org-ctrl-c-ctrl-c

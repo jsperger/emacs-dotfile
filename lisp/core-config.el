@@ -258,7 +258,11 @@ the unwritable tidbits."
 
 (use-package server
   :ensure nil
-  :commands (server-running-p))
+  :commands
+	(server-running-p)
+	:custom
+	(server-use-tcp t)
+	)
 
 (use-package simple
 	;; basic editing commands for emacs
