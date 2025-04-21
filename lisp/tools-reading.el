@@ -66,6 +66,14 @@
 ;; --- Documentation ---
 ;;;
 
+(use-package devdocs
+	:general
+	(tyrant-def
+		"Jm" 'devdocs-lookup
+		"JM" 'devdocs-peruse
+		"hd" 'devdocs-peruse)
+	)
+
 (use-package dash-docs
 	:disabled)
 
