@@ -93,8 +93,11 @@
     "c"       (cons "code" (make-sparse-keymap))
     "cb"      'flymake-show-buffer-diagnostics
     "cc"      'compile
-    "cn"      'next-error
+    "cj"      'previous-error
+    "ck"      'next-error
+		"cn"      'next-error
     "cp"      'previous-error
+		"cP"      'check-parens
     "cr"      'recompile
     "cx"      'kill-compilation
     "c="      'indent-region-or-buffer
