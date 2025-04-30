@@ -20,7 +20,6 @@
          :pre-build (("make" "elpa"))
          :build (:not elpaca--compile-info) ;; Make will take care of this step
          :files ("*.el" "doc/*.info*" "etc" "images" "latex" "style")
-         :version (lambda (_) (require 'auctex) AUCTeX-version)
 )
   :mode ("\\.tex\\'" . LaTeX-mode)
   :hook (LaTeX-mode . hs-minor-mode)
