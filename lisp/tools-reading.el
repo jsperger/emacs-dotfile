@@ -32,10 +32,27 @@
           )
 )
 
+;; (use-package
+;;	https://github.com/chenyanming/paw
+;;	)
+
 ;;;
 ;; --- Readling List ---
 ;;;
 
+(use-package wallabag
+:disabled
+	:load-path "~/.emacs.d/lisp/wallabag/"
+  :config
+  (setq wallabag-host "https://xx.xx.xx") ;; wallabag server host name
+  (setq wallabag-username "xx") ;; username
+  (setq wallabag-password "xx") ;; password
+  (setq wallabag-clientid "xx") ;; created with API clients management
+  (setq wallabag-secret "xx") ;; created with API clients management
+  (setq wallabag-search-print-items '("title" "domain" "tag" "reading-time" "date")) ;; control what content should be show in *wallabag-search*
+(setq wallabag-search-page-max-rows 32) ;; how many items shown in one page
+  ;; (setq wallabag-db-file "~/OneDrive/Org/wallabag.sqlite") ;; optional, default is saved to ~/.emacs.d/.cache/wallabag.sqlite
+  )
 
 (use-package zotero
 	;; https://gitlab.com/fvdbeek/emacs-zotero
@@ -79,7 +96,14 @@
 
 (use-package consult-dash
 	:disabled
-  :after (consult dash-docs))
+  :after (consult dash-docs)
+	:general
+	(tyrant-def
+		"Jm" 'consult-dash)
+  :config
+    ;; Use the symbol at point as initial search term
+   (consult-customize consult-dash :initial (thing-at-point 'symbol))
+	)
 
 ;; Structure and interpretation of computer programs
 ;; in package form?
