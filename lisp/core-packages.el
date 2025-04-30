@@ -165,9 +165,7 @@
 
 (use-package banner-comment
 	:config
-	(setopt banner-comment-end "  "
-					banner-comment-start ";; "
-					banner-comment-width 72)
+	(setopt banner-comment-width 72)
 	:general
 	(tyrant-def
 		"ab" 'banner-comment))
