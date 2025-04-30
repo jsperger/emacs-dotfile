@@ -82,8 +82,8 @@
 (when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
 
 
-;; (lambda () (unless (server-running-p)
-;;              (server-start)))
+(lambda () (unless (server-running-p)
+              (server-start)))
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before custom set variables"))
 
 (custom-set-variables
@@ -125,7 +125,10 @@
  '(magit-wip-merge-branch t)
  '(magit-wip-mode t)
  '(markdown-list-indent-width 2)
+ '(olivetti-body-width 0.7)
+ '(olivetti-style 'fancy)
  '(org-edit-src-content-indentation 0)
+ '(org-make-toc-insert-custom-ids t)
  '(package-native-compile t)
  '(safe-local-variable-values '((TeX-master . t)))
  '(standard-indent 2)
@@ -151,7 +154,7 @@
 ;; (add-hook 'enable-theme-functions #'fontaine-apply-current-preset)
 ;; (load-theme 'ef-dream)
 ;; (load-theme 'doom-nord)
-(load-theme 'doom-monokai-pro)
+;; (load-theme 'doom-monokai-pro)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
 (custom-set-faces
