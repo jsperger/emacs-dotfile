@@ -12,6 +12,12 @@
 	:custom
 	(marginalia-mode t))
 
+(use-package epkg-marginalia
+	:after marginalia
+	:config
+	(setcar (alist-get 'package marginalia-annotator-registry)
+          #'epkg-marginalia-annotate-package))
+
 (use-package nerd-icons-completion
   :after marginalia
 	:hook (marginalia-mode . nerd-icons-completion-mode)
