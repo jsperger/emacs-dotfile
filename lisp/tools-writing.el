@@ -17,6 +17,12 @@
 (use-package flymake-proselint
   :disabled)
 
+(use-package flymake-vale
+	:ensure (flymake-vale :host github :repo "tpeacock19/flymake-vale")
+	:general
+	(tyrant-def
+		"as" 'flymake-vale-load))
+
 (use-package jinx
   :after evil
   :hook (text-mode . jinx-mode)
