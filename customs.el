@@ -93,33 +93,15 @@
  ;; If there is more than one, they won't work right.
  '(TeX-indent-close-delimiters "]")
  '(TeX-indent-open-delimiters "[")
- '(custom-safe-themes
-	 '("59c36051a521e3ea68dc530ded1c7be169cd19e8873b7994bfc02a216041bf3b"
-		 "4c16a8be2f20a68f0b63979722676a176c4f77e2216cc8fe0ea200f597ceb22e"
-		 "2b0fcc7cc9be4c09ec5c75405260a85e41691abb1ee28d29fcd5521e4fca575b"
-		 "7fea145741b3ca719ae45e6533ad1f49b2a43bf199d9afaee5b6135fd9e6f9b8"
-		 "53b6ea82cb4aa7547d3667b5a007638ff4a2bf877883e440ff3acd82e7bbdabc"
-		 "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773"
-		 "e8bd9bbf6506afca133125b0be48b1f033b1c8647c628652ab7a2fe065c10ef0"
-		 "cee5c56dc8b95b345bfe1c88d82d48f89e0f23008b0c2154ef452b2ce348da37"
-		 "046a2b81d13afddae309930ef85d458c4f5d278a69448e5a5261a5c78598e012"
-		 "833ddce3314a4e28411edf3c6efde468f6f2616fc31e17a62587d6a9255f4633"
-		 "830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1"
-		 "fee7287586b17efbfda432f05539b58e86e059e78006ce9237b8732fde991b4c"
-		 "524fa911b70d6b94d71585c9f0c5966fe85fb3a9ddd635362bfabd1a7981a307"
-		 "94bed81ca0be98f58d2cfa2676221c492c8fd5f76b40abd9d73ac00c0d0c9711"
-		 "ea4dd126d72d30805c083421a50544e235176d9698c8c541b824b60912275ba1"
-		 "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3"
-		 "ffa78fc746f85d1c88a2d1691b1e37d21832e9a44a0eeee114a00816eabcdaf9"
-		 "f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66"
-		 "34cf3305b35e3a8132a0b1bdf2c67623bc2cb05b125f8d7d26bd51fd16d547ec" default))
  '(auth-source-debug t)
  '(banner-comment-width 72)
  '(custom-safe-themes t)
  '(eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly)
+ '(ess-ido-flex-matching nil)
  '(ess-use-R-completion nil)
  '(ess-use-company nil)
- '(ess-use-ido nil)
+ '(ess-use-flymake nil)
+ '(ess-use-ido nil nil (ido))
  '(indent-tabs-mode t)
  '(large-file-warning-threshold 100000000)
  '(logos-olivetti t)
@@ -130,7 +112,6 @@
  '(magit-wip-merge-branch t)
  '(magit-wip-mode t)
  '(markdown-list-indent-width 2)
- '(olivetti-body-width 0.7)
  '(olivetti-style 'fancy)
  '(org-edit-src-content-indentation 0)
  '(org-make-toc-insert-custom-ids t)

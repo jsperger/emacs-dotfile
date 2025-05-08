@@ -45,7 +45,8 @@ Just put this function in `hippie-expand-try-functions-list'."
 	(setopt yas-global-mode t)
 	)
 
-(use-package yasnippet-snippets)
+(use-package yasnippet-snippets
+	:after yasnippet)
 
 (provide 'completion-snippets)
 ;; Local Variables:

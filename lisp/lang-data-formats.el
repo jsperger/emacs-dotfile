@@ -15,7 +15,7 @@
   :mode (".csv" . csv-mode)
   :config
   (add-hook 'csv-mode-hook 'csv-guess-set-separator)
-
+	:general
   (despot-def csv-mode-map
     "s" 'csv-sort-fields
     "n" 'csv-sort-numeric-fields

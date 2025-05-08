@@ -65,7 +65,7 @@
 
 ;; 2025-02-22 Disabled eldoc, use built-in
 ;; Reason: Error. Not worth fixing at the moment because I was only using elpa versions of
-;; eldoc and jsonrpc because of eglot  
+;; eldoc and jsonrpc because of eglot 
 ;; Error:  something about incf not defined. I'm guessing it should use cl-incf;
 ;; maybe it should intelligently choose between cl-incf and ts-incf I'm not
 ;; sure.

@@ -225,7 +225,13 @@
     (add-hook 'flymake-mode-hook
               (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
 
-
+(use-package sideline-flymake
+	:disabled
+  :hook (flymake-mode . sideline-mode)
+  :init
+  (setq sideline-flymake-display-mode 'point) ; 'point to show errors only on point
+                                              ; 'line to show errors on the current line
+  (setq sideline-backends-right '(sideline-flymake)))
 
 ;; ============================= Modeline ============================= 
 

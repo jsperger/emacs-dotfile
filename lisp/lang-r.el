@@ -10,8 +10,7 @@
 
 (use-package ess
   :mode ("\\([rR]\\)\\'" . R-mode)
-;;  :hook ((R-mode ess-r-mode) . 'eglot-ensure)
-;;	(ess-r-help-mode . evil-mode)
+	;; is there a reason for R-mode over ess-r-mode? 
   :init
 	(setopt ess-set-style t
 					comint-scroll-to-bottom-on-input t
