@@ -12,7 +12,7 @@
   :mode ("\\([rR]\\)\\'" . R-mode)
 	;; is there a reason for R-mode over ess-r-mode? 
   :init
-	(setopt ess-set-style t
+	(setq ess-set-style t
 					comint-scroll-to-bottom-on-input t
 					comint-scroll-to-bottom-on-output t
 					ess-indent-offset 2)
@@ -38,20 +38,6 @@
 											)
 	(ess-style 'OWN)
 	:config
-	(defun oc-set-ess-offset-indent ()
-		"Set ess-offset-arguments values to my preferred defaults. Motivated by an Org src block issue (that  is likely due to a config issue on my end)."
-		(interactive)
-		(setopt
-		 ess-offset-arguments 'prev-call
-		 ess-offset-arguments-newline 'prev-line)
-		)
-
-	(defun air-format ()
-		"Run the 'air' formatter in the current directory. Runs asynchronously"
-		(interactive)
-		(async-shell-command "air format .")
-		)
-	
 	:general
 	(despot-def (ess-r-mode-map)
 		:major-modes '(ess-r-mode R-mode)

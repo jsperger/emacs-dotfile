@@ -230,25 +230,6 @@ With a prefix ARG, remove start location."
 	)
 
 ;;;
-;; --- Diagramming Tools
-;;;
-
-(use-package chatu
-  :hook ((org-mode markdown-mode) . chatu-mode)
-  :commands (chatu-add
-             chatu-open)
-  :custom ((chatu-input-dir "./draws")
-           (chatu-output-dir "./draws_out")))
-
-(use-package pikchr-mode
-		:mode ("\\.pikchr\\'" . pikchr-mode))
-
-(use-package uniline
-	:general
-(tyrant-def "au" 'uniline-mode)
-	)
-
-;;;
 ;;; Exporters:
 ;;;
 

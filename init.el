@@ -142,10 +142,11 @@
 (require 'editor-vc)
 
 (require 'tools-denote)
-(require 'tools-notes)
-(require 'tools-reading)
+(require 'tools-diagramming)
 (require 'tools-media)
+(require 'tools-notes)
 (require 'tools-programming)
+(require 'tools-reading)
 (require 'tools-search)
 (require 'tools-web)
 (require 'tools-writing)
@@ -160,6 +161,7 @@
 (require 'lang-rust)
 (require 'lang-tex)
 (require 'lang-web)
+(require 'lang-functions)
 
 (require 'tools-lsp-bridge)
 
