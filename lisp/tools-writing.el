@@ -52,7 +52,13 @@
    [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
    [remap evil-next-flyspell-error] 'evil-next-jinx-error))
 
-(use-package freeze-it)
+(use-package freeze-it
+	;; makes previous writing read-only
+	;; https://github.com/rnkn/freeze-it
+	;; Text remains read-only until you kill the buffer, so that you can't cheat. This is by design, because the minor mode targets the psychological temptation to revise your writing, rather than just the ability.
+	;; MAYBE try out the package
+	:disabled
+	)
 
 (use-package unfill
 	;; TODO Add general keybinds for unfill
@@ -92,7 +98,11 @@
 		)
 	)
 
-(use-package writegood-mode)
+(use-package writegood-mode
+	:disabled
+	;; just does font locking, doesn't plug into flymake or other diagnostics
+	;; no easy way to navigate the issues it identifies
+	)
 
 (provide 'tools-writing)
 ;; Local Variables:
