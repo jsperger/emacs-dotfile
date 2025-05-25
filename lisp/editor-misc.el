@@ -219,6 +219,10 @@ stays on current"
     "b9" 'buffer-to-window-9))
 
 (use-package biome
+	;; weather info from open meteo
+	;; https://github.com/SqrtMinusOne/biome
+	;; something wrong with my setup
+	:disabled
 	:general
 	(tyrant-def "aw" 'biome)
 	:config

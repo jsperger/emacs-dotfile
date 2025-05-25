@@ -248,6 +248,9 @@ With a prefix ARG, remove start location."
 	:after org
   )
 
+(use-package ox-beamer-lecture
+	:after org)
+
 ;;;
 ;;; Appearance:
 ;;;

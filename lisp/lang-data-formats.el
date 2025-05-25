@@ -36,6 +36,12 @@
 	:disabled
 	)
 
+(use-package jsonian
+	:mode ("\\.json\\'")
+	:after so-long
+  :custom
+  (jsonian-no-so-long-mode))
+
 (use-package toml)
 
 (provide 'lang-data-formats)

@@ -48,7 +48,7 @@
 
 (use-package focus
 	;;	:hook text-mode
-	:hook visual-line-fill-column-mode
+;;	:hook visual-line-fill-column-mode
 	:general
 	(tyrant-def "tF" 'focus-mode)
 	)
@@ -57,6 +57,9 @@
   :disabled)
 
 (use-package nocomments-mode
+	;; remove comments from the visual display by replacing them with blank characters
+	;; Does not get rid of the space that the comments took up
+	:disabled
 	:general
 	(tyrant-def
 		"tc" 'nocomments-mode))
