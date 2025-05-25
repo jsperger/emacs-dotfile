@@ -41,10 +41,6 @@
 	;; etc.
 	)
 
-(use-package mermaid-mode
-			:mode ("\\.mermaid\\'" . mermaid-mode))
-
-(use-package toml)
 
 (provide 'lang-web)
 ;; Local Variables:

@@ -36,6 +36,8 @@
 	:disabled
 	)
 
+(use-package toml)
+
 (provide 'lang-data-formats)
 
 ;; Local Variables:
