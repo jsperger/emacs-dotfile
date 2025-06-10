@@ -1,6 +1,6 @@
 ;;; lang-org.el --- -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023  John Sperger
+;; Copyright (C) 2025  John Sperger
 
 ;; Author: John Sperger
 
@@ -19,7 +19,9 @@
         )
 	:config
 	(setopt org-latex-bib-compiler "biber"
-					org-latex-compiler "lualatex")
+					org-latex-compiler "lualatex"
+          org-babel-load-languages '((R . t) (emacs-lisp . t))
+          )
 
   (use-package oc
     :ensure nil
