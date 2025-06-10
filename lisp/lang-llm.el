@@ -72,14 +72,18 @@
 (use-package aidermacs
 	:general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
+	(setopt aidermacs-backend 'vterm)
   (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
   (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
+	(setenv "LM_STUDIO_API_KEY" "dummy-api-key")
+	(setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
   :custom
   ; See the Configuration section below
   (aidermacs-use-architect-mode t)
   (aidermacs-default-model "sonnet"))
 
 (use-package forge-llm
+	:disabled
 	:after forge llm
 	:custom
 	(forge-llm-llm-provider

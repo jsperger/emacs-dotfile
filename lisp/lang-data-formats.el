@@ -12,7 +12,7 @@
 ;; -------------------------------------
 
 (use-package csv-mode
-  :mode (".csv" . csv-mode)
+  :mode ("\\.csv\\'" . csv-mode)
   :config
   (add-hook 'csv-mode-hook 'csv-guess-set-separator)
 	:general
@@ -37,6 +37,7 @@
 	)
 
 (use-package jsonian
+	:disabled
 	:mode ("\\.json\\'")
 	:after so-long
   :custom

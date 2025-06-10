@@ -67,9 +67,11 @@
 		)
 	)
 
-(use-package closql)
+(use-package closql
+  :disabled)
 
 (use-package ghub)
+
 (use-package forge
   :after magit 
   :init
