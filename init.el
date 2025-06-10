@@ -151,6 +151,7 @@
 (require 'tools-web)
 (require 'tools-writing)
 
+(require 'lang-bib)
 (require 'lang-data-formats)
 (require 'lang-lisp)
 (require 'lang-llm)
