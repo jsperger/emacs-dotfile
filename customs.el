@@ -10,29 +10,6 @@
   (exec-path-from-shell-initialize))
 
 
-;; Not working.
-;; (defun my-adjust-visual-fill-column-for-variable-pitch ()
-;;   "Adjust visual fill column for variable pitch mode."
-;;   (when variable-pitch-mode
-;;     ;; Set a different visual fill column for variable pitch mode
-;;     (setq visual-fill-column-width 60)
-;; ))
-
-;; (defun my-disable-visual-fill-column-for-variable-pitch ()
-;;   "Disable visual fill column adjustments for variable pitch mode."
-;;   (when (and variable-pitch-mode
-;;              (bound-and-true-p visual-fill-column-mode))
-;;     ;; Disable visual fill column mode when exiting variable pitch
-;;     (setq visual-fill-column-width nil)))
-
-;; (add-hook 'variable-pitch-mode-hook #'my-adjust-visual-fill-column-for-variable-pitch)
-;; (add-hook 'text-scale-mode-hook 'my-disable-visual-fill-column-for-variable-pitch)
-;; (setq-default TeX-master nil
-;;               TeX-command "LaTeX"
-;;               TeX-engine 'luatex
-;;   	      preview-scale 1.0
-;;               preview-scale-function
-;;               (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
 
 ;; (setq preview-auto-cache-preamble nil
 ;;       TeX-parse-self t
@@ -58,17 +35,6 @@
 ;;; After-init hooks packages
 
 ;; general emacs settings
-
-(when my-debug-mode (message "Checkpoint: %s" "hooks: before evil"))
-;; evil settings
-;; (evil-collection-init)
-;; (evil-owl-mode)
-;; (evil-snipe-mode)
-;;(doom-modeline-mode)
-
-(when my-debug-mode (message "Checkpoint: %s" "hooks: after evil"))
-;; (shackle-mode)
-;; (global-hl-todo-mode)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before completion modes"))
 (vertico-mode)
