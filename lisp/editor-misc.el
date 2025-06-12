@@ -151,6 +151,7 @@ reuse it's window, otherwise create new one."
 (use-package xr)  ;; Convert string regexp to rx notation
 
 (use-package winum
+  :hook (elpaca-after-init . winum-mode)
   :init
   (with-eval-after-load 'which-key
     (push '((nil . "winum-select-window-[1-9]") . t) which-key-replacement-alist)

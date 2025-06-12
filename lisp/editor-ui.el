@@ -217,7 +217,11 @@
   :general
   (tyrant-def
     ";" '("pop toggle" . popper-toggle)
-    ":" '("pop kill" . popper-kill-latest-popup)))
+    ":" '("pop kill" . popper-kill-latest-popup))
+  :custom
+  (popper-mode 1)
+  (popper-echo-mode 1)
+  )
 
 (use-package sideline
   :init
