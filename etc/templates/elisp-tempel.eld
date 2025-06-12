@@ -3,7 +3,7 @@ emacs-lisp-mode elisp-mode
 (comment-line-40 ";; -------------------------------------" n)
 
 (header ";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name)))
-        " --- " p " -*- lexical-binding: t -*-" n
+        " --- " p " -*- lexical-binding: t; -*-" n
         ";;; Commentary:" n ";;; Code:" n n)
 
 

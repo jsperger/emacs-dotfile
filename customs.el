@@ -1,4 +1,4 @@
-;;; customs.el --- Summary -*- lexical-binding: t; -*-
+;;; customs.el --- Customization-set options -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
