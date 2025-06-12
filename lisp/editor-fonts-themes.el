@@ -267,9 +267,9 @@
 (use-package solarized-theme)
 
 (provide 'editor-fonts-themes)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; no-native-compile: t
+;;; no-update-autoloads: t
+;;; End:
 ;;; editor-themes.el ends here

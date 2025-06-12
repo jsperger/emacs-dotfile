@@ -155,9 +155,9 @@
 
 (provide 'customs)
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; no-native-compile: t
+;;; no-update-autoloads: t
+;;; End:
 ;;; customs.el ends here

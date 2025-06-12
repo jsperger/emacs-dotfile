@@ -66,9 +66,9 @@
 
 
 (provide 'completion-actions)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; no-native-compile: t
+;;; no-update-autoloads: t
+;;; End:
 ;;; completion-actions.el ends here

@@ -284,9 +284,9 @@ With a prefix ARG, remove start location."
 	)
 
 (provide 'lang-org)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; no-native-compile: t
+;;; no-update-autoloads: t
+;;; End:
 ;;; lang-org.el ends here

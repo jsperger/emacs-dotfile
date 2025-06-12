@@ -47,9 +47,9 @@
 (use-package highlight-refontification)
 
 (provide 'editor-font-locking)
-;; Local variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; no-native-compile: t
+;;; no-update-autoloads: t
+;;; End:
 ;;; editor-font-locking.el ends here
