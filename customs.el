@@ -65,6 +65,7 @@
  '(ess-use-company nil)
  '(ess-use-flymake nil)
  '(ess-use-ido nil nil (ido))
+ '(indent-tabs-mode nil)
  '(large-file-warning-threshold 100000000)
  '(logos-olivetti t)
  '(magit-wip-after-apply-mode t)
