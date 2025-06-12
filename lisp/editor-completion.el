@@ -11,6 +11,7 @@
 
 (use-package vertico
   :ensure (:files (:defaults "extensions/*.el"))
+  :hook (elpaca-after-init . vertico-mode)
   :config
   (setq vertico-cycle t)
 
