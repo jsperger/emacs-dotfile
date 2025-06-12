@@ -68,7 +68,6 @@
       '(read-only t cursor-intangible t face minibuffer-prompt))
 (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
-
 (use-package desktop
   :disabled
   :ensure nil
@@ -252,17 +251,10 @@ the unwritable tidbits."
               (setq-local register-alist
                           (cl-remove-if-not #'savehist-printable register-alist)))))
 
+
 (use-package saveplace
   :ensure nil
 	:custom (save-place-mode 1))
-
-(use-package server
-  :ensure nil
-  :commands
-	(server-running-p)
-	:custom
-	(server-use-tcp t)
-	)
 
 (use-package simple
 	;; basic editing commands for emacs
