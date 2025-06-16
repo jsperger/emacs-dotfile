@@ -27,6 +27,7 @@
 
 
 (use-package gptel
+  :functions gptel--insert-file-string
 	:config
 	(setopt gptel-model   'llama-cpp
 					gptel-backend (gptel-make-openai "llama-cpp"
@@ -107,7 +108,7 @@
 		 )
 	 )
 
-(provide 'lang-llm)
+(provide 'tools-llm)
 
 ;;; Local Variables:
 ;;; no-byte-compile: t

@@ -119,7 +119,7 @@
 (require 'lang-bib)
 (require 'lang-data-formats)
 (require 'lang-lisp)
-(require 'lang-llm)
+(require 'tools-llm)
 (require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-python)
