@@ -87,13 +87,27 @@
 	(setq denote-journal-title-format 'day-date-month-year)
 	)
 
+(use-package denote-menu
+  :general
+  (tyrant-def "lm" 'list-denotes)
+
+  (despot-def (denote-menu-mode-map)
+		:major-modes '(denote-menu-mode)
+		"c" 'dentoe-menu-clear-filters
+    "e" 'denote-menu-export-to-dired
+    "k" 'denote-menu-filter-by-keyword
+		"r" 'denote-menu-filter
+    "o" 'denote-menu-filter-out-keyword
+    )
+  )
+
 (use-package denote-project-notes
 	:after denote
 	:general
 	(tyrant-def "ps" 'denote-project-notes-show
 		"pi" 'denote-project-notes-set-identifier)
 	)
-;; ========================== Reading Notes =========================  
+;============================ Literature Notes ============================
 (use-package citar-denote
 	:hook (denote-after-new-note . citar-denote-mode)
 	(denote-fontify-links-mode . citar-denote-mode)
