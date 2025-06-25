@@ -109,6 +109,7 @@
 
 (require 'tools-denote)
 (require 'tools-diagramming)
+(require 'tools-llm)
 (require 'tools-media)
 (require 'tools-notes)
 (require 'tools-programming)
@@ -120,7 +121,6 @@
 (require 'lang-bib)
 (require 'lang-data-formats)
 (require 'lang-lisp)
-(require 'tools-llm)
 (require 'lang-markdown)
 (require 'lang-org)
 (require 'lang-python)
@@ -131,6 +131,8 @@
 (require 'lang-functions)
 
 (require 'tools-lsp-bridge)
+(require 'tools-org-capture)
+;; (require 'tools-eaf)
 
 ;; ====================== After-init hooks + custom ======================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
