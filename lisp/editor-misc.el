@@ -233,16 +233,6 @@ stays on current"
 			)
 	)
 
-
-
-(defun replace-double-dollar-math ()
-  "Replace display math $$...$$ with \[...\] in the current buffer."
-  (interactive)
-  (goto-char (point-min))
-  (while (re-search-forward "\\$\\$\\(.*?\\)\\$\\$" nil t)
-    (replace-match "\\[\\1\\]" nil nil)))
-
-
 (provide 'editor-misc)
 ;; Local Variables:
 ;; no-byte-compile: t
