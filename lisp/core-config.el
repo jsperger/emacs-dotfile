@@ -38,7 +38,13 @@
 
 ;; Use system trash for file deletion.
 (setopt delete-by-moving-to-trash t)
+(setq trash-directory "~/.Trash")
 
+;; See `trash-directory' as it requires defining `system-move-file-to-trash'.
+(defun system-move-file-to-trash (file)
+  "Use \"trash\" to move FILE to the system trash."
+  (cl-assert (executable-find "trash") nil "'trash' must be installed. Needs \"brew install trash\"")
+  (call-process "trash" nil 0 nil "-F"  file))
 ;; autosave each change
 (setopt bookmark-save-flag 1)
 
@@ -145,10 +151,10 @@
         (fundamental-mode))))
   (add-hook 'find-file-hook #'check-large-file)
 
-  ;; see document of `move-file-to-trash'
-  (defun system-move-file-to-trash (filename)
-    (process-file-shell-command
-     (format "trash %S" (file-local-name filename))))
+  ;; ;; see document of `move-file-to-trash'
+  ;; (defun system-move-file-to-trash (filename)
+  ;;   (process-file-shell-command
+  ;;    (format "trash %S" (file-local-name filename))))
 
   (defun make-directory-maybe ()
     "Create parent directory if not exists while visiting file."
