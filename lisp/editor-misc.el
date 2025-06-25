@@ -61,6 +61,9 @@ reuse it's window, otherwise create new one."
 (use-package reveal-in-folder
   :general (tyrant-def "bf" 'reveal-in-folder))
 
+(use-package scratch
+  :general (tyrant-def "bS" 'scratch))
+
 (use-package terminal-here
   :config
   (setq terminal-here-mac-terminal-command  (lambda (dir)
