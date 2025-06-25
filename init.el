@@ -99,8 +99,9 @@
 (require 'completion-snippets)
 
 (require 'editor-icons)
+(require 'editor-fonts)
 (require 'editor-font-locking)
-(require 'editor-fonts-themes)
+(require 'editor-themes)
 (require 'editor-misc)
 (require 'editor-projects)
 (require 'editor-ui)
