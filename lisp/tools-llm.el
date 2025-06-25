@@ -42,11 +42,15 @@
 		:endpoint "/api/v1/chat/completions"
 		:stream t
 		:key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
-		:models '(google/gemini-2.0-flash-001
-							anthropic/claude-3.7-sonnet
-							mistralai/mistral-small-3.1-24b-instruct:free
+		:models '(google/gemini-2.5-flash-preview-05-20
+              google/gemini-2.5-flash-preview-05-20:thinking
+							google/gemini-2.5-pro-preview
+							anthropic/claude-sonnet-4
+              deepseek/deepseek-r1-0528:free
+              deepseek/deepseek-prover-v2:free
 							open-r1/olympiccoder-32b:free
-							google/gemma-3-27b-it:free
+							mistralai/devstral-small:free
+              google/gemma-3-27b-it:free
 							deepseek/deepseek-r1-zero:free
 							qwen/qwq-32b:free)
 		)
@@ -55,19 +59,6 @@
 		:stream t
 		:key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
 		)
-
-	(gptel-make-anthropic "Claude-thinking" ;Any name you want
-		:key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
-		:stream t
-		:models '(claude-3-7-sonnet-20250219)
-		:header (lambda () (when-let* ((key (gptel--get-api-key)))
-												 `(("x-api-key" . ,key)
-													 ("anthropic-version" . "2023-06-01")
-													 ("anthropic-beta" . "pdfs-2024-09-25")
-													 ("anthropic-beta" . "output-128k-2025-02-19")
-													 ("anthropic-beta" . "prompt-caching-2024-07-31"))))
-		:request-params '(:thinking (:type "enabled" :budget_tokens 8192)
-																:max_tokens 65536))
 	)
 
 (use-package aidermacs
@@ -81,7 +72,8 @@
   :custom
   ; See the Configuration section below
   (aidermacs-use-architect-mode t)
-  (aidermacs-default-model "sonnet"))
+  (aidermacs-default-model "sonnet")
+  )
 
 (use-package forge-llm
 	:disabled
