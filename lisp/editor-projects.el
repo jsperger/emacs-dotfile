@@ -78,11 +78,12 @@
   :config (projection-multi-embark-setup-command-map))
 
 (use-package tabspaces
+  :after consult
   :hook (tab-bar-mode . tabspaces-mode) 
   :commands (tabspaces-switch-or-create-workspace
              tabspaces-open-or-create-project-and-workspace)
   :custom
-  (tabspaces-use-filtered-buffers-as-default nil)
+  (tabspaces-use-filtered-buffers-as-default t)
   (tabspaces-default-tab "Default")
   (tabspaces-remove-to-default t)
   (tabspaces-include-buffers '("*scratch*"))
@@ -90,7 +91,7 @@
   (tabspaces-todo-file-name "project-todo.org")
   ;; sessions
   (tabspaces-session t)
-  (tabspaces-session-auto-restore t)
+  (tabspaces-session-auto-restore nil)
   (tab-bar-new-tab-choice "*scratch*")
 	:config
 	;; Filter Buffers for Consult-Buffer
@@ -146,7 +147,7 @@
 	;; (setq tabspaces-session-project-session-store 'project)
 
 	;; ;; Store all project sessions in a specific directory
-	;;(setq tabspaces-session-project-session-store "~/.emacs.d/tabspaces-sessions/")
+	(setopt tabspaces-session-project-session-store "~/.emacs.d/var/tabspaces-sessions/")
   )
 
 ;; -------------------------------------

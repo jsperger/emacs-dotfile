@@ -1,48 +1,12 @@
 ;;; customs.el --- Customization-set options -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
-
 (when my-debug-mode
-  (message "Checkpoint: %s" "latex el"))
-;; Get shell path variables if running as a daemon
-
-(when (daemonp)
-  (exec-path-from-shell-initialize))
-
-
-
-;; (setq preview-auto-cache-preamble nil
-;;       TeX-parse-self t
-;;       TeX-save-query nil
-;;       TeX-source-correlate-start-server t
-;;       LaTeX-fill-break-at-separators nil)
-
-;; (setq bibtex-file-path "~/obsidian/"
-;;       bibtex-files '("obsidian-biblatex.bib")
-;;       bibtex-align-at-equal-sign t
-;;       bibtex-dialect 'bibtex)
-
-;; (setopt citar-at-point-function 'embark-act
-;;       citar-bibliography bib-file-location
-;;       citar-library-paths `(,(concat bibtex-file-path "files/"))
-;;       citar-file-open-functions '(("html" . citar-file-open-external)
-;;                                   ("pdf" . citar-file-open-external)
-;;                                   (t . find-file)))
-
-(when my-debug-mode (message "Checkpoint: %s" "set q"))
-
-
-;;; After-init hooks packages
-
-;; general emacs settings
-
-
-
-(when my-debug-mode (message "Checkpoint: %s" "hooks: end of hooks"))
-
+  (message "Checkpoint: %s" "latex el" (file-name-base)))
 
 (lambda () (unless (server-running-p)
-              (server-start)))
+             (server-start)))
+
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before custom set variables"))
 
 (custom-set-variables
@@ -75,7 +39,7 @@
  '(org-edit-src-content-indentation 0)
  '(org-make-toc-insert-custom-ids t)
  '(package-native-compile t)
- '(safe-local-variable-values '((TeX-master . t)))
+ '(safe-local-variable-values '((org-list-indent-offset . 2) (TeX-master . t)))
  '(standard-indent 2)
  '(trusted-content '("~/.emacs.d/" "~/projects/")))
 
@@ -100,6 +64,8 @@
 ;; (load-theme 'ef-dream)
 ;; (load-theme 'doom-nord)
 ;; (load-theme 'doom-monokai-pro)
+(load-theme 'doom-gruvbox)
+
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
 (custom-set-faces

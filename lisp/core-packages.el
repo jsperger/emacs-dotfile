@@ -93,8 +93,6 @@
 		 "XDG_CONFG_HOME"
 		 "XDG_STATE_HOME")
 	 )
-	 :config
-	 (exec-path-from-shell-initialize)
 	)
 
 (use-package dirvish

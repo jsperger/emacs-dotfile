@@ -31,21 +31,21 @@
           org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
 
 	(defun org-toggle-hidden-emphasis-markers ()
-	"Toggle whether markup should be hidden in 'org-mode'."
-	(interactive)
-	(if org-hide-emphasis-markers
-			(setopt org-hide-emphasis-markers nil)
-		(setopt org-hide-emphasis-markers t)
-		)
-	(font-lock-update)
-	)
+	  "Toggle whether markup should be hidden in 'org-mode'."
+	  (interactive)
+	  (if org-hide-emphasis-markers
+			  (setopt org-hide-emphasis-markers nil)
+		  (setopt org-hide-emphasis-markers t)
+		  )
+	  (font-lock-update)
+	  )
 
 	(use-package org-indent
 		:ensure nil)
 	(use-package org-protocol
 		:ensure nil
 		)
-
+  :general
   (despot-def org-mode-map
     "'"     'org-edit-special
     ","     'org-ctrl-c-ctrl-c
@@ -150,7 +150,6 @@
 
   (general-def 'normal org-mode-map "RET" 'org-open-at-point)
 
-  :general
   (tyrant-def
     "O"      (cons "Org" (make-sparse-keymap))
     "O/"     'org-occur-in-agenda-files
@@ -165,12 +164,14 @@
     "OCr"    'org-resolve-clocks
     "Od"     'open-org-default-notes-file
     "Ol"     'org-store-link
-    "Op"     'open-org-project-file)
+    "Op"     'open-org-project-file
+    "Ot"     'org-transclusion-mode
+    )
   )
 
 
 ;;;
-;;; Functionality Add-ons
+;======================== Functionality Add-ons ========================
 ;;;
 
 ;; Org-transclusion lets you insert a copy of text content via a file link or ID
@@ -178,8 +179,21 @@
 ;; different buffers at the same time without copy-and-pasting it.
 (use-package org-transclusion
   :after org
-
-	)
+  :general
+  (despot-def org-mode-map
+    "l" 'org-transclusion-add
+    "L"     (cons "transclusion" (make-sparse-keymap))
+    "L TAB" 'org-cycle
+    "Ld" 'org-transclusion-remove
+    "LD" 'org-transclusion-detach
+    "Lj" 'org-transclusion-demote-subtree
+    "Lk" 'org-transclusion-promote-subtree
+    "Lm" 'org-transclusion-move-to-source
+    "Ls" 'org-transclusion-live-sync-start
+    "Lr" 'org-transclusion-refresh
+    "Lo" 'org-transclusion-open-source
+    )
+  )
 
 ;; Orphanage - collection of Unmaintained org add-ons
 (use-package org-contrib
@@ -231,9 +245,9 @@ With a prefix ARG, remove start location."
   :after org
 	)
 
-;;;
-;;; Exporters:
-;;;
+
+;;; ============================== Exporters =============================
+
 
 (use-package ox-pandoc
 	:after org
@@ -254,7 +268,7 @@ With a prefix ARG, remove start location."
 	:after org)
 
 ;;;
-;;; Appearance:
+;;; ============================== Appearance =============================
 ;;;
 
 (use-package org-modern
