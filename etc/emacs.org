@@ -357,7 +357,7 @@ Installed / to try / disabled etc. should be tags not hierarchy
   - [[#dape-httpsgithubcomsvaantedape][dape https://github.com/svaante/dape]]
     - [[#r-debugger-httpsgithubcommanuelhentschelvscode-r-debugger][R debugger https://github.com/ManuelHentschel/VSCode-R-Debugger]]
   - [[#crux][crux]]
-  - [[#eglot-tempel][eglot-tempel]]
+  - [[#eglot-tempel-0][eglot-tempel]]
   - [[#evil-tex-httpsgithubcomiyefratevil-tex][evil-tex https://github.com/iyefrat/evil-tex]]
   - [[#evil-textobj-tree-sitter][evil-textobj-tree-sitter]]
   - [[#indent-control][indent-control]]
@@ -373,49 +373,103 @@ Installed / to try / disabled etc. should be tags not hierarchy
     - [[#org-contrib][org-contrib]]
 :END:
 *** Notes
+:PROPERTIES:
+:CUSTOM_ID: notes
+:END:
 **** consult
+:PROPERTIES:
+:CUSTOM_ID: consult
+:END:
 holy shit this does so much more than I realized
 ***** consult narrowing prefixes
+:PROPERTIES:
+:CUSTOM_ID: consult-narrowing-prefixes
+:END:
 - f: file
 - p: project
 - l:
 - m: bookmark
 
 *** Currently Testing
+:PROPERTIES:
+:CUSTOM_ID: currently-testing
+:END:
 **** denote
+:PROPERTIES:
+:CUSTOM_ID: denote
+:END:
 **** latex-extra
+:PROPERTIES:
+:CUSTOM_ID: latex-extra
+:END:
 https://github.com/Malabarba/latex-extra
 Small QoL changes to fill-indent, tab folding, and navigation
 **** eglot-tempel
+:PROPERTIES:
+:CUSTOM_ID: eglot-tempel
+:END:
 https://github.com/fejfighter/eglot-tempel
 **** sicp
+:PROPERTIES:
+:CUSTOM_ID: sicp
+:END:
 Silly way to read Structure and Interpretation of Computer Programs
 
 
 *** Check Updates - Currently Bugged packages
+:PROPERTIES:
+:CUSTOM_ID: check-updates---currently-bugged-packages
+:END:
 **** magit-todos (2024-sept-ish I should really date these)
+:PROPERTIES:
+:CUSTOM_ID: magit-todos-2024-sept-ish-i-should-really-date-these
+:END:
 
 Collects TODO and other keywords in a project's files and displays them in magit's summary
 
 **** terminal-here
+:PROPERTIES:
+:CUSTOM_ID: terminal-here
+:END:
 - [ ] kitty issue with changing directory on mac / broader mac issues [[https://github.com/davidshepherd7/terminal-here/issues/45][Github
   Custom arguments and commands not working on macos  #45 ]]
 
 **** nord-theme
+:PROPERTIES:
+:CUSTOM_ID: nord-theme
+:END:
 Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
 
 (use-package nord-theme)
 (use-package nordic-night-theme)
 *** Check updates - In development (e.g.features I want not ready)
+:PROPERTIES:
+:CUSTOM_ID: check-updates---in-development-egfeatures-i-want-not-ready
+:END:
 *** Packages to Test
+:PROPERTIES:
+:CUSTOM_ID: packages-to-test
+:END:
 **** arxiv-mode
+:PROPERTIES:
+:CUSTOM_ID: arxiv-mode
+:END:
 Access arxiv in emacs.
 Not sure if it has functionality I care about (easily download tex files)
 **** benchmark-init
+:PROPERTIES:
+:CUSTOM_ID: benchmark-init
+:END:
 Benchmarking tools for emacs init and startup time
 **** consult-eglot https://github.com/mohkale/consult-eglot
+:PROPERTIES:
+:CUSTOM_ID: consult-eglot-httpsgithubcommohkaleconsult-eglot
+:END:
 
 **** combobulate
+:PROPERTIES:
+:CUSTOM_ID: combobulate
+:END:
 https://github.com/mickeynp/combobulate
 Structured editing and movement based on tree-sitter
 ```
@@ -428,41 +482,91 @@ clarity of all aspects of your code, enabling more correct movement and editing
 than you would otherwise have.
 ```
 **** dape https://github.com/svaante/dape
+:PROPERTIES:
+:CUSTOM_ID: dape-httpsgithubcomsvaantedape
+:END:
 Debug adapter protocol. Like language server protocol for debugging.
 ***** R debugger https://github.com/ManuelHentschel/VSCode-R-Debugger
+:PROPERTIES:
+:CUSTOM_ID: r-debugger-httpsgithubcommanuelhentschelvscode-r-debugger
+:END:
 **** crux
+:PROPERTIES:
+:CUSTOM_ID: crux
+:END:
 Bunch of utility functions for emacs quality of life stuff
 **** eglot-tempel
+:PROPERTIES:
+:CUSTOM_ID: eglot-tempel-0
+:END:
 Use tempel instead of yasnippet with eglot
 **** evil-tex https://github.com/iyefrat/evil-tex
+:PROPERTIES:
+:CUSTOM_ID: evil-tex-httpsgithubcomiyefratevil-tex
+:END:
 **** evil-textobj-tree-sitter
+:PROPERTIES:
+:CUSTOM_ID: evil-textobj-tree-sitter
+:END:
 https://github.com/meain/evil-textobj-tree-sitter
 tree-sitter type movement with evil and text
 **** indent-control
+:PROPERTIES:
+:CUSTOM_ID: indent-control
+:END:
 Interface that combine all the indentation variables from each major mode to one giant list.
 **** mindstream
+:PROPERTIES:
+:CUSTOM_ID: mindstream
+:END:
 Simple efficient note taker that minimizes friction e.g. due to having to name a temp file
 https://countvajhula.github.io/mindstream/
 **** org-anki
+:PROPERTIES:
+:CUSTOM_ID: org-anki
+:END:
 Synch org notes and anki. Only does basic and cloze, but that's all I use.
 
 **** projection
+:PROPERTIES:
+:CUSTOM_ID: projection
+:END:
 https://github.com/mohkale/projection
 projectile like features on top of emacs built-in project.el
 *** Notes on packages that were tested, added, or removed
+:PROPERTIES:
+:CUSTOM_ID: notes-on-packages-that-were-tested-added-or-removed
+:END:
 **** Added Packages
+:PROPERTIES:
+:CUSTOM_ID: added-packages
+:END:
 ***** bicycle
+:PROPERTIES:
+:CUSTOM_ID: bicycle
+:END:
 Purpose: Cycle outline and code visibility. Can combine outline and hs modes.
 Status: Added sometime before September 2024 (long before)
 **** Removed Packages
+:PROPERTIES:
+:CUSTOM_ID: removed-packages
+:END:
 ***** desktop
+:PROPERTIES:
+:CUSTOM_ID: desktop
+:END:
 Disabled because it doesn't always play nice with elpaca. It seems it'll resume
 and load packages associated with the current buffer before the elpaca init
 runs.
 ***** fold-dwim-org
+:PROPERTIES:
+:CUSTOM_ID: fold-dwim-org
+:END:
 Disabled for many months, name is illustrative but don't recall using it.
 ***** org-contrib
-
+:PROPERTIES:
+:CUSTOM_ID: org-contrib
+:END:
 
 * Snippets
 ** Jinx
@@ -488,6 +592,32 @@ https://github.com/tshu-w/.emacs.d/blob/7de113f9f05523f4abeda8c83f2dabe2f21cb6b2
    [remap evil-next-flyspell-error] 'evil-next-jinx-error))
 #+end_src
 * Debugging
+** Variable font adjustments
+#+begin_src elisp
+;; Not working.
+(defun my-adjust-visual-fill-column-for-variable-pitch ()
+  "Adjust visual fill column for variable pitch mode."
+  (when variable-pitch-mode
+    ;; Set a different visual fill column for variable pitch mode
+    (setq visual-fill-column-width 60)
+))
+
+(defun my-disable-visual-fill-column-for-variable-pitch ()
+  "Disable visual fill column adjustments for variable pitch mode."
+  (when (and variable-pitch-mode
+             (bound-and-true-p visual-fill-column-mode))
+    ;; Disable visual fill column mode when exiting variable pitch
+    (setq visual-fill-column-width nil)))
+
+(add-hook 'variable-pitch-mode-hook #'my-adjust-visual-fill-column-for-variable-pitch)
+(add-hook 'text-scale-mode-hook 'my-disable-visual-fill-column-for-variable-pitch)
+(setq-default TeX-master nil
+              TeX-command "LaTeX"
+              TeX-engine 'luatex
+  	      preview-scale 1.0
+              preview-scale-function
+              (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
+#+end_src
 ** ACM
 *** Issue
 I want to disable return as a completion command because it's too easy to

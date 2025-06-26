@@ -198,8 +198,38 @@
 ;; Orphanage - collection of Unmaintained org add-ons
 (use-package org-contrib
   :disabled
-  :after org)
+  :after org
+  )
 
+
+;; Potentially fork and add to install examples
+;; (use-package org-todoist
+;;   :vc (:url "https://github.com/Lillenne/org-todoist.git")
+;; )
+
+;; (use-package org-todoist
+;;   :ensure (:host github
+;;            :repo "lillenne/org-todoist"
+;;            :branch "main"
+;;           ;; :files ("org-todoist.el")
+;;            )
+;;   :init
+;; ;; Replace with your API token found in Settings / Integrations / Developer tab
+;; ;; https://www.todoist.com/help/articles/find-your-api-token-Jpzx9IIlB
+;;   (setq org-todoist-api-token "<your-token>")
+;;   )
+
+
+(use-package org-todoist
+  :after gptel ; for whack secret workaround
+  :ensure (:host github
+           :repo "lillenne/org-todoist"
+           :branch "main"
+          ;; :files ("org-todoist.el")
+           )
+  :init
+  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
+  )
 
 (use-package org-pdftools
 	:disabled

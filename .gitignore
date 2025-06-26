@@ -23,3 +23,5 @@
 /fontaine-latest-state.eld
 /etc/scratch/
 /etc/emacs-llm-prompting.org
+/..emacs.d-tabspaces-session.el
+/site-lisp/
