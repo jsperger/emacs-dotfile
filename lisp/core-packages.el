@@ -67,6 +67,7 @@
   )
 
 (use-package exec-path-from-shell
+  :disabled
 	:defines	exec-path-from-shell-arguments
 	exec-path-from-shell-variables
 	exec-path-from-shell-initialize
