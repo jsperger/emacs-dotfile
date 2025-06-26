@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+;; [[file:config.org::init][init]]
 ;; ===================== Elpaca bootstrap install ====================
 ;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
 (defvar elpaca-installer-version 0.11)
@@ -44,29 +45,14 @@
 (elpaca `(,@elpaca-order))
 ;; ======================== END: elpaca bootstrap ========================
 
-;; Elpaca use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
   (elpaca-use-package-mode)
   ;; Assume :elpaca t unless otherwise specified.
-  (setq elpaca-use-package-by-default t))
+  (setq elpaca-use-package-by-default t)
+  )
 
-;; Block until current queue processed.
-(elpaca-wait)
-
-;; ========================= Debugging assistant =========================
-
-
-(defvar my-debug-mode nil
-  "Toggle debugging messages. Set to t to enable, nil to disable.")
-
-(use-package no-littering :ensure (:wait t))
-
-(use-package dash)
-
-(use-package queue)
-
-(use-package plz)
+(elpaca-wait) ; Block until current queue processed.
 
 ;; ============== Define constants for use throughout config =============
 
@@ -74,7 +60,20 @@
 (defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
 
-;;;; ============================== Load path ==============================
+
+(defconst my-debug-mode nil
+  "Toggle debugging messages. Set to t to enable, nil to disable.")
+;; init ends here
+
+;; [[file:config.org::no-littering][no-littering]]
+;; ============== Packages that change core functionality =============
+
+(use-package no-littering :ensure (:wait t))
+
+;; no-littering ends here
+
+;; [[file:config.org::load configuration files][load configuration files]]
+;; ============================== Load path ==============================
 ;; optimize: force "lisp"" and "site-lisp" at the head to reduce the startup time.
 (dolist (dir '("lisp"))
   (push (expand-file-name dir user-emacs-directory) load-path))
