@@ -107,6 +107,8 @@
 (require 'editor-ui)
 (require 'editor-vc)
 
+(require 'ui-modeline)
+
 (require 'tools-denote)
 (require 'tools-diagramming)
 (require 'tools-llm)
