@@ -1,4 +1,4 @@
-;;; lang-markdown.el --- -*- lexical-binding: t; -*-
+;;; lang-markdown.el --- markdown -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020-2023  Tianshu Wang, (C) 2023-2024  John Sperger
 
@@ -110,10 +110,4 @@
   )
 
 (provide 'lang-markdown)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; lang-markdown.el ends here

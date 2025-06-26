@@ -1,4 +1,4 @@
-;;; lang-functions.el ---  -*- lexical-binding: t -*-
+;;; lang-functions.el --- de functions for programming -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; Functions for specific programming languages
 ;;; Code:
@@ -44,9 +44,4 @@
 
 
 (provide 'lang-functions)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; lang-functions.el ends here

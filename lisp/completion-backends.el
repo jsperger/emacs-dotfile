@@ -1,4 +1,4 @@
-;;; completion-backends.el --- summary -*- lexical-binding: t -*-
+;;; completion-backends.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 
@@ -24,8 +24,7 @@
      ((string-prefix-p "!" pattern)
       `(orderless-without-literal . ,(substring pattern 1)))))
 
-  (setq orderless-style-dispatchers '(flex-if-twiddle without-if-bang))
-
+  (setopt orderless-style-dispatchers '(flex-if-twiddle without-if-bang))
 )
 
 (use-package prescient
@@ -53,9 +52,4 @@
 	)
 
 (provide 'completion-backends)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; completion-backends.el ends here

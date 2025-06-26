@@ -1,4 +1,4 @@
-;;; editor-vc.el --- -*- lexical-binding: t; -*-
+;;; editor-vc.el --- version control -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020-2023  Tianshu Wang
 
@@ -173,9 +173,4 @@
   :config (magit-todos-mode 1))
 
 (provide 'editor-vc)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; editor-vc.el ends here

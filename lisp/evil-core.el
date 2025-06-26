@@ -1,4 +1,4 @@
-;;; evil-core.el --- summary -*- lexical-binding: t -*-
+;;; evil-core.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 ;;; Commentary:

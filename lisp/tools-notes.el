@@ -1,10 +1,11 @@
-;;; tools-notes.el --- -*- lexical-binding: t; -*-
+;;; tools-notes.el --- notes -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024 John Sperger
 
 ;; Author: John Sperger
 
 ;;; Commentary:
+;; figure out relationship with denote
 
 ;;; Code:
 
@@ -44,10 +45,4 @@
 
 
 (provide 'tools-notes)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-notes.el ends here

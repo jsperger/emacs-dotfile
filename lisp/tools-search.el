@@ -1,4 +1,4 @@
-;;; tools-search.el ---  -*- lexical-binding: t -*-
+;;; tools-search.el --- search tools -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -20,8 +20,4 @@
  	)
 
 (provide 'tools-search)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
 ;;; tools-search.el ends here

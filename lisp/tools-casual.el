@@ -1,4 +1,4 @@
-;;; tools-casual.el --- -*- lexical-binding: t -*-
+;;; tools-casual.el --- casual suite -*- lexical-binding: t -*-
 
 ;; Author: John Sperger
 

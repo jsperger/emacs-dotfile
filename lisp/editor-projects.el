@@ -1,4 +1,4 @@
-;;; editor-projects.el --- -*- lexical-binding: t; -*-
+;;; editor-projects.el --- projects -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024 John Sperger
 
@@ -200,9 +200,4 @@
 	)
 
 (provide 'editor-projects)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; editor-projects.el ends here

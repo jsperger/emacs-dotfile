@@ -1,4 +1,4 @@
-;;; tools-writing.el --- -*- lexical-binding: t -*-
+;;; tools-writing.el --- prose writing -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -105,9 +105,4 @@
 	)
 
 (provide 'tools-writing)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-writing.el ends here

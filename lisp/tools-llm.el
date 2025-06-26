@@ -1,10 +1,11 @@
-;;; lang-llm.el --- -*- lexical-binding: t; -*-
+;;; lang-llm.el --- large language models -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2024  John Sperger
 
 ;; Author: John Sperger
 
-;;; Commentary: For interacting with large language models (LLMs)
+;;; Commentary:
+;; For interacting with large language models (LLMs)
 
 ;;; Code:
 
@@ -101,10 +102,4 @@
 	 )
 
 (provide 'tools-llm)
-
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; lang-llm.el ends here

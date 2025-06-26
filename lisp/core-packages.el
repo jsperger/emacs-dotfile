@@ -1,9 +1,12 @@
-;;; core-packages.el --- -*- lexical-binding: t; -*-
-;;; Commentary: Packages
+;;; core-packages.el --- deprecating -*- lexical-binding: t; -*-
+;;; Commentary:
+;; This file should be split into more descriptive files or by builtin/not built in
+;; Currently it's a confusing mixture of external and builtin packages
+;; and who knows what "core" means. I mean emacs and daemons would make sense but
+;; why'd I put surround and banner comment in here?
 ;; Note to future self: :defer t is needed to defer loading when elpaca nil is
 ;; specified.
 
-;;;
 ;;; Code:
 
 
@@ -170,9 +173,4 @@
 		"ab" 'banner-comment))
 
 (provide 'core-packages)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; core-packages.el ends here

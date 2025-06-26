@@ -1,4 +1,4 @@
-;;; editor-icons.el ---  -*- lexical-binding: t -*-
+;;; editor-icons.el --- icons -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -75,9 +75,4 @@
 	:custom (nerd-icon-scale-factor 0.8)
 )
 (provide 'editor-icons)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; editor-icons.el ends here

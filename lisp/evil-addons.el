@@ -1,4 +1,4 @@
-;;; evil-addons.el --- summary -*- lexical-binding: t -*-
+;;; evil-addons.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 ;;; Commentary:

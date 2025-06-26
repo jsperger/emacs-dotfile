@@ -1,4 +1,4 @@
-;;; editor-lsp.el -*- lexical-binding: t; -*-
+;;; editor-lsp.el --- builtin lsp config -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -97,9 +97,4 @@
 
 
 (provide 'editor-lsp)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; editor-lsp.el ends here

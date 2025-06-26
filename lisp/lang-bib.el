@@ -1,4 +1,4 @@
-;;; lang-bib.el ---  -*- lexical-binding: t -*-
+;;; lang-bib.el --- bibliography -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -50,9 +50,4 @@
 
 
 (provide 'lang-bib)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; lang-bib.el ends here

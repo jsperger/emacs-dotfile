@@ -1,4 +1,4 @@
-;;; tools-media.el --- summary -*- lexical-binding: t -*-
+;;; tools-media.el --- media players -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 
@@ -14,9 +14,4 @@
 	)
 
 (provide 'tools-media)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-media.el ends here

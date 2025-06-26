@@ -1,4 +1,4 @@
-;;; editor-fonts.el ---  -*- lexical-binding: t; -*-
+;;; editor-fonts.el --- font config -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -173,9 +173,4 @@
 
 
 (provide 'editor-fonts)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; editor-fonts.el ends here

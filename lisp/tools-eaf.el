@@ -1,4 +1,4 @@
-;;; tools-eaf.el ---  -*- lexical-binding: t -*-
+;;; tools-eaf.el --- external app framework -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; For Emacs application framework packages
 ;; https://github.com/emacs-eaf/emacs-application-framework
@@ -27,9 +27,4 @@
   ) 
 
 (provide 'tools-eaf)
-;;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-eaf.el ends here

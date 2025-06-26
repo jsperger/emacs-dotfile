@@ -1,4 +1,4 @@
-;;; lang-rust.el --- -*- lexical-binding: t; -*-
+;;; lang-rust.el --- rust and cargo -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023  John Sperger
 
@@ -37,9 +37,4 @@
 		"f" 'cargo-mode-test-current-test)
 	)
 (provide 'lang-rust)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; lang-rust.el ends here

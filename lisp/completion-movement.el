@@ -1,4 +1,4 @@
-;;; completion-movement.el --- summary -*- lexical-binding: t -*-
+;;; completion-movement.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 
@@ -96,10 +96,6 @@
 			(?h . "HACK"))
 		"Default mapping of narrow and keywords.")
 	)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
+
 (provide 'completion-movement)
 ;;; completion-movement.el ends here

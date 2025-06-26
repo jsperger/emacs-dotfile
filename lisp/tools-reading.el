@@ -1,10 +1,8 @@
-;;; tools-reading.el ---  -*- lexical-binding: t -*-
+;;; tools-reading.el --- reading text -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
-;;;
-;; --- File-type handlers ---
-;;;
+;;;; ========================== File-type handlers =========================
 
 (use-package djvu)
 
@@ -36,9 +34,7 @@
 ;;	https://github.com/chenyanming/paw
 ;;	)
 
-;;;
-;; --- Readling List ---
-;;;
+;;;; ============================ Readling List ============================
 
 (use-package wallabag
 :disabled
@@ -79,9 +75,7 @@
 (use-package calibredb
 	:disabled)
 
-;;;
-;; --- Documentation ---
-;;;
+;;;; ============================ Documentation ============================
 
 (use-package devdocs
 	:general
@@ -110,9 +104,4 @@
 (use-package sicp)
 
 (provide 'tools-reading)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-reading.el ends here

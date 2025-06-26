@@ -1,4 +1,4 @@
-;;; editor-themes.el --- -*- lexical-binding: t; -*-
+;;; editor-themes.el --- themes -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020-2023  Tianshu Wang
 
@@ -8,7 +8,7 @@
 
 ;;; Code:
 
-;;; ============================ Theme packages ===========================
+;;;; ============================ Theme packages ===========================
 
 ;; (use-package nano-theme
 ;;  :disabled)
@@ -49,7 +49,7 @@
 (use-package solarized-theme)
 
 
-;;; =================== Hooks for after loading a theme ===================
+;;;; =================== Hooks for after loading a theme ===================
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -106,9 +106,4 @@
 					)
 
 (provide 'editor-themes)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; editor-themes.el ends here

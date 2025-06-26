@@ -1,4 +1,4 @@
-;;; tools-lsp-bridge.el --- summary -*- lexical-binding: t -*-
+;;; tools-lsp-bridge.el --- fast lsp -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 
@@ -105,9 +105,4 @@
 )
 
 (provide 'tools-lsp-bridge)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-lsp-bridge.el ends here

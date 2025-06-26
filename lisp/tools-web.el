@@ -1,5 +1,6 @@
-;;; tools-web.el ---  -*- lexical-binding: t -*-
+;;; tools-web.el --- browse gemini/gopher -*- lexical-binding: t; -*-
 ;;; Commentary:
+;; rename /refactor
 ;;; Code:
 
 (use-package elpher
@@ -7,9 +8,4 @@
 	(despot-def "ag" 'elpher))
 
 (provide 'tools-web)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-web.el ends here

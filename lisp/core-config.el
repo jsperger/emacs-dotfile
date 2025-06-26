@@ -1,4 +1,4 @@
-;;; core-config.el -*- lexical-binding: t; -*-
+;;; core-config.el --- config -*- lexical-binding: t; -*-
 
 ;; Forked from Tianshu Wang
 
@@ -294,10 +294,4 @@ the unwritable tidbits."
   (setopt winner-boring-buffers-regexp "\\*.*\\*"))
 
 (provide 'core-config)
-
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; core-config.el ends here

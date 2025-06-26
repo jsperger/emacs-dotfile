@@ -1,4 +1,4 @@
-;;; lang-data-formats.el --- -*- lexical-binding: t; -*-
+;;; lang-data-formats.el --- data format modes -*- lexical-binding: t; -*-
 
 
 ;; Author: Tianshu Wang, John Sperger
@@ -46,10 +46,4 @@
 (use-package toml)
 
 (provide 'lang-data-formats)
-
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; lang-data-formats.el ends here

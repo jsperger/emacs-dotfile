@@ -1,4 +1,4 @@
-;;; completion-actions.el --- summary -*- lexical-binding: t -*-
+;;; completion-actions.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 
@@ -66,9 +66,4 @@
 
 
 (provide 'completion-actions)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; completion-actions.el ends here

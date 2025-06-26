@@ -1,4 +1,4 @@
-;;; core-funcs.el --- -*- lexical-binding: t; -*-
+;;; core-funcs.el --- de functions -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020-2023  Tianshu Wang
 
@@ -394,9 +394,4 @@ a dedicated window."
 
 
 (provide 'core-funcs)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; core-funcs.el ends here

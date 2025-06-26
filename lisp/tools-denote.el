@@ -1,4 +1,4 @@
-;;; tools-denote.el ---  -*- lexical-binding: t -*-
+;;; tools-denote.el --- de note takin app -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -118,9 +118,4 @@
 
 
 (provide 'tools-denote)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-denote.el ends here

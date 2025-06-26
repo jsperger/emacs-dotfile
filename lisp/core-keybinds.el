@@ -1,4 +1,4 @@
-;;; core-keybinds.el --- -*- lexical-binding: t; -*-
+;;; core-keybinds.el --- general keybinds -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2020-2023  Tianshu Wang
 
@@ -386,9 +386,4 @@
                           (indent-according-to-mode))))))
 
 (provide 'core-keybinds)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; core-keybinds.el ends here

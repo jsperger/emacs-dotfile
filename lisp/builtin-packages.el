@@ -1,4 +1,4 @@
-;;; builtin-packages.el --- summary -*- lexical-binding: t -*-
+;;; builtin-packages.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 

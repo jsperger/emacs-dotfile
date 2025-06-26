@@ -1,4 +1,4 @@
-;;; completion-display.el --- summary -*- lexical-binding: t -*-
+;;; completion-display.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 
@@ -16,7 +16,8 @@
 	:after marginalia
 	:config
 	(setcar (alist-get 'package marginalia-annotator-registry)
-          #'epkg-marginalia-annotate-package))
+          #'epkg-marginalia-annotate-package)
+  )
 
 (use-package nerd-icons-completion
   :after marginalia
@@ -27,9 +28,4 @@
 
 
 (provide 'completion-display)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; completion-display.el ends here

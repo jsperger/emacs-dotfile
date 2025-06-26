@@ -1,6 +1,7 @@
-;;; tools-programming.el ---  -*- lexical-binding: t -*-
+;;; tools-programming.el --- general programming  -*- lexical-binding: t; -*-
 
-;;; Commentary: General programming tools excluding bridge-lsp
+;;; Commentary:
+;; General programming tools excluding bridge-lsp
 ;; Language-specific packages belong in the relevant lang-{foo}.el file
 
 ;;; Code:
@@ -50,9 +51,4 @@
 
 
 (provide 'tools-programming)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-programming.el ends here

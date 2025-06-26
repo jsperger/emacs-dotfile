@@ -2,7 +2,6 @@
 
 ;; Author: John Sperger
 
-
 ;;; Commentary:
 
 ;; commentary
@@ -28,10 +27,4 @@
 	:disabled)
 
 (provide 'lang-python)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; lang-python.el ends here

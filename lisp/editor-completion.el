@@ -116,9 +116,4 @@
   (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
 (provide 'editor-completion)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; editor-completion.el ends here

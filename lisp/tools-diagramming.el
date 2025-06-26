@@ -1,4 +1,4 @@
-;;; tools-diagramming.el ---  -*- lexical-binding: t -*-
+;;; tools-diagramming.el --- diagramming dsls  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -39,9 +39,4 @@
 
 
 (provide 'tools-diagramming)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-diagramming.el ends here

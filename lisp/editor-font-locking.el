@@ -1,4 +1,4 @@
-;;; editor-font-locking.el --- summary -*- lexical-binding: t -*-
+;;; editor-font-locking.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 ;; Version: version
@@ -47,9 +47,4 @@
 (use-package highlight-refontification)
 
 (provide 'editor-font-locking)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; editor-font-locking.el ends here

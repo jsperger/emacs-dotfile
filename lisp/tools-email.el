@@ -1,4 +1,4 @@
-;;; tools-email.el --- summary -*- lexical-binding: t -*-
+;;; tools-email.el --- summary -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 ;;; Commentary:
@@ -7,14 +7,11 @@
 
 ;;; Code:
 
-(use-package mu4e)
+(use-package mu4e
+  :disabled)
 
-(use-package notmuch)
+(use-package notmuch
+  :disabled)
 
 (provide 'tools-email)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; tools-email.el ends here

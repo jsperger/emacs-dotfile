@@ -1,10 +1,10 @@
-;;; core-treesit.el --- summary -*- lexical-binding: t -*-
+;;; core-treesit.el --- treesitter config -*- lexical-binding: t; -*-
 
 ;; Author: John Sperger
 
 ;;; Commentary:
 
-;; commentary
+;; revisit in emacs 31, finally getting some builtin sources
 
 ;;; Code:
 
@@ -33,9 +33,4 @@
 	)
 
 (provide 'core-treesit)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 ;;; core-treesit.el ends here

@@ -1,4 +1,4 @@
-;;; lang-org.el --- -*- lexical-binding: t; -*-
+;;; lang-org.el --- org -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025  John Sperger
 
@@ -328,9 +328,4 @@ With a prefix ARG, remove start location."
 	)
 
 (provide 'lang-org)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
 ;;; lang-org.el ends here
