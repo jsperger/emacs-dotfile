@@ -195,8 +195,11 @@
 
 ;; ============================== Windows ============================= 
 (use-package golden-ratio
+  :disabled
   :config (setopt golden-ratio-mode nil)
 	)
+
+(use-package zoom)
 
 (use-package eyebrowse
 	:disabled)

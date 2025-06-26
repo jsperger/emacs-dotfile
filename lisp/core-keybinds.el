@@ -275,7 +275,8 @@
     "tM"      'consult-minor-mode-menu
     "td"      'toggle-debug-on-error
     "tf"      'display-fill-column-indicator-mode
-    "tg"      'golden-ratio-mode
+    ;;    "tg"      'golden-ratio-mode
+    "tg"      'zoom-mode
     "th"      'hs-minor-mode
     "tj"      'jinx-mode
     "tl"      'toggle-truncate-lines
@@ -327,7 +328,8 @@
     "wD"      'delete-other-windows
     "wm"      'toggle-maximize-buffer
     "wf"      'follow-mode
-    "wg"      'golden-ratio
+;;    "wg"      'golden-ratio
+    "wg"      'zoom-mode
     "wh"      'evil-window-left
     "wH"      'evil-window-move-far-left
     "wj"      'evil-window-down
