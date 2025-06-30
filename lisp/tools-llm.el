@@ -43,9 +43,9 @@
 		:endpoint "/api/v1/chat/completions"
 		:stream t
 		:key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
-		:models '(google/gemini-2.5-flash-preview-05-20
-              google/gemini-2.5-flash-preview-05-20:thinking
-							google/gemini-2.5-pro-preview
+		:models '(google/gemini-2.5-flash
+							google/gemini-2.5-pro
+              openrouter/auto
 							anthropic/claude-sonnet-4
               deepseek/deepseek-r1-0528:free
               deepseek/deepseek-prover-v2:free
@@ -60,6 +60,12 @@
 		:stream t
 		:key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
 		)
+
+  (gptel-make-gemini "Gemini-API"
+    :stream t
+    :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
+    )
+
 	)
 
 (use-package aidermacs

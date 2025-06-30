@@ -25,3 +25,4 @@
 /etc/emacs-llm-prompting.org
 /..emacs.d-tabspaces-session.el
 /site-lisp/
+*.sqlite
