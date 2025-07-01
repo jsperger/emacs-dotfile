@@ -122,6 +122,7 @@
 
 (require 'lang-bib)
 (require 'lang-data-formats)
+(require 'lang-go)
 (require 'lang-lisp)
 (require 'lang-markdown)
 (require 'lang-org)
