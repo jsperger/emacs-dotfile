@@ -1,4 +1,4 @@
-;;; tools-programming.el --- general programming  -*- lexical-binding: t; -*-
+;;; tools-programming.el --- general programming  -*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; General programming tools excluding bridge-lsp
@@ -9,8 +9,8 @@
 ;; ====================== Formatting and Linting =====================  
 
 (use-package apheleia
-  :config (setq apheleia-global-mode nil)
-  ;; :custom (apheleia-global-mode nil)
+  :disabled
+  :custom (apheleia-global-mode nil)
   )
 
 (use-package editorconfig

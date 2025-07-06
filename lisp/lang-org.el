@@ -20,7 +20,11 @@
 	:config
 	(setopt org-latex-bib-compiler "biber"
 					org-latex-compiler "lualatex"
-          org-babel-load-languages '((R . t) (emacs-lisp . t))
+          org-babel-load-languages '(
+                                     (emacs-lisp . t)
+                                     (R . t)
+                                     (shell . t)
+                                     )
           )
 
   (use-package oc
