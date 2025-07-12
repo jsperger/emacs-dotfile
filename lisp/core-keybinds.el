@@ -91,7 +91,8 @@
 
 		;;=================================== code =================================
     "c"       (cons "code" (make-sparse-keymap))
-    "cb"      'flymake-show-buffer-diagnostics
+    "cb"      'lsp-bridge-diagnostic-list
+    "cB"      'flymake-show-buffer-diagnostics
     "cc"      'compile
     "cj"      'previous-error
     "ck"      'next-error
