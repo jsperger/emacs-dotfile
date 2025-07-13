@@ -72,6 +72,7 @@
 	:general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
 	(setopt aidermacs-backend 'vterm)
+  (setenv "GEMINI_API_KEY" (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
   (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
   (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
 	(setenv "LM_STUDIO_API_KEY" "dummy-api-key")
@@ -79,7 +80,7 @@
   :custom
   ; See the Configuration section below
   (aidermacs-use-architect-mode t)
-  (aidermacs-default-model "sonnet")
+  (aidermacs-default-model "gemini/gemini-pro-2.5")
   )
 
 (use-package forge-llm
