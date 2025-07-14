@@ -172,5 +172,7 @@
 	(tyrant-def
 		"ab" 'banner-comment))
 
+(use-package auth-source-1password)
+
 (provide 'core-packages)
 ;;; core-packages.el ends here

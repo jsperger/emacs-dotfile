@@ -1,9 +1,9 @@
 ;;; editor-vc.el --- version control -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2020-2023  Tianshu Wang
+;; Copyright (C) 2023-2025 John Sperger, 2020-2023  Tianshu Wang
 
-;; Author: Tianshu Wang <wang@tianshu.me>
-;; edits: John Sperger
+;; Current author: John Sperger
+;; Original author: Tianshu Wang <wang@tianshu.me>
 ;;; Commentary:
 
 ;;; Code:
@@ -21,19 +21,12 @@
 	 magit-define-global-key-bindings nil
 	 forge-add-default-bindings nil
 	 )
-  ;; (with-eval-after-load 'project
-  ;;   (define-key project-prefix-map "m" #'magit-project-status)
-  ;;   (add-to-list 'project-switch-commands '(magit-project-status "Magit") t))
-
 	:hook (magit-diff-mode . (lambda () (toggle-truncate-lines -1)))
   :config
   (setopt magit-diff-refine-hunk t
         magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
         magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
         magit-save-repository-buffers 'dontask)
-
-  ;; (add-hook 'magit-process-find-password-functions 'magit-process-password-auth-source)
-
   (defun org-reveal-advice (&rest _args)
     "Unfold the org headings for a target line.
     This can be used to advice functions that might open .org files.
@@ -67,24 +60,23 @@
 		)
 	)
 
-(use-package closql
-  :disabled)
+(use-package closql)
 
 (use-package ghub)
 
 (use-package forge
-  :after magit 
+  :after magit
   :init
   (setq
-	 auth-sources '("~/.authinfo")
-;;  forge-add-default-bindings nil  must be done before magit is loaded not here
+	 auth-sources '("~/.authinfo.gpg")
+   ;;  forge-add-default-bindings nil  must be done before magit is loaded not here
    forge-database-connector 'sqlite-builtin
 	 )
 	)
 
 (use-package transient
   :after vc magit
-  :config
+  :general
   (general-def transient-base-map   "q" 'transient-quit-one)
   (general-def transient-sticky-map "q" 'transient-quit-seq))
 

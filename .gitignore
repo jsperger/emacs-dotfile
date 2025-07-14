@@ -26,3 +26,4 @@
 /..emacs.d-tabspaces-session.el
 /site-lisp/
 *.sqlite
+.aider*
