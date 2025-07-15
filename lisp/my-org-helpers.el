@@ -38,15 +38,24 @@ corresponding ':tangle' header argument."
   "Update modification info in the current subtree's properties.
 Sets 'LAST_MODIFIED' timestamp and 'MODIFIED_WITH_EMACS' version.
 Intended for `before-save-hook` in an Org mode buffer."
-  (when (derived-mode-p 'org-mode)
+ (when (derived-mode-p 'org-mode)
     (save-excursion
       (org-back-to-heading t)
-      ;; Set the last modified timestamp
-      (org-entry-put (point) "LAST_MODIFIED"
-                     (format-time-string "[%Y-%m-%d %a %H:%M]"))
-      ;; Set the Emacs version used for the modification
-      (org-entry-put (point) "MODIFIED_WITH_EMACS"
-                     (emacs-version))))
-  )
+      (let* ((emacs-full-version (emacs-version))
+             (emacs-version-short (car (split-string emacs-full-version " ("))))
+        ;; Set the last modified timestamp. Using `nil` as the first
+        ;; argument correctly finds the current entry's property drawer.
+        (org-entry-put nil "LAST_MODIFIED"
+                       (format-time-string "[%Y-%m-%d %a %H:%M]"))
+        ;; Set the Emacs version in the same property drawer.
+        (org-entry-put nil "MODIFIED_WITH_EMACS" emacs-version-short))))
+ )
+
+(defun my/org-tangle-add-nocompile-footer (epilogue-data)
+  "Generate file-local variables and a closing comment for tangling.
+Argument EPILOGUE-DATA is the tangled filename."
+  (let ((filename (file-name-nondirectory epilogue-data)))
+    (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n\n;;; %s ends here\n" filename)))
+
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here

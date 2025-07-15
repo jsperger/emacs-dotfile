@@ -201,10 +201,9 @@
 	)
 
 (use-package org-make-toc
-  :after org
-  :config
-  (setopt org-make-toc-insert-custom-ids t)
-	)
+  :hook org-mode
+  :config  (setopt org-make-toc-insert-custom-ids t)
+  )
 
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
