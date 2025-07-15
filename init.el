@@ -74,9 +74,8 @@
 (defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
 
-;; ============================== Load path ==============================
+;;;; ============================== Load path ==============================
 ;; optimize: force "lisp"" and "site-lisp" at the head to reduce the startup time.
-
 (dolist (dir '("lisp"))
   (push (expand-file-name dir user-emacs-directory) load-path))
 
@@ -89,53 +88,68 @@
 (require 'builtin-packages)
 (require 'core-config)
 (require 'core-funcs)
-(require 'core-packages)
-(require 'core-treesit)
 
-(require 'completion-actions)
-(require 'completion-backends)
-(require 'completion-display)
-(require 'completion-movement)
+;; (require 'core-packages)
+;; (require 'core-treesit)
+
+;; (require 'completion-actions)
+;; (require 'completion-backends)
+;; (require 'completion-display)
+;; (require 'completion-movement)
 (require 'completion-snippets)
 
-(require 'editor-icons)
-(require 'editor-fonts)
-(require 'editor-font-locking)
-(require 'editor-themes)
-(require 'editor-misc)
-(require 'editor-projects)
-(require 'editor-ui)
+;; (require 'editor-icons)
+;; (require 'editor-fonts)
+;; (require 'editor-font-locking)
+;; (require 'editor-themes)
+;; (require 'editor-misc)
+;; (require 'editor-projects)
+;; (require 'editor-ui)
 (require 'editor-vc)
 
-(require 'ui-modeline)
+;; (require 'ui-modeline)
 
-(require 'tools-denote)
-(require 'tools-diagramming)
+;; (require 'tools-denote)
+;; (require 'tools-diagramming)
 (require 'tools-llm)
-(require 'tools-media)
-(require 'tools-notes)
-(require 'tools-programming)
-(require 'tools-reading)
+;; (require 'tools-media)
+;; (require 'tools-notes)
+;; (require 'tools-programming)
+;; (require 'tools-reading)
 (require 'tools-search)
-(require 'tools-web)
-(require 'tools-writing)
+;; (require 'tools-web)
+;; (require 'tools-writing)
 
-(require 'lang-bib)
-(require 'lang-data-formats)
-(require 'lang-go)
-(require 'lang-lisp)
-(require 'lang-markdown)
-(require 'lang-org)
-(require 'lang-python)
-(require 'lang-r)
-(require 'lang-rust)
-(require 'lang-tex)
-(require 'lang-web)
-(require 'lang-functions)
+;; (require 'lang-bib)
+;; (require 'lang-data-formats)
+;; (require 'lang-go)
+;; (require 'lang-lisp)
+;; (require 'lang-markdown)
+;; (require 'lang-org)
+;; (require 'lang-python)
+;; (require 'lang-r)
+;; (require 'lang-rust)
+;; (require 'lang-tex)
+;; (require 'lang-web)
+;; (require 'lang-functions)
 
 (require 'tools-lsp-bridge)
-(require 'tools-org-capture)
-;; (require 'tools-eaf)
+;; (require 'tools-org-capture)
+;; (require 'org-node)
+;; ;; (require 'tools-eaf)
+
+
+;;;; --- Load use-package configurations manually ---
+;; (let ((config-dir (expand-file-name "config" user-emacs-directory)))
+;;   (dolist (file
+;;            '(;; Core setup (load these first)
+;;              "setup-org.el"
+;;              "setup-lsp.el"
+;;              ;; Major packages and modes
+;;              "setup-lang-r.el"
+;;              "setup-lang-rust.el"
+;;              "setup-tools-notes.el"))
+;;     (load-file (expand-file-name file config-dir))))
 
 ;; ====================== After-init hooks + custom ======================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
