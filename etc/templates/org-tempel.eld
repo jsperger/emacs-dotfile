@@ -29,6 +29,10 @@ n
   "-----"
   )
 
+(make-toc-local-var "# Local Variables:" n
+                    "# eval: (add-hook 'before-save-hook #'org-make-toc nil t)" n
+                    "# End:")
+
 ;; Beamer - TODO: Figure out how to use latex inserts in org
 ;; to avoid copy pasting
 (columns "\\begin{columns}

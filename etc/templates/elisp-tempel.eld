@@ -26,13 +26,17 @@ emacs-lisp-mode elisp-mode
                  ";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name)))
                  " ends here" n)
 
-(footer-vars ";;; Local Variables:
+(local-vars-footer ";;; Local Variables:
 ;;; no-byte-compile: t
 ;;; no-native-compile: t
 ;;; no-update-autoloads: t
 ;;; End:")
 
-(footer-emacs-config "
+
+(footer-base "(provide '" (file-name-base)  ")" n
+";;; " (file-name-nondirectory (or (buffer-file-name) (buffer-name))) " ends here")
+
+(footer-no-compile "
 (provide '" (file-name-base)  ")
 ;;; Local Variables:
 ;;; no-byte-compile: t
