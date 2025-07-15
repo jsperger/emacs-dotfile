@@ -1,13 +1,12 @@
 ;;; config/setup-markdown.el --- Markdown configuration -*- lexical-binding: t -*-
-
+;;; Commentary:
+;;; Code:
 (use-package markdown-mode
-  :mode ("README\.md\'' . gfm-mode)
-	("\.qmd\'' . markdown-mode)
-  :init
-	(setopt markdown-command "multimarkdown")
+  :mode ("README\\.md\\'" . gfm-mode)
+        ("\\.qmd\\'" . markdown-mode)
+  :init (setq markdown-command "multimarkdown")
   :config
   (setopt markdown-fontify-code-blocks-natively t)
-
   (despot-def markdown-mode-map
     "RET"   'markdown-do
     "M-RET" 'markdown-insert-list-item

@@ -1,7 +1,5 @@
 ;;; config/setup-vc.el --- Version control configuration -*- lexical-binding: t -*-
 
-(require 'my-vc-helpers)
-
 (use-package vc
   :ensure nil
   :config

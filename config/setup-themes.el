@@ -3,7 +3,7 @@
 (require 'my-theme-helpers)
 
 (use-package catppuccin-theme
-  :defer t)
+  :disabled)
 
 (use-package doom-themes)
 
@@ -33,7 +33,8 @@
 
 (use-package modus-themes)
 
-(use-package solarized-theme)
+(use-package solarized-theme
+  :disabled)
 
 (advice-add 'load-theme :after #'load-theme@run-hooks)
 (advice-add 'load-theme :before #'load-theme@theme-dont-propagate)

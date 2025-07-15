@@ -1,5 +1,6 @@
 ;;; config/setup-ui.el --- UI configuration -*- lexical-binding: t -*-
-
+;;; Commentary:
+;;; Code:
 (use-package mct
 	:disabled
 	:hook (vertico-mode . mct-mode))
@@ -24,6 +25,7 @@
   :config (advice-add 'outline-flag-region :after 'backline-update))
 
 (use-package focus
+  :disabled
 	:general
 	(tyrant-def "tF" 'focus-mode)
 	)
@@ -67,23 +69,24 @@
 	)
 
 (use-package shackle
-	:config
-	(setopt shackle-mode t
-					shackle-default-size 0.2
-					shackle-rules `(
-											(help-mode :select t :align right :size ,fill-column)
-											(helpful-mode :select t :align right :size ,fill-column)
-											("*Messages*"                    :select t :align t)
-											("*eldoc*"                       :align t)
-											(special-mode                    :align t)
-											(process-menu-mode               :align t)
-											(compilation-mode                :align t)
-											(flymake-diagnostics-buffer-mode :align t)
-											("*Shell Command Output*"        :align t :size 2)
-											("*Async Shell Command*"         :align t :size 2)
-											("*elpaca-info*" :align t)
-											))
-	)
+  :config
+  (setopt shackle-mode t
+          shackle-default-size 0.2
+          shackle-rules
+          `((help-mode :select t :align right :size
+                       fill-column)
+            (helpful-mode :select t :align right :size ,fill-column)
+            ("*Messages*"                    :select t :align t)
+            ("*eldoc*"                       :align t)
+            (special-mode                    :align t)
+            (process-menu-mode               :align t)
+            (compilation-mode                :align t)
+            (flymake-diagnostics-buffer-mode :align t)
+            ("*Shell Command Output*"        :align t :size 2)
+            ("*Async Shell Command*"         :align t :size 2)
+            ("*elpaca-info*" :align t)
+            ))
+  )
 
 (use-package spacious-padding
   :config
@@ -102,9 +105,9 @@
 (use-package visual-fill-column
 	:hook (elpaca-after-init . global-visual-fill-column-mode)
   :config
-	(setopt
-   visual-fill-column-center-text t
-	 visual-fill-column-extra-text-width '(4 . 4)
+  (setopt   visual-fill-column-center-text t
+	    visual-fill-column-extra-text-width '(4 . 4)
+            fill-column 80
    )
   )
 
@@ -125,6 +128,7 @@
     "wC" 'global-writeroom-mode))
 
 (use-package logos
+  :disabled
 	:config
 	(setopt olivetti-body-width 0.7
 				olivetti-minimum-body-width 80
@@ -160,7 +164,8 @@
   :config (setopt golden-ratio-mode nil)
 	)
 
-(use-package zoom)
+(use-package zoom
+  :disabled)
 
 (use-package eyebrowse
 	:disabled)
@@ -197,14 +202,6 @@
     (setopt sideline-backends-right '(sideline-flymake))
     (add-hook 'flymake-mode-hook
               (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
-
-(use-package sideline-flymake
-	:disabled
-  :hook (flymake-mode . sideline-mode)
-  :init
-  (setq sideline-flymake-display-mode 'point)
-  (setq sideline-backends-right '(sideline-flymake))
-  )
 
 ;; Local Variables:
 ;; no-byte-compile: t

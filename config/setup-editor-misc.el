@@ -3,9 +3,11 @@
 (require 'my-editor-helpers)
 
 (use-package dumb-jump
+  :disabled
   :init
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  (setq dumb-jump-selector 'completing-read))
+  (setq dumb-jump-selector 'completing-read)
+  )
 
 (use-package helpful
   :config
