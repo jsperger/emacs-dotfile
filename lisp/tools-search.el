@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-
-
-(use-package elgrep)
-
 (use-package rg
 	:config
 	(when (and IS-MAC (daemonp))
