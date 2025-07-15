@@ -3,7 +3,8 @@
 (use-package vc
   :ensure nil
   :config
-  (setopt vc-follow-symlinks t))
+  (setopt vc-follow-symlinks t)
+  )
 
 (use-package magit
   :init
@@ -42,10 +43,6 @@
     "d"  'magit-diff
 		)
 	)
-
-(use-package closql)
-
-(use-package ghub)
 
 (use-package forge
   :after magit
@@ -118,11 +115,13 @@
   (tyrant-def
     "gI"  (cons "gitignore" (make-sparse-keymap))
     "gIn" 'gitignore-templates-new-file
-    "gIi" 'gitignore-templates-insert))
+    "gIi" 'gitignore-templates-insert)
+  )
 
 (use-package magit-todos
   :after magit
-  :config (magit-todos-mode 1))
+  :config (magit-todos-mode 1)
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t

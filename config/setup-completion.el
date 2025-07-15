@@ -43,8 +43,9 @@
   (use-package vertico-multiform
     :ensure nil
     :hook (vertico-mode . vertico-multiform-mode)
-		:config
-		(add-to-list 'vertico-multiform-categories '(embark-keybinding grid)))
+    :config
+    (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
+    )
   )
 
 

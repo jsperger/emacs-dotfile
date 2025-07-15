@@ -32,6 +32,15 @@
   ;;                         fr))))))
 
   ;;   (add-to-list 'embark-indicators #'embark-vertico-indicator))
+  :config
+  (defun bibtex-key-embark ()
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (when (looking-at bibtex-entry-maybe-empty-head)
+      (cons 'bibtex-key
+            (bibtex-key-in-head)))))
+
+
   :general
   (:keymaps '(global normal)
             "C-." 'embark-act

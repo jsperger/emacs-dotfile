@@ -1,7 +1,5 @@
 ;;; config/setup-bib.el --- Bibliography configuration -*- lexical-binding: t -*-
 
-(require 'my-bib-helpers)
-
 (use-package bibtex
   :ensure nil
   )
@@ -10,13 +8,15 @@
   :after bibtex auctex
   :hook ((org-mode LaTeX-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
   :init
+
   (with-eval-after-load 'embark
     (defvar-keymap bibtex-key-embark-map
       :doc "Embark keymap for Zetteldeft links"
       :parent embark-general-map
       "f" #'citar-open
       "n" #'citar-open-notes)
-    (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map)))
+    (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map))
+    )
 
   :general
   (tyrant-def "aC" 'citar-open)
@@ -30,7 +30,12 @@
 (use-package citar-embark
   :after citar embark
   :config
-  (citar-embark-mode))
+  (citar-embark-mode)
+  (defun citar-setup-capf ()
+  "add `citar-capf' to `completion-at-point-functions'"
+  (add-to-list 'completion-at-point-functions #'citar-capf))
+
+)
 
 (use-package ebib
 	:general

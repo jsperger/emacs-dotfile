@@ -43,7 +43,7 @@
      (jinx-local-words . "engine-specific model-specific")
      (org-list-indent-offset . 2) (TeX-master . t)))
  '(standard-indent 2)
- '(trusted-content '("~/.emacs.d/" "~/projects/")))
+ '(trusted-content '("~/.emacs.d/" "~/projects/" "~/code/best-analysis")))
 
 
 

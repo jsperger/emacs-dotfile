@@ -1,8 +1,8 @@
 ;;; config/setup-icons.el --- Icons configuration -*- lexical-binding: t -*-
 
 (use-package nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+  :hook  (dired-mode . nerd-icons-dired-mode)
+  )
 
 (use-package nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
