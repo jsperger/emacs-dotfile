@@ -275,12 +275,13 @@ With a prefix ARG, remove start location."
 	)
 
 (use-package org-make-toc
-	:hook (org-mode . org-make-toc-mode)
   :after org
+  :config
+  (setopt org-make-toc-insert-custom-ids t)
 	)
 
 
-;;; ============================== Exporters =============================
+;;;; ============================== Exporters =============================
 
 
 (use-package ox-pandoc
@@ -301,26 +302,24 @@ With a prefix ARG, remove start location."
 (use-package ox-beamer-lecture
 	:after org)
 
-;;;
-;;; ============================== Appearance =============================
-;;;
+
+;;;; ============================== Appearance =============================
+
 
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
   :config
 	(set-face-attribute 'org-modern-symbol nil :family "Iosevka")
-  (setq
-   ;; Edit settings
-   org-auto-align-tags nil
-   org-tags-column 0
-   org-catch-invisible-edits 'show-and-error
-   org-special-ctrl-a/e t
-   org-insert-heading-respect-content t
-
-   ;; Org styling, hide markup etc.
-   org-hide-emphasis-markers t
-   org-pretty-entities t
-   org-ellipsis "…"))
+  (setopt  org-auto-align-tags nil
+           org-tags-column 0
+           org-catch-invisible-edits 'show-and-error
+           org-special-ctrl-a/e t
+           org-insert-heading-respect-content t
+           ;; Org styling, hide markup etc.
+           org-hide-emphasis-markers t
+           org-pretty-entities t
+           org-ellipsis "…")
+  )
 
 (use-package org-side-tree
 	:disabled
