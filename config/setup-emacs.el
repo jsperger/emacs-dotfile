@@ -149,13 +149,6 @@
 		"Sr" 'surround-replace)
 	)
 
-(use-package banner-comment
-	:config
-	(setopt banner-comment-width 72)
-	:general
-	(tyrant-def
-		"ab" 'banner-comment))
-
 (use-package auth-source-1password)
 
 ;;; setup-emacs.el ends here
