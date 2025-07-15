@@ -1,7 +1,5 @@
 ;;; config/setup-completion.el --- Completion configuration -*- lexical-binding: t -*-
 
-(require 'my-completion-helpers)
-
 (use-package vertico
   :ensure (:files (:defaults "extensions/*.el"))
   :hook (elpaca-after-init . vertico-mode)

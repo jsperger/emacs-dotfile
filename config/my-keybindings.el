@@ -1,4 +1,4 @@
-;;; lisp/my-keybindings.el --- Keybindings -*- lexical-binding: t -*-
+;;; config/my-keybindings.el --- Keybindings -*- lexical-binding: t -*-
 
 (tyrant-def
   "SPC"     '("M-x" . execute-extended-command)
@@ -342,5 +342,10 @@
                         (delete-region (point) prev-pos)
                         (indent-according-to-mode)))))
 
-(provide 'my-keybindings)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; my-keybindings.el ends here

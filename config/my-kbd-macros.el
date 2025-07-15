@@ -1,4 +1,4 @@
-;;; lisp/my-kbd-macros.el --- Keyboard macros -*- lexical-binding: t -*-
+;;; config/my-kbd-macros.el --- Keyboard macros -*- lexical-binding: t -*-
 
 (defalias 'kmacro-insert-macro 'insert-kbd-macro)
 
@@ -7,4 +7,9 @@
 
 
 (provide 'my-kbd-macros)
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; no-native-compile: t
+;;; no-update-autoloads: t
+;;; End:
 ;;; my-kbd-macros.el ends here

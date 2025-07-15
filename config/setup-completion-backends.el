@@ -1,7 +1,5 @@
 ;;; config/setup-completion-backends.el --- Completion backends -*- lexical-binding: t -*-
 
-(require 'my-completion-helpers)
-
 (use-package orderless
   :init
   (setq completion-styles '(orderless basic)
