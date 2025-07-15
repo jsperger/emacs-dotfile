@@ -18,12 +18,12 @@
   (setopt global-auto-revert-non-file-buffers t
         auto-revert-verbose nil))
 
-(use-package dabbrev
-  :ensure nil
-  :defer t
-  :config
-  (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
-        dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
+;; (use-package dabbrev
+;;  :ensure nil
+;;  :defer t
+;;  :config
+;;  (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
+;;       dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
 (use-package dired
   :ensure nil
