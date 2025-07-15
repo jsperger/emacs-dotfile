@@ -1,7 +1,5 @@
 ;;; config/setup-core.el --- Core configuration -*- lexical-binding: t -*-
 
-(require 'my-core-helpers)
-
 (use-package ultra-scroll
   ;; :load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
   :ensure (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")

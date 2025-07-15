@@ -1,7 +1,5 @@
 ;;; config/setup-editor-misc.el --- Miscellaneous editor configuration -*- lexical-binding: t -*-
 
-(require 'my-editor-helpers)
-
 (use-package dumb-jump
   :disabled
   :init

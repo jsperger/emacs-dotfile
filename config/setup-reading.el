@@ -37,13 +37,6 @@
 (setq wallabag-search-page-max-rows 32)
   )
 
-(use-package zotero
-	:disabled
-  :commands (zotero-browser)
-  :init
-  (require 'zotero-browser)
-	)
-
 
 (use-package zotxt
 	:disabled)

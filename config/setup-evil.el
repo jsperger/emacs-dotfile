@@ -1,19 +1,19 @@
 ;;; config/setup-evil.el --- Evil configuration -*- lexical-binding: t -*-
 
 (use-package evil
-	:ensure (:wait t)
-	:demand t
-	:hook ((elpaca-after-init . evil-mode)
-				 (prog-mode . hs-minor-mode)) ;why is this here?
-	:init
-	(setq evil-want-keybinding nil
-					evil-symbol-word-search t
-					evil-ex-search-vim-style-regexp t
-					evil-search-module 'evil-search
-					evil-magic 'very-magic
-					evil-want-C-u-delete t
-					evil-want-C-u-scroll t
-					hs-minor-mode-map nil)
+  :ensure (:wait t)
+  :demand t
+  :hook ((elpaca-after-init . evil-mode)
+         (prog-mode . hs-minor-mode)) ;why is this here?
+  :init
+  (setq evil-want-keybinding nil
+        evil-symbol-word-search t
+        evil-ex-search-vim-style-regexp t
+        evil-search-module 'evil-search
+        evil-magic 'very-magic
+        evil-want-C-u-delete t
+        evil-want-C-u-scroll t
+        hs-minor-mode-map nil)
   :config
   (setopt evil-cross-lines t
         evil-kill-on-visual-paste nil

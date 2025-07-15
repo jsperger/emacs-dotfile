@@ -1,7 +1,5 @@
 ;;; config/setup-projects.el --- Projects configuration -*- lexical-binding: t -*-
 
-(require 'my-project-helpers)
-
 (use-package todoist
 	:disabled
   :config

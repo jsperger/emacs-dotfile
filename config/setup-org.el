@@ -1,7 +1,5 @@
 ;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
 
-(require 'my-org-helpers)
-
 (use-package org
 	:commands (org-toggle-hidden-emphasis-markers)
   :init

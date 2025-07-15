@@ -1,7 +1,5 @@
 ;;; config/setup-emacs.el --- Emacs configuration -*- lexical-binding: t -*-
 
-(require 'my-emacs-helpers)
-
 (use-package emacs
   :ensure nil
 

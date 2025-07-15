@@ -1,7 +1,5 @@
 ;;; config/setup-writing.el --- Writing tools configuration -*- lexical-binding: t -*-
 
-(require 'my-writing-helpers)
-
 (use-package binder
 	:general
 	(tyrant-def
@@ -59,7 +57,15 @@
 (use-package pandoc-mode
 	:disabled
   :hook (pandoc-mode . pandoc-load-default-settings)
-  :commands pandoc)
+  :commands pandoc
+  :config
+  (defun pandoc ()
+  "Start pandoc for the buffer and open the menu"
+  (interactive)
+  (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
+  (pandoc-main-hydra/body))
+
+)
 
 (use-package ox-typst
 	:disabled

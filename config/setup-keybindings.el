@@ -1,7 +1,5 @@
 ;;; config/setup-keybindings.el --- Keybindings configuration -*- lexical-binding: t -*-
 
-(require 'my-keybindings)
-
 (use-package which-key
 	:hook (elpaca-after-init)
   :config

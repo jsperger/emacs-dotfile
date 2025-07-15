@@ -1,7 +1,5 @@
 ;;; config/setup-themes.el --- Themes configuration -*- lexical-binding: t -*-
 
-(require 'my-theme-helpers)
-
 (use-package catppuccin-theme
   :disabled)
 
