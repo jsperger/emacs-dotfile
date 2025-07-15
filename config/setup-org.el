@@ -181,7 +181,7 @@
   )
 
 (use-package org-todoist
-  :after gptel
+  :after gptel ; why would this depend on gptel? oh my api key olol
   :ensure (:host github
            :repo "lillenne/org-todoist"
            :branch "main"
@@ -207,21 +207,6 @@
   :config
   (setopt org-make-toc-insert-custom-ids t)
 	)
-
-(use-package ox-pandoc
-	:after org
-	:hook (org-mode . org-pandoc-startup-check))
-
-(use-package ob-mermaid
-  :after org)
-
-(use-package ox-tufte
-	:disabled
-	:after org
-  )
-
-(use-package ox-beamer-lecture
-	:after org)
 
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
