@@ -1,6 +1,7 @@
 ;;; config/setup-ui.el --- UI configuration -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
+
 (use-package mct
 	:disabled
 	:hook (vertico-mode . mct-mode))
@@ -65,8 +66,12 @@
 (use-package olivetti
 	:hook ((text-mode prog-mode org-mode) . olivetti-mode)
 	:config
-	(setopt olivetti-style 'fancy)
-	)
+	(setopt olivetti-style 'fancy
+                olivetti-body-width 0.7
+		olivetti-minimum-body-width 80
+		olivetti-recall-visual-line-mode-entry-state t)
+        )
+   
 
 (use-package shackle
   :config
@@ -129,10 +134,6 @@
 
 (use-package logos
   :disabled
-	:config
-	(setopt olivetti-body-width 0.7
-				olivetti-minimum-body-width 80
-				olivetti-recall-visual-line-mode-entry-state t)
 	)
 (use-package calle24
 	:disabled

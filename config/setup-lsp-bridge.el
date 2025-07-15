@@ -13,11 +13,14 @@
 
   :hook (elpaca-after-init . global-lsp-bridge-mode)
   :config
-  (setopt toml-indent-offset 2)
+  (setopt toml-indent-offset 2
+          lsp-bridge-enable-completion-in-minibuffer t)
   :custom (global-lsp-bridge-mode t)
 
   (use-package acm
+    :hook lsp-bridge-mode
     :ensure nil
+    :config (setopt acm-mode t)
     )
   )
 

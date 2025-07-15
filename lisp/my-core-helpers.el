@@ -58,7 +58,7 @@
 
 (defun project-try-root (dir)
   "Search up the `DIR' for `project-root-files'."
-  (when-let ((root
+  (when-let* ((root
               (seq-some
                (lambda (n) (locate-dominating-file dir n))
                project-root-files)))

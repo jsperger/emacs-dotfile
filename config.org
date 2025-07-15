@@ -236,27 +236,383 @@ Emacs packages
 #+end_src
 
 * Config directory
-** my-keybinds.el
-#+begin_src emacs-lisp :tangle config/my-keybinds.el
-;;; my-keybinds.el --- general key binds -*- lexical-binding: t; -*-
-;;; Commentary:
-;;; Code:
+** my-kbd-macros.el
+#+begin_src emacs-lisp :tangle config/my-kbd-macros.el
+;;; config/my-kbd-macros.el --- Keyboard macros -*- lexical-binding: t -*-
+
+(defalias 'kmacro-insert-macro 'insert-kbd-macro)
+
+(defalias 'targets_string_to_tar_read
+   (kmacro "w w v w w w w w h y 0 p a SPC < - SPC t a r _ r e a d ( <kp-delete> <kp-delete> <kp-delete> <escape> $ a <backspace> ) <escape>"))
 
 
-
+(provide 'my-kbd-macros)
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; no-native-compile: t
 ;;; no-update-autoloads: t
 ;;; End:
-;;; my-keybinds.el ends here
+;;; my-kbd-macros.el ends here
+#+end_src
+
+** my-keybindings.el
+#+begin_src emacs-lisp :tangle config/my-keybindings.el
+;;; config/my-keybindings.el --- Keybindings -*- lexical-binding: t -*-
+
+(tyrant-def
+  "SPC"     '("M-x" . execute-extended-command)
+  "TAB"     '("last buffer" . alternate-buffer)
+  "RET"     '("Switch" . consult-buffer)
+  "!"       '("shell cmd" . shell-command)
+  "i"       '("insert" . tempel-insert)
+  "I"       '("insert" . yas-insert-snippet)
+  "M" '("bookmark" . bookmark-set)
+  ","       (cons "config" (make-sparse-keymap))
+  ",d"      'describe-face
+  ",f"      'fontaine-set-preset
+  ",F"      'menu-set-font
+  ",t"      'consult-theme
+
+  ;;================================= applications ===========================
+  "a"       (cons "apps" (make-sparse-keymap))
+  ;;		"ab" 'banner-comment ; defined in package dec
+  "ac"      'consult-minor-mode-menu
+  "aC"      'calc-dispatch
+  "ae"      'embark-act
+  "aE"      'embark-act-all
+  "ap"      'list-processes
+  ;;    "ad"      'todoist
+  "af"      'fontaine-set-preset
+  "aF"      'menu-set-font
+  ;;		"am"     'manage-minor-mode-table ;in manage-minor-mode-table use-package def
+  "ao"      (cons "obsidian" (make-sparse-keymap))
+  "aoc"     'obsidian-capture
+  "aoj"     'obsidian-jump
+  "aos"     'obsidian-search
+  "at"      'consult-theme
+  "aP"      'proced
+
+  ;;================================ buffers =================================
+  "b"       (cons "buffers" (make-sparse-keymap))
+  "bb"      'switch-to-buffer
+  "bB"      'ibuffer
+  "bd"      'kill-current-buffer
+  "bm"      'switch-to-messages-buffer
+  "bs"      'switch-to-scratch-buffer
+  "bu"      'reopen-killed-buffer
+  "bx"      'kill-buffer-and-window
+
+  ;;=================================== code =================================
+  "c"       (cons "code" (make-sparse-keymap))
+  "cb"      'lsp-bridge-diagnostic-list
+  "cB"      'flymake-show-buffer-diagnostics
+  "cc"      'compile
+  "cj"      'previous-error
+  "ck"      'next-error
+  "cn"      'next-error
+  "cp"      'previous-error
+  "cP"      'check-parens
+  "cr"      'recompile
+  "cx"      'kill-compilation
+  "c="      'indent-region-or-buffer
+
+  ;;================================== elpaca ================================
+  "e"       (cons "elpaca" (make-sparse-keymap))
+  "ef"      'elpaca-fetch-all
+  "eF"      'elpaca-fetch
+  "el"      'elpaca-log
+  "em"      'elpaca-manager
+  "eu"      'elpaca-merge ;; update equivalent
+  ;; Intentional no bind for merge-all
+
+  ;;================================== Ellama ================================
+  ;; "E"       (cons "Ellama" (make-sparse-keymap))
+  ;; "Ec"      (cons "code" (make-sparse-keymap))
+  ;; "Ecc"     'ellama-code-complete
+  ;; "Eca"     'ellama-code-add
+  ;; "Ece"     'ellama-code-edit
+  ;; "Eci"     'ellama-code-improve
+  ;; "Ecr"     'ellama-code-review
+  ;; "Es"      (cons "summarize & session" (make-sparse-keymap))
+  ;; "Ess"    'ellama-summarize
+  ;; "Esw"    'ellama-summarize-webpage
+  ;; "Esl"    'ellama-load-session
+  ;; "Esr"    'ellama-session-rename
+  ;; "Esd"    'ellama-session-remove
+  ;; "Esa"    'ellama-session-switch
+  ;; "Ei"      (cons "improve" (make-sparse-keymap))
+  ;; "Eiw"    'ellama-improve-wording
+  ;; "Eig"    'ellama-improve-grammar
+  ;; "Eic"    'ellama-improve-conciseness
+  ;; "Em"      (cons "make" (make-sparse-keymap))
+  ;; "Eml"    'ellama-make-list
+  ;; "Emt"    'ellama-make-table
+  ;; "Emf"    'ellama-make-format
+  ;; "Ea"      (cons "ask & chat" (make-sparse-keymap))
+  ;; "Eaa"    'ellama-ask-about
+  ;; "Eai"    'ellama-chat
+  ;; "Eal"    'ellama-ask-line
+  ;; "Eas"    'ellama-ask-selection
+  ;; "Et"      (cons "translate" (make-sparse-keymap))
+  ;; "Ett"    'ellama-translate
+  ;; "Etb"    'ellama-translate-buffer
+  ;; "Ete"    'ellama-chat-translation-enable
+  ;; "Etd"    'ellama-chat-translation-disable
+  ;; "Etc"    'ellama-complete
+  ;; "Ed"      (cons "define" (make-sparse-keymap))
+  ;; "Edw"    'ellama-define-word
+  ;; "Ex"      (cons "context" (make-sparse-keymap))
+  ;; "Exb"    'ellama-context-add-buffer
+  ;; "Exf"    'ellama-context-add-file
+  ;; "Exs"    'ellama-context-add-selection
+  ;; "Exi"    'ellama-context-add-info-node
+  ;; "Ep"      (cons "provider" (make-sparse-keymap))
+  ;; "Eps"    'ellama-provider-select
+
+  ;;================================== files =================================
+  "f"       (cons "files" (make-sparse-keymap))
+  "fb"      'rename-current-buffer-file
+  "fC"      '("copy-file" . write-file)
+  "fD"      'delete-current-buffer-file
+  "fe"      'find-library
+                                        ;    "fE"      'sudo-edit
+  "ff"      'find-file
+  "fj"      'dired-jump
+  "fJ"      'dired-jump-other-window
+  "fo"      'open-file-or-directory-in-external-app
+  "fr"      'rg
+  "fR"      'rg-menu
+  "fs"      'save-buffer
+  "fv"      (cons "variables" (make-sparse-keymap))
+  "fvd"     'add-dir-local-variable
+  "fvf"     'add-file-local-variable
+  "fvp"     'add-file-local-variable-prop-line
+
+  ;;================================== Frame =================================
+  "F"       (cons "Frame" (make-sparse-keymap))
+  "Fd"      'delete-frame
+  "FD"      'delete-other-frames
+  "Fn"      'make-frame
+  "Fo"      'other-frame
+
+  ;;=================================== help =================================
+  "h"       (cons "help" (make-sparse-keymap))
+  "ha"      'apropos
+  "hb"      'describe-bindings
+  "hc"      'describe-char
+  "hf"      'describe-function
+  "hF"      'describe-face
+  "hi"      'info-emacs-manual
+  "hI"      'info-display-manual
+  "hk"      'describe-key
+  "hK"      'describe-keymap
+  "hm"      'describe-mode
+  "hM"      'man
+  "hp"      'describe-package
+  "ht"      'describe-text-properties
+  "hv"      'describe-variable
+  "hP"      (cons "profiler" (make-sparse-keymap))
+  "hPs"     'profiler-start
+  "hPk"     'profiler-stop
+  "hPr"     'profiler-report
+
+  ;;=================================== jump ==================================
+  "j"       'consult-buffer
+  
+  "J"       (cons "jump" (make-sparse-keymap))
+  "Jb"      'bookmark-jump
+  "Ji"      'imenu
+  ;;    "jg"      'avy-goto-char-timer
+  "Jn"      'denote
+  ;;    "jo"      'obsidian-jump
+
+  ;;=================================== keys ==================================
+  "k"       (cons "key" (make-sparse-keymap))
+  "km"      'which-key-show-major-mode
+  "kt"      'which-key-show-top-level
+  "kM"      'which-key-show-minor-mode-keymap
+  "ka"      'which-key-show-keymap ; show [a]ny or [a]ll keymap
+  "kd"      'describe-key
+  "kD"      'describe-keymap
+
+  ;;================================== eglot =================================
+  ;; "l"  (cons "eglot" (make-sparse-keymap))
+  ;; "la" 'eglot-code-actions
+  ;; "lb" 'eglot-events-buffer
+  ;; "lr" 'eglot-rename
+  ;; "lR" 'eglot-reconnect
+  ;; "lx" 'eglot-shutdown
+  ;; "lX" 'eglot-shutdown-all
+  ;; "l=" 'eglot-format
+
+  ;;============================ major mode prefix ===========================
+  "m"       (cons "major mode" (make-sparse-keymap))
+
+  ;;================================= projects ===============================
+  "p"       (cons "projects" project-prefix-map)
+  "pt"      'project-open-in-tab
+  "pb"      'bookmark-in-project-toggle
+  "pj"      'bookmark-in-project-jump
+
+  ;;=================================== quit =================================
+  "q"       (cons "quit" (make-sparse-keymap))
+  "qd"      'restart-emacs-debug-init
+  "qr"      'restart-emacs
+  "qR"      'restart-emacs-without-desktop
+  "qf"      'delete-frame
+  "qq"      'delete-frame
+  "qQ"      'save-buffers-kill-emacs
+  "qs"      'server-shutdown
+  "qS"      'server-save-buffers-kill-terminal
+  "qt"      'save-buffers-kill-terminal
+
+  ;;================================= spelling ===============================
+  "s"       (cons "spelling" (make-sparse-keymap))
+  "sb"      'flyspell-buffer
+  "sn"      'flyspell-goto-next-error
+  "sr"      'flyspell-region
+  "sc"      'jinx-correct
+  "sC"      'jinx-correct-nearest
+  "sj"      'jinx-next
+
+  ;;================================= replace ================================
+  "r"       (cons "replace" (make-sparse-keymap))
+  "ra"      'query-replace ; Ask = query
+  "rs"      'replace-string
+  "rr"      'replace-string-in-region
+
+  ;;=================================== toggle ===============================
+  "t"       (cons "toggle" (make-sparse-keymap))
+  "ta"      'auto-fill-mode
+  ;;    "tb"      'global-obsidian-mode
+  ;;		"tc"      'nocomments-mode defined-in-package
+  "tM"      'consult-minor-mode-menu
+  "td"      'toggle-debug-on-error
+  "tf"      'display-fill-column-indicator-mode
+  ;;    "tg"      'golden-ratio-mode
+  "tg"      'zoom-mode
+  "th"      'hs-minor-mode
+  "tj"      'jinx-mode
+  "tl"      'toggle-truncate-lines
+  "tm"      'flymake-mode
+  "tn"      'display-line-numbers-mode
+  "tz"      'outline-minor-mode
+  "tO"      'org-modern-mode
+  "tp" 'variable-pitch-mode
+  ;;    "tp"      'pdf-view-mode ;probably don't need it since I fixed the :mode def
+  ;;    "tr"      'writegood-mode
+  "ts"      'flyspell-mode
+  "tt"      'LateX-mode
+  "tv"      'visual-fill-column-mode
+  "tV"      'olivetti-mode
+  "tw"      'whitespace-mode
+  "tW"      'toggle-word-wrap
+  "tz"      'TeX-fold-mode
+
+  ;;=================================== Tabs =================================
+  "T"       (cons "Tabs" tab-prefix-map)
+  "Td"      'tab-bar-close-tab
+  "TD"      'tab-bar-close-other-tabs
+  "Tg"      'tab-bar-change-tab-group
+  "Tm"      'tab-bar-move-tab-to
+  "TM"      'tab-bar-move-tab-to-group
+  "Tl"      'tab-bar-switch-to-tab
+  "TR"      'tab-bar-rename-tab
+  "Tt"      'other-tab-prefix
+  "Tu"      'tab-bar-undo-close-tab
+  "T1"      '("select tab 1..8" . tab-bar-select-tab)
+  "T2"      'tab-bar-select-tab
+  "T3"      'tab-bar-select-tab
+  "T4"      'tab-bar-select-tab
+  "T5"      'tab-bar-select-tab
+  "T6"      'tab-bar-select-tab
+  "T7"      'tab-bar-select-tab
+  "T8"      'tab-bar-select-tab
+  "T TAB"   'tab-bar-switch-to-last-tab
+
+  ;;============================= universal prefix ===========================
+  "u"       '("universal" . universal-argument)
+
+  ;;================================= windows ================================
+  "w"       (cons "windows" (make-sparse-keymap))
+  "w TAB"   'alternate-window
+  "w+"      'window-layout-toggle
+  "wb"      'switch-to-minibuffer-window
+  "wd"      'delete-window
+  "wD"      'delete-other-windows
+  "wm"      'toggle-maximize-buffer
+  "wf"      'follow-mode
+  ;;    "wg"      'golden-ratio
+  "wg"      'zoom-mode
+  "wh"      'evil-window-left
+  "wH"      'evil-window-move-far-left
+  "wj"      'evil-window-down
+  "wJ"      'evil-window-move-very-bottom
+  "wk"      'evil-window-up
+  "wK"      'evil-window-move-very-top
+  "wl"      'evil-window-right
+  "wL"      'evil-window-move-far-right
+  "wr"      'rotate-windows-forward
+  "wR"      'rotate-windows-backward
+  "wS"      'split-window-vertically
+  "ws"      'split-window-vertically-and-focus
+  "wt"      'toggle-current-window-dedication
+  "wu"      'winner-undo
+  "wU"      'winner-redo
+  "wV"      'split-window-horizontally
+  "wv"      'split-window-horizontally-and-focus
+  "w="      'balance-windows
+  "w <left>" 'shrink-window-horizontally
+  "w <down>" 'shrink-window
+  "w <up>"   'enlarge-window
+  "w <right>" 'enlarge-window-horizontally
+  )
+
+(general-def
+  [remap comment-dwim] 'comment-or-uncomment
+  "M-/" 'hippie-expand
+  "M-j" (defun scroll-other-window-next-line (&optional arg)
+          (interactive "P")
+          (scroll-other-window (or arg 1)))
+  "M-k" (defun scroll-other-window-previous-line (&optional arg)
+          (interactive "P")
+          (scroll-other-window (- (or arg 1)))))
+
+(when IS-MAC
+  (general-def
+    "s-`"   'other-frame
+    "s-a"   'mark-whole-buffer
+    "s-c"   'evil-yank
+    "s-n"   'make-frame
+    "s-m"   'iconify-frame
+    "s-q"   'save-buffers-kill-terminal
+    "s-v"   'yank
+    "s-x"   'kill-region
+    "s-w"   'delete-window
+    "s-W"   'delete-frame
+    "s-z"   'evil-undo
+    "s-Z"   'evil-redo
+    "s-C-F" 'toggle-frame-fullscreen
+    "s-s"   'save-buffer
+    "s-<backspace>" (defun delete-line-before-point ()
+                      (interactive)
+                      (let ((prev-pos (point)))
+                        (forward-visible-line 0)
+                        (delete-region (point) prev-pos)
+                        (indent-according-to-mode)))))
+
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; my-keybindings.el ends here
 #+end_src
 
 ** setup-bib.el
 #+begin_src emacs-lisp :tangle config/setup-bib.el
 ;;; config/setup-bib.el --- Bibliography configuration -*- lexical-binding: t -*-
-
-(require 'my-bib-helpers)
 
 (use-package bibtex
   :ensure nil
@@ -266,13 +622,15 @@ Emacs packages
   :after bibtex auctex
   :hook ((org-mode LaTeX-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
   :init
+
   (with-eval-after-load 'embark
     (defvar-keymap bibtex-key-embark-map
       :doc "Embark keymap for Zetteldeft links"
       :parent embark-general-map
       "f" #'citar-open
       "n" #'citar-open-notes)
-    (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map)))
+    (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map))
+    )
 
   :general
   (tyrant-def "aC" 'citar-open)
@@ -286,7 +644,12 @@ Emacs packages
 (use-package citar-embark
   :after citar embark
   :config
-  (citar-embark-mode))
+  (citar-embark-mode)
+  (defun citar-setup-capf ()
+  "add `citar-capf' to `completion-at-point-functions'"
+  (add-to-list 'completion-at-point-functions #'citar-capf))
+
+)
 
 (use-package ebib
 	:general
@@ -429,6 +792,15 @@ Emacs packages
   ;;                         fr))))))
 
   ;;   (add-to-list 'embark-indicators #'embark-vertico-indicator))
+  :config
+  (defun bibtex-key-embark ()
+  (save-excursion
+    (bibtex-beginning-of-entry)
+    (when (looking-at bibtex-entry-maybe-empty-head)
+      (cons 'bibtex-key
+            (bibtex-key-in-head)))))
+
+
   :general
   (:keymaps '(global normal)
             "C-." 'embark-act
@@ -464,13 +836,21 @@ Emacs packages
 #+begin_src emacs-lisp :tangle config/setup-completion-backends.el
 ;;; config/setup-completion-backends.el --- Completion backends -*- lexical-binding: t -*-
 
-(require 'my-completion-helpers)
-
 (use-package orderless
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil)
   :config
+(defun flex-if-twiddle (pattern _index _total)
+  (when (string-suffix-p "~" pattern)
+    `(orderless-flex . ,(substring pattern 0 -1))))
+
+(defun without-if-bang (pattern _index _total)
+  (cond
+   ((equal "!" pattern)
+    '(orderless-literal . ""))
+   ((string-prefix-p "!" pattern)
+    `(orderless-without-literal . ,(substring pattern 1)))))
   (setopt orderless-style-dispatchers '(flex-if-twiddle without-if-bang))
 )
 
@@ -537,8 +917,6 @@ Emacs packages
 ** setup-completion.el
 #+begin_src emacs-lisp :tangle config/setup-completion.el
 ;;; config/setup-completion.el --- Completion configuration -*- lexical-binding: t -*-
-
-(require 'my-completion-helpers)
 
 (use-package vertico
   :ensure (:files (:defaults "extensions/*.el"))
@@ -654,29 +1032,97 @@ Emacs packages
 #+begin_src emacs-lisp :tangle config/setup-consult.el
 ;;; config/setup-consult.el --- Consult configuration -*- lexical-binding: t -*-
 
-(require 'my-consult-helpers)
-
 (use-package consult
   :init
   (advice-add #'project-find-regexp :override #'consult-ripgrep)
   (advice-add #'project-switch-to-buffer :override #'consult-project-buffer)
-  :config
-  (setq consult-narrow-key "?"
-        consult-preview-key "M-.")
-
-  (consult-customize consult-theme
-                     :preview-key '(:debounce 0.2 any)
-                     consult-goto-line consult-imenu consult-line
-                     :preview-key 'any
-                     consult-line
-                     :initial (when-let ((string (thing-at-point 'word)))
-                                (add-hook 'pre-command-hook 'consult-delete-default-contents)
-                                (propertize string 'face 'shadow)))
-
   (setq consult-project-buffer-sources
         '(consult--source-project-buffer
           consult--source-project-recent-file-override
-          consult--source-project-file-hidden))
+          consult--source-project-file-hidden)
+        )
+
+  :config
+  (setopt consult-narrow-key "?"
+          consult-preview-key "M-.")
+
+  (defvar consult--source-project-file
+    `(:name     "Project File"
+                :narrow   ?f
+                :category file
+                :face     consult-file
+                :history  file-name-history
+                :state    ,#'consult--file-state
+                :enabled  ,(lambda () consult-project-function)
+                :items
+                ,(lambda ()
+                   (when-let (project (project-current t))
+                     (let* ((all-files (project-files project))
+                            (common-parent-directory
+                             (let ((common-prefix (try-completion "" all-files)))
+                               (if (> (length common-prefix) 0)
+                                   (file-name-directory common-prefix))))
+                            (cpd-length (length common-parent-directory))
+                            items)
+                       (print all-files)
+                       (dolist (file all-files items)
+                         (let ((part (substring file cpd-length)))
+                           (when (equal part "") (setq part "./"))
+                           (put-text-property 0 1 'multi-category `(file . ,file) part)
+                           (push part items))))))
+                "Project file candidate source for `consult-buffer'."))
+
+  (defvar consult--source-project-file-hidden
+    `(:hidden t :narrow (?f . "Project File") ,@consult--source-project-file)
+    "Like `consult--source-project-file' but hidden by default.")
+
+  (defvar consult--source-project-recent-file-override
+    `(:name "Recent File" :narrow (?r . "Recent File") ,@consult--source-project-file)
+    "Like `consult--source-recent-file' but overridden the narrow key.")
+
+  (defun consult-delete-default-contents()
+    (remove-hook 'pre-command-hook 'consult-delete-default-contents)
+    (cond ((member this-command '(self-insert-command))
+           (delete-minibuffer-contents))
+          (t (put-text-property (minibuffer-prompt-end) (point-max) 'face 'default))))
+
+  (consult-customize
+   consult-theme
+   :preview-key '(:debounce 0.2 any)
+   consult-goto-line consult-imenu consult-line
+   :preview-key 'any
+   consult-line
+   :initial (when-let ((string (thing-at-point 'word)))
+              (add-hook 'pre-command-hook 'consult-delete-default-contents)
+              (propertize string 'face 'shadow)
+              )
+   )
+  (defvar consult--source-workspace
+    (list :name     "Workspace Buffers"
+          :narrow   ?w
+          :history  'buffer-name-history
+          :category 'buffer
+          :state    #'consult--buffer-state
+          :default  t
+          :items    (lambda () (consult--buffer-query
+                                :predicate #'tabspaces--local-buffer-p
+                                :sort 'visibility
+                                :as #'buffer-name)))
+
+    "Set workspace buffer list for consult-buffer.")
+
+  (defun my--consult-tabspaces ()
+    "Deactivate isolated buffers when not using tabspaces."
+    (cond (tabspaces-mode
+           ;; hide full buffer list (still available with "b")
+           (consult-customize consult--source-buffer :hidden t :default nil)
+           (add-to-list 'consult-buffer-sources 'consult--source-workspace))
+          (t
+           ;; reset consult-buffer to show all buffers
+           (consult-customize consult--source-buffer :hidden nil :default t)
+           (setq consult-buffer-sources (remove #'consult--source-workspace consult-buffer-sources))))
+    )
+
   :general
   ([remap switch-to-buffer]    'consult-buffer
    [remap goto-line]           'consult-goto-line
@@ -690,20 +1136,20 @@ Emacs packages
   (org-mode-map
    [remap consult-imenu]       'consult-org-heading
    [remap consult-imenu-multi] 'consult-org-agenda)
-	)
+  )
 
 (use-package consult-todo
-	;; something seems off, it's slow as hell
-	:disabled
-	:after consult
-	:config
-	(defconst consult-todo--narrow
-		'((?t . "TODO")
-			(?f . "FIXME")
-			(?b . "BUG")
-			(?h . "HACK"))
-		"Default mapping of narrow and keywords.")
-	)
+  ;; something seems off, it's slow as hell
+  :disabled
+  :after consult
+  :config
+  (defconst consult-todo--narrow
+    '((?t . "TODO")
+      (?f . "FIXME")
+      (?b . "BUG")
+      (?h . "HACK"))
+    "Default mapping of narrow and keywords.")
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t
@@ -716,8 +1162,6 @@ Emacs packages
 ** setup-core.el
 #+begin_src emacs-lisp :tangle config/setup-core.el
 ;;; config/setup-core.el --- Core configuration -*- lexical-binding: t -*-
-
-(require 'my-core-helpers)
 
 (use-package ultra-scroll
   ;; :load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
@@ -1151,8 +1595,6 @@ Emacs packages
 #+begin_src emacs-lisp :tangle config/setup-editor-misc.el
 ;;; config/setup-editor-misc.el --- Miscellaneous editor configuration -*- lexical-binding: t -*-
 
-(require 'my-editor-helpers)
-
 (use-package dumb-jump
   :disabled
   :init
@@ -1321,8 +1763,6 @@ Emacs packages
 ** setup-emacs.el
 #+begin_src emacs-lisp :tangle config/setup-emacs.el
 ;;; config/setup-emacs.el --- Emacs configuration -*- lexical-binding: t -*-
-
-(require 'my-emacs-helpers)
 
 (use-package emacs
   :ensure nil
@@ -1549,19 +1989,19 @@ Emacs packages
 ;;; config/setup-evil.el --- Evil configuration -*- lexical-binding: t -*-
 
 (use-package evil
-	:ensure (:wait t)
-	:demand t
-	:hook ((elpaca-after-init . evil-mode)
-				 (prog-mode . hs-minor-mode)) ;why is this here?
-	:init
-	(setq evil-want-keybinding nil
-					evil-symbol-word-search t
-					evil-ex-search-vim-style-regexp t
-					evil-search-module 'evil-search
-					evil-magic 'very-magic
-					evil-want-C-u-delete t
-					evil-want-C-u-scroll t
-					hs-minor-mode-map nil)
+  :ensure (:wait t)
+  :demand t
+  :hook ((elpaca-after-init . evil-mode)
+         (prog-mode . hs-minor-mode)) ;why is this here?
+  :init
+  (setq evil-want-keybinding nil
+        evil-symbol-word-search t
+        evil-ex-search-vim-style-regexp t
+        evil-search-module 'evil-search
+        evil-magic 'very-magic
+        evil-want-C-u-delete t
+        evil-want-C-u-scroll t
+        hs-minor-mode-map nil)
   :config
   (setopt evil-cross-lines t
         evil-kill-on-visual-paste nil
@@ -1609,7 +2049,8 @@ Emacs packages
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
-;; End:;;; setup-evil.el ends here
+;; End:
+;;; setup-evil.el ends here
 #+end_src
 
 ** setup-font-locking.el
@@ -1890,8 +2331,8 @@ Emacs packages
 ;;; config/setup-icons.el --- Icons configuration -*- lexical-binding: t -*-
 
 (use-package nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
+  :hook  (dired-mode . nerd-icons-dired-mode)
+  )
 
 (use-package nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
@@ -1974,8 +2415,6 @@ Emacs packages
 #+begin_src emacs-lisp :tangle config/setup-keybindings.el
 ;;; config/setup-keybindings.el --- Keybindings configuration -*- lexical-binding: t -*-
 
-(require 'my-keybindings)
-
 (use-package which-key
 	:hook (elpaca-after-init)
   :config
@@ -2046,98 +2485,98 @@ Emacs packages
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
 (use-package llm
-	:config
-	(use-package llm-openai
-		:ensure nil)
+  :config
+  (use-package llm-openai
+    :ensure nil)
 
-	(use-package llm-claude
-		:ensure nil)
-	)
+  (use-package llm-claude
+    :ensure nil)
+  )
 
 (use-package ellama
-	:disabled
+  :disabled
   :after llm
-	:config
-	(setopt ellama-provider (make-llm-openai-compatible
-													 :url "http://127.0.0.1:1234"))
-	)
+  :config
+  (setopt ellama-provider (make-llm-openai-compatible
+			   :url "http://127.0.0.1:1234"))
+  )
 
 
 (use-package gptel
   :functions gptel--insert-file-string
-	:config
-	(setopt gptel-model   'llama-cpp
-					gptel-backend (gptel-make-openai "llama-cpp"
-													:stream t
-													:protocol "http"
-													:host "localhost:1234"
-													:models '(llama-cpp)))
+  :config
+  (setopt gptel-model   'llama-cpp
+          gptel-backend (gptel-make-openai "llama-cpp"
+                          :stream t
+                          :protocol "http"
+                          :host "localhost:1234"
+                          :models '(llama-cpp)))
 
-	(gptel-make-openai "OpenRouter"               
-		:host "openrouter.ai"
-		:endpoint "/api/v1/chat/completions"
-		:stream t
-		:key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
-		:models '(google/gemini-2.5-flash
-							google/gemini-2.5-pro
+  (gptel-make-openai "OpenRouter"               
+    :host "openrouter.ai"
+    :endpoint "/api/v1/chat/completions"
+    :stream t
+    :key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
+    :models '(google/gemini-2.5-flash
+	      google/gemini-2.5-pro
               openrouter/auto
-							anthropic/claude-sonnet-4
+	      anthropic/claude-sonnet-4
               deepseek/deepseek-r1-0528:free
               deepseek/deepseek-prover-v2:free
-							open-r1/olympiccoder-32b:free
-							mistralai/devstral-small:free
+	      open-r1/olympiccoder-32b:free
+	      mistralai/devstral-small:free
               google/gemma-3-27b-it:free
-							deepseek/deepseek-r1-zero:free
-							qwen/qwq-32b:free)
-		)
+	      deepseek/deepseek-r1-zero:free
+	      qwen/qwq-32b:free)
+    )
 
-	(gptel-make-anthropic "Claude"          
-		:stream t
-		:key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
-		)
+  (gptel-make-anthropic "Claude"          
+    :stream t
+    :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
+    )
 
   (gptel-make-gemini "Gemini-API"
     :stream t
     :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
     )
 
-	)
+  )
 
 (use-package aidermacs
-	:general (tyrant-def "aa" 'aidermacs-transient-menu)
+  :general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
-	(setopt aidermacs-backend 'vterm)
+  (setopt aidermacs-backend 'vterm)
   (setenv "GEMINI_API_KEY" (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
   (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
   (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
-	(setenv "LM_STUDIO_API_KEY" "dummy-api-key")
-	(setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
+  (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
+  (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
   :custom
   (aidermacs-use-architect-mode t)
   (aidermacs-default-model "gemini/gemini-pro-2.5")
   )
 
 (use-package forge-llm
-	:disabled
-	:after forge llm
-	:custom
-	(forge-llm-llm-provider
-	 (make-llm-claude
-		:key (auth-source-pick-first-password
-					:host "api.anthropic.com"
-					:user "apikey")
-		:chat-model "claude-3-7-sonnet-20250219"
-		)
-	 )
-	 :config
-	 (forge-llm-setup)
-	 :general
-	 (tyrant-def
-		 "gg" 'forge-llm-generate-pr-description
-		 "gp" 'forge-llm-generate-pr-description-at-point
-		 "gt" 'forge-llm-insert-template-at-point
-		 )
-	 )
+  :disabled
+  :after forge llm
+  :custom
+  (forge-llm-llm-provider
+   (make-llm-claude
+    :key (auth-source-pick-first-password
+	  :host "api.anthropic.com"
+	  :user "apikey")
+    :chat-model "claude-3-7-sonnet-20250219"
+    )
+   )
+  :config
+  (forge-llm-setup)
+  :general
+  (tyrant-def
+    "gg" 'forge-llm-generate-pr-description
+    "gp" 'forge-llm-generate-pr-description-at-point
+    "gt" 'forge-llm-insert-template-at-point
+    )
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t
@@ -2165,11 +2604,11 @@ Emacs packages
   :hook (elpaca-after-init . global-lsp-bridge-mode)
   :config
   (setopt toml-indent-offset 2
-          lsp-bridge-enable-completion-in-minibuffer t
-          lsp-bridge-enable-in-minibuffer t)
+          lsp-bridge-enable-completion-in-minibuffer t)
   :custom (global-lsp-bridge-mode t)
 
   (use-package acm
+    :hook lsp-bridge-mode
     :ensure nil
     :config (setopt acm-mode t)
     )
@@ -2573,8 +3012,6 @@ Emacs packages
 #+begin_src emacs-lisp :tangle config/setup-org.el
 ;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
 
-(require 'my-org-helpers)
-
 (use-package org
 	:commands (org-toggle-hidden-emphasis-markers)
   :init
@@ -2857,8 +3294,6 @@ Emacs packages
 ** setup-projects.el
 #+begin_src emacs-lisp :tangle config/setup-projects.el
 ;;; config/setup-projects.el --- Projects configuration -*- lexical-binding: t -*-
-
-(require 'my-project-helpers)
 
 (use-package todoist
 	:disabled
@@ -3146,13 +3581,6 @@ Emacs packages
 (setq wallabag-search-page-max-rows 32)
   )
 
-(use-package zotero
-	:disabled
-  :commands (zotero-browser)
-  :init
-  (require 'zotero-browser)
-	)
-
 
 (use-package zotxt
 	:disabled)
@@ -3273,14 +3701,25 @@ Emacs packages
 #+begin_src emacs-lisp :tangle config/setup-snippets.el
 ;;; config/setup-snippets.el --- Snippets configuration -*- lexical-binding: t -*-
 
-(require 'my-tempel-helpers)
-
 (use-package tempel
   :hook ((text-mode prog-mode) . tempel-setup-capf)
   :init
   (setq tempel-trigger-prefix "<"
         tempel-path "~/.emacs.d/etc/templates/*.eld")
   :config
+(defun tempel-setup-capf ()
+  (setq-local completion-at-point-functions
+              (cons #'tempel-complete
+                    completion-at-point-functions)))
+
+(defun tempel-hippie-try-expand (old)
+  "Integrate with hippie expand.
+Just put this function in `hippie-expand-try-functions-list'."
+  (if (not old)
+      (tempel-expand t)
+    (undo 1)))
+
+
   (add-to-list 'hippie-expand-try-functions-list #'tempel-hippie-try-expand t)
 
 	;;	:custom
@@ -3467,8 +3906,6 @@ Emacs packages
 #+begin_src emacs-lisp :tangle config/setup-themes.el
 ;;; config/setup-themes.el --- Themes configuration -*- lexical-binding: t -*-
 
-(require 'my-theme-helpers)
-
 (use-package catppuccin-theme
   :disabled)
 
@@ -3560,6 +3997,7 @@ Emacs packages
 ;;; config/setup-ui.el --- UI configuration -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
+
 (use-package mct
 	:disabled
 	:hook (vertico-mode . mct-mode))
@@ -3624,8 +4062,12 @@ Emacs packages
 (use-package olivetti
 	:hook ((text-mode prog-mode org-mode) . olivetti-mode)
 	:config
-	(setopt olivetti-style 'fancy)
-	)
+	(setopt olivetti-style 'fancy
+                olivetti-body-width 0.7
+		olivetti-minimum-body-width 80
+		olivetti-recall-visual-line-mode-entry-state t)
+        )
+   
 
 (use-package shackle
   :config
@@ -3688,10 +4130,6 @@ Emacs packages
 
 (use-package logos
   :disabled
-	:config
-	(setopt olivetti-body-width 0.7
-				olivetti-minimum-body-width 80
-				olivetti-recall-visual-line-mode-entry-state t)
 	)
 (use-package calle24
 	:disabled
@@ -3777,7 +4215,8 @@ Emacs packages
 (use-package vc
   :ensure nil
   :config
-  (setopt vc-follow-symlinks t))
+  (setopt vc-follow-symlinks t)
+  )
 
 (use-package magit
   :init
@@ -3816,10 +4255,6 @@ Emacs packages
     "d"  'magit-diff
 		)
 	)
-
-(use-package closql)
-
-(use-package ghub)
 
 (use-package forge
   :after magit
@@ -3892,11 +4327,13 @@ Emacs packages
   (tyrant-def
     "gI"  (cons "gitignore" (make-sparse-keymap))
     "gIn" 'gitignore-templates-new-file
-    "gIi" 'gitignore-templates-insert))
+    "gIi" 'gitignore-templates-insert)
+  )
 
 (use-package magit-todos
   :after magit
-  :config (magit-todos-mode 1))
+  :config (magit-todos-mode 1)
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t
@@ -3948,8 +4385,6 @@ Emacs packages
 ** setup-writing.el
 #+begin_src emacs-lisp :tangle config/setup-writing.el
 ;;; config/setup-writing.el --- Writing tools configuration -*- lexical-binding: t -*-
-
-(require 'my-writing-helpers)
 
 (use-package binder
 	:general
@@ -4008,7 +4443,15 @@ Emacs packages
 (use-package pandoc-mode
 	:disabled
   :hook (pandoc-mode . pandoc-load-default-settings)
-  :commands pandoc)
+  :commands pandoc
+  :config
+  (defun pandoc ()
+  "Start pandoc for the buffer and open the menu"
+  (interactive)
+  (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
+  (pandoc-main-hydra/body))
+
+)
 
 (use-package ox-typst
 	:disabled
@@ -4034,99 +4477,8 @@ Emacs packages
 ;; End:
 ;;; setup-writing.el ends here
 #+end_src
+
 * Lisp
-** my-bib-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-bib-helpers.el
-;;; lisp/my-bib-helpers.el --- Helper functions for bibliography -*- lexical-binding: t -*-
-
-(defun bibtex-key-embark ()
-  (save-excursion
-    (bibtex-beginning-of-entry)
-    (when (looking-at bibtex-entry-maybe-empty-head)
-      (cons 'bibtex-key
-            (bibtex-key-in-head)))))
-
-(defun citar-setup-capf ()
-  "add `citar-capf' to `completion-at-point-functions'"
-  (add-to-list 'completion-at-point-functions #'citar-capf))
-
-(provide 'my-bib-helpers)
-;;; my-bib-helpers.el ends here
-#+end_src
-
-** my-completion-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-completion-helpers.el
-;;; lisp/my-completion-helpers.el --- Helper functions for completion -*- lexical-binding: t -*-
-
-(defun flex-if-twiddle (pattern _index _total)
-  (when (string-suffix-p "~" pattern)
-    `(orderless-flex . ,(substring pattern 0 -1))))
-
-(defun without-if-bang (pattern _index _total)
-  (cond
-   ((equal "!" pattern)
-    '(orderless-literal . ""))
-   ((string-prefix-p "!" pattern)
-    `(orderless-without-literal . ,(substring pattern 1)))))
-
-(defun crm-indicator (args)
-  (cons (format "[CRM%s] %s"
-                (string-replace "[ \t]*" "" crm-separator)
-                (car args))
-        (cdr args)))
-
-(provide 'my-completion-helpers)
-;;; my-completion-helpers.el ends here
-#+end_src
-
-** my-consult-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-consult-helpers.el
-;;; lisp/my-consult-helpers.el --- Helper functions for consult -*- lexical-binding: t -*-
-
-(defun consult-delete-default-contents()
-  (remove-hook 'pre-command-hook 'consult-delete-default-contents)
-  (cond ((member this-command '(self-insert-command))
-         (delete-minibuffer-contents))
-        (t (put-text-property (minibuffer-prompt-end) (point-max) 'face 'default))))
-
-(defvar consult--source-project-file
-  `(:name     "Project File"
-              :narrow   ?f
-              :category file
-              :face     consult-file
-              :history  file-name-history
-              :state    ,#'consult--file-state
-              :enabled  ,(lambda () consult-project-function)
-              :items
-              ,(lambda ()
-                 (when-let (project (project-current t))
-                   (let* ((all-files (project-files project))
-                          (common-parent-directory
-                           (let ((common-prefix (try-completion "" all-files)))
-                             (if (> (length common-prefix) 0)
-                                 (file-name-directory common-prefix))))
-                          (cpd-length (length common-parent-directory))
-                          items)
-                     (print all-files)
-                     (dolist (file all-files items)
-                       (let ((part (substring file cpd-length)))
-                         (when (equal part "") (setq part "./"))
-                         (put-text-property 0 1 'multi-category `(file . ,file) part)
-                         (push part items))))))
-              "Project file candidate source for `consult-buffer'."))
-
-(defvar consult--source-project-file-hidden
-  `(:hidden t :narrow (?f . "Project File") ,@consult--source-project-file)
-  "Like `consult--source-project-file' but hidden by default.")
-
-(defvar consult--source-project-recent-file-override
-  `(:name "Recent File" :narrow (?r . "Recent File") ,@consult--source-project-file)
-  "Like `consult--source-recent-file' but overridden the narrow key.")
-
-(provide 'my-consult-helpers)
-;;; my-consult-helpers.el ends here
-#+end_src
-
 ** my-core-functions.el
 #+begin_src emacs-lisp :tangle lisp/my-core-functions.el
 ;;; lisp/my-core-functions.el --- Core functions -*- lexical-binding: t -*-
@@ -4590,7 +4942,7 @@ a dedicated window."
 
 (defun project-try-root (dir)
   "Search up the `DIR' for `project-root-files'."
-  (when-let ((root
+  (when-let* ((root
               (seq-some
                (lambda (n) (locate-dominating-file dir n))
                project-root-files)))
@@ -4667,51 +5019,6 @@ stays on current"
 ;;; my-editor-helpers.el ends here
 #+end_src
 
-** my-emacs-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-emacs-helpers.el
-;;; lisp/my-emacs-helpers.el --- Helper functions for emacs -*- lexical-binding: t -*-
-
-(defun crm-indicator (args)
-  (cons (format "[CRM%s] %s"
-                (replace-regexp-in-string
-                 "\\`\\[.*?]\\*\\|\\[.*?]\\*\\" ""
-                 crm-separator)
-                (car args))
-        (cdr args)))
-
-(provide 'my-emacs-helpers)
-;;; my-emacs-helpers.el ends here
-#+end_src
-
-** my-evil-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-evil-helpers.el
-;;; lisp/my-evil-helpers.el --- Helper functions for evil -*- lexical-binding: t -*-
-
-;; (evil-define-text-object evil-pasted (count &rest args)
-;;   (list (save-excursion (evil-goto-mark ?\[) (point))
-;;         (save-excursion (evil-goto-mark ?\]) (1+ (point)))))
-
-;; (evil-define-text-object evil-inner-buffer (count &optional beg end type)
-;;   (list (point-min) (point-max)))
-
-(provide 'my-evil-helpers)
-;;; my-evil-helpers.el ends here
-#+end_src
-
-** my-kbd-macros.el
-#+begin_src emacs-lisp :tangle lisp/my-kbd-macros.el
-;;; lisp/my-kbd-macros.el --- Keyboard macros -*- lexical-binding: t -*-
-
-(defalias 'kmacro-insert-macro 'insert-kbd-macro)
-
-(defalias 'targets_string_to_tar_read
-   (kmacro "w w v w w w w w h y 0 p a SPC < - SPC t a r _ r e a d ( <kp-delete> <kp-delete> <kp-delete> <escape> $ a <backspace> ) <escape>"))
-
-
-(provide 'my-kbd-macros)
-;;; my-kbd-macros.el ends here
-#+end_src
-
 ** my-keybinding-helpers.el
 #+begin_src emacs-lisp :tangle lisp/my-keybinding-helpers.el
 ;;; lisp/my-keybinding-helpers.el --- Keybinding helper functions -*- lexical-binding: t -*-
@@ -4720,360 +5027,11 @@ stays on current"
   "Display all keybindings defined in the `tyrant-map`.
 This provides a consolidated view of all global leader keys."
   (interactive)
-  (describe-keymap 'tyrant-map))
+  (describe-keymap 'tyrant-map)
+  )
 
 (provide 'my-keybinding-helpers)
 ;;; my-keybinding-helpers.el ends here
-#+end_src
-
-** my-keybindings.el
-#+begin_src emacs-lisp :tangle lisp/my-keybindings.el
-;;; lisp/my-keybindings.el --- Keybindings -*- lexical-binding: t -*-
-
-(tyrant-def
-  "SPC"     '("M-x" . execute-extended-command)
-  "TAB"     '("last buffer" . alternate-buffer)
-  "RET"     '("Switch" . consult-buffer)
-  "!"       '("shell cmd" . shell-command)
-  "i"       '("insert" . tempel-insert)
-  "I"       '("insert" . yas-insert-snippet)
-  "M" '("bookmark" . bookmark-set)
-  ","       (cons "config" (make-sparse-keymap))
-  ",d"      'describe-face
-  ",f"      'fontaine-set-preset
-  ",F"      'menu-set-font
-  ",t"      'consult-theme
-
-  ;;================================= applications ===========================
-  "a"       (cons "apps" (make-sparse-keymap))
-  ;;		"ab" 'banner-comment ; defined in package dec
-  "ac"      'consult-minor-mode-menu
-  "aC"      'calc-dispatch
-  "ae"      'embark-act
-  "aE"      'embark-act-all
-  "ap"      'list-processes
-  ;;    "ad"      'todoist
-  "af"      'fontaine-set-preset
-  "aF"      'menu-set-font
-  ;;		"am"     'manage-minor-mode-table ;in manage-minor-mode-table use-package def
-  "ao"      (cons "obsidian" (make-sparse-keymap))
-  "aoc"     'obsidian-capture
-  "aoj"     'obsidian-jump
-  "aos"     'obsidian-search
-  "at"      'consult-theme
-  "aP"      'proced
-
-  ;;================================ buffers =================================
-  "b"       (cons "buffers" (make-sparse-keymap))
-  "bb"      'switch-to-buffer
-  "bB"      'ibuffer
-  "bd"      'kill-current-buffer
-  "bm"      'switch-to-messages-buffer
-  "bs"      'switch-to-scratch-buffer
-  "bu"      'reopen-killed-buffer
-  "bx"      'kill-buffer-and-window
-
-  ;;=================================== code =================================
-  "c"       (cons "code" (make-sparse-keymap))
-  "cb"      'lsp-bridge-diagnostic-list
-  "cB"      'flymake-show-buffer-diagnostics
-  "cc"      'compile
-  "cj"      'previous-error
-  "ck"      'next-error
-  "cn"      'next-error
-  "cp"      'previous-error
-  "cP"      'check-parens
-  "cr"      'recompile
-  "cx"      'kill-compilation
-  "c="      'indent-region-or-buffer
-
-  ;;================================== elpaca ================================
-  "e"       (cons "elpaca" (make-sparse-keymap))
-  "ef"      'elpaca-fetch-all
-  "eF"      'elpaca-fetch
-  "el"      'elpaca-log
-  "em"      'elpaca-manager
-  "eu"      'elpaca-merge ;; update equivalent
-  ;; Intentional no bind for merge-all
-
-  ;;================================== Ellama ================================
-  ;; "E"       (cons "Ellama" (make-sparse-keymap))
-  ;; "Ec"      (cons "code" (make-sparse-keymap))
-  ;; "Ecc"     'ellama-code-complete
-  ;; "Eca"     'ellama-code-add
-  ;; "Ece"     'ellama-code-edit
-  ;; "Eci"     'ellama-code-improve
-  ;; "Ecr"     'ellama-code-review
-  ;; "Es"      (cons "summarize & session" (make-sparse-keymap))
-  ;; "Ess"    'ellama-summarize
-  ;; "Esw"    'ellama-summarize-webpage
-  ;; "Esl"    'ellama-load-session
-  ;; "Esr"    'ellama-session-rename
-  ;; "Esd"    'ellama-session-remove
-  ;; "Esa"    'ellama-session-switch
-  ;; "Ei"      (cons "improve" (make-sparse-keymap))
-  ;; "Eiw"    'ellama-improve-wording
-  ;; "Eig"    'ellama-improve-grammar
-  ;; "Eic"    'ellama-improve-conciseness
-  ;; "Em"      (cons "make" (make-sparse-keymap))
-  ;; "Eml"    'ellama-make-list
-  ;; "Emt"    'ellama-make-table
-  ;; "Emf"    'ellama-make-format
-  ;; "Ea"      (cons "ask & chat" (make-sparse-keymap))
-  ;; "Eaa"    'ellama-ask-about
-  ;; "Eai"    'ellama-chat
-  ;; "Eal"    'ellama-ask-line
-  ;; "Eas"    'ellama-ask-selection
-  ;; "Et"      (cons "translate" (make-sparse-keymap))
-  ;; "Ett"    'ellama-translate
-  ;; "Etb"    'ellama-translate-buffer
-  ;; "Ete"    'ellama-chat-translation-enable
-  ;; "Etd"    'ellama-chat-translation-disable
-  ;; "Etc"    'ellama-complete
-  ;; "Ed"      (cons "define" (make-sparse-keymap))
-  ;; "Edw"    'ellama-define-word
-  ;; "Ex"      (cons "context" (make-sparse-keymap))
-  ;; "Exb"    'ellama-context-add-buffer
-  ;; "Exf"    'ellama-context-add-file
-  ;; "Exs"    'ellama-context-add-selection
-  ;; "Exi"    'ellama-context-add-info-node
-  ;; "Ep"      (cons "provider" (make-sparse-keymap))
-  ;; "Eps"    'ellama-provider-select
-
-  ;;================================== files =================================
-  "f"       (cons "files" (make-sparse-keymap))
-  "fb"      'rename-current-buffer-file
-  "fC"      '("copy-file" . write-file)
-  "fD"      'delete-current-buffer-file
-  "fe"      'find-library
-                                        ;    "fE"      'sudo-edit
-  "ff"      'find-file
-  "fj"      'dired-jump
-  "fJ"      'dired-jump-other-window
-  "fo"      'open-file-or-directory-in-external-app
-  "fr"      'rg
-  "fR"      'rg-menu
-  "fs"      'save-buffer
-  "fv"      (cons "variables" (make-sparse-keymap))
-  "fvd"     'add-dir-local-variable
-  "fvf"     'add-file-local-variable
-  "fvp"     'add-file-local-variable-prop-line
-
-  ;;================================== Frame =================================
-  "F"       (cons "Frame" (make-sparse-keymap))
-  "Fd"      'delete-frame
-  "FD"      'delete-other-frames
-  "Fn"      'make-frame
-  "Fo"      'other-frame
-
-  ;;=================================== help =================================
-  "h"       (cons "help" (make-sparse-keymap))
-  "ha"      'apropos
-  "hb"      'describe-bindings
-  "hc"      'describe-char
-  "hf"      'describe-function
-  "hF"      'describe-face
-  "hi"      'info-emacs-manual
-  "hI"      'info-display-manual
-  "hk"      'describe-key
-  "hK"      'describe-keymap
-  "hm"      'describe-mode
-  "hM"      'man
-  "hp"      'describe-package
-  "ht"      'describe-text-properties
-  "hv"      'describe-variable
-  "hP"      (cons "profiler" (make-sparse-keymap))
-  "hPs"     'profiler-start
-  "hPk"     'profiler-stop
-  "hPr"     'profiler-report
-
-  ;;=================================== jump ==================================
-  "j"       'consult-buffer
-  
-  "J"       (cons "jump" (make-sparse-keymap))
-  "Jb"      'bookmark-jump
-  "Ji"      'imenu
-  ;;    "jg"      'avy-goto-char-timer
-  "Jn"      'denote
-  ;;    "jo"      'obsidian-jump
-
-  ;;=================================== keys ==================================
-  "k"       (cons "key" (make-sparse-keymap))
-  "km"      'which-key-show-major-mode
-  "kt"      'which-key-show-top-level
-  "kM"      'which-key-show-minor-mode-keymap
-  "ka"      'which-key-show-keymap ; show [a]ny or [a]ll keymap
-  "kd"      'describe-key
-  "kD"      'describe-keymap
-
-  ;;================================== eglot =================================
-  ;; "l"  (cons "eglot" (make-sparse-keymap))
-  ;; "la" 'eglot-code-actions
-  ;; "lb" 'eglot-events-buffer
-  ;; "lr" 'eglot-rename
-  ;; "lR" 'eglot-reconnect
-  ;; "lx" 'eglot-shutdown
-  ;; "lX" 'eglot-shutdown-all
-  ;; "l=" 'eglot-format
-
-  ;;============================ major mode prefix ===========================
-  "m"       (cons "major mode" (make-sparse-keymap))
-
-  ;;================================= projects ===============================
-  "p"       (cons "projects" project-prefix-map)
-  "pt"      'project-open-in-tab
-  "pb"      'bookmark-in-project-toggle
-  "pj"      'bookmark-in-project-jump
-
-  ;;=================================== quit =================================
-  "q"       (cons "quit" (make-sparse-keymap))
-  "qd"      'restart-emacs-debug-init
-  "qr"      'restart-emacs
-  "qR"      'restart-emacs-without-desktop
-  "qf"      'delete-frame
-  "qq"      'delete-frame
-  "qQ"      'save-buffers-kill-emacs
-  "qs"      'server-shutdown
-  "qS"      'server-save-buffers-kill-terminal
-  "qt"      'save-buffers-kill-terminal
-
-  ;;================================= spelling ===============================
-  "s"       (cons "spelling" (make-sparse-keymap))
-  "sb"      'flyspell-buffer
-  "sn"      'flyspell-goto-next-error
-  "sr"      'flyspell-region
-  "sc"      'jinx-correct
-  "sC"      'jinx-correct-nearest
-  "sj"      'jinx-next
-
-  ;;================================= replace ================================
-  "r"       (cons "replace" (make-sparse-keymap))
-  "ra"      'query-replace ; Ask = query
-  "rs"      'replace-string
-  "rr"      'replace-string-in-region
-
-  ;;=================================== toggle ===============================
-  "t"       (cons "toggle" (make-sparse-keymap))
-  "ta"      'auto-fill-mode
-  ;;    "tb"      'global-obsidian-mode
-  ;;		"tc"      'nocomments-mode defined-in-package
-  "tM"      'consult-minor-mode-menu
-  "td"      'toggle-debug-on-error
-  "tf"      'display-fill-column-indicator-mode
-  ;;    "tg"      'golden-ratio-mode
-  "tg"      'zoom-mode
-  "th"      'hs-minor-mode
-  "tj"      'jinx-mode
-  "tl"      'toggle-truncate-lines
-  "tm"      'flymake-mode
-  "tn"      'display-line-numbers-mode
-  "tz"      'outline-minor-mode
-  "tO"      'org-modern-mode
-  "tp" 'variable-pitch-mode
-  ;;    "tp"      'pdf-view-mode ;probably don't need it since I fixed the :mode def
-  ;;    "tr"      'writegood-mode
-  "ts"      'flyspell-mode
-  "tt"      'LateX-mode
-  "tv"      'visual-fill-column-mode
-  "tV"      'olivetti-mode
-  "tw"      'whitespace-mode
-  "tW"      'toggle-word-wrap
-  "tz"      'TeX-fold-mode
-
-  ;;=================================== Tabs =================================
-  "T"       (cons "Tabs" tab-prefix-map)
-  "Td"      'tab-bar-close-tab
-  "TD"      'tab-bar-close-other-tabs
-  "Tg"      'tab-bar-change-tab-group
-  "Tm"      'tab-bar-move-tab-to
-  "TM"      'tab-bar-move-tab-to-group
-  "Tl"      'tab-bar-switch-to-tab
-  "TR"      'tab-bar-rename-tab
-  "Tt"      'other-tab-prefix
-  "Tu"      'tab-bar-undo-close-tab
-  "T1"      '("select tab 1..8" . tab-bar-select-tab)
-  "T2"      'tab-bar-select-tab
-  "T3"      'tab-bar-select-tab
-  "T4"      'tab-bar-select-tab
-  "T5"      'tab-bar-select-tab
-  "T6"      'tab-bar-select-tab
-  "T7"      'tab-bar-select-tab
-  "T8"      'tab-bar-select-tab
-  "T TAB"   'tab-bar-switch-to-last-tab
-
-  ;;============================= universal prefix ===========================
-  "u"       '("universal" . universal-argument)
-
-  ;;================================= windows ================================
-  "w"       (cons "windows" (make-sparse-keymap))
-  "w TAB"   'alternate-window
-  "w+"      'window-layout-toggle
-  "wb"      'switch-to-minibuffer-window
-  "wd"      'delete-window
-  "wD"      'delete-other-windows
-  "wm"      'toggle-maximize-buffer
-  "wf"      'follow-mode
-  ;;    "wg"      'golden-ratio
-  "wg"      'zoom-mode
-  "wh"      'evil-window-left
-  "wH"      'evil-window-move-far-left
-  "wj"      'evil-window-down
-  "wJ"      'evil-window-move-very-bottom
-  "wk"      'evil-window-up
-  "wK"      'evil-window-move-very-top
-  "wl"      'evil-window-right
-  "wL"      'evil-window-move-far-right
-  "wr"      'rotate-windows-forward
-  "wR"      'rotate-windows-backward
-  "wS"      'split-window-vertically
-  "ws"      'split-window-vertically-and-focus
-  "wt"      'toggle-current-window-dedication
-  "wu"      'winner-undo
-  "wU"      'winner-redo
-  "wV"      'split-window-horizontally
-  "wv"      'split-window-horizontally-and-focus
-  "w="      'balance-windows
-  "w <left>" 'shrink-window-horizontally
-  "w <down>" 'shrink-window
-  "w <up>"   'enlarge-window
-  "w <right>" 'enlarge-window-horizontally
-  )
-
-(general-def
-  [remap comment-dwim] 'comment-or-uncomment
-  "M-/" 'hippie-expand
-  "M-j" (defun scroll-other-window-next-line (&optional arg)
-          (interactive "P")
-          (scroll-other-window (or arg 1)))
-  "M-k" (defun scroll-other-window-previous-line (&optional arg)
-          (interactive "P")
-          (scroll-other-window (- (or arg 1)))))
-
-(when IS-MAC
-  (general-def
-    "s-`"   'other-frame
-    "s-a"   'mark-whole-buffer
-    "s-c"   'evil-yank
-    "s-n"   'make-frame
-    "s-m"   'iconify-frame
-    "s-q"   'save-buffers-kill-terminal
-    "s-v"   'yank
-    "s-x"   'kill-region
-    "s-w"   'delete-window
-    "s-W"   'delete-frame
-    "s-z"   'evil-undo
-    "s-Z"   'evil-redo
-    "s-C-F" 'toggle-frame-fullscreen
-    "s-s"   'save-buffer
-    "s-<backspace>" (defun delete-line-before-point ()
-                      (interactive)
-                      (let ((prev-pos (point)))
-                        (forward-visible-line 0)
-                        (delete-region (point) prev-pos)
-                        (indent-according-to-mode)))))
-
-(provide 'my-keybindings)
-;;; my-keybindings.el ends here
 #+end_src
 
 ** my-lang-helpers.el
@@ -5169,7 +5127,7 @@ This provides a consolidated view of all global leader keys."
 #+begin_src emacs-lisp :tangle lisp/my-org-helpers.el
 ;;; lisp/my-org-helpers.el --- Helper functions for org-mode -*- lexical-binding: t -*-
 
-(defun org-toggle-hidden-emphasis-markers ()
+(defun my/org-toggle-hidden-emphasis-markers ()
   "Toggle whether markup should be hidden in 'org-mode'."
   (interactive)
   (if org-hide-emphasis-markers
@@ -5203,91 +5161,8 @@ corresponding ':tangle' header argument."
             (insert "\n"))
           (insert "#+end_src\n\n"))))))
 
-(with-eval-after-load 'org-noter-pdftools
-  (defun org-noter-pdftools-insert-precise-note (&optional toggle-no-questions)
-  (interactive "P")
-  (org-noter--with-valid-session
-   (let ((org-noter-insert-note-no-questions (if toggle-no-questions
-                                                 (not org-noter-insert-note-no-questions)
-                                               org-noter-insert-note-no-questions))
-         (org-pdftools-use-isearch-link t)
-         (org-pdftools-use-freepointer-annot t))
-     (org-noter-insert-note (org-noter--get-precise-info)))))
-)
-
-(defun org-noter-set-start-location (&optional arg)
-  "When opening a session with this document, go to the current location.
-With a prefix ARG, remove start location."
-  (interactive "P")
-  (org-noter--with-valid-session
-   (let ((inhibit-read-only t)
-         (ast (org-noter--parse-root))
-         (location (org-noter--doc-approx-location (when (called-interactively-p 'any) 'interactive))))
-     (with-current-buffer (org-noter--session-notes-buffer session)
-       (org-with-wide-buffer
-        (goto-char (org-element-property :begin ast))
-        (if arg
-            (org-entry-delete nil org-noter-property-note-location)
-          (org-entry-put nil org-noter-property-note-location
-                         (org-noter--pretty-print-location location))))))))
-
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here
-#+end_src
-
-** my-project-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-project-helpers.el
-;;; lisp/my-project-helpers.el --- Helper functions for projects -*- lexical-binding: t -*-
-
-(defvar consult--source-workspace
-  (list :name     "Workspace Buffers"
-        :narrow   ?w
-        :history  'buffer-name-history
-        :category 'buffer
-        :state    #'consult--buffer-state
-        :default  t
-        :items    (lambda () (consult--buffer-query
-                               :predicate #'tabspaces--local-buffer-p
-                               :sort 'visibility
-                               :as #'buffer-name)))
-
-  "Set workspace buffer list for consult-buffer.")
-
-(defun my--consult-tabspaces ()
-  "Deactivate isolated buffers when not using tabspaces."
-  (require 'consult)
-  (cond (tabspaces-mode
-         ;; hide full buffer list (still available with "b")
-         (consult-customize consult--source-buffer :hidden t :default nil)
-         (add-to-list 'consult-buffer-sources 'consult--source-workspace))
-        (t
-         ;; reset consult-buffer to show all buffers
-         (consult-customize consult--source-buffer :hidden nil :default t)
-         (setq consult-buffer-sources (remove #'consult--source-workspace consult-buffer-sources))))
-  )
-
-(provide 'my-project-helpers)
-;;; my-project-helpers.el ends here
-#+end_src
-
-** my-tempel-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-tempel-helpers.el
-;;; lisp/my-tempel-helpers.el --- Helper functions for tempel -*- lexical-binding: t -*-
-
-(defun tempel-setup-capf ()
-  (setq-local completion-at-point-functions
-              (cons #'tempel-complete
-                    completion-at-point-functions)))
-
-(defun tempel-hippie-try-expand (old)
-  "Integrate with hippie expand.
-Just put this function in `hippie-expand-try-functions-list'."
-  (if (not old)
-      (tempel-expand t)
-    (undo 1)))
-
-(provide 'my-tempel-helpers)
-;;; my-tempel-helpers.el ends here
 #+end_src
 
 ** my-theme-helpers.el
@@ -5354,7 +5229,8 @@ This can be used to advice functions that might open .org files.
 
 For example: To unfold from a magit diff buffer, evaluate the following:
 (advice-add 'magit-diff-visit-file :after #'org-reveal-advice)"
-  (when (derived-mode-p 'org-mode) (org-reveal)))
+  (when (derived-mode-p 'org-mode) (org-reveal))
+  )
 
 (defun git-link-copy-url-only ()
   "Only copy the generated link to the kill ring."
@@ -5371,19 +5247,3 @@ For example: To unfold from a magit diff buffer, evaluate the following:
 (provide 'my-vc-helpers)
 ;;; my-vc-helpers.el ends here
 #+end_src
-
-** my-writing-helpers.el
-#+begin_src emacs-lisp :tangle lisp/my-writing-helpers.el
-;;; lisp/my-writing-helpers.el --- Helper functions for writing -*- lexical-binding: t -*-
-
-(defun pandoc ()
-  "Start pandoc for the buffer and open the menu"
-  (interactive)
-  (if (not (bound-and-true-p pandoc-mode)) (pandoc-mode))
-  (pandoc-main-hydra/body))
-
-(provide 'my-writing-helpers)
-;;; my-writing-helpers.el ends here
-#+end_src
-
-
