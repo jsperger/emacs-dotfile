@@ -142,4 +142,10 @@
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 
 
+(provide 'init)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; init.el ends here

@@ -1,4 +1,6 @@
-;;; early-init.el --- Emacs pre package.el & GUI configuration -*- lexical-binding: t; -*-
+;;; early-init.el --- before package.el, GUI -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
 
 ;; Defer garbage collection further back in the startup process
 (setq gc-cons-threshold most-positive-fixnum gc-cons-percentage 0.6)
@@ -23,10 +25,9 @@
 (when (featurep 'ns)
   (push '(ns-transparent-titlebar . t) default-frame-alist))
 
-
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; early-init.el ends here
