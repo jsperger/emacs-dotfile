@@ -1,7 +1,5 @@
 ;;; config/setup-evil.el --- Evil configuration -*- lexical-binding: t -*-
 
-(require 'my-evil-helpers)
-
 (use-package evil
 	:ensure (:wait t)
 	:demand t
@@ -41,9 +39,19 @@
                      #'evil-change
                      #'evil-delete
                      #'evil-replace)
+ (progn
+    (evil-define-text-object evil-pasted (count &rest args)
+      (list (save-excursion (evil-goto-mark ?\[) (point))
+            (save-excursion (evil-goto-mark ?\]) (1+ (point)))))
+    (define-key evil-inner-text-objects-map "P" 'evil-pasted)
+
+    ;; define text-object for entire buffer
+    (evil-define-text-object evil-inner-buffer (count &optional beg end type)
+      (list (point-min) (point-max)))
+    (define-key evil-inner-text-objects-map "g" 'evil-inner-buffer))
 
   (add-hook 'evil-normal-state-exit-hook #'evil-ex-nohighlight)
-
+:general
 	(general-def '(normal motion) "TAB" 'bicycle-cycle)
   (general-def 'normal "zf" 'reposition-window)
   (general-def 'insert [remap evil-complete-previous] 'hippie-expand)
