@@ -98,36 +98,32 @@
 
   )
 
-
 ;; no-littering ends here
 
 ;; [[file:config.org::load configuration files][load configuration files]]
-;; ============================== Load path ==============================
+;=========== Load use-package declarations and configuration ===========
+
+;; Declarations to executed immediately. I.e. those with elpaca
+;; :ensure (:wait t)
+;; :demand t
+(load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
+
+;=========================== Load lisp defuns ==========================
 ;; Add personal `lisp` directory to the load-path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; --- Load personal library files ---
- (require 'my-bib-helpers)
- (require 'my-completion-helpers)
- (require 'my-consult-helpers)
  (require 'my-core-functions)
  (require 'my-core-helpers)
  (require 'my-editor-helpers)
-;; (require 'my-emacs-helpers)
-;; (require 'my-evil-helpers)
-;; (require 'my-kbd-macros)
  (require 'my-keybinding-helpers)
- (require 'my-keybindings)
  (require 'my-lang-helpers)
  (require 'my-lsp-bridge-helpers)
  (require 'my-org-helpers)
- (require 'my-project-helpers)
- (require 'my-tempel-helpers)
  (require 'my-theme-helpers)
  (require 'my-vc-helpers)
-;; (require 'my-writing-helpers)
 
-;; --- Load use-package configurations manually ---
+;; General delcarations that can be handled
 (let ((config-dir (expand-file-name "config" user-emacs-directory)))
   (dolist (file
            '(
@@ -149,7 +145,6 @@
              ;; "setup-emacs.el"
              ;; "setup-email.el"
               "setup-evil-addons.el"
-              "setup-evil.el"
               "setup-font-locking.el"
               "setup-fonts.el"
              ;; "setup-go.el"
@@ -159,6 +154,7 @@
              ;; "setup-lisp.el"
              "setup-llm.el"
              "setup-lsp-bridge.el"
+"my-keybindings.el"
              ;; "setup-lsp.el"
               "setup-markdown.el"
              ;; "setup-media.el"
@@ -187,12 +183,14 @@
     )
   )
 
+
+;=============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; init.el ends here
