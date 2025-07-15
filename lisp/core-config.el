@@ -8,21 +8,13 @@
 
 ;;; Code:
 
-;; smooth scrolling
-;; (setq scroll-conservatively 101
-;;       scroll-margin 2)
-
 (use-package ultra-scroll
-	;; :load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
-	;; :vc (:url "https://github.com/jdtsmith/ultra-scroll") ; For Emacs>=30
-	:ensure (ultra-scroll
-					 :type git :host github :repo "jdtsmith/ultra-scroll")
-  :init
-  (setq scroll-conservatively 101 ; important!
-        scroll-margin 0) 
-  :config
-  (ultra-scroll-mode 1)
-	)
+  ;; :load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
+  :ensure (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")
+  :init  (setq scroll-conservatively 50
+               scroll-margin 0) 
+  :config (ultra-scroll-mode 1)
+  )
 
 ;; Highlight and allow to open http link at point in programming buffers
 ;; goto-address-prog-mode only highlights links in strings and comments
@@ -277,14 +269,12 @@ the unwritable tidbits."
 
 (use-package whitespace
   :ensure nil
-	:defer t
-  :hook (;(prog-mode . whitespace-mode)
-         (diff-mode . whitespace-mode))
+  :hook (diff-mode . whitespace-mode)
  )
 
 (use-package winner
   :ensure nil
-	:defer t
+  :defer t
   :commands (winner-undo winner-redo)
   :init
   (setopt winner-dont-bind-my-keys t)
