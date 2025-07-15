@@ -4,10 +4,9 @@
 	:general
 	(despot-def "ag" 'elpher))
 
-;;; setup-gopher.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-gopher.el ends here

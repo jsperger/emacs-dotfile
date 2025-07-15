@@ -7,10 +7,9 @@
 	(ready-player-mode +1)
 	)
 
-;;; setup-media.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-media.el ends here

@@ -95,10 +95,9 @@
 (use-package denote-citar-sections
 	:disabled)
 
-;;; setup-denote.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-denote.el ends here

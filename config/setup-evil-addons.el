@@ -32,10 +32,9 @@
     "s" 'evil-surround-region
     "S" 'evil-substitute))
 
-;;; setup-evil-addons.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-evil-addons.el ends here

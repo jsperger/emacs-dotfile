@@ -43,10 +43,9 @@
 (add-hook 'after-load-theme-hook #'unscale-outlines)
 (add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
 
-;;; setup-themes.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-themes.el ends here

@@ -10,4 +10,3 @@
 
 (provide 'my-emacs-helpers)
 ;;; my-emacs-helpers.el ends here
-

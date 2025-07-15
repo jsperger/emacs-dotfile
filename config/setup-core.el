@@ -1,11 +1,5 @@
 ;;; config/setup-core.el --- Core configuration -*- lexical-binding: t -*-
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-
 (require 'my-core-helpers)
 
 (use-package ultra-scroll
@@ -205,3 +199,9 @@
 	(winner-mode 1)
   :config
   (setopt winner-boring-buffers-regexp "\\*.*\\*"))
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-core.el ends here

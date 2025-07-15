@@ -24,10 +24,9 @@
 					(yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 	)
 
-;;; setup-treesit.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-treesit.el ends here

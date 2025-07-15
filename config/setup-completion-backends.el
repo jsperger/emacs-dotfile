@@ -1,11 +1,5 @@
 ;;; config/setup-completion-backends.el --- Completion backends -*- lexical-binding: t -*-
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-
 (require 'my-completion-helpers)
 
 (use-package orderless
@@ -39,3 +33,9 @@
 	:init
 	(setq vertico-prescient-enable-filtering t)
 	)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-completion-backends.el ends here

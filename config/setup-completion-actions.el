@@ -1,11 +1,5 @@
 ;;; config/setup-completion-actions.el --- Completion actions -*- lexical-binding: t -*-
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-
 (use-package avy
 	:general
 	(tyrant-def
@@ -60,3 +54,10 @@
 	:after consult-gh
 	:custom
 	(consult-gh-forge-mode +1))
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-completion-actions.el ends here

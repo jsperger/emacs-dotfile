@@ -15,10 +15,9 @@
   (tyrant-def "am" 'manage-minor-mode-table)
  )
 
-;;; setup-search.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-search.el ends here

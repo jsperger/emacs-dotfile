@@ -1,11 +1,5 @@
 ;;; config/setup-completion-display.el --- Completion display -*- lexical-binding: t -*-
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-
 (use-package marginalia
 	:custom
 	(marginalia-mode t))
@@ -23,3 +17,9 @@
   :config
   (setopt nerd-icons-completion-mode t)
 	)
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-completion-display.el ends here

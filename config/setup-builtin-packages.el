@@ -1,11 +1,5 @@
 ;;; config/setup-builtin-packages.el --- Builtin packages -*- lexical-binding: t -*-
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-
 (use-package autorevert
   :ensure nil
   :hook (elpaca-after-init . global-auto-revert-mode)
@@ -50,3 +44,9 @@
 	:config
 	(setopt glasses-separate-parentheses-p nil)
 )
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-builtin-packages.el ends here

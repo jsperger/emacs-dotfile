@@ -136,10 +136,9 @@
 	:disabled
 	)
 
-;;; setup-projects.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-projects.el ends here

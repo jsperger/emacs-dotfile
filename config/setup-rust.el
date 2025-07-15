@@ -29,11 +29,10 @@
 		"f" 'cargo-mode-test-current-test)
 	)
 
-;;; setup-rust.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-rust.el ends here
 

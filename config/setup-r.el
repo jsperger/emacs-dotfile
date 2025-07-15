@@ -62,10 +62,9 @@
   :mode ("\\.qmd\\'" . poly-markdown+R-mode)
   )
 
-;;; setup-r.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-r.el ends here

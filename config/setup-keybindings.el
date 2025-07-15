@@ -18,10 +18,9 @@
   :config
   (setq general-emit-autoloads nil))
 
-;;; setup-keybindings.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-keybindings.el ends here

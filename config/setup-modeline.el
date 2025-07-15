@@ -27,10 +27,9 @@
 (use-package nano-modeline
   :disabled)
 
-;;; setup-modeline.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-modeline.el ends here

@@ -35,11 +35,9 @@
 	:mode ("\\.rkt\\" . racket-mode)
 	)
 
-;;; setup-lisp.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-
+;;; setup-lisp.el ends here

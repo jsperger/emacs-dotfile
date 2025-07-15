@@ -49,10 +49,8 @@
   (general-def 'insert [remap evil-complete-previous] 'hippie-expand)
 	)
 
-;;; setup-evil.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
-;; End:
+;; End:;;; setup-evil.el ends here

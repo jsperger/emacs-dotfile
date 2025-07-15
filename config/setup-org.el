@@ -246,10 +246,9 @@
 					org-side-tree-enable-folding t)
 	)
 
-;;; setup-org.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-org.el ends here

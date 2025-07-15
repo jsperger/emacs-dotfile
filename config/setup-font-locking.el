@@ -33,10 +33,9 @@
 
 (use-package highlight-refontification)
 
-;;; setup-font-locking.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-font-locking.el ends here

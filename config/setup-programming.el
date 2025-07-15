@@ -30,11 +30,9 @@
 	:general
 	(trant-def "ci" 'drepl-ipython))
 
-;;; setup-programming.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-
+;;; setup-programming.el ends here

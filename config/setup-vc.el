@@ -126,10 +126,9 @@
   :after magit
   :config (magit-todos-mode 1))
 
-;;; setup-vc.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-vc.el ends here
