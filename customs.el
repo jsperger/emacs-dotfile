@@ -27,7 +27,6 @@
  '(ess-use-ido nil nil (ido))
  '(indent-tabs-mode nil)
  '(large-file-warning-threshold 100000000)
- '(logos-olivetti t)
  '(magit-wip-after-apply-mode t)
  '(magit-wip-after-save-mode t)
  '(magit-wip-before-change-mode t)
@@ -39,7 +38,10 @@
  '(org-edit-src-content-indentation 0)
  '(org-make-toc-insert-custom-ids t)
  '(package-native-compile t)
- '(safe-local-variable-values '((org-list-indent-offset . 2) (TeX-master . t)))
+ '(safe-local-variable-values
+   '((eval add-hook 'before-save-hook #'org-make-toc nil t)
+     (jinx-local-words . "engine-specific model-specific")
+     (org-list-indent-offset . 2) (TeX-master . t)))
  '(standard-indent 2)
  '(trusted-content '("~/.emacs.d/" "~/projects/")))
 
