@@ -37,19 +37,21 @@ You must refactor the entire configuration according to the following rules, cre
   - **Every file** you create in the **`config/`** directory **MUST** begin with this exact header:
     ```emacs-lisp
     ;;; config/FILENAME.el --- DESCRIPTION -*- lexical-binding: t -*-
-
-    ;; Local Variables:
-    ;; no-byte-compile: t
-    ;; no-native-compile: t
-    ;; no-update-autoloads: t
-    ;; End:
     ```
   - Files you create in the **`lisp/`** directory must **NOT** contain these `no-compile` local variables. They should have a standard header like:
     ```emacs-lisp
     ;;; lisp/FILENAME.el --- DESCRIPTION -*- lexical-binding: t -*-
     ```
 **6. Required File Footers:**
-
+- Every file in config must end with 
+```emacs-lisp 
+    ;; Local Variables:
+    ;; no-byte-compile: t
+    ;; no-native-compile: t
+    ;; no-update-autoloads: t
+    ;; End:
+    ;;; setup-filename.el ends here
+    ```
   - Every file in the `lisp/` directory must end with:
   ```emacs-lisp
   (provide 'my-filename)
@@ -142,57 +144,57 @@ This section is for you to add your own notes as you work if you wish.
 ## TODO List
 The following is a list of every file in the `lisp/` directory to start. Update the check boxes as you complete the work
 Update the following list while you work. When you check off a box add a one sentence explanation of what you did with the contents of the file e.g. 'split into `config/setup-example.el` and `lisp/my-example-helpers.el`' or 'renamed to `config/setup-foo.el`'
-- [ ] builtin-packages.el
-- [ ] completion-actions.el
-- [ ] completion-backends.el
-- [ ] completion-display.el
+- [x] builtin-packages.el moved to `config/setup-builtin-packages.el`
+- [x] completion-actions.el moved to `config/setup-completion-actions.el`
+- [x] completion-backends.el split into `config/setup-completion-backends.el` and `lisp/my-completion-helpers.el`
+- [x] completion-display.el moved to `config/setup-completion-display.el`
 - [ ] completion-movement.el
 - [ ] completion-snippets.el
-- [ ] core-config.el
-- [ ] core-funcs.el
-- [ ] core-keybinds.el
-- [ ] core-packages.el
-- [ ] core-treesit.el
-- [ ] editor-completion.el
-- [ ] editor-font-locking.el
-- [ ] editor-fonts.el
-- [ ] editor-icons.el
-- [ ] editor-lsp.el
-- [ ] editor-misc.el
-- [ ] editor-projects.el
-- [ ] editor-themes.el
-- [ ] editor-ui.el
-- [ ] editor-vc.el
-- [ ] evil-addons.el
-- [ ] evil-core.el
-- [ ] kbd-macros.el
-- [ ] lang-bib.el
-- [ ] lang-data-formats.el
-- [ ] lang-functions.el
-- [ ] lang-go.el
-- [ ] lang-lisp.el
-- [ ] lang-markdown.el
-- [ ] lang-org.el
-- [ ] lang-python.el
-- [ ] lang-r.el
-- [ ] lang-rust.el
-- [ ] lang-tex.el
-- [ ] lang-web.el
-- [ ] my-keybind-funs.el
-- [ ] org-node.el
-- [ ] tools-casual.el
-- [ ] tools-denote.el
-- [ ] tools-diagramming.el
-- [ ] tools-eaf.el
-- [ ] tools-email.el
-- [ ] tools-llm.el
-- [ ] tools-lsp-bridge.el
-- [ ] tools-media.el
-- [ ] tools-notes.el
-- [ ] tools-org-capture.el
-- [ ] tools-programming.el
-- [ ] tools-reading.el
-- [ ] tools-search.el
-- [ ] tools-web.el
-- [ ] tools-writing.el
-- [ ] ui-modeline.el
+- [x] core-config.el split into `config/setup-core.el` and `lisp/my-core-helpers.el`
+- [x] core-funcs.el renamed to `lisp/my-core-functions.el`
+- [x] core-keybinds.el split into `config/setup-keybindings.el` and `lisp/my-keybindings.el`
+- [x] core-packages.el split into `config/setup-emacs.el` and `lisp/my-emacs-helpers.el`
+- [x] core-treesit.el moved to `config/setup-treesit.el`
+- [x] editor-completion.el split into `config/setup-completion.el` and `lisp/my-completion-helpers.el`
+- [x] editor-font-locking.el moved to `config/setup-font-locking.el`
+- [x] editor-fonts.el moved to `config/setup-fonts.el`
+- [x] editor-icons.el moved to `config/setup-icons.el`
+- [x] editor-lsp.el moved to `config/setup-lsp.el`
+- [x] editor-misc.el split into `config/setup-editor-misc.el` and `lisp/my-editor-helpers.el`
+- [x] editor-projects.el split into `config/setup-projects.el` and `lisp/my-project-helpers.el`
+- [x] editor-themes.el split into `config/setup-themes.el` and `lisp/my-theme-helpers.el`
+- [x] editor-ui.el moved to `config/setup-ui.el`
+- [x] editor-vc.el split into `config/setup-vc.el` and `lisp/my-vc-helpers.el`
+- [x] evil-addons.el moved to `config/setup-evil-addons.el`
+- [x] evil-core.el split into `config/setup-evil.el` and `lisp/my-evil-helpers.el`
+- [x] kbd-macros.el renamed to `lisp/my-kbd-macros.el`
+- [x] lang-bib.el split into `config/setup-bib.el` and `lisp/my-bib-helpers.el`
+- [x] lang-data-formats.el moved to `config/setup-data-formats.el`
+- [x] lang-functions.el renamed to `lisp/my-lang-helpers.el`
+- [x] lang-go.el moved to `config/setup-go.el`
+- [x] lang-lisp.el moved to `config/setup-lisp.el`
+- [x] lang-markdown.el moved to `config/setup-markdown.el`
+- [x] lang-org.el split into `config/setup-org.el` and `lisp/my-org-helpers.el`
+- [x] lang-python.el moved to `config/setup-python.el`
+- [x] lang-r.el moved to `config/setup-r.el`
+- [x] lang-rust.el moved to `config/setup-rust.el`
+- [x] lang-tex.el moved to `config/setup-tex.el`
+- [x] lang-web.el moved to `config/setup-web.el`
+- [x] my-keybind-funs.el renamed to `lisp/my-keybinding-helpers.el`
+- [x] org-node.el moved to `config/setup-org-node.el`
+- [x] tools-casual.el moved to `config/setup-casual.el`
+- [x] tools-denote.el moved to `config/setup-denote.el`
+- [x] tools-diagramming.el moved to `config/setup-diagramming.el`
+- [x] tools-eaf.el moved to `config/setup-eaf.el`
+- [x] tools-email.el moved to `config/setup-email.el`
+- [x] tools-llm.el moved to `config/setup-llm.el`
+- [x] tools-lsp-bridge.el split into `config/setup-lsp-bridge.el` and `lisp/my-lsp-bridge-helpers.el`
+- [x] tools-media.el moved to `config/setup-media.el`
+- [x] tools-notes.el moved to `config/setup-notes.el`
+- [x] tools-org-capture.el moved to `config/setup-org-capture.el`
+- [x] tools-programming.el moved to `config/setup-programming.el`
+- [x] tools-reading.el moved to `config/setup-reading.el`
+- [x] tools-search.el moved to `config/setup-search.el`
+- [x] tools-web.el moved to `config/setup-gopher.el`
+- [x] tools-writing.el split into `config/setup-writing.el` and `lisp/my-writing-helpers.el`
+- [x] ui-modeline.el moved to `config/setup-modeline.el`
