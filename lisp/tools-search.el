@@ -8,12 +8,14 @@
   (setopt rg-executable "/opt/homebrew/bin/rg"))
 	)
 
-(use-package wgrep)
+(use-package wgrep
+  :disabled)
 
 (use-package manage-minor-mode-table
-	:general
-	(tyrant-def "am" 'manage-minor-mode-table)
- 	)
+  :disabled
+  :general
+  (tyrant-def "am" 'manage-minor-mode-table)
+ )
 
 (provide 'tools-search)
 ;;; tools-search.el ends here
