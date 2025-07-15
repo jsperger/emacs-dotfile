@@ -29,9 +29,13 @@
 ;; --- Font Locking Utilities ---
 ;;;
 
-(use-package font-lock-studio)
+(use-package font-lock-studio
+  ;; really useful when you need it, but doesn't need to be enabled most of the time
+  :disabled)
 
-(use-package highlight-refontification)
+(use-package highlight-refontification
+  ;; really useful when you need it, but doesn't need to be enabled most of the time
+  :disabled)
 
 ;; Local Variables:
 ;; no-byte-compile: t

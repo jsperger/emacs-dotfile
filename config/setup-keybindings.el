@@ -12,12 +12,6 @@
         which-key-allow-evil-operators t)
   (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
 
-(use-package general
-	:ensure (:wait t)
-	:demand t
-  :config
-  (setq general-emit-autoloads nil))
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
