@@ -34,5 +34,19 @@ corresponding ':tangle' header argument."
             (insert "\n"))
           (insert "#+end_src\n\n"))))))
 
+(defun my/org-update-subtree-modification-info ()
+  "Update modification info in the current subtree's properties.
+Sets 'LAST_MODIFIED' timestamp and 'MODIFIED_WITH_EMACS' version.
+Intended for `before-save-hook` in an Org mode buffer."
+  (when (derived-mode-p 'org-mode)
+    (save-excursion
+      (org-back-to-heading t)
+      ;; Set the last modified timestamp
+      (org-entry-put (point) "LAST_MODIFIED"
+                     (format-time-string "[%Y-%m-%d %a %H:%M]"))
+      ;; Set the Emacs version used for the modification
+      (org-entry-put (point) "MODIFIED_WITH_EMACS"
+                     (emacs-version))))
+  )
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here

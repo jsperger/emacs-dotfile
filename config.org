@@ -1,3 +1,6 @@
+:PROPERTIES:
+:TOC:      :include siblings :depth 1 :force (depth) :ignore (this) :local (nothing)
+:END:
 #+title: John's Emacs Configuration
 #+subtitle: And scattered esoterica to help my future self
 #+author: John Sperger
@@ -10,14 +13,34 @@
 
 *Last revised and exported on {{{latest-export-date}}} with a word
 count of {{{word-count}}}.*
-
 * Overview
+:PROPERTIES:
+:TOC:      :include siblings :force (nothing) :ignore (nothing) :local (nothing) :depth 1
+:CUSTOM_ID: overview
+:LAST_MODIFIED: [2025-07-15 Tue 18:36]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
+:END:
+
+:CONTENTS:
+- [[#overview][Overview]]
+  - [[#style][Style]]
+  - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
+  - [[#warnings][Warnings]]
+- [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
+- [[#configuration][Configuration]]
+- [[#config-directory][Config directory]]
+- [[#lisp][Lisp]]
+:END:
 
 This file documents and generates my Emacs configuration. It tangles to create
 my configuration files; this is distinct from the kind of literate config that
 uses the org file as the config file.
 
 ** Style
+:PROPERTIES:
+:CUSTOM_ID: style
+:END:
 
 Headings in the sections containing configuration code are functional as well as
 organizational. 
@@ -32,11 +55,20 @@ organizational.
 |          |                |               |
 
 ** Design Decisions & Notable Features
+:PROPERTIES:
+:CUSTOM_ID: design-decisions--notable-features
+:END:
 *** Support for detangling
+:PROPERTIES:
+:CUSTOM_ID: support-for-detangling
+:END:
 
 The header option =:comments link= encases the code in the tangled file with a comment linking back to the org source block. This enables detangling, making changes in the tangled file and propagating them back to the org source block.
 Not sure if this will be a good idea or if it's just an invitation for the config to get out of sync. 
 *** Aggressive time-stamping
+:PROPERTIES:
+:CUSTOM_ID: aggressive-time-stamping
+:END:
 The combination of scavenging snippets from a multitude of dotfiles, tending
 towards maximalism in package usage, Emacs's long history and ongoing
 development, and starting to configure Emacs before I had any idea what I was
@@ -49,8 +81,17 @@ Other snippets
 
 
 ** Warnings
+:PROPERTIES:
+:CUSTOM_ID: warnings
+:END:
 *** I have no idea what I'm doing
+:PROPERTIES:
+:CUSTOM_ID: i-have-no-idea-what-im-doing
+:END:
 *** I don't care about startup time (or at least don't optimize for it)
+:PROPERTIES:
+:CUSTOM_ID: i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it
+:END:
 This config is meant to be used with Emacs running as a daemon. When I want to
 open Emacs I'm really calling ~emacsclient~ with an option to create a new frame.
 When I "quit" emacs I just delete the current frame. The initialization is far
@@ -60,15 +101,30 @@ my configuration.
 I'm sympathetic to the arguments in this blog post that [[https://batsov.com/articles/2025/04/07/emacs-startup-time-does-not-matter/][start-up time doesn't matter]] (to me). 
 
 * Notes on configuring Emacs
+:PROPERTIES:
+:CUSTOM_ID: notes-on-configuring-emacs
+:END:
 ** Things I found or continue to find particularly confusing
+:PROPERTIES:
+:CUSTOM_ID: things-i-found-or-continue-to-find-particularly-confusing
+:END:
 *** Package management and loading packages
+:PROPERTIES:
+:CUSTOM_ID: package-management-and-loading-packages
+:END:
 related: 
 *** The "right" way to configure package options
+:PROPERTIES:
+:CUSTOM_ID: the-right-way-to-configure-package-options
+:END:
 * Configuration
+:PROPERTIES:
+:CUSTOM_ID: configuration
+:END:
 *** init.el
 :PROPERTIES:
 :header-args: :tangle init.el
-:CUSTOM_ID: configuration
+:CUSTOM_ID: initel
 :END:
 
 :TODO: Figure out a way to abide by the emacs styling where the first line is like ~;;; init.el --- Summary -*- lexical-binding: t; -*-~
@@ -145,6 +201,9 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 		"Toggle debugging messages. Set to t to enable, nil to disable.")
 #+end_src
 **** no-littering
+:PROPERTIES:
+:CUSTOM_ID: no-littering
+:END:
 Emacs packages 
 #+name: no-littering
 #+begin_src emacs-lisp :noweb yes :comments link :tangle init.el 
@@ -154,6 +213,9 @@ Emacs packages
 #+end_src
 
 **** Load configuration files
+:PROPERTIES:
+:CUSTOM_ID: load-configuration-files
+:END:
 
 #+name: load configuration files
 #+begin_src emacs-lisp :noweb yes :comments link :tangle init.el 
@@ -236,7 +298,13 @@ Emacs packages
 #+end_src
 
 * Config directory
+:PROPERTIES:
+:CUSTOM_ID: config-directory
+:END:
 ** my-kbd-macros.el
+:PROPERTIES:
+:CUSTOM_ID: my-kbd-macrosel
+:END:
 #+begin_src emacs-lisp :tangle config/my-kbd-macros.el
 ;;; config/my-kbd-macros.el --- Keyboard macros -*- lexical-binding: t -*-
 
@@ -256,6 +324,9 @@ Emacs packages
 #+end_src
 
 ** my-keybindings.el
+:PROPERTIES:
+:CUSTOM_ID: my-keybindingsel
+:END:
 #+begin_src emacs-lisp :tangle config/my-keybindings.el
 ;;; config/my-keybindings.el --- Keybindings -*- lexical-binding: t -*-
 
@@ -611,6 +682,9 @@ Emacs packages
 #+end_src
 
 ** setup-bib.el
+:PROPERTIES:
+:CUSTOM_ID: setup-bibel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-bib.el
 ;;; config/setup-bib.el --- Bibliography configuration -*- lexical-binding: t -*-
 
@@ -665,6 +739,9 @@ Emacs packages
 #+end_src
 
 ** setup-builtin-packages.el
+:PROPERTIES:
+:CUSTOM_ID: setup-builtin-packagesel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-builtin-packages.el
 ;;; config/setup-builtin-packages.el --- Builtin packages -*- lexical-binding: t -*-
 
@@ -721,6 +798,9 @@ Emacs packages
 #+end_src
 
 ** setup-casual.el
+:PROPERTIES:
+:CUSTOM_ID: setup-casualel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-casual.el
 ;;; config/setup-casual.el --- Casual suite configuration -*- lexical-binding: t -*-
 
@@ -736,6 +816,9 @@ Emacs packages
 #+end_src
 
 ** setup-comment-tools.el
+:PROPERTIES:
+:CUSTOM_ID: setup-comment-toolsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-comment-tools.el
 ;;; setup-comment-tools.el ---  -*- lexical-binding: t; -*-
 ;;; Commentary:
@@ -757,6 +840,9 @@ Emacs packages
 #+end_src
 
 ** setup-completion-actions.el
+:PROPERTIES:
+:CUSTOM_ID: setup-completion-actionsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-completion-actions.el
 ;;; config/setup-completion-actions.el --- Completion actions -*- lexical-binding: t -*-
 
@@ -833,6 +919,9 @@ Emacs packages
 #+end_src
 
 ** setup-completion-backends.el
+:PROPERTIES:
+:CUSTOM_ID: setup-completion-backendsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-completion-backends.el
 ;;; config/setup-completion-backends.el --- Completion backends -*- lexical-binding: t -*-
 
@@ -886,6 +975,9 @@ Emacs packages
 #+end_src
 
 ** setup-completion-display.el
+:PROPERTIES:
+:CUSTOM_ID: setup-completion-displayel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-completion-display.el
 ;;; config/setup-completion-display.el --- Completion display -*- lexical-binding: t -*-
 
@@ -915,6 +1007,9 @@ Emacs packages
 #+end_src
 
 ** setup-completion.el
+:PROPERTIES:
+:CUSTOM_ID: setup-completionel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-completion.el
 ;;; config/setup-completion.el --- Completion configuration -*- lexical-binding: t -*-
 
@@ -1029,6 +1124,9 @@ Emacs packages
 #+end_src
 
 ** setup-consult.el
+:PROPERTIES:
+:CUSTOM_ID: setup-consultel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-consult.el
 ;;; config/setup-consult.el --- Consult configuration -*- lexical-binding: t -*-
 
@@ -1160,6 +1258,9 @@ Emacs packages
 #+end_src
 
 ** setup-core.el
+:PROPERTIES:
+:CUSTOM_ID: setup-coreel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-core.el
 ;;; config/setup-core.el --- Core configuration -*- lexical-binding: t -*-
 
@@ -1369,6 +1470,9 @@ Emacs packages
 #+end_src
 
 ** setup-data-formats.el
+:PROPERTIES:
+:CUSTOM_ID: setup-data-formatsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-data-formats.el
 ;;; config/setup-data-formats.el --- Data format modes configuration -*- lexical-binding: t -*-
 
@@ -1415,6 +1519,9 @@ Emacs packages
 #+end_src
 
 ** setup-denote.el
+:PROPERTIES:
+:CUSTOM_ID: setup-denoteel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-denote.el
 ;;; config/setup-denote.el --- Denote configuration -*- lexical-binding: t -*-
 
@@ -1522,6 +1629,9 @@ Emacs packages
 #+end_src
 
 ** setup-diagramming.el
+:PROPERTIES:
+:CUSTOM_ID: setup-diagrammingel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-diagramming.el
 ;;; config/setup-diagramming.el --- Diagramming tools configuration -*- lexical-binding: t -*-
 
@@ -1569,6 +1679,9 @@ Emacs packages
 #+end_src
 
 ** setup-eaf.el
+:PROPERTIES:
+:CUSTOM_ID: setup-eafel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-eaf.el
 ;;; config/setup-eaf.el --- EAF configuration -*- lexical-binding: t -*-
 
@@ -1592,6 +1705,9 @@ Emacs packages
 #+end_src
 
 ** setup-editor-misc.el
+:PROPERTIES:
+:CUSTOM_ID: setup-editor-miscel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-editor-misc.el
 ;;; config/setup-editor-misc.el --- Miscellaneous editor configuration -*- lexical-binding: t -*-
 
@@ -1761,6 +1877,9 @@ Emacs packages
 #+end_src
 
 ** setup-emacs.el
+:PROPERTIES:
+:CUSTOM_ID: setup-emacsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-emacs.el
 ;;; config/setup-emacs.el --- Emacs configuration -*- lexical-binding: t -*-
 
@@ -1923,6 +2042,9 @@ Emacs packages
 #+end_src
 
 ** setup-email.el
+:PROPERTIES:
+:CUSTOM_ID: setup-emailel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-email.el
 ;;; config/setup-email.el --- Email configuration -*- lexical-binding: t -*-
 
@@ -1941,6 +2063,9 @@ Emacs packages
 #+end_src
 
 ** setup-evil-addons.el
+:PROPERTIES:
+:CUSTOM_ID: setup-evil-addonsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-evil-addons.el
 ;;; config/setup-evil-addons.el --- Evil addons configuration -*- lexical-binding: t -*-
 
@@ -1985,6 +2110,9 @@ Emacs packages
 #+end_src
 
 ** setup-evil.el
+:PROPERTIES:
+:CUSTOM_ID: setup-evilel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-evil.el
 ;;; config/setup-evil.el --- Evil configuration -*- lexical-binding: t -*-
 
@@ -2054,6 +2182,9 @@ Emacs packages
 #+end_src
 
 ** setup-font-locking.el
+:PROPERTIES:
+:CUSTOM_ID: setup-font-lockingel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-font-locking.el
 ;;; config/setup-font-locking.el --- Font locking configuration -*- lexical-binding: t -*-
 
@@ -2103,6 +2234,9 @@ Emacs packages
 #+end_src
 
 ** setup-fonts.el
+:PROPERTIES:
+:CUSTOM_ID: setup-fontsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-fonts.el
 ;;; config/setup-fonts.el --- Font configuration -*- lexical-binding: t -*-
 
@@ -2284,6 +2418,9 @@ Emacs packages
 #+end_src
 
 ** setup-go.el
+:PROPERTIES:
+:CUSTOM_ID: setup-goel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-go.el
 ;;; config/setup-go.el --- Go programming language configuration -*- lexical-binding: t -*-
 
@@ -2311,6 +2448,9 @@ Emacs packages
 #+end_src
 
 ** setup-gopher.el
+:PROPERTIES:
+:CUSTOM_ID: setup-gopherel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-gopher.el
 ;;; config/setup-gopher.el --- Gopher configuration -*- lexical-binding: t -*-
 
@@ -2327,6 +2467,9 @@ Emacs packages
 #+end_src
 
 ** setup-icons.el
+:PROPERTIES:
+:CUSTOM_ID: setup-iconsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-icons.el
 ;;; config/setup-icons.el --- Icons configuration -*- lexical-binding: t -*-
 
@@ -2412,6 +2555,9 @@ Emacs packages
 #+end_src
 
 ** setup-keybindings.el
+:PROPERTIES:
+:CUSTOM_ID: setup-keybindingsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-keybindings.el
 ;;; config/setup-keybindings.el --- Keybindings configuration -*- lexical-binding: t -*-
 
@@ -2434,6 +2580,9 @@ Emacs packages
 #+end_src
 
 ** setup-lisp.el
+:PROPERTIES:
+:CUSTOM_ID: setup-lispel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-lisp.el
 ;;; config/setup-lisp.el --- Lisp configuration -*- lexical-binding: t -*-
 
@@ -2481,6 +2630,9 @@ Emacs packages
 #+end_src
 
 ** setup-llm.el
+:PROPERTIES:
+:CUSTOM_ID: setup-llmel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-llm.el
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
@@ -2587,6 +2739,9 @@ Emacs packages
 #+end_src
 
 ** setup-lsp-bridge.el
+:PROPERTIES:
+:CUSTOM_ID: setup-lsp-bridgeel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-lsp-bridge.el
 ;;; config/setup-lsp-bridge.el --- lsp-bridge configuration -*- lexical-binding: t -*-
 
@@ -2623,6 +2778,9 @@ Emacs packages
 #+end_src
 
 ** setup-lsp.el
+:PROPERTIES:
+:CUSTOM_ID: setup-lspel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-lsp.el
 ;;; config/setup-lsp.el --- LSP configuration -*- lexical-binding: t -*-
 
@@ -2724,6 +2882,9 @@ Emacs packages
 #+end_src
 
 ** setup-markdown.el
+:PROPERTIES:
+:CUSTOM_ID: setup-markdownel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-markdown.el
 ;;; config/setup-markdown.el --- Markdown configuration -*- lexical-binding: t -*-
 ;;; Commentary:
@@ -2823,6 +2984,9 @@ Emacs packages
 #+end_src
 
 ** setup-media.el
+:PROPERTIES:
+:CUSTOM_ID: setup-mediael
+:END:
 #+begin_src emacs-lisp :tangle config/setup-media.el
 ;;; config/setup-media.el --- Media players configuration -*- lexical-binding: t -*-
 
@@ -2842,6 +3006,9 @@ Emacs packages
 #+end_src
 
 ** setup-modeline.el
+:PROPERTIES:
+:CUSTOM_ID: setup-modelineel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-modeline.el
 ;;; config/setup-modeline.el --- Modeline configuration -*- lexical-binding: t -*-
 
@@ -2882,6 +3049,9 @@ Emacs packages
 #+end_src
 
 ** setup-notes.el
+:PROPERTIES:
+:CUSTOM_ID: setup-notesel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-notes.el
 ;;; config/setup-notes.el --- Notes configuration -*- lexical-binding: t -*-
 
@@ -2918,6 +3088,9 @@ Emacs packages
 #+end_src
 
 ** setup-org-capture.el
+:PROPERTIES:
+:CUSTOM_ID: setup-org-captureel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-org-capture.el
 ;;; config/setup-org-capture.el --- Org capture tools configuration -*- lexical-binding: t -*-
 
@@ -2932,6 +3105,9 @@ Emacs packages
 #+end_src
 
 ** setup-org-exporters.el
+:PROPERTIES:
+:CUSTOM_ID: setup-org-exportersel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-org-exporters.el
 ;;; setup-org-exporters.el ---  -*- lexical-binding: t; -*-
 ;;; Commentary:
@@ -2961,6 +3137,9 @@ Emacs packages
 #+end_src
 
 ** setup-org-node.el
+:PROPERTIES:
+:CUSTOM_ID: setup-org-nodeel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-org-node.el
 ;;; config/setup-org-node.el --- Org-node configuration -*- lexical-binding: t -*-
 
@@ -3009,6 +3188,9 @@ Emacs packages
 #+end_src
 
 ** setup-org.el
+:PROPERTIES:
+:CUSTOM_ID: setup-orgel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-org.el
 ;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
 
@@ -3250,6 +3432,9 @@ Emacs packages
 #+end_src
 
 ** setup-programming.el
+:PROPERTIES:
+:CUSTOM_ID: setup-programmingel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-programming.el
 ;;; config/setup-programming.el --- General programming tools configuration -*- lexical-binding: t -*-
 
@@ -3292,6 +3477,9 @@ Emacs packages
 #+end_src
 
 ** setup-projects.el
+:PROPERTIES:
+:CUSTOM_ID: setup-projectsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-projects.el
 ;;; config/setup-projects.el --- Projects configuration -*- lexical-binding: t -*-
 
@@ -3438,6 +3626,9 @@ Emacs packages
 #+end_src
 
 ** setup-python.el
+:PROPERTIES:
+:CUSTOM_ID: setup-pythonel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-python.el
 ;;; config/setup-python.el --- Python configuration -*- lexical-binding: t -*-
 
@@ -3467,6 +3658,9 @@ Emacs packages
 #+end_src
 
 ** setup-r.el
+:PROPERTIES:
+:CUSTOM_ID: setup-rel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-r.el
 ;;; config/setup-r.el --- R language configuration -*- lexical-binding: t -*-
 
@@ -3541,6 +3735,9 @@ Emacs packages
 #+end_src
 
 ** setup-reading.el
+:PROPERTIES:
+:CUSTOM_ID: setup-readingel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-reading.el
 ;;; config/setup-reading.el --- Reading tools configuration -*- lexical-binding: t -*-
 
@@ -3629,6 +3826,9 @@ Emacs packages
 #+end_src
 
 ** setup-rust.el
+:PROPERTIES:
+:CUSTOM_ID: setup-rustel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-rust.el
 ;;; config/setup-rust.el --- Rust language configuration -*- lexical-binding: t -*-
 
@@ -3671,6 +3871,9 @@ Emacs packages
 #+end_src
 
 ** setup-search.el
+:PROPERTIES:
+:CUSTOM_ID: setup-searchel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-search.el
 ;;; config/setup-search.el --- Search tools configuration -*- lexical-binding: t -*-
 
@@ -3698,6 +3901,9 @@ Emacs packages
 #+end_src
 
 ** setup-snippets.el
+:PROPERTIES:
+:CUSTOM_ID: setup-snippetsel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-snippets.el
 ;;; config/setup-snippets.el --- Snippets configuration -*- lexical-binding: t -*-
 
@@ -3753,6 +3959,9 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 ** setup-tex.el
+:PROPERTIES:
+:CUSTOM_ID: setup-texel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-tex.el
 ;;; config/setup-tex.el --- TeX and LaTeX configuration -*- lexical-binding: t -*-
 
@@ -3903,6 +4112,9 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 ** setup-themes.el
+:PROPERTIES:
+:CUSTOM_ID: setup-themesel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-themes.el
 ;;; config/setup-themes.el --- Themes configuration -*- lexical-binding: t -*-
 
@@ -3957,6 +4169,9 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 ** setup-treesit.el
+:PROPERTIES:
+:CUSTOM_ID: setup-treesitel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-treesit.el
 ;;; config/setup-treesit.el --- Treesitter configuration -*- lexical-binding: t -*-
 
@@ -3993,6 +4208,9 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 ** setup-ui.el
+:PROPERTIES:
+:CUSTOM_ID: setup-uiel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
 ;;; config/setup-ui.el --- UI configuration -*- lexical-binding: t -*-
 ;;; Commentary:
@@ -4209,6 +4427,9 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 ** setup-vc.el
+:PROPERTIES:
+:CUSTOM_ID: setup-vcel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-vc.el
 ;;; config/setup-vc.el --- Version control configuration -*- lexical-binding: t -*-
 
@@ -4344,6 +4565,9 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 ** setup-web.el
+:PROPERTIES:
+:CUSTOM_ID: setup-webel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-web.el
 ;;; config/setup-web.el --- Web development configuration -*- lexical-binding: t -*-
 
@@ -4383,6 +4607,9 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 ** setup-writing.el
+:PROPERTIES:
+:CUSTOM_ID: setup-writingel
+:END:
 #+begin_src emacs-lisp :tangle config/setup-writing.el
 ;;; config/setup-writing.el --- Writing tools configuration -*- lexical-binding: t -*-
 
@@ -4479,7 +4706,18 @@ Just put this function in `hippie-expand-try-functions-list'."
 #+end_src
 
 * Lisp
+:PROPERTIES:
+:CUSTOM_ID: lisp
+:END:
 ** my-core-functions.el
+:PROPERTIES:
+:CUSTOM_ID: my-core-functionsel
+:END:
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-15 Tue 18:34]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-core-functions.el
 ;;; lisp/my-core-functions.el --- Core functions -*- lexical-binding: t -*-
 
@@ -4600,33 +4838,33 @@ initialized with the current directory instead of filename."
      (if (not (tramp-tramp-file-p fname))
          (concat "/sudo:root@localhost:" fname)
        (with-parsed-tramp-file-name fname parsed
-                                    (when (equal parsed-user "root")
-                                      (error "Already root!"))
-                                    (let* ((new-hop (tramp-make-tramp-file-name
-                                                     ;; Try to retrieve a tramp method suitable for
-                                                     ;; multi-hopping
-                                                     (cond ((tramp-get-method-parameter
-                                                             parsed 'tramp-login-program))
-                                                           ((tramp-get-method-parameter
-                                                             parsed 'tramp-copy-program))
-                                                           (t parsed-method))
-                                                     parsed-user
-                                                     parsed-domain
-                                                     parsed-host
-                                                     parsed-port
-                                                     nil
-                                                     parsed-hop))
-                                           (new-hop (substring new-hop 1 -1))
-                                           (new-hop (concat new-hop "|"))
-                                           (new-fname (tramp-make-tramp-file-name
-                                                       "sudo"
-                                                       parsed-user
-                                                       parsed-domain
-                                                       parsed-host
-                                                       parsed-port
-                                                       parsed-localname
-                                                       new-hop)))
-                                      new-fname))))))
+         (when (equal parsed-user "root")
+           (error "Already root!"))
+         (let* ((new-hop (tramp-make-tramp-file-name
+                          ;; Try to retrieve a tramp method suitable for
+                          ;; multi-hopping
+                          (cond ((tramp-get-method-parameter
+                                  parsed 'tramp-login-program))
+                                ((tramp-get-method-parameter
+                                  parsed 'tramp-copy-program))
+                                (t parsed-method))
+                          parsed-user
+                          parsed-domain
+                          parsed-host
+                          parsed-port
+                          nil
+                          parsed-hop))
+                (new-hop (substring new-hop 1 -1))
+                (new-hop (concat new-hop "|"))
+                (new-fname (tramp-make-tramp-file-name
+                            "sudo"
+                            parsed-user
+                            parsed-domain
+                            parsed-host
+                            parsed-port
+                            parsed-localname
+                            new-hop)))
+           new-fname))))))
 
 (defun open-file-in-external-app (file-path)
   "Open FILE-PATH in external application."
@@ -4635,7 +4873,7 @@ initialized with the current directory instead of filename."
     (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path)))
    (IS-MAC (shell-command (format "open \"%s\"" file-path)))
    (IS-LINUX (let ((process-connection-type nil))
-                                  (start-process "" nil "xdg-open" file-path)))))
+               (start-process "" nil "xdg-open" file-path)))))
 
 (defun open-file-or-directory-in-external-app (arg)
   "Open current file in external application.
@@ -4840,7 +5078,7 @@ a dedicated window."
   (interactive)
   (save-some-buffers)
   (kill-emacs)
- )
+  )
 
 ;; ---------------------------------------------------------------------------
 ;; Misc
@@ -4881,6 +5119,9 @@ a dedicated window."
 #+end_src
 
 ** my-core-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-core-helpersel
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-core-helpers.el
 ;;; lisp/my-core-helpers.el --- Helper functions for core config -*- lexical-binding: t -*-
 
@@ -4974,6 +5215,9 @@ the unwritable tidbits."
 #+end_src
 
 ** my-editor-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-editor-helpersel
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-editor-helpers.el
 ;;; lisp/my-editor-helpers.el --- Helper functions for editor -*- lexical-binding: t -*-
 
@@ -5020,6 +5264,9 @@ stays on current"
 #+end_src
 
 ** my-keybinding-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-keybinding-helpersel
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-keybinding-helpers.el
 ;;; lisp/my-keybinding-helpers.el --- Keybinding helper functions -*- lexical-binding: t -*-
 
@@ -5035,6 +5282,9 @@ This provides a consolidated view of all global leader keys."
 #+end_src
 
 ** my-lang-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-lang-helpersel
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-lang-helpers.el
 ;;; lisp/my-lang-helpers.el --- Language helper functions -*- lexical-binding: t -*-
 
@@ -5083,6 +5333,9 @@ This provides a consolidated view of all global leader keys."
 #+end_src
 
 ** my-lsp-bridge-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-lsp-bridge-helpersel
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-lsp-bridge-helpers.el
 ;;; lisp/my-lsp-bridge-helpers.el --- Helper functions for lsp-bridge -*- lexical-binding: t -*-
 
@@ -5124,6 +5377,9 @@ This provides a consolidated view of all global leader keys."
 #+end_src
 
 ** my-org-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-org-helpersel
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-org-helpers.el
 ;;; lisp/my-org-helpers.el --- Helper functions for org-mode -*- lexical-binding: t -*-
 
@@ -5166,6 +5422,9 @@ corresponding ':tangle' header argument."
 #+end_src
 
 ** my-theme-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-theme-helpersel
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-theme-helpers.el
 ;;; lisp/my-theme-helpers.el --- Helper functions for themes -*- lexical-binding: t -*-
 
@@ -5220,6 +5479,14 @@ corresponding ':tangle' header argument."
 #+end_src
 
 ** my-vc-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-vc-helpersel
+:END:
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-15 Tue 18:33]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
+:END:
 #+begin_src emacs-lisp :tangle lisp/my-vc-helpers.el
 ;;; lisp/my-vc-helpers.el --- Helper functions for version control -*- lexical-binding: t -*-
 
@@ -5247,3 +5514,8 @@ For example: To unfold from a magit diff buffer, evaluate the following:
 (provide 'my-vc-helpers)
 ;;; my-vc-helpers.el ends here
 #+end_src
+
+## Local Variables:
+## eval: (add-hook 'before-save-hook #'org-make-toc nil t)
+## eval: (add-hook 'before-save-hook #'my/org-update-subtree-modification-info)
+## End:

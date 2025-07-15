@@ -35,4 +35,3 @@
 ;; no-update-autoloads: t
 ;; End:
 ;;; setup-rust.el ends here
-
