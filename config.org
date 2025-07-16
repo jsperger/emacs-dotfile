@@ -15,22 +15,89 @@
 count of {{{word-count}}}.*
 * Overview
 :PROPERTIES:
-:TOC:      :include siblings :force (nothing) :ignore (nothing) :local (nothing) :depth 1
+:LAST_MODIFIED: [2025-07-16 Wed 00:42]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:TOC:  :include siblings :force (nothing) :ignore (nothing) :local (nothing) :depth 2
 :CUSTOM_ID: overview
-:LAST_MODIFIED: [2025-07-15 Tue 18:36]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
-of 2025-07-06
 :END:
-
 :CONTENTS:
 - [[#overview][Overview]]
   - [[#style][Style]]
   - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
+    - [[#support-for-detangling][Support for detangling]]
+    - [[#aggressive-time-stamping][Aggressive time-stamping]]
   - [[#warnings][Warnings]]
+    - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
+    - [[#i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it][I don't care about startup time (or at least don't optimize for it)]]
 - [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
+  - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
 - [[#configuration][Configuration]]
+  - [[#initel][init.el]]
 - [[#config-directory][Config directory]]
-- [[#lisp][Lisp]]
+  - [[#keyboard-macros][Keyboard macros]]
+  - [[#global-key-binds][Global key binds]]
+  - [[#bibliography-management][Bibliography management]]
+  - [[#setup-builtin-packagesel][setup-builtin-packages.el]]
+  - [[#setup-casualel][setup-casual.el]]
+  - [[#setup-comment-toolsel][setup-comment-tools.el]]
+  - [[#setup-completion-actionsel][setup-completion-actions.el]]
+  - [[#set-up-completion-backends][Set up completion backends]]
+  - [[#annotate-completion-options][Annotate completion options]]
+  - [[#setup-completionel][setup-completion.el]]
+  - [[#setup-consultel][setup-consult.el]]
+  - [[#setup-coreel][setup-core.el]]
+  - [[#setup-data-formatsel][setup-data-formats.el]]
+  - [[#setup-denoteel][setup-denote.el]]
+  - [[#setup-diagrammingel][setup-diagramming.el]]
+  - [[#setup-eafel][setup-eaf.el]]
+  - [[#setup-editor-miscel][setup-editor-misc.el]]
+  - [[#setup-emacsel][setup-emacs.el]]
+  - [[#setup-emailel][setup-email.el]]
+  - [[#setup-evil-addonsel][setup-evil-addons.el]]
+  - [[#setup-evilel][setup-evil.el]]
+  - [[#setup-font-lockingel][setup-font-locking.el]]
+  - [[#setup-fontsel][setup-fonts.el]]
+  - [[#setup-goel][setup-go.el]]
+  - [[#setup-gopherel][setup-gopher.el]]
+  - [[#setup-iconsel][setup-icons.el]]
+  - [[#setup-keybindingsel][setup-keybindings.el]]
+  - [[#setup-lispel][setup-lisp.el]]
+  - [[#setup-llmel][setup-llm.el]]
+  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
+  - [[#setup-lspel][setup-lsp.el]]
+  - [[#setup-markdownel][setup-markdown.el]]
+  - [[#setup-mediael][setup-media.el]]
+  - [[#setup-modelineel][setup-modeline.el]]
+  - [[#setup-notesel][setup-notes.el]]
+  - [[#setup-org-captureel][setup-org-capture.el]]
+  - [[#setup-org-exportersel][setup-org-exporters.el]]
+  - [[#setup-org-nodeel][setup-org-node.el]]
+  - [[#setup-orgel][setup-org.el]]
+  - [[#setup-programmingel][setup-programming.el]]
+  - [[#setup-projectsel][setup-projects.el]]
+  - [[#setup-pythonel][setup-python.el]]
+  - [[#setup-rel][setup-r.el]]
+  - [[#setup-readingel][setup-reading.el]]
+  - [[#setup-rustel][setup-rust.el]]
+  - [[#setup-searchel][setup-search.el]]
+  - [[#setup-snippetsel][setup-snippets.el]]
+  - [[#setup-texel][setup-tex.el]]
+  - [[#setup-themesel][setup-themes.el]]
+  - [[#setup-treesitel][setup-treesit.el]]
+  - [[#setup-uiel][setup-ui.el]]
+  - [[#setup-vcel][setup-vc.el]]
+  - [[#setup-webel][setup-web.el]]
+  - [[#setup-writingel][setup-writing.el]]
+- [[#lisp-functions][Lisp functions]]
+  - [[#my-core-functionsel][my-core-functions.el]]
+  - [[#my-core-helpersel][my-core-helpers.el]]
+  - [[#my-editor-helpersel][my-editor-helpers.el]]
+  - [[#my-keybinding-helpersel][my-keybinding-helpers.el]]
+  - [[#my-lang-helpersel][my-lang-helpers.el]]
+  - [[#my-lsp-bridge-helpersel][my-lsp-bridge-helpers.el]]
+  - [[#my-org-helpersel][my-org-helpers.el]]
+  - [[#my-theme-helpersel][my-theme-helpers.el]]
+  - [[#my-vc-helpersel][my-vc-helpers.el]]
 :END:
 
 This file documents and generates my Emacs configuration. It tangles to create
@@ -243,7 +310,7 @@ Emacs packages
 **** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-15 Tue 19:33]
+:LAST_MODIFIED: [2025-07-15 Tue 19:36]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -346,12 +413,18 @@ Emacs packages
 
 * Config directory
 :PROPERTIES:
+:header-args: :comments link
 :CUSTOM_ID: config-directory
+:LAST_MODIFIED: [2025-07-16 Wed 01:02]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-** my-kbd-macros.el
+** Keyboard macros
 :PROPERTIES:
-:CUSTOM_ID: my-kbd-macrosel
+:LAST_MODIFIED: [2025-07-16 Wed 00:29]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: keyboard-macros
 :END:
+Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-are-misunderstood][Keyboard Macros are misunderstood]]
 #+begin_src emacs-lisp :tangle config/my-kbd-macros.el
 ;;; config/my-kbd-macros.el --- Keyboard macros -*- lexical-binding: t -*-
 
@@ -362,18 +435,20 @@ Emacs packages
 
 
 (provide 'my-kbd-macros)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; my-kbd-macros.el ends here
 #+end_src
-
-** my-keybindings.el
+** Global key binds
 :PROPERTIES:
-:CUSTOM_ID: my-keybindingsel
+:CUSTOM_ID: global-key-binds
+:LAST_MODIFIED: [2025-07-16 Wed 00:07]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
+I need to move most of these out of here and put them in the relavent package declaration. 
 #+begin_src emacs-lisp :tangle config/my-keybindings.el
 ;;; config/my-keybindings.el --- Keybindings -*- lexical-binding: t -*-
 
@@ -728,13 +803,13 @@ Emacs packages
 ;;; my-keybindings.el ends here
 #+end_src
 
-** setup-bib.el
+** Bibliography management
 :PROPERTIES:
-:CUSTOM_ID: setup-bibel
+:LAST_MODIFIED: [2025-07-16 Wed 00:41]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: bibliography-management
 :END:
-#+begin_src emacs-lisp :tangle config/setup-bib.el
-;;; config/setup-bib.el --- Bibliography configuration -*- lexical-binding: t -*-
-
+#+begin_src emacs-lisp :tangle config/setup-bib.el :prologue (cfg/org-tangle-file-header "Bibliography configuration") :epilogue (cfg/org-tangle-file-footer)
 (use-package bibtex
   :ensure nil
   )
@@ -776,13 +851,6 @@ Emacs packages
 	:general
 	(tyrant-def "d" 'ebib))
 
-;;; setup-bib.el ends here
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
 #+end_src
 
 ** setup-builtin-packages.el
@@ -848,7 +916,13 @@ Emacs packages
 :PROPERTIES:
 :CUSTOM_ID: setup-casualel
 :END:
-#+begin_src emacs-lisp :tangle config/setup-casual.el
+:PROPERTIES:
+:CUSTOM_ID: setup-casualel
+:LAST_MODIFIED: [2025-07-15 Tue 19:04]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
+:END:
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-casual.el --- Casual suite configuration -*- lexical-binding: t -*-
 
 (use-package casual
@@ -866,6 +940,12 @@ Emacs packages
 :PROPERTIES:
 :CUSTOM_ID: setup-comment-toolsel
 :END:
+:PROPERTIES:
+:CUSTOM_ID: setup-comment-toolsel
+:LAST_MODIFIED: [2025-07-15 Tue 19:04]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
+:END:
 #+begin_src emacs-lisp :tangle config/setup-comment-tools.el
 ;;; setup-comment-tools.el ---  -*- lexical-binding: t; -*-
 ;;; Commentary:
@@ -878,11 +958,11 @@ Emacs packages
 
 
 (provide 'setup-comment-tools)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; setup-comment-tools.el ends here
 #+end_src
 
@@ -965,12 +1045,18 @@ Emacs packages
 ;;; setup-completion-actions.el ends here
 #+end_src
 
-** setup-completion-backends.el
+** Set up completion backends
+:PROPERTIES:
+:CUSTOM_ID: set-up-completion-backends
+:END:
 :PROPERTIES:
 :CUSTOM_ID: setup-completion-backendsel
+:LAST_MODIFIED: [2025-07-15 Tue 19:05]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
 :END:
 #+begin_src emacs-lisp :tangle config/setup-completion-backends.el
-;;; config/setup-completion-backends.el --- Completion backends -*- lexical-binding: t -*-
+;;; setup-completion-backends.el --- Completion backends -*- lexical-binding: t -*-
 
 (use-package orderless
   :init
@@ -990,12 +1076,25 @@ Emacs packages
   (setopt orderless-style-dispatchers '(flex-if-twiddle without-if-bang))
 )
 
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-completion-backends.el ends here
+#+end_src
+*** Other completion backends
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-15 Tue 19:13]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
+:END:
+#+begin_src eamcs-lisp :tangle no
 (use-package prescient
-	:disabled
-	:config
-  (setopt prescient-sort-full-matches-first t
-					prescient-sort-length-enable nil)
-	)
+        :disabled
+        :config  (setopt prescient-sort-full-matches-first t
+                         prescient-sort-length-enable nil)
+        )
 
 (use-package corfu-prescient
 	:disabled
@@ -1005,7 +1104,6 @@ Emacs packages
   (setq corfu-prescient-enable-filtering t)
 	)
 
-
 (use-package vertico-prescient
 	:disabled
 	:after prescient
@@ -1013,38 +1111,37 @@ Emacs packages
 	:init
 	(setq vertico-prescient-enable-filtering t)
 	)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-completion-backends.el ends here
 #+end_src
-
-** setup-completion-display.el
+** Annotate completion options
 :PROPERTIES:
-:CUSTOM_ID: setup-completion-displayel
+:CUSTOM_ID: annotate-completion-options
 :END:
+:PROPERTIES:
+:CUSTOM_ID: annotate-completion-options
+:LAST_MODIFIED: [2025-07-15 Tue 19:14]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
+of 2025-07-06
+:END:
+
 #+begin_src emacs-lisp :tangle config/setup-completion-display.el
 ;;; config/setup-completion-display.el --- Completion display -*- lexical-binding: t -*-
 
 (use-package marginalia
-	:custom
-	(marginalia-mode t))
+  :custom
+  (marginalia-mode t))
 
 (use-package epkg-marginalia
-	:after marginalia
-	:config
-	(setcar (alist-get 'package marginalia-annotator-registry)
+  :after marginalia
+  :config
+  (setcar (alist-get 'package marginalia-annotator-registry)
           #'epkg-marginalia-annotate-package)
   )
 
 (use-package nerd-icons-completion
   :after marginalia
-	:hook (marginalia-mode . nerd-icons-completion-mode)
-  :config
-  (setopt nerd-icons-completion-mode t)
-	)
+  :hook (marginalia-mode . nerd-icons-completion-mode)
+  :config (setopt nerd-icons-completion-mode t)
+  )
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
@@ -1519,9 +1616,11 @@ Emacs packages
 ** setup-data-formats.el
 :PROPERTIES:
 :CUSTOM_ID: setup-data-formatsel
+:LAST_MODIFIED: [2025-07-15 Tue 19:28]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-data-formats.el
-;;; config/setup-data-formats.el --- Data format modes configuration -*- lexical-binding: t -*-
+;;; setup-data-formats.el --- data viewers -*- lexical-binding: t -*-
 
 (use-package csv-mode
   :mode ("\\.csv\\\'" . csv-mode)
@@ -1541,9 +1640,23 @@ Emacs packages
     )
   )
 
-
 (use-package emacsql)
 
+(use-package toml)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-data-formats.el ends here
+#+end_src
+**** Other data viewers
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-15 Tue 19:28]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle no
 (use-package json-navigator
 	:disabled
 	)
@@ -1555,16 +1668,7 @@ Emacs packages
   :custom
   (jsonian-no-so-long-mode))
 
-(use-package toml)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-data-formats.el ends here
 #+end_src
-
 ** setup-denote.el
 :PROPERTIES:
 :CUSTOM_ID: setup-denoteel
@@ -4752,30 +4856,27 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-writing.el ends here
 #+end_src
 
-* Lisp
+* Lisp functions
 :PROPERTIES:
-:CUSTOM_ID: lisp
+:CUSTOM_ID: lisp-functions
+:LAST_MODIFIED: [2025-07-15 Tue 22:30]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 ** my-core-functions.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-functionsel
-:END:
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-15 Tue 18:34]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
-of 2025-07-06
+:LAST_MODIFIED: [2025-07-15 Tue 22:32]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-core-functions.el
 ;;; lisp/my-core-functions.el --- Core functions -*- lexical-binding: t -*-
 
-;; Copyright (C) 2020-2023  Tianshu Wang
+;; Copyright (C) 2024-2025  John Sperger
 
-;; Author: Tianshu Wang <wang@tianshu.me>
-
+;; Author: John Sperger
 ;;; Commentary:
-
+;; Original Author: Tianshu Wang <wang@tianshu.me>
 ;;; Code:
-
 ;; ---------------------------------------------------------------------------
 ;; File
 ;; ---------------------------------------------------------------------------
@@ -5426,6 +5527,8 @@ This provides a consolidated view of all global leader keys."
 ** my-org-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-org-helpersel
+:LAST_MODIFIED: [2025-07-16 Wed 00:30]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-org-helpers.el
 ;;; lisp/my-org-helpers.el --- Helper functions for org-mode -*- lexical-binding: t -*-
@@ -5463,7 +5566,45 @@ corresponding ':tangle' header argument."
           (unless (string-suffix-p "\n" file-contents)
             (insert "\n"))
           (insert "#+end_src\n\n"))))))
+(defun my/org-update-subtree-modification-info ()
+  "Update modification info in the current subtree's properties.
+Sets 'LAST_MODIFIED' timestamp and 'MODIFIED_WITH_EMACS' version.
+Intended for `before-save-hook` in an Org mode buffer."
+ (when (derived-mode-p 'org-mode)
+    (save-excursion
+      (org-back-to-heading t)
+      (let* ((emacs-full-version (emacs-version))
+             (emacs-version-short (car (split-string emacs-full-version " ("))))
+        ;; Set the last modified timestamp. Using `nil` as the first
+        ;; argument correctly finds the current entry's property drawer.
+        (org-entry-put nil "LAST_MODIFIED"
+                       (format-time-string "[%Y-%m-%d %a %H:%M]"))
+        ;; Set the Emacs version in the same property drawer.
+        (org-entry-put nil "MODIFIED_WITH_EMACS" emacs-version-short))))
+ )
 
+(defun my/org-tangle-add-nocompile-footer (epilogue-data)
+  "Generate file-local variables and a closing comment for tangling.
+Argument EPILOGUE-DATA is the tangled filename."
+  (let ((filename (file-name-nondirectory epilogue-data)))
+    (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n\n;;; %s ends here\n" filename)))
+
+(defun cfg/org-tangle-file-header (description)
+  "Generate a standard file header for tangled Emacs Lisp files.
+This function is intended for use in an Org Babel :prologue
+header argument. It uses the dynamically-bound `tangle-file`
+variable provided by Org Babel and the provided DESCRIPTION string."
+  (format ";;; %s --- %s -*- lexical-binding: t -*-\n"
+          tangle-file
+          description))
+
+(defun cfg/org-tangle-file-footer ()
+  "Generate a standard file footer for tangled Emacs Lisp files.
+This function is intended for use in an Org Babel :epilogue
+header argument. It uses the dynamically-bound `tangle-file`
+variable provided by Org Babel."
+  (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n;;; %s ends here\n"
+          (file-name-nondirectory tangle-file)))
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here
 #+end_src

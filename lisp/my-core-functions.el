@@ -1,13 +1,11 @@
 ;;; lisp/my-core-functions.el --- Core functions -*- lexical-binding: t -*-
 
-;; Copyright (C) 2020-2023  Tianshu Wang
+;; Copyright (C) 2024-2025  John Sperger
 
-;; Author: Tianshu Wang <wang@tianshu.me>
-
+;; Author: John Sperger
 ;;; Commentary:
-
+;; Original Author: Tianshu Wang <wang@tianshu.me>
 ;;; Code:
-
 ;; ---------------------------------------------------------------------------
 ;; File
 ;; ---------------------------------------------------------------------------
@@ -117,33 +115,33 @@ initialized with the current directory instead of filename."
      (if (not (tramp-tramp-file-p fname))
          (concat "/sudo:root@localhost:" fname)
        (with-parsed-tramp-file-name fname parsed
-                                    (when (equal parsed-user "root")
-                                      (error "Already root!"))
-                                    (let* ((new-hop (tramp-make-tramp-file-name
-                                                     ;; Try to retrieve a tramp method suitable for
-                                                     ;; multi-hopping
-                                                     (cond ((tramp-get-method-parameter
-                                                             parsed 'tramp-login-program))
-                                                           ((tramp-get-method-parameter
-                                                             parsed 'tramp-copy-program))
-                                                           (t parsed-method))
-                                                     parsed-user
-                                                     parsed-domain
-                                                     parsed-host
-                                                     parsed-port
-                                                     nil
-                                                     parsed-hop))
-                                           (new-hop (substring new-hop 1 -1))
-                                           (new-hop (concat new-hop "|"))
-                                           (new-fname (tramp-make-tramp-file-name
-                                                       "sudo"
-                                                       parsed-user
-                                                       parsed-domain
-                                                       parsed-host
-                                                       parsed-port
-                                                       parsed-localname
-                                                       new-hop)))
-                                      new-fname))))))
+         (when (equal parsed-user "root")
+           (error "Already root!"))
+         (let* ((new-hop (tramp-make-tramp-file-name
+                          ;; Try to retrieve a tramp method suitable for
+                          ;; multi-hopping
+                          (cond ((tramp-get-method-parameter
+                                  parsed 'tramp-login-program))
+                                ((tramp-get-method-parameter
+                                  parsed 'tramp-copy-program))
+                                (t parsed-method))
+                          parsed-user
+                          parsed-domain
+                          parsed-host
+                          parsed-port
+                          nil
+                          parsed-hop))
+                (new-hop (substring new-hop 1 -1))
+                (new-hop (concat new-hop "|"))
+                (new-fname (tramp-make-tramp-file-name
+                            "sudo"
+                            parsed-user
+                            parsed-domain
+                            parsed-host
+                            parsed-port
+                            parsed-localname
+                            new-hop)))
+           new-fname))))))
 
 (defun open-file-in-external-app (file-path)
   "Open FILE-PATH in external application."
@@ -152,7 +150,7 @@ initialized with the current directory instead of filename."
     (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path)))
    (IS-MAC (shell-command (format "open \"%s\"" file-path)))
    (IS-LINUX (let ((process-connection-type nil))
-                                  (start-process "" nil "xdg-open" file-path)))))
+               (start-process "" nil "xdg-open" file-path)))))
 
 (defun open-file-or-directory-in-external-app (arg)
   "Open current file in external application.
@@ -357,7 +355,7 @@ a dedicated window."
   (interactive)
   (save-some-buffers)
   (kill-emacs)
- )
+  )
 
 ;; ---------------------------------------------------------------------------
 ;; Misc

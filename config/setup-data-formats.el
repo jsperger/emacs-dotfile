@@ -1,4 +1,4 @@
-;;; config/setup-data-formats.el --- Data format modes configuration -*- lexical-binding: t -*-
+;;; setup-data-formats.el --- data viewers -*- lexical-binding: t -*-
 
 (use-package csv-mode
   :mode ("\\.csv\\\'" . csv-mode)
@@ -18,19 +18,7 @@
     )
   )
 
-
 (use-package emacsql)
-
-(use-package json-navigator
-	:disabled
-	)
-
-(use-package jsonian
-	:disabled
-	:mode ("\\.json\\'")
-	:after so-long
-  :custom
-  (jsonian-no-so-long-mode))
 
 (use-package toml)
 

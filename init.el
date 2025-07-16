@@ -1,4 +1,3 @@
-;;; init.el --- Emacs configuration entry point -*- lexical-binding: t -*-
 ;;; init.el --- Initialize configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
@@ -97,7 +96,6 @@
     "SPC u" 'universal-argument-more)
 
   )
-
 ;; no-littering ends here
 
 ;; [[file:config.org::load configuration files][load configuration files]]

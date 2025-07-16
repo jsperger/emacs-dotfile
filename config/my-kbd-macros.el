@@ -7,9 +7,9 @@
 
 
 (provide 'my-kbd-macros)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; my-kbd-macros.el ends here

@@ -41,10 +41,9 @@
 	:general
 	(tyrant-def "d" 'ebib))
 
-;;; setup-bib.el ends here
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; setup-bib.el ends here

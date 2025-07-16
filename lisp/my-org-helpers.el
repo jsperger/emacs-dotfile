@@ -57,5 +57,21 @@ Argument EPILOGUE-DATA is the tangled filename."
   (let ((filename (file-name-nondirectory epilogue-data)))
     (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n\n;;; %s ends here\n" filename)))
 
+(defun cfg/org-tangle-file-header (description)
+  "Generate a standard file header for tangled Emacs Lisp files.
+This function is intended for use in an Org Babel :prologue
+header argument. It uses the dynamically-bound `tangle-file`
+variable provided by Org Babel and the provided DESCRIPTION string."
+  (format ";;; %s --- %s -*- lexical-binding: t -*-\n"
+          tangle-file
+          description))
+
+(defun cfg/org-tangle-file-footer ()
+  "Generate a standard file footer for tangled Emacs Lisp files.
+This function is intended for use in an Org Babel :epilogue
+header argument. It uses the dynamically-bound `tangle-file`
+variable provided by Org Babel."
+  (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n;;; %s ends here\n"
+          (file-name-nondirectory tangle-file)))
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here
