@@ -1,5 +1,8 @@
-;;; config/setup-builtin-packages.el --- Builtin packages -*- lexical-binding: t -*-
+;;; configure-base-and-built-in.el --- Built-in packages -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
 
+;; [[file:../its-lit.org::*Configuring built-in packages][Configuring built-in packages:1]]
 (use-package autorevert
   :ensure nil
   :hook (elpaca-after-init . global-auto-revert-mode)
@@ -28,6 +31,21 @@
 	:config
 	(setopt glasses-separate-parentheses-p nil)
 )
+;; Configuring built-in packages:1 ends here
+
+;; [[file:../its-lit.org::#which-key-config][=which-key= configuration:1]]
+(use-package which-key
+  :ensure nil
+  :hook (elpaca-after-init)
+  :config
+  (setopt which-key-idle-delay 0.4
+        which-key-idle-secondary-delay 0.01
+        which-key-max-description-length 32
+        which-key-sort-order 'which-key-key-order-alpha
+        which-key-allow-evil-operators t)
+  (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
+;; =which-key= configuration:1 ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

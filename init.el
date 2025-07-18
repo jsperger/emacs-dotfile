@@ -126,7 +126,8 @@
   (dolist (file
            '(
              ;; "setup-bib.el"
-             "setup-builtin-packages.el"
+             "configure-base-and-built-in.el"
+             "configure-keybinding.el"
              ;; "setup-casual.el"
              "setup-comment-tools.el"
              ;; "setup-completion-actions.el"
@@ -149,12 +150,9 @@
              ;; "setup-gopher.el"
              "setup-help.el"
              ;; "setup-icons.el"
-             "setup-keybindings.el"
              ;; "setup-lisp.el"
              "setup-llm.el"
              "setup-lsp-bridge.el"
-             "my-keybindings.el"
-             ;; "setup-lsp.el"
              "setup-markdown.el"
              ;; "setup-media.el"
              "setup-modeline.el"

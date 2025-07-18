@@ -39,7 +39,8 @@
  '(org-make-toc-insert-custom-ids t)
  '(package-native-compile t)
  '(safe-local-variable-values
-   '((eval add-hook 'before-save-hook #'org-make-toc nil t)
+   '((eval add-hook 'before-save-hook #'my/org-update-subtree-modification-info)
+     (eval add-hook 'before-save-hook #'org-make-toc nil t)
      (jinx-local-words . "engine-specific model-specific")
      (org-list-indent-offset . 2) (TeX-master . t)))
  '(standard-indent 2)

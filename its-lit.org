@@ -34,74 +34,9 @@ count of {{{word-count}}}.*
   - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
   - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
 - [[#configuration][Configuration]]
-  - [[#initel][init.el]]
-- [[#config-directory][Config directory]]
-  - [[#keyboard-macros][Keyboard macros]]
-  - [[#global-key-binds][Global key binds]]
-  - [[#bibliography-management][Bibliography management]]
-  - [[#setup-builtin-packagesel][setup-builtin-packages.el]]
-  - [[#setup-casualel][setup-casual.el]]
-  - [[#setup-comment-toolsel][setup-comment-tools.el]]
-  - [[#setup-completion-actionsel][setup-completion-actions.el]]
-  - [[#set-up-completion-backends][Set up completion backends]]
-  - [[#annotate-completion-options][Annotate completion options]]
-  - [[#setup-completionel][setup-completion.el]]
-  - [[#setup-consultel][setup-consult.el]]
-  - [[#setup-coreel][setup-core.el]]
-  - [[#setup-data-formatsel][setup-data-formats.el]]
-  - [[#setup-denoteel][setup-denote.el]]
-  - [[#setup-diagrammingel][setup-diagramming.el]]
-  - [[#setup-eafel][setup-eaf.el]]
-  - [[#setup-editor-miscel][setup-editor-misc.el]]
-  - [[#setup-emacsel][setup-emacs.el]]
-  - [[#setup-emailel][setup-email.el]]
-  - [[#setup-evil-addonsel][setup-evil-addons.el]]
-  - [[#setup-evilel][setup-evil.el]]
-  - [[#setup-font-lockingel][setup-font-locking.el]]
-  - [[#setup-fontsel][setup-fonts.el]]
-  - [[#setup-goel][setup-go.el]]
-  - [[#setup-gopherel][setup-gopher.el]]
-  - [[#setup-help-and-documentation-viewers][Setup help and documentation viewers]]
-  - [[#setup-iconsel][setup-icons.el]]
-  - [[#setup-keybindingsel][setup-keybindings.el]]
-  - [[#setup-lispel][setup-lisp.el]]
-  - [[#setup-llmel][setup-llm.el]]
-  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
-  - [[#setup-lspel][setup-lsp.el]]
-  - [[#setup-markdownel][setup-markdown.el]]
-  - [[#setup-mediael][setup-media.el]]
-  - [[#setup-modelineel][setup-modeline.el]]
-  - [[#setup-notesel][setup-notes.el]]
-  - [[#outline-and-fold-text][Outline and fold text]]
-  - [[#setup-org-captureel][setup-org-capture.el]]
-  - [[#setup-org-exportersel][setup-org-exporters.el]]
-  - [[#setup-org-nodeel][setup-org-node.el]]
-  - [[#setup-orgel][setup-org.el]]
-  - [[#setup-programmingel][setup-programming.el]]
-  - [[#setup-projectsel][setup-projects.el]]
-  - [[#setup-pythonel][setup-python.el]]
-  - [[#setup-rel][setup-r.el]]
-  - [[#setup-readingel][setup-reading.el]]
-  - [[#setup-rustel][setup-rust.el]]
-  - [[#setup-searchel][setup-search.el]]
-  - [[#setup-snippetsel][setup-snippets.el]]
-  - [[#setup-texel][setup-tex.el]]
-  - [[#setup-themesel][setup-themes.el]]
-  - [[#setup-treesitel][setup-treesit.el]]
-  - [[#setup-uiel][setup-ui.el]]
-  - [[#setup-vcel][setup-vc.el]]
-  - [[#setup-webel][setup-web.el]]
-  - [[#setup-writingel][setup-writing.el]]
-- [[#lisp-functions][Lisp functions]]
-  - [[#my-core-functionsel][my-core-functions.el]]
-  - [[#my-core-helpersel][my-core-helpers.el]]
-  - [[#my-editor-helpersel][my-editor-helpers.el]]
-  - [[#my-keybinding-helpersel][my-keybinding-helpers.el]]
-  - [[#my-lang-helpersel][my-lang-helpers.el]]
-  - [[#my-lsp-bridge-helpersel][my-lsp-bridge-helpers.el]]
-  - [[#my-org-helpersel][my-org-helpers.el]]
-  - [[#my-theme-helpersel][my-theme-helpers.el]]
-  - [[#my-vc-helpersel][my-vc-helpers.el]]
+  - [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
+  - [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
+  - [[#lisp-functions][Lisp functions]]
 - [[#appendices][Appendices]]
 :END:
 
@@ -336,11 +271,15 @@ Has a direct example of trying to keep a lexical binding directive at the top of
 :LAST_MODIFIED: [2025-07-18 Fri 02:21]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
+** Emacs user directory files (init and early-init)
+:PROPERTIES:
+:CUSTOM_ID: emacs-user-directory-files-init-and-early-init
+:END:
 *** init.el
 :PROPERTIES:
 :header-args: :tangle init.el
 :CUSTOM_ID: initel
-:LAST_MODIFIED: [2025-07-18 Fri 02:23]
+:LAST_MODIFIED: [2025-07-18 Fri 04:52]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -418,7 +357,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 (defconst my-debug-mode nil
   "Toggle debugging messages. Set to t to enable, nil to disable.")
 #+end_src
-**** no-littering
+***** no-littering
 :PROPERTIES:
 :CUSTOM_ID: no-littering
 :END:
@@ -457,10 +396,10 @@ Emacs packages
   )
 #+end_src
 
-**** Load configuration files
+***** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-18 Fri 04:12]
+:LAST_MODIFIED: [2025-07-18 Fri 18:08]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -493,7 +432,8 @@ Emacs packages
   (dolist (file
            '(
              ;; "setup-bib.el"
-             "setup-builtin-packages.el"
+             "configure-base-and-built-in.el"
+             "configure-keybinding.el"
              ;; "setup-casual.el"
              "setup-comment-tools.el"
              ;; "setup-completion-actions.el"
@@ -516,12 +456,9 @@ Emacs packages
              ;; "setup-gopher.el"
              "setup-help.el"
              ;; "setup-icons.el"
-             "setup-keybindings.el"
              ;; "setup-lisp.el"
              "setup-llm.el"
              "setup-lsp-bridge.el"
-             "my-keybindings.el"
-             ;; "setup-lsp.el"
              "setup-markdown.el"
              ;; "setup-media.el"
              "setup-modeline.el"
@@ -567,45 +504,47 @@ Emacs packages
 ;;; init.el ends here
 #+end_src
 
-* Config directory
+** Config directory for non-byte-copiled files
 :PROPERTIES:
-:CUSTOM_ID: config-directory
-:LAST_MODIFIED: [2025-07-17 Thu 01:27]
+:CUSTOM_ID: config-directory-for-non-byte-copiled-files
+:LAST_MODIFIED: [2025-07-18 Fri 17:19]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-** Keyboard macros
+*** One stop keybinding shop
+:PROPERTIES:
+:header-args: :tangle config/configure-keybinding.el :comments noweb
+:LAST_MODIFIED: [2025-07-18 Fri 18:07]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :noweb no :comments no
+;;; configure-keybinding.el --- All things keys -*- lexical-binding: t; -*-
+;;; Commentary:
+;; See `its-lit.org`
+;;; Code:
+#+end_src
+**** Keyboard macros
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 02:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: keyboard-macros
 :END:
 Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-are-misunderstood][Keyboard Macros are misunderstood]]
-#+begin_src emacs-lisp :tangle config/my-kbd-macros.el
-;;; config/my-kbd-macros.el --- Keyboard macros -*- lexical-binding: t -*-
-
+#+begin_src emacs-lisp 
+;;;; =========================== Keyboard macros ==========================
 (defalias 'kmacro-insert-macro 'insert-kbd-macro)
 
 (defalias 'targets_string_to_tar_read
    (kmacro "w w v w w w w w h y 0 p a SPC < - SPC t a r _ r e a d ( <kp-delete> <kp-delete> <kp-delete> <escape> $ a <backspace> ) <escape>"))
-
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; my-kbd-macros.el ends here
 #+end_src
-** Global key binds
+**** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-07-18 Fri 02:16]
+:LAST_MODIFIED: [2025-07-18 Fri 17:47]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
-#+begin_src emacs-lisp :tangle config/my-keybindings.el
-;;; config/my-keybindings.el --- Keybindings -*- lexical-binding: t -*-
-
+#+begin_src emacs-lisp 
+;;;; ========================== General Keybinds ==========================
 (tyrant-def
   "SPC"     '("M-x" . execute-extended-command)
   "TAB"     '("last buffer" . alternate-buffer)
@@ -672,50 +611,6 @@ I need to move most of these out of here and put them in the relavent package de
   "eu"      'elpaca-merge ;; update equivalent
   ;; Intentional no bind for merge-all
 
-  ;;================================== Ellama ================================
-  ;; "E"       (cons "Ellama" (make-sparse-keymap))
-  ;; "Ec"      (cons "code" (make-sparse-keymap))
-  ;; "Ecc"     'ellama-code-complete
-  ;; "Eca"     'ellama-code-add
-  ;; "Ece"     'ellama-code-edit
-  ;; "Eci"     'ellama-code-improve
-  ;; "Ecr"     'ellama-code-review
-  ;; "Es"      (cons "summarize & session" (make-sparse-keymap))
-  ;; "Ess"    'ellama-summarize
-  ;; "Esw"    'ellama-summarize-webpage
-  ;; "Esl"    'ellama-load-session
-  ;; "Esr"    'ellama-session-rename
-  ;; "Esd"    'ellama-session-remove
-  ;; "Esa"    'ellama-session-switch
-  ;; "Ei"      (cons "improve" (make-sparse-keymap))
-  ;; "Eiw"    'ellama-improve-wording
-  ;; "Eig"    'ellama-improve-grammar
-  ;; "Eic"    'ellama-improve-conciseness
-  ;; "Em"      (cons "make" (make-sparse-keymap))
-  ;; "Eml"    'ellama-make-list
-  ;; "Emt"    'ellama-make-table
-  ;; "Emf"    'ellama-make-format
-  ;; "Ea"      (cons "ask & chat" (make-sparse-keymap))
-  ;; "Eaa"    'ellama-ask-about
-  ;; "Eai"    'ellama-chat
-  ;; "Eal"    'ellama-ask-line
-  ;; "Eas"    'ellama-ask-selection
-  ;; "Et"      (cons "translate" (make-sparse-keymap))
-  ;; "Ett"    'ellama-translate
-  ;; "Etb"    'ellama-translate-buffer
-  ;; "Ete"    'ellama-chat-translation-enable
-  ;; "Etd"    'ellama-chat-translation-disable
-  ;; "Etc"    'ellama-complete
-  ;; "Ed"      (cons "define" (make-sparse-keymap))
-  ;; "Edw"    'ellama-define-word
-  ;; "Ex"      (cons "context" (make-sparse-keymap))
-  ;; "Exb"    'ellama-context-add-buffer
-  ;; "Exf"    'ellama-context-add-file
-  ;; "Exs"    'ellama-context-add-selection
-  ;; "Exi"    'ellama-context-add-info-node
-  ;; "Ep"      (cons "provider" (make-sparse-keymap))
-  ;; "Eps"    'ellama-provider-select
-
   ;;================================== files =================================
   "f"       (cons "files" (make-sparse-keymap))
   "fb"      'rename-current-buffer-file
@@ -765,7 +660,7 @@ I need to move most of these out of here and put them in the relavent package de
 
   ;;=================================== jump ==================================
   "j"       'consult-buffer
-  
+
   "J"       (cons "jump" (make-sparse-keymap))
   "Jb"      'bookmark-jump
   "Ji"      'imenu
@@ -781,16 +676,6 @@ I need to move most of these out of here and put them in the relavent package de
   "ka"      'which-key-show-keymap ; show [a]ny or [a]ll keymap
   "kd"      'describe-key
   "kD"      'describe-keymap
-
-  ;;================================== eglot =================================
-  ;; "l"  (cons "eglot" (make-sparse-keymap))
-  ;; "la" 'eglot-code-actions
-  ;; "lb" 'eglot-events-buffer
-  ;; "lr" 'eglot-rename
-  ;; "lR" 'eglot-reconnect
-  ;; "lx" 'eglot-shutdown
-  ;; "lX" 'eglot-shutdown-all
-  ;; "l=" 'eglot-format
 
   ;;============================ major mode prefix ===========================
   "m"       (cons "major mode" (make-sparse-keymap))
@@ -924,7 +809,80 @@ I need to move most of these out of here and put them in the relavent package de
   "M-k" (defun scroll-other-window-previous-line (&optional arg)
           (interactive "P")
           (scroll-other-window (- (or arg 1)))))
+#+end_src
 
+***** Removed keybindings
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 17:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:HEADER_ARGS: :tangle no :noweb no
+:END:
+#+name: ellama keybindings
+#+begin_src emacs-lisp
+;;================================== Ellama ================================
+;; "E"       (cons "Ellama" (make-sparse-keymap))
+;; "Ec"      (cons "code" (make-sparse-keymap))
+;; "Ecc"     'ellama-code-complete
+;; "Eca"     'ellama-code-add
+;; "Ece"     'ellama-code-edit
+;; "Eci"     'ellama-code-improve
+;; "Ecr"     'ellama-code-review
+;; "Es"      (cons "summarize & session" (make-sparse-keymap))
+;; "Ess"    'ellama-summarize
+;; "Esw"    'ellama-summarize-webpage
+;; "Esl"    'ellama-load-session
+;; "Esr"    'ellama-session-rename
+;; "Esd"    'ellama-session-remove
+;; "Esa"    'ellama-session-switch
+;; "Ei"      (cons "improve" (make-sparse-keymap))
+;; "Eiw"    'ellama-improve-wording
+;; "Eig"    'ellama-improve-grammar
+;; "Eic"    'ellama-improve-conciseness
+;; "Em"      (cons "make" (make-sparse-keymap))
+;; "Eml"    'ellama-make-list
+;; "Emt"    'ellama-make-table
+;; "Emf"    'ellama-make-format
+;; "Ea"      (cons "ask & chat" (make-sparse-keymap))
+;; "Eaa"    'ellama-ask-about
+;; "Eai"    'ellama-chat
+;; "Eal"    'ellama-ask-line
+;; "Eas"    'ellama-ask-selection
+;; "Et"      (cons "translate" (make-sparse-keymap))
+;; "Ett"    'ellama-translate
+;; "Etb"    'ellama-translate-buffer
+;; "Ete"    'ellama-chat-translation-enable
+;; "Etd"    'ellama-chat-translation-disable
+;; "Etc"    'ellama-complete
+;; "Ed"      (cons "define" (make-sparse-keymap))
+;; "Edw"    'ellama-define-word
+;; "Ex"      (cons "context" (make-sparse-keymap))
+;; "Exb"    'ellama-context-add-buffer
+;; "Exf"    'ellama-context-add-file
+;; "Exs"    'ellama-context-add-selection
+;; "Exi"    'ellama-context-add-info-node
+;; "Ep"      (cons "provider" (make-sparse-keymap))
+;; "Eps"    'ellama-provider-select
+#+end_src
+
+#+name: eglot bindings
+#+begin_src emacs-lisp
+;;================================== eglot =================================
+;; "l"  (cons "eglot" (make-sparse-keymap))
+;; "la" 'eglot-code-actions
+;; "lb" 'eglot-events-buffer
+;; "lr" 'eglot-rename
+;; "lR" 'eglot-reconnect
+;; "lx" 'eglot-shutdown
+;; "lX" 'eglot-shutdown-all
+;; "l=" 'eglot-format
+#+end_src
+***** Mac-specific keybinds
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 17:43]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
 (when IS-MAC
   (general-def
     "s-`"   'other-frame
@@ -947,17 +905,21 @@ I need to move most of these out of here and put them in the relavent package de
                         (forward-visible-line 0)
                         (delete-region (point) prev-pos)
                         (indent-according-to-mode)))))
-
-
+#+end_src
+**** Keybind file footer
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 18:07]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :noweb no :comments no
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; my-keybindings.el ends here
+;;; configure-keybinding.el ends here
 #+end_src
-
-** Bibliography management
+*** Bibliography management
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 02:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1013,13 +975,30 @@ I need to move most of these out of here and put them in the relavent package de
 ;;; setup-bib.el ends here
 #+end_src
 
-** setup-builtin-packages.el
+*** Configure base emacs options and built-in packages
 :PROPERTIES:
-:CUSTOM_ID: setup-builtin-packagesel
+:CUSTOM_ID: setup-base-built-in-packages
+:header-args: :tangle config/configure-base-and-built-in.el :comments noweb
+:LAST_MODIFIED: [2025-07-18 Fri 18:02]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-builtin-packages.el
-;;; config/setup-builtin-packages.el --- Builtin packages -*- lexical-binding: t -*-
+**** Base and built-in file header
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 18:05]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle config/configure-base-and-built-in.el :comments no :noweb no
+;;; configure-base-and-built-in.el --- Built-in packages -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+#+end_src
+**** Configuring built-in packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 18:05]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
 
+#+begin_src emacs-lisp 
 (use-package autorevert
   :ensure nil
   :hook (elpaca-after-init . global-auto-revert-mode)
@@ -1028,13 +1007,6 @@ I need to move most of these out of here and put them in the relavent package de
           auto-revert-verbose nil
   )
 )
-
-;; (use-package dabbrev
-;;  :ensure nil
-;;  :defer t
-;;  :config
-;;  (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
-;;       dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\'")))
 
 (use-package dired
   :ensure nil
@@ -1049,6 +1021,68 @@ I need to move most of these out of here and put them in the relavent package de
           )
   )
 
+(use-package glasses
+	:ensure nil
+	:hook (ess-r-mode . glasses-mode)
+	:config
+	(setopt glasses-separate-parentheses-p nil)
+)
+#+end_src
+**** =which-key= configuration
+:PROPERTIES:
+:CUSTOM_ID: which-key-config
+:LAST_MODIFIED: [2025-07-18 Fri 18:00]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+=which-key= is built in now (starting with Emacs 30?)
+
+#+begin_src emacs-lisp
+(use-package which-key
+  :ensure nil
+  :hook (elpaca-after-init)
+  :config
+  (setopt which-key-idle-delay 0.4
+        which-key-idle-secondary-delay 0.01
+        which-key-max-description-length 32
+        which-key-sort-order 'which-key-key-order-alpha
+        which-key-allow-evil-operators t)
+  (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
+#+end_src
+
+**** Base and built-in configuration footer
+:PROPERTIES:
+:CUSTOM_ID: base-built-in-footer
+:LAST_MODIFIED: [2025-07-18 Fri 18:01]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :comments no :noweb no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-builtin-packages.el ends here
+#+end_src
+**** Removed declarations
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 17:34]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header-args: :tangle no :comments no
+:END:
+Off the top of my head, I think
+- =dabbrev= conflicts with =acm= the completion package for =lsp-bridge=
+- =repeat= doesn't have any customization and just isn't necessary as it's builtin?
+- =sqlite= was trying to make sure I was using the builtin version
+
+#+name: removed built-in package declarations
+#+begin_src emacs-lisp :tangle no :comments no :eval no
+;; (use-package dabbrev
+;;  :ensure nil
+;;  :defer t
+;;  :config
+;;  (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
+;;       dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\'")))
 
 ;;(use-package repeat
 ;;  :ensure nil
@@ -1057,22 +1091,9 @@ I need to move most of these out of here and put them in the relavent package de
 
 ;;(use-package sqlite
 ;;  :ensure nil)
-
-(use-package glasses
-	:ensure nil
-	:hook (ess-r-mode . glasses-mode)
-	:config
-	(setopt glasses-separate-parentheses-p nil)
-)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-builtin-packages.el ends here
 #+end_src
 
-** setup-casual.el
+*** setup-casual.el
 :PROPERTIES:
 :CUSTOM_ID: setup-casualel
 :END:
@@ -1096,7 +1117,7 @@ of 2025-07-06
 ;;; setup-casual.el ends here
 #+end_src
 
-** setup-comment-tools.el
+*** setup-comment-tools.el
 :PROPERTIES:
 :CUSTOM_ID: setup-comment-toolsel
 :END:
@@ -1125,7 +1146,7 @@ of 2025-07-06
 ;;; setup-comment-tools.el ends here
 #+end_src
 
-** setup-completion-actions.el
+*** setup-completion-actions.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completion-actionsel
 :END:
@@ -1204,7 +1225,7 @@ of 2025-07-06
 ;;; setup-completion-actions.el ends here
 #+end_src
 
-** Set up completion backends
+*** Set up completion backends
 :PROPERTIES:
 :CUSTOM_ID: set-up-completion-backends
 :END:
@@ -1242,7 +1263,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-completion-backends.el ends here
 #+end_src
-*** Other completion backends
+**** Other completion backends
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-15 Tue 19:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
@@ -1271,7 +1292,7 @@ of 2025-07-06
 	(setq vertico-prescient-enable-filtering t)
 	)
 #+end_src
-** Annotate completion options
+*** Annotate completion options
 :PROPERTIES:
 :CUSTOM_ID: annotate-completion-options
 :END:
@@ -1309,7 +1330,7 @@ of 2025-07-06
 ;;; setup-completion-display.el ends here
 #+end_src
 
-** setup-completion.el
+*** setup-completion.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completionel
 :END:
@@ -1426,7 +1447,7 @@ of 2025-07-06
 ;;; setup-completion.el ends here
 #+end_src
 
-** setup-consult.el
+*** setup-consult.el
 :PROPERTIES:
 :CUSTOM_ID: setup-consultel
 :END:
@@ -1560,7 +1581,7 @@ of 2025-07-06
 ;;; setup-consult.el ends here
 #+end_src
 
-** setup-core.el
+*** setup-core.el
 :PROPERTIES:
 :CUSTOM_ID: setup-coreel
 :LAST_MODIFIED: [2025-07-18 Fri 04:25]
@@ -1778,7 +1799,7 @@ of 2025-07-06
 ;;; setup-core.el ends here
 #+end_src
 
-** setup-data-formats.el
+*** setup-data-formats.el
 :PROPERTIES:
 :CUSTOM_ID: setup-data-formatsel
 :LAST_MODIFIED: [2025-07-15 Tue 19:28]
@@ -1816,7 +1837,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-data-formats.el ends here
 #+end_src
-**** Other data viewers
+***** Other data viewers
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-15 Tue 19:28]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1834,7 +1855,7 @@ of 2025-07-06
   (jsonian-no-so-long-mode))
 
 #+end_src
-** setup-denote.el
+*** setup-denote.el
 :PROPERTIES:
 :CUSTOM_ID: setup-denoteel
 :END:
@@ -1944,7 +1965,7 @@ of 2025-07-06
 ;;; setup-denote.el ends here
 #+end_src
 
-** setup-diagramming.el
+*** setup-diagramming.el
 :PROPERTIES:
 :CUSTOM_ID: setup-diagrammingel
 :END:
@@ -1994,7 +2015,7 @@ of 2025-07-06
 ;;; setup-diagramming.el ends here
 #+end_src
 
-** setup-eaf.el
+*** setup-eaf.el
 :PROPERTIES:
 :CUSTOM_ID: setup-eafel
 :END:
@@ -2020,7 +2041,7 @@ of 2025-07-06
 ;;; setup-eaf.el ends here
 #+end_src
 
-** setup-editor-misc.el
+*** setup-editor-misc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-editor-miscel
 :LAST_MODIFIED: [2025-07-18 Fri 04:31]
@@ -2181,7 +2202,7 @@ of 2025-07-06
 ;;; setup-editor-misc.el ends here
 #+end_src
 
-** setup-emacs.el
+*** setup-emacs.el
 :PROPERTIES:
 :CUSTOM_ID: setup-emacsel
 :END:
@@ -2346,7 +2367,7 @@ of 2025-07-06
 ;; End:
 #+end_src
 
-** setup-email.el
+*** setup-email.el
 :PROPERTIES:
 :CUSTOM_ID: setup-emailel
 :END:
@@ -2367,7 +2388,7 @@ of 2025-07-06
 ;;; setup-email.el ends here
 #+end_src
 
-** setup-evil-addons.el
+*** setup-evil-addons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evil-addonsel
 :END:
@@ -2414,7 +2435,7 @@ of 2025-07-06
 ;;; setup-evil-addons.el ends here
 #+end_src
 
-** setup-evil.el
+*** setup-evil.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evilel
 :END:
@@ -2486,7 +2507,187 @@ of 2025-07-06
 ;;; setup-evil.el ends here
 #+end_src
 
-** setup-font-locking.el
+*** setup-fonts.el
+:PROPERTIES:
+:CUSTOM_ID: setup-fontsel
+:LAST_MODIFIED: [2025-07-18 Fri 17:12]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle config/setup-fonts.el
+;;; setup-fonts.el --- Font settings -*- lexical-binding: t -*-
+
+(use-package ligature
+  :disabled)
+
+(use-package fontaine
+  :config
+  (setopt
+   fontaine-presets '((t
+	     :default-weight normal
+	     :default-height 150
+	     :fixed-pitch-family "JetBrains Mono NL"
+	     :variable-pitch-family "Heliotrope OT"
+	     :variable-pitch-height 1.05
+	     :bold-family nil ; use the face's bold
+	     :bold-weight bold)
+
+	    ;; Universal presets
+	    ;; Presets to change point size only
+	    (10pt :default-height 100)
+	    (11pt :default-height 110)
+	    (12pt :default-height 120)
+	    (13pt :default-height 130)
+	    (14pt :default-height 140)
+	    (15pt :default-height 150)
+	    (16pt :default-height 160)
+	    (17pt :default-height 170)
+	    (18pt :default-height 180)
+
+	    ;; Line spacing is additional line spacing, not total line spacing
+	    ;; (i.e. 0 is the default)
+	    ;; Meaning differs depending on whether it is an integer or float
+	    ;; Integer = additional pixels to add
+	    ;; Floating point = additional spacing proportional to point size
+	    (lsd :line-space 0)
+	    ;; line spacing pixels
+	    (lsp1 :line-spacing 1)
+	    (lsp2 :line-spacing 2)
+	    (lsp3 :line-spacing 3)
+	    (lsp4 :line-spacing 4)
+	    (lsp5 :line-spacing 5)
+	    ;; line spacing scaling
+	    (lss05 :line-spacing 0.05)
+	    (lss10 :line-spacing 0.10)
+	    (lss15 :line-spacing 0.15)
+	    (lss20 :line-spacing 0.20)
+	    (lss25 :line-spacing 0.25)
+	    (lss30 :line-spacing 0.30)
+
+	    ;; Font presets
+
+	    ;; Monospace fonts
+	    (iosevka-comfy
+	     :default-family "Iosevka Comfy"
+	     :default-weight normal)
+
+	    (fira-mono
+	     :default-family "Fira Mono")
+
+	    (fira-code
+	     :default-family "FiraCode Nerd Font"
+	     )
+
+	    (jetbrains-mono
+	     :default-family "JetBrains Mono NL")
+
+	    (plex-mono
+	     :default-family "IBM Plex Mono")
+
+	    (dank-mono
+	     :default-family "Dank Mono")
+
+	    (hack
+	     :default-family "Hack Nerd Font")
+
+	    ;; think inter is proportional not mono
+	    (inter
+	     :default-family "Inter")
+
+	    (xenon
+	     :default-family "Monaspace Xenon")
+
+	    (input-mono
+	     :default-family "Input Mono")
+	    ;; Quasi-monospace fonts
+	    (duospace
+	     :default-family "iA Writer Duospace")
+
+	    (triplicate-mono-b
+	     :default-family "Triplicate B")
+
+	    (triplicate-code-b
+	     :default-family "Triplicate B Code")
+
+	    (triplicate-poly-b
+	     :default-family "Triplicate B Poly")
+
+	    (triplicate-mono-a
+	     :default-family "Triplicate A")
+
+	    (triplicate-code-a
+	     :default-family "Triplicate A Code")
+
+	    (triplicate-poly-a
+	     :default-family "Triplicate A Poly")
+
+	    (header-triplicate
+	     :header-line-family "Triplicate A Caps"
+	     :header-line-height 1.1)
+
+	    (triplicate-combo
+	     :default-family "Triplicate A Code"
+	     :variable-pitch-family "Triplicate A Poly"
+	     :header-line-family "Triplicate A Caps"
+	     :header-line-height 1.1
+	     )
+
+	    (header-heliotrope
+	     :header-line-family "Heliotrope 4 Caps"
+	     :header-line-height 1.1)
+
+	    (header-overpass
+	     :header-line-family "Overpass"
+	     :header-line-height 1.1)
+	    
+	    (header-null
+	     :header-line-family nil
+	     :header-line-height 1.0)
+
+	    (quattro
+	     :default-family "iA Writer Quattro V")
+
+	    ;; Variable pitch fonts
+	    (serif-input
+	     :variable-pitch-family "Input Serif")
+
+	    (sans-input
+	     :variable-pitch-family "Input Sans")
+
+	    (vp-heliotrope
+	     :variable-pitch-family "Heliotrope OT"
+	     :variable-pitch-height 1.05)
+
+	    (vp-avenir
+	     :variable-pitch-family "Avenir"
+	     :default-weight book)
+
+	    (vp-minion
+	     :variable-pitch-family "Minion 3")
+	    )
+	  )
+  :hook (elpaca-after-init . fontaine-mode)
+  :custom (fontaine-mode t)
+  )
+
+
+(use-package show-font
+  :general
+  (tyrant-def
+    "hs" 'show-font-select-preview
+    "hT" 'show-font-tabulated)
+  :bind
+  (("C-c s f" . show-font-select-preview)
+   ("C-c s t" . show-font-tabulated))
+  )
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-fonts.el ends here
+#+end_src
+*** setup-font-locking.el
 :PROPERTIES:
 :CUSTOM_ID: setup-font-lockingel
 :END:
@@ -2538,191 +2739,7 @@ of 2025-07-06
 ;;; setup-font-locking.el ends here
 #+end_src
 
-** setup-fonts.el
-:PROPERTIES:
-:CUSTOM_ID: setup-fontsel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-fonts.el
-;;; config/setup-fonts.el --- Font configuration -*- lexical-binding: t -*-
-
-(use-package ligature
-  :disabled)
-
-(use-package fontaine
-  :config
-  (setopt fontaine-presets
-					'((t
-						 :default-weight normal
-						 :default-height 150
-						 :fixed-pitch-family "JetBrains Mono NL"
-						 :variable-pitch-family "Heliotrope OT"
-						 :variable-pitch-height 1.05
-						 :bold-family nil ; use whatever the underlying face has
-						 :bold-weight bold)
-
-					;;;
-						;; Universal presets
-					;;;
-
-						;; Presets to change point size only
-						(10pt :default-height 100)
-						(11pt :default-height 110)
-						(12pt :default-height 120)
-						(13pt :default-height 130)
-						(14pt :default-height 140)
-						(15pt :default-height 150)
-						(16pt :default-height 160)
-						(17pt :default-height 170)
-						(18pt :default-height 180)
-
-						;; Line spacing is additional line spacing, not total line spacing
-						;; (i.e. 0 is the default)
-						;; Meaning differs depending on whether it is an integer or float
-						;; Integer = additional pixels to add
-						;; Floating point = additional spacing proportional to point size
-						(lsd :line-space 0)
-						;; line spacing pixels
-						(lsp1 :line-spacing 1)
-						(lsp2 :line-spacing 2)
-						(lsp3 :line-spacing 3)
-						(lsp4 :line-spacing 4)
-						(lsp5 :line-spacing 5)
-						;; line spacing scaling
-						(lss05 :line-spacing 0.05)
-						(lss10 :line-spacing 0.10)
-						(lss15 :line-spacing 0.15)
-						(lss20 :line-spacing 0.20)
-						(lss25 :line-spacing 0.25)
-						(lss30 :line-spacing 0.30)
-
-					;;;
-						;; Font presets
-					;;;
-
-						;; Monospace fonts
-						(iosevka-comfy
-						 :default-family "Iosevka Comfy"
-						 :default-weight normal)
-
-						(fira-mono
-						 :default-family "Fira Mono")
-
-						(fira-code
-						 :default-family "FiraCode Nerd Font"
-						 )
-
-						(jetbrains-mono
-						 :default-family "JetBrains Mono NL")
-
-						(plex-mono
-						 :default-family "IBM Plex Mono")
-
-						(dank-mono
-						 :default-family "Dank Mono")
-
-						(hack
-						 :default-family "Hack Nerd Font")
-
-						;; think inter is proportional not mono
-						(inter
-						 :default-family "Inter")
-
-						(xenon
-						 :default-family "Monaspace Xenon")
-
-						(input-mono
-						 :default-family "Input Mono")
-						;; Quasi-monospace fonts
-						(duospace
-						 :default-family "iA Writer Duospace")
-
-						(triplicate-mono-b
-						 :default-family "Triplicate B")
-
-						(triplicate-code-b
-						 :default-family "Triplicate B Code")
-
-						(triplicate-poly-b
-						 :default-family "Triplicate B Poly")
-
-						(triplicate-mono-a
-						 :default-family "Triplicate A")
-
-						(triplicate-code-a
-						 :default-family "Triplicate A Code")
-
-						(triplicate-poly-a
-						 :default-family "Triplicate A Poly")
-
-						(header-triplicate
-						 :header-line-family "Triplicate A Caps"
-						 :header-line-height 1.1)
-
-						(triplicate-combo
-						 :default-family "Triplicate A Code"
-						 :variable-pitch-family "Triplicate A Poly"
-						 :header-line-family "Triplicate A Caps"
-						 :header-line-height 1.1
-						 )
-
-						(header-heliotrope
-						 :header-line-family "Heliotrope 4 Caps"
-						 :header-line-height 1.1)
-
-						(header-overpass
-						 :header-line-family "Overpass"
-						 :header-line-height 1.1)
-						
-						(header-null
-						 :header-line-family nil
-						 :header-line-height 1.0)
-
-						(quattro
-						 :default-family "iA Writer Quattro V")
-
-						;; Variable pitch fonts
-						(serif-input
-						 :variable-pitch-family "Input Serif")
-
-						(sans-input
-						 :variable-pitch-family "Input Sans")
-
-						(vp-heliotrope
-						 :variable-pitch-family "Heliotrope OT"
-						 :variable-pitch-height 1.05)
-
-						(vp-avenir
-						 :variable-pitch-family "Avenir"
-						 :default-weight book)
-
-						(vp-minion
-						 :variable-pitch-family "Minion 3")
-						)
-					)
-	:hook (elpaca-after-init . fontaine-mode)
-	:custom (fontaine-mode t)
-  )
-
-
-(use-package show-font
-  :general
-  (tyrant-def
-    "hs" 'show-font-select-preview
-    "hT" 'show-font-tabulated)
-  :bind
-  (("C-c s f" . show-font-select-preview)
-   ("C-c s t" . show-font-tabulated))
-	)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-fonts.el ends here
-#+end_src
-
-** setup-go.el
+*** setup-go.el
 :PROPERTIES:
 :CUSTOM_ID: setup-goel
 :END:
@@ -2752,7 +2769,7 @@ of 2025-07-06
 ;;; setup-go.el ends here
 #+end_src
 
-** setup-gopher.el
+*** setup-gopher.el
 :PROPERTIES:
 :CUSTOM_ID: setup-gopherel
 :END:
@@ -2770,7 +2787,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-gopher.el ends here
 #+end_src
-** Setup help and documentation viewers
+*** Setup help and documentation viewers
 :PROPERTIES:
 :CUSTOM_ID: setup-help-and-documentation-viewers
 :LAST_MODIFIED: [2025-07-18 Fri 04:11]
@@ -2800,7 +2817,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-help.el ends here
 #+end_src
-** setup-icons.el
+*** setup-icons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-iconsel
 :END:
@@ -2888,32 +2905,7 @@ of 2025-07-06
 ;;; setup-icons.el ends here
 #+end_src
 
-** setup-keybindings.el
-:PROPERTIES:
-:CUSTOM_ID: setup-keybindingsel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-keybindings.el
-;;; config/setup-keybindings.el --- Keybindings configuration -*- lexical-binding: t -*-
-
-(use-package which-key
-	:hook (elpaca-after-init)
-  :config
-  (setq which-key-idle-delay 0.4
-        which-key-idle-secondary-delay 0.01
-        which-key-max-description-length 32
-        which-key-sort-order 'which-key-key-order-alpha
-        which-key-allow-evil-operators t)
-  (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-keybindings.el ends here
-#+end_src
-
-** setup-lisp.el
+*** setup-lisp.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lispel
 :END:
@@ -2963,7 +2955,7 @@ of 2025-07-06
 ;;; setup-lisp.el ends here
 #+end_src
 
-** setup-llm.el
+*** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
 :END:
@@ -3072,7 +3064,7 @@ of 2025-07-06
 ;;; setup-llm.el ends here
 #+end_src
 
-** setup-lsp-bridge.el
+*** setup-lsp-bridge.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lsp-bridgeel
 :END:
@@ -3111,7 +3103,7 @@ of 2025-07-06
 ;;; setup-lsp-bridge.el ends here
 #+end_src
 
-** setup-lsp.el
+*** setup-lsp.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lspel
 :END:
@@ -3215,7 +3207,7 @@ of 2025-07-06
 ;;; setup-lsp.el ends here
 #+end_src
 
-** setup-markdown.el
+*** setup-markdown.el
 :PROPERTIES:
 :CUSTOM_ID: setup-markdownel
 :END:
@@ -3317,7 +3309,7 @@ of 2025-07-06
 ;;; setup-markdown.el ends here
 #+end_src
 
-** setup-media.el
+*** setup-media.el
 :PROPERTIES:
 :CUSTOM_ID: setup-mediael
 :END:
@@ -3339,7 +3331,7 @@ of 2025-07-06
 ;;; setup-media.el ends here
 #+end_src
 
-** setup-modeline.el
+*** setup-modeline.el
 :PROPERTIES:
 :CUSTOM_ID: setup-modelineel
 :END:
@@ -3382,7 +3374,7 @@ of 2025-07-06
 ;;; setup-modeline.el ends here
 #+end_src
 
-** setup-notes.el
+*** setup-notes.el
 :PROPERTIES:
 :CUSTOM_ID: setup-notesel
 :END:
@@ -3421,7 +3413,7 @@ of 2025-07-06
 ;;; setup-notes.el ends here
 #+end_src
 
-** Outline and fold text
+*** Outline and fold text
 :PROPERTIES:
 :CUSTOM_ID: outline-and-fold-text
 :LAST_MODIFIED: [2025-07-18 Fri 02:35]
@@ -3472,108 +3464,8 @@ of 2025-07-06
 ;;; setup-outlining.el ends here
 #+end_src
 
-** setup-org-capture.el
-:PROPERTIES:
-:CUSTOM_ID: setup-org-captureel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-org-capture.el
-;;; config/setup-org-capture.el --- Org capture tools configuration -*- lexical-binding: t -*-
-
-(use-package doct)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-org-capture.el ends here
-#+end_src
-
-** setup-org-exporters.el
-:PROPERTIES:
-:CUSTOM_ID: setup-org-exportersel
-:LAST_MODIFIED: [2025-07-18 Fri 02:59]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-org-exporters.el
-;;; setup-org-exporters.el ---  -*- lexical-binding: t; -*-
-;;; Commentary:
-;;; Code:
-
-(use-package ox-pandoc
-	:after org
-	:hook (org-mode . org-pandoc-startup-check))
-
-(use-package ob-mermaid
-  :after org)
-
-(use-package ox-tufte
-	:disabled
-	:after org
-  )
-
-(use-package ox-beamer-lecture
-	:after org)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
-;;; setup-org-exporters.el ends here
-#+end_src
-
-** setup-org-node.el
-:PROPERTIES:
-:CUSTOM_ID: setup-org-nodeel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-org-node.el
-;;; config/setup-org-node.el --- Org-node configuration -*- lexical-binding: t -*-
-
-(use-package org-mem
-  :defer
-  :functions org-mem-updater
-  :config
-  (setopt org-mem-do-sync-with-org-id t
-          org-mem-watch-dirs (list "~/obsidian/org/node")
-          )
-  (org-mem-updater-mode)
-  )
-
-(use-package org-node
-  :after org
-  :init
-  (keymap-global-set "M-o n" org-node-global-prefix-map)
-  (with-eval-after-load 'org
-    (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
-  :config
-  (org-node-cache-mode)
-  :general
-  (tyrant-def
-    "n"      (cons "node" (make-sparse-keymap))
-    "nf" 'org-node-find
-    "ni" 'org-node-insert-link
-    "nb" 'org-node-context-dwim
-    "nd" 'org-node-insert-into-related
-    "ng" 'org-node-grep
-    "nn" 'org-node-nodeify-entry
-    "ns" 'org-node-seq-dispatch
-    "nw" 'org-node-refile
-    "nr" 'org-node-visit-random
-    "nt" 'org-node-insert-transclusion
-    "nu" 'org-node-insert-raw-link
-    "ns" 'org-node-insert-transclusion-as-subtree
-    )
-  )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-org-node.el ends here
-#+end_src
-
-** setup-org.el
+*** Set up all things org mode
+************ setup-org.el
 :PROPERTIES:
 :CUSTOM_ID: setup-orgel
 :LAST_MODIFIED: [2025-07-18 Fri 03:42]
@@ -3818,9 +3710,112 @@ of 2025-07-06
 ;;; setup-org.el ends here
 #+end_src
 
-** setup-programming.el
+**** setup-org-capture.el
+:PROPERTIES:
+:CUSTOM_ID: setup-org-captureel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-org-capture.el
+;;; config/setup-org-capture.el --- Org capture tools configuration -*- lexical-binding: t -*-
+
+(use-package doct)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-org-capture.el ends here
+#+end_src
+
+**** setup-org-exporters.el
+:PROPERTIES:
+:CUSTOM_ID: setup-org-exportersel
+:LAST_MODIFIED: [2025-07-18 Fri 02:59]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle config/setup-org-exporters.el
+;;; setup-org-exporters.el ---  -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+
+(use-package ox-pandoc
+	:after org
+	:hook (org-mode . org-pandoc-startup-check))
+
+(use-package ob-mermaid
+  :after org)
+
+(use-package ox-tufte
+	:disabled
+	:after org
+  )
+
+(use-package ox-beamer-lecture
+	:after org)
+;;; Local Variables:
+;;; no-byte-compile: t
+;;; no-native-compile: t
+;;; no-update-autoloads: t
+;;; End:
+;;; setup-org-exporters.el ends here
+#+end_src
+
+**** setup-org-node.el
+:PROPERTIES:
+:CUSTOM_ID: setup-org-nodeel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-org-node.el
+;;; config/setup-org-node.el --- Org-node configuration -*- lexical-binding: t -*-
+
+(use-package org-mem
+  :defer
+  :functions org-mem-updater
+  :config
+  (setopt org-mem-do-sync-with-org-id t
+          org-mem-watch-dirs (list "~/obsidian/org/node")
+          )
+  (org-mem-updater-mode)
+  )
+
+(use-package org-node
+  :after org
+  :init
+  (keymap-global-set "M-o n" org-node-global-prefix-map)
+  (with-eval-after-load 'org
+    (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
+  :config
+  (org-node-cache-mode)
+  :general
+  (tyrant-def
+    "n"      (cons "node" (make-sparse-keymap))
+    "nf" 'org-node-find
+    "ni" 'org-node-insert-link
+    "nb" 'org-node-context-dwim
+    "nd" 'org-node-insert-into-related
+    "ng" 'org-node-grep
+    "nn" 'org-node-nodeify-entry
+    "ns" 'org-node-seq-dispatch
+    "nw" 'org-node-refile
+    "nr" 'org-node-visit-random
+    "nt" 'org-node-insert-transclusion
+    "nu" 'org-node-insert-raw-link
+    "ns" 'org-node-insert-transclusion-as-subtree
+    )
+  )
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-org-node.el ends here
+#+end_src
+
+*** setup-programming.el
 :PROPERTIES:
 :CUSTOM_ID: setup-programmingel
+:LAST_MODIFIED: [2025-07-18 Fri 04:57]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-programming.el
 ;;; config/setup-programming.el --- General programming tools configuration -*- lexical-binding: t -*-
@@ -3863,7 +3858,7 @@ of 2025-07-06
 ;;; setup-programming.el ends here
 #+end_src
 
-** setup-projects.el
+*** setup-projects.el
 :PROPERTIES:
 :CUSTOM_ID: setup-projectsel
 :END:
@@ -4012,119 +4007,10 @@ of 2025-07-06
 ;;; setup-projects.el ends here
 #+end_src
 
-** setup-python.el
-:PROPERTIES:
-:CUSTOM_ID: setup-pythonel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-python.el
-;;; config/setup-python.el --- Python configuration -*- lexical-binding: t -*-
-
-(use-package python-x
-	)
-
-(use-package live-py-mode
-	:general
-	  (despot-def (python-mode-map)
-    :major-modes '(python-mode python-ts-mode)
-    "l" 'live-py-mode
-    )
-	)
-
-(use-package uv-mode
-	:hook (python-mode . uv-mode))
-
-(use-package pyenv-mode
-	:disabled)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-python.el ends here
-#+end_src
-
-** setup-r.el
-:PROPERTIES:
-:CUSTOM_ID: setup-rel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-r.el
-;;; config/setup-r.el --- R language configuration -*- lexical-binding: t -*-
-
-(use-package ess
-  :mode ("\([rR]\)\'" . R-mode)
-  :init
-  (setq ess-set-style t
-        comint-scroll-to-bottom-on-input t
-        comint-scroll-to-bottom-on-output t
-        ess-indent-offset 2)
-  (add-hook 'inferior-ess-mode-hook
-            (lambda ()
-              (add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
-  :custom
-  (inferior-R-args "--no-save")
-  (ess-indent-offset 2)
-  (ess-own-style-list '(
-                        (ess-indent-offset . 2)
-                        (ess-offset-arguments . prev-call)
-                        (ess-offset-arguments-newline . prev-line)
-                        (ess-offset-block . prev-line)
-                        (ess-offset-continued . straight)
-                        (ess-align-nested-calls "ifelse")
-                        (ess-align-arguments-in-calls "function[ 	]*(")
-                        (ess-align-continuations-in-calls . t)
-                        (ess-align-blocks control-flow)
-                        (ess-indent-from-lhs arguments fun-decl-opening)
-                        (ess-indent-from-chain-start . t)
-                        (ess-indent-with-fancy-comments . nil))
-                      )
-  (ess-style 'OWN)
-  :config
-  :general
-  (despot-def (ess-r-mode-map)
-    :major-modes '(ess-r-mode R-mode)
-    "b" 'ess-eval-buffer
-    "c" 'ess-eval-region-or-function-or-paragraph
-    "TAB" 'ess-install-library
-    "f" 'ess-eval-function
-    "F" 'air-format
-    "r" 'run-ess-r
-    "v" 'oc-set-ess-offset
-    )
-  )
-
-(use-package r-ts-mode
-  :disabled
-  :hook (R-mode . r-ts-mode)
-  :ensure (r-ts-mode
-	   :type git :host github :repo "nverno/r-ts-mode"))
-
-(use-package essgd
-	:general
-	  (despot-def (ess-r-mode-map)
-			:major-modes 'ess-r-mode
-			"g" 'essgd-start)
-	)
-
-(use-package ess-view-data
-	:disabled)
-
-(use-package poly-R
-  :mode ("\\.qmd\\'" . poly-markdown+R-mode)
-  )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-r.el ends here
-#+end_src
-
-** setup-reading.el
+*** setup-reading.el
 :PROPERTIES:
 :CUSTOM_ID: setup-readingel
-:LAST_MODIFIED: [2025-07-18 Fri 03:47]
+:LAST_MODIFIED: [2025-07-18 Fri 04:59]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-reading.el
@@ -4213,52 +4099,7 @@ of 2025-07-06
 ;;; setup-reading.el ends here
 #+end_src
 
-** setup-rust.el
-:PROPERTIES:
-:CUSTOM_ID: setup-rustel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-rust.el
-;;; config/setup-rust.el --- Rust language configuration -*- lexical-binding: t -*-
-
-(use-package rust-mode
-	:mode ("\\.rs\\\'" . rust-mode)
-  :general
-  (despot-def (rust-mode-map)
-      :major-modes '(rust-ts-mode rust-mode)
-      "c"            'rust-compile
-			"k" 'rust-check
-			"t" 'rust-test
-			"r" 'rust-run
-			"F" 'rust-format-buffer)
-	)
-
-(use-package cargo-mode
-  :hook
-  (rust-mode . cargo-minor-mode)
-  :config
-  (setopt compilation-scroll-output t
-			rust-format-on-save t)
-	:general
-	(despot-def (rust-mode-map)
-		:major-modes '(rust-mode rust-ts-mode)
-		"e" 'cargo-mode-execute-task
-		"t" 'cargo-mode-test
-		"l" 'cargo-mode-last-command
-		"b" 'cargo-mode-build
-		"o" 'cargo-mode-test-current-buffer
-		"f" 'cargo-mode-test-current-test)
-	)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-rust.el ends here
-
-#+end_src
-
-** setup-search.el
+*** setup-search.el
 :PROPERTIES:
 :CUSTOM_ID: setup-searchel
 :END:
@@ -4288,9 +4129,11 @@ of 2025-07-06
 ;;; setup-search.el ends here
 #+end_src
 
-** setup-snippets.el
+*** setup-snippets.el
 :PROPERTIES:
 :CUSTOM_ID: setup-snippetsel
+:LAST_MODIFIED: [2025-07-18 Fri 05:00]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-snippets.el
 ;;; config/setup-snippets.el --- Snippets configuration -*- lexical-binding: t -*-
@@ -4346,7 +4189,166 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-snippets.el ends here
 #+end_src
 
-** setup-tex.el
+*** Configure (programming) language-specific options
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 05:02]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+**** setup-python.el
+:PROPERTIES:
+:CUSTOM_ID: setup-pythonel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-python.el
+;;; config/setup-python.el --- Python configuration -*- lexical-binding: t -*-
+
+(use-package python-x
+	)
+
+(use-package live-py-mode
+	:general
+	  (despot-def (python-mode-map)
+    :major-modes '(python-mode python-ts-mode)
+    "l" 'live-py-mode
+    )
+	)
+
+(use-package uv-mode
+	:hook (python-mode . uv-mode))
+
+(use-package pyenv-mode
+	:disabled)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-python.el ends here
+#+end_src
+
+**** setup-r.el
+:PROPERTIES:
+:CUSTOM_ID: setup-rel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-r.el
+;;; config/setup-r.el --- R language configuration -*- lexical-binding: t -*-
+
+(use-package ess
+  :mode ("\([rR]\)\'" . R-mode)
+  :init
+  (setq ess-set-style t
+        comint-scroll-to-bottom-on-input t
+        comint-scroll-to-bottom-on-output t
+        ess-indent-offset 2)
+  (add-hook 'inferior-ess-mode-hook
+            (lambda ()
+              (add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
+  :custom
+  (inferior-R-args "--no-save")
+  (ess-indent-offset 2)
+  (ess-own-style-list '(
+                        (ess-indent-offset . 2)
+                        (ess-offset-arguments . prev-call)
+                        (ess-offset-arguments-newline . prev-line)
+                        (ess-offset-block . prev-line)
+                        (ess-offset-continued . straight)
+                        (ess-align-nested-calls "ifelse")
+                        (ess-align-arguments-in-calls "function[ 	]*(")
+                        (ess-align-continuations-in-calls . t)
+                        (ess-align-blocks control-flow)
+                        (ess-indent-from-lhs arguments fun-decl-opening)
+                        (ess-indent-from-chain-start . t)
+                        (ess-indent-with-fancy-comments . nil))
+                      )
+  (ess-style 'OWN)
+  :config
+  :general
+  (despot-def (ess-r-mode-map)
+    :major-modes '(ess-r-mode R-mode)
+    "b" 'ess-eval-buffer
+    "c" 'ess-eval-region-or-function-or-paragraph
+    "TAB" 'ess-install-library
+    "f" 'ess-eval-function
+    "F" 'air-format
+    "r" 'run-ess-r
+    "v" 'oc-set-ess-offset
+    )
+  )
+
+(use-package r-ts-mode
+  :disabled
+  :hook (R-mode . r-ts-mode)
+  :ensure (r-ts-mode
+	   :type git :host github :repo "nverno/r-ts-mode"))
+
+(use-package essgd
+	:general
+	  (despot-def (ess-r-mode-map)
+			:major-modes 'ess-r-mode
+			"g" 'essgd-start)
+	)
+
+(use-package ess-view-data
+	:disabled)
+
+(use-package poly-R
+  :mode ("\\.qmd\\'" . poly-markdown+R-mode)
+  )
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-r.el ends here
+#+end_src
+
+**** setup-rust.el
+:PROPERTIES:
+:CUSTOM_ID: setup-rustel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-rust.el
+;;; config/setup-rust.el --- Rust language configuration -*- lexical-binding: t -*-
+
+(use-package rust-mode
+	:mode ("\\.rs\\\'" . rust-mode)
+  :general
+  (despot-def (rust-mode-map)
+      :major-modes '(rust-ts-mode rust-mode)
+      "c"            'rust-compile
+			"k" 'rust-check
+			"t" 'rust-test
+			"r" 'rust-run
+			"F" 'rust-format-buffer)
+	)
+
+(use-package cargo-mode
+  :hook
+  (rust-mode . cargo-minor-mode)
+  :config
+  (setopt compilation-scroll-output t
+			rust-format-on-save t)
+	:general
+	(despot-def (rust-mode-map)
+		:major-modes '(rust-mode rust-ts-mode)
+		"e" 'cargo-mode-execute-task
+		"t" 'cargo-mode-test
+		"l" 'cargo-mode-last-command
+		"b" 'cargo-mode-build
+		"o" 'cargo-mode-test-current-buffer
+		"f" 'cargo-mode-test-current-test)
+	)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-rust.el ends here
+
+#+end_src
+
+**** setup-tex.el
 :PROPERTIES:
 :CUSTOM_ID: setup-texel
 :END:
@@ -4499,7 +4501,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-tex.el ends here
 #+end_src
 
-** setup-themes.el
+*** setup-themes.el
 :PROPERTIES:
 :CUSTOM_ID: setup-themesel
 :END:
@@ -4556,7 +4558,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-themes.el ends here
 #+end_src
 
-** setup-treesit.el
+*** setup-treesit.el
 :PROPERTIES:
 :CUSTOM_ID: setup-treesitel
 :END:
@@ -4595,7 +4597,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-treesit.el ends here
 #+end_src
 
-** setup-ui.el
+*** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
 :LAST_MODIFIED: [2025-07-18 Fri 03:40]
@@ -4774,7 +4776,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-ui.el ends here
 #+end_src
 
-** setup-vc.el
+*** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
 :END:
@@ -4912,7 +4914,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-vc.el ends here
 #+end_src
 
-** setup-web.el
+*** setup-web.el
 :PROPERTIES:
 :CUSTOM_ID: setup-webel
 :END:
@@ -4954,7 +4956,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;; End:
 #+end_src
 
-** setup-writing.el
+*** setup-writing.el
 :PROPERTIES:
 :CUSTOM_ID: setup-writingel
 :END:
@@ -5053,13 +5055,13 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-writing.el ends here
 #+end_src
 
-* Lisp functions
+** Lisp functions
 :PROPERTIES:
 :CUSTOM_ID: lisp-functions
 :LAST_MODIFIED: [2025-07-15 Tue 22:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-** my-core-functions.el
+*** my-core-functions.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-functionsel
 :LAST_MODIFIED: [2025-07-15 Tue 22:32]
@@ -5463,7 +5465,7 @@ a dedicated window."
 ;;; my-core-functions.el ends here
 #+end_src
 
-** my-core-helpers.el
+*** my-core-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-helpersel
 :END:
@@ -5559,7 +5561,7 @@ the unwritable tidbits."
 ;;; my-core-helpers.el ends here
 #+end_src
 
-** my-editor-helpers.el
+*** my-editor-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-editor-helpersel
 :END:
@@ -5608,7 +5610,7 @@ stays on current"
 ;;; my-editor-helpers.el ends here
 #+end_src
 
-** my-keybinding-helpers.el
+*** my-keybinding-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-keybinding-helpersel
 :END:
@@ -5626,7 +5628,7 @@ This provides a consolidated view of all global leader keys."
 ;;; my-keybinding-helpers.el ends here
 #+end_src
 
-** my-lang-helpers.el
+*** my-lang-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-lang-helpersel
 :END:
@@ -5677,7 +5679,7 @@ This provides a consolidated view of all global leader keys."
 ;;; my-lang-helpers.el ends here
 #+end_src
 
-** my-lsp-bridge-helpers.el
+*** my-lsp-bridge-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-lsp-bridge-helpersel
 :END:
@@ -5721,7 +5723,7 @@ This provides a consolidated view of all global leader keys."
 ;;; my-lsp-bridge-helpers.el ends here
 #+end_src
 
-** my-org-helpers.el
+*** my-org-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-org-helpersel
 :LAST_MODIFIED: [2025-07-16 Wed 00:30]
@@ -5806,7 +5808,7 @@ variable provided by Org Babel."
 ;;; my-org-helpers.el ends here
 #+end_src
 
-** my-theme-helpers.el
+*** my-theme-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-theme-helpersel
 :END:
@@ -5863,7 +5865,7 @@ variable provided by Org Babel."
 ;;; my-theme-helpers.el ends here
 #+end_src
 
-** my-vc-helpers.el
+*** my-vc-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-vc-helpersel
 :END:
