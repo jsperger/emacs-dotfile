@@ -1,97 +1,33 @@
 ;;; config/setup-editor-misc.el --- Miscellaneous editor configuration -*- lexical-binding: t -*-
 
-(use-package dumb-jump
-  :disabled
-  :init
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  (setq dumb-jump-selector 'completing-read)
-  )
-
-(use-package link-hint
-  :disabled ; occassionally useful not necessary?
-  :config
-  (setq link-hint-restore nil)
-  :general
-  (general-def
-    :keymaps '(compilation-mode-map
-               custom-mode-map
-               eww-link-keymap
-               eww-mode-map
-               help-mode-map
-               helpful-mode-map
-               Info-mode-map
-               mu4e-view-mode-map
-               xref--xref-buffer-mode-map
-               woman-mode-map)
-    :states  'normal
-    "o"      'link-hint-open-link)
-
-  (tyrant-def
-    "Jo" 'link-hint-open-link
-    "JO" 'link-hint-open-multiple-links
-    "Jy" 'link-hint-copy-link))
-
 (use-package reveal-in-folder
   :general (tyrant-def "bf" 'reveal-in-folder))
 
+;; Conveniently create scratches in the same mode as the current file
 (use-package scratch
   :general (tyrant-def "bS" 'scratch))
 
 (use-package terminal-here
-  :config
-  (setq terminal-here-mac-terminal-command  (lambda (dir)
-                                              (list "open" "-a" "kitty" "--args" "--working-directory" (expand-file-name dir)))
-        terminal-here-linux-terminal-command 'alacritty
-        terminal-here-project-root-function (lambda () (project-root (project-current t))))
+  :init (setq terminal-here-mac-terminal-command 'ghostty)
   :general
-  (tyrant-def
-    "'"   '("terminal here" . terminal-here-launch)
-    "p '" '("terminal project root" . terminal-here-project-launch)))
+  (tyrant-def "'" '("terminal here" . terminal-here-launch)
+    "p '" '("terminal project root" . terminal-here-project-launch)
+    )
+  )
 
 (use-package vterm
-	:general (tyrant-def
-						 "av" 'vterm
-						 "aV" 'vterm-other-window)
-	)
+  :general (tyrant-def "av" 'vterm
+             "aV" 'vterm-other-window
+             )
+  )
 
 (use-package undo-fu
-	:config
-	(setopt evil-undo-system 'undo-fu))
+  :config (setopt evil-undo-system 'undo-fu)
+  )
 
 (use-package undo-fu-session
-	:custom
-	(undo-fu-session-global-mode t)
-	)
-
-(use-package password-menu
-	;; was using while debugging authinfo api key stuff
-	:disabled
-	:general
-	(tyrant-def "as" 'password-menu-transient)
-	)
-
-(use-package substitute
-	:general
-	(tyrant-def
-		"rb" 'substitute-target-in-buffer
-		"rd" 'substitute-target-in-defun
-		"rj" 'substitute-target-below-point
-		"rk" 'substitute-target-above-point)
-	:config
-	(add-hook 'substitute-post-replace-functions #'substitute-report-operation)
-	)
-
-(use-package tmr
-	:general
-	(tyrant-def "aT" 'tmr-tabulated-view)
-	:config
-	(setq tmr-sound-file "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga")
-	(setq tmr-notification-urgency 'normal)
-	(setq tmr-descriptions-list 'tmr-description-history)
-	(define-key global-map "\C-ct" 'tmr-prefix-map)
-	)
-
-(use-package xr)
+  :custom (undo-fu-session-global-mode t)
+  )
 
 (use-package winum
   :hook (elpaca-after-init . winum-mode)
@@ -132,17 +68,6 @@
     "b7" 'buffer-to-window-7
     "b8" 'buffer-to-window-8
     "b9" 'buffer-to-window-9))
-
-(use-package biome
-	:disabled
-	:general
-	(tyrant-def "aw" 'biome)
-	:config
-	(setq biome-query-coords
-      '(("Carrboro" 35.91014 -79.07529)
-        ("Philly" 39.95233 -75.16379))
-			)
-	)
 
 ;; Local Variables:
 ;; no-byte-compile: t

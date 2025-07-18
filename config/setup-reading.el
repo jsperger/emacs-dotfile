@@ -1,4 +1,4 @@
-;;; config/setup-reading.el --- Reading tools configuration -*- lexical-binding: t -*-
+;;; config/setup-reading.el --- Reading tools -*- lexical-binding: t -*-
 
 (use-package djvu)
 
@@ -6,7 +6,8 @@
 	:mode ("\\.epub\\'" . nov-mode)
 	:hook (nov-mode . visual-line-fill-column-mode)
 	:config
-	(setq-local visual-fill-column-width 60)
+;; Want this only in nov-mode with variable pitch font, not the right way to do        
+;;	(setq-local visual-fill-column-width 60)
         (setopt nov-text-width t
                 visual-fill-column-center-text t)
         )
@@ -19,60 +20,11 @@
   (setopt pdf-view-display-size 'fit-page
           pdf-view-resize-factor 1.1
           pdf-annot-activate-created-annotations t
-					pdf-view-use-unicode-ligther nil
+          pdf-view-use-unicode-ligther nil
           )
 )
 
-(use-package wallabag
-  :disabled
-  :load-path "~/.emacs.d/lisp/wallabag/"
-  :config
-  (setq wallabag-host "https://xx.xx.xx")
-  (setq wallabag-username "xx")
-  (setq wallabag-password "xx")
-  (setq wallabag-clientid "xx")
-  (setq wallabag-secret "xx")
-  (setq wallabag-search-print-items '("title" "domain" "tag" "reading-time" "date"))
-(setq wallabag-search-page-max-rows 32)
-  )
-
-
-(use-package zotxt
-	:disabled)
-
-(use-package pocket-reader
-	:disabled)
-
-(use-package biblio
-	:disabled)
-
-(use-package arxiv-mode
-	:disabled)
-
-(use-package calibredb
-	:disabled)
-
-(use-package devdocs
-	:general
-	(tyrant-def
-		"Jm" 'devdocs-lookup
-		"JM" 'devdocs-peruse
-		"hd" 'devdocs-peruse)
-	)
-
-(use-package dash-docs
-	:disabled)
-
-(use-package consult-dash
-	:disabled
-  :after (consult dash-docs)
-	:general
-	(tyrant-def
-		"Jm" 'consult-dash)
-  :config
-   (consult-customize consult-dash :initial (thing-at-point 'symbol))
-	)
-
+;; Structure and Interpretation of Computer Programs as info file
 (use-package sicp)
 
 ;; Local Variables:
