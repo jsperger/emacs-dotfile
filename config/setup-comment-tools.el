@@ -8,7 +8,6 @@
   )
 
 
-(provide 'setup-comment-tools)
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

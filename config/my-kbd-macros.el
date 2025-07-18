@@ -6,7 +6,6 @@
    (kmacro "w w v w w w w w h y 0 p a SPC < - SPC t a r _ r e a d ( <kp-delete> <kp-delete> <kp-delete> <escape> $ a <backspace> ) <escape>"))
 
 
-(provide 'my-kbd-macros)
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

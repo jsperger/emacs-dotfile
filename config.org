@@ -6,8 +6,8 @@
 #+author: John Sperger
 #+language: en
 #+options: toc:2
-# macros taken from prot's config https://git.sr.ht/~protesilaos/dotfiles
 #+startup: overview
+# macros taken from prot's config https://git.sr.ht/~protesilaos/dotfiles
 #+macro: latest-export-date (eval (format-time-string "%F %T %z"))
 #+macro: word-count (eval (count-words (point-min) (point-max)))
 
@@ -24,13 +24,15 @@ count of {{{word-count}}}.*
 - [[#overview][Overview]]
   - [[#style][Style]]
   - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
-    - [[#support-for-detangling][Support for detangling]]
+    - [[#support-for-detangling-e-nope-juice-not-worth-the-squeeze][Support for detangling e; nope, juice not worth the squeeze]]
     - [[#aggressive-time-stamping][Aggressive time-stamping]]
   - [[#warnings][Warnings]]
     - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
     - [[#i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it][I don't care about startup time (or at least don't optimize for it)]]
+  - [[#lisp-helpers-for-maintaining-my-literate-config][Lisp helpers for maintaining my literate config]]
 - [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
   - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
+  - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
 - [[#configuration][Configuration]]
   - [[#initel][init.el]]
 - [[#config-directory][Config directory]]
@@ -69,6 +71,7 @@ count of {{{word-count}}}.*
   - [[#setup-mediael][setup-media.el]]
   - [[#setup-modelineel][setup-modeline.el]]
   - [[#setup-notesel][setup-notes.el]]
+  - [[#outline-and-fold-text][Outline and fold text]]
   - [[#setup-org-captureel][setup-org-capture.el]]
   - [[#setup-org-exportersel][setup-org-exporters.el]]
   - [[#setup-org-nodeel][setup-org-node.el]]
@@ -98,6 +101,7 @@ count of {{{word-count}}}.*
   - [[#my-org-helpersel][my-org-helpers.el]]
   - [[#my-theme-helpersel][my-theme-helpers.el]]
   - [[#my-vc-helpersel][my-vc-helpers.el]]
+- [[#appendices][Appendices]]
 :END:
 
 This file documents and generates my Emacs configuration. It tangles to create
@@ -125,13 +129,18 @@ organizational.
 :PROPERTIES:
 :CUSTOM_ID: design-decisions--notable-features
 :END:
-*** Support for detangling
+*** Support for detangling e; nope, juice not worth the squeeze
 :PROPERTIES:
-:CUSTOM_ID: support-for-detangling
+:CUSTOM_ID: support-for-detangling-e-nope-juice-not-worth-the-squeeze
+:LAST_MODIFIED: [2025-07-18 Fri 02:11]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 The header option =:comments link= encases the code in the tangled file with a comment linking back to the org source block. This enables detangling, making changes in the tangled file and propagating them back to the org source block.
-Not sure if this will be a good idea or if it's just an invitation for the config to get out of sync. 
+Not sure if this will be a good idea or if it's just an invitation for the config to get out of sync.
+
+Too much of a headache to get this working with the lexical binding directive. A simple solution with just the directive and no other info would be easiest with a post-tangle hook, but I want more functionality like including the filename and short description in the first line. Maybe someday, but for now just need to be disciplined about editing the org file not the indvidual lisp files. Maybe someday... [[#notes-header-and-footer-templates][maybe someday
+]]
 *** Aggressive time-stamping
 :PROPERTIES:
 :CUSTOM_ID: aggressive-time-stamping
@@ -184,14 +193,105 @@ related:
 :PROPERTIES:
 :CUSTOM_ID: the-right-way-to-configure-package-options
 :END:
+** Notes while figuring out how to make header and footer templates
+:PROPERTIES:
+:CUSTOM_ID: notes-while-figuring-out-how-to-make-header-and-footer-templates
+:END:
+*** Potentially useful
+**** noweb syntax
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 01:06]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+=< <code-block-name> >= (no spaces between brackets, just a rendering workaround) Insert the literal body of code block code-block-name itself.
+
+=< <code-block-name()> >=: Insert the *results of evaluating the code block code-block-name (as obtained with org-babel-execute-src-block). That can be of different types: LaTeX, etc.
+
+=< <code-block-name(x = 3.3)> >=: Insert the results of evaluating it with the specified argument value.
+
+Note that you can customize org-babel-noweb-wrap-start and org-babel-noweb-wrap-end to use something else than angle brackets (for example, double quotes).
+
+/Problem:/ doesn't seem to be suitable for passing an argument in a variable that's defined in the header or in a property due to the order things are evaluated but I'm not super confident about that. 
+**** hooks
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 00:57]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+- =org-babel-post-tangle-hook= which is run within tangled code files "making it suitable for post-processing, compilation, and evaluation of code in the tangled files."
+
+[[https://emacs.stackexchange.com/questions/81540/lexical-binding-in-a-tangled-init-el-file][stack overflow example using this to add lexical binding directive]]
+
+#+begin_src emacs-lisp :tangle no :eval no
+;; function
+(defun my-ensure-lexical-binding-cookie()
+  (goto-char(point-min)) ;; beginning of tangled code
+  (insert ";; -*- coding: utf-8; lexical-binding: t -*-")
+  (newline)
+  (newline)
+  (let ((inhibit-message t)) ;; Don't show messages from these functions
+    (basic-save-buffer)
+    (kill-buffer) nil)
+
+ ;; Adding the hook
+(add-hook 'org-babel-post-tangle-hook #'my-ensure-lexical-binding-cookie)
+
+#+end_src
+
+- =org-babel-tangle-finished-hook= is run after post-tangle hooks, in the original buffer.
+**** functions
+- =org-babel-map-src-blocks=
+- =org-sbe=
+*** Related examples from the internet
+[[https://github.com/fniessen/refcard-org-babel][org babel refcard / cheatsheet]]
+**** [[https://emacs.stackexchange.com/a/46721][Use built-in :noweb functionality to include variable values in tangled files]]
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 02:28]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+**** [[https://www.reddit.com/r/orgmode/comments/1cklpow/ansible_like_variables_in_orgmodebabeltangle/][lisp in header argument for conditional evaluation]]
+#+NAME: common-config
+#+begin_src conf :tangle no
+  timezone=Europe/Berlin
+#+end_src
+
+#+begin_src conf :noweb yes :tangle (if (string-equal (system-name) "pc1") "~/tmp/babeltest/theconfig" "no")
+  hostname=pc1
+  <<common-config>>
+#+end_src
+
+#+begin_src conf :noweb yes :tangle (if (string-equal (system-name) "pc2") "~/tmp/babeltest/theconfig" "no")
+  hostname=pc2
+  <<common-config>>
+#+end_src
+
+**** [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-elisp.html#org46f2da5][Tangling with variables]]
+***** Notes
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 02:21]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+Has a direct example of trying to keep a lexical binding directive at the top of the file
+**** [[https://eschulte.github.io/org-scraps/][Eric Schulte's org scraps]]
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-17 Thu 01:36]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+- [[https://eschulte.github.io/org-scraps/scraps/2011-07-19-including-noweb-refs-without-last-newline.html][Including noweb refs without the last newline]]
+- [[https://eschulte.github.io/org-scraps/scraps/2011-07-25-expand-noweb-refs.html][Expand noweb refs]] 
+- [[https://eschulte.github.io/org-scraps/scraps/2010-12-13-tangle-templates.html][Tangle templates]]
 * Configuration
 :PROPERTIES:
 :CUSTOM_ID: configuration
+:LAST_MODIFIED: [2025-07-18 Fri 02:21]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 *** init.el
 :PROPERTIES:
 :header-args: :tangle init.el
 :CUSTOM_ID: initel
+:LAST_MODIFIED: [2025-07-18 Fri 02:23]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 :TODO: Figure out a way to abide by the emacs styling where the first line is like ~;;; init.el --- Summary -*- lexical-binding: t; -*-~
@@ -205,8 +305,8 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 ;;; Code:
 #+end_src
 
-#+name: init
-#+begin_src emacs-lisp :noweb yes :comments link :tangle init.el 
+#+name: init elpaca
+#+begin_src emacs-lisp :tangle init.el :comments noweb
 ;; ===================== Elpaca bootstrap install ====================
 ;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
 (defvar elpaca-installer-version 0.11)
@@ -274,7 +374,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 :END:
 Emacs packages 
 #+name: no-littering
-#+begin_src emacs-lisp :noweb yes :comments link :tangle init.el 
+#+begin_src emacs-lisp :noweb yes :comments noweb :tangle init.el 
 ;; ============== Packages that change core functionality =============
 
 (use-package no-littering :ensure (:wait t))
@@ -310,12 +410,12 @@ Emacs packages
 **** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-15 Tue 19:36]
+:LAST_MODIFIED: [2025-07-18 Fri 02:27]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 #+name: load configuration files
-#+begin_src emacs-lisp :noweb yes :comments link :tangle init.el 
+#+begin_src emacs-lisp :noweb yes :comments noweb :tangle init.el 
 ;=========== Load use-package declarations and configuration ===========
 
 ;; Declarations to executed immediately. I.e. those with elpaca
@@ -390,6 +490,7 @@ Emacs packages
              "setup-themes.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
+             "setup-outlining.el"
              "setup-vc.el"
              ;; "setup-web.el"
              ;; "setup-writing.el"
@@ -406,21 +507,24 @@ Emacs packages
 #+end_src
 
 #+name: footer-init
-#+begin_src emacs-lisp
-(provide 'init)
+#+begin_src emacs-lisp :tangle init.el
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
 ;;; init.el ends here
 #+end_src
 
 * Config directory
 :PROPERTIES:
-:header-args: :comments link
 :CUSTOM_ID: config-directory
-:LAST_MODIFIED: [2025-07-16 Wed 01:02]
+:LAST_MODIFIED: [2025-07-17 Thu 01:27]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 ** Keyboard macros
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-16 Wed 00:29]
+:LAST_MODIFIED: [2025-07-18 Fri 02:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: keyboard-macros
 :END:
@@ -434,7 +538,6 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
    (kmacro "w w v w w w w w h y 0 p a SPC < - SPC t a r _ r e a d ( <kp-delete> <kp-delete> <kp-delete> <escape> $ a <backspace> ) <escape>"))
 
 
-(provide 'my-kbd-macros)
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
@@ -805,11 +908,12 @@ I need to move most of these out of here and put them in the relavent package de
 
 ** Bibliography management
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-16 Wed 00:41]
+:LAST_MODIFIED: [2025-07-18 Fri 02:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: bibliography-management
 :END:
-#+begin_src emacs-lisp :tangle config/setup-bib.el :prologue (cfg/org-tangle-file-header "Bibliography configuration") :epilogue (cfg/org-tangle-file-footer)
+#+begin_src emacs-lisp :tangle config/setup-bib.el 
+;;; setup-bib --- bibliography management -*- lexical-binding: t; -*-
 (use-package bibtex
   :ensure nil
   )
@@ -850,7 +954,12 @@ I need to move most of these out of here and put them in the relavent package de
 (use-package ebib
 	:general
 	(tyrant-def "d" 'ebib))
-
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-bib.el ends here
 #+end_src
 
 ** setup-builtin-packages.el
@@ -957,7 +1066,6 @@ of 2025-07-06
   )
 
 
-(provide 'setup-comment-tools)
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
@@ -3238,6 +3346,57 @@ of 2025-07-06
 ;;; setup-notes.el ends here
 #+end_src
 
+** Outline and fold text
+:PROPERTIES:
+:CUSTOM_ID: outline-and-fold-text
+:LAST_MODIFIED: [2025-07-17 Thu 18:06]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle config/setup-notes.el
+;;; setup-outlining.el ---  -*- lexical-binding: t; -*-
+(use-package outline-minor-faces
+  :after outline
+  :config (add-hook 'outline-minor-mode-hook
+                    #'outline-minor-faces-mode)
+  )
+
+(use-package backline
+  :after outline
+  :config (advice-add 'outline-flag-region :after 'backline-update)
+  )
+
+(use-package outline-indent
+	:commands outline-indent-minor-mode
+	:custom
+  (outline-indent-ellipsis " ▼ ")
+	:general
+	(tyrant-def
+		"to" 'outline-indent-minor-mode
+    "o"       (cons "outline" (make-sparse-keymap))
+		"oa" '("all open" . outline-indent-open-folds)
+		"oA" '("all closed" . outline-indent-close-folds)
+		"ob" 'bicycle-cycle
+		"oB" 'bicycle-cycle-global
+		"oc" 'outline-indent-close-fold
+		"oj" 'outline-forward-same-level
+		"ok" 'outline-backward-same-level
+		"oh"      'hs-minor-mode
+		"oo" 'outline-indent-open-fold
+		"oO"      'outline-minor-mode
+		"or" 'outline-indent-open-fold-rec
+		"ot" 'bicycle-cycle
+		"oT" 'bicycle-cycle-global
+		"oz"      'TeX-fold-mode)
+        )
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-outlining.el ends here
+#+end_src
+
 ** setup-org-capture.el
 :PROPERTIES:
 :CUSTOM_ID: setup-org-captureel
@@ -3278,7 +3437,6 @@ of 2025-07-06
 
 (use-package ox-beamer-lecture
 	:after org)
-(provide 'setup-org-exporters)
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; no-native-compile: t
@@ -4361,6 +4519,8 @@ Just put this function in `hippie-expand-try-functions-list'."
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
+:LAST_MODIFIED: [2025-07-18 Fri 02:13]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
 ;;; config/setup-ui.el --- UI configuration -*- lexical-binding: t -*-
@@ -4381,15 +4541,6 @@ Just put this function in `hippie-expand-try-functions-list'."
     )
   )
 
-(use-package outline-minor-faces
-  :after outline
-  :config (add-hook 'outline-minor-mode-hook
-                    #'outline-minor-faces-mode))
-
-(use-package backline
-  :after outline
-  :config (advice-add 'outline-flag-region :after 'backline-update))
-
 (use-package focus
   :disabled
 	:general
@@ -4404,29 +4555,6 @@ Just put this function in `hippie-expand-try-functions-list'."
 	:general
 	(tyrant-def
 		"tc" 'nocomments-mode))
-
-(use-package outline-indent
-	:commands outline-indent-minor-mode
-	:custom
-  (outline-indent-ellipsis " ▼ ")
-	:general
-	(tyrant-def
-		"to" 'outline-indent-minor-mode
-    "o"       (cons "outline" (make-sparse-keymap))
-		"oa" '("all open" . outline-indent-open-folds)
-		"oA" '("all closed" . outline-indent-close-folds)
-		"ob" 'bicycle-cycle
-		"oB" 'bicycle-cycle-global
-		"oc" 'outline-indent-close-fold
-		"oj" 'outline-forward-same-level
-		"ok" 'outline-backward-same-level
-		"oh"      'hs-minor-mode
-		"oo" 'outline-indent-open-fold
-		"oO"      'outline-minor-mode
-		"or" 'outline-indent-open-fold-rec
-		"ot" 'bicycle-cycle
-		"oT" 'bicycle-cycle-global
-		"oz"      'TeX-fold-mode))
 
 (use-package olivetti
 	:hook ((text-mode prog-mode org-mode) . olivetti-mode)
@@ -4443,9 +4571,8 @@ Just put this function in `hippie-expand-try-functions-list'."
   (setopt shackle-mode t
           shackle-default-size 0.2
           shackle-rules
-          `((help-mode :select t :align right :size
-                       fill-column)
-            (helpful-mode :select t :align right :size ,fill-column)
+          `((help-mode :select t :align right :size fill-column)
+            (helpful-mode :select t :align right :size fill-column)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
             (special-mode                    :align t)
@@ -4459,26 +4586,16 @@ Just put this function in `hippie-expand-try-functions-list'."
   )
 
 (use-package spacious-padding
-  :config
-  (setq spacious-padding-widths
-        '( internal-border-width 10
-           header-line-width 4
-           mode-line-width 6
-           tab-width 4
-           right-divider-width 20
-           scroll-bar-width 8)
-        )
-  (setq spacious-padding-subtle-mode-line t)
+  :config (setopt spacious-padding-subtle-mode-line t)
   )
 
 
 (use-package visual-fill-column
-	:hook (elpaca-after-init . global-visual-fill-column-mode)
-  :config
-  (setopt   visual-fill-column-center-text t
-	    visual-fill-column-extra-text-width '(4 . 4)
-            fill-column 80
-   )
+  :hook (elpaca-after-init . global-visual-fill-column-mode)
+  :config (setopt visual-fill-column-center-text t
+                  visual-fill-column-extra-text-width '(4 . 4)
+                  fill-column 80
+                  )
   )
 
 (use-package writeroom-mode
@@ -5702,7 +5819,12 @@ For example: To unfold from a magit diff buffer, evaluate the following:
 (provide 'my-vc-helpers)
 ;;; my-vc-helpers.el ends here
 #+end_src
-
+* Appendices
+:PROPERTIES:
+:CUSTOM_ID: appendices
+:LAST_MODIFIED: [2025-07-16 Wed 23:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
 ## Local Variables:
 ## eval: (add-hook 'before-save-hook #'org-make-toc nil t)
 ## eval: (add-hook 'before-save-hook #'my/org-update-subtree-modification-info)

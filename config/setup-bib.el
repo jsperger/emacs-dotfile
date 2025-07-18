@@ -1,5 +1,4 @@
-;;; config/setup-bib.el --- Bibliography configuration -*- lexical-binding: t -*-
-
+;;; setup-bib --- bibliography management -*- lexical-binding: t; -*-
 (use-package bibtex
   :ensure nil
   )
@@ -40,7 +39,6 @@
 (use-package ebib
 	:general
 	(tyrant-def "d" 'ebib))
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

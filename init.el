@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;; [[file:config.org::init][init]]
+;; [[file:config.org::init elpaca][init elpaca]]
 ;; ===================== Elpaca bootstrap install ====================
 ;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
 (defvar elpaca-installer-version 0.11)
@@ -63,7 +63,7 @@
 
 (defconst my-debug-mode nil
   "Toggle debugging messages. Set to t to enable, nil to disable.")
-;; init ends here
+;; init elpaca ends here
 
 ;; [[file:config.org::no-littering][no-littering]]
 ;; ============== Packages that change core functionality =============
@@ -187,7 +187,6 @@
 ;=============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
-
 ;; load configuration files ends here
 
 ;; Local Variables:

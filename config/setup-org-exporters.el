@@ -16,7 +16,6 @@
 
 (use-package ox-beamer-lecture
 	:after org)
-(provide 'setup-org-exporters)
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; no-native-compile: t
