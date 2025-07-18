@@ -7,21 +7,8 @@
   (setq dumb-jump-selector 'completing-read)
   )
 
-(use-package helpful
-  :config
-  (setq helpful-max-buffers 3
-        helpful-switch-buffer-function #'helpful-reuse-window)
-
-  (with-eval-after-load 'ibuffer
-    (add-to-list 'ibuffer-help-buffer-modes 'helpful-mode))
-  :general
-  ([remap describe-command]  'helpful-command
-   [remap describe-function] 'helpful-callable
-   [remap describe-key]      'helpful-key
-   [remap describe-symbol]   'helpful-symbol
-   [remap describe-variable] 'helpful-variable))
-
 (use-package link-hint
+  :disabled ; occassionally useful not necessary?
   :config
   (setq link-hint-restore nil)
   :general

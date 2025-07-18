@@ -61,6 +61,7 @@ count of {{{word-count}}}.*
   - [[#setup-fontsel][setup-fonts.el]]
   - [[#setup-goel][setup-go.el]]
   - [[#setup-gopherel][setup-gopher.el]]
+  - [[#setup-help-and-documentation-viewers][Setup help and documentation viewers]]
   - [[#setup-iconsel][setup-icons.el]]
   - [[#setup-keybindingsel][setup-keybindings.el]]
   - [[#setup-lispel][setup-lisp.el]]
@@ -459,7 +460,7 @@ Emacs packages
 **** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-18 Fri 02:27]
+:LAST_MODIFIED: [2025-07-18 Fri 04:12]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -513,6 +514,7 @@ Emacs packages
              "setup-fonts.el"
              ;; "setup-go.el"
              ;; "setup-gopher.el"
+             "setup-help.el"
              ;; "setup-icons.el"
              "setup-keybindings.el"
              ;; "setup-lisp.el"
@@ -531,7 +533,7 @@ Emacs packages
              ;; "setup-projects.el"
              ;; "setup-python.el"
              "setup-r.el"
-             ;; "setup-reading.el"
+             "setup-reading.el"
              ;; "setup-rust.el"
              "setup-search.el"
              "setup-snippets.el"
@@ -1561,12 +1563,13 @@ of 2025-07-06
 ** setup-core.el
 :PROPERTIES:
 :CUSTOM_ID: setup-coreel
+:LAST_MODIFIED: [2025-07-18 Fri 04:25]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-core.el
 ;;; config/setup-core.el --- Core configuration -*- lexical-binding: t -*-
 
 (use-package ultra-scroll
-  ;; :load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
   :ensure (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")
   :init  (setq scroll-conservatively 50
                scroll-margin 0) 
@@ -1612,7 +1615,7 @@ of 2025-07-06
 
 ;; Do not allow the cursor in the minibuffer prompt
 (setopt minibuffer-prompt-properties
-      '(read-only t cursor-intangible t face minibuffer-prompt))
+        '(read-only t cursor-intangible t face minibuffer-prompt))
 (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
 (use-package desktop
@@ -1623,12 +1626,12 @@ of 2025-07-06
   :config
   ;; inhibit no-loaded prompt
   (setopt desktop-file-modtime (file-attribute-modification-time
-                              (file-attributes
-                               (desktop-full-file-name)))
-        desktop-lazy-verbose nil
-        desktop-load-locked-desktop t
-        desktop-restore-eager nil
-        desktop-save t)
+                                (file-attributes
+                                 (desktop-full-file-name)))
+          desktop-lazy-verbose nil
+          desktop-load-locked-desktop t
+          desktop-restore-eager nil
+          desktop-save t)
 
   (dolist (param '(foreground-color background-color background-mode font cursor-color mouse-color))
     (push `(,param . :never) frameset-filter-alist))
@@ -1637,49 +1640,49 @@ of 2025-07-06
 
 (use-package display-line-numbers
   :ensure nil
-	:defer t
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
   :config
   (setopt display-line-numbers-type t
-                display-line-numbers-width-start 100))
+          display-line-numbers-width-start 100)
+  )
 
 (use-package doc-view
   :ensure nil
   :defer t
-  :config
-  (setopt doc-view-resolution 400))
+  :config (setopt doc-view-resolution 330)
+  )
 
 (use-package ediff
   :ensure nil
   :defer t
   :config
   (setopt ediff-window-setup-function 'ediff-setup-windows-plain
-                ediff-split-window-function 'split-window-horizontally
-                ediff-merge-split-window-function 'split-window-horizontally))
+          ediff-split-window-function 'split-window-horizontally
+          ediff-merge-split-window-function 'split-window-horizontally
+          )
+  )
 
-(use-package elec-pair
-  :ensure nil
-	:defer t
-	:custom (electric-pair-mode 1))
+;; (use-package elec-pair
+;;   :ensure nil
+;; 	:defer t
+;; 	:custom (electric-pair-mode 1))
 
 (use-package files
   :ensure nil
-	:defer t
-;;  :hook (before-save . delete-trailing-whitespace)
+  :defer t
   :config
-  (add-hook 'find-file-hook #'check-large-file)
-  (add-to-list 'find-file-not-found-functions 'make-directory-maybe nil #'eq))
+  (add-to-list 'find-file-not-found-functions 'make-directory-maybe nil #'eq)
+  )
 
 (use-package flymake
   :ensure nil
-	:defer t
   :hook (prog-mode . flymake-mode)
   :init (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
   )
 
 (use-package newcomment
   :ensure nil
-	:defer t
+  :defer t
   :commands comment-or-uncomment
   :config
   (defun comment-or-uncomment (n)
@@ -1697,71 +1700,76 @@ of 2025-07-06
   :defer t
   :config
   (setopt project-vc-merge-submodules nil
-        project-switch-commands '((project-switch-to-buffer "Find buffer")
-                                  (project-find-file "Find file")
-                                  (project-find-regexp "Find regexp")
-                                  (project-find-dir "Find directory"))
-        project-switch-use-entire-map t)
-
-  (add-to-list 'project-find-functions 'project-try-root t))
+          project-switch-commands '((project-switch-to-buffer "Find buffer")
+                                    (project-find-file "Find file")
+                                    (project-find-regexp "Find regexp")
+                                    (project-find-dir "Find directory"))
+          project-switch-use-entire-map t
+          )
+  (add-to-list 'project-find-functions 'project-try-root t)
+  )
 
 (use-package recentf
   :ensure nil
-	:defer t
-	:custom (recentf-mode 1)
-  :config
-  (setopt recentf-auto-cleanup 'never
-        recentf-max-saved-items 250))
+  :defer t
+  :custom (recentf-mode 1)
+  :config (setopt recentf-auto-cleanup 'never
+                  recentf-max-saved-items 250)
+  )
 
 (use-package savehist
   :ensure nil
-	:defer t
-	:custom (savehist-mode 1)
+  :defer t
+  :custom (savehist-mode 1)
   :config
   (setopt enable-recursive-minibuffers t ; allow commands in minibuffers
-        history-length 250
-        savehist-autosave-interval nil
-        savehist-additional-variables '(evil-jumps-history
-                                        mark-ring global-mark-ring
-                                        search-ring regexp-search-ring
-                                        extended-command-history))
-
+          history-length 500
+          savehist-autosave-interval nil
+          savehist-additional-variables '(evil-jumps-history
+                                          mark-ring global-mark-ring
+                                          search-ring regexp-search-ring
+                                          extended-command-history)
+          )
   (add-hook 'savehist-save-hook #'savehist-unpropertize-variables-h)
-  (add-hook 'savehist-save-hook #'savehist-remove-unprintable-registers-h))
+  (add-hook 'savehist-save-hook #'savehist-remove-unprintable-registers-h)
+  )
 
 
 (use-package saveplace
   :ensure nil
-	:custom (save-place-mode 1))
+  :custom (save-place-mode 1))
 
 (use-package simple
-	;; basic editing commands for emacs
+  ;; basic editing commands for emacs
   :ensure nil
-	:defer t
+  :defer t
   :config
   (setopt column-number-mode t
-        delete-trailing-lines nil
-        eval-expression-print-length nil
-        eval-expression-print-level nil
-        next-error-message-highlight t
-        ;; save clipboard contents into kill-ring before replace them
-        save-interprogram-paste-before-kill t))
+          delete-trailing-lines nil
+          eval-expression-print-length nil
+          eval-expression-print-level nil
+          next-error-message-highlight t
+          ;; save clipboard contents into kill-ring before replace them
+          save-interprogram-paste-before-kill t
+          )
+  )
 
 (use-package whitespace
   :ensure nil
   :hook (diff-mode . whitespace-mode)
- )
+  )
 
 (use-package winner
   :ensure nil
   :defer t
   :commands (winner-undo winner-redo)
   :init
-  (setopt winner-dont-bind-my-keys t)
-	:custom
-	(winner-mode 1)
+  (setq winner-dont-bind-my-keys t)
+  :custom
+  (winner-mode 1)
   :config
-  (setopt winner-boring-buffers-regexp "\\*.*\\*"))
+  (setopt winner-boring-buffers-regexp "\\*.*\\*")
+  )
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
@@ -2015,6 +2023,8 @@ of 2025-07-06
 ** setup-editor-misc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-editor-miscel
+:LAST_MODIFIED: [2025-07-18 Fri 04:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-editor-misc.el
 ;;; config/setup-editor-misc.el --- Miscellaneous editor configuration -*- lexical-binding: t -*-
@@ -2026,21 +2036,8 @@ of 2025-07-06
   (setq dumb-jump-selector 'completing-read)
   )
 
-(use-package helpful
-  :config
-  (setq helpful-max-buffers 3
-        helpful-switch-buffer-function #'helpful-reuse-window)
-
-  (with-eval-after-load 'ibuffer
-    (add-to-list 'ibuffer-help-buffer-modes 'helpful-mode))
-  :general
-  ([remap describe-command]  'helpful-command
-   [remap describe-function] 'helpful-callable
-   [remap describe-key]      'helpful-key
-   [remap describe-symbol]   'helpful-symbol
-   [remap describe-variable] 'helpful-variable))
-
 (use-package link-hint
+  :disabled ; occassionally useful not necessary?
   :config
   (setq link-hint-restore nil)
   :general
@@ -2773,7 +2770,36 @@ of 2025-07-06
 ;; End:
 ;;; setup-gopher.el ends here
 #+end_src
+** Setup help and documentation viewers
+:PROPERTIES:
+:CUSTOM_ID: setup-help-and-documentation-viewers
+:LAST_MODIFIED: [2025-07-18 Fri 04:11]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
 
+#+begin_src emacs-lisp :tangle config/setup-help.el
+;;; config/setup-help.el --- helpful annotations -*- lexical-binding: t -*-
+
+(use-package helpful
+  :config
+  (setq helpful-max-buffers 3
+        helpful-switch-buffer-function #'helpful-reuse-window)
+
+  (with-eval-after-load 'ibuffer
+    (add-to-list 'ibuffer-help-buffer-modes 'helpful-mode))
+  :general
+  ([remap describe-command]  'helpful-command
+   [remap describe-function] 'helpful-callable
+   [remap describe-key]      'helpful-key
+   [remap describe-symbol]   'helpful-symbol
+   [remap describe-variable] 'helpful-variable))
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-help.el ends here
+#+end_src
 ** setup-icons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-iconsel
@@ -3466,6 +3492,8 @@ of 2025-07-06
 ** setup-org-exporters.el
 :PROPERTIES:
 :CUSTOM_ID: setup-org-exportersel
+:LAST_MODIFIED: [2025-07-18 Fri 02:59]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-org-exporters.el
 ;;; setup-org-exporters.el ---  -*- lexical-binding: t; -*-
@@ -3548,14 +3576,14 @@ of 2025-07-06
 ** setup-org.el
 :PROPERTIES:
 :CUSTOM_ID: setup-orgel
-:LAST_MODIFIED: [2025-07-18 Fri 02:53]
+:LAST_MODIFIED: [2025-07-18 Fri 03:42]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-org.el
 ;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
 
 (use-package org
-	:commands (org-toggle-hidden-emphasis-markers)
+  :commands (org-toggle-hidden-emphasis-markers)
   :init
   (setq org-directory "~/obsidian/org/"
         org-inbox-file (concat org-directory "inbox.org")
@@ -3563,11 +3591,10 @@ of 2025-07-06
         org-project-file (concat org-directory "projects.org")
         org-confirm-babel-evaluate nil
         )
-	:config
-	(setopt org-latex-bib-compiler "biber"
-					org-latex-compiler "lualatex"
-          org-babel-load-languages '(
-                                     (emacs-lisp . t)
+  :config
+  (setopt org-latex-bib-compiler "biber"
+          org-latex-compiler "lualatex"
+          org-babel-load-languages '((emacs-lisp . t)
                                      (R . t)
                                      (shell . t)
                                      )
@@ -3580,11 +3607,11 @@ of 2025-07-06
                                        (t csl))
           org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
 
-	(use-package org-indent
-		:ensure nil)
-	(use-package org-protocol
-		:ensure nil
-		)
+  (use-package org-indent
+    :ensure nil)
+  (use-package org-protocol
+    :ensure nil
+    )
   :general
   (despot-def org-mode-map
     "'"     'org-edit-special
@@ -3670,12 +3697,12 @@ of 2025-07-06
     "tw"    'org-table-wrap-region
     "T"     (cons "toggles" (make-sparse-keymap))
     "Tc"    'org-toggle-checkbox
-		"Td"    'org-modern-indent-mode
-		"TD"    'org-indent-mode
+    "Td"    'org-modern-indent-mode
+    "TD"    'org-indent-mode
     "Te"    'org-toggle-pretty-entities
     "Ti"    'org-toggle-inline-images
     "Tl"    'org-toggle-link-display
-		"Tm"    'org-toggle-hidden-emphasis-markers
+    "Tm"    'org-toggle-hidden-emphasis-markers
     "Tt"    'org-show-todo-tree
     "Tx"    'org-latex-preview
     "x"     (cons "text" (make-sparse-keymap))
@@ -3735,24 +3762,24 @@ of 2025-07-06
 (use-package org-todoist
   :after gptel ; why would this depend on gptel? oh my api key olol
   :ensure (:host github
-           :repo "lillenne/org-todoist"
-           :branch "main"
-           )
+                 :repo "lillenne/org-todoist"
+                 :branch "main"
+                 )
   :init
   (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
   )
 
 (use-package org-pdftools
-	:disabled
+  :disabled
   :hook (org-mode . org-pdftools-setup-link))
 
 (use-package org-noter-pdftools
-	:disabled
-	:after org-noter
-	:config
+  :disabled
+  :after org-noter
+  :config
   (with-eval-after-load 'pdf-annot
     (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note))
-	)
+  )
 
 (use-package org-make-toc
   :after org
@@ -3763,7 +3790,7 @@ of 2025-07-06
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
   :config
-	(set-face-attribute 'org-modern-symbol nil :family "Iosevka")
+  (set-face-attribute 'org-modern-symbol nil :family "Iosevka")
   (setopt  org-auto-align-tags nil
            org-tags-column 0
            org-catch-invisible-edits 'show-and-error
@@ -3775,13 +3802,13 @@ of 2025-07-06
   )
 
 (use-package org-side-tree
-	:disabled
-	:hook org-mode
-	:config
-	(setopt org-side-tree-persistent nil
-					org-side-tree-fontify t
-					org-side-tree-enable-folding t)
-	)
+  :disabled
+  :hook org-mode
+  :config
+  (setopt org-side-tree-persistent nil
+	  org-side-tree-fontify t
+	  org-side-tree-enable-folding t)
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t
@@ -4097,6 +4124,8 @@ of 2025-07-06
 ** setup-reading.el
 :PROPERTIES:
 :CUSTOM_ID: setup-readingel
+:LAST_MODIFIED: [2025-07-18 Fri 03:47]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-reading.el
 ;;; config/setup-reading.el --- Reading tools configuration -*- lexical-binding: t -*-
@@ -4106,16 +4135,15 @@ of 2025-07-06
 (use-package nov
 	:mode ("\\.epub\\'" . nov-mode)
 	:hook (nov-mode . visual-line-fill-column-mode)
-	:init
-	(setopt nov-text-width t
-					visual-fill-column-center-text t)
 	:config
 	(setq-local visual-fill-column-width 60)
-)
+        (setopt nov-text-width t
+                visual-fill-column-center-text t)
+        )
 
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
-	:mode ("\\.pdf\\'" . pdf-view-mode)
+  :mode ("\\.pdf\\'" . pdf-view-mode)
   :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
   :init
   (setopt pdf-view-display-size 'fit-page
@@ -4126,8 +4154,8 @@ of 2025-07-06
 )
 
 (use-package wallabag
-:disabled
-	:load-path "~/.emacs.d/lisp/wallabag/"
+  :disabled
+  :load-path "~/.emacs.d/lisp/wallabag/"
   :config
   (setq wallabag-host "https://xx.xx.xx")
   (setq wallabag-username "xx")
@@ -4570,7 +4598,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-07-18 Fri 02:13]
+:LAST_MODIFIED: [2025-07-18 Fri 03:40]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -4579,51 +4607,49 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; Code:
 
 (use-package mct
-	:disabled
-	:hook (vertico-mode . mct-mode))
+  :disabled
+  :hook (vertico-mode . mct-mode))
 
 (use-package bicycle
   :hook ((prog-mode . outline-minor-mode)
          (prog-mode . hs-minor-mode))
-  :general
-  (tyrant-def
-    "t TAB" 'bicycle-cycle
-    "t <backtab>" 'bicycle-cycle-global
-    )
+  :general (tyrant-def
+             "t TAB" 'bicycle-cycle
+             "t <backtab>" 'bicycle-cycle-global
+             )
   )
 
 (use-package focus
   :disabled
-	:general
-	(tyrant-def "tF" 'focus-mode)
-	)
+  :general
+  (tyrant-def "tF" 'focus-mode)
+  )
 
 (use-package indent-control
   :disabled)
 
 (use-package nocomments-mode
-	:disabled
-	:general
-	(tyrant-def
-		"tc" 'nocomments-mode))
+  :disabled
+  :general (tyrant-def "tc" 'nocomments-mode)
+  )
 
 (use-package olivetti
-	:hook ((text-mode prog-mode org-mode) . olivetti-mode)
-	:config
-	(setopt olivetti-style 'fancy
-                olivetti-body-width 0.7
-		olivetti-minimum-body-width 80
-		olivetti-recall-visual-line-mode-entry-state t)
-        )
-   
+  :hook ((text-mode prog-mode org-mode) . olivetti-mode)
+  :config (setopt olivetti-style 'fancy
+                  olivetti-body-width 0.7
+                  olivetti-minimum-body-width 80
+                  olivetti-recall-visual-line-mode-entry-state t
+                  )
+  )
+
 
 (use-package shackle
   :config
   (setopt shackle-mode t
           shackle-default-size 0.2
           shackle-rules
-          `((help-mode :select t :align right :size fill-column)
-            (helpful-mode :select t :align right :size fill-column)
+          `((help-mode :select t :align right :size 0.33)
+            (helpful-mode :select t :align right :size 0.33)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
             (special-mode                    :align t)
@@ -4667,16 +4693,16 @@ Just put this function in `hippie-expand-try-functions-list'."
 
 (use-package logos
   :disabled
-	)
+  )
 (use-package calle24
-	:disabled
-	:hook (compilation-mode . calle24-refresh-appearance)
-	:config
-	(calle24-refresh-appearance)
-)
+  :disabled
+  :hook (compilation-mode . calle24-refresh-appearance)
+  :config
+  (calle24-refresh-appearance)
+  )
 
 (use-package activities
-	:disabled
+  :disabled
   :init
   (activities-mode)
   (activities-tabs-mode)
@@ -4696,29 +4722,29 @@ Just put this function in `hippie-expand-try-functions-list'."
 (use-package golden-ratio
   :disabled
   :config (setopt golden-ratio-mode nil)
-	)
+  )
 
 (use-package zoom
   :disabled)
 
 (use-package eyebrowse
-	:disabled)
+  :disabled)
 
 (use-package popper
   :config
   (setopt popper-display-control nil
-        popper-reference-buffers
-        '("\*Messages\*"
-          "Output\*$"
-          "\*Async Shell Command\*"
-          "\*eldoc\*"
-          "^\*EGLOT"
-          help-mode
-          helpful-mode
-          compilation-mode
-          process-menu-mode
-          special-mode
-          flymake-diagnostics-buffer-mode))
+          popper-reference-buffers
+          '("\*Messages\*"
+            "Output\*$"
+            "\*Async Shell Command\*"
+            "\*eldoc\*"
+            "^\*EGLOT"
+            help-mode
+            helpful-mode
+            compilation-mode
+            process-menu-mode
+            special-mode
+            flymake-diagnostics-buffer-mode))
   :general
   (tyrant-def
     ";" '("pop toggle" . popper-toggle)
@@ -4729,13 +4755,16 @@ Just put this function in `hippie-expand-try-functions-list'."
   )
 
 (use-package sideline
-  :init
-  (use-package sideline-flymake
-    :hook (flymake-mode . sideline-mode)
+  :hook (flymake-mode . sideline-mode)
+  )
+
+(use-package sideline-flymake
     :init
-    (setopt sideline-backends-right '(sideline-flymake))
+    (setq sideline-backends-right '(sideline-flymake))
     (add-hook 'flymake-mode-hook
-              (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
+              (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t))
+              )
+    )
 
 ;; Local Variables:
 ;; no-byte-compile: t

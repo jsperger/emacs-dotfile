@@ -33,7 +33,6 @@ corresponding ':tangle' header argument."
           (unless (string-suffix-p "\n" file-contents)
             (insert "\n"))
           (insert "#+end_src\n\n"))))))
-
 (defun my/org-update-subtree-modification-info ()
   "Update modification info in the current subtree's properties.
 Sets 'LAST_MODIFIED' timestamp and 'MODIFIED_WITH_EMACS' version.

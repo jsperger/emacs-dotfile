@@ -13,7 +13,7 @@
 
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))
-	:mode ("\\.pdf\\'" . pdf-view-mode)
+  :mode ("\\.pdf\\'" . pdf-view-mode)
   :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
   :init
   (setopt pdf-view-display-size 'fit-page
@@ -24,8 +24,8 @@
 )
 
 (use-package wallabag
-:disabled
-	:load-path "~/.emacs.d/lisp/wallabag/"
+  :disabled
+  :load-path "~/.emacs.d/lisp/wallabag/"
   :config
   (setq wallabag-host "https://xx.xx.xx")
   (setq wallabag-username "xx")
