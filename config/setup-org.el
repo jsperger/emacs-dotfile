@@ -1,7 +1,7 @@
 ;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
 
 (use-package org
-	:commands (org-toggle-hidden-emphasis-markers)
+  :commands (org-toggle-hidden-emphasis-markers)
   :init
   (setq org-directory "~/obsidian/org/"
         org-inbox-file (concat org-directory "inbox.org")
@@ -9,11 +9,10 @@
         org-project-file (concat org-directory "projects.org")
         org-confirm-babel-evaluate nil
         )
-	:config
-	(setopt org-latex-bib-compiler "biber"
-					org-latex-compiler "lualatex"
-          org-babel-load-languages '(
-                                     (emacs-lisp . t)
+  :config
+  (setopt org-latex-bib-compiler "biber"
+          org-latex-compiler "lualatex"
+          org-babel-load-languages '((emacs-lisp . t)
                                      (R . t)
                                      (shell . t)
                                      )
@@ -26,11 +25,11 @@
                                        (t csl))
           org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
 
-	(use-package org-indent
-		:ensure nil)
-	(use-package org-protocol
-		:ensure nil
-		)
+  (use-package org-indent
+    :ensure nil)
+  (use-package org-protocol
+    :ensure nil
+    )
   :general
   (despot-def org-mode-map
     "'"     'org-edit-special
@@ -116,12 +115,12 @@
     "tw"    'org-table-wrap-region
     "T"     (cons "toggles" (make-sparse-keymap))
     "Tc"    'org-toggle-checkbox
-		"Td"    'org-modern-indent-mode
-		"TD"    'org-indent-mode
+    "Td"    'org-modern-indent-mode
+    "TD"    'org-indent-mode
     "Te"    'org-toggle-pretty-entities
     "Ti"    'org-toggle-inline-images
     "Tl"    'org-toggle-link-display
-		"Tm"    'org-toggle-hidden-emphasis-markers
+    "Tm"    'org-toggle-hidden-emphasis-markers
     "Tt"    'org-show-todo-tree
     "Tx"    'org-latex-preview
     "x"     (cons "text" (make-sparse-keymap))
@@ -181,34 +180,35 @@
 (use-package org-todoist
   :after gptel ; why would this depend on gptel? oh my api key olol
   :ensure (:host github
-           :repo "lillenne/org-todoist"
-           :branch "main"
-           )
+                 :repo "lillenne/org-todoist"
+                 :branch "main"
+                 )
   :init
   (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
   )
 
 (use-package org-pdftools
-	:disabled
+  :disabled
   :hook (org-mode . org-pdftools-setup-link))
 
 (use-package org-noter-pdftools
-	:disabled
-	:after org-noter
-	:config
+  :disabled
+  :after org-noter
+  :config
   (with-eval-after-load 'pdf-annot
     (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note))
-	)
+  )
 
 (use-package org-make-toc
+  :after org
   :hook org-mode
-  :config  (setopt org-make-toc-insert-custom-ids t)
+  :config (setopt org-make-toc-insert-custom-ids t)
   )
 
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
   :config
-	(set-face-attribute 'org-modern-symbol nil :family "Iosevka")
+  (set-face-attribute 'org-modern-symbol nil :family "Iosevka")
   (setopt  org-auto-align-tags nil
            org-tags-column 0
            org-catch-invisible-edits 'show-and-error
@@ -220,13 +220,13 @@
   )
 
 (use-package org-side-tree
-	:disabled
-	:hook org-mode
-	:config
-	(setopt org-side-tree-persistent nil
-					org-side-tree-fontify t
-					org-side-tree-enable-folding t)
-	)
+  :disabled
+  :hook org-mode
+  :config
+  (setopt org-side-tree-persistent nil
+	  org-side-tree-fontify t
+	  org-side-tree-enable-folding t)
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t

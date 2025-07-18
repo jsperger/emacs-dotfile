@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;; [[file:config.org::init elpaca][init elpaca]]
+;; [[file:its-lit.org::init elpaca][init elpaca]]
 ;; ===================== Elpaca bootstrap install ====================
 ;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
 (defvar elpaca-installer-version 0.11)
@@ -65,7 +65,7 @@
   "Toggle debugging messages. Set to t to enable, nil to disable.")
 ;; init elpaca ends here
 
-;; [[file:config.org::no-littering][no-littering]]
+;; [[file:its-lit.org::no-littering][no-littering]]
 ;; ============== Packages that change core functionality =============
 
 (use-package no-littering :ensure (:wait t))
@@ -98,7 +98,7 @@
   )
 ;; no-littering ends here
 
-;; [[file:config.org::load configuration files][load configuration files]]
+;; [[file:its-lit.org::load configuration files][load configuration files]]
 ;=========== Load use-package declarations and configuration ===========
 
 ;; Declarations to executed immediately. I.e. those with elpaca

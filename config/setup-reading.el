@@ -5,12 +5,11 @@
 (use-package nov
 	:mode ("\\.epub\\'" . nov-mode)
 	:hook (nov-mode . visual-line-fill-column-mode)
-	:init
-	(setopt nov-text-width t
-					visual-fill-column-center-text t)
 	:config
 	(setq-local visual-fill-column-width 60)
-)
+        (setopt nov-text-width t
+                visual-fill-column-center-text t)
+        )
 
 (use-package pdf-tools
   :ensure (:post-build (pdf-tools-install))

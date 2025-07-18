@@ -3,42 +3,39 @@
 ;;; Code:
 
 (use-package mct
-	:disabled
-	:hook (vertico-mode . mct-mode))
+  :disabled
+  :hook (vertico-mode . mct-mode))
 
 (use-package bicycle
   :hook ((prog-mode . outline-minor-mode)
          (prog-mode . hs-minor-mode))
-  :general
-  (tyrant-def
-    "t TAB" 'bicycle-cycle
-    "t <backtab>" 'bicycle-cycle-global
-    )
+  :general (tyrant-def
+             "t TAB" 'bicycle-cycle
+             "t <backtab>" 'bicycle-cycle-global
+             )
   )
 
 (use-package focus
   :disabled
-	:general
-	(tyrant-def "tF" 'focus-mode)
-	)
+  :general
+  (tyrant-def "tF" 'focus-mode)
+  )
 
 (use-package indent-control
   :disabled)
 
 (use-package nocomments-mode
-	:disabled
-	:general
-	(tyrant-def
-		"tc" 'nocomments-mode))
+  :disabled
+  :general (tyrant-def "tc" 'nocomments-mode)
+  )
 
 (use-package olivetti
   :hook ((text-mode prog-mode org-mode) . olivetti-mode)
-  :config
-  (setopt olivetti-style 'fancy
-          olivetti-body-width 0.7
-	  olivetti-minimum-body-width 80
-	  olivetti-recall-visual-line-mode-entry-state t
-          )
+  :config (setopt olivetti-style 'fancy
+                  olivetti-body-width 0.7
+                  olivetti-minimum-body-width 80
+                  olivetti-recall-visual-line-mode-entry-state t
+                  )
   )
 
 
@@ -47,9 +44,8 @@
   (setopt shackle-mode t
           shackle-default-size 0.2
           shackle-rules
-          `((help-mode :select t :align right :size
-                       fill-column)
-            (helpful-mode :select t :align right :size ,fill-column)
+          `((help-mode :select t :align right :size 0.33)
+            (helpful-mode :select t :align right :size 0.33)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
             (special-mode                    :align t)
@@ -63,25 +59,16 @@
   )
 
 (use-package spacious-padding
-  :config
-  ;; (setopt spacious-padding-widths '(internal-border-width 10
-  ;;                                   header-line-width 4
-  ;;                                   mode-line-width 6
-  ;;                                   tab-width 4
-  ;;                                   right-divider-width 20
-  ;;                                   scroll-bar-width 8)
-  ;;         spacious-padding-subtle-mode-line t
-  ;;       )
-  (setopt spacious-padding-subtle-mode-line t)
+  :config (setopt spacious-padding-subtle-mode-line t)
   )
 
 
 (use-package visual-fill-column
   :hook (elpaca-after-init . global-visual-fill-column-mode)
-  :config (setopt   visual-fill-column-center-text t
-	            visual-fill-column-extra-text-width '(4 . 4)
-                    fill-column 80
-                    )
+  :config (setopt visual-fill-column-center-text t
+                  visual-fill-column-extra-text-width '(4 . 4)
+                  fill-column 80
+                  )
   )
 
 (use-package writeroom-mode
@@ -102,16 +89,16 @@
 
 (use-package logos
   :disabled
-	)
+  )
 (use-package calle24
-	:disabled
-	:hook (compilation-mode . calle24-refresh-appearance)
-	:config
-	(calle24-refresh-appearance)
-)
+  :disabled
+  :hook (compilation-mode . calle24-refresh-appearance)
+  :config
+  (calle24-refresh-appearance)
+  )
 
 (use-package activities
-	:disabled
+  :disabled
   :init
   (activities-mode)
   (activities-tabs-mode)
@@ -131,29 +118,29 @@
 (use-package golden-ratio
   :disabled
   :config (setopt golden-ratio-mode nil)
-	)
+  )
 
 (use-package zoom
   :disabled)
 
 (use-package eyebrowse
-	:disabled)
+  :disabled)
 
 (use-package popper
   :config
   (setopt popper-display-control nil
-        popper-reference-buffers
-        '("\*Messages\*"
-          "Output\*$"
-          "\*Async Shell Command\*"
-          "\*eldoc\*"
-          "^\*EGLOT"
-          help-mode
-          helpful-mode
-          compilation-mode
-          process-menu-mode
-          special-mode
-          flymake-diagnostics-buffer-mode))
+          popper-reference-buffers
+          '("\*Messages\*"
+            "Output\*$"
+            "\*Async Shell Command\*"
+            "\*eldoc\*"
+            "^\*EGLOT"
+            help-mode
+            helpful-mode
+            compilation-mode
+            process-menu-mode
+            special-mode
+            flymake-diagnostics-buffer-mode))
   :general
   (tyrant-def
     ";" '("pop toggle" . popper-toggle)
@@ -164,13 +151,16 @@
   )
 
 (use-package sideline
-  :init
-  (use-package sideline-flymake
-    :hook (flymake-mode . sideline-mode)
+  :hook (flymake-mode . sideline-mode)
+  )
+
+(use-package sideline-flymake
     :init
-    (setopt sideline-backends-right '(sideline-flymake))
+    (setq sideline-backends-right '(sideline-flymake))
     (add-hook 'flymake-mode-hook
-              (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t)))))
+              (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t))
+              )
+    )
 
 ;; Local Variables:
 ;; no-byte-compile: t

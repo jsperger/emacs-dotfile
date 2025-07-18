@@ -144,6 +144,8 @@ Too much of a headache to get this working with the lexical binding directive. A
 *** Aggressive time-stamping
 :PROPERTIES:
 :CUSTOM_ID: aggressive-time-stamping
+:LAST_MODIFIED: [2025-07-18 Fri 02:53]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 The combination of scavenging snippets from a multitude of dotfiles, tending
 towards maximalism in package usage, Emacs's long history and ongoing
@@ -151,10 +153,7 @@ development, and starting to configure Emacs before I had any idea what I was
 doing combine to make certain configuration options obsolete over time.
 
 You'll encounter snippets that have been passed around since time immemorial
-and .
-The garbage collector trick is a notable one that still seems to have utility.
-Other snippets 
-
+(the garbage collector trick is a notable one that still seems to have utility).
 
 ** Warnings
 :PROPERTIES:
@@ -176,6 +175,56 @@ my configuration.
 
 I'm sympathetic to the arguments in this blog post that [[https://batsov.com/articles/2025/04/07/emacs-startup-time-does-not-matter/][start-up time doesn't matter]] (to me). 
 
+** Lisp helpers for maintaining my literate config
+:PROPERTIES:
+:header-args: :tangle no
+:CUSTOM_ID: lisp-helpers-for-maintaining-my-literate-config
+:LAST_MODIFIED: [2025-07-18 Fri 01:22]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+This block defines the helper functions for tangling files from this Org document.
+Execute it with `C-c C-c` once per Emacs session before tangling.
+
+None of these are working currently
+#+name: tangle-header-notworking
+#+begin_src emacs-lisp :tangle no :var fname="foo.el", description = ""
+  (defun cfg/org-tangle-file-header (description)
+    "Generate a standard file header for tangled Emacs Lisp files."
+    (if (boundp 'tangle-file)
+        (format ";;; %s --- %s -*- lexical-binding: t -*-\n"
+                tangle-file
+                description)
+      (format ";;; /path/to/file.el --- %s -*- lexical-binding: t -*-\n;; (NOTE: Called outside of a tangling process)\n"
+              description)))
+#+end_src
+
+#+name: tangle-footer-nocompile-notworking
+#+begin_src
+  (defun cfg/org-tangle-file-footer ()
+    "Generate a standard file footer for tangled Emacs Lisp files."
+    (if (boundp 'tangle-file)
+        (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n;;; %s ends here\n"
+                (file-name-nondirectory tangle-file))
+ )))
+#+end_src
+
+#+name: tangle-footer-compiled-notworking
+#+begin_src
+  (defun cfg/org-tangle-file-footer ()
+    "Generate a standard file footer for tangled Emacs Lisp files that will be byte compiled."
+    (if (boundp 'tangle-file)
+        (format "\n;;; %s ends here\n"
+                (file-name-nondirectory tangle-file))
+)
+)
+#+end_src
+
+
+#+RESULTS: tangle-helpers
+: cfg/org-tangle-file-footer
+
+#+end_src
 * Notes on configuring Emacs
 :PROPERTIES:
 :CUSTOM_ID: notes-on-configuring-emacs
@@ -548,7 +597,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 ** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-07-16 Wed 00:07]
+:LAST_MODIFIED: [2025-07-18 Fri 02:16]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -3499,6 +3548,8 @@ of 2025-07-06
 ** setup-org.el
 :PROPERTIES:
 :CUSTOM_ID: setup-orgel
+:LAST_MODIFIED: [2025-07-18 Fri 02:53]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-org.el
 ;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
@@ -3705,9 +3756,9 @@ of 2025-07-06
 
 (use-package org-make-toc
   :after org
-  :config
-  (setopt org-make-toc-insert-custom-ids t)
-	)
+  :hook org-mode
+  :config (setopt org-make-toc-insert-custom-ids t)
+  )
 
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
