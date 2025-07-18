@@ -3349,10 +3349,10 @@ of 2025-07-06
 ** Outline and fold text
 :PROPERTIES:
 :CUSTOM_ID: outline-and-fold-text
-:LAST_MODIFIED: [2025-07-17 Thu 18:06]
+:LAST_MODIFIED: [2025-07-18 Fri 02:35]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-notes.el
+#+begin_src emacs-lisp :tangle config/setup-outlining.el
 ;;; setup-outlining.el ---  -*- lexical-binding: t; -*-
 (use-package outline-minor-faces
   :after outline
@@ -3366,28 +3366,28 @@ of 2025-07-06
   )
 
 (use-package outline-indent
-	:commands outline-indent-minor-mode
-	:custom
+  :commands outline-indent-minor-mode
+  :custom
   (outline-indent-ellipsis " ▼ ")
-	:general
-	(tyrant-def
-		"to" 'outline-indent-minor-mode
-    "o"       (cons "outline" (make-sparse-keymap))
-		"oa" '("all open" . outline-indent-open-folds)
-		"oA" '("all closed" . outline-indent-close-folds)
-		"ob" 'bicycle-cycle
-		"oB" 'bicycle-cycle-global
-		"oc" 'outline-indent-close-fold
-		"oj" 'outline-forward-same-level
-		"ok" 'outline-backward-same-level
-		"oh"      'hs-minor-mode
-		"oo" 'outline-indent-open-fold
-		"oO"      'outline-minor-mode
-		"or" 'outline-indent-open-fold-rec
-		"ot" 'bicycle-cycle
-		"oT" 'bicycle-cycle-global
-		"oz"      'TeX-fold-mode)
-        )
+  :general
+  (tyrant-def
+    "to" 'outline-indent-minor-mode
+    "o"  (cons "outline" (make-sparse-keymap))
+    "oa" '("all open" . outline-indent-open-folds)
+    "oA" '("all closed" . outline-indent-close-folds)
+    "ob" 'bicycle-cycle
+    "oB" 'bicycle-cycle-global
+    "oc" 'outline-indent-close-fold
+    "oj" 'outline-forward-same-level
+    "ok" 'outline-backward-same-level
+    "oh" 'hs-minor-mode
+    "oo" 'outline-indent-open-fold
+    "oO" 'outline-minor-mode
+    "or" 'outline-indent-open-fold-rec
+    "ot" 'bicycle-cycle
+    "oT" 'bicycle-cycle-global
+    "oz" 'TeX-fold-mode)
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t
