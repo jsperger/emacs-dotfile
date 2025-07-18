@@ -173,6 +173,7 @@
              "setup-themes.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
+             "setup-outlining.el"
              "setup-vc.el"
              ;; "setup-web.el"
              ;; "setup-writing.el"

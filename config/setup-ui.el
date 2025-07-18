@@ -16,15 +16,6 @@
     )
   )
 
-(use-package outline-minor-faces
-  :after outline
-  :config (add-hook 'outline-minor-mode-hook
-                    #'outline-minor-faces-mode))
-
-(use-package backline
-  :after outline
-  :config (advice-add 'outline-flag-region :after 'backline-update))
-
 (use-package focus
   :disabled
 	:general
@@ -40,38 +31,16 @@
 	(tyrant-def
 		"tc" 'nocomments-mode))
 
-(use-package outline-indent
-	:commands outline-indent-minor-mode
-	:custom
-  (outline-indent-ellipsis " ▼ ")
-	:general
-	(tyrant-def
-		"to" 'outline-indent-minor-mode
-    "o"       (cons "outline" (make-sparse-keymap))
-		"oa" '("all open" . outline-indent-open-folds)
-		"oA" '("all closed" . outline-indent-close-folds)
-		"ob" 'bicycle-cycle
-		"oB" 'bicycle-cycle-global
-		"oc" 'outline-indent-close-fold
-		"oj" 'outline-forward-same-level
-		"ok" 'outline-backward-same-level
-		"oh"      'hs-minor-mode
-		"oo" 'outline-indent-open-fold
-		"oO"      'outline-minor-mode
-		"or" 'outline-indent-open-fold-rec
-		"ot" 'bicycle-cycle
-		"oT" 'bicycle-cycle-global
-		"oz"      'TeX-fold-mode))
-
 (use-package olivetti
-	:hook ((text-mode prog-mode org-mode) . olivetti-mode)
-	:config
-	(setopt olivetti-style 'fancy
-                olivetti-body-width 0.7
-		olivetti-minimum-body-width 80
-		olivetti-recall-visual-line-mode-entry-state t)
-        )
-   
+  :hook ((text-mode prog-mode org-mode) . olivetti-mode)
+  :config
+  (setopt olivetti-style 'fancy
+          olivetti-body-width 0.7
+	  olivetti-minimum-body-width 80
+	  olivetti-recall-visual-line-mode-entry-state t
+          )
+  )
+
 
 (use-package shackle
   :config
@@ -95,25 +64,24 @@
 
 (use-package spacious-padding
   :config
-  (setq spacious-padding-widths
-        '( internal-border-width 10
-           header-line-width 4
-           mode-line-width 6
-           tab-width 4
-           right-divider-width 20
-           scroll-bar-width 8)
-        )
-  (setq spacious-padding-subtle-mode-line t)
+  ;; (setopt spacious-padding-widths '(internal-border-width 10
+  ;;                                   header-line-width 4
+  ;;                                   mode-line-width 6
+  ;;                                   tab-width 4
+  ;;                                   right-divider-width 20
+  ;;                                   scroll-bar-width 8)
+  ;;         spacious-padding-subtle-mode-line t
+  ;;       )
+  (setopt spacious-padding-subtle-mode-line t)
   )
 
 
 (use-package visual-fill-column
-	:hook (elpaca-after-init . global-visual-fill-column-mode)
-  :config
-  (setopt   visual-fill-column-center-text t
-	    visual-fill-column-extra-text-width '(4 . 4)
-            fill-column 80
-   )
+  :hook (elpaca-after-init . global-visual-fill-column-mode)
+  :config (setopt   visual-fill-column-center-text t
+	            visual-fill-column-extra-text-width '(4 . 4)
+                    fill-column 80
+                    )
   )
 
 (use-package writeroom-mode
