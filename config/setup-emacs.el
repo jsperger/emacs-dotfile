@@ -129,10 +129,6 @@
 		)
 	)
 
-(use-package benchmark-init
-	:config
-	(add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate))
-
 (use-package daemons
 	:disabled)
 

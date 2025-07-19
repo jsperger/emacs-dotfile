@@ -360,6 +360,8 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 ***** no-littering
 :PROPERTIES:
 :CUSTOM_ID: no-littering
+:LAST_MODIFIED: [2025-07-18 Fri 21:55]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 Emacs packages 
 #+name: no-littering
@@ -394,12 +396,16 @@ Emacs packages
     "SPC u" 'universal-argument-more)
 
   )
+
+(use-package benchmark-init
+  :config (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate)
+  )
 #+end_src
 
 ***** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-18 Fri 18:08]
+:LAST_MODIFIED: [2025-07-18 Fri 20:32]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -622,8 +628,8 @@ I need to move most of these out of here and put them in the relavent package de
   "fj"      'dired-jump
   "fJ"      'dired-jump-other-window
   "fo"      'open-file-or-directory-in-external-app
-  "fr"      'rg
-  "fR"      'rg-menu
+;;  "fr"      'rg
+;;  "fR"      'rg-menu
   "fs"      'save-buffer
   "fv"      (cons "variables" (make-sparse-keymap))
   "fvd"     'add-dir-local-variable
@@ -2378,10 +2384,6 @@ These packages have the distinction of being useful but I don't use them enough,
 		"M-e" 'dirvish-emerge-menu
 		)
 	)
-
-(use-package benchmark-init
-	:config
-	(add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate))
 
 (use-package daemons
 	:disabled)
@@ -4152,14 +4154,17 @@ These packages have the distinction of being useful but I don't use them enough,
 *** setup-search.el
 :PROPERTIES:
 :CUSTOM_ID: setup-searchel
+:LAST_MODIFIED: [2025-07-18 Fri 21:18]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-search.el
 ;;; config/setup-search.el --- Search tools configuration -*- lexical-binding: t -*-
 
 (use-package rg
-	:config
-	(when (and IS-MAC (daemonp))
-  (setopt rg-executable "/opt/homebrew/bin/rg"))
+  :config (when (and IS-MAC (daemonp)) (setopt rg-executable "/opt/homebrew/bin/rg"))
+  :general (tyrant-def   "fr" 'rg
+                         "fR" 'rg-menu
+             )
 	)
 
 (use-package wgrep

@@ -96,6 +96,10 @@
     "SPC u" 'universal-argument-more)
 
   )
+
+(use-package benchmark-init
+	:config	(add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate)
+        )
 ;; no-littering ends here
 
 ;; [[file:its-lit.org::load configuration files][load configuration files]]

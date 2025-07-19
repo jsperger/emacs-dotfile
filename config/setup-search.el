@@ -1,9 +1,10 @@
 ;;; config/setup-search.el --- Search tools configuration -*- lexical-binding: t -*-
 
 (use-package rg
-	:config
-	(when (and IS-MAC (daemonp))
-  (setopt rg-executable "/opt/homebrew/bin/rg"))
+  :config (when (and IS-MAC (daemonp)) (setopt rg-executable "/opt/homebrew/bin/rg"))
+  :general (tyrant-def   "fr" 'rg
+                         "fR" 'rg-menu
+             )
 	)
 
 (use-package wgrep
