@@ -1,9 +1,11 @@
-;;; init.el --- Summary -*- lexical-binding: t; -*-
+;;; init.el --- Initialize configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
-;; Elpaca installer https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
-(defvar elpaca-installer-version 0.10)
+;; [[file:its-lit.org::init elpaca][init elpaca]]
+;; ===================== Elpaca bootstrap install ====================
+;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
+(defvar elpaca-installer-version 0.11)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
 (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
@@ -38,145 +40,165 @@
   (unless (require 'elpaca-autoloads nil t)
     (require 'elpaca)
     (elpaca-generate-autoloads "elpaca" repo)
-    (load "./elpaca-autoloads")))
+    (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
+;; ======================== END: elpaca bootstrap ========================
 
-;; Install use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
   (elpaca-use-package-mode)
   ;; Assume :elpaca t unless otherwise specified.
-  (setq elpaca-use-package-by-default t))
+  (setq elpaca-use-package-by-default t)
+  )
 
-;; Block until current queue processed.
-(elpaca-wait)
+(elpaca-wait) ; Block until current queue processed.
+;; init elpaca ends here
 
-;;;;;;;;;;;;;;
-;; Debugging assistant
-;;
-;;
-
-(defvar my-debug-mode nil
-  "Toggle debugging messages. Set to t to enable, nil to disable.")
-
-
-;;
-;; 2025-02-22 Disabled eldoc, use built-in
-;; Reason: Error. Not worth fixing at the moment because I was only using elpa versions of
-;; eldoc and jsonrpc because of eglot  
-;; Error:  something about incf not defined. I'm guessing it should use cl-incf;
-;; maybe it should intelligently choose between cl-incf and ts-incf I'm not
-;; sure.
-;; Eldoc workaround
-;; https://github.com/progfolio/elpaca/issues/398
-;;(unload-feature 'eldoc t) ;; Unload built-in eldoc
-;;(setq custom-delayed-init-variables '())
-;;(defvar global-eldoc-mode nil)
-;; (elpaca eldoc
-;;   (require 'eldoc)
-;;   (global-eldoc-mode) ;; This is usually enabled by default by Emacs
-;;   )
-
-(use-package jsonrpc :ensure (:wait t) )
-
-(use-package no-littering :ensure (:wait t))
-
-(use-package track-changes)
-
-;; use-package version of eldoc workaround
-;; (use-package eldoc
-;;   :preface
-;;   (unload-feature 'eldoc t)
-;;   (setq custom-delayed-init-variables '())
-;;   (defvar global-eldoc-mode nil)
-;;   :config
-;;   (global-eldoc-mode))
-
-(use-package queue)
-
-(use-package plz)
-
-;;;;;;;;;;;;;;
-;; Define constants for use throughout config
-;;
+;; [[file:its-lit.org::constant flags][constant flags]]
+;; ============== Define constants for use throughout config =============
 (defconst IS-MAC (eq system-type 'darwin))
 (defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
+(defconst IS-ANDROID (eq system-type 'android))
+
+(defconst my-debug-mode nil
+  "Toggle debugging messages. Set to t to enable, nil to disable.")
+;; constant flags ends here
+
+;; [[file:its-lit.org::no-littering][no-littering]]
+;; ============== Packages that change core functionality =============
+(use-package no-littering :ensure (:wait t))
+;; no-littering ends here
+
+;; [[file:its-lit.org::general declaration][general declaration]]
+(use-package general
+  :ensure (:wait t)
+  :demand t
+  :config  (setopt general-emit-autoloads nil)
+  (general-define-key
+   :states '(normal insert motion emacs)
+   :keymaps 'override
+   :prefix-map 'tyrant-map
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC")
+
+  (general-create-definer tyrant-def :keymaps 'tyrant-map)
+  (tyrant-def "" nil)
+
+  (general-create-definer despot-def
+    :states '(normal insert motion emacs)
+    :keymaps 'override
+    :major-modes t
+    :prefix "SPC m"
+    :non-normal-prefix "M-SPC m")
+  (despot-def "" nil)
+
+  (general-def universal-argument-map
+    "SPC u" 'universal-argument-more)
+
+  )
+;; general declaration ends here
+
+;; [[file:its-lit.org::benchmark init declaration][benchmark init declaration]]
+(use-package benchmark-init
+  :config (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate)
+  )
+;; benchmark init declaration ends here
+
+;; [[file:its-lit.org::load configuration files][load configuration files]]
+;;;; =========== Load use-package declarations and configuration ===========
+
+;; Declarations to executed immediately. I.e. those with elpaca
+;; :ensure (:wait t)
+;; :demand t
+(load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
+
+;;;; =========================== Load lisp defuns ==========================
+;; Add personal `lisp` directory to the load-path
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+;; --- Load personal library files ---
+(require 'my-core-functions)
+(require 'my-core-helpers)
+(require 'my-editor-helpers)
+(require 'my-keybinding-helpers)
+(require 'my-lang-helpers)
+(require 'my-lsp-bridge-helpers)
+(require 'my-org-helpers)
+(require 'my-theme-helpers)
+(require 'my-vc-helpers)
+
+;; General delcarations that can be handled by elpaca/use-package queueing
+(let ((config-dir (expand-file-name "config" user-emacs-directory)))
+  (dolist (file
+           '(
+             ;; "setup-bib.el"
+             "configure-base-and-built-in.el"
+             "configure-keybinding.el"
+             "configure-org.el"
+             ;; "setup-casual.el"
+             "setup-comment-tools.el"
+             ;;              ;; "setup-completion-actions.el"
+             "setup-completion-backends.el"
+             "setup-completion-display.el"
+             "setup-completion.el"
+             "setup-consult.el"
+             ;;              "setup-core.el"
+             ;; "setup-data-formats.el"
+             ;; "setup-denote.el"
+             ;; "setup-diagramming.el"
+             ;; "setup-eaf.el"
+             ;;             "setup-editor-misc.el"
+             ;; "setup-emacs.el"
+             ;;              ;; "setup-email.el"
+             "setup-evil-addons.el"
+             "setup-font-locking.el"
+             "setup-fonts.el"
+             ;;              ;; "setup-go.el"
+             ;;              ;; "setup-gopher.el"
+             "setup-help.el"
+             ;;              ;; "setup-icons.el"
+             ;;              ;; "setup-lisp.el"
+             "setup-llm.el"
+             "setup-lsp-bridge.el"
+             "setup-markdown.el"
+             ;;              ;; "setup-media.el"
+             "setup-modeline.el"
+             ;;              ;; "setup-notes.el"
+             ;;              ;; "setup-programming.el"
+             ;; "setup-projects.el"
+             ;; "setup-python.el"
+             "setup-r.el"
+             ;;              "setup-reading.el"
+             ;; "setup-rust.el"
+             "setup-search.el"
+             "setup-snippets.el"
+             ;; "setup-tex.el"
+             "setup-themes.el"
+             ;; "setup-treesit.el"
+             "setup-ui.el"
+             "setup-outlining.el"
+             "setup-vc.el"
+             ;; "setup-web.el"
+             ;; "setup-writing.el"
+             )
+           )
+    (load-file (expand-file-name file config-dir))
+    )
+  )
 
 
-
-;;;;;;;;;;;;;;
-;; Key Bindings
-;;
-;; Load path
-;; optimize: force "lisp"" and "site-lisp" at the head to reduce the startup time.
-
-(dolist (dir '("lisp"))
-  (push (expand-file-name dir user-emacs-directory) load-path))
-
-(require 'core-keybinds)
-(require 'editor-completion)
-
-(require 'evil-core)
-(require 'evil-addons)
-
-(require 'builtin-packages)
-(require 'core-config)
-(require 'core-funcs)
-(require 'core-packages)
-(require 'core-treesit)
-
-(require 'completion-actions)
-(require 'completion-backends)
-(require 'completion-display)
-(require 'completion-movement)
-(require 'completion-snippets)
-
-;; (require 'editor-lsp)
-
-
-(require 'editor-font-locking)
-(require 'editor-fonts-themes)
-(require 'editor-misc)
-(require 'editor-projects)
-(require 'editor-ui)
-(require 'editor-vc)
-
-(require 'tools-notes)
-(require 'tools-reading)
-(require 'tools-programming)
-(require 'tools-search)
-(require 'tools-writing)
-
-(require 'lang-data-formats)
-(require 'lang-lisp)
-(require 'lang-llm)
-(require 'lang-markdown)
-(require 'lang-org)
-(require 'lang-python)
-(require 'lang-r)
-(require 'lang-rust)
-(require 'lang-tex)
-(require 'lang-web)
-
-(require 'tools-lsp-bridge)
-;; After-init hooks + custom
+;;;; =============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
+;; load configuration files ends here
 
-(provide 'init)
-
-;;; DANGER ZONE
-;; Respect the no-byte-compile local variable
-;; !Config files should not be byte compiled!
-;; Emacs will compile package lisp JIT (or when building for packages in base
-;; emacs when building emacs with the -native-compile=aot flag)
-;;;
-
+;; [[file:its-lit.org::footer-init][footer-init]]
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
 ;;; init.el ends here
+;; footer-init ends here

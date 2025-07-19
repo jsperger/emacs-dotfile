@@ -1,0 +1,702 @@
+:PROPERTIES:
+:ID:       6CE26267-DAE7-4094-A788-C4D90D0923A0
+#+title: Miscellaneous emacs notes
+#+subtitle: Lisp Snippets, Debugging, Odds and Ends etc.
+#+author: John Sperger
+#+language: en
+:END:
+* Emacs
+** Font Notes
+[[https://www.x.org/releases/X11R7.6/doc/xorg-docs/specs/XLFD/xlfd.html#fontname][XLFD font convention]] e.g. ~-***-terminus-medium-r-normal-***-14-**-***-***-*c*-*-*~
+#+begin_quote
+
+
+From the convention page, here we have :
+
+        ~FAMILY_NAME~ : a string that identifies the range or family of typeface designs that are all variations of one basic typographic style. Here : "terminus".
+
+        ~WEIGHT_NAME~ : a string that identifies the font's typographic weight, that is, the nominal blackness of the font. Here "medium".
+
+        ~SLANT~ field : a code-string that indicates the overall posture of the typeface design used in the font. Here : r "Roman Upright design"
+
+        ~SETWIDTH_NAME~ : the font's typographic proportionate width. Here : "normal".
+
+        ~PIXEL_SIZE~ : the body size of the font at a particular POINT_SIZE and RESOLUTION_Y. Here "14".
+
+And the "c" is for "charcell":
+
+        SPACING : a code-string that indicates the escapement class of the font, that is, monospace (fixed pitch), proportional (variable pitch), or charcell (a special monospaced font that conforms to the traditional data-processing character cell font model).
+
+The rest is not specified (replaced with wildcards).
+#+end_quote
+** Configuration notes
+*** Autoload
+[[info:Elisp][Elisp Autoloading]] Autoloading does the opposite of what it sounds like to me.
+Autoloading means that the function is loaded when it's needed (automatically)
+instead of pre-loade
+
+#+begin_quote Info 
+The presence of autoloading trigger keywords can be overridden using
+‘:demand t’, which forces the package to load immediately.  Thus, even
+if you use an autoloading keyword such as ‘:bind’ (*note Key
+bindings::), adding ‘:demand’ will force loading to occur immediately.
+It will also avoid creating an autoload for the bound key, as it would
+be redundant.
+   If you specify both ‘:demand t’ and ‘:defer t’, the ‘:defer’ keyword
+will take precedence.
+#+end_quote
+
+
+#+begin_src gfm
+                   # :demand use-package interaction
+
+                 There are two queueing systems: elpaca's and use-package's
+
+
+  I'm trying to understand the relationship between `:demand` and `:wait` keywords.
+I understand `:wait` is an elpaca keyword while `:demand` is a use-package keyword. 
+
+  
+
+        ```
+         (use-package vertico)
+         (use-package visual-fill-column :demand t)
+          ```
+    Vertico is finished before visual-fill-column
+
+      ```
+         (use-package vertico)
+         (use-package indent-control :demand t)
+          ```
+    Indent-control is finished before vertico
+
+        ```
+         (use-package vertico)
+         (use-package visual-fill-column :demand t)
+    	 (use-package indent-control :ensure (:wait t))
+          ```
+
+    ```
+         (use-package vertico)
+         (use-package visual-fill-column :demand t)
+    	 (use-package indent-control :demand t :ensure (:wait t))
+             ```
+    		 
+           (use-package vertico)
+
+           (use-package indent-control
+           	:demand t
+           	)
+
+           ```
+                   
+                   ``` emacs-lisp
+                   ;; Expands to: (elpaca evil (use-package evil :demand t))
+                   (use-package evil :ensure t :demand t)
+                   ```
+                   ``` emacs-lisp
+                   ;; Expands to: (elpaca evil (use-package evil :demand t))
+                   (use-package evil :ensure t :demand t)
+                   ```
+
+                   ``` emacs-lisp
+                   ;; Expands to: (elpaca evil (use-package evil :demand t))
+                   (use-package evil :ensure (:wait t))
+                   ```
+
+
+#+end_src
+
+* Packages and Projects
+** Projects
+*** Create a package or functionality to mimic ia writer
+**** (Grammatical) syntax highlighting - look at things like
+https://github.com/retextjs/retext
+https://github.com/retextjs/awesome-retext
+https://edu.visl.dk/visl/en/info/engsymbol.html
+https://github.com/syntax-tree/nlcst
+https://github.com/syntax-tree/unist
+
+**** focus on current paragraph/sentence/code block etc.
+https://github.com/larstvei/Focus
+
+**** possibly relevant
+https://github.com/alexispurslane/motion-selection-mode
+
+*** Create a literate config using org-mode
+
+*** cg
+**** Notes
+I wonder if you could do something fun with tree sitter + a constraint grammar
+
+See also https://github.com/alexispurslane/motion-selection-mode
+**** Basic Info
+Major mode for editing Constraint Grammar files
+
+source: MELPA
+url: https://visl.sdu.dk/constraint_grammar.html
+***** Website
+General [to top]
+
+Constraint Grammar (CG) parsers are at the core of most of VISL's live applications. The Constraint Grammar concept was launched by Fred Karlsson in the early 90'ies (Karlsson et.al.1995), and CG parsers have since been written for a large variety of languages, routinely achieving F-scores for PoS (word class) of over 99%. A number of syntactic CG systems have reported F-scores of around 95%. VISL's own Constraint Grammar systems are inspired by Eckhard Bick's PALAVRAS parser for Portuguese (Bick 2000), and use, as a novelty, subclause function, generalized dependency markers and semantic prototype tags. For most languages, a lexicon based morphological analyzer provides input to the first CG level, while the output of the last CG-level can be converted into syntactic tree structures by specially designed Phrase Structure Grammars (PSG's), using syntactic functions, not words, as terminals. Other, hybrid combinations are, however, feasible. Thus, the French system uses PoS information from a probabilistic tagger.
+
+Constraint Grammar (CG) is a methodological paradigm for Natural Language Parsing (NLP). Linguist-written, context dependent rules are compiled into a grammar that assigns grammatical tags ("readings") to words or other tokens in running text. Typical tags address lemmatisation (lexeme or base form), inflexion, derivation, syntactic function, dependency, valency, case roles, semantic type etc. Each rule either adds, removes, selects or replaces a tag or a set of grammatical tags in a given sentence context. Context conditions can be linked to any tag or tag set of any word anywhere in the sentence, either locally (defined distances) or globally (undefined disances). Context conditions in the same rule may be linked, i.e. conditioned upon each other, negated or blocked by interfering words or tags. Typical CG's consist of thousands of rules, that are applied set-wise in progressive steps, covering ever more advanced levels of analysis. Within each level, safe rules are used before heuristic rules, and no rule is allowed to remove the last reading of a given kind, thus providing for a hight degree of robustness. 
+*** Standard projects
+**** DONE Figure out how to remove manual step in packages requiring `AUCTeX-version`
+preview-dvisvgm
+latex-extra
+
+****** Solution:
+AUCTeX-version declared in a new location, changed recipe https://github.com/jsperger/emacs-dotfile/commit/77e946c
+**** Figure out Mac environment issues
+pdf-tools build failed when emacs was launched from the launcher but succeeded
+when emacs was launched from the command line. Forgot to copy the message but
+some packages weren't available or something.
+
+Similarly emacs says pandoc isn't installed when launched from launcher, but is
+fine from command line.
+
+**** Figure out why obsidian package isn't working
+
+
+**** Figure out how to get `preview-dvisvgm` and `latex-extra` to work correctly out of the box
+Fail because they rely on auctex-version (capitalization not correct), but that
+variable isn't defined until auctex is launched (terminology right?).  Putting
+:after auctex doesn't seem to be enough.
+
+Current workaround: open a tex file to instantiate auctex-version
+`elpaca-delete` the two packages
+Install through elpaca-manager
+
+**** center text in visual-line-mode-fill-column
+https://codeberg.org/joostkremers/visual-fill-column/issues/7
+Margins are unequal and there doesn't seem to be an easy way to customize this
+with package options. Hackish way is to set a negative number for 'Visual Fill Column Extra Text Width'
+
+**** Ensure Correct Settings Hygiene
+ - [ ] `:init` vs. `:config` vs `:custom`
+ - [ ] `setq` vs. `setq-local` vs. `setq-default` vs. `setopt` vs. `:custom`
+   In config files I think
+
+ -    `setq` and `setq-default` should not be used
+ -  `setq-local` should be used for buffer local variables
+ -  Default variables it's user's choice between `setopt` in :init or :config as
+   appropriate or :custom
+ - init is before package load, config is after
+Zone of less confidence:
+ - if the package uses a variable to set other variables then configure it init?
+ - if the package just uses the variable at runtime (wrong term I'm sure) then
+   config?
+ - example from recent experience: some of indentation / formatting
+   /font-locking config stuff in ess checks the config variable in the beginning
+   and then sets a bunch of other variables based on it. If you change this
+   config variable the children don't update so you need to set it in init. Some
+   of this is probably bad code, might be other better reasons tho
+
+  - [ ] options that should be set in init vs config
+
+***** Figure out if `eval-after-load` works with elpaca
+2025-02-01 I think it does, it's just that it might not be called until the package is loaded after opening a file. Can't use it for initialization stuff/config?
+it's that after-init hooks don't
+
+2025-02-06 Now less certain, I'm definitely a bit confused about the difference
+between :config (settings after loading a package) and eval-after-load (?after
+loading a file? Is this for stuff you want to do after loading a file with a
+certain extension but distinct from mode hooks?)
+
+***** replace setq in config
+`setq` seems like it should be replaced by either
+`setopt` for global https://www.reddit.com/r/emacs/comments/178em7u/comment/k5077cy/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1
+`setq-local`
+
+`setq` doesn't run setter functions associated with a variable
+https://www.gnu.org/software/emacs/manual/html_node/elisp/Setting-Variables.html#index-setopt
+
+nb: setopt shouldn't be used for programming, just init files because it's much less efficient
+
+Discussion of `:custom:` `setq` `setopt`
+https://old.reddit.com/r/emacs/comments/18gdqyq/when_should_usepackage_custom_or_setopt_be_used/
+#+begin_quote
+use-package is older than setopt. Setopt is a macro for setting user-options, which was just introduced in the latest Emacs release. Use-package has been around as a separate Emacs extension for many years. But, like setopt, use-package was only added to the core of Emacs in version 29.1.
+
+Use-package is a more complex macro that does a lot more than just set user-options. Not everyone uses it, but it is very popular. It provides a way to minimize typing and perhaps have a more visually appealing syntax for your config, but it's completely optional.
+
+There are many different ways to set user options. You already know about setopt and use-package's :custom keyword. There are also: - customize-set-variable - custom-set-variables (which you actually shouldn't manipulate directly) - M-x customize-variable and other entry-points to the Emacs Customization UI, which you can use to interactively set and/or save user-options. When you use this interface, Emacs saves your settings by changing the above-mentioned "custom-set-variables" form in your custom-file (which by default, is your init-file).
+
+I happen to like the syntax of setopt, because you can basically throw a bunch of variable-value pairs into it and not have to worry about wrapping each pair in parentheses.
+
+There's nothing cringe about your config. How you organize it is up to you and you alone. There are about ten different ways you could have written what you've got. The way you did it should work fine.
+
+If you want to make full use of use-package for the evil-mode portion, I suppose you could do something like this:
+
+(use-package evil
+  :custom (evil-mode t))
+
+Or this:
+
+(use-package evil
+  :init
+  (setopt evil-mode t))
+
+Or this:
+
+(use-package evil
+  :init
+  (evil-mode 1))
+
+Or even just "M-x customize-variable RET evil-mode RET", then make sure it's turned on and click the "Apply & Save" button.
+
+Any of these should have the same effect, but what you've got is also fine.
+#+end_quote
+
+#+begin_quote
+Thank you for your very detailed and insightful comment. I tried all of the three code blocks but only the last one works as expected. All three of them modify the evil-mode variable correctly however only the third one enables evil-mode at startup. It seems like it only works if this option is set after starting the package like with use-packages's :config option rather than :init or :custom. Why is this? Is this always the case with user options?
+#+end_quote
+
+#+begin_quote
+
+
+    only the last one works as expected.
+
+By chance, do you have use-package-always-defer enabled?
+
+Turning on a minor mode will almost always work using the customize system. However, the package has to get loaded in order for the customized setting to have any effect.
+
+By default, use-package immediately loads a package whenever that package's use-package form is evaluated. But this changes if you use any of these keywords: :hook, :commands, :bind, :bind*, :bind-keymap, :bind-keymap*, :mode, and :interpreter. In those cases, use-package sets up an autoload, causing the package to load when the conditions set by those keywords have been met. That helps reduce the startup time when Emacs is loading your init file, since packages only get loaded when they're needed.
+
+Another circumstance when use-package won't load a package immediately is if you use :defer t. In that case, you are telling use-package to simply not worry about loading the package. Typically, you would do this when you know of some other circumstance that will cause a package to load.
+
+If you've set use-package-always-defer to a non-nil value, use-package will treat :defer t as the default setting, meaning that it will not load any packages immediately except where you've added :demand t to a use-package form.
+
+(evil-mode 1) can work even if use-package doesn't load evil, because it's a function-call, which has been defined by the package authors themselves to autoload Evil. So when you call it, it loads the package and doesn't need use-package to load it. You can see where the autoload is created in evil-core.el.
+
+It's customary for any important command or mode in a package to be defined with an autoload. This simplifies configuration for users, so that you can just call the function without worrying whether the package already loaded or not.
+
+On the other hand, you can set a user-option whenever you want, but it won't have any effect until the package that defines that setting has loaded. I've encountered a user-option that autoloaded a package before, but that's unusual and not the conventional behavior.
+
+So in the first two use-package forms, we were just customizing the value of evil-mode to a non-nil value. That enables evil-mode as soon as the package loads, or immediately if it's already loaded.
+
+But the third form does something slightly different. It calls evil-mode as a function. If Evil hasn't loaded yet, there's an autoload already in place, and this causes the package to load whenever you call that function. That autoload was created by package.el when you installed Evil and it saw the ;;;###autoload cookie. So it will make sure the package loads, regardless of how you've set up use-package.
+
+EDIT: Actually, getting into the weeds a bit and looking at the documentation for define-minor-mode and define-globalized-minor-mode, it looks like an ;;;###autoload cookie would normally cause a globalized minor-mode (such as evil-mode) to autoload even just by customizing it as a user-option. But the autoload for evil-mode looks like it was written in a way that prevents it from autoloading as a user-option. Instead of placing the autoload cookie directly before the mode's definition (a call to define-globalized-minor-mode), it's placed in front of a specific call to the autoload function, which only sets up the evil-mode function for autoloading. Not sure if that was an intentional design-decision or a by-product of them wanting to autoload a different file. Anyway, probably more than you wanted or needed to know, but I ended up learning something new.
+#+end_quote
+
+Different poster
+#+begin_quote
+Yeah i know, very sad and cringe. Please help :'(
+
+Im sorry you feel that way. Trust me, wallowing in self flagellation shan't help you.
+
+Use-package :custom and setopt do the same thing, it's entirely a matter of which syntax you prefer (I'm partial to :custom myself). Setopt is newer so it's probable that fewer people use it.
+
+Also: in your config quoted at the end, you should put the stuff related to evil inside the use-package block. :config is better if the package has to be loaded first, as in this case (evil provides the setter function for its customize option).
+
+#+end_quote
+
+*** Minor projects
+- [X] Fix display of third indent character in org-modern
+  Solution: Add `(set-face-attribute 'org-modern-symbol nil :family "Iosevka")`
+  to org-modern config
+- [X] Update to use elpaca ':wait' recipe keyword
+Replace (elpaca-wait) commands scattered throughout with
+`:wait` recipes in the relevant packages
+
+Solution notes: Turns out only general (and maybe jsonrpc) really needed it.
+*** Package and Custom Settings TODOs
+**** TODO replace 'all-the-icons' family of packages with 'nerd-icons'
+**** TODO visual-fill-column
+
+- Change defaults in lisp file instead of customize
+- enable global visual-fill-column
+- figure out the correct column width and amount of extra space on the sides I want
+
+**** TODO line number
+ - fix the scroll issue with variable pitch fonts caused by when line number for the
+   current line has more digits than the other line numbers on screen (it
+   usually does because current line is absolute and others are relative)
+
+**** TODO Auctex
+   * [X]  Move customization from customs.el to lang-tex.el
+   * [ ] see if anything from CDLaTeX is worth using and remap the keybinds to evil format
+   - [ ] figure out how to bind LaTeXMk instead of having to use `TeX-Command-Master`
+Looks like this is what gets passed when you run it:
+          ("LaTeXMk"
+  "latexmk %(latexmk-out) %(file-line-error) %(output-dir) %`%(extraopts) %S%(mode)%' %t"
+  TeX-run-format nil (LaTeX-mode docTeX-mode) :help "Run LaTeXMk")
+
+**** TODO Preview
+Switch preview to use libsvgm for svg instead of png previews. See if that actually makes previews not look like ass.
+In general: make previews not look like ass.
+
+*** Re-organize package notes.
+Installed / to try / disabled etc. should be tags not hierarchy 
+** Packages
+:PROPERTIES:
+:TOC: :include descendants
+:END:
+
+:CONTENTS:
+- [[#notes][Notes]]
+  - [[#consult][consult]]
+    - [[#consult-narrowing-prefixes][consult narrowing prefixes]]
+- [[#currently-testing][Currently Testing]]
+  - [[#denote][denote]]
+  - [[#latex-extra][latex-extra]]
+  - [[#eglot-tempel][eglot-tempel]]
+  - [[#sicp][sicp]]
+- [[#check-updates---currently-bugged-packages][Check Updates - Currently Bugged packages]]
+  - [[#magit-todos-2024-sept-ish-i-should-really-date-these][magit-todos (2024-sept-ish I should really date these)]]
+  - [[#terminal-here][terminal-here]]
+  - [[#nord-theme][nord-theme]]
+- [[#check-updates---in-development-egfeatures-i-want-not-ready][Check updates - In development (e.g.features I want not ready)]]
+- [[#packages-to-test][Packages to Test]]
+  - [[#arxiv-mode][arxiv-mode]]
+  - [[#benchmark-init][benchmark-init]]
+  - [[#consult-eglot-httpsgithubcommohkaleconsult-eglot][consult-eglot https://github.com/mohkale/consult-eglot]]
+  - [[#combobulate][combobulate]]
+  - [[#dape-httpsgithubcomsvaantedape][dape https://github.com/svaante/dape]]
+    - [[#r-debugger-httpsgithubcommanuelhentschelvscode-r-debugger][R debugger https://github.com/ManuelHentschel/VSCode-R-Debugger]]
+  - [[#crux][crux]]
+  - [[#eglot-tempel-0][eglot-tempel]]
+  - [[#evil-tex-httpsgithubcomiyefratevil-tex][evil-tex https://github.com/iyefrat/evil-tex]]
+  - [[#evil-textobj-tree-sitter][evil-textobj-tree-sitter]]
+  - [[#indent-control][indent-control]]
+  - [[#mindstream][mindstream]]
+  - [[#org-anki][org-anki]]
+  - [[#projection][projection]]
+- [[#notes-on-packages-that-were-tested-added-or-removed][Notes on packages that were tested, added, or removed]]
+  - [[#added-packages][Added Packages]]
+    - [[#bicycle][bicycle]]
+  - [[#removed-packages][Removed Packages]]
+    - [[#desktop][desktop]]
+    - [[#fold-dwim-org][fold-dwim-org]]
+    - [[#org-contrib][org-contrib]]
+:END:
+*** Notes
+:PROPERTIES:
+:CUSTOM_ID: notes
+:END:
+**** consult
+:PROPERTIES:
+:CUSTOM_ID: consult
+:END:
+holy shit this does so much more than I realized
+***** consult narrowing prefixes
+:PROPERTIES:
+:CUSTOM_ID: consult-narrowing-prefixes
+:END:
+- f: file
+- p: project
+- l:
+- m: bookmark
+
+*** Currently Testing
+:PROPERTIES:
+:CUSTOM_ID: currently-testing
+:END:
+**** denote
+:PROPERTIES:
+:CUSTOM_ID: denote
+:END:
+**** latex-extra
+:PROPERTIES:
+:CUSTOM_ID: latex-extra
+:END:
+https://github.com/Malabarba/latex-extra
+Small QoL changes to fill-indent, tab folding, and navigation
+**** eglot-tempel
+:PROPERTIES:
+:CUSTOM_ID: eglot-tempel
+:END:
+https://github.com/fejfighter/eglot-tempel
+**** sicp
+:PROPERTIES:
+:CUSTOM_ID: sicp
+:END:
+Silly way to read Structure and Interpretation of Computer Programs
+
+
+*** Check Updates - Currently Bugged packages
+:PROPERTIES:
+:CUSTOM_ID: check-updates---currently-bugged-packages
+:END:
+**** magit-todos (2024-sept-ish I should really date these)
+:PROPERTIES:
+:CUSTOM_ID: magit-todos-2024-sept-ish-i-should-really-date-these
+:END:
+
+Collects TODO and other keywords in a project's files and displays them in magit's summary
+
+**** terminal-here
+:PROPERTIES:
+:CUSTOM_ID: terminal-here
+:END:
+- [ ] kitty issue with changing directory on mac / broader mac issues [[https://github.com/davidshepherd7/terminal-here/issues/45][Github
+  Custom arguments and commands not working on macos  #45 ]]
+
+**** nord-theme
+:PROPERTIES:
+:CUSTOM_ID: nord-theme
+:END:
+Hasn't been updated for emacs 29+ https://github.com/nordtheme/emacs/pulls
+
+(use-package nord-theme)
+(use-package nordic-night-theme)
+*** Check updates - In development (e.g.features I want not ready)
+:PROPERTIES:
+:CUSTOM_ID: check-updates---in-development-egfeatures-i-want-not-ready
+:END:
+*** Packages to Test
+:PROPERTIES:
+:CUSTOM_ID: packages-to-test
+:END:
+**** arxiv-mode
+:PROPERTIES:
+:CUSTOM_ID: arxiv-mode
+:END:
+Access arxiv in emacs.
+Not sure if it has functionality I care about (easily download tex files)
+**** benchmark-init
+:PROPERTIES:
+:CUSTOM_ID: benchmark-init
+:END:
+Benchmarking tools for emacs init and startup time
+**** consult-eglot https://github.com/mohkale/consult-eglot
+:PROPERTIES:
+:CUSTOM_ID: consult-eglot-httpsgithubcommohkaleconsult-eglot
+:END:
+
+**** combobulate
+:PROPERTIES:
+:CUSTOM_ID: combobulate
+:END:
+https://github.com/mickeynp/combobulate
+Structured editing and movement based on tree-sitter
+```
+Combobulate is a package that adds structured editing and movement to a wide
+range of programming languages. Unlike most programming major modes that use
+error-prone imperative code and regular expressions to determine what's what in
+your code, Combobulate uses Emacs 29's tree-sitter library. Tree-sitter
+maintains a concrete syntax tree of your code; it gives Combobulate absolute
+clarity of all aspects of your code, enabling more correct movement and editing
+than you would otherwise have.
+```
+**** dape https://github.com/svaante/dape
+:PROPERTIES:
+:CUSTOM_ID: dape-httpsgithubcomsvaantedape
+:END:
+Debug adapter protocol. Like language server protocol for debugging.
+***** R debugger https://github.com/ManuelHentschel/VSCode-R-Debugger
+:PROPERTIES:
+:CUSTOM_ID: r-debugger-httpsgithubcommanuelhentschelvscode-r-debugger
+:END:
+**** crux
+:PROPERTIES:
+:CUSTOM_ID: crux
+:END:
+Bunch of utility functions for emacs quality of life stuff
+**** eglot-tempel
+:PROPERTIES:
+:CUSTOM_ID: eglot-tempel-0
+:END:
+Use tempel instead of yasnippet with eglot
+**** evil-tex https://github.com/iyefrat/evil-tex
+:PROPERTIES:
+:CUSTOM_ID: evil-tex-httpsgithubcomiyefratevil-tex
+:END:
+**** evil-textobj-tree-sitter
+:PROPERTIES:
+:CUSTOM_ID: evil-textobj-tree-sitter
+:END:
+https://github.com/meain/evil-textobj-tree-sitter
+tree-sitter type movement with evil and text
+**** indent-control
+:PROPERTIES:
+:CUSTOM_ID: indent-control
+:END:
+Interface that combine all the indentation variables from each major mode to one giant list.
+**** mindstream
+:PROPERTIES:
+:CUSTOM_ID: mindstream
+:END:
+Simple efficient note taker that minimizes friction e.g. due to having to name a temp file
+https://countvajhula.github.io/mindstream/
+**** org-anki
+:PROPERTIES:
+:CUSTOM_ID: org-anki
+:END:
+Synch org notes and anki. Only does basic and cloze, but that's all I use.
+
+**** projection
+:PROPERTIES:
+:CUSTOM_ID: projection
+:END:
+https://github.com/mohkale/projection
+projectile like features on top of emacs built-in project.el
+*** Notes on packages that were tested, added, or removed
+:PROPERTIES:
+:CUSTOM_ID: notes-on-packages-that-were-tested-added-or-removed
+:END:
+**** Added Packages
+:PROPERTIES:
+:CUSTOM_ID: added-packages
+:END:
+***** bicycle
+:PROPERTIES:
+:CUSTOM_ID: bicycle
+:END:
+Purpose: Cycle outline and code visibility. Can combine outline and hs modes.
+Status: Added sometime before September 2024 (long before)
+**** Removed Packages
+:PROPERTIES:
+:CUSTOM_ID: removed-packages
+:END:
+***** desktop
+:PROPERTIES:
+:CUSTOM_ID: desktop
+:END:
+Disabled because it doesn't always play nice with elpaca. It seems it'll resume
+and load packages associated with the current buffer before the elpaca init
+runs.
+***** fold-dwim-org
+:PROPERTIES:
+:CUSTOM_ID: fold-dwim-org
+:END:
+Disabled for many months, name is illustrative but don't recall using it.
+***** org-contrib
+:PROPERTIES:
+:CUSTOM_ID: org-contrib
+:END:
+
+* Snippets
+** Jinx
+https://github.com/tshu-w/.emacs.d/blob/7de113f9f05523f4abeda8c83f2dabe2f21cb6b2/lisp/editor-misc.el#L239
+#+begin_src elisp
+(use-package jinx
+  :straight t
+  :hook (text-mode . jinx-mode)
+  :config
+  (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
+  (with-eval-after-load 'vertico-multiform
+    (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20))))
+  (with-eval-after-load 'evil
+    (evil-define-motion evil-prev-jinx-error (count)
+      "Go to the COUNT'th spelling mistake preceding point."
+      :jump t (jinx-previous (or count 1)))
+    (evil-define-motion evil-next-jinx-error (count)
+      "Go to the COUNT'th spelling mistake after point."
+      :jump t (jinx-next (or count 1))))
+  :general
+  ([remap ispell-word] 'jinx-correct-word
+   [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
+   [remap evil-next-flyspell-error] 'evil-next-jinx-error))
+#+end_src
+* Debugging
+** Variable font adjustments
+#+begin_src elisp
+;; Not working.
+(defun my-adjust-visual-fill-column-for-variable-pitch ()
+  "Adjust visual fill column for variable pitch mode."
+  (when variable-pitch-mode
+    ;; Set a different visual fill column for variable pitch mode
+    (setq visual-fill-column-width 60)
+))
+
+(defun my-disable-visual-fill-column-for-variable-pitch ()
+  "Disable visual fill column adjustments for variable pitch mode."
+  (when (and variable-pitch-mode
+             (bound-and-true-p visual-fill-column-mode))
+    ;; Disable visual fill column mode when exiting variable pitch
+    (setq visual-fill-column-width nil)))
+
+(add-hook 'variable-pitch-mode-hook #'my-adjust-visual-fill-column-for-variable-pitch)
+(add-hook 'text-scale-mode-hook 'my-disable-visual-fill-column-for-variable-pitch)
+(setq-default TeX-master nil
+              TeX-command "LaTeX"
+              TeX-engine 'luatex
+  	      preview-scale 1.0
+              preview-scale-function
+              (lambda () (* (/ 10.0 (preview-document-pt)) preview-scale)))
+#+end_src
+** ACM
+*** Issue
+I want to disable return as a completion command because it's too easy to
+unintentionally replace a word at the end of a line with a completion.
+
+*** Debugging
+#+begin_src elisp
+(add-to-list 'load-path "~/.emacs.d/elpaca/builds/lsp-bridge/")
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(require 'lsp-bridge)
+(global-lsp-bridge-mode)
+#+end_src
+
+*** Failed Solutions
+
+** jinx
+*** `jinx-exclude-regexp` and `\input{foo}` in LaTeX-mode
+core-packages.el
+#+begin_src elisp
+(add-to-list 'jinx-exclude-regexps '(LaTeX-mode "\\s*\\\\input{[^}]+}\\s*"))
+#+end_src
+
+Behavior: 'rct' in '	\input{components/notation-rct-version}' is marked as
+misspelled
+
+Expected: \input{...} macros should not be included in jinx results
+
+**** Debugging
+see `~/.cache/lm-studio/conversations1737803226079.conversation.json`
+
+#+begin_src
+(defun jinx--debug-print-exclude-regexp ()
+    (when jinx-exclude-regexps
+      (let ((combined-regexp
+             (mapconcat (lambda (entry)
+                          (format "\$?:%s\$" (mapconcat 'identity (cdr entry) "\\|")))
+                        (cl-remove-if-not (lambda (entry)
+                                            (or (eq (car entry) t)
+                                                (derived-mode-p (car entry))))
+                                          jinx-exclude-regexps)
+                        "\\|")))
+        (message "Combined Jinx Exclude Regexp: %s" combined-regexp))))
+
+(jinx--debug-print-exclude-regexp)
+#+end_src
+Run in scratch buffer:
+
+Combined Jinx Exclude Regexp: $?:\s*\\input{[^}]+}\s*$\|$?:\cc$\|$?:Package-Requires:.*$$\|$?:[A-Z]+\>\|-+\>\|\w*?[0-9]\w*\>\|[a-z]+://\S-+\|<?[-+_.~a-zA-Z][-+_.~:a-zA-Z0-9]*@[-.a-zA-Z0-9]+>?\|\(?:Local Variables\|End\):\s-*$\|jinx-\(?:languages\|local-words\):\s-+.*$$
+
+Calling describe-variable (SPC - h - v) in `theory-only.tex`
+jinx--exclude-regexp is a buffer-local variable defined in jinx.el.
+
+Value in #<buffer theory-only.tex>
+"\\(?:\\s*\\\\input{[^}]+}\\s*\\)\\|\\(?:\\cc\\)\\|\\(?:[A-Z]+\\>\\)\\|\\(?:-+\\>\\)\\|\\(?:\\w*?[0-9]\\w*\\>\\)\\|\\(?:[a-z]+://\\S-+\\)\\|\\(?:<?[-+_.~a-zA-Z][-+_.~:a-zA-Z0-9]*@[-.a-zA-Z0-9]+>?\\)\\|\\(?:\\(?:Local Variables\\|End\\):\\s-*$\\)\\|\\(?:jinx-\\(?:languages\\|local-words\\):\\s-+.*$\\)"
+
+** ~ess~ formatting in org src blocks
+*** Command history
+#+begin_src elisp
+(command-history)
+(helpful-variable 'ess-offset-arguments)
+(helpful-variable 'ess-offset-arguments-newline)
+(find-file "~/code/best-analysis/air.toml" t)
+(find-file "~/code/best-analysis/.lintr" t)
+(evil-org-delete 3029 3037 'exclusive)
+(evil-org-delete 3001 3010 'exclusive)
+(find-file "~/code/best-analysis/data/config/settings.org" t)
+(evil-org-delete 7617 7632 'exclusive)
+(evil-find-char nil 69)
+(pwd nil)
+(execute-extended-command nil "pwd" "pwd")
+(fontaine-set-preset '15pt)
+(run-ess-r nil)
+(execute-extended-command nil "run-ess-r" "run")
+(evil-org-delete 5593 5609 'exclusive)
+(delete-current-buffer-file)
+(execute-extended-command nil "delete-current-buffer-file" "delete")
+(run-ess-r nil)
+(execute-extended-command nil "run-ess-r")
+#+end_src

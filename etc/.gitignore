@@ -1,0 +1,9 @@
+# Blocklist files/folders in same directory as this .gitignore file
+/*
+
+# Includelist some files
+!.gitignore
+!activate-lsp-bridge-venv.zsh
+!setup-lsp-bridge-venv.zsh
+!templates/
+!yasnippet/

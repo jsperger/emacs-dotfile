@@ -1,4 +1,6 @@
-;;;; early-init.el --- -*- lexical-binding: t; -*-
+;;; early-init.el --- before package.el, GUI -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
 
 ;; Defer garbage collection further back in the startup process
 (setq gc-cons-threshold most-positive-fixnum gc-cons-percentage 0.6)
@@ -21,11 +23,15 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(internal-border-width . 0) default-frame-alist)
 (when (featurep 'ns)
-  (push '(ns-transparent-titlebar . t) default-frame-alist))
-
+  (push '(ns-transparent-titlebar . t) default-frame-alist)
+  (setq frame-resize-pixelwise t
+        window-resize-pixelwise t
+        ns-pop-up-frames nil)
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+;;; early-init.el ends here
