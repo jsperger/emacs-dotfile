@@ -398,7 +398,7 @@ mistakes in my configuration.
 ***** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-18 Fri 23:26]
+:LAST_MODIFIED: [2025-07-19 Sat 04:48]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -463,8 +463,6 @@ mistakes in my configuration.
              ;;              ;; "setup-media.el"
              "setup-modeline.el"
              ;;              ;; "setup-notes.el"
-             ;;              ;; "setup-org-capture.el"
-             ;;              ;; "setup-org-node.el"
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
              ;; "setup-python.el"
@@ -995,7 +993,7 @@ I need to move most of these out of here and put them in the relavent package de
 #+end_src
 **** Configure base emacs options
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:01]
+:LAST_MODIFIED: [2025-07-19 Sat 04:35]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -1014,6 +1012,7 @@ I need to move most of these out of here and put them in the relavent package de
           undo-strong-limit 100663296 ; 96mb.
           undo-outer-limit 1006632960 ; 960mb.
           sentence-end-double-space nil ;single space between sentences
+          use-short-answers t ; use y/n instead of yes/no
           )
  )
 #+end_src
@@ -3507,7 +3506,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-outlining.el ends here
 #+end_src
 
-*** Set up all things org mode
+*** Configure all things org mode
 :PROPERTIES:
 :header-args: :tangle config/configure-org.el :comments noweb
 :LAST_MODIFIED: [2025-07-18 Fri 23:14]
@@ -3768,13 +3767,13 @@ These packages have the distinction of being useful but I don't use them enough,
 
 **** Configure org mode's progeny
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:22]
+:LAST_MODIFIED: [2025-07-19 Sat 04:45]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-
-***** =org-todoist=
+Packages that build on org mode rather than add something to it.
+***** org-todoist
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:25]
+:LAST_MODIFIED: [2025-07-19 Sat 04:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp
@@ -3790,63 +3789,15 @@ These packages have the distinction of being useful but I don't use them enough,
   :general (tyrant-def "aT" 'org-todoist-dispatch)
   )
 #+end_src
-**** setup-org-capture.el
-:PROPERTIES:
-:CUSTOM_ID: setup-org-captureel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-org-capture.el
-;;; config/setup-org-capture.el --- Org capture tools configuration -*- lexical-binding: t -*-
-
-(use-package doct)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-org-capture.el ends here
-#+end_src
-
-**** setup-org-exporters.el
-:PROPERTIES:
-:CUSTOM_ID: setup-org-exportersel
-:LAST_MODIFIED: [2025-07-18 Fri 02:59]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-org-exporters.el
-;;; setup-org-exporters.el ---  -*- lexical-binding: t; -*-
-;;; Commentary:
-;;; Code:
-
-(use-package ox-pandoc
-	:after org
-	:hook (org-mode . org-pandoc-startup-check))
-
-(use-package ob-mermaid
-  :after org)
-
-(use-package ox-tufte
-	:disabled
-	:after org
-  )
-
-(use-package ox-beamer-lecture
-	:after org)
-;;; Local Variables:
-;;; no-byte-compile: t
-;;; no-native-compile: t
-;;; no-update-autoloads: t
-;;; End:
-;;; setup-org-exporters.el ends here
-#+end_src
-
-**** setup-org-node.el
+***** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: setup-org-nodeel
+:LAST_MODIFIED: [2025-07-19 Sat 04:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-org-node.el
-;;; config/setup-org-node.el --- Org-node configuration -*- lexical-binding: t -*-
 
+Disabling this until I have time to sit down and give it an honest effort. 
+#+begin_src emacs-lisp :tangle no
 (use-package org-mem
   :defer
   :functions org-mem-updater
@@ -3882,15 +3833,49 @@ These packages have the distinction of being useful but I don't use them enough,
     "ns" 'org-node-insert-transclusion-as-subtree
     )
   )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-org-node.el ends here
 #+end_src
 
+**** Configuring org capture templates :TODO:
+:PROPERTIES:
+:CUSTOM_ID: setup-org-captureel
+:LAST_MODIFIED: [2025-07-19 Sat 04:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle no
+(use-package doct)
+#+end_src
+
+**** Add additional ways to export from org to other formats
+:PROPERTIES:
+:CUSTOM_ID: setup-org-exportersel
+:LAST_MODIFIED: [2025-07-19 Sat 04:41]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package ox-pandoc
+	:after org
+	:hook (org-mode . org-pandoc-startup-check))
+
+(use-package ob-mermaid
+  :after org)
+#+end_src
+
+***** Disabled Exporters
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 04:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no
+(use-package ox-tufte
+	:disabled
+	:after org
+  )
+
+(use-package ox-beamer-lecture
+	:after org)
+#+end_src
 **** Configure org footer
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 23:17]

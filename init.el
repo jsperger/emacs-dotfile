@@ -166,8 +166,6 @@
              ;;              ;; "setup-media.el"
              "setup-modeline.el"
              ;;              ;; "setup-notes.el"
-             ;;              ;; "setup-org-capture.el"
-             ;;              ;; "setup-org-node.el"
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
              ;; "setup-python.el"

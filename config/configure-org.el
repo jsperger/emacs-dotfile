@@ -198,7 +198,7 @@
   )
 ;; Configure org functionality add-ons:1 ends here
 
-;; [[file:../its-lit.org::*=org-todoist=][=org-todoist=:1]]
+;; [[file:../its-lit.org::*org-todoist][org-todoist:1]]
 (use-package org-todoist
   :after gptel ; why would this depend on gptel? oh my api key olol
   :ensure (:host github
@@ -210,7 +210,16 @@
 
   :general (tyrant-def "aT" 'org-todoist-dispatch)
   )
-;; =org-todoist=:1 ends here
+;; org-todoist:1 ends here
+
+;; [[file:../its-lit.org::#setup-org-exportersel][Add additional ways to export from org to other formats:1]]
+(use-package ox-pandoc
+	:after org
+	:hook (org-mode . org-pandoc-startup-check))
+
+(use-package ob-mermaid
+  :after org)
+;; Add additional ways to export from org to other formats:1 ends here
 
 ;; Local Variables:
 ;; no-byte-compile: t

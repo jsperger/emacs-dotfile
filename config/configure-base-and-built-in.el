@@ -17,6 +17,7 @@
           undo-strong-limit 100663296 ; 96mb.
           undo-outer-limit 1006632960 ; 960mb.
           sentence-end-double-space nil ;single space between sentences
+          use-short-answers t ; use y/n instead of yes/no
           )
  )
 ;; Configure base emacs options:1 ends here
