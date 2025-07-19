@@ -115,52 +115,12 @@ I'm sympathetic to the arguments in this blog post that [[https://batsov.com/art
 :PROPERTIES:
 :header-args: :tangle no
 :CUSTOM_ID: lisp-helpers-for-maintaining-my-literate-config
-:LAST_MODIFIED: [2025-07-18 Fri 01:22]
+:LAST_MODIFIED: [2025-07-18 Fri 21:37]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
-This block defines the helper functions for tangling files from this Org document.
-Execute it with `C-c C-c` once per Emacs session before tangling.
+Work in progress
 
-None of these are working currently
-#+name: tangle-header-notworking
-#+begin_src emacs-lisp :tangle no :var fname="foo.el", description = ""
-  (defun cfg/org-tangle-file-header (description)
-    "Generate a standard file header for tangled Emacs Lisp files."
-    (if (boundp 'tangle-file)
-        (format ";;; %s --- %s -*- lexical-binding: t -*-\n"
-                tangle-file
-                description)
-      (format ";;; /path/to/file.el --- %s -*- lexical-binding: t -*-\n;; (NOTE: Called outside of a tangling process)\n"
-              description)))
-#+end_src
-
-#+name: tangle-footer-nocompile-notworking
-#+begin_src
-  (defun cfg/org-tangle-file-footer ()
-    "Generate a standard file footer for tangled Emacs Lisp files."
-    (if (boundp 'tangle-file)
-        (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n;;; %s ends here\n"
-                (file-name-nondirectory tangle-file))
- )))
-#+end_src
-
-#+name: tangle-footer-compiled-notworking
-#+begin_src
-  (defun cfg/org-tangle-file-footer ()
-    "Generate a standard file footer for tangled Emacs Lisp files that will be byte compiled."
-    (if (boundp 'tangle-file)
-        (format "\n;;; %s ends here\n"
-                (file-name-nondirectory tangle-file))
-)
-)
-#+end_src
-
-
-#+RESULTS: tangle-helpers
-: cfg/org-tangle-file-footer
-
-#+end_src
 * Notes on configuring Emacs
 :PROPERTIES:
 :CUSTOM_ID: notes-on-configuring-emacs
@@ -5781,7 +5741,7 @@ This provides a consolidated view of all global leader keys."
 *** my-org-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-org-helpersel
-:LAST_MODIFIED: [2025-07-16 Wed 00:30]
+:LAST_MODIFIED: [2025-07-18 Fri 21:36]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-org-helpers.el
@@ -5836,29 +5796,6 @@ Intended for `before-save-hook` in an Org mode buffer."
         ;; Set the Emacs version in the same property drawer.
         (org-entry-put nil "MODIFIED_WITH_EMACS" emacs-version-short))))
  )
-
-(defun my/org-tangle-add-nocompile-footer (epilogue-data)
-  "Generate file-local variables and a closing comment for tangling.
-Argument EPILOGUE-DATA is the tangled filename."
-  (let ((filename (file-name-nondirectory epilogue-data)))
-    (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n\n;;; %s ends here\n" filename)))
-
-(defun cfg/org-tangle-file-header (description)
-  "Generate a standard file header for tangled Emacs Lisp files.
-This function is intended for use in an Org Babel :prologue
-header argument. It uses the dynamically-bound `tangle-file`
-variable provided by Org Babel and the provided DESCRIPTION string."
-  (format ";;; %s --- %s -*- lexical-binding: t -*-\n"
-          tangle-file
-          description))
-
-(defun cfg/org-tangle-file-footer ()
-  "Generate a standard file footer for tangled Emacs Lisp files.
-This function is intended for use in an Org Babel :epilogue
-header argument. It uses the dynamically-bound `tangle-file`
-variable provided by Org Babel."
-  (format "\n;; Local Variables:\n;; no-byte-compile: t\n;; no-native-compile: t\n;; no-update-autoloads: t\n;; End:\n;;; %s ends here\n"
-          (file-name-nondirectory tangle-file)))
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here
 #+end_src
