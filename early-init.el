@@ -23,7 +23,11 @@
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(internal-border-width . 0) default-frame-alist)
 (when (featurep 'ns)
-  (push '(ns-transparent-titlebar . t) default-frame-alist))
+  (push '(ns-transparent-titlebar . t) default-frame-alist)
+  (setq frame-resize-pixelwise t
+        window-resize-pixelwise t
+        ns-pop-up-frames nil)
+  )
 
 ;; Local Variables:
 ;; no-byte-compile: t
