@@ -8,16 +8,23 @@
 
 (use-package magit
   :init
-  (setq
-	 magit-define-global-key-bindings nil
-	 forge-add-default-bindings nil
-	 )
-	:hook (magit-diff-mode . (lambda () (toggle-truncate-lines -1)))
+  (setq	 magit-define-global-key-bindings nil
+         forge-add-default-bindings nil
+         )
+  
+  :hook (magit-diff-mode . (lambda () (toggle-truncate-lines -1)))
   :config
   (setopt magit-diff-refine-hunk t
         magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
         magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
-        magit-save-repository-buffers 'dontask)
+        magit-save-repository-buffers 'dontask
+        magit-wip-after-apply-mode t
+        magit-wip-after-save-mode t
+        magit-wip-before-change-mode t
+        magit-wip-initial-backup-mode t
+        magit-wip-merge-branch t
+        magit-wip-mode t
+        )
 
   (advice-add 'magit-blame-addition           :after #'org-reveal-advice)
   (advice-add 'magit-diff-visit-file          :after #'org-reveal-advice)
@@ -36,22 +43,23 @@
     "gs"  'magit-status
     "gS"  'magit-stage-file
     "gU"  'magit-unstage-file)
-	(despot-def '(magit-status-mode-map)
+  (despot-def '(magit-status-mode-map)
 		:major-modes '(magit-status-mode)
     "b"  'magit-blame
     "c"  'magit-commit
     "d"  'magit-diff
 		)
-	)
+  )
 
 (use-package forge
   :after magit
   :init
-  (setq
-	 auth-sources '("~/.authinfo.gpg")
-   forge-database-connector 'sqlite-builtin
-	 )
-	)
+  (setq	 auth-sources '("~/.authinfo.gpg")
+         forge-database-connector 'sqlite-builtin
+         )
+  :general
+  (general-def magit-mode-map "@" 'forge-dispatch)
+  )
 
 (use-package transient
   :after vc magit
@@ -120,6 +128,7 @@
 
 (use-package magit-todos
   :after magit
+  :hook magit-status-mode
   :config (magit-todos-mode 1)
   )
 

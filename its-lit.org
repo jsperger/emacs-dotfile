@@ -4794,6 +4794,8 @@ Just put this function in `hippie-expand-try-functions-list'."
 *** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
+:LAST_MODIFIED: [2025-07-18 Fri 21:42]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-vc.el
 ;;; config/setup-vc.el --- Version control configuration -*- lexical-binding: t -*-
@@ -4815,7 +4817,14 @@ Just put this function in `hippie-expand-try-functions-list'."
   (setopt magit-diff-refine-hunk t
         magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
         magit-revision-show-gravatars '("^Author:     " . "^Commit:     ")
-        magit-save-repository-buffers 'dontask)
+        magit-save-repository-buffers 'dontask
+        magit-wip-after-apply-mode t
+        magit-wip-after-save-mode t
+        magit-wip-before-change-mode t
+        magit-wip-initial-backup-mode t
+        magit-wip-merge-branch t
+        magit-wip-mode t
+        )
 
   (advice-add 'magit-blame-addition           :after #'org-reveal-advice)
   (advice-add 'magit-diff-visit-file          :after #'org-reveal-advice)
