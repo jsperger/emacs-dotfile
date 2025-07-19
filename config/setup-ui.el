@@ -67,7 +67,7 @@
                                             :tab-width 4
                                             :right-divider-width 0
                                             :scroll-bar-width 4
-                                            :fringe-width 4)
+                                            :fringe-width 8)
                   )
   )
 

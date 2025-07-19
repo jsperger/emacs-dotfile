@@ -53,23 +53,25 @@
   )
 
 (elpaca-wait) ; Block until current queue processed.
+;; init elpaca ends here
 
+;; [[file:its-lit.org::constant flags][constant flags]]
 ;; ============== Define constants for use throughout config =============
-
 (defconst IS-MAC (eq system-type 'darwin))
 (defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
-
+(defconst IS-ANDROID (eq system-type 'android))
 
 (defconst my-debug-mode nil
   "Toggle debugging messages. Set to t to enable, nil to disable.")
-;; init elpaca ends here
+;; constant flags ends here
 
 ;; [[file:its-lit.org::no-littering][no-littering]]
 ;; ============== Packages that change core functionality =============
-
 (use-package no-littering :ensure (:wait t))
+;; no-littering ends here
 
+;; [[file:its-lit.org::general declaration][general declaration]]
 (use-package general
   :ensure (:wait t)
   :demand t
@@ -96,11 +98,13 @@
     "SPC u" 'universal-argument-more)
 
   )
+;; general declaration ends here
 
+;; [[file:its-lit.org::benchmark init declaration][benchmark init declaration]]
 (use-package benchmark-init
   :config (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate)
   )
-;; no-littering ends here
+;; benchmark init declaration ends here
 
 ;; [[file:its-lit.org::load configuration files][load configuration files]]
 ;;;; =========== Load use-package declarations and configuration ===========
@@ -132,6 +136,7 @@
              ;; "setup-bib.el"
              "configure-base-and-built-in.el"
              "configure-keybinding.el"
+             "configure-org.el"
              ;; "setup-casual.el"
              "setup-comment-tools.el"
              ;;              ;; "setup-completion-actions.el"
@@ -163,7 +168,6 @@
              ;;              ;; "setup-notes.el"
              ;;              ;; "setup-org-capture.el"
              ;;              ;; "setup-org-node.el"
-             "setup-org.el"
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
              ;; "setup-python.el"
@@ -192,9 +196,11 @@
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 ;; load configuration files ends here
 
+;; [[file:its-lit.org::footer-init][footer-init]]
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
 ;;; init.el ends here
+;; footer-init ends here

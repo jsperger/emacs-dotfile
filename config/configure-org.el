@@ -1,6 +1,8 @@
-;; [[file:../its-lit.org::#setup-orgel][setup-org.el:1]]
-;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
+;;; configure-org.el --- Org-mode and its children -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
 
+;; [[file:../its-lit.org::*Configure base org settings and major mode keybinds][Configure base org settings and major mode keybinds:1]]
 (use-package org
   :commands (org-toggle-hidden-emphasis-markers)
   :init
@@ -154,52 +156,9 @@
     "Ot"     'org-transclusion-mode
     )
   )
+;; Configure base org settings and major mode keybinds:1 ends here
 
-(use-package org-transclusion
-  :after org
-  :general
-  (despot-def org-mode-map
-    "l" 'org-transclusion-add
-    "L"     (cons "transclusion" (make-sparse-keymap))
-    "L TAB" 'org-cycle
-    "Ld" 'org-transclusion-remove
-    "LD" 'org-transclusion-detach
-    "Lj" 'org-transclusion-demote-subtree
-    "Lk" 'org-transclusion-promote-subtree
-    "Lm" 'org-transclusion-move-to-source
-    "Ls" 'org-transclusion-live-sync-start
-    "Lr" 'org-transclusion-refresh
-    "Lo" 'org-transclusion-open-source
-    )
-  )
-
-(use-package org-contrib
-  :disabled
-  :after org
-  )
-
-(use-package org-todoist
-  :after gptel ; why would this depend on gptel? oh my api key olol
-  :ensure (:host github
-                 :repo "lillenne/org-todoist"
-                 :branch "main"
-                 )
-  :init
-  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
-  )
-
-(use-package org-pdftools
-  :disabled
-  :hook (org-mode . org-pdftools-setup-link))
-
-(use-package org-noter-pdftools
-  :disabled
-  :after org-noter
-  :config
-  (with-eval-after-load 'pdf-annot
-    (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note))
-  )
-
+;; [[file:../its-lit.org::#setup-orgel][Configure org functionality add-ons:1]]
 (use-package org-make-toc
   :after org
   :hook org-mode
@@ -220,19 +179,42 @@
            org-ellipsis "…")
   )
 
-(use-package org-side-tree
-  :disabled
-  :hook org-mode
-  :config
-  (setopt org-side-tree-persistent nil
-	  org-side-tree-fontify t
-	  org-side-tree-enable-folding t)
+(use-package org-transclusion
+  :after org
+  :general
+  (despot-def org-mode-map
+    "l" 'org-transclusion-add
+    "L"     (cons "transclusion" (make-sparse-keymap))
+    "L TAB" 'org-cycle
+    "Ld" 'org-transclusion-remove
+    "LD" 'org-transclusion-detach
+    "Lj" 'org-transclusion-demote-subtree
+    "Lk" 'org-transclusion-promote-subtree
+    "Lm" 'org-transclusion-move-to-source
+    "Ls" 'org-transclusion-live-sync-start
+    "Lr" 'org-transclusion-refresh
+    "Lo" 'org-transclusion-open-source
+    )
   )
+;; Configure org functionality add-ons:1 ends here
+
+;; [[file:../its-lit.org::*=org-todoist=][=org-todoist=:1]]
+(use-package org-todoist
+  :after gptel ; why would this depend on gptel? oh my api key olol
+  :ensure (:host github
+                 :repo "lillenne/org-todoist"
+                 :branch "main"
+                 )
+  :init
+  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
+
+  :general (tyrant-def "aT" 'org-todoist-dispatch)
+  )
+;; =org-todoist=:1 ends here
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; setup-org.el ends here
-;; setup-org.el:1 ends here
+;;; configure-org.el ends here

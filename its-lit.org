@@ -237,18 +237,16 @@ Has a direct example of trying to keep a lexical binding directive at the top of
 :END:
 *** init.el
 :PROPERTIES:
-:header-args: :tangle init.el
 :CUSTOM_ID: initel
-:LAST_MODIFIED: [2025-07-18 Fri 04:52]
+:LAST_MODIFIED: [2025-07-19 Sat 04:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header-args: :tangle init.el :comments noweb 
 :END:
-
-:TODO: Figure out a way to abide by the emacs styling where the first line is like ~;;; init.el --- Summary -*- lexical-binding: t; -*-~
 
 while still having tangle/detangle functionality. Shouldn't be too difficult honestly because the first line can be inferred from the filename
 
 #+name: header-init
-#+begin_src emacs-lisp :tangle init.el
+#+begin_src emacs-lisp :comments no
 ;;; init.el --- Initialize configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
@@ -306,13 +304,25 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
   )
 
 (elpaca-wait) ; Block until current queue processed.
+#+end_src
 
+***** Define constants to use as conditional configuration flags
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 04:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+I find =(when IS-MAC ...)= to be clearer and shorter than checking the system type
+and remembering that MAC is called darwin here and ns in other places. I'm
+probably being fast and loose with system type and GUI/non-GUI configuration. 
+
+#+name: constant flags
+#+begin_src emacs-lisp
 ;; ============== Define constants for use throughout config =============
-
 (defconst IS-MAC (eq system-type 'darwin))
 (defconst IS-LINUX (memq system-type '(gnu gnu/linux gnu/kfreebsd berkeley-unix)))
 (defconst IS-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
-
+(defconst IS-ANDROID (eq system-type 'android))
 
 (defconst my-debug-mode nil
   "Toggle debugging messages. Set to t to enable, nil to disable.")
@@ -320,16 +330,29 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 ***** no-littering
 :PROPERTIES:
 :CUSTOM_ID: no-littering
-:LAST_MODIFIED: [2025-07-18 Fri 21:55]
+:LAST_MODIFIED: [2025-07-19 Sat 04:28]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-Emacs packages 
+
+A fantastically useful package that unifies the myriad paths emacs packages use
+to store configuration and storage files. There's a lot of manual work behind
+the magic so newer or less popular packages might not be incorporated. 
 #+name: no-littering
 #+begin_src emacs-lisp :noweb yes :comments noweb :tangle init.el 
 ;; ============== Packages that change core functionality =============
-
 (use-package no-littering :ensure (:wait t))
+#+end_src
 
+***** General for keybinds
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 04:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+I lifted the tyrant and despot definer and naming scheme from [[https://github.com/tshu-w/.emacs.d][tshu-w's config
+(gh link)]]
+#+name: general declaration
+#+begin_src emacs-lisp
 (use-package general
   :ensure (:wait t)
   :demand t
@@ -356,16 +379,26 @@ Emacs packages
     "SPC u" 'universal-argument-more)
 
   )
+#+end_src
 
+***** Benchmark init time
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 04:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+I don't optimize for it, but I've frequently found slow init times to indicate
+mistakes in my configuration.
+#+name: benchmark init declaration
+#+begin_src emacs-lisp
 (use-package benchmark-init
   :config (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate)
   )
 #+end_src
-
 ***** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-18 Fri 22:38]
+:LAST_MODIFIED: [2025-07-18 Fri 23:26]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -400,6 +433,7 @@ Emacs packages
              ;; "setup-bib.el"
              "configure-base-and-built-in.el"
              "configure-keybinding.el"
+             "configure-org.el"
              ;; "setup-casual.el"
              "setup-comment-tools.el"
              ;;              ;; "setup-completion-actions.el"
@@ -431,7 +465,6 @@ Emacs packages
              ;;              ;; "setup-notes.el"
              ;;              ;; "setup-org-capture.el"
              ;;              ;; "setup-org-node.el"
-             "setup-org.el"
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
              ;; "setup-python.el"
@@ -469,6 +502,8 @@ Emacs packages
 ;; End:
 ;;; init.el ends here
 #+end_src
+
+#+RESULTS: footer-init
 
 ** Config directory for non-byte-copiled files
 :PROPERTIES:
@@ -3473,15 +3508,30 @@ These packages have the distinction of being useful but I don't use them enough,
 #+end_src
 
 *** Set up all things org mode
-************ setup-org.el
 :PROPERTIES:
-:CUSTOM_ID: setup-orgel
-:LAST_MODIFIED: [2025-07-18 Fri 03:42]
+:header-args: :tangle config/configure-org.el :comments noweb
+:LAST_MODIFIED: [2025-07-18 Fri 23:14]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-org.el
-;;; config/setup-org.el --- Org-mode configuration -*- lexical-binding: t -*-
 
+**** Configure org header
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:16]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :comments no :noweb no
+;;; configure-org.el --- Org-mode and its children -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+#+end_src
+
+**** Configure base org settings and major mode keybinds
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:19]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
 (use-package org
   :commands (org-toggle-hidden-emphasis-markers)
   :init
@@ -3635,52 +3685,14 @@ These packages have the distinction of being useful but I don't use them enough,
     "Ot"     'org-transclusion-mode
     )
   )
-
-(use-package org-transclusion
-  :after org
-  :general
-  (despot-def org-mode-map
-    "l" 'org-transclusion-add
-    "L"     (cons "transclusion" (make-sparse-keymap))
-    "L TAB" 'org-cycle
-    "Ld" 'org-transclusion-remove
-    "LD" 'org-transclusion-detach
-    "Lj" 'org-transclusion-demote-subtree
-    "Lk" 'org-transclusion-promote-subtree
-    "Lm" 'org-transclusion-move-to-source
-    "Ls" 'org-transclusion-live-sync-start
-    "Lr" 'org-transclusion-refresh
-    "Lo" 'org-transclusion-open-source
-    )
-  )
-
-(use-package org-contrib
-  :disabled
-  :after org
-  )
-
-(use-package org-todoist
-  :after gptel ; why would this depend on gptel? oh my api key olol
-  :ensure (:host github
-                 :repo "lillenne/org-todoist"
-                 :branch "main"
-                 )
-  :init
-  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
-  )
-
-(use-package org-pdftools
-  :disabled
-  :hook (org-mode . org-pdftools-setup-link))
-
-(use-package org-noter-pdftools
-  :disabled
-  :after org-noter
-  :config
-  (with-eval-after-load 'pdf-annot
-    (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note))
-  )
-
+#+end_src
+************ Configure org functionality add-ons
+:PROPERTIES:
+:CUSTOM_ID: setup-orgel
+:LAST_MODIFIED: [2025-07-18 Fri 23:23]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp 
 (use-package org-make-toc
   :after org
   :hook org-mode
@@ -3701,6 +3713,33 @@ These packages have the distinction of being useful but I don't use them enough,
            org-ellipsis "…")
   )
 
+(use-package org-transclusion
+  :after org
+  :general
+  (despot-def org-mode-map
+    "l" 'org-transclusion-add
+    "L"     (cons "transclusion" (make-sparse-keymap))
+    "L TAB" 'org-cycle
+    "Ld" 'org-transclusion-remove
+    "LD" 'org-transclusion-detach
+    "Lj" 'org-transclusion-demote-subtree
+    "Lk" 'org-transclusion-promote-subtree
+    "Lm" 'org-transclusion-move-to-source
+    "Ls" 'org-transclusion-live-sync-start
+    "Lr" 'org-transclusion-refresh
+    "Lo" 'org-transclusion-open-source
+    )
+  )
+#+end_src
+
+***** Disabled org functionality packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:22]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header-args: :tangle no :comments no
+:END:
+
+#+begin_src emacs-lisp
 (use-package org-side-tree
   :disabled
   :hook org-mode
@@ -3709,15 +3748,48 @@ These packages have the distinction of being useful but I don't use them enough,
 	  org-side-tree-fontify t
 	  org-side-tree-enable-folding t)
   )
+(use-package org-pdftools
+  :disabled
+  :hook (org-mode . org-pdftools-setup-link))
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-org.el ends here
+(use-package org-noter-pdftools
+  :disabled
+  :after org-noter
+  :config
+  (with-eval-after-load 'pdf-annot
+    (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note))
+  )
+
+(use-package org-contrib
+  :disabled
+  :after org
+  )
 #+end_src
 
+**** Configure org mode's progeny
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:22]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+***** =org-todoist=
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:25]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp
+(use-package org-todoist
+  :after gptel ; why would this depend on gptel? oh my api key olol
+  :ensure (:host github
+                 :repo "lillenne/org-todoist"
+                 :branch "main"
+                 )
+  :init
+  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
+
+  :general (tyrant-def "aT" 'org-todoist-dispatch)
+  )
+#+end_src
 **** setup-org-capture.el
 :PROPERTIES:
 :CUSTOM_ID: setup-org-captureel
@@ -3819,6 +3891,20 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-org-node.el ends here
 #+end_src
 
+**** Configure org footer
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:17]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :comments no :noweb no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; configure-org.el ends here
+#+end_src
 *** setup-programming.el
 :PROPERTIES:
 :CUSTOM_ID: setup-programmingel
@@ -4627,7 +4713,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 *** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-07-18 Fri 22:59]
+:LAST_MODIFIED: [2025-07-18 Fri 23:06]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -4700,7 +4786,7 @@ Just put this function in `hippie-expand-try-functions-list'."
                                             :tab-width 4
                                             :right-divider-width 0
                                             :scroll-bar-width 4
-                                            :fringe-width 4)
+                                            :fringe-width 8)
                   )
   )
 
