@@ -103,91 +103,91 @@
 ;; no-littering ends here
 
 ;; [[file:its-lit.org::load configuration files][load configuration files]]
-;=========== Load use-package declarations and configuration ===========
+;;;; =========== Load use-package declarations and configuration ===========
 
 ;; Declarations to executed immediately. I.e. those with elpaca
 ;; :ensure (:wait t)
 ;; :demand t
- (load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
+(load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
 
-;=========================== Load lisp defuns ==========================
+;;;; =========================== Load lisp defuns ==========================
 ;; Add personal `lisp` directory to the load-path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; --- Load personal library files ---
- (require 'my-core-functions)
- (require 'my-core-helpers)
- (require 'my-editor-helpers)
- (require 'my-keybinding-helpers)
- (require 'my-lang-helpers)
- (require 'my-lsp-bridge-helpers)
- (require 'my-org-helpers)
+(require 'my-core-functions)
+(require 'my-core-helpers)
+(require 'my-editor-helpers)
+(require 'my-keybinding-helpers)
+(require 'my-lang-helpers)
+(require 'my-lsp-bridge-helpers)
+(require 'my-org-helpers)
 (require 'my-theme-helpers)
 (require 'my-vc-helpers)
 
 ;; General delcarations that can be handled by elpaca/use-package queueing
- (let ((config-dir (expand-file-name "config" user-emacs-directory)))
-   (dolist (file
-            '(
-              ;; "setup-bib.el"
-              "configure-base-and-built-in.el"
-              "configure-keybinding.el"
+(let ((config-dir (expand-file-name "config" user-emacs-directory)))
+  (dolist (file
+           '(
+             ;; "setup-bib.el"
+             "configure-base-and-built-in.el"
+             "configure-keybinding.el"
              ;; "setup-casual.el"
-              "setup-comment-tools.el"
-;;              ;; "setup-completion-actions.el"
-              "setup-completion-backends.el"
-              "setup-completion-display.el"
-              "setup-completion.el"
-              "setup-consult.el"
-;;              "setup-core.el"
+             "setup-comment-tools.el"
+             ;;              ;; "setup-completion-actions.el"
+             "setup-completion-backends.el"
+             "setup-completion-display.el"
+             "setup-completion.el"
+             "setup-consult.el"
+             ;;              "setup-core.el"
              ;; "setup-data-formats.el"
              ;; "setup-denote.el"
              ;; "setup-diagramming.el"
              ;; "setup-eaf.el"
-;;             "setup-editor-misc.el"
+             ;;             "setup-editor-misc.el"
              ;; "setup-emacs.el"
-;;              ;; "setup-email.el"
-              "setup-evil-addons.el"
-;;              "setup-font-locking.el"
-;;              "setup-fonts.el"
-;;              ;; "setup-go.el"
-;;              ;; "setup-gopher.el"
-;;              "setup-help.el"
-;;              ;; "setup-icons.el"
-;;              ;; "setup-lisp.el"
-;;              "setup-llm.el"
-              "setup-lsp-bridge.el"
-;;              "setup-markdown.el"
-;;              ;; "setup-media.el"
-;;              "setup-modeline.el"
-;;              ;; "setup-notes.el"
-;;              ;; "setup-org-capture.el"
-;;              ;; "setup-org-node.el"
-              "setup-org.el"
-;;              ;; "setup-programming.el"
-              ;; "setup-projects.el"
-              ;; "setup-python.el"
-              "setup-r.el"
-;;              "setup-reading.el"
-              ;; "setup-rust.el"
-;;              "setup-search.el"
-              "setup-snippets.el"
-              ;; "setup-tex.el"
-;;              "setup-themes.el"
-              ;; "setup-treesit.el"
-;;              "setup-ui.el"
-;;              "setup-outlining.el"
-;;              "setup-vc.el"
-              ;; "setup-web.el"
-              ;; "setup-writing.el"
-              )
-            )
-     (load-file (expand-file-name file config-dir))
-     )
-   )
+             ;;              ;; "setup-email.el"
+             "setup-evil-addons.el"
+             "setup-font-locking.el"
+             "setup-fonts.el"
+             ;;              ;; "setup-go.el"
+             ;;              ;; "setup-gopher.el"
+             "setup-help.el"
+             ;;              ;; "setup-icons.el"
+             ;;              ;; "setup-lisp.el"
+             "setup-llm.el"
+             "setup-lsp-bridge.el"
+             "setup-markdown.el"
+             ;;              ;; "setup-media.el"
+             "setup-modeline.el"
+             ;;              ;; "setup-notes.el"
+             ;;              ;; "setup-org-capture.el"
+             ;;              ;; "setup-org-node.el"
+             "setup-org.el"
+             ;;              ;; "setup-programming.el"
+             ;; "setup-projects.el"
+             ;; "setup-python.el"
+             "setup-r.el"
+             ;;              "setup-reading.el"
+             ;; "setup-rust.el"
+             "setup-search.el"
+             "setup-snippets.el"
+             ;; "setup-tex.el"
+             "setup-themes.el"
+             ;; "setup-treesit.el"
+             "setup-ui.el"
+             "setup-outlining.el"
+             "setup-vc.el"
+             ;; "setup-web.el"
+             ;; "setup-writing.el"
+             )
+           )
+    (load-file (expand-file-name file config-dir))
+    )
+  )
 
 
-;=============================== Customs ===============================
+;;;; =============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 ;; load configuration files ends here

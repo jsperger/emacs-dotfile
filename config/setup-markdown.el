@@ -7,6 +7,7 @@
   :init (setq markdown-command "multimarkdown")
   :config
   (setopt markdown-fontify-code-blocks-natively t)
+  :general
   (despot-def markdown-mode-map
     "RET"   'markdown-do
     "M-RET" 'markdown-insert-list-item

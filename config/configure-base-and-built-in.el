@@ -2,6 +2,25 @@
 ;;; Commentary:
 ;;; Code:
 
+;; [[file:../its-lit.org::*Configure base emacs options][Configure base emacs options:1]]
+(use-package emacs
+  :ensure nil
+  :config
+  (setopt enable-recursive-minibuffers t
+          user-full-name "John Sperger"
+          user-mail-address "josp@duck.com"
+          initial-scratch-message nil   ; "make scratch buffer empty"
+          tab-width 2 ; tab-width default 2 instead of 4
+          fill-column 80 ; fill-column default 80 chars
+          ring-bell-function 'ignore ;no beep
+          undo-limit 67108864 ; increases undo limit 64mb.
+          undo-strong-limit 100663296 ; 96mb.
+          undo-outer-limit 1006632960 ; 960mb.
+          sentence-end-double-space nil ;single space between sentences
+          )
+ )
+;; Configure base emacs options:1 ends here
+
 ;; [[file:../its-lit.org::*Configuring built-in packages][Configuring built-in packages:1]]
 (use-package autorevert
   :ensure nil

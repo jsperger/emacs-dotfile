@@ -365,97 +365,97 @@ Emacs packages
 ***** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-18 Fri 20:32]
+:LAST_MODIFIED: [2025-07-18 Fri 22:38]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 #+name: load configuration files
 #+begin_src emacs-lisp :noweb yes :comments noweb :tangle init.el 
-;=========== Load use-package declarations and configuration ===========
+;;;; =========== Load use-package declarations and configuration ===========
 
 ;; Declarations to executed immediately. I.e. those with elpaca
 ;; :ensure (:wait t)
 ;; :demand t
- (load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
+(load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
 
-;=========================== Load lisp defuns ==========================
+;;;; =========================== Load lisp defuns ==========================
 ;; Add personal `lisp` directory to the load-path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; --- Load personal library files ---
- (require 'my-core-functions)
- (require 'my-core-helpers)
- (require 'my-editor-helpers)
- (require 'my-keybinding-helpers)
- (require 'my-lang-helpers)
- (require 'my-lsp-bridge-helpers)
- (require 'my-org-helpers)
+(require 'my-core-functions)
+(require 'my-core-helpers)
+(require 'my-editor-helpers)
+(require 'my-keybinding-helpers)
+(require 'my-lang-helpers)
+(require 'my-lsp-bridge-helpers)
+(require 'my-org-helpers)
 (require 'my-theme-helpers)
 (require 'my-vc-helpers)
 
 ;; General delcarations that can be handled by elpaca/use-package queueing
- (let ((config-dir (expand-file-name "config" user-emacs-directory)))
-   (dolist (file
-            '(
-              ;; "setup-bib.el"
-              "configure-base-and-built-in.el"
-              "configure-keybinding.el"
+(let ((config-dir (expand-file-name "config" user-emacs-directory)))
+  (dolist (file
+           '(
+             ;; "setup-bib.el"
+             "configure-base-and-built-in.el"
+             "configure-keybinding.el"
              ;; "setup-casual.el"
-              "setup-comment-tools.el"
-;;              ;; "setup-completion-actions.el"
-              "setup-completion-backends.el"
-              "setup-completion-display.el"
-              "setup-completion.el"
-              "setup-consult.el"
-;;              "setup-core.el"
+             "setup-comment-tools.el"
+             ;;              ;; "setup-completion-actions.el"
+             "setup-completion-backends.el"
+             "setup-completion-display.el"
+             "setup-completion.el"
+             "setup-consult.el"
+             ;;              "setup-core.el"
              ;; "setup-data-formats.el"
              ;; "setup-denote.el"
              ;; "setup-diagramming.el"
              ;; "setup-eaf.el"
-;;             "setup-editor-misc.el"
+             ;;             "setup-editor-misc.el"
              ;; "setup-emacs.el"
-;;              ;; "setup-email.el"
-              "setup-evil-addons.el"
-;;              "setup-font-locking.el"
-;;              "setup-fonts.el"
-;;              ;; "setup-go.el"
-;;              ;; "setup-gopher.el"
-;;              "setup-help.el"
-;;              ;; "setup-icons.el"
-;;              ;; "setup-lisp.el"
-;;              "setup-llm.el"
-              "setup-lsp-bridge.el"
-;;              "setup-markdown.el"
-;;              ;; "setup-media.el"
-;;              "setup-modeline.el"
-;;              ;; "setup-notes.el"
-;;              ;; "setup-org-capture.el"
-;;              ;; "setup-org-node.el"
-              "setup-org.el"
-;;              ;; "setup-programming.el"
-              ;; "setup-projects.el"
-              ;; "setup-python.el"
-              "setup-r.el"
-;;              "setup-reading.el"
-              ;; "setup-rust.el"
-;;              "setup-search.el"
-              "setup-snippets.el"
-              ;; "setup-tex.el"
-;;              "setup-themes.el"
-              ;; "setup-treesit.el"
-;;              "setup-ui.el"
-;;              "setup-outlining.el"
-;;              "setup-vc.el"
-              ;; "setup-web.el"
-              ;; "setup-writing.el"
-              )
-            )
-     (load-file (expand-file-name file config-dir))
-     )
-   )
+             ;;              ;; "setup-email.el"
+             "setup-evil-addons.el"
+             "setup-font-locking.el"
+             "setup-fonts.el"
+             ;;              ;; "setup-go.el"
+             ;;              ;; "setup-gopher.el"
+             "setup-help.el"
+             ;;              ;; "setup-icons.el"
+             ;;              ;; "setup-lisp.el"
+             "setup-llm.el"
+             "setup-lsp-bridge.el"
+             "setup-markdown.el"
+             ;;              ;; "setup-media.el"
+             "setup-modeline.el"
+             ;;              ;; "setup-notes.el"
+             ;;              ;; "setup-org-capture.el"
+             ;;              ;; "setup-org-node.el"
+             "setup-org.el"
+             ;;              ;; "setup-programming.el"
+             ;; "setup-projects.el"
+             ;; "setup-python.el"
+             "setup-r.el"
+             ;;              "setup-reading.el"
+             ;; "setup-rust.el"
+             "setup-search.el"
+             "setup-snippets.el"
+             ;; "setup-tex.el"
+             "setup-themes.el"
+             ;; "setup-treesit.el"
+             "setup-ui.el"
+             "setup-outlining.el"
+             "setup-vc.el"
+             ;; "setup-web.el"
+             ;; "setup-writing.el"
+             )
+           )
+    (load-file (expand-file-name file config-dir))
+    )
+  )
 
 
-;=============================== Customs ===============================
+;;;; =============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 #+end_src
@@ -958,6 +958,30 @@ I need to move most of these out of here and put them in the relavent package de
 ;;; Commentary:
 ;;; Code:
 #+end_src
+**** Configure base emacs options
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:01]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package emacs
+  :ensure nil
+  :config
+  (setopt enable-recursive-minibuffers t
+          user-full-name "John Sperger"
+          user-mail-address "josp@duck.com"
+          initial-scratch-message nil   ; "make scratch buffer empty"
+          tab-width 2 ; tab-width default 2 instead of 4
+          fill-column 80 ; fill-column default 80 chars
+          ring-bell-function 'ignore ;no beep
+          undo-limit 67108864 ; increases undo limit 64mb.
+          undo-strong-limit 100663296 ; 96mb.
+          undo-outer-limit 1006632960 ; 960mb.
+          sentence-end-double-space nil ;single space between sentences
+          )
+ )
+#+end_src
 **** Configuring built-in packages
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:05]
@@ -1221,40 +1245,14 @@ Off the top of my head, I think
 ;;  :ensure nil)
 #+end_src
 
-*** setup-casual.el
-:PROPERTIES:
-:CUSTOM_ID: setup-casualel
-:END:
-:PROPERTIES:
-:CUSTOM_ID: setup-casualel
-:LAST_MODIFIED: [2025-07-15 Tue 19:04]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
-of 2025-07-06
-:END:
-#+begin_src emacs-lisp :tangle no
-;;; config/setup-casual.el --- Casual suite configuration -*- lexical-binding: t -*-
-
-(use-package casual
-	:disabled)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-casual.el ends here
-#+end_src
-
 *** setup-comment-tools.el
 :PROPERTIES:
-:CUSTOM_ID: setup-comment-toolsel
+:LAST_MODIFIED: [2025-07-18 Fri 22:10]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-:PROPERTIES:
-:CUSTOM_ID: setup-comment-toolsel
-:LAST_MODIFIED: [2025-07-15 Tue 19:04]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
-of 2025-07-06
-:END:
+
+I'm a big fan of the look of banner comments but trying to set a custom prefix it wasn't clear how to keep the language-adaptive comment symbol and add a string afterwards. I always want a space
+#+name: comment tools
 #+begin_src emacs-lisp :tangle config/setup-comment-tools.el
 ;;; setup-comment-tools.el ---  -*- lexical-binding: t; -*-
 ;;; Commentary:
@@ -1273,6 +1271,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-comment-tools.el ends here
 #+end_src
+
 
 *** setup-completion-actions.el
 :PROPERTIES:
@@ -3216,6 +3215,8 @@ These packages have the distinction of being useful but I don't use them enough,
 *** setup-markdown.el
 :PROPERTIES:
 :CUSTOM_ID: setup-markdownel
+:LAST_MODIFIED: [2025-07-18 Fri 22:33]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-markdown.el
 ;;; config/setup-markdown.el --- Markdown configuration -*- lexical-binding: t -*-
@@ -3227,6 +3228,7 @@ These packages have the distinction of being useful but I don't use them enough,
   :init (setq markdown-command "multimarkdown")
   :config
   (setopt markdown-fontify-code-blocks-natively t)
+  :general
   (despot-def markdown-mode-map
     "RET"   'markdown-do
     "M-RET" 'markdown-insert-list-item
@@ -4625,7 +4627,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 *** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-07-18 Fri 03:40]
+:LAST_MODIFIED: [2025-07-18 Fri 22:59]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -4690,7 +4692,16 @@ Just put this function in `hippie-expand-try-functions-list'."
   )
 
 (use-package spacious-padding
-  :config (setopt spacious-padding-subtle-mode-line t)
+  :hook elpaca-after-init
+  :config (setopt spacious-padding-subtle-frame-lines t
+                  spacious-padding-widths '(:internal-border-width 10
+                                            :header-line-width 4
+                                            :mode-line-width 4
+                                            :tab-width 4
+                                            :right-divider-width 0
+                                            :scroll-bar-width 4
+                                            :fringe-width 4)
+                  )
   )
 
 
