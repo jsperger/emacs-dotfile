@@ -1,4 +1,4 @@
-;;; lisp/my-lsp-bridge-helpers.el --- Helper functions for lsp-bridge -*- lexical-binding: t -*-
+;;; my-lsp-bridge-helpers.el --- Helper functions for lsp-bridge -*- lexical-binding: t -*-
 
 (defvar lsp-bridge-venv-path
 	(no-littering-expand-var-file-name "lsp-bridge-env")

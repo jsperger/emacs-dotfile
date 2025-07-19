@@ -1,4 +1,4 @@
-;;; lisp/my-org-helpers.el --- Helper functions for org-mode -*- lexical-binding: t -*-
+;;; my-org-helpers.el --- Helper functions for org-mode -*- lexical-binding: t -*-
 
 (defun my/org-toggle-hidden-emphasis-markers ()
   "Toggle whether markup should be hidden in 'org-mode'."
@@ -33,7 +33,6 @@ corresponding ':tangle' header argument."
           (unless (string-suffix-p "\n" file-contents)
             (insert "\n"))
           (insert "#+end_src\n\n"))))))
-
 (defun my/org-update-subtree-modification-info ()
   "Update modification info in the current subtree's properties.
 Sets 'LAST_MODIFIED' timestamp and 'MODIFIED_WITH_EMACS' version.
@@ -50,6 +49,5 @@ Intended for `before-save-hook` in an Org mode buffer."
         ;; Set the Emacs version in the same property drawer.
         (org-entry-put nil "MODIFIED_WITH_EMACS" emacs-version-short))))
  )
-
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here

@@ -1,4 +1,4 @@
-;;; lisp/my-core-helpers.el --- Helper functions for core config -*- lexical-binding: t -*-
+;;; my-core-helpers.el --- Helper functions for core config -*- lexical-binding: t -*-
 
 (defun system-move-file-to-trash (file)
   "Use \"trash\" to move FILE to the system trash."

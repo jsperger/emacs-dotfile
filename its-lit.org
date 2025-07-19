@@ -5079,11 +5079,11 @@ Just put this function in `hippie-expand-try-functions-list'."
 *** my-core-functions.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-functionsel
-:LAST_MODIFIED: [2025-07-15 Tue 22:32]
+:LAST_MODIFIED: [2025-07-18 Fri 21:39]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-core-functions.el
-;;; lisp/my-core-functions.el --- Core functions -*- lexical-binding: t -*-
+;;; my-core-functions.el --- Core functions -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2024-2025  John Sperger
 
@@ -5483,9 +5483,11 @@ a dedicated window."
 *** my-core-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-helpersel
+:LAST_MODIFIED: [2025-07-18 Fri 21:39]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-core-helpers.el
-;;; lisp/my-core-helpers.el --- Helper functions for core config -*- lexical-binding: t -*-
+;;; my-core-helpers.el --- Helper functions for core config -*- lexical-binding: t -*-
 
 (defun system-move-file-to-trash (file)
   "Use \"trash\" to move FILE to the system trash."
@@ -5579,9 +5581,11 @@ the unwritable tidbits."
 *** my-editor-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-editor-helpersel
+:LAST_MODIFIED: [2025-07-18 Fri 21:39]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-editor-helpers.el
-;;; lisp/my-editor-helpers.el --- Helper functions for editor -*- lexical-binding: t -*-
+;;; my-editor-helpers.el --- Helper functions for editor -*- lexical-binding: t -*-
 
 (defun helpful-reuse-window (buffer-or-name)
   "Switch to helpful BUFFER-OR-NAME.
@@ -5628,9 +5632,11 @@ stays on current"
 *** my-keybinding-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-keybinding-helpersel
+:LAST_MODIFIED: [2025-07-18 Fri 21:39]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-keybinding-helpers.el
-;;; lisp/my-keybinding-helpers.el --- Keybinding helper functions -*- lexical-binding: t -*-
+;;; my-keybinding-helpers.el --- Keybinding helper functions -*- lexical-binding: t -*-
 
 (defun my-view-leader-keys ()
   "Display all keybindings defined in the `tyrant-map`.
@@ -5646,9 +5652,11 @@ This provides a consolidated view of all global leader keys."
 *** my-lang-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-lang-helpersel
+:LAST_MODIFIED: [2025-07-18 Fri 21:39]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-lang-helpers.el
-;;; lisp/my-lang-helpers.el --- Language helper functions -*- lexical-binding: t -*-
+;;; my-lang-helpers.el --- Language helper functions -*- lexical-binding: t -*-
 
 ; ================================== R ================================== ;
 (defun oc-set-ess-offset-indent ()
@@ -5697,9 +5705,11 @@ This provides a consolidated view of all global leader keys."
 *** my-lsp-bridge-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-lsp-bridge-helpersel
+:LAST_MODIFIED: [2025-07-18 Fri 21:39]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-lsp-bridge-helpers.el
-;;; lisp/my-lsp-bridge-helpers.el --- Helper functions for lsp-bridge -*- lexical-binding: t -*-
+;;; my-lsp-bridge-helpers.el --- Helper functions for lsp-bridge -*- lexical-binding: t -*-
 
 (defvar lsp-bridge-venv-path
 	(no-littering-expand-var-file-name "lsp-bridge-env")
@@ -5741,11 +5751,11 @@ This provides a consolidated view of all global leader keys."
 *** my-org-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-org-helpersel
-:LAST_MODIFIED: [2025-07-18 Fri 21:36]
+:LAST_MODIFIED: [2025-07-18 Fri 21:39]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-org-helpers.el
-;;; lisp/my-org-helpers.el --- Helper functions for org-mode -*- lexical-binding: t -*-
+;;; my-org-helpers.el --- Helper functions for org-mode -*- lexical-binding: t -*-
 
 (defun my/org-toggle-hidden-emphasis-markers ()
   "Toggle whether markup should be hidden in 'org-mode'."
@@ -5803,9 +5813,11 @@ Intended for `before-save-hook` in an Org mode buffer."
 *** my-theme-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-theme-helpersel
+:LAST_MODIFIED: [2025-07-18 Fri 21:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-theme-helpers.el
-;;; lisp/my-theme-helpers.el --- Helper functions for themes -*- lexical-binding: t -*-
+;;; my-theme-helpers.el --- Helper functions for themes -*- lexical-binding: t -*-
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")
@@ -5859,15 +5871,12 @@ Intended for `before-save-hook` in an Org mode buffer."
 
 *** my-vc-helpers.el
 :PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 21:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: my-vc-helpersel
 :END:
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-15 Tue 18:33]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
-of 2025-07-06
-:END:
 #+begin_src emacs-lisp :tangle lisp/my-vc-helpers.el
-;;; lisp/my-vc-helpers.el --- Helper functions for version control -*- lexical-binding: t -*-
+;;; my-vc-helpers.el --- Helper functions for version control -*- lexical-binding: t -*-
 
 (defun org-reveal-advice (&rest _args)
   "Unfold the org headings for a target line.

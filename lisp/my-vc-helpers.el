@@ -1,4 +1,4 @@
-;;; lisp/my-vc-helpers.el --- Helper functions for version control -*- lexical-binding: t -*-
+;;; my-vc-helpers.el --- Helper functions for version control -*- lexical-binding: t -*-
 
 (defun org-reveal-advice (&rest _args)
   "Unfold the org headings for a target line.

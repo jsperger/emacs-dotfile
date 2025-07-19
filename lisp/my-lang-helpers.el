@@ -1,4 +1,4 @@
-;;; lisp/my-lang-helpers.el --- Language helper functions -*- lexical-binding: t -*-
+;;; my-lang-helpers.el --- Language helper functions -*- lexical-binding: t -*-
 
 ; ================================== R ================================== ;
 (defun oc-set-ess-offset-indent ()

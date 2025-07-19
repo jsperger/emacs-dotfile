@@ -1,4 +1,4 @@
-;;; lisp/my-theme-helpers.el --- Helper functions for themes -*- lexical-binding: t -*-
+;;; my-theme-helpers.el --- Helper functions for themes -*- lexical-binding: t -*-
 
 (defvar after-load-theme-hook nil
   "Hook run after a color theme is loaded using `load-theme'.")

@@ -1,4 +1,4 @@
-;;; lisp/my-editor-helpers.el --- Helper functions for editor -*- lexical-binding: t -*-
+;;; my-editor-helpers.el --- Helper functions for editor -*- lexical-binding: t -*-
 
 (defun helpful-reuse-window (buffer-or-name)
   "Switch to helpful BUFFER-OR-NAME.

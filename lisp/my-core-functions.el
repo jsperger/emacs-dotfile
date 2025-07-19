@@ -1,4 +1,4 @@
-;;; lisp/my-core-functions.el --- Core functions -*- lexical-binding: t -*-
+;;; my-core-functions.el --- Core functions -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2024-2025  John Sperger
 

@@ -1,4 +1,4 @@
-;;; lisp/my-keybinding-helpers.el --- Keybinding helper functions -*- lexical-binding: t -*-
+;;; my-keybinding-helpers.el --- Keybinding helper functions -*- lexical-binding: t -*-
 
 (defun my-view-leader-keys ()
   "Display all keybindings defined in the `tyrant-map`.

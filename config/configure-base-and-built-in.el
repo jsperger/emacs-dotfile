@@ -192,4 +192,4 @@
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; setup-builtin-packages.el ends here
+;;; configure-base-and-built-in ends here
