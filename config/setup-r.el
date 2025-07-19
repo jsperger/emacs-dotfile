@@ -28,7 +28,12 @@
                         (ess-indent-with-fancy-comments . nil))
                       )
   (ess-style 'OWN)
-  :config
+  :config (setopt  ess-ido-flex-matching nil
+                   ess-use-R-completion nil
+                   ess-use-company nil
+                   ess-use-flymake nil
+                   ess-use-ido nil
+                   )
   :general
   (despot-def (ess-r-mode-map)
     :major-modes '(ess-r-mode R-mode)

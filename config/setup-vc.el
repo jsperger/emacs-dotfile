@@ -7,11 +7,9 @@
   )
 
 (use-package magit
-  :init
-  (setq	 magit-define-global-key-bindings nil
-         forge-add-default-bindings nil
-         )
-  
+  :init (setq magit-define-global-key-bindings nil
+              forge-add-default-bindings nil
+              )
   :hook (magit-diff-mode . (lambda () (toggle-truncate-lines -1)))
   :config
   (setopt magit-diff-refine-hunk t
@@ -31,8 +29,7 @@
   (advice-add 'magit-diff-visit-worktree-file :after #'org-reveal-advice)
 
   :general
-  (tyrant-def
-    "g"   (cons "git" (make-sparse-keymap))
+  (tyrant-def "g" (cons "git" (make-sparse-keymap))
     "gb"  'magit-blame
     "gc"  'magit-clone
     "gd"  'magit-diff
@@ -42,56 +39,55 @@
     "gm"  'magit-dispatch
     "gs"  'magit-status
     "gS"  'magit-stage-file
-    "gU"  'magit-unstage-file)
+    "gU"  'magit-unstage-file
+    )
   (despot-def '(magit-status-mode-map)
-		:major-modes '(magit-status-mode)
+    :major-modes '(magit-status-mode)
     "b"  'magit-blame
     "c"  'magit-commit
     "d"  'magit-diff
-		)
+    )
   )
 
 (use-package forge
   :after magit
-  :init
-  (setq	 auth-sources '("~/.authinfo.gpg")
-         forge-database-connector 'sqlite-builtin
-         )
-  :general
-  (general-def magit-mode-map "@" 'forge-dispatch)
+  :init  (setq	 auth-sources '("~/.authinfo.gpg")
+                 forge-database-connector 'sqlite-builtin
+                 )
   )
 
 (use-package transient
   :after vc magit
   :general
   (general-def transient-base-map   "q" 'transient-quit-one)
-  (general-def transient-sticky-map "q" 'transient-quit-seq))
+  (general-def transient-sticky-map "q" 'transient-quit-seq)
+  )
 
 (use-package browse-at-remote
   :after vc magit
   :general
-  (tyrant-def "go" 'browse-at-remote))
+  (tyrant-def "go" 'browse-at-remote)
+  )
 
 (use-package diff-hl
-  :after vc magit 
-	:hook (magit-pre-refresh . diff-hl-magit-pre-refresh)
-	(magit-post-refresh . diff-hl-magit-post-refresh)
-	:custom (global-diff-hl-mode 1)
-  :config
-  (setopt diff-hl-side 'right)
-
+  :after vc magit
+  :hook (magit-pre-refresh . diff-hl-magit-pre-refresh)
+        (magit-post-refresh . diff-hl-magit-post-refresh)
+  :custom (global-diff-hl-mode 1)
+  :config (setopt diff-hl-side 'right)
+  :general
   (general-def 'normal
     "[ h" '(diff-hl-previous-hunk :jump t)
-    "] h" '(diff-hl-next-hunk :jump t)))
+    "] h" '(diff-hl-next-hunk :jump t))
+  )
 
 (use-package git-modes
-	:mode ("\\.gitignore\\\'" . gitignore-mode)
+  :mode ("\\.gitignore\\\'" . gitignore-mode)
   :after vc magit)
 
 (use-package git-link
   :after vc magit
-  :config
-  (setq git-link-open-in-browser t)
+  :config (setopt git-link-open-in-browser t)
   :general
   (tyrant-def
     "gL"  (cons "links" (make-sparse-keymap))
@@ -99,7 +95,8 @@
     "gLC" 'git-link-commit-copy-url-only
     "gLl" 'git-link
     "gLL" 'git-link-copy-url-only
-    "gLh" 'git-link-homepage))
+    "gLh" 'git-link-homepage)
+  )
 
 (use-package git-cliff
 	:disabled
@@ -128,7 +125,6 @@
 
 (use-package magit-todos
   :after magit
-  :hook magit-status-mode
   :config (magit-todos-mode 1)
   )
 

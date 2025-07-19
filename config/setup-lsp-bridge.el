@@ -3,6 +3,7 @@
 (require 'my-lsp-bridge-helpers)
 
 (use-package lsp-bridge
+  :after yasnippet
   :ensure (lsp-bridge
            :type git :host github :repo "manateelazycat/lsp-bridge"
            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")

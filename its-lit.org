@@ -376,7 +376,7 @@ Emacs packages
 ;; Declarations to executed immediately. I.e. those with elpaca
 ;; :ensure (:wait t)
 ;; :demand t
-(load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
+ (load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
 
 ;=========================== Load lisp defuns ==========================
 ;; Add personal `lisp` directory to the load-path
@@ -390,69 +390,69 @@ Emacs packages
  (require 'my-lang-helpers)
  (require 'my-lsp-bridge-helpers)
  (require 'my-org-helpers)
- (require 'my-theme-helpers)
- (require 'my-vc-helpers)
+(require 'my-theme-helpers)
+(require 'my-vc-helpers)
 
 ;; General delcarations that can be handled by elpaca/use-package queueing
-(let ((config-dir (expand-file-name "config" user-emacs-directory)))
-  (dolist (file
-           '(
-             ;; "setup-bib.el"
-             "configure-base-and-built-in.el"
-             "configure-keybinding.el"
+ (let ((config-dir (expand-file-name "config" user-emacs-directory)))
+   (dolist (file
+            '(
+              ;; "setup-bib.el"
+              "configure-base-and-built-in.el"
+              "configure-keybinding.el"
              ;; "setup-casual.el"
-             "setup-comment-tools.el"
-             ;; "setup-completion-actions.el"
-             "setup-completion-backends.el"
-             "setup-completion-display.el"
-             "setup-completion.el"
-             "setup-consult.el"
-             "setup-core.el"
+              "setup-comment-tools.el"
+;;              ;; "setup-completion-actions.el"
+              "setup-completion-backends.el"
+              "setup-completion-display.el"
+              "setup-completion.el"
+              "setup-consult.el"
+;;              "setup-core.el"
              ;; "setup-data-formats.el"
              ;; "setup-denote.el"
              ;; "setup-diagramming.el"
              ;; "setup-eaf.el"
-             "setup-editor-misc.el"
+;;             "setup-editor-misc.el"
              ;; "setup-emacs.el"
-             ;; "setup-email.el"
-             "setup-evil-addons.el"
-             "setup-font-locking.el"
-             "setup-fonts.el"
-             ;; "setup-go.el"
-             ;; "setup-gopher.el"
-             "setup-help.el"
-             ;; "setup-icons.el"
-             ;; "setup-lisp.el"
-             "setup-llm.el"
-             "setup-lsp-bridge.el"
-             "setup-markdown.el"
-             ;; "setup-media.el"
-             "setup-modeline.el"
-             ;; "setup-notes.el"
-             ;; "setup-org-capture.el"
-             ;; "setup-org-node.el"
-             "setup-org.el"
-             ;; "setup-programming.el"
-             ;; "setup-projects.el"
-             ;; "setup-python.el"
-             "setup-r.el"
-             "setup-reading.el"
-             ;; "setup-rust.el"
-             "setup-search.el"
-             "setup-snippets.el"
-             ;; "setup-tex.el"
-             "setup-themes.el"
-             ;; "setup-treesit.el"
-             "setup-ui.el"
-             "setup-outlining.el"
-             "setup-vc.el"
-             ;; "setup-web.el"
-             ;; "setup-writing.el"
-             )
-           )
-    (load-file (expand-file-name file config-dir))
-    )
-  )
+;;              ;; "setup-email.el"
+              "setup-evil-addons.el"
+;;              "setup-font-locking.el"
+;;              "setup-fonts.el"
+;;              ;; "setup-go.el"
+;;              ;; "setup-gopher.el"
+;;              "setup-help.el"
+;;              ;; "setup-icons.el"
+;;              ;; "setup-lisp.el"
+;;              "setup-llm.el"
+              "setup-lsp-bridge.el"
+;;              "setup-markdown.el"
+;;              ;; "setup-media.el"
+;;              "setup-modeline.el"
+;;              ;; "setup-notes.el"
+;;              ;; "setup-org-capture.el"
+;;              ;; "setup-org-node.el"
+              "setup-org.el"
+;;              ;; "setup-programming.el"
+              ;; "setup-projects.el"
+              ;; "setup-python.el"
+              "setup-r.el"
+;;              "setup-reading.el"
+              ;; "setup-rust.el"
+;;              "setup-search.el"
+              "setup-snippets.el"
+              ;; "setup-tex.el"
+;;              "setup-themes.el"
+              ;; "setup-treesit.el"
+;;              "setup-ui.el"
+;;              "setup-outlining.el"
+;;              "setup-vc.el"
+              ;; "setup-web.el"
+              ;; "setup-writing.el"
+              )
+            )
+     (load-file (expand-file-name file config-dir))
+     )
+   )
 
 
 ;=============================== Customs ===============================
@@ -505,7 +505,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 **** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-07-18 Fri 17:47]
+:LAST_MODIFIED: [2025-07-18 Fri 21:51]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -1180,7 +1180,7 @@ I really need to learn how to use =ediff= properly
 **** Base and built-in configuration footer
 :PROPERTIES:
 :CUSTOM_ID: base-built-in-footer
-:LAST_MODIFIED: [2025-07-18 Fri 18:01]
+:LAST_MODIFIED: [2025-07-18 Fri 19:04]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -1190,7 +1190,7 @@ I really need to learn how to use =ediff= properly
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; setup-builtin-packages.el ends here
+;;; configure-base-and-built-in ends here
 #+end_src
 **** Removed declarations
 :PROPERTIES:
@@ -3070,6 +3070,8 @@ These packages have the distinction of being useful but I don't use them enough,
 *** setup-lsp-bridge.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lsp-bridgeel
+:LAST_MODIFIED: [2025-07-18 Fri 20:32]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-lsp-bridge.el
 ;;; config/setup-lsp-bridge.el --- lsp-bridge configuration -*- lexical-binding: t -*-
@@ -3077,6 +3079,7 @@ These packages have the distinction of being useful but I don't use them enough,
 (require 'my-lsp-bridge-helpers)
 
 (use-package lsp-bridge
+  :after yasnippet
   :ensure (lsp-bridge
            :type git :host github :repo "manateelazycat/lsp-bridge"
            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
@@ -4244,6 +4247,8 @@ Just put this function in `hippie-expand-try-functions-list'."
 **** setup-r.el
 :PROPERTIES:
 :CUSTOM_ID: setup-rel
+:LAST_MODIFIED: [2025-07-18 Fri 21:46]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-r.el
 ;;; config/setup-r.el --- R language configuration -*- lexical-binding: t -*-
@@ -4276,7 +4281,12 @@ Just put this function in `hippie-expand-try-functions-list'."
                         (ess-indent-with-fancy-comments . nil))
                       )
   (ess-style 'OWN)
-  :config
+  :config (setopt  ess-ido-flex-matching nil
+                   ess-use-R-completion nil
+                   ess-use-company nil
+                   ess-use-flymake nil
+                   ess-use-ido nil
+                   )
   :general
   (despot-def (ess-r-mode-map)
     :major-modes '(ess-r-mode R-mode)
@@ -4794,7 +4804,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 *** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
-:LAST_MODIFIED: [2025-07-18 Fri 21:42]
+:LAST_MODIFIED: [2025-07-18 Fri 22:00]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-vc.el
@@ -4807,12 +4817,10 @@ Just put this function in `hippie-expand-try-functions-list'."
   )
 
 (use-package magit
-  :init
-  (setq
-	 magit-define-global-key-bindings nil
-	 forge-add-default-bindings nil
-	 )
-	:hook (magit-diff-mode . (lambda () (toggle-truncate-lines -1)))
+  :init (setq magit-define-global-key-bindings nil
+              forge-add-default-bindings nil
+              )
+  :hook (magit-diff-mode . (lambda () (toggle-truncate-lines -1)))
   :config
   (setopt magit-diff-refine-hunk t
         magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
@@ -4831,8 +4839,7 @@ Just put this function in `hippie-expand-try-functions-list'."
   (advice-add 'magit-diff-visit-worktree-file :after #'org-reveal-advice)
 
   :general
-  (tyrant-def
-    "g"   (cons "git" (make-sparse-keymap))
+  (tyrant-def "g" (cons "git" (make-sparse-keymap))
     "gb"  'magit-blame
     "gc"  'magit-clone
     "gd"  'magit-diff
@@ -4842,55 +4849,55 @@ Just put this function in `hippie-expand-try-functions-list'."
     "gm"  'magit-dispatch
     "gs"  'magit-status
     "gS"  'magit-stage-file
-    "gU"  'magit-unstage-file)
-	(despot-def '(magit-status-mode-map)
-		:major-modes '(magit-status-mode)
+    "gU"  'magit-unstage-file
+    )
+  (despot-def '(magit-status-mode-map)
+    :major-modes '(magit-status-mode)
     "b"  'magit-blame
     "c"  'magit-commit
     "d"  'magit-diff
-		)
-	)
+    )
+  )
 
 (use-package forge
   :after magit
-  :init
-  (setq
-	 auth-sources '("~/.authinfo.gpg")
-   forge-database-connector 'sqlite-builtin
-	 )
-	)
+  :init  (setq	 auth-sources '("~/.authinfo.gpg")
+                 forge-database-connector 'sqlite-builtin
+                 )
+  )
 
 (use-package transient
   :after vc magit
   :general
   (general-def transient-base-map   "q" 'transient-quit-one)
-  (general-def transient-sticky-map "q" 'transient-quit-seq))
+  (general-def transient-sticky-map "q" 'transient-quit-seq)
+  )
 
 (use-package browse-at-remote
   :after vc magit
   :general
-  (tyrant-def "go" 'browse-at-remote))
+  (tyrant-def "go" 'browse-at-remote)
+  )
 
 (use-package diff-hl
-  :after vc magit 
-	:hook (magit-pre-refresh . diff-hl-magit-pre-refresh)
-	(magit-post-refresh . diff-hl-magit-post-refresh)
-	:custom (global-diff-hl-mode 1)
-  :config
-  (setopt diff-hl-side 'right)
-
+  :after vc magit
+  :hook (magit-pre-refresh . diff-hl-magit-pre-refresh)
+        (magit-post-refresh . diff-hl-magit-post-refresh)
+  :custom (global-diff-hl-mode 1)
+  :config (setopt diff-hl-side 'right)
+  :general
   (general-def 'normal
     "[ h" '(diff-hl-previous-hunk :jump t)
-    "] h" '(diff-hl-next-hunk :jump t)))
+    "] h" '(diff-hl-next-hunk :jump t))
+  )
 
 (use-package git-modes
-	:mode ("\\.gitignore\\\'" . gitignore-mode)
+  :mode ("\\.gitignore\\\'" . gitignore-mode)
   :after vc magit)
 
 (use-package git-link
   :after vc magit
-  :config
-  (setq git-link-open-in-browser t)
+  :config (setopt git-link-open-in-browser t)
   :general
   (tyrant-def
     "gL"  (cons "links" (make-sparse-keymap))
@@ -4898,7 +4905,8 @@ Just put this function in `hippie-expand-try-functions-list'."
     "gLC" 'git-link-commit-copy-url-only
     "gLl" 'git-link
     "gLL" 'git-link-copy-url-only
-    "gLh" 'git-link-homepage))
+    "gLh" 'git-link-homepage)
+  )
 
 (use-package git-cliff
 	:disabled
