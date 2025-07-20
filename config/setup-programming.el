@@ -21,15 +21,6 @@
  '(typespec "https://github.com/happenslol/tree-sitter-typespec"))
 	)
 
-(use-package code-cells
-	:disabled
-	:mode ("\\([ipynb]\\)\\'" . code-cells-mode))
-
-(use-package drepl
-	:disabled
-	:general
-	(trant-def "ci" 'drepl-ipython))
-
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

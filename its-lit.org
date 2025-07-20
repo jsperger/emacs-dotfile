@@ -1,6 +1,3 @@
-:PROPERTIES:
-:TOC:      :include siblings :depth 1 :force (depth) :ignore (this) :local (nothing)
-:END:
 #+title: John's Emacs Configuration
 #+subtitle: And scattered esoterica to help my future self
 #+author: John Sperger
@@ -160,7 +157,7 @@ Work in progress
 :PROPERTIES:
 :TOC:      :include all :depth 4 :force (nothing) :ignore (nothing) :local (nothing)
 :CUSTOM_ID: detailed-outline
-:LAST_MODIFIED: [2025-07-20 Sun 03:34]
+:LAST_MODIFIED: [2025-07-20 Sun 04:32]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 :CONTENTS:
@@ -181,11 +178,10 @@ Work in progress
   - [[#initel][init.el]]
 - [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
   - [[#one-stop-keybinding-shop][One stop keybinding shop]]
-  - [[#bibliography-management][Bibliography management]]
   - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
   - [[#editor-utilities-and-core-functionality][Editor utilities and "core" functionality]]
   - [[#configure-all-things-org-mode][Configure all things org mode]]
-  - [[#configure-programming-language-specific-options][Configure (programming) language-specific options]]
+  - [[#configure-programming-language-specific-modes-and-options][Configure (programming) language-specific modes and options]]
   - [[#configure-theming][Configure theming]]
   - [[#configure-completion-frameworks][Configure completion frameworks]]
   - [[#setup-denoteel][setup-denote.el]]
@@ -199,7 +195,6 @@ Work in progress
   - [[#setup-goel][setup-go.el]]
   - [[#setup-gopherel][setup-gopher.el]]
   - [[#setup-iconsel][setup-icons.el]]
-  - [[#setup-lispel][setup-lisp.el]]
   - [[#setup-llmel][setup-llm.el]]
   - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
   - [[#setup-lspel][setup-lsp.el]]
@@ -215,6 +210,7 @@ Work in progress
   - [[#setup-uiel][setup-ui.el]]
   - [[#setup-vcel][setup-vc.el]]
   - [[#setup-webel][setup-web.el]]
+  - [[#bibliography-management][Bibliography management]]
   - [[#setup-writingel][setup-writing.el]]
 - [[#lisp-functions][Lisp functions]]
   - [[#my-core-functionsel][my-core-functions.el]]
@@ -512,7 +508,7 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-20 Sun 03:58]
+:LAST_MODIFIED: [2025-07-20 Sun 04:32]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -550,6 +546,7 @@ mistakes in my configuration.
              "configure-org.el"
              "configure-theming.el"
              "configure-utilities.el"
+             "configure-prog-langs.el"
              ;; "setup-casual.el"
              ;;              ;; "setup-completion-actions.el"
              "setup-completion-backends.el"
@@ -576,11 +573,7 @@ mistakes in my configuration.
              ;;              ;; "setup-notes.el"
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
-             ;; "setup-python.el"
-             "setup-r.el"
              ;;              "setup-reading.el"
-             ;; "setup-rust.el"
-             ;; "setup-tex.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
              "setup-vc.el"
@@ -1036,62 +1029,6 @@ I need to move most of these out of here and put them in the relavent package de
 ;; End:
 ;;; configure-keybinding.el ends here
 #+end_src
-** Bibliography management
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 02:30]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: bibliography-management
-:END:
-#+begin_src emacs-lisp :tangle config/setup-bib.el 
-;;; setup-bib --- bibliography management -*- lexical-binding: t; -*-
-(use-package bibtex
-  :ensure nil
-  )
-
-(use-package citar
-  :after bibtex auctex
-  :hook ((org-mode LaTeX-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
-  :init
-
-  (with-eval-after-load 'embark
-    (defvar-keymap bibtex-key-embark-map
-      :doc "Embark keymap for Zetteldeft links"
-      :parent embark-general-map
-      "f" #'citar-open
-      "n" #'citar-open-notes)
-    (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map))
-    )
-
-  :general
-  (tyrant-def "aC" 'citar-open)
-
-  :custom
-  (citar-at-point-function 'embark-act)
-  (citar-bibliography '("~/obsidian/obsidian-biblatex.bib"))
-  )
-
-
-(use-package citar-embark
-  :after citar embark
-  :config
-  (citar-embark-mode)
-  (defun citar-setup-capf ()
-  "add `citar-capf' to `completion-at-point-functions'"
-  (add-to-list 'completion-at-point-functions #'citar-capf))
-
-)
-
-(use-package ebib
-	:general
-	(tyrant-def "d" 'ebib))
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-bib.el ends here
-#+end_src
-
 ** Configure base emacs options and built-in packages
 :PROPERTIES:
 :CUSTOM_ID: configure-base-emacs-options-and-built-in-packages
@@ -2318,53 +2255,126 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;;; configure-org.el ends here
 #+end_src
 
-** Configure (programming) language-specific options
+** Configure (programming) language-specific modes and options
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 05:02]
+:LAST_MODIFIED: [2025-07-20 Sun 04:36]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: configure-programming-language-specific-options
+:CUSTOM_ID: configure-programming-language-specific-modes-and-options
+:header-args: :tangle config/configure-prog-langs.el :comments noweb
 :END:
-*** setup-python.el
+
+#+name: Programming languages header
+#+begin_src emacs-lisp :comments no
+;;; configure-prog-langs.el --- lang-specific -*- lexical-binding: t -*-
+;;; Commentary:
+;; Configuration that's programming language specific
+;; So LSP config doesn't live here
+;;; Code:
+
+#+end_src
+*** Lisp-based languages
 :PROPERTIES:
-:CUSTOM_ID: setup-pythonel
+:CUSTOM_ID: setup-lisp-programming
+:LAST_MODIFIED: [2025-07-20 Sun 04:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-python.el
-;;; config/setup-python.el --- Python configuration -*- lexical-binding: t -*-
-
-(use-package python-x
-	)
-
-(use-package live-py-mode
-	:general
-	  (despot-def (python-mode-map)
-    :major-modes '(python-mode python-ts-mode)
-    "l" 'live-py-mode
+#+begin_src emacs-lisp 
+;;;; ========================= Lisp languages ==========================
+(use-package slime
+	:hook (elisp-mode . slime-mode)
+  :config
+	(setopt inferior-lisp-program "sbcl")
+	(add-hook 'slime-mode-hook (setq-local lsp-bridge-mode -1))
+  :general
+  (despot-def (slime-mode-map)
+    :major-modes 'slime-mode
+    "b" 'slime-eval-buffer
+    "c" 'slime-compile-defun
+    "k" 'slime-compile-and-load-file
+    "f"  'ad-Advice-slime-eval-defun
+    "r" 'slime-eval-region
     )
+  )
+
+(use-package elisp-mode
+  :ensure nil
+  :config
+  (despot-def :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
+    "'"  'ielm
+    "c"  (cons "compile" (make-sparse-keymap))
+    "cc" 'emacs-lisp-byte-compile
+    "e"  (cons "eval" (make-sparse-keymap))
+    "eb" 'eval-buffer
+    "ee" 'eval-last-sexp
+    "er" 'eval-region
+    "ef" 'eval-defun
+    "t"  (cons "tests" (make-sparse-keymap))
+    "tb" 'ert-run-tests-buffer
+    "tq" 'ert)
+  )
+
+(use-package racket-mode
+	:mode ("\\.rkt\\" . racket-mode)
 	)
-
-(use-package uv-mode
-	:hook (python-mode . uv-mode))
-
-(use-package pyenv-mode
-	:disabled)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-python.el ends here
 #+end_src
 
-*** setup-r.el
+*** Python configuration
 :PROPERTIES:
-:CUSTOM_ID: setup-rel
-:LAST_MODIFIED: [2025-07-18 Fri 21:46]
+:CUSTOM_ID: setup-pythonel
+:LAST_MODIFIED: [2025-07-20 Sun 04:49]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-r.el
-;;; config/setup-r.el --- R language configuration -*- lexical-binding: t -*-
+#+begin_src emacs-lisp 
+;;;; ============================== Python ==============================
+(use-package uv-mode
+	:hook (python-mode . uv-mode)
+  )
+#+end_src
 
+**** Disabled python packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 04:33]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Need time to figure these out but possible options for making Python more
+interactive/enhance the REPL loop.
+
+#+name: Python REPL/live coding 
+#+begin_src emacs-lisp :tangle no :eval no :comments no
+(use-package python-x)
+
+(use-package live-py-mode
+  :general (despot-def (python-mode-map)
+             :major-modes '(python-mode python-ts-mode)
+             "l" 'live-py-mode
+             )
+  )
+
+(use-package code-cells
+	:disabled
+	:mode ("\\([ipynb]\\)\\'" . code-cells-mode))
+
+(use-package drepl
+	:disabled
+	:general (trant-def "ci" 'drepl-ipython)
+  )
+#+end_src
+
+#+begin_src emacs-lisp :tangle no :eval no :comments no
+(use-package pyenv-mode
+	:disabled)
+#+end_src
+*** R programming
+:PROPERTIES:
+:CUSTOM_ID: setup-rel
+:LAST_MODIFIED: [2025-07-20 Sun 04:27]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+I need to go over this again, ess was refusing to respect my style and there's
+a bunch of repeated configuration.
+#+begin_src emacs-lisp 
 (use-package ess
   :mode ("\([rR]\)\'" . R-mode)
   :init
@@ -2412,84 +2422,78 @@ Disabling this until I have time to sit down and give it an honest effort.
     )
   )
 
-(use-package r-ts-mode
-  :disabled
-  :hook (R-mode . r-ts-mode)
-  :ensure (r-ts-mode
-	   :type git :host github :repo "nverno/r-ts-mode"))
-
 (use-package essgd
 	:general
-	  (despot-def (ess-r-mode-map)
-			:major-modes 'ess-r-mode
-			"g" 'essgd-start)
+	(despot-def (ess-r-mode-map)
+		:major-modes 'ess-r-mode
+		"g" 'essgd-start)
 	)
-
-(use-package ess-view-data
-	:disabled)
 
 (use-package poly-R
   :mode ("\\.qmd\\'" . poly-markdown+R-mode)
   )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-r.el ends here
 #+end_src
 
-*** setup-rust.el
+**** Disabled R packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 04:28]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no :eval no :comments no
+(use-package r-ts-mode
+  :disabled
+  :hook (R-mode . r-ts-mode)
+  :ensure (r-ts-mode
+	   :type git :host github :repo "nverno/r-ts-mode")
+  )
+
+(use-package ess-view-data
+	:disabled)
+#+end_src
+*** Rust programming
 :PROPERTIES:
 :CUSTOM_ID: setup-rustel
+:LAST_MODIFIED: [2025-07-20 Sun 04:56]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-rust.el
-;;; config/setup-rust.el --- Rust language configuration -*- lexical-binding: t -*-
-
+#+begin_src emacs-lisp 
 (use-package rust-mode
-	:mode ("\\.rs\\\'" . rust-mode)
+	:mode ("\\.rs\\'" . rust-mode)
   :general
   (despot-def (rust-mode-map)
-      :major-modes '(rust-ts-mode rust-mode)
-      "c"            'rust-compile
-			"k" 'rust-check
-			"t" 'rust-test
-			"r" 'rust-run
-			"F" 'rust-format-buffer)
+    :major-modes '(rust-ts-mode rust-mode)
+    "c"            'rust-compile
+		"k" 'rust-check
+		"t" 'rust-test
+		"r" 'rust-run
+		"F" 'rust-format-buffer)
 	)
 
 (use-package cargo-mode
-  :hook
-  (rust-mode . cargo-minor-mode)
-  :config
-  (setopt compilation-scroll-output t
-			rust-format-on-save t)
-	:general
-	(despot-def (rust-mode-map)
-		:major-modes '(rust-mode rust-ts-mode)
-		"e" 'cargo-mode-execute-task
-		"t" 'cargo-mode-test
-		"l" 'cargo-mode-last-command
-		"b" 'cargo-mode-build
-		"o" 'cargo-mode-test-current-buffer
-		"f" 'cargo-mode-test-current-test)
-	)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-rust.el ends here
-
+  :hook (rust-mode . cargo-minor-mode)
+  :config  (setopt compilation-scroll-output t
+                   rust-format-on-save t)
+  :general (despot-def (rust-mode-map)
+             :major-modes '(rust-mode rust-ts-mode)
+             "e" 'cargo-mode-execute-task
+             "t" 'cargo-mode-test
+             "l" 'cargo-mode-last-command
+             "b" 'cargo-mode-build
+             "o" 'cargo-mode-test-current-buffer
+             "f" 'cargo-mode-test-current-test
+             )
+  )
 #+end_src
 
-*** setup-tex.el
+*** LaTeX / TeX configuration
 :PROPERTIES:
 :CUSTOM_ID: setup-texel
+:LAST_MODIFIED: [2025-07-20 Sun 04:30]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-tex.el
+Disabled because it's in desperate need of spring cleaning / revision.
+#+begin_src emacs-lisp :tangle no :eval no :comments no
 ;;; config/setup-tex.el --- TeX and LaTeX configuration -*- lexical-binding: t -*-
 
 (use-package auctex
@@ -2636,6 +2640,20 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;; no-update-autoloads: t
 ;; End:
 ;;; setup-tex.el ends here
+#+end_src
+
+*** Programming languages footer
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 04:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :comments no :noweb no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; configure-prog-langs.el ends here
 #+end_src
 
 ** Configure theming
@@ -4083,79 +4101,31 @@ of 2025-07-06
 ;;; setup-icons.el ends here
 #+end_src
 
-** setup-lisp.el
-:PROPERTIES:
-:CUSTOM_ID: setup-lispel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-lisp.el
-;;; config/setup-lisp.el --- Lisp configuration -*- lexical-binding: t -*-
-
-(use-package slime
-	:hook (elisp-mode . slime-mode)
-  :config
-	(setopt inferior-lisp-program "sbcl")
-	(add-hook 'slime-mode-hook (setq-local lsp-bridge-mode -1))
-  (despot-def (slime-mode-map)
-    :major-modes 'slime-mode
-    "b" 'slime-eval-buffer
-    "c" 'slime-compile-defun
-    "k" 'slime-compile-and-load-file
-    "f"  'ad-Advice-slime-eval-defun
-    "r" 'slime-eval-region
-    )
-  )
-
-(use-package elisp-mode
-  :ensure nil
-  :config
-  (despot-def :keymaps '(emacs-lisp-mode-map lisp-interaction-mode-map)
-    "'"  'ielm
-    "c"  (cons "compile" (make-sparse-keymap))
-    "cc" 'emacs-lisp-byte-compile
-    "e"  (cons "eval" (make-sparse-keymap))
-    "eb" 'eval-buffer
-    "ee" 'eval-last-sexp
-    "er" 'eval-region
-    "ef" 'eval-defun
-    "t"  (cons "tests" (make-sparse-keymap))
-    "tb" 'ert-run-tests-buffer
-    "tq" 'ert))
-
-(use-package racket-mode
-	:mode ("\\.rkt\\" . racket-mode)
-	)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-lisp.el ends here
-#+end_src
-
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
+:LAST_MODIFIED: [2025-07-20 Sun 04:00]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-llm.el
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
-(use-package llm
-  :config
-  (use-package llm-openai
-    :ensure nil)
+;; (use-package llm
+;;   :config
+;;   (use-package llm-openai
+;;     :ensure nil)
 
-  (use-package llm-claude
-    :ensure nil)
-  )
+;;   (use-package llm-claude
+;;     :ensure nil)
+;;   )
 
-(use-package ellama
-  :disabled
-  :after llm
-  :config
-  (setopt ellama-provider (make-llm-openai-compatible
-			   :url "http://127.0.0.1:1234"))
-  )
+;; (use-package ellama
+;;   :disabled
+;;   :after llm
+;;   :config
+;;   (setopt ellama-provider (make-llm-openai-compatible
+;; 			   :url "http://127.0.0.1:1234"))
+;;   )
 
 
 (use-package gptel
@@ -4199,6 +4169,7 @@ of 2025-07-06
   )
 
 (use-package aidermacs
+  :after gptel
   :general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
   (setopt aidermacs-backend 'vterm)
@@ -4208,7 +4179,6 @@ of 2025-07-06
   (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
   (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
   :custom
-  (aidermacs-use-architect-mode t)
   (aidermacs-default-model "gemini/gemini-pro-2.5")
   )
 
@@ -4626,15 +4596,6 @@ of 2025-07-06
  'treesit-language-source-alist
  '(typespec "https://github.com/happenslol/tree-sitter-typespec"))
 	)
-
-(use-package code-cells
-	:disabled
-	:mode ("\\([ipynb]\\)\\'" . code-cells-mode))
-
-(use-package drepl
-	:disabled
-	:general
-	(trant-def "ci" 'drepl-ipython))
 
 ;; Local Variables:
 ;; no-byte-compile: t
@@ -5311,6 +5272,62 @@ of 2025-07-06
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
+#+end_src
+
+** Bibliography management
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 04:41]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: bibliography-management
+:END:
+#+begin_src emacs-lisp :tangle config/setup-bib.el 
+;;; setup-bib --- bibliography management -*- lexical-binding: t; -*-
+(use-package bibtex
+  :ensure nil
+  )
+
+(use-package citar
+  :after bibtex auctex
+  :hook ((org-mode LaTeX-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
+  :init
+
+  (with-eval-after-load 'embark
+    (defvar-keymap bibtex-key-embark-map
+      :doc "Embark keymap for Zetteldeft links"
+      :parent embark-general-map
+      "f" #'citar-open
+      "n" #'citar-open-notes)
+    (add-to-list 'embark-keymap-alist '(bibtex-key . bibtex-key-embark-map))
+    )
+
+  :general
+  (tyrant-def "aC" 'citar-open)
+
+  :custom
+  (citar-at-point-function 'embark-act)
+  (citar-bibliography '("~/obsidian/obsidian-biblatex.bib"))
+  )
+
+
+(use-package citar-embark
+  :after citar embark
+  :config
+  (citar-embark-mode)
+  (defun citar-setup-capf ()
+  "add `citar-capf' to `completion-at-point-functions'"
+  (add-to-list 'completion-at-point-functions #'citar-capf))
+
+)
+
+(use-package ebib
+	:general
+	(tyrant-def "d" 'ebib))
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-bib.el ends here
 #+end_src
 
 ** setup-writing.el

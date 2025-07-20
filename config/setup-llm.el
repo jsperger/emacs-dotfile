@@ -1,21 +1,21 @@
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
-(use-package llm
-  :config
-  (use-package llm-openai
-    :ensure nil)
+;; (use-package llm
+;;   :config
+;;   (use-package llm-openai
+;;     :ensure nil)
 
-  (use-package llm-claude
-    :ensure nil)
-  )
+;;   (use-package llm-claude
+;;     :ensure nil)
+;;   )
 
-(use-package ellama
-  :disabled
-  :after llm
-  :config
-  (setopt ellama-provider (make-llm-openai-compatible
-			   :url "http://127.0.0.1:1234"))
-  )
+;; (use-package ellama
+;;   :disabled
+;;   :after llm
+;;   :config
+;;   (setopt ellama-provider (make-llm-openai-compatible
+;; 			   :url "http://127.0.0.1:1234"))
+;;   )
 
 
 (use-package gptel
@@ -59,6 +59,7 @@
   )
 
 (use-package aidermacs
+  :after gptel
   :general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
   (setopt aidermacs-backend 'vterm)
@@ -68,7 +69,6 @@
   (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
   (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
   :custom
-  (aidermacs-use-architect-mode t)
   (aidermacs-default-model "gemini/gemini-pro-2.5")
   )
 
