@@ -2314,7 +2314,7 @@ Disabling this until I have time to sit down and give it an honest effort.
   )
 
 (use-package racket-mode
-	:mode ("\\.rkt\\" . racket-mode)
+  :mode ("\\.rkt\\'" . racket-mode)
 	)
 #+end_src
 
@@ -2376,7 +2376,7 @@ I need to go over this again, ess was refusing to respect my style and there's
 a bunch of repeated configuration.
 #+begin_src emacs-lisp 
 (use-package ess
-  :mode ("\([rR]\)\'" . R-mode)
+  :mode ("\\.[rR]\\'" . R-mode)
   :init
   (setq ess-set-style t
         comint-scroll-to-bottom-on-input t

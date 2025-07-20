@@ -40,7 +40,7 @@
   )
 
 (use-package racket-mode
-	:mode ("\\.rkt\\" . racket-mode)
+  :mode ("\\.rkt\\'" . racket-mode)
 	)
 ;; Lisp-based languages:1 ends here
 
@@ -53,7 +53,7 @@
 
 ;; [[file:../its-lit.org::#setup-rel][R programming:1]]
 (use-package ess
-  :mode ("\([rR]\)\'" . R-mode)
+  :mode ("\\.[rR]\\'" . R-mode)
   :init
   (setq ess-set-style t
         comint-scroll-to-bottom-on-input t
