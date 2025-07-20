@@ -67,7 +67,7 @@
  '(flymake-note ((t (:underline nil :inherit default))))
  '(flymake-warning ((t (:underline nil :inherit default)))))
 
-(when IS-MAC (toggle-frame-fullscreen))
+;; (when IS-MAC (toggle-frame-fullscreen))
 
 (provide 'customs)
 ;; Local Variables:

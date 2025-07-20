@@ -24,7 +24,7 @@ count of {{{word-count}}}.*
 - [[#overview][Overview]]
   - [[#style][Style]]
   - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
-    - [[#support-for-detangling-e-nope-juice-not-worth-the-squeeze][Support for detangling e; nope, juice not worth the squeeze]]
+    - [[#support-for-detangling-excluding-headerfooter][Support for detangling (excluding header/footer)]]
     - [[#aggressive-time-stamping][Aggressive time-stamping]]
   - [[#warnings][Warnings]]
     - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
@@ -33,10 +33,66 @@ count of {{{word-count}}}.*
 - [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
   - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
   - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
-- [[#configuration][Configuration]]
-  - [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
-  - [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
-  - [[#lisp-functions][Lisp functions]]
+- [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
+  - [[#initel][init.el]]
+- [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
+  - [[#one-stop-keybinding-shop][One stop keybinding shop]]
+  - [[#bibliography-management][Bibliography management]]
+  - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
+  - [[#setup-comment-toolsel][setup-comment-tools.el]]
+  - [[#setup-completion-actionsel][setup-completion-actions.el]]
+  - [[#set-up-completion-backends][Set up completion backends]]
+  - [[#annotate-completion-options][Annotate completion options]]
+  - [[#setup-completionel][setup-completion.el]]
+  - [[#setup-consultel][setup-consult.el]]
+  - [[#setup-coreel][setup-core.el]]
+  - [[#setup-data-formatsel][setup-data-formats.el]]
+  - [[#setup-denoteel][setup-denote.el]]
+  - [[#setup-diagrammingel][setup-diagramming.el]]
+  - [[#setup-eafel][setup-eaf.el]]
+  - [[#configure-editor-utility-packages][Configure editor utility packages]]
+  - [[#setup-emacsel][setup-emacs.el]]
+  - [[#setup-emailel][setup-email.el]]
+  - [[#setup-evil-addonsel][setup-evil-addons.el]]
+  - [[#setup-evilel][setup-evil.el]]
+  - [[#setup-font-lockingel][setup-font-locking.el]]
+  - [[#setup-goel][setup-go.el]]
+  - [[#setup-gopherel][setup-gopher.el]]
+  - [[#setup-help-and-documentation-viewers][Setup help and documentation viewers]]
+  - [[#setup-iconsel][setup-icons.el]]
+  - [[#setup-lispel][setup-lisp.el]]
+  - [[#setup-llmel][setup-llm.el]]
+  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
+  - [[#setup-lspel][setup-lsp.el]]
+  - [[#setup-markdownel][setup-markdown.el]]
+  - [[#setup-mediael][setup-media.el]]
+  - [[#setup-modelineel][setup-modeline.el]]
+  - [[#setup-notesel][setup-notes.el]]
+  - [[#outline-and-fold-text][Outline and fold text]]
+  - [[#configure-all-things-org-mode][Configure all things org mode]]
+  - [[#setup-programmingel][setup-programming.el]]
+  - [[#setup-projectsel][setup-projects.el]]
+  - [[#setup-readingel][setup-reading.el]]
+  - [[#setup-searchel][setup-search.el]]
+  - [[#setup-snippetsel][setup-snippets.el]]
+  - [[#configure-programming-language-specific-options][Configure (programming) language-specific options]]
+  - [[#configure-theming][Configure Theming]]
+  - [[#setup-treesitel][setup-treesit.el]]
+  - [[#configure-ui-elements][Configure UI Elements]]
+  - [[#setup-uiel][setup-ui.el]]
+  - [[#setup-vcel][setup-vc.el]]
+  - [[#setup-webel][setup-web.el]]
+  - [[#setup-writingel][setup-writing.el]]
+- [[#lisp-functions][Lisp functions]]
+  - [[#my-core-functionsel][my-core-functions.el]]
+  - [[#my-core-helpersel][my-core-helpers.el]]
+  - [[#my-editor-helpersel][my-editor-helpers.el]]
+  - [[#my-keybinding-helpersel][my-keybinding-helpers.el]]
+  - [[#my-lang-helpersel][my-lang-helpers.el]]
+  - [[#my-lsp-bridge-helpersel][my-lsp-bridge-helpers.el]]
+  - [[#my-org-helpersel][my-org-helpers.el]]
+  - [[#my-theme-helpersel][my-theme-helpers.el]]
+  - [[#my-vc-helpersel][my-vc-helpers.el]]
 - [[#appendices][Appendices]]
 :END:
 
@@ -47,40 +103,92 @@ uses the org file as the config file.
 ** Style
 :PROPERTIES:
 :CUSTOM_ID: style
+:LAST_MODIFIED: [2025-07-19 Sat 19:10]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 Headings in the sections containing configuration code are functional as well as
 organizational. 
 #+name: Heading structure
-| Level    | Usage          | Meaning       |
-|----------+----------------+---------------|
-| H1 ~*~     | Organizational |               |
-| H2 ~**~    |                |               |
-| H3 ~***~   | Functional     | distinct file |
-| H4 ~****~  | Functional     | time stamping |
-| H5 ~*****~ | Functional     |               |
-|          |                |               |
+| Level   | Usage                                                |
+|---------+------------------------------------------------------|
+| H1 ~*~    | Organization; Tangle to distinct directories         |
+| H2 ~**~   | Each header at this level tangles to a distinct file |
+| H3+ ~***~ | Finer-grained control of time stamping, header args  |
+|         |                                                      |
 
 ** Design Decisions & Notable Features
 :PROPERTIES:
 :CUSTOM_ID: design-decisions--notable-features
 :END:
-*** Support for detangling e; nope, juice not worth the squeeze
+*** Support for detangling (excluding header/footer)
 :PROPERTIES:
-:CUSTOM_ID: support-for-detangling-e-nope-juice-not-worth-the-squeeze
-:LAST_MODIFIED: [2025-07-18 Fri 02:11]
+:CUSTOM_ID: support-for-detangling-excluding-headerfooter
+:LAST_MODIFIED: [2025-07-19 Sat 19:15]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
-The header option =:comments link= encases the code in the tangled file with a comment linking back to the org source block. This enables detangling, making changes in the tangled file and propagating them back to the org source block.
-Not sure if this will be a good idea or if it's just an invitation for the config to get out of sync.
+The header option =:comments noweb= encases the code in the tangled file with a
+comment linking back to the org source block. This enables detangling; you can
+edit elisp files and backpropogate the changes to this org file. Not sure if this will be a good idea or if it's just an invitation for the config to get out of sync.
 
-Too much of a headache to get this working with the lexical binding directive. A simple solution with just the directive and no other info would be easiest with a post-tangle hook, but I want more functionality like including the filename and short description in the first line. Maybe someday, but for now just need to be disciplined about editing the org file not the indvidual lisp files. Maybe someday... [[#notes-header-and-footer-templates][maybe someday
+**** Headers and footers
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:32]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Detangling relies on magic comments that are inserted in the tangled file to
+link them back to a src block in the org file. The contents of the src block get
+encased by comment lines (automatically adjusted to the language of the block)
+like:
+
+#+begin_src emacs-lisp :eval no results: asis :noweb no
+;; [[file:its-lit.org::{src block}][{src block}]]
+...
+;; {src block} ends here
+#+end_src
+
+This presents a problem for the header of lisp files with a lexical binding
+directive:
+#+begin_src emacs-lisp :eval no results: asis :noweb no
+-*- lexical-binding: t -*-
+#+end_src
+
+I spent a bit of time trying to automagically add these but ultimately gave up
+for now. The workaround is very simple, manual header and footer blocks with
+=:comments no= added to the header arugments:
+
+#+name: Example header
+#+begin_src org
+,#+begin_src emacs-lisp :comments no
+;;; {file}.el --- short description -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+,#+end_src
+#+end_src
+
+#+name: Example footer
+#+begin_src org
+,#+begin_src emacs-lisp :comments no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; configure-{file} ends here
+,#+end_src
+#+end_src
+
+Because they're so boiler plate I wanted to write a function that would print
+them automatically based on the tangle destination + a user-supplied argument
+for the short description. 
+A simple solution with just the directive and no other info would be easiest with a post-tangle hook, but I want more functionality like including the filename and short description in the first line. Maybe someday, but for now just need to be disciplined about editing the org file not the indvidual lisp files. Maybe someday... [[#notes-header-and-footer-templates][maybe someday
 ]]
 *** Aggressive time-stamping
 :PROPERTIES:
 :CUSTOM_ID: aggressive-time-stamping
-:LAST_MODIFIED: [2025-07-18 Fri 02:53]
+:LAST_MODIFIED: [2025-07-19 Sat 19:33]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 The combination of scavenging snippets from a multitude of dotfiles, tending
@@ -89,7 +197,8 @@ development, and starting to configure Emacs before I had any idea what I was
 doing combine to make certain configuration options obsolete over time.
 
 You'll encounter snippets that have been passed around since time immemorial
-(the garbage collector trick is a notable one that still seems to have utility).
+(the early-init garbage collector trick is a notable one that still seems to
+have utility even if it's just saving fractions of a second).
 
 ** Warnings
 :PROPERTIES:
@@ -120,6 +229,8 @@ I'm sympathetic to the arguments in this blog post that [[https://batsov.com/art
 :END:
 
 Work in progress
+
+
 
 * Notes on configuring Emacs
 :PROPERTIES:
@@ -225,17 +336,13 @@ Has a direct example of trying to keep a lexical binding directive at the top of
 - [[https://eschulte.github.io/org-scraps/scraps/2011-07-19-including-noweb-refs-without-last-newline.html][Including noweb refs without the last newline]]
 - [[https://eschulte.github.io/org-scraps/scraps/2011-07-25-expand-noweb-refs.html][Expand noweb refs]] 
 - [[https://eschulte.github.io/org-scraps/scraps/2010-12-13-tangle-templates.html][Tangle templates]]
-* Configuration
-:PROPERTIES:
-:CUSTOM_ID: configuration
-:LAST_MODIFIED: [2025-07-18 Fri 02:21]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-** Emacs user directory files (init and early-init)
+* Emacs user directory files (init and early-init)
 :PROPERTIES:
 :CUSTOM_ID: emacs-user-directory-files-init-and-early-init
+:LAST_MODIFIED: [2025-07-19 Sat 19:02]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-*** init.el
+** init.el
 :PROPERTIES:
 :CUSTOM_ID: initel
 :LAST_MODIFIED: [2025-07-19 Sat 04:30]
@@ -306,7 +413,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 (elpaca-wait) ; Block until current queue processed.
 #+end_src
 
-***** Define constants to use as conditional configuration flags
+**** Define constants to use as conditional configuration flags
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -327,7 +434,7 @@ probably being fast and loose with system type and GUI/non-GUI configuration.
 (defconst my-debug-mode nil
   "Toggle debugging messages. Set to t to enable, nil to disable.")
 #+end_src
-***** no-littering
+**** no-littering
 :PROPERTIES:
 :CUSTOM_ID: no-littering
 :LAST_MODIFIED: [2025-07-19 Sat 04:28]
@@ -343,7 +450,7 @@ the magic so newer or less popular packages might not be incorporated.
 (use-package no-littering :ensure (:wait t))
 #+end_src
 
-***** General for keybinds
+**** General for keybinds
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -381,7 +488,7 @@ I lifted the tyrant and despot definer and naming scheme from [[https://github.c
   )
 #+end_src
 
-***** Benchmark init time
+**** Benchmark init time
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -395,10 +502,10 @@ mistakes in my configuration.
   :config (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate)
   )
 #+end_src
-***** Load configuration files
+**** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-19 Sat 04:48]
+:LAST_MODIFIED: [2025-07-19 Sat 20:20]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -434,6 +541,7 @@ mistakes in my configuration.
              "configure-base-and-built-in.el"
              "configure-keybinding.el"
              "configure-org.el"
+             "configure-theming.el"
              ;; "setup-casual.el"
              "setup-comment-tools.el"
              ;;              ;; "setup-completion-actions.el"
@@ -451,7 +559,6 @@ mistakes in my configuration.
              ;;              ;; "setup-email.el"
              "setup-evil-addons.el"
              "setup-font-locking.el"
-             "setup-fonts.el"
              ;;              ;; "setup-go.el"
              ;;              ;; "setup-gopher.el"
              "setup-help.el"
@@ -472,7 +579,6 @@ mistakes in my configuration.
              "setup-search.el"
              "setup-snippets.el"
              ;; "setup-tex.el"
-             "setup-themes.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
              "setup-outlining.el"
@@ -503,17 +609,20 @@ mistakes in my configuration.
 
 #+RESULTS: footer-init
 
-** Config directory for non-byte-copiled files
+* Config directory for non-byte-copiled files
 :PROPERTIES:
 :CUSTOM_ID: config-directory-for-non-byte-copiled-files
 :LAST_MODIFIED: [2025-07-18 Fri 17:19]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-*** One stop keybinding shop
+
+
+** One stop keybinding shop
 :PROPERTIES:
 :header-args: :tangle config/configure-keybinding.el :comments noweb
 :LAST_MODIFIED: [2025-07-18 Fri 18:07]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: one-stop-keybinding-shop
 :END:
 #+begin_src emacs-lisp :noweb no :comments no
 ;;; configure-keybinding.el --- All things keys -*- lexical-binding: t; -*-
@@ -521,7 +630,7 @@ mistakes in my configuration.
 ;; See `its-lit.org`
 ;;; Code:
 #+end_src
-**** Keyboard macros
+*** Keyboard macros
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 02:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -535,7 +644,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 (defalias 'targets_string_to_tar_read
    (kmacro "w w v w w w w w h y 0 p a SPC < - SPC t a r _ r e a d ( <kp-delete> <kp-delete> <kp-delete> <escape> $ a <backspace> ) <escape>"))
 #+end_src
-**** Global key binds
+*** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
 :LAST_MODIFIED: [2025-07-18 Fri 21:51]
@@ -810,7 +919,7 @@ I need to move most of these out of here and put them in the relavent package de
           (scroll-other-window (- (or arg 1)))))
 #+end_src
 
-***** Removed keybindings
+**** Removed keybindings
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 17:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -875,7 +984,7 @@ I need to move most of these out of here and put them in the relavent package de
 ;; "lX" 'eglot-shutdown-all
 ;; "l=" 'eglot-format
 #+end_src
-***** Mac-specific keybinds
+**** Mac-specific keybinds
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 17:43]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -905,7 +1014,7 @@ I need to move most of these out of here and put them in the relavent package de
                         (delete-region (point) prev-pos)
                         (indent-according-to-mode)))))
 #+end_src
-**** Keybind file footer
+*** Keybind file footer
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:07]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -918,7 +1027,7 @@ I need to move most of these out of here and put them in the relavent package de
 ;; End:
 ;;; configure-keybinding.el ends here
 #+end_src
-*** Bibliography management
+** Bibliography management
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 02:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -974,14 +1083,14 @@ I need to move most of these out of here and put them in the relavent package de
 ;;; setup-bib.el ends here
 #+end_src
 
-*** Configure base emacs options and built-in packages
+** Configure base emacs options and built-in packages
 :PROPERTIES:
-:CUSTOM_ID: setup-base-built-in-packages
+:CUSTOM_ID: configure-base-emacs-options-and-built-in-packages
 :header-args: :tangle config/configure-base-and-built-in.el :comments noweb
 :LAST_MODIFIED: [2025-07-18 Fri 18:02]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-**** Base and built-in file header
+*** Base and built-in file header
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -991,7 +1100,7 @@ I need to move most of these out of here and put them in the relavent package de
 ;;; Commentary:
 ;;; Code:
 #+end_src
-**** Configure base emacs options
+*** Configure base emacs options
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:35]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1016,7 +1125,7 @@ I need to move most of these out of here and put them in the relavent package de
           )
  )
 #+end_src
-**** Configuring built-in packages
+*** Configuring built-in packages
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1046,7 +1155,7 @@ I need to move most of these out of here and put them in the relavent package de
   )
 #+end_src
 
-**** Configure built-in programming utilities
+*** Configure built-in programming utilities
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1087,7 +1196,7 @@ I need to move most of these out of here and put them in the relavent package de
   )
 #+end_src
 
-**** Configure ediff for viewing diffs
+*** Configure ediff for viewing diffs
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1107,7 +1216,7 @@ I really need to learn how to use =ediff= properly
 
 #+end_src
 
-**** Built-in package configuration that were in a separate file for some reason
+*** Built-in package configuration that were in a separate file for some reason
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1214,7 +1323,7 @@ I really need to learn how to use =ediff= properly
   )
 #+end_src
 
-**** =which-key= configuration
+*** =which-key= configuration
 :PROPERTIES:
 :CUSTOM_ID: which-key-config
 :LAST_MODIFIED: [2025-07-18 Fri 18:00]
@@ -1235,7 +1344,7 @@ I really need to learn how to use =ediff= properly
   (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
 #+end_src
 
-**** Base and built-in configuration footer
+*** Base and built-in configuration footer
 :PROPERTIES:
 :CUSTOM_ID: base-built-in-footer
 :LAST_MODIFIED: [2025-07-18 Fri 19:04]
@@ -1250,7 +1359,7 @@ I really need to learn how to use =ediff= properly
 ;; End:
 ;;; configure-base-and-built-in ends here
 #+end_src
-**** Removed declarations
+*** Removed declarations
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 17:34]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1279,10 +1388,11 @@ Off the top of my head, I think
 ;;  :ensure nil)
 #+end_src
 
-*** setup-comment-tools.el
+** setup-comment-tools.el
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 22:10]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: setup-comment-toolsel
 :END:
 
 I'm a big fan of the look of banner comments but trying to set a custom prefix it wasn't clear how to keep the language-adaptive comment symbol and add a string afterwards. I always want a space
@@ -1307,7 +1417,7 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 #+end_src
 
 
-*** setup-completion-actions.el
+** setup-completion-actions.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completion-actionsel
 :END:
@@ -1386,7 +1496,7 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 ;;; setup-completion-actions.el ends here
 #+end_src
 
-*** Set up completion backends
+** Set up completion backends
 :PROPERTIES:
 :CUSTOM_ID: set-up-completion-backends
 :END:
@@ -1424,7 +1534,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-completion-backends.el ends here
 #+end_src
-**** Other completion backends
+*** Other completion backends
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-15 Tue 19:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
@@ -1453,7 +1563,7 @@ of 2025-07-06
 	(setq vertico-prescient-enable-filtering t)
 	)
 #+end_src
-*** Annotate completion options
+** Annotate completion options
 :PROPERTIES:
 :CUSTOM_ID: annotate-completion-options
 :END:
@@ -1491,7 +1601,7 @@ of 2025-07-06
 ;;; setup-completion-display.el ends here
 #+end_src
 
-*** setup-completion.el
+** setup-completion.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completionel
 :END:
@@ -1608,7 +1718,7 @@ of 2025-07-06
 ;;; setup-completion.el ends here
 #+end_src
 
-*** setup-consult.el
+** setup-consult.el
 :PROPERTIES:
 :CUSTOM_ID: setup-consultel
 :END:
@@ -1742,7 +1852,7 @@ of 2025-07-06
 ;;; setup-consult.el ends here
 #+end_src
 
-*** setup-core.el
+** setup-core.el
 :PROPERTIES:
 :CUSTOM_ID: setup-coreel
 :LAST_MODIFIED: [2025-07-18 Fri 04:25]
@@ -1808,7 +1918,7 @@ of 2025-07-06
 ;;; setup-core.el ends here
 #+end_src
 
-**** Removed core customizations
+*** Removed core customizations
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:43]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1837,7 +1947,7 @@ of 2025-07-06
 
 #+end_src
 
-*** setup-data-formats.el
+** setup-data-formats.el
 :PROPERTIES:
 :CUSTOM_ID: setup-data-formatsel
 :LAST_MODIFIED: [2025-07-15 Tue 19:28]
@@ -1875,7 +1985,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-data-formats.el ends here
 #+end_src
-***** Other data viewers
+**** Other data viewers
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-15 Tue 19:28]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1893,7 +2003,7 @@ of 2025-07-06
   (jsonian-no-so-long-mode))
 
 #+end_src
-*** setup-denote.el
+** setup-denote.el
 :PROPERTIES:
 :CUSTOM_ID: setup-denoteel
 :END:
@@ -2003,7 +2113,7 @@ of 2025-07-06
 ;;; setup-denote.el ends here
 #+end_src
 
-*** setup-diagramming.el
+** setup-diagramming.el
 :PROPERTIES:
 :CUSTOM_ID: setup-diagrammingel
 :END:
@@ -2053,7 +2163,7 @@ of 2025-07-06
 ;;; setup-diagramming.el ends here
 #+end_src
 
-*** setup-eaf.el
+** setup-eaf.el
 :PROPERTIES:
 :CUSTOM_ID: setup-eafel
 :END:
@@ -2079,9 +2189,9 @@ of 2025-07-06
 ;;; setup-eaf.el ends here
 #+end_src
 
-*** Configure editor utility packages
+** Configure editor utility packages
 :PROPERTIES:
-:CUSTOM_ID: setup-editor-miscel
+:CUSTOM_ID: configure-editor-utility-packages
 :LAST_MODIFIED: [2025-07-18 Fri 18:41]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2164,7 +2274,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-editor-misc.el ends here
 #+end_src
-**** Removed packages
+*** Removed packages
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -2242,7 +2352,7 @@ These packages have the distinction of being useful but I don't use them enough,
   (setq dumb-jump-selector 'completing-read)
   )
 #+end_src
-*** setup-emacs.el
+** setup-emacs.el
 :PROPERTIES:
 :CUSTOM_ID: setup-emacsel
 :END:
@@ -2403,7 +2513,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;; End:
 #+end_src
 
-*** setup-email.el
+** setup-email.el
 :PROPERTIES:
 :CUSTOM_ID: setup-emailel
 :END:
@@ -2424,7 +2534,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-email.el ends here
 #+end_src
 
-*** setup-evil-addons.el
+** setup-evil-addons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evil-addonsel
 :END:
@@ -2471,7 +2581,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-evil-addons.el ends here
 #+end_src
 
-*** setup-evil.el
+** setup-evil.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evilel
 :END:
@@ -2543,187 +2653,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-evil.el ends here
 #+end_src
 
-*** setup-fonts.el
-:PROPERTIES:
-:CUSTOM_ID: setup-fontsel
-:LAST_MODIFIED: [2025-07-18 Fri 17:12]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-fonts.el
-;;; setup-fonts.el --- Font settings -*- lexical-binding: t -*-
-
-(use-package ligature
-  :disabled)
-
-(use-package fontaine
-  :config
-  (setopt
-   fontaine-presets '((t
-	     :default-weight normal
-	     :default-height 150
-	     :fixed-pitch-family "JetBrains Mono NL"
-	     :variable-pitch-family "Heliotrope OT"
-	     :variable-pitch-height 1.05
-	     :bold-family nil ; use the face's bold
-	     :bold-weight bold)
-
-	    ;; Universal presets
-	    ;; Presets to change point size only
-	    (10pt :default-height 100)
-	    (11pt :default-height 110)
-	    (12pt :default-height 120)
-	    (13pt :default-height 130)
-	    (14pt :default-height 140)
-	    (15pt :default-height 150)
-	    (16pt :default-height 160)
-	    (17pt :default-height 170)
-	    (18pt :default-height 180)
-
-	    ;; Line spacing is additional line spacing, not total line spacing
-	    ;; (i.e. 0 is the default)
-	    ;; Meaning differs depending on whether it is an integer or float
-	    ;; Integer = additional pixels to add
-	    ;; Floating point = additional spacing proportional to point size
-	    (lsd :line-space 0)
-	    ;; line spacing pixels
-	    (lsp1 :line-spacing 1)
-	    (lsp2 :line-spacing 2)
-	    (lsp3 :line-spacing 3)
-	    (lsp4 :line-spacing 4)
-	    (lsp5 :line-spacing 5)
-	    ;; line spacing scaling
-	    (lss05 :line-spacing 0.05)
-	    (lss10 :line-spacing 0.10)
-	    (lss15 :line-spacing 0.15)
-	    (lss20 :line-spacing 0.20)
-	    (lss25 :line-spacing 0.25)
-	    (lss30 :line-spacing 0.30)
-
-	    ;; Font presets
-
-	    ;; Monospace fonts
-	    (iosevka-comfy
-	     :default-family "Iosevka Comfy"
-	     :default-weight normal)
-
-	    (fira-mono
-	     :default-family "Fira Mono")
-
-	    (fira-code
-	     :default-family "FiraCode Nerd Font"
-	     )
-
-	    (jetbrains-mono
-	     :default-family "JetBrains Mono NL")
-
-	    (plex-mono
-	     :default-family "IBM Plex Mono")
-
-	    (dank-mono
-	     :default-family "Dank Mono")
-
-	    (hack
-	     :default-family "Hack Nerd Font")
-
-	    ;; think inter is proportional not mono
-	    (inter
-	     :default-family "Inter")
-
-	    (xenon
-	     :default-family "Monaspace Xenon")
-
-	    (input-mono
-	     :default-family "Input Mono")
-	    ;; Quasi-monospace fonts
-	    (duospace
-	     :default-family "iA Writer Duospace")
-
-	    (triplicate-mono-b
-	     :default-family "Triplicate B")
-
-	    (triplicate-code-b
-	     :default-family "Triplicate B Code")
-
-	    (triplicate-poly-b
-	     :default-family "Triplicate B Poly")
-
-	    (triplicate-mono-a
-	     :default-family "Triplicate A")
-
-	    (triplicate-code-a
-	     :default-family "Triplicate A Code")
-
-	    (triplicate-poly-a
-	     :default-family "Triplicate A Poly")
-
-	    (header-triplicate
-	     :header-line-family "Triplicate A Caps"
-	     :header-line-height 1.1)
-
-	    (triplicate-combo
-	     :default-family "Triplicate A Code"
-	     :variable-pitch-family "Triplicate A Poly"
-	     :header-line-family "Triplicate A Caps"
-	     :header-line-height 1.1
-	     )
-
-	    (header-heliotrope
-	     :header-line-family "Heliotrope 4 Caps"
-	     :header-line-height 1.1)
-
-	    (header-overpass
-	     :header-line-family "Overpass"
-	     :header-line-height 1.1)
-	    
-	    (header-null
-	     :header-line-family nil
-	     :header-line-height 1.0)
-
-	    (quattro
-	     :default-family "iA Writer Quattro V")
-
-	    ;; Variable pitch fonts
-	    (serif-input
-	     :variable-pitch-family "Input Serif")
-
-	    (sans-input
-	     :variable-pitch-family "Input Sans")
-
-	    (vp-heliotrope
-	     :variable-pitch-family "Heliotrope OT"
-	     :variable-pitch-height 1.05)
-
-	    (vp-avenir
-	     :variable-pitch-family "Avenir"
-	     :default-weight book)
-
-	    (vp-minion
-	     :variable-pitch-family "Minion 3")
-	    )
-	  )
-  :hook (elpaca-after-init . fontaine-mode)
-  :custom (fontaine-mode t)
-  )
-
-
-(use-package show-font
-  :general
-  (tyrant-def
-    "hs" 'show-font-select-preview
-    "hT" 'show-font-tabulated)
-  :bind
-  (("C-c s f" . show-font-select-preview)
-   ("C-c s t" . show-font-tabulated))
-  )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-fonts.el ends here
-#+end_src
-*** setup-font-locking.el
+** setup-font-locking.el
 :PROPERTIES:
 :CUSTOM_ID: setup-font-lockingel
 :END:
@@ -2775,7 +2705,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-font-locking.el ends here
 #+end_src
 
-*** setup-go.el
+** setup-go.el
 :PROPERTIES:
 :CUSTOM_ID: setup-goel
 :END:
@@ -2805,7 +2735,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-go.el ends here
 #+end_src
 
-*** setup-gopher.el
+** setup-gopher.el
 :PROPERTIES:
 :CUSTOM_ID: setup-gopherel
 :END:
@@ -2823,7 +2753,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;; End:
 ;;; setup-gopher.el ends here
 #+end_src
-*** Setup help and documentation viewers
+** Setup help and documentation viewers
 :PROPERTIES:
 :CUSTOM_ID: setup-help-and-documentation-viewers
 :LAST_MODIFIED: [2025-07-18 Fri 04:11]
@@ -2853,7 +2783,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;; End:
 ;;; setup-help.el ends here
 #+end_src
-*** setup-icons.el
+** setup-icons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-iconsel
 :END:
@@ -2941,7 +2871,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-icons.el ends here
 #+end_src
 
-*** setup-lisp.el
+** setup-lisp.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lispel
 :END:
@@ -2991,7 +2921,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-lisp.el ends here
 #+end_src
 
-*** setup-llm.el
+** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
 :END:
@@ -3100,7 +3030,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-llm.el ends here
 #+end_src
 
-*** setup-lsp-bridge.el
+** setup-lsp-bridge.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lsp-bridgeel
 :LAST_MODIFIED: [2025-07-18 Fri 20:32]
@@ -3142,7 +3072,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-lsp-bridge.el ends here
 #+end_src
 
-*** setup-lsp.el
+** setup-lsp.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lspel
 :END:
@@ -3246,7 +3176,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-lsp.el ends here
 #+end_src
 
-*** setup-markdown.el
+** setup-markdown.el
 :PROPERTIES:
 :CUSTOM_ID: setup-markdownel
 :LAST_MODIFIED: [2025-07-18 Fri 22:33]
@@ -3351,7 +3281,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-markdown.el ends here
 #+end_src
 
-*** setup-media.el
+** setup-media.el
 :PROPERTIES:
 :CUSTOM_ID: setup-mediael
 :END:
@@ -3373,7 +3303,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-media.el ends here
 #+end_src
 
-*** setup-modeline.el
+** setup-modeline.el
 :PROPERTIES:
 :CUSTOM_ID: setup-modelineel
 :END:
@@ -3416,7 +3346,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-modeline.el ends here
 #+end_src
 
-*** setup-notes.el
+** setup-notes.el
 :PROPERTIES:
 :CUSTOM_ID: setup-notesel
 :END:
@@ -3455,7 +3385,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-notes.el ends here
 #+end_src
 
-*** Outline and fold text
+** Outline and fold text
 :PROPERTIES:
 :CUSTOM_ID: outline-and-fold-text
 :LAST_MODIFIED: [2025-07-18 Fri 02:35]
@@ -3506,14 +3436,15 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-outlining.el ends here
 #+end_src
 
-*** Configure all things org mode
+** Configure all things org mode
 :PROPERTIES:
 :header-args: :tangle config/configure-org.el :comments noweb
 :LAST_MODIFIED: [2025-07-18 Fri 23:14]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-all-things-org-mode
 :END:
 
-**** Configure org header
+*** Configure org header
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 23:16]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -3524,7 +3455,7 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; Code:
 #+end_src
 
-**** Configure base org settings and major mode keybinds
+*** Configure base org settings and major mode keybinds
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 23:19]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -3685,7 +3616,7 @@ These packages have the distinction of being useful but I don't use them enough,
     )
   )
 #+end_src
-************ Configure org functionality add-ons
+*********** Configure org functionality add-ons
 :PROPERTIES:
 :CUSTOM_ID: setup-orgel
 :LAST_MODIFIED: [2025-07-18 Fri 23:23]
@@ -3731,7 +3662,7 @@ These packages have the distinction of being useful but I don't use them enough,
   )
 #+end_src
 
-***** Disabled org functionality packages
+**** Disabled org functionality packages
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 23:22]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -3765,13 +3696,13 @@ These packages have the distinction of being useful but I don't use them enough,
   )
 #+end_src
 
-**** Configure org mode's progeny
+*** Configure org mode's progeny
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:45]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 Packages that build on org mode rather than add something to it.
-***** org-todoist
+**** org-todoist
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -3789,7 +3720,7 @@ Packages that build on org mode rather than add something to it.
   :general (tyrant-def "aT" 'org-todoist-dispatch)
   )
 #+end_src
-***** Configure Org-node :TODO:
+**** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: setup-org-nodeel
 :LAST_MODIFIED: [2025-07-19 Sat 04:44]
@@ -3835,7 +3766,7 @@ Disabling this until I have time to sit down and give it an honest effort.
   )
 #+end_src
 
-**** Configuring org capture templates :TODO:
+*** Configuring org capture templates :TODO:
 :PROPERTIES:
 :CUSTOM_ID: setup-org-captureel
 :LAST_MODIFIED: [2025-07-19 Sat 04:45]
@@ -3845,7 +3776,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 (use-package doct)
 #+end_src
 
-**** Add additional ways to export from org to other formats
+*** Add additional ways to export from org to other formats
 :PROPERTIES:
 :CUSTOM_ID: setup-org-exportersel
 :LAST_MODIFIED: [2025-07-19 Sat 04:41]
@@ -3861,7 +3792,7 @@ Disabling this until I have time to sit down and give it an honest effort.
   :after org)
 #+end_src
 
-***** Disabled Exporters
+**** Disabled Exporters
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:45]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -3876,7 +3807,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 (use-package ox-beamer-lecture
 	:after org)
 #+end_src
-**** Configure org footer
+*** Configure org footer
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 23:17]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -3890,7 +3821,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;; End:
 ;;; configure-org.el ends here
 #+end_src
-*** setup-programming.el
+** setup-programming.el
 :PROPERTIES:
 :CUSTOM_ID: setup-programmingel
 :LAST_MODIFIED: [2025-07-18 Fri 04:57]
@@ -3937,7 +3868,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;;; setup-programming.el ends here
 #+end_src
 
-*** setup-projects.el
+** setup-projects.el
 :PROPERTIES:
 :CUSTOM_ID: setup-projectsel
 :END:
@@ -4086,7 +4017,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;;; setup-projects.el ends here
 #+end_src
 
-*** setup-reading.el
+** setup-reading.el
 :PROPERTIES:
 :CUSTOM_ID: setup-readingel
 :LAST_MODIFIED: [2025-07-18 Fri 18:40]
@@ -4130,7 +4061,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;;; setup-reading.el ends here
 #+end_src
 
-**** Removed reading packages
+*** Removed reading packages
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:34]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -4187,7 +4118,7 @@ Disabling this until I have time to sit down and give it an honest effort.
    (consult-customize consult-dash :initial (thing-at-point 'symbol))
 	)
 #+end_src
-*** setup-search.el
+** setup-search.el
 :PROPERTIES:
 :CUSTOM_ID: setup-searchel
 :LAST_MODIFIED: [2025-07-18 Fri 21:18]
@@ -4220,7 +4151,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;;; setup-search.el ends here
 #+end_src
 
-*** setup-snippets.el
+** setup-snippets.el
 :PROPERTIES:
 :CUSTOM_ID: setup-snippetsel
 :LAST_MODIFIED: [2025-07-18 Fri 05:00]
@@ -4280,12 +4211,13 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-snippets.el ends here
 #+end_src
 
-*** Configure (programming) language-specific options
+** Configure (programming) language-specific options
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 05:02]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-programming-language-specific-options
 :END:
-**** setup-python.el
+*** setup-python.el
 :PROPERTIES:
 :CUSTOM_ID: setup-pythonel
 :END:
@@ -4317,7 +4249,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-python.el ends here
 #+end_src
 
-**** setup-r.el
+*** setup-r.el
 :PROPERTIES:
 :CUSTOM_ID: setup-rel
 :LAST_MODIFIED: [2025-07-18 Fri 21:46]
@@ -4401,7 +4333,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-r.el ends here
 #+end_src
 
-**** setup-rust.el
+*** setup-rust.el
 :PROPERTIES:
 :CUSTOM_ID: setup-rustel
 :END:
@@ -4446,7 +4378,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 
 #+end_src
 
-**** setup-tex.el
+*** setup-tex.el
 :PROPERTIES:
 :CUSTOM_ID: setup-texel
 :END:
@@ -4599,13 +4531,31 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-tex.el ends here
 #+end_src
 
-*** setup-themes.el
+** Configure Theming
 :PROPERTIES:
-:CUSTOM_ID: setup-themesel
+:header-args:emacs-lisp: :tangle config/configure-theming.el :comments noweb
+:LAST_MODIFIED: [2025-07-19 Sat 19:04]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-theming
 :END:
-#+begin_src emacs-lisp :tangle config/setup-themes.el
-;;; config/setup-themes.el --- Themes configuration -*- lexical-binding: t -*-
 
+Packages that substantially change the user interface as configured in 
+
+#+name:theme header
+#+begin_src emacs-lisp :comments no :noweb no
+;;; configure-theming.el --- Themes configuration -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+#+end_src
+
+*** Color theme packages
+:PROPERTIES:
+:CUSTOM_ID: color-theme-packages
+:LAST_MODIFIED: [2025-07-19 Sat 19:03]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
 (use-package catppuccin-theme
   :disabled)
 
@@ -4639,7 +4589,206 @@ Just put this function in `hippie-expand-try-functions-list'."
 
 (use-package solarized-theme
   :disabled)
+#+end_src
 
+*** Managing fonts
+:PROPERTIES:
+:CUSTOM_ID: setup-fontsel
+:LAST_MODIFIED: [2025-07-19 Sat 19:49]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp
+;;;; Font configuration
+(use-package fontaine
+  :hook (elpaca-after-init . fontaine-mode)
+  :config
+  (setopt fontaine-presets '(
+                             (t  :default-weight normal
+                                 :default-height 150
+                                 :fixed-pitch-family "JetBrains Mono NL"
+                                 :variable-pitch-family "Heliotrope OT"
+                                 :variable-pitch-height 1.05
+                                 :bold-family nil ; use the face's bold
+                                 :bold-weight bold)
+
+;;;;; Presets that keep the same font family but modify its appearance
+	                           ;; Presets to change point size only
+	                           (10pt :default-height 100)
+	                           (11pt :default-height 110)
+	                           (12pt :default-height 120)
+	                           (13pt :default-height 130)
+	                           (14pt :default-height 140)
+	                           (15pt :default-height 150)
+	                           (16pt :default-height 160)
+	                           (17pt :default-height 170)
+	                           (18pt :default-height 180)
+
+;; Line spacing is additional line spacing, not total line spacing
+;; (i.e. 0 is the default)
+;; Meaning differs depending on whether it is an integer or float
+;; Integer = additional pixels to add
+;; Floating point = additional spacing proportional to point size
+	                           (lsd :line-space 0)
+	                           ;; line spacing pixels
+	                           (lsp1 :line-spacing 1)
+	                           (lsp2 :line-spacing 2)
+	                           (lsp3 :line-spacing 3)
+	                           (lsp4 :line-spacing 4)
+	                           (lsp5 :line-spacing 5)
+	                           ;; line spacing scaling
+	                           (lss05 :line-spacing 0.05)
+	                           (lss10 :line-spacing 0.10)
+	                           (lss15 :line-spacing 0.15)
+	                           (lss20 :line-spacing 0.20)
+	                           (lss25 :line-spacing 0.25)
+	                           (lss30 :line-spacing 0.30)
+
+;;;;; Font presets
+
+;;;;;; Monospace fonts
+	                           (iosevka-comfy
+	                            :default-family "Iosevka Comfy"
+	                            :default-weight normal)
+
+	                           (fira-mono
+	                            :default-family "Fira Mono")
+
+	                           (fira-code
+	                            :default-family "FiraCode Nerd Font"
+	                            )
+
+	                           (jetbrains-mono
+	                            :default-family "JetBrains Mono NL")
+
+	                           (plex-mono
+	                            :default-family "IBM Plex Mono")
+
+	                           (dank-mono
+	                            :default-family "Dank Mono")
+
+	                           (hack
+	                            :default-family "Hack Nerd Font")
+
+	                           ;; think inter is proportional not mono
+	                           (inter
+	                            :default-family "Inter")
+
+	                           (xenon
+	                            :default-family "Monaspace Xenon")
+
+	                           (input-mono
+	                            :default-family "Input Mono")
+;;;;;; Quasi-monospace fonts
+	                           (duospace
+	                            :default-family "iA Writer Duospace")
+
+	                           (triplicate-mono-b
+	                            :default-family "Triplicate B")
+
+	                           (triplicate-code-b
+	                            :default-family "Triplicate B Code")
+
+	                           (triplicate-poly-b
+	                            :default-family "Triplicate B Poly")
+
+	                           (triplicate-mono-a
+	                            :default-family "Triplicate A")
+
+	                           (triplicate-code-a
+	                            :default-family "Triplicate A Code")
+
+	                           (triplicate-poly-a
+	                            :default-family "Triplicate A Poly")
+
+	                           (header-triplicate
+	                            :header-line-family "Triplicate A Caps"
+	                            :header-line-height 1.1)
+
+	                           (triplicate-combo
+	                            :default-family "Triplicate A Code"
+	                            :variable-pitch-family "Triplicate A Poly"
+	                            :header-line-family "Triplicate A Caps"
+	                            :header-line-height 1.1
+	                            )
+
+                             ;; Not fully variable width but it's not suitable for coding imo.
+                             ;; Could be fine for writing in a markup language
+                             (quattro
+	                            :default-family "iA Writer Quattro V")
+
+
+;;;;;; Header fonts      
+	                           (header-heliotrope
+	                            :header-line-family "Heliotrope 4 Caps"
+	                            :header-line-height 1.1)
+
+	                           (header-overpass
+	                            :header-line-family "Overpass"
+	                            :header-line-height 1.1)
+
+                             ;; Don't use a different family for headers 
+	                           (header-null
+	                            :header-line-family nil
+	                            :header-line-height 1.0)
+
+;;;;;; Variable pitch fonts
+	                           (serif-input
+	                            :variable-pitch-family "Input Serif")
+
+	                           (sans-input
+	                            :variable-pitch-family "Input Sans")
+
+	                           (vp-heliotrope
+	                            :variable-pitch-family "Heliotrope OT"
+	                            :variable-pitch-height 1.05)
+
+	                           (vp-avenir
+	                            :variable-pitch-family "Avenir"
+	                            :default-weight book)
+
+	                           (vp-minion
+	                            :variable-pitch-family "Minion 3")
+	                           )
+	        )
+  :custom (fontaine-mode t)
+  )
+#+end_src
+
+**** View fonts within emacs
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:38]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Font waterfall and size viewer from within emacs.
+#+begin_src emacs-lisp
+(use-package show-font
+  :general  (tyrant-def  "hs" 'show-font-select-preview
+                         "hT" 'show-font-tabulated
+                         )
+  :bind
+  (("C-c s f" . show-font-select-preview)
+   ("C-c s t" . show-font-tabulated))
+  )
+
+#+end_src
+**** Disabled packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:38]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no
+(use-package ligature
+  :disabled)
+#+end_src
+*** Theming advice and hooks
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:06]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
 (advice-add 'load-theme :after #'load-theme@run-hooks)
 (advice-add 'load-theme :before #'load-theme@theme-dont-propagate)
 
@@ -4647,16 +4796,24 @@ Just put this function in `hippie-expand-try-functions-list'."
 (add-hook 'after-load-theme-hook #'customize-tab-bar)
 (add-hook 'after-load-theme-hook #'unscale-outlines)
 (add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
+#+end_src
 
+*** Theming lisp footer
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:06]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; setup-themes.el ends here
+;;; configure-theming.el ends here
 #+end_src
 
-*** setup-treesit.el
+** setup-treesit.el
 :PROPERTIES:
 :CUSTOM_ID: setup-treesitel
 :END:
@@ -4695,7 +4852,12 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-treesit.el ends here
 #+end_src
 
-*** setup-ui.el
+** Configure UI Elements
+:PROPERTIES:
+:CUSTOM_ID: configure-ui-elements
+:END:
+
+** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
 :LAST_MODIFIED: [2025-07-18 Fri 23:06]
@@ -4883,7 +5045,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-ui.el ends here
 #+end_src
 
-*** setup-vc.el
+** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
 :LAST_MODIFIED: [2025-07-18 Fri 22:00]
@@ -5028,7 +5190,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-vc.el ends here
 #+end_src
 
-*** setup-web.el
+** setup-web.el
 :PROPERTIES:
 :CUSTOM_ID: setup-webel
 :END:
@@ -5070,7 +5232,7 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;; End:
 #+end_src
 
-*** setup-writing.el
+** setup-writing.el
 :PROPERTIES:
 :CUSTOM_ID: setup-writingel
 :END:
@@ -5169,13 +5331,13 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;;; setup-writing.el ends here
 #+end_src
 
-** Lisp functions
+* Lisp functions
 :PROPERTIES:
 :CUSTOM_ID: lisp-functions
 :LAST_MODIFIED: [2025-07-15 Tue 22:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-*** my-core-functions.el
+** my-core-functions.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-functionsel
 :LAST_MODIFIED: [2025-07-18 Fri 21:39]
@@ -5579,7 +5741,7 @@ a dedicated window."
 ;;; my-core-functions.el ends here
 #+end_src
 
-*** my-core-helpers.el
+** my-core-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-helpersel
 :LAST_MODIFIED: [2025-07-18 Fri 21:39]
@@ -5677,7 +5839,7 @@ the unwritable tidbits."
 ;;; my-core-helpers.el ends here
 #+end_src
 
-*** my-editor-helpers.el
+** my-editor-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-editor-helpersel
 :LAST_MODIFIED: [2025-07-18 Fri 21:39]
@@ -5728,7 +5890,7 @@ stays on current"
 ;;; my-editor-helpers.el ends here
 #+end_src
 
-*** my-keybinding-helpers.el
+** my-keybinding-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-keybinding-helpersel
 :LAST_MODIFIED: [2025-07-18 Fri 21:39]
@@ -5748,7 +5910,7 @@ This provides a consolidated view of all global leader keys."
 ;;; my-keybinding-helpers.el ends here
 #+end_src
 
-*** my-lang-helpers.el
+** my-lang-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-lang-helpersel
 :LAST_MODIFIED: [2025-07-18 Fri 21:39]
@@ -5801,7 +5963,7 @@ This provides a consolidated view of all global leader keys."
 ;;; my-lang-helpers.el ends here
 #+end_src
 
-*** my-lsp-bridge-helpers.el
+** my-lsp-bridge-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-lsp-bridge-helpersel
 :LAST_MODIFIED: [2025-07-18 Fri 21:39]
@@ -5847,7 +6009,7 @@ This provides a consolidated view of all global leader keys."
 ;;; my-lsp-bridge-helpers.el ends here
 #+end_src
 
-*** my-org-helpers.el
+** my-org-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-org-helpersel
 :LAST_MODIFIED: [2025-07-18 Fri 21:39]
@@ -5909,7 +6071,7 @@ Intended for `before-save-hook` in an Org mode buffer."
 ;;; my-org-helpers.el ends here
 #+end_src
 
-*** my-theme-helpers.el
+** my-theme-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-theme-helpersel
 :LAST_MODIFIED: [2025-07-18 Fri 21:40]
@@ -5968,7 +6130,7 @@ Intended for `before-save-hook` in an Org mode buffer."
 ;;; my-theme-helpers.el ends here
 #+end_src
 
-*** my-vc-helpers.el
+** my-vc-helpers.el
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 21:40]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
