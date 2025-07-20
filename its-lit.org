@@ -20,76 +20,6 @@ count of {{{word-count}}}.*
 :TOC:  :include siblings :force (nothing) :ignore (nothing) :local (nothing) :depth 2
 :CUSTOM_ID: overview
 :END:
-:CONTENTS:
-- [[#overview][Overview]]
-  - [[#style][Style]]
-  - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
-    - [[#support-for-detangling-excluding-headerfooter][Support for detangling (excluding header/footer)]]
-    - [[#aggressive-time-stamping][Aggressive time-stamping]]
-  - [[#warnings][Warnings]]
-    - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
-    - [[#i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it][I don't care about startup time (or at least don't optimize for it)]]
-  - [[#lisp-helpers-for-maintaining-my-literate-config][Lisp helpers for maintaining my literate config]]
-- [[#detailed-outline][Detailed Outline]]
-- [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
-  - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
-  - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
-- [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
-  - [[#initel][init.el]]
-- [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
-  - [[#one-stop-keybinding-shop][One stop keybinding shop]]
-  - [[#bibliography-management][Bibliography management]]
-  - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
-  - [[#editor-utilities-and-core-functionality][Editor utilities and "core" functionality]]
-  - [[#configure-all-things-org-mode][Configure all things org mode]]
-  - [[#configure-programming-language-specific-options][Configure (programming) language-specific options]]
-  - [[#configure-theming][Configure Theming]]
-  - [[#configure-completion-frameworks][Configure completion frameworks]]
-  - [[#setup-data-formatsel][setup-data-formats.el]]
-  - [[#setup-denoteel][setup-denote.el]]
-  - [[#setup-diagrammingel][setup-diagramming.el]]
-  - [[#setup-eafel][setup-eaf.el]]
-  - [[#configure-editor-utility-packages][Configure editor utility packages]]
-  - [[#setup-emacsel][setup-emacs.el]]
-  - [[#setup-emailel][setup-email.el]]
-  - [[#setup-evil-addonsel][setup-evil-addons.el]]
-  - [[#setup-evilel][setup-evil.el]]
-  - [[#setup-font-lockingel][setup-font-locking.el]]
-  - [[#setup-goel][setup-go.el]]
-  - [[#setup-gopherel][setup-gopher.el]]
-  - [[#setup-help-and-documentation-viewers][Setup help and documentation viewers]]
-  - [[#setup-iconsel][setup-icons.el]]
-  - [[#setup-lispel][setup-lisp.el]]
-  - [[#setup-llmel][setup-llm.el]]
-  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
-  - [[#setup-lspel][setup-lsp.el]]
-  - [[#setup-markdownel][setup-markdown.el]]
-  - [[#setup-mediael][setup-media.el]]
-  - [[#setup-modelineel][setup-modeline.el]]
-  - [[#setup-notesel][setup-notes.el]]
-  - [[#setup-programmingel][setup-programming.el]]
-  - [[#setup-projectsel][setup-projects.el]]
-  - [[#setup-readingel][setup-reading.el]]
-  - [[#setup-searchel][setup-search.el]]
-  - [[#setup-snippetsel][setup-snippets.el]]
-  - [[#setup-treesitel][setup-treesit.el]]
-  - [[#configure-ui-elements][Configure UI Elements]]
-  - [[#setup-uiel][setup-ui.el]]
-  - [[#setup-vcel][setup-vc.el]]
-  - [[#setup-webel][setup-web.el]]
-  - [[#setup-writingel][setup-writing.el]]
-- [[#lisp-functions][Lisp functions]]
-  - [[#my-core-functionsel][my-core-functions.el]]
-  - [[#my-core-helpersel][my-core-helpers.el]]
-  - [[#my-editor-helpersel][my-editor-helpers.el]]
-  - [[#my-keybinding-helpersel][my-keybinding-helpers.el]]
-  - [[#my-lang-helpersel][my-lang-helpers.el]]
-  - [[#my-lsp-bridge-helpersel][my-lsp-bridge-helpers.el]]
-  - [[#my-org-helpersel][my-org-helpers.el]]
-  - [[#my-theme-helpersel][my-theme-helpers.el]]
-  - [[#my-vc-helpersel][my-vc-helpers.el]]
-- [[#appendices][Appendices]]
-:END:
 
 This file documents and generates my Emacs configuration. It tangles to create
 my configuration files; this is distinct from the kind of literate config that
@@ -226,12 +156,11 @@ I'm sympathetic to the arguments in this blog post that [[https://batsov.com/art
 Work in progress
 
 
-
 * Detailed Outline
 :PROPERTIES:
-:TOC:      :include all :depth 3 :force (nothing) :ignore (nothing) :local (nothing)
+:TOC:      :include all :depth 4 :force (nothing) :ignore (nothing) :local (nothing)
 :CUSTOM_ID: detailed-outline
-:LAST_MODIFIED: [2025-07-19 Sat 20:40]
+:LAST_MODIFIED: [2025-07-20 Sun 03:34]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 :CONTENTS:
@@ -257,13 +186,11 @@ Work in progress
   - [[#editor-utilities-and-core-functionality][Editor utilities and "core" functionality]]
   - [[#configure-all-things-org-mode][Configure all things org mode]]
   - [[#configure-programming-language-specific-options][Configure (programming) language-specific options]]
-  - [[#configure-theming][Configure Theming]]
+  - [[#configure-theming][Configure theming]]
   - [[#configure-completion-frameworks][Configure completion frameworks]]
-  - [[#setup-data-formatsel][setup-data-formats.el]]
   - [[#setup-denoteel][setup-denote.el]]
   - [[#setup-diagrammingel][setup-diagramming.el]]
   - [[#setup-eafel][setup-eaf.el]]
-  - [[#configure-editor-utility-packages][Configure editor utility packages]]
   - [[#setup-emacsel][setup-emacs.el]]
   - [[#setup-emailel][setup-email.el]]
   - [[#setup-evil-addonsel][setup-evil-addons.el]]
@@ -271,7 +198,6 @@ Work in progress
   - [[#setup-font-lockingel][setup-font-locking.el]]
   - [[#setup-goel][setup-go.el]]
   - [[#setup-gopherel][setup-gopher.el]]
-  - [[#setup-help-and-documentation-viewers][Setup help and documentation viewers]]
   - [[#setup-iconsel][setup-icons.el]]
   - [[#setup-lispel][setup-lisp.el]]
   - [[#setup-llmel][setup-llm.el]]
@@ -284,8 +210,6 @@ Work in progress
   - [[#setup-programmingel][setup-programming.el]]
   - [[#setup-projectsel][setup-projects.el]]
   - [[#setup-readingel][setup-reading.el]]
-  - [[#setup-searchel][setup-search.el]]
-  - [[#setup-snippetsel][setup-snippets.el]]
   - [[#setup-treesitel][setup-treesit.el]]
   - [[#configure-ui-elements][Configure UI Elements]]
   - [[#setup-uiel][setup-ui.el]]
@@ -431,7 +355,11 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 ;;; Commentary:
 ;;; Code:
 #+end_src
-
+*** Bootstrap Elpaca package manager
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:46]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
 #+name: init elpaca
 #+begin_src emacs-lisp :tangle init.el :comments noweb
 ;; ===================== Elpaca bootstrap install ====================
@@ -485,10 +413,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 
 (elpaca-wait) ; Block until current queue processed.
 #+end_src
-
-#+RESULTS: init elpaca
-
-**** Define constants to use as conditional configuration flags
+*** Define constants to use as conditional configuration flags
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -509,6 +434,13 @@ probably being fast and loose with system type and GUI/non-GUI configuration.
 (defconst my-debug-mode nil
   "Toggle debugging messages. Set to t to enable, nil to disable.")
 #+end_src
+*** Declare packages that are immediately loaded
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:48]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+These packages have to be loaded immediately becuase they either provide
+=use-package= keywords or change how intialization works in some way.
 **** no-littering
 :PROPERTIES:
 :CUSTOM_ID: no-littering
@@ -577,23 +509,23 @@ mistakes in my configuration.
   :config (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate)
   )
 #+end_src
-**** Load configuration files
+*** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-20 Sun 02:57]
+:LAST_MODIFIED: [2025-07-20 Sun 03:58]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 #+name: load configuration files
 #+begin_src emacs-lisp :noweb yes :comments noweb :tangle init.el 
-;;;; =========== Load use-package declarations and configuration ===========
+;;;; =========== Load use-package declarations and configuration =======
 
 ;; Declarations to executed immediately. I.e. those with elpaca
 ;; :ensure (:wait t)
 ;; :demand t
 (load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
 
-;;;; =========================== Load lisp defuns ==========================
+;;;; =========================== Load lisp defuns ======================
 ;; Add personal `lisp` directory to the load-path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
@@ -624,19 +556,16 @@ mistakes in my configuration.
              "setup-completion-display.el"
              "setup-completion.el"
              "setup-consult.el"
-             ;;              "setup-core.el"
              ;; "setup-data-formats.el"
              ;; "setup-denote.el"
              ;; "setup-diagramming.el"
              ;; "setup-eaf.el"
-             ;;             "setup-editor-misc.el"
              ;; "setup-emacs.el"
              ;;              ;; "setup-email.el"
              "setup-evil-addons.el"
              "setup-font-locking.el"
              ;;              ;; "setup-go.el"
              ;;              ;; "setup-gopher.el"
-             "setup-help.el"
              ;;              ;; "setup-icons.el"
              ;;              ;; "setup-lisp.el"
              "setup-llm.el"
@@ -651,8 +580,6 @@ mistakes in my configuration.
              "setup-r.el"
              ;;              "setup-reading.el"
              ;; "setup-rust.el"
-             "setup-search.el"
-             "setup-snippets.el"
              ;; "setup-tex.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
@@ -666,7 +593,7 @@ mistakes in my configuration.
   )
 #+end_src
 
-**** Load custom file and run after-init hooks
+*** Load custom file and run after-init hooks
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 20:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -677,7 +604,7 @@ mistakes in my configuration.
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 #+end_src
 
-**** Local variable footer for init
+*** Local variable footer for init
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 20:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
@@ -1281,6 +1208,56 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
           )
   )
 #+end_src
+**** Removed built-in configuration
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:33]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Off the top of my head, I think
+- I broke =desktop= regularly but I haven't used it in so long that it's 99.9% of
+  user error.
+- =dabbrev= conflicts with =acm= the completion package for =lsp-bridge=
+- =repeat= doesn't have any customization and just isn't necessary as it's builtin?
+- =sqlite= was trying to make sure I was using the builtin version
+
+
+#+name: removed built-in package declarations
+#+begin_src emacs-lisp :tangle no :eval no :comments no
+(use-package desktop
+  :disabled
+  :ensure nil
+  :commands restart-emacs-without-desktop
+  :init (desktop-save-mode)
+  :config
+  ;; inhibit no-loaded prompt
+  (setopt desktop-file-modtime (file-attribute-modification-time
+                                (file-attributes
+                                 (desktop-full-file-name)))
+          desktop-lazy-verbose nil
+          desktop-load-locked-desktop t
+          desktop-restore-eager nil
+          desktop-save t)
+
+  (dolist (param '(foreground-color background-color background-mode font cursor-color mouse-color))
+    (push `(,param . :never) frameset-filter-alist))
+
+  (advice-add 'desktop-read :around #'desktop-read@inhibit-message))
+(use-package dabbrev
+ :ensure nil
+ :defer t
+ :config
+ (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
+      dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\'")))
+
+(use-package repeat
+ :ensure nil
+ :defer t
+ )
+
+(use-package sqlite
+ :ensure nil)
+#+end_src
 
 *** Configure built-in programming utilities
 :PROPERTIES:
@@ -1486,36 +1463,6 @@ I really need to learn how to use =ediff= properly
 ;; End:
 ;;; configure-base-and-built-in ends here
 #+end_src
-*** Removed declarations
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 17:34]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:header-args: :tangle no :comments no
-:END:
-Off the top of my head, I think
-- =dabbrev= conflicts with =acm= the completion package for =lsp-bridge=
-- =repeat= doesn't have any customization and just isn't necessary as it's builtin?
-- =sqlite= was trying to make sure I was using the builtin version
-
-#+name: removed built-in package declarations
-#+begin_src emacs-lisp :tangle no :comments no :eval no
-;; (use-package dabbrev
-;;  :ensure nil
-;;  :defer t
-;;  :config
-;;  (setopt dabbrev-abbrev-char-regexp "[A-Za-z-_]"
-;;       dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\'")))
-
-;;(use-package repeat
-;;  :ensure nil
-;;  :defer t
-;;  )
-
-;;(use-package sqlite
-;;  :ensure nil)
-#+end_src
-
-
 ** Editor utilities and "core" functionality
 :PROPERTIES:
 :header-args: :tangle config/configure-utilities.el :comments noweb
@@ -1530,12 +1477,174 @@ Off the top of my head, I think
 ;;; Commentary:
 ;;; Code:
 #+end_src
-*** Modify core editor functioning
+*** Configure editor utility packages
 :PROPERTIES:
-:CUSTOM_ID: setup-coreel
-:LAST_MODIFIED: [2025-07-20 Sun 02:47]
+:CUSTOM_ID: configure-editor-utility-packages
+:LAST_MODIFIED: [2025-07-20 Sun 03:52]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
+
+#+begin_src emacs-lisp :comments no
+
+;;;; ========================= Utility packages ========================
+#+end_src
+**** Comment utilities
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:52]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: banner-comments
+:END:
+
+I'm a big fan of the look of banner comments but trying to set a custom prefix it wasn't clear how to keep the language-adaptive comment symbol and add a string afterwards. I always want a space
+
+#+name: comment tools
+#+begin_src emacs-lisp
+(use-package banner-comment
+  :config  (setopt banner-comment-width 68)
+  :general  (tyrant-def "ab" 'banner-comment)
+  )
+#+end_src
+**** Utilities for interact with the operating system
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:58]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp 
+(use-package reveal-in-folder
+  :general (tyrant-def "bf" 'reveal-in-folder))
+
+(use-package terminal-here
+  :init (setq terminal-here-mac-terminal-command 'ghostty)
+  :general
+  (tyrant-def "'" '("terminal here" . terminal-here-launch)
+    "p '" '("terminal project root" . terminal-here-project-launch)
+    )
+  )
+#+end_src
+**** Scratch buffer utilities
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:41]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+;; Conveniently create scratches in the same mode as the current file
+(use-package scratch
+  :general (tyrant-def "bS" 'scratch))
+#+end_src
+**** Search utilities
+:PROPERTIES:
+:CUSTOM_ID: setup-searchel
+:LAST_MODIFIED: [2025-07-20 Sun 03:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Don't know if this is still the case but for a spell the emacs package wouldn't find the homebrew executable when run as a daemon.
+#+begin_src emacs-lisp
+(use-package rg
+  :config (when (and IS-MAC (daemonp)) (setopt rg-executable "/opt/homebrew/bin/rg"))
+  :general (tyrant-def   "fr" 'rg
+                         "fR" 'rg-menu
+             )
+	)
+#+end_src
+
+***** Removed search-related packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:03]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no :comments no
+(use-package wgrep
+  :disabled)
+
+(use-package manage-minor-mode-table
+  :disabled
+  :general
+  (tyrant-def "am" 'manage-minor-mode-table)
+ )
+#+end_src
+**** Terminal configuration
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:55]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package vterm
+  :general (tyrant-def "av" 'vterm
+                       "aV" 'vterm-other-window
+                       )
+  )
+#+end_src
+*** Data format modes
+:PROPERTIES:
+:CUSTOM_ID: data-format-modes
+:LAST_MODIFIED: [2025-07-20 Sun 03:53]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp
+;;;; ======================= Data file format modes ======================
+
+(use-package csv-mode
+  :mode ("\\.[cC][sS][vV]\\\'" . csv-mode)
+  :config
+  (add-hook 'csv-mode-hook 'csv-guess-set-separator)
+	:general
+  (despot-def csv-mode-map
+    "s" 'csv-sort-fields
+    "n" 'csv-sort-numeric-fields
+    "r" 'csv-reverse-region
+    "k" 'csv-kill-fields
+    "y" 'csv-yank-fields
+    "a" 'csv-align-fields
+    "A" 'csv-align-mode
+    "u" 'csv-unalign-fields
+    "t" 'csv-transpose
+    )
+  )
+
+(use-package toml
+  :mode ("\\.[tT][oO][mM][lL]\\'" . toml-mode)
+  )
+#+end_src
+***** Removed data viewers
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:15]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle no :comments no
+
+;; a high-level Emacs Lisp front-end for SQLite
+;; epkg depends on it, I forget if I was manually declaring it for another reason
+(use-package emacsql)
+
+
+(use-package json-navigator
+	:disabled
+	)
+
+(use-package jsonian
+	:disabled
+	:mode ("\\.json\\'")
+	:after so-long
+  :custom
+  (jsonian-no-so-long-mode))
+
+#+end_src
+*** Modify core editor functioning
+:PROPERTIES:
+:CUSTOM_ID: core-editor-functioning
+:LAST_MODIFIED: [2025-07-20 Sun 03:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :comments no
+
+;;;; ================= Modify core editor functionality ================
+#+end_src
+
 **** Smooth scrolling
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:48]
@@ -1550,26 +1659,96 @@ Who knew scrolling could be so hard?
   :config (ultra-scroll-mode 1)
   )
 #+end_src
-**** Banner comments
+**** Setup help and documentation viewers
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 02:55]
+:CUSTOM_ID: setup-help-and-documentation-viewers
+:LAST_MODIFIED: [2025-07-20 Sun 03:26]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: banner-comments
 :END:
 
-I'm a big fan of the look of banner comments but trying to set a custom prefix it wasn't clear how to keep the language-adaptive comment symbol and add a string afterwards. I always want a space
-
-#+name: comment tools
 #+begin_src emacs-lisp
-(use-package banner-comment
-  :config  (setopt banner-comment-width 72)
-  :general  (tyrant-def "ab" 'banner-comment)
+(use-package helpful
+  :config
+  (setq helpful-max-buffers 3
+        helpful-switch-buffer-function #'helpful-reuse-window)
+
+  (with-eval-after-load 'ibuffer
+    (add-to-list 'ibuffer-help-buffer-modes 'helpful-mode))
+  :general
+  ([remap describe-command]  'helpful-command
+   [remap describe-function] 'helpful-callable
+   [remap describe-key]      'helpful-key
+   [remap describe-symbol]   'helpful-symbol
+   [remap describe-variable] 'helpful-variable))
+#+end_src
+
+**** Configuring how undo works
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:42]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package undo-fu
+  :config (setopt evil-undo-system 'undo-fu)
+  )
+
+(use-package undo-fu-session
+  :custom (undo-fu-session-global-mode t)
   )
 #+end_src
-**** Outline and fold text
+**** Windowing
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+Window numbering
+#+begin_src emacs-lisp
+(use-package winum
+  :hook (elpaca-after-init . winum-mode)
+  :init
+  (with-eval-after-load 'which-key
+    (push '((nil . "winum-select-window-[1-9]") . t) which-key-replacement-alist)
+    (push '((nil . "buffer-to-window-[1-9]") . t) which-key-replacement-alist))
+  :config
+  (setq winum-auto-assign-0-to-minibuffer t
+        winum-auto-setup-mode-line t
+        winum-scope 'frame-local)
+
+  (dotimes (i 9)
+    (let ((n (+ i 1)))
+      (eval `(defun ,(intern (format "buffer-to-window-%s" n)) (&optional arg)
+               ,(format "Move buffer to the window with number %i." n)
+               (interactive "P")
+               (if arg
+                   (move-buffer-to-window ,n t)
+                 (swap-buffers-to-window ,n t))))))
+  :general
+  (tyrant-def
+    "1"  '("window 1..9" . winum-select-window-1)
+    "2"  'winum-select-window-2
+    "3"  'winum-select-window-3
+    "4"  'winum-select-window-4
+    "5"  'winum-select-window-5
+    "6"  'winum-select-window-6
+    "7"  'winum-select-window-7
+    "8"  'winum-select-window-8
+    "9"  'winum-select-window-9
+    "b1" '("Move buffer to window 1..9" . buffer-to-window-1)
+    "b2" 'buffer-to-window-2
+    "b3" 'buffer-to-window-3
+    "b4" 'buffer-to-window-4
+    "b5" 'buffer-to-window-5
+    "b6" 'buffer-to-window-6
+    "b7" 'buffer-to-window-7
+    "b8" 'buffer-to-window-8
+    "b9" 'buffer-to-window-9)
+  )
+#+end_src
+*** Outline and fold text
 :PROPERTIES:
 :CUSTOM_ID: outline-and-fold-text
-:LAST_MODIFIED: [2025-07-20 Sun 02:53]
+:LAST_MODIFIED: [2025-07-20 Sun 03:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
@@ -1597,33 +1776,67 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
     "oz" 'TeX-fold-mode)
   )
 #+end_src
-*** Removed core customizations
+
+*** Text snippet insertion and collections
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 18:43]
+:CUSTOM_ID: snippet-insertion
+:LAST_MODIFIED: [2025-07-20 Sun 03:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle no :eval no
-(use-package desktop
-  :disabled
-  :ensure nil
-  :commands restart-emacs-without-desktop
-  :init (desktop-save-mode)
+#+begin_src emacs-lisp 
+;;;; ========================== Text snippets ==========================
+(use-package tempel
+  :hook ((text-mode prog-mode) . tempel-setup-capf)
+  :init
+  (setq tempel-trigger-prefix "<"
+        tempel-path "~/.emacs.d/etc/templates/*.eld")
   :config
-  ;; inhibit no-loaded prompt
-  (setopt desktop-file-modtime (file-attribute-modification-time
-                                (file-attributes
-                                 (desktop-full-file-name)))
-          desktop-lazy-verbose nil
-          desktop-load-locked-desktop t
-          desktop-restore-eager nil
-          desktop-save t)
+  (defun tempel-setup-capf ()
+    (setq-local completion-at-point-functions
+                (cons #'tempel-complete
+                      completion-at-point-functions)))
 
-  (dolist (param '(foreground-color background-color background-mode font cursor-color mouse-color))
-    (push `(,param . :never) frameset-filter-alist))
+  (defun tempel-hippie-try-expand (old)
+    "Integrate with hippie expand. Just put this function in `hippie-expand-try-functions-list'." 
+    (if (not old)
+        (tempel-expand t)
+      (undo 1)))
 
-  (advice-add 'desktop-read :around #'desktop-read@inhibit-message))
+  (add-to-list 'hippie-expand-try-functions-list #'tempel-hippie-try-expand t)
+	)
 
+(use-package tempel-collection
+  :after tempel)
 
+(use-package yasnippet
+	:hook ((text-mode prog-mode) . yas-minor-mode)
+	:config
+	(setopt yas-global-mode t)
+	)
+
+(use-package yasnippet-snippets
+	:after yasnippet)
+#+end_src
+
+**** Removed snippet packages and customization
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:23]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+I must've been doing something strange to run into the error with
+=tempel-auto-reload= described below. But just in case...
+
+#+begin_src emacs-lisp :tangle no :comments no :eval no
+	;;	:custom
+	;;	(tempel-auto-reload nil)
+	;; I don't want unexpected changes if I update something from a template, but
+	;; I think I should use tempel-done when I'm done with a template
+
+(use-package eglot-tempel
+	:disabled
+  :hook (eglot-managed-mode .  eglot-tempel-mode)
+	)
 #+end_src
 *** Footer for utilities config
 :PROPERTIES:
@@ -1641,6 +1854,84 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 ;;; configure-utilities.el ends here
 #+end_src
 
+*** Removed packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 03:37]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header-args: :tangle no :comments no
+:END:
+
+These packages have the distinction of being useful but I don't use them enough, and if I ever want to use them, I need to add them back in an intentional manner.
+=xr=  is for translating and pretty printing regular expressions. I can see its utility but I don't work with regular expressions enough to find it worth keeping.
+
+#+name: useful removed packages
+#+begin_src emacs-lisp :tangle no :comments no :eval no
+(use-package xr)
+
+(use-package password-menu
+	;; was using while debugging authinfo api key stuff
+	:disabled
+	:general
+	(tyrant-def "as" 'password-menu-transient)
+	)
+
+(use-package substitute
+	:general
+	(tyrant-def
+		"rb" 'substitute-target-in-buffer
+		"rd" 'substitute-target-in-defun
+		"rj" 'substitute-target-below-point
+		"rk" 'substitute-target-above-point)
+	:config
+	(add-hook 'substitute-post-replace-functions #'substitute-report-operation)
+	)
+
+(use-package tmr
+	:general
+	(tyrant-def "aT" 'tmr-tabulated-view)
+	:config
+	(setq tmr-sound-file "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga")
+	(setq tmr-notification-urgency 'normal)
+	(setq tmr-descriptions-list 'tmr-description-history)
+	(define-key global-map "\C-ct" 'tmr-prefix-map)
+	)
+
+(use-package link-hint
+  :disabled ; occassionally useful not necessary?
+  :config
+  (setq link-hint-restore nil)
+  :general
+  (general-def
+    :keymaps '(compilation-mode-map
+               custom-mode-map
+               eww-link-keymap
+               eww-mode-map
+               help-mode-map
+               helpful-mode-map
+               Info-mode-map
+               mu4e-view-mode-map
+               xref--xref-buffer-mode-map
+               woman-mode-map)
+    :states  'normal
+    "o"      'link-hint-open-link)
+
+  (tyrant-def
+    "Jo" 'link-hint-open-link
+    "JO" 'link-hint-open-multiple-links
+    "Jy" 'link-hint-copy-link)
+  )
+
+#+end_src
+
+#+name: removed utilities I don't remember much about
+#+begin_src emacs-lisp :eval no :tangle no :comments no
+(use-package dumb-jump
+  :disabled
+  :init
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  (setq dumb-jump-selector 'completing-read)
+  )
+#+end_src
 ** Configure all things org mode
 :PROPERTIES:
 :header-args: :tangle config/configure-org.el :comments noweb
@@ -2347,10 +2638,10 @@ Disabling this until I have time to sit down and give it an honest effort.
 ;;; setup-tex.el ends here
 #+end_src
 
-** Configure Theming
+** Configure theming
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle config/configure-theming.el :comments noweb
-:LAST_MODIFIED: [2025-07-19 Sat 19:04]
+:LAST_MODIFIED: [2025-07-20 Sun 03:04]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-theming
 :END:
@@ -2679,7 +2970,6 @@ Font waterfall and size viewer from within emacs.
 :LAST_MODIFIED: [2025-07-19 Sat 20:37]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-
 *** setup-completion-actions.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completion-actionsel
@@ -3115,62 +3405,6 @@ of 2025-07-06
 ;;; setup-consult.el ends here
 #+end_src
 
-** setup-data-formats.el
-:PROPERTIES:
-:CUSTOM_ID: setup-data-formatsel
-:LAST_MODIFIED: [2025-07-15 Tue 19:28]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-data-formats.el
-;;; setup-data-formats.el --- data viewers -*- lexical-binding: t -*-
-
-(use-package csv-mode
-  :mode ("\\.csv\\\'" . csv-mode)
-  :config
-  (add-hook 'csv-mode-hook 'csv-guess-set-separator)
-	:general
-  (despot-def csv-mode-map
-    "s" 'csv-sort-fields
-    "n" 'csv-sort-numeric-fields
-    "r" 'csv-reverse-region
-    "k" 'csv-kill-fields
-    "y" 'csv-yank-fields
-    "a" 'csv-align-fields
-    "A" 'csv-align-mode
-    "u" 'csv-unalign-fields
-    "t" 'csv-transpose
-    )
-  )
-
-(use-package emacsql)
-
-(use-package toml)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-data-formats.el ends here
-#+end_src
-**** Other data viewers
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-15 Tue 19:28]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle no
-(use-package json-navigator
-	:disabled
-	)
-
-(use-package jsonian
-	:disabled
-	:mode ("\\.json\\'")
-	:after so-long
-  :custom
-  (jsonian-no-so-long-mode))
-
-#+end_src
 ** setup-denote.el
 :PROPERTIES:
 :CUSTOM_ID: setup-denoteel
@@ -3357,169 +3591,6 @@ of 2025-07-06
 ;;; setup-eaf.el ends here
 #+end_src
 
-** Configure editor utility packages
-:PROPERTIES:
-:CUSTOM_ID: configure-editor-utility-packages
-:LAST_MODIFIED: [2025-07-18 Fri 18:41]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-editor-misc.el
-;;; config/setup-editor-misc.el --- Miscellaneous editor configuration -*- lexical-binding: t -*-
-
-(use-package reveal-in-folder
-  :general (tyrant-def "bf" 'reveal-in-folder))
-
-;; Conveniently create scratches in the same mode as the current file
-(use-package scratch
-  :general (tyrant-def "bS" 'scratch))
-
-(use-package terminal-here
-  :init (setq terminal-here-mac-terminal-command 'ghostty)
-  :general
-  (tyrant-def "'" '("terminal here" . terminal-here-launch)
-    "p '" '("terminal project root" . terminal-here-project-launch)
-    )
-  )
-
-(use-package vterm
-  :general (tyrant-def "av" 'vterm
-             "aV" 'vterm-other-window
-             )
-  )
-
-(use-package undo-fu
-  :config (setopt evil-undo-system 'undo-fu)
-  )
-
-(use-package undo-fu-session
-  :custom (undo-fu-session-global-mode t)
-  )
-
-(use-package winum
-  :hook (elpaca-after-init . winum-mode)
-  :init
-  (with-eval-after-load 'which-key
-    (push '((nil . "winum-select-window-[1-9]") . t) which-key-replacement-alist)
-    (push '((nil . "buffer-to-window-[1-9]") . t) which-key-replacement-alist))
-  :config
-  (setq winum-auto-assign-0-to-minibuffer t
-        winum-auto-setup-mode-line t
-        winum-scope 'frame-local)
-
-  (dotimes (i 9)
-    (let ((n (+ i 1)))
-      (eval `(defun ,(intern (format "buffer-to-window-%s" n)) (&optional arg)
-               ,(format "Move buffer to the window with number %i." n)
-               (interactive "P")
-               (if arg
-                   (move-buffer-to-window ,n t)
-                 (swap-buffers-to-window ,n t))))))
-  :general
-  (tyrant-def
-    "1"  '("window 1..9" . winum-select-window-1)
-    "2"  'winum-select-window-2
-    "3"  'winum-select-window-3
-    "4"  'winum-select-window-4
-    "5"  'winum-select-window-5
-    "6"  'winum-select-window-6
-    "7"  'winum-select-window-7
-    "8"  'winum-select-window-8
-    "9"  'winum-select-window-9
-    "b1" '("Move buffer to window 1..9" . buffer-to-window-1)
-    "b2" 'buffer-to-window-2
-    "b3" 'buffer-to-window-3
-    "b4" 'buffer-to-window-4
-    "b5" 'buffer-to-window-5
-    "b6" 'buffer-to-window-6
-    "b7" 'buffer-to-window-7
-    "b8" 'buffer-to-window-8
-    "b9" 'buffer-to-window-9))
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-editor-misc.el ends here
-#+end_src
-*** Removed packages
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 18:29]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:header-args: :tangle no :comments no
-:END:
-
-These packages have the distinction of being useful but I don't use them enough, and if I ever want to use them, I need to add them back in an intentional manner.
-=xr=  is for translating and pretty printing regular expressions. I can see its utility but I don't work with regular expressions enough to find it worth keeping.
-
-#+name: useful removed packages
-#+begin_src emacs-lisp
-(use-package xr)
-
-(use-package password-menu
-	;; was using while debugging authinfo api key stuff
-	:disabled
-	:general
-	(tyrant-def "as" 'password-menu-transient)
-	)
-
-(use-package substitute
-	:general
-	(tyrant-def
-		"rb" 'substitute-target-in-buffer
-		"rd" 'substitute-target-in-defun
-		"rj" 'substitute-target-below-point
-		"rk" 'substitute-target-above-point)
-	:config
-	(add-hook 'substitute-post-replace-functions #'substitute-report-operation)
-	)
-
-(use-package tmr
-	:general
-	(tyrant-def "aT" 'tmr-tabulated-view)
-	:config
-	(setq tmr-sound-file "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga")
-	(setq tmr-notification-urgency 'normal)
-	(setq tmr-descriptions-list 'tmr-description-history)
-	(define-key global-map "\C-ct" 'tmr-prefix-map)
-	)
-
-(use-package link-hint
-  :disabled ; occassionally useful not necessary?
-  :config
-  (setq link-hint-restore nil)
-  :general
-  (general-def
-    :keymaps '(compilation-mode-map
-               custom-mode-map
-               eww-link-keymap
-               eww-mode-map
-               help-mode-map
-               helpful-mode-map
-               Info-mode-map
-               mu4e-view-mode-map
-               xref--xref-buffer-mode-map
-               woman-mode-map)
-    :states  'normal
-    "o"      'link-hint-open-link)
-
-  (tyrant-def
-    "Jo" 'link-hint-open-link
-    "JO" 'link-hint-open-multiple-links
-    "Jy" 'link-hint-copy-link)
-  )
-
-#+end_src
-
-#+name: removed utilities I don't remember much about
-#+begin_src emacs-lisp
-(use-package dumb-jump
-  :disabled
-  :init
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-  (setq dumb-jump-selector 'completing-read)
-  )
-#+end_src
 ** setup-emacs.el
 :PROPERTIES:
 :CUSTOM_ID: setup-emacsel
@@ -3923,36 +3994,6 @@ These packages have the distinction of being useful but I don't use them enough,
 ;; no-update-autoloads: t
 ;; End:
 ;;; setup-gopher.el ends here
-#+end_src
-** Setup help and documentation viewers
-:PROPERTIES:
-:CUSTOM_ID: setup-help-and-documentation-viewers
-:LAST_MODIFIED: [2025-07-18 Fri 04:11]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp :tangle config/setup-help.el
-;;; config/setup-help.el --- helpful annotations -*- lexical-binding: t -*-
-
-(use-package helpful
-  :config
-  (setq helpful-max-buffers 3
-        helpful-switch-buffer-function #'helpful-reuse-window)
-
-  (with-eval-after-load 'ibuffer
-    (add-to-list 'ibuffer-help-buffer-modes 'helpful-mode))
-  :general
-  ([remap describe-command]  'helpful-command
-   [remap describe-function] 'helpful-callable
-   [remap describe-key]      'helpful-key
-   [remap describe-symbol]   'helpful-symbol
-   [remap describe-variable] 'helpful-variable))
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-help.el ends here
 #+end_src
 ** setup-icons.el
 :PROPERTIES:
@@ -4853,99 +4894,6 @@ These packages have the distinction of being useful but I don't use them enough,
    (consult-customize consult-dash :initial (thing-at-point 'symbol))
 	)
 #+end_src
-** setup-search.el
-:PROPERTIES:
-:CUSTOM_ID: setup-searchel
-:LAST_MODIFIED: [2025-07-18 Fri 21:18]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-search.el
-;;; config/setup-search.el --- Search tools configuration -*- lexical-binding: t -*-
-
-(use-package rg
-  :config (when (and IS-MAC (daemonp)) (setopt rg-executable "/opt/homebrew/bin/rg"))
-  :general (tyrant-def   "fr" 'rg
-                         "fR" 'rg-menu
-             )
-	)
-
-(use-package wgrep
-  :disabled)
-
-(use-package manage-minor-mode-table
-  :disabled
-  :general
-  (tyrant-def "am" 'manage-minor-mode-table)
- )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-search.el ends here
-#+end_src
-
-** setup-snippets.el
-:PROPERTIES:
-:CUSTOM_ID: setup-snippetsel
-:LAST_MODIFIED: [2025-07-18 Fri 05:00]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-snippets.el
-;;; config/setup-snippets.el --- Snippets configuration -*- lexical-binding: t -*-
-
-(use-package tempel
-  :hook ((text-mode prog-mode) . tempel-setup-capf)
-  :init
-  (setq tempel-trigger-prefix "<"
-        tempel-path "~/.emacs.d/etc/templates/*.eld")
-  :config
-(defun tempel-setup-capf ()
-  (setq-local completion-at-point-functions
-              (cons #'tempel-complete
-                    completion-at-point-functions)))
-
-(defun tempel-hippie-try-expand (old)
-  "Integrate with hippie expand.
-Just put this function in `hippie-expand-try-functions-list'."
-  (if (not old)
-      (tempel-expand t)
-    (undo 1)))
-
-
-  (add-to-list 'hippie-expand-try-functions-list #'tempel-hippie-try-expand t)
-
-	;;	:custom
-	;;	(tempel-auto-reload nil)
-	;; I don't want unexpected changes if I update something from a template, but
-	;; I think I should use tempel-done when I'm done with a template
-	)
-
-(use-package tempel-collection
-  :after tempel)
-
-(use-package eglot-tempel
-	:disabled
-  :hook (eglot-managed-mode .  eglot-tempel-mode)
-	)
-
-(use-package yasnippet
-	:hook ((text-mode prog-mode) . yas-minor-mode)
-	:config
-	(setopt yas-global-mode t)
-	)
-
-(use-package yasnippet-snippets
-	:after yasnippet)
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-snippets.el ends here
-#+end_src
-
 ** setup-treesit.el
 :PROPERTIES:
 :CUSTOM_ID: setup-treesitel

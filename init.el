@@ -107,14 +107,14 @@
 ;; benchmark init declaration ends here
 
 ;; [[file:its-lit.org::load configuration files][load configuration files]]
-;;;; =========== Load use-package declarations and configuration ===========
+;;;; =========== Load use-package declarations and configuration =======
 
 ;; Declarations to executed immediately. I.e. those with elpaca
 ;; :ensure (:wait t)
 ;; :demand t
 (load-file (expand-file-name "config/setup-evil.el" user-emacs-directory))
 
-;;;; =========================== Load lisp defuns ==========================
+;;;; =========================== Load lisp defuns ======================
 ;; Add personal `lisp` directory to the load-path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
@@ -145,19 +145,16 @@
              "setup-completion-display.el"
              "setup-completion.el"
              "setup-consult.el"
-             ;;              "setup-core.el"
              ;; "setup-data-formats.el"
              ;; "setup-denote.el"
              ;; "setup-diagramming.el"
              ;; "setup-eaf.el"
-             ;;             "setup-editor-misc.el"
              ;; "setup-emacs.el"
              ;;              ;; "setup-email.el"
              "setup-evil-addons.el"
              "setup-font-locking.el"
              ;;              ;; "setup-go.el"
              ;;              ;; "setup-gopher.el"
-             "setup-help.el"
              ;;              ;; "setup-icons.el"
              ;;              ;; "setup-lisp.el"
              "setup-llm.el"
@@ -172,8 +169,6 @@
              "setup-r.el"
              ;;              "setup-reading.el"
              ;; "setup-rust.el"
-             "setup-search.el"
-             "setup-snippets.el"
              ;; "setup-tex.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
