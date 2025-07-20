@@ -2,9 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-;; [[file:../its-lit.org::*Define additional font lock faces][Define additional font lock faces:1]]
+;; [[file:../its-lit.org::*Preserve appearance of collapsed outline headings until window edge][Preserve appearance of collapsed outline headings until window edge:1]]
+(use-package backline
+  :after outline
+  :config (advice-add 'outline-flag-region :after 'backline-update))
 
-;; Define additional font lock faces:1 ends here
+(use-package outline-minor-faces
+  :after outline
+  :config (add-hook 'outline-minor-mode-hook
+                    #'outline-minor-faces-mode))
+;; Preserve appearance of collapsed outline headings until window edge:1 ends here
 
 ;; [[file:../its-lit.org::#color-theme-packages][Color theme packages:1]]
 (use-package doom-themes)

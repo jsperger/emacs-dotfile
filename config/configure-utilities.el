@@ -1,15 +1,24 @@
-;;; setup-outlining.el ---  -*- lexical-binding: t; -*-
-(use-package outline-minor-faces
-  :after outline
-  :config (add-hook 'outline-minor-mode-hook
-                    #'outline-minor-faces-mode)
-  )
+;;; configure-utilities.el --- editor add-ons -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
 
-(use-package backline
-  :after outline
-  :config (advice-add 'outline-flag-region :after 'backline-update)
+;; [[file:../its-lit.org::*Smooth scrolling][Smooth scrolling:1]]
+(use-package ultra-scroll
+  :ensure (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")
+  :init  (setq scroll-conservatively 50
+               scroll-margin 0) 
+  :config (ultra-scroll-mode 1)
   )
+;; Smooth scrolling:1 ends here
 
+;; [[file:../its-lit.org::comment tools][comment tools]]
+(use-package banner-comment
+  :config  (setopt banner-comment-width 72)
+  :general  (tyrant-def "ab" 'banner-comment)
+  )
+;; comment tools ends here
+
+;; [[file:../its-lit.org::#outline-and-fold-text][Outline and fold text:1]]
 (use-package outline-indent
   :commands outline-indent-minor-mode
   :custom
@@ -33,10 +42,11 @@
     "oT" 'bicycle-cycle-global
     "oz" 'TeX-fold-mode)
   )
+;; Outline and fold text:1 ends here
 
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; setup-outlining.el ends here
+;;; configure-utilities.el ends here

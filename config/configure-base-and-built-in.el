@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;; [[file:../its-lit.org::*Configure base emacs options][Configure base emacs options:1]]
+;; [[file:../its-lit.org::emacs package declaration for config options][emacs package declaration for config options]]
 (use-package emacs
   :ensure nil
   :init
@@ -22,6 +22,8 @@
           use-short-answers t ; use y/n instead of yes/no
           compilation-scroll-output 'first-error ;scroll to 1st error/end compile
           delete-by-moving-to-trash t ; use system trash for file deletion
+          load-prefer-newer t ;don't load outdated compiled files
+          kill-do-not-save-duplicates t ; no dupes in kill-ring
           )
   ;; Highlight and allow to open http link at point in programming buffers
   ;; goto-address-prog-mode only highlights links in strings and comments
@@ -30,9 +32,10 @@
   (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
   ;; enable subword-mode in prog-mode
   (add-hook 'prog-mode-hook #'subword-mode)
-  
+  ;; Don't  prompt on killing a buffer if the file is open in other clients
+  (add-hook 'server-visit-hook #'server-remove-kill-buffer-hook)
   )
-;; Configure base emacs options:1 ends here
+;; emacs package declaration for config options ends here
 
 ;; [[file:../its-lit.org::*Configuring built-in packages][Configuring built-in packages:1]]
 (use-package autorevert
