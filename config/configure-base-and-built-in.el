@@ -5,6 +5,8 @@
 ;; [[file:../its-lit.org::*Configure base emacs options][Configure base emacs options:1]]
 (use-package emacs
   :ensure nil
+  :init
+  (setq trash-directory "~/.Trash")
   :config
   (setopt enable-recursive-minibuffers t
           user-full-name "John Sperger"
@@ -18,8 +20,18 @@
           undo-outer-limit 1006632960 ; 960mb.
           sentence-end-double-space nil ;single space between sentences
           use-short-answers t ; use y/n instead of yes/no
+          compilation-scroll-output 'first-error ;scroll to 1st error/end compile
+          delete-by-moving-to-trash t ; use system trash for file deletion
           )
- )
+  ;; Highlight and allow to open http link at point in programming buffers
+  ;; goto-address-prog-mode only highlights links in strings and comments
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode)
+  ;; Highlight and follow bug references in comments and strings
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+  ;; enable subword-mode in prog-mode
+  (add-hook 'prog-mode-hook #'subword-mode)
+  
+  )
 ;; Configure base emacs options:1 ends here
 
 ;; [[file:../its-lit.org::*Configuring built-in packages][Configuring built-in packages:1]]

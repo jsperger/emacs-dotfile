@@ -7,22 +7,6 @@
   :config (ultra-scroll-mode 1)
   )
 
-;; Highlight and allow to open http link at point in programming buffers
-;; goto-address-prog-mode only highlights links in strings and comments
-(add-hook 'prog-mode-hook #'goto-address-prog-mode)
-;; Highlight and follow bug references in comments and strings
-(add-hook 'prog-mode-hook #'bug-reference-prog-mode)
-;; enable subword-mode in prog-mode
-(add-hook 'prog-mode-hook #'subword-mode)
-
-
-;; scroll compilation to first error or end
-(setopt compilation-scroll-output 'first-error)
-
-;; Use system trash for file deletion.
-(setopt delete-by-moving-to-trash t)
-(setq trash-directory "~/.Trash")
-
 ;; autosave each change
 (setopt bookmark-save-flag 1)
 

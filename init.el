@@ -186,18 +186,17 @@
     (load-file (expand-file-name file config-dir))
     )
   )
+;; load configuration files ends here
 
-
+;; [[file:its-lit.org::*Load custom file and run after-init hooks][Load custom file and run after-init hooks:1]]
 ;;;; =============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
-;; load configuration files ends here
+;; Load custom file and run after-init hooks:1 ends here
 
-;; [[file:its-lit.org::footer-init][footer-init]]
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
 ;;; init.el ends here
-;; footer-init ends here

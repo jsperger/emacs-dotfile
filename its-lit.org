@@ -6,7 +6,7 @@
 #+author: John Sperger
 #+language: en
 #+options: toc:2
-#+startup: overview
+#+startup: show2levels
 # macros taken from prot's config https://git.sr.ht/~protesilaos/dotfiles
 #+macro: latest-export-date (eval (format-time-string "%F %T %z"))
 #+macro: word-count (eval (count-words (point-min) (point-max)))
@@ -30,6 +30,7 @@ count of {{{word-count}}}.*
     - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
     - [[#i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it][I don't care about startup time (or at least don't optimize for it)]]
   - [[#lisp-helpers-for-maintaining-my-literate-config][Lisp helpers for maintaining my literate config]]
+- [[#detailed-outline][Detailed Outline]]
 - [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
   - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
   - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
@@ -39,13 +40,12 @@ count of {{{word-count}}}.*
   - [[#one-stop-keybinding-shop][One stop keybinding shop]]
   - [[#bibliography-management][Bibliography management]]
   - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
-  - [[#setup-comment-toolsel][setup-comment-tools.el]]
-  - [[#setup-completion-actionsel][setup-completion-actions.el]]
-  - [[#set-up-completion-backends][Set up completion backends]]
-  - [[#annotate-completion-options][Annotate completion options]]
-  - [[#setup-completionel][setup-completion.el]]
-  - [[#setup-consultel][setup-consult.el]]
   - [[#setup-coreel][setup-core.el]]
+  - [[#configure-all-things-org-mode][Configure all things org mode]]
+  - [[#configure-programming-language-specific-options][Configure (programming) language-specific options]]
+  - [[#configure-theming][Configure Theming]]
+  - [[#setup-comment-toolsel][setup-comment-tools.el]]
+  - [[#configure-completion-frameworks][Configure completion frameworks]]
   - [[#setup-data-formatsel][setup-data-formats.el]]
   - [[#setup-denoteel][setup-denote.el]]
   - [[#setup-diagrammingel][setup-diagramming.el]]
@@ -69,14 +69,11 @@ count of {{{word-count}}}.*
   - [[#setup-modelineel][setup-modeline.el]]
   - [[#setup-notesel][setup-notes.el]]
   - [[#outline-and-fold-text][Outline and fold text]]
-  - [[#configure-all-things-org-mode][Configure all things org mode]]
   - [[#setup-programmingel][setup-programming.el]]
   - [[#setup-projectsel][setup-projects.el]]
   - [[#setup-readingel][setup-reading.el]]
   - [[#setup-searchel][setup-search.el]]
   - [[#setup-snippetsel][setup-snippets.el]]
-  - [[#configure-programming-language-specific-options][Configure (programming) language-specific options]]
-  - [[#configure-theming][Configure Theming]]
   - [[#setup-treesitel][setup-treesit.el]]
   - [[#configure-ui-elements][Configure UI Elements]]
   - [[#setup-uiel][setup-ui.el]]
@@ -231,6 +228,86 @@ I'm sympathetic to the arguments in this blog post that [[https://batsov.com/art
 Work in progress
 
 
+
+* Detailed Outline
+:PROPERTIES:
+:TOC:      :include all :depth 3 :force (nothing) :ignore (nothing) :local (nothing)
+:CUSTOM_ID: detailed-outline
+:LAST_MODIFIED: [2025-07-19 Sat 20:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+:CONTENTS:
+- [[#overview][Overview]]
+  - [[#style][Style]]
+  - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
+    - [[#support-for-detangling-excluding-headerfooter][Support for detangling (excluding header/footer)]]
+    - [[#aggressive-time-stamping][Aggressive time-stamping]]
+  - [[#warnings][Warnings]]
+    - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
+    - [[#i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it][I don't care about startup time (or at least don't optimize for it)]]
+  - [[#lisp-helpers-for-maintaining-my-literate-config][Lisp helpers for maintaining my literate config]]
+- [[#detailed-outline][Detailed Outline]]
+- [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
+  - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
+  - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
+- [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
+  - [[#initel][init.el]]
+- [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
+  - [[#one-stop-keybinding-shop][One stop keybinding shop]]
+  - [[#bibliography-management][Bibliography management]]
+  - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
+  - [[#setup-coreel][setup-core.el]]
+  - [[#configure-all-things-org-mode][Configure all things org mode]]
+  - [[#configure-programming-language-specific-options][Configure (programming) language-specific options]]
+  - [[#configure-theming][Configure Theming]]
+  - [[#setup-comment-toolsel][setup-comment-tools.el]]
+  - [[#configure-completion-frameworks][Configure completion frameworks]]
+  - [[#setup-data-formatsel][setup-data-formats.el]]
+  - [[#setup-denoteel][setup-denote.el]]
+  - [[#setup-diagrammingel][setup-diagramming.el]]
+  - [[#setup-eafel][setup-eaf.el]]
+  - [[#configure-editor-utility-packages][Configure editor utility packages]]
+  - [[#setup-emacsel][setup-emacs.el]]
+  - [[#setup-emailel][setup-email.el]]
+  - [[#setup-evil-addonsel][setup-evil-addons.el]]
+  - [[#setup-evilel][setup-evil.el]]
+  - [[#setup-font-lockingel][setup-font-locking.el]]
+  - [[#setup-goel][setup-go.el]]
+  - [[#setup-gopherel][setup-gopher.el]]
+  - [[#setup-help-and-documentation-viewers][Setup help and documentation viewers]]
+  - [[#setup-iconsel][setup-icons.el]]
+  - [[#setup-lispel][setup-lisp.el]]
+  - [[#setup-llmel][setup-llm.el]]
+  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
+  - [[#setup-lspel][setup-lsp.el]]
+  - [[#setup-markdownel][setup-markdown.el]]
+  - [[#setup-mediael][setup-media.el]]
+  - [[#setup-modelineel][setup-modeline.el]]
+  - [[#setup-notesel][setup-notes.el]]
+  - [[#outline-and-fold-text][Outline and fold text]]
+  - [[#setup-programmingel][setup-programming.el]]
+  - [[#setup-projectsel][setup-projects.el]]
+  - [[#setup-readingel][setup-reading.el]]
+  - [[#setup-searchel][setup-search.el]]
+  - [[#setup-snippetsel][setup-snippets.el]]
+  - [[#setup-treesitel][setup-treesit.el]]
+  - [[#configure-ui-elements][Configure UI Elements]]
+  - [[#setup-uiel][setup-ui.el]]
+  - [[#setup-vcel][setup-vc.el]]
+  - [[#setup-webel][setup-web.el]]
+  - [[#setup-writingel][setup-writing.el]]
+- [[#lisp-functions][Lisp functions]]
+  - [[#my-core-functionsel][my-core-functions.el]]
+  - [[#my-core-helpersel][my-core-helpers.el]]
+  - [[#my-editor-helpersel][my-editor-helpers.el]]
+  - [[#my-keybinding-helpersel][my-keybinding-helpers.el]]
+  - [[#my-lang-helpersel][my-lang-helpers.el]]
+  - [[#my-lsp-bridge-helpersel][my-lsp-bridge-helpers.el]]
+  - [[#my-org-helpersel][my-org-helpers.el]]
+  - [[#my-theme-helpersel][my-theme-helpers.el]]
+  - [[#my-vc-helpersel][my-vc-helpers.el]]
+- [[#appendices][Appendices]]
+:END:
 
 * Notes on configuring Emacs
 :PROPERTIES:
@@ -413,6 +490,8 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 (elpaca-wait) ; Block until current queue processed.
 #+end_src
 
+#+RESULTS: init elpaca
+
 **** Define constants to use as conditional configuration flags
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
@@ -590,15 +669,26 @@ mistakes in my configuration.
     (load-file (expand-file-name file config-dir))
     )
   )
+#+end_src
 
-
+**** Load custom file and run after-init hooks
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 20:29]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src
 ;;;; =============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
 #+end_src
 
+**** Local variable footer for init
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 20:30]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
 #+name: footer-init
-#+begin_src emacs-lisp :tangle init.el
+#+begin_src emacs-lisp :tangle init.el :comments no
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
@@ -607,15 +697,12 @@ mistakes in my configuration.
 ;;; init.el ends here
 #+end_src
 
-#+RESULTS: footer-init
-
 * Config directory for non-byte-copiled files
 :PROPERTIES:
 :CUSTOM_ID: config-directory-for-non-byte-copiled-files
-:LAST_MODIFIED: [2025-07-18 Fri 17:19]
+:LAST_MODIFIED: [2025-07-19 Sat 20:28]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-
 
 ** One stop keybinding shop
 :PROPERTIES:
@@ -1102,13 +1189,15 @@ I need to move most of these out of here and put them in the relavent package de
 #+end_src
 *** Configure base emacs options
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 04:35]
+:LAST_MODIFIED: [2025-07-19 Sat 20:47]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 #+begin_src emacs-lisp
 (use-package emacs
   :ensure nil
+  :init
+  (setq trash-directory "~/.Trash")
   :config
   (setopt enable-recursive-minibuffers t
           user-full-name "John Sperger"
@@ -1122,8 +1211,19 @@ I need to move most of these out of here and put them in the relavent package de
           undo-outer-limit 1006632960 ; 960mb.
           sentence-end-double-space nil ;single space between sentences
           use-short-answers t ; use y/n instead of yes/no
+          compilation-scroll-output 'first-error ;scroll to 1st error/end compile
+          delete-by-moving-to-trash t ; use system trash for file deletion
           )
- )
+  ;; Highlight and allow to open http link at point in programming buffers
+  ;; goto-address-prog-mode only highlights links in strings and comments
+  (add-hook 'prog-mode-hook #'goto-address-prog-mode)
+  ;; Highlight and follow bug references in comments and strings
+  (add-hook 'prog-mode-hook #'bug-reference-prog-mode)
+  ;; enable subword-mode in prog-mode
+  (add-hook 'prog-mode-hook #'subword-mode)
+  
+  )
+
 #+end_src
 *** Configuring built-in packages
 :PROPERTIES:
@@ -1388,6 +1488,1106 @@ Off the top of my head, I think
 ;;  :ensure nil)
 #+end_src
 
+
+** setup-core.el
+:PROPERTIES:
+:CUSTOM_ID: setup-coreel
+:LAST_MODIFIED: [2025-07-18 Fri 04:25]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle config/setup-core.el
+;;; config/setup-core.el --- Core configuration -*- lexical-binding: t -*-
+
+(use-package ultra-scroll
+  :ensure (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")
+  :init  (setq scroll-conservatively 50
+               scroll-margin 0) 
+  :config (ultra-scroll-mode 1)
+  )
+
+;; autosave each change
+(setopt bookmark-save-flag 1)
+
+;; keep focus while navigating help buffers
+(setopt help-window-select t)
+
+;; When emacs asks for "yes" or "no", let "y" or "n" suffice
+;; (fset 'yes-or-no-p 'y-or-n-p)
+(setopt use-short-answers t)
+
+;; don't load outdated compiled files.
+(setopt load-prefer-newer t)
+
+;; don't save duplicates in kill-ring
+(setopt kill-do-not-save-duplicates t)
+
+;; break lines after more characters
+(setopt word-wrap-by-category t)
+
+(add-hook 'server-visit-hook #'server-remove-kill-buffer-hook)
+
+;; Do not allow the cursor in the minibuffer prompt
+(setopt minibuffer-prompt-properties
+        '(read-only t cursor-intangible t face minibuffer-prompt))
+(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-core.el ends here
+#+end_src
+
+*** Removed core customizations
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 18:43]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle no :eval no
+(use-package desktop
+  :disabled
+  :ensure nil
+  :commands restart-emacs-without-desktop
+  :init (desktop-save-mode)
+  :config
+  ;; inhibit no-loaded prompt
+  (setopt desktop-file-modtime (file-attribute-modification-time
+                                (file-attributes
+                                 (desktop-full-file-name)))
+          desktop-lazy-verbose nil
+          desktop-load-locked-desktop t
+          desktop-restore-eager nil
+          desktop-save t)
+
+  (dolist (param '(foreground-color background-color background-mode font cursor-color mouse-color))
+    (push `(,param . :never) frameset-filter-alist))
+
+  (advice-add 'desktop-read :around #'desktop-read@inhibit-message))
+
+
+#+end_src
+** Configure all things org mode
+:PROPERTIES:
+:header-args: :tangle config/configure-org.el :comments noweb
+:LAST_MODIFIED: [2025-07-18 Fri 23:14]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-all-things-org-mode
+:END:
+
+*** Configure org header
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:16]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :comments no :noweb no
+;;; configure-org.el --- Org-mode and its children -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+#+end_src
+
+*** Configure base org settings and major mode keybinds
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:19]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package org
+  :commands (org-toggle-hidden-emphasis-markers)
+  :init
+  (setq org-directory "~/obsidian/org/"
+        org-inbox-file (concat org-directory "inbox.org")
+        org-default-notes-file org-inbox-file
+        org-project-file (concat org-directory "projects.org")
+        org-confirm-babel-evaluate nil
+        )
+  :config
+  (setopt org-latex-bib-compiler "biber"
+          org-latex-compiler "lualatex"
+          org-babel-load-languages '((emacs-lisp . t)
+                                     (R . t)
+                                     (shell . t)
+                                     )
+          )
+
+  (use-package oc
+    :ensure nil
+    :config
+    (setq org-cite-export-processors '((latex biblatex)
+                                       (t csl))
+          org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
+
+  (use-package org-indent
+    :ensure nil)
+  (use-package org-protocol
+    :ensure nil
+    )
+  :general
+  (despot-def org-mode-map
+    "'"     'org-edit-special
+    ","     'org-ctrl-c-ctrl-c
+    "*"     'org-ctrl-c-star
+    "-"     'org-ctrl-c-minus
+    "#"     'org-update-statistics-cookies
+    "RET"   'org-ctrl-c-ret
+    "M-RET" 'org-meta-return
+    "b"     (cons "babel" (make-sparse-keymap))
+    "ba"    'org-babel-sha1-hash
+    "bb"    'org-babel-execute-buffer
+    "bc"    'org-babel-check-src-block
+    "bd"    'org-babel-demarcate-block
+    "be"    'org-babel-execute-maybe
+    "bf"    'org-babel-tangle-file
+    "bg"    'org-babel-goto-named-src-block
+    "bh"    'org-babel-describe-bindings
+    "bi"    'org-babel-lob-ingest
+    "bI"    'org-babel-view-src-block-info
+    "bj"    'org-babel-insert-header-arg
+    "bl"    'org-babel-load-in-session
+    "bn"    'org-babel-next-src-block
+    "bo"    'org-babel-open-src-block-result
+    "bp"    'org-babel-previous-src-block
+    "br"    'org-babel-goto-named-result
+    "bs"    'org-babel-execute-subtree
+    "bt"    'org-babel-tangle
+    "bu"    'org-babel-goto-src-block-head
+    "bv"    'org-babel-expand-src-block
+    "bx"    'org-babel-do-key-sequence-in-edit-buffer
+    "bz"    'org-babel-switch-to-session
+    "e"     (cons "export" (make-sparse-keymap))
+    "ee"    'org-export-dispatch
+    "eb"    'org-beamer-export-to-pdf
+    "el"    'org-latex-export-to-latex
+    "ep"    'org-latex-export-to-pdf
+    "i"     (cons "insert" (make-sparse-keymap))
+    "ib"    'org-insert-structure-template
+    "ic"    'org-cite-insert
+    "id"    'org-insert-drawer
+    "if"    'org-footnote-new
+    "ih"    'org-insert-heading
+    "iH"    'org-insert-heading-after-current
+    "ii"    'org-id-get-create
+    "iI"    'org-insert-item
+    "il"    'org-insert-link
+    "in"    'org-add-note
+    "ip"    'org-set-property
+    "is"    'org-insert-subheading
+    "it"    'org-set-tags-command
+    "t"     (cons "tables" (make-sparse-keymap))
+    "ta"    'org-table-align
+    "tb"    'org-table-blank-field
+    "tc"    'org-table-convert
+    "td"    (cons "delete" (make-sparse-keymap))
+    "tdc"   'org-table-delete-column
+    "tdr"   'org-table-kill-row
+    "te"    'org-table-eval-formula
+    "tE"    'org-table-export
+    "tf"    'org-table-field-info
+    "th"    'org-table-previous-field
+    "tH"    'org-table-move-column-left
+    "ti"    (cons "insert" (make-sparse-keymap))
+    "tic"   'org-table-insert-column
+    "tih"   'org-table-insert-hline
+    "tiH"   'org-table-hline-and-move
+    "tir"   'org-table-insert-row
+    "tI"    'org-table-import
+    "tj"    'org-table-next-row
+    "tJ"    'org-table-move-row-down
+    "tK"    'org-table-move-row-up
+    "tl"    'org-table-next-field
+    "tL"    'org-table-move-column-right
+    "tn"    'org-table-create
+    "tN"    'org-table-create-with-table.el
+    "tp"    'org-plot/gnuplot
+    "tr"    'org-table-recalculate
+    "ts"    'org-table-sort-lines
+    "tt"    (cons "toggles" (make-sparse-keymap))
+    "ttf"   'org-table-toggle-formula-debugger
+    "tto"   'org-table-toggle-coordinate-overlays
+    "tw"    'org-table-wrap-region
+    "T"     (cons "toggles" (make-sparse-keymap))
+    "Tc"    'org-toggle-checkbox
+    "Td"    'org-modern-indent-mode
+    "TD"    'org-indent-mode
+    "Te"    'org-toggle-pretty-entities
+    "Ti"    'org-toggle-inline-images
+    "Tl"    'org-toggle-link-display
+    "Tm"    'org-toggle-hidden-emphasis-markers
+    "Tt"    'org-show-todo-tree
+    "Tx"    'org-latex-preview
+    "x"     (cons "text" (make-sparse-keymap))
+    "xb"    'org-bold
+    "xc"    'org-code
+    "xi"    'org-italic
+    "xo"    'org-open-at-point
+    "xr"    'org-clear
+    "xs"    'org-strike-through
+    "xu"    'org-underline
+    "xv"    'org-verbatim)
+
+  (general-def 'normal org-mode-map "RET" 'org-open-at-point)
+
+  (tyrant-def
+    "O"      (cons "Org" (make-sparse-keymap))
+    "O/"     'org-occur-in-agenda-files
+    "Oa"     'org-agenda
+    "Oc"     'org-capture
+    "OC"     (cons "clock" (make-sparse-keymap))
+    "OCc"    'org-clock-cancel
+    "OCg"    'org-clock-goto
+    "OCi"    'org-clock-in-last
+    "OCj"    'org-clock-jump-to-current-clock
+    "OCo"    'org-clock-out
+    "OCr"    'org-resolve-clocks
+    "Od"     'open-org-default-notes-file
+    "Ol"     'org-store-link
+    "Op"     'open-org-project-file
+    "Ot"     'org-transclusion-mode
+    )
+  )
+#+end_src
+*********** Configure org functionality add-ons
+:PROPERTIES:
+:CUSTOM_ID: setup-orgel
+:LAST_MODIFIED: [2025-07-18 Fri 23:23]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp 
+(use-package org-make-toc
+  :after org
+  :hook org-mode
+  :config (setopt org-make-toc-insert-custom-ids t)
+  )
+
+(use-package org-modern
+  :hook (org-mode . org-modern-mode)
+  :config
+  (set-face-attribute 'org-modern-symbol nil :family "Iosevka")
+  (setopt  org-auto-align-tags nil
+           org-tags-column 0
+           org-catch-invisible-edits 'show-and-error
+           org-special-ctrl-a/e t
+           org-insert-heading-respect-content t
+           org-hide-emphasis-markers t
+           org-pretty-entities t
+           org-ellipsis "…")
+  )
+
+(use-package org-transclusion
+  :after org
+  :general
+  (despot-def org-mode-map
+    "l" 'org-transclusion-add
+    "L"     (cons "transclusion" (make-sparse-keymap))
+    "L TAB" 'org-cycle
+    "Ld" 'org-transclusion-remove
+    "LD" 'org-transclusion-detach
+    "Lj" 'org-transclusion-demote-subtree
+    "Lk" 'org-transclusion-promote-subtree
+    "Lm" 'org-transclusion-move-to-source
+    "Ls" 'org-transclusion-live-sync-start
+    "Lr" 'org-transclusion-refresh
+    "Lo" 'org-transclusion-open-source
+    )
+  )
+#+end_src
+
+**** Disabled org functionality packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 23:22]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header-args: :tangle no :comments no
+:END:
+
+#+begin_src emacs-lisp
+(use-package org-side-tree
+  :disabled
+  :hook org-mode
+  :config
+  (setopt org-side-tree-persistent nil
+	  org-side-tree-fontify t
+	  org-side-tree-enable-folding t)
+  )
+(use-package org-pdftools
+  :disabled
+  :hook (org-mode . org-pdftools-setup-link))
+
+(use-package org-noter-pdftools
+  :disabled
+  :after org-noter
+  :config
+  (with-eval-after-load 'pdf-annot
+    (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note))
+  )
+
+(use-package org-contrib
+  :disabled
+  :after org
+  )
+#+end_src
+
+*** Configure org mode's progeny
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 04:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+Packages that build on org mode rather than add something to it.
+**** org-todoist
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 04:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp
+(use-package org-todoist
+  :after gptel ; why would this depend on gptel? oh my api key olol
+  :ensure (:host github
+                 :repo "lillenne/org-todoist"
+                 :branch "main"
+                 )
+  :init
+  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
+
+  :general (tyrant-def "aT" 'org-todoist-dispatch)
+  )
+#+end_src
+**** Configure Org-node :TODO:
+:PROPERTIES:
+:CUSTOM_ID: setup-org-nodeel
+:LAST_MODIFIED: [2025-07-19 Sat 04:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Disabling this until I have time to sit down and give it an honest effort. 
+#+begin_src emacs-lisp :tangle no
+(use-package org-mem
+  :defer
+  :functions org-mem-updater
+  :config
+  (setopt org-mem-do-sync-with-org-id t
+          org-mem-watch-dirs (list "~/obsidian/org/node")
+          )
+  (org-mem-updater-mode)
+  )
+
+(use-package org-node
+  :after org
+  :init
+  (keymap-global-set "M-o n" org-node-global-prefix-map)
+  (with-eval-after-load 'org
+    (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
+  :config
+  (org-node-cache-mode)
+  :general
+  (tyrant-def
+    "n"      (cons "node" (make-sparse-keymap))
+    "nf" 'org-node-find
+    "ni" 'org-node-insert-link
+    "nb" 'org-node-context-dwim
+    "nd" 'org-node-insert-into-related
+    "ng" 'org-node-grep
+    "nn" 'org-node-nodeify-entry
+    "ns" 'org-node-seq-dispatch
+    "nw" 'org-node-refile
+    "nr" 'org-node-visit-random
+    "nt" 'org-node-insert-transclusion
+    "nu" 'org-node-insert-raw-link
+    "ns" 'org-node-insert-transclusion-as-subtree
+    )
+  )
+#+end_src
+
+*** Configuring org capture templates :TODO:
+:PROPERTIES:
+:CUSTOM_ID: setup-org-captureel
+:LAST_MODIFIED: [2025-07-19 Sat 04:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle no
+(use-package doct)
+#+end_src
+
+*** Add additional ways to export from org to other formats
+:PROPERTIES:
+:CUSTOM_ID: setup-org-exportersel
+:LAST_MODIFIED: [2025-07-19 Sat 04:41]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package ox-pandoc
+	:after org
+	:hook (org-mode . org-pandoc-startup-check))
+
+(use-package ob-mermaid
+  :after org)
+#+end_src
+
+**** Disabled Exporters
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 04:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no
+(use-package ox-tufte
+	:disabled
+	:after org
+  )
+
+(use-package ox-beamer-lecture
+	:after org)
+#+end_src
+*** Configure org footer
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 20:34]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :comments no :noweb no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; configure-org.el ends here
+#+end_src
+
+** Configure (programming) language-specific options
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-18 Fri 05:02]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-programming-language-specific-options
+:END:
+*** setup-python.el
+:PROPERTIES:
+:CUSTOM_ID: setup-pythonel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-python.el
+;;; config/setup-python.el --- Python configuration -*- lexical-binding: t -*-
+
+(use-package python-x
+	)
+
+(use-package live-py-mode
+	:general
+	  (despot-def (python-mode-map)
+    :major-modes '(python-mode python-ts-mode)
+    "l" 'live-py-mode
+    )
+	)
+
+(use-package uv-mode
+	:hook (python-mode . uv-mode))
+
+(use-package pyenv-mode
+	:disabled)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-python.el ends here
+#+end_src
+
+*** setup-r.el
+:PROPERTIES:
+:CUSTOM_ID: setup-rel
+:LAST_MODIFIED: [2025-07-18 Fri 21:46]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp :tangle config/setup-r.el
+;;; config/setup-r.el --- R language configuration -*- lexical-binding: t -*-
+
+(use-package ess
+  :mode ("\([rR]\)\'" . R-mode)
+  :init
+  (setq ess-set-style t
+        comint-scroll-to-bottom-on-input t
+        comint-scroll-to-bottom-on-output t
+        ess-indent-offset 2)
+  (add-hook 'inferior-ess-mode-hook
+            (lambda ()
+              (add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
+  :custom
+  (inferior-R-args "--no-save")
+  (ess-indent-offset 2)
+  (ess-own-style-list '(
+                        (ess-indent-offset . 2)
+                        (ess-offset-arguments . prev-call)
+                        (ess-offset-arguments-newline . prev-line)
+                        (ess-offset-block . prev-line)
+                        (ess-offset-continued . straight)
+                        (ess-align-nested-calls "ifelse")
+                        (ess-align-arguments-in-calls "function[ 	]*(")
+                        (ess-align-continuations-in-calls . t)
+                        (ess-align-blocks control-flow)
+                        (ess-indent-from-lhs arguments fun-decl-opening)
+                        (ess-indent-from-chain-start . t)
+                        (ess-indent-with-fancy-comments . nil))
+                      )
+  (ess-style 'OWN)
+  :config (setopt  ess-ido-flex-matching nil
+                   ess-use-R-completion nil
+                   ess-use-company nil
+                   ess-use-flymake nil
+                   ess-use-ido nil
+                   )
+  :general
+  (despot-def (ess-r-mode-map)
+    :major-modes '(ess-r-mode R-mode)
+    "b" 'ess-eval-buffer
+    "c" 'ess-eval-region-or-function-or-paragraph
+    "TAB" 'ess-install-library
+    "f" 'ess-eval-function
+    "F" 'air-format
+    "r" 'run-ess-r
+    "v" 'oc-set-ess-offset
+    )
+  )
+
+(use-package r-ts-mode
+  :disabled
+  :hook (R-mode . r-ts-mode)
+  :ensure (r-ts-mode
+	   :type git :host github :repo "nverno/r-ts-mode"))
+
+(use-package essgd
+	:general
+	  (despot-def (ess-r-mode-map)
+			:major-modes 'ess-r-mode
+			"g" 'essgd-start)
+	)
+
+(use-package ess-view-data
+	:disabled)
+
+(use-package poly-R
+  :mode ("\\.qmd\\'" . poly-markdown+R-mode)
+  )
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-r.el ends here
+#+end_src
+
+*** setup-rust.el
+:PROPERTIES:
+:CUSTOM_ID: setup-rustel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-rust.el
+;;; config/setup-rust.el --- Rust language configuration -*- lexical-binding: t -*-
+
+(use-package rust-mode
+	:mode ("\\.rs\\\'" . rust-mode)
+  :general
+  (despot-def (rust-mode-map)
+      :major-modes '(rust-ts-mode rust-mode)
+      "c"            'rust-compile
+			"k" 'rust-check
+			"t" 'rust-test
+			"r" 'rust-run
+			"F" 'rust-format-buffer)
+	)
+
+(use-package cargo-mode
+  :hook
+  (rust-mode . cargo-minor-mode)
+  :config
+  (setopt compilation-scroll-output t
+			rust-format-on-save t)
+	:general
+	(despot-def (rust-mode-map)
+		:major-modes '(rust-mode rust-ts-mode)
+		"e" 'cargo-mode-execute-task
+		"t" 'cargo-mode-test
+		"l" 'cargo-mode-last-command
+		"b" 'cargo-mode-build
+		"o" 'cargo-mode-test-current-buffer
+		"f" 'cargo-mode-test-current-test)
+	)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-rust.el ends here
+
+#+end_src
+
+*** setup-tex.el
+:PROPERTIES:
+:CUSTOM_ID: setup-texel
+:END:
+#+begin_src emacs-lisp :tangle config/setup-tex.el
+;;; config/setup-tex.el --- TeX and LaTeX configuration -*- lexical-binding: t -*-
+
+(use-package auctex
+  :mode ("\\.tex\\'" . LaTeX-mode)
+  :hook (LaTeX-mode . hs-minor-mode)
+  (LaTeX-mode . outline-minor-mode)
+  (LaTeX-mode . auto-fill-mode)
+  (LaTeX-mode . TeX-fold-mode)
+    (LaTeX-mode . LaTeX-math-mode)
+  :general
+  (despot-def (TeX-latex-mode-map)
+    :major-modes '(TeX-tex-mode LaTeX-mode)
+    ","             'TeX-command-master
+    "a"             'TeX-command-run-all
+    "b"             'TeX-command-menu
+    "c"             'TeX-clean
+    "h"             'TeX-doc
+    "k"             'TeX-kill-job
+    "l"             'TeX-recenter-output-buffer
+    "n"             'TeX-next-error
+    "N"             'TeX-previous-error
+    "v"             'TeX-view
+    "x"             (cons "text/fonts" (make-sparse-keymap))
+    "xb"            'font-bold
+    "xc"            'font-code
+    "xe"            'font-emphasis
+    "xi"            'font-italic
+    "xr"            'font-clear
+    "xo"            'font-oblique
+    "xf"            (cons "fonts" (make-sparse-keymap))
+    "xfc"           'font-small-caps
+    "xff"           'font-sans-serif
+    "xfr"           'font-serif
+    "z"             (cons "fold" (make-sparse-keymap))
+    "z="            'TeX-fold-math
+    "zb"            'TeX-fold-buffer
+    "zB"            'TeX-fold-clearout-buffer
+    "ze"            'TeX-fold-env
+    "zI"            'TeX-fold-clearout-item
+    "zm"            'TeX-fold-macro
+    "zp"            'TeX-fold-paragraph
+    "zP"            'TeX-fold-clearout-paragraph
+    "zr"            'TeX-fold-region
+    "zR"            'TeX-fold-clearout-region
+    "zz"            'TeX-fold-dwim)
+
+  (despot-def LaTeX-mode-map
+    :major-modes '(LaTeX-mode)
+    "."                'LaTeX-mark-environment
+    ","             'TeX-command-master
+    "a"             'TeX-command-run-all
+    "c"             'TeX-clean
+    "e"                'LaTeX-environment
+    "f"                (cons "fill" (make-sparse-keymap))
+    "fe"               'LaTeX-fill-environment
+    "fp"               'LaTeX-fill-paragraph
+    "fr"               'LaTeX-fill-region
+    "fs"               'LaTeX-fill-section
+    "h"             'TeX-doc
+    "k"             'TeX-kill-job
+    "l"             'TeX-recenter-output-buffer
+    "n"             'TeX-next-error
+    "N"             'TeX-previous-error
+    "p"                (cons "preview" (make-sparse-keymap))
+    "pb"               'preview-buffer
+    "pc"               'preview-clearout
+    "pd"               'preview-document
+    "pe"               'preview-environment
+    "pf"               'preview-cache-preamble
+    "pp"               'preview-at-point
+    "pr"               'preview-region
+    "ps"               'preview-section
+    "r"                (cons "reference" (make-sparse-keymap))
+    "rr"               'reftex-reference
+    "rl"               'reftex-label
+    "rj"               'reftex-goto-label
+    "s"                'LaTeX-section
+    "x"                (cons "text/fonts" (make-sparse-keymap))
+    "xB"               'font-medium
+    "xu"               'font-underline
+    "xf"               (cons "fonts" (make-sparse-keymap))
+    "xfa"              'font-calligraphic
+    "xfn"              'font-normal
+    "xfu"              'font-upright
+    "xi"               'font-italic
+    "xr"               'font-clear
+    "xo"               'font-oblique
+    "v"             'TeX-view
+    "x"             (cons "text/fonts" (make-sparse-keymap))
+    "xb"            'font-bold
+    "xc"            'font-code
+    "xe"            'font-emphasis
+    "xi"            'font-italic
+    "xr"            'font-clear
+    "xo"            'font-oblique
+    "xf"            (cons "fonts" (make-sparse-keymap))
+    "xfc"           'font-small-caps
+    "xff"           'font-sans-serif
+    "xfr"           'font-serif
+    "z"             (cons "fold" (make-sparse-keymap))
+    "z="            'TeX-fold-math
+    "zb"            'TeX-fold-buffer
+    "zB"            'TeX-fold-clearout-buffer
+    "ze"            'TeX-fold-env
+    "zI"            'TeX-fold-clearout-item
+    "zm"            'TeX-fold-macro
+    "zp"            'TeX-fold-paragraph
+    "zP"            'TeX-fold-clearout-paragraph
+    "zr"            'TeX-fold-region
+    "zR"            'TeX-fold-clearout-region
+    "zz"            'TeX-fold-dwim)
+
+  :config
+  (setopt TeX-engine 'luatex)
+	(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+  )
+
+(use-package preview-dvisvgm
+  :after auctex)
+
+(use-package xenops
+	:disabled)
+
+(use-package cdlatex
+	:disabled)
+
+(use-package latex-extra
+  :disabled
+  :after auctex
+  :hook (LaTeX-mode . latex-extra-mode))
+
+(use-package latex-table-wizard
+	:disabled)
+
+(use-package evil-tex
+	:disabled)
+
+(use-package latex-extra
+	:disabled)
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-tex.el ends here
+#+end_src
+
+** Configure Theming
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle config/configure-theming.el :comments noweb
+:LAST_MODIFIED: [2025-07-19 Sat 19:04]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-theming
+:END:
+
+Packages that substantially change the user interface as configured in 
+
+#+name:theme header
+#+begin_src emacs-lisp :comments no :noweb no
+;;; configure-theming.el --- Themes configuration -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+#+end_src
+
+*** Define additional font lock faces
+
+#+begin_src emacs-lisp
+
+#+end_src
+*** Color theme packages
+:PROPERTIES:
+:CUSTOM_ID: color-theme-packages
+:LAST_MODIFIED: [2025-07-19 Sat 21:34]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package doom-themes)
+
+(use-package ef-themes
+  :config (setopt ef-themes-mixed-fonts t)
+  )
+
+(use-package flexoki-themes
+  :custom
+  (flexoki-themes-use-bold-keywords t)
+  (flexoki-themes-use-bold-builtins t)
+  (flexoki-themes-use-italic-comments nil)
+  )
+
+;; Development version I think? Also built in
+(use-package modus-themes)
+#+end_src
+
+**** Disabled themes
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 21:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header_args:emacs-lisp: :tange no :noweb no :comments no
+:END:
+
+***** Just not using at the moment
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 21:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+Doric themes are nearly monochrome
+
+#+name: nice just not using currently
+#+begin_src emacs-lisp :tangle no
+(use-package doric-themes)
+
+(use-package nordic-night-theme)
+
+;; requires special setup?
+(use-package evenok	:disabled )
+#+end_src
+
+***** Disabled for a reason
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 21:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+- Catpppuccin was weirdly slow to load
+- Kaolin is okay but I found the color choices to not be the most readable
+
+#+begin_src emacs-lisp :tangle no
+(use-package catppuccin-theme
+  :disabled)
+
+(use-package kaolin-themes)
+#+end_src
+
+#+name: Disabled due to doom redundancy
+#+begin_src emacs-lisp :tangle no
+(use-package gruvbox-theme)
+
+(use-package solarized-theme
+  :disabled)
+#+end_src
+*** Managing fonts
+:PROPERTIES:
+:CUSTOM_ID: setup-fontsel
+:LAST_MODIFIED: [2025-07-19 Sat 19:49]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+#+begin_src emacs-lisp
+;;;; Font configuration
+(use-package fontaine
+  :hook (elpaca-after-init . fontaine-mode)
+  :config
+  (setopt fontaine-presets '(
+                             (t  :default-weight normal
+                                 :default-height 150
+                                 :fixed-pitch-family "JetBrains Mono NL"
+                                 :variable-pitch-family "Heliotrope OT"
+                                 :variable-pitch-height 1.05
+                                 :bold-family nil ; use the face's bold
+                                 :bold-weight bold)
+
+;;;;; Presets that keep the same font family but modify its appearance
+	                           ;; Presets to change point size only
+	                           (10pt :default-height 100)
+	                           (11pt :default-height 110)
+	                           (12pt :default-height 120)
+	                           (13pt :default-height 130)
+	                           (14pt :default-height 140)
+	                           (15pt :default-height 150)
+	                           (16pt :default-height 160)
+	                           (17pt :default-height 170)
+	                           (18pt :default-height 180)
+
+;; Line spacing is additional line spacing, not total line spacing
+;; (i.e. 0 is the default)
+;; Meaning differs depending on whether it is an integer or float
+;; Integer = additional pixels to add
+;; Floating point = additional spacing proportional to point size
+	                           (lsd :line-space 0)
+	                           ;; line spacing pixels
+	                           (lsp1 :line-spacing 1)
+	                           (lsp2 :line-spacing 2)
+	                           (lsp3 :line-spacing 3)
+	                           (lsp4 :line-spacing 4)
+	                           (lsp5 :line-spacing 5)
+	                           ;; line spacing scaling
+	                           (lss05 :line-spacing 0.05)
+	                           (lss10 :line-spacing 0.10)
+	                           (lss15 :line-spacing 0.15)
+	                           (lss20 :line-spacing 0.20)
+	                           (lss25 :line-spacing 0.25)
+	                           (lss30 :line-spacing 0.30)
+
+;;;;; Font presets
+
+;;;;;; Monospace fonts
+	                           (iosevka-comfy
+	                            :default-family "Iosevka Comfy"
+	                            :default-weight normal)
+
+	                           (fira-mono
+	                            :default-family "Fira Mono")
+
+	                           (fira-code
+	                            :default-family "FiraCode Nerd Font"
+	                            )
+
+	                           (jetbrains-mono
+	                            :default-family "JetBrains Mono NL")
+
+	                           (plex-mono
+	                            :default-family "IBM Plex Mono")
+
+	                           (dank-mono
+	                            :default-family "Dank Mono")
+
+	                           (hack
+	                            :default-family "Hack Nerd Font")
+
+	                           ;; think inter is proportional not mono
+	                           (inter
+	                            :default-family "Inter")
+
+	                           (xenon
+	                            :default-family "Monaspace Xenon")
+
+	                           (input-mono
+	                            :default-family "Input Mono")
+;;;;;; Quasi-monospace fonts
+	                           (duospace
+	                            :default-family "iA Writer Duospace")
+
+	                           (triplicate-mono-b
+	                            :default-family "Triplicate B")
+
+	                           (triplicate-code-b
+	                            :default-family "Triplicate B Code")
+
+	                           (triplicate-poly-b
+	                            :default-family "Triplicate B Poly")
+
+	                           (triplicate-mono-a
+	                            :default-family "Triplicate A")
+
+	                           (triplicate-code-a
+	                            :default-family "Triplicate A Code")
+
+	                           (triplicate-poly-a
+	                            :default-family "Triplicate A Poly")
+
+	                           (header-triplicate
+	                            :header-line-family "Triplicate A Caps"
+	                            :header-line-height 1.1)
+
+	                           (triplicate-combo
+	                            :default-family "Triplicate A Code"
+	                            :variable-pitch-family "Triplicate A Poly"
+	                            :header-line-family "Triplicate A Caps"
+	                            :header-line-height 1.1
+	                            )
+
+                             ;; Not fully variable width but it's not suitable for coding imo.
+                             ;; Could be fine for writing in a markup language
+                             (quattro
+	                            :default-family "iA Writer Quattro V")
+
+
+;;;;;; Header fonts      
+	                           (header-heliotrope
+	                            :header-line-family "Heliotrope 4 Caps"
+	                            :header-line-height 1.1)
+
+	                           (header-overpass
+	                            :header-line-family "Overpass"
+	                            :header-line-height 1.1)
+
+                             ;; Don't use a different family for headers 
+	                           (header-null
+	                            :header-line-family nil
+	                            :header-line-height 1.0)
+
+;;;;;; Variable pitch fonts
+	                           (serif-input
+	                            :variable-pitch-family "Input Serif")
+
+	                           (sans-input
+	                            :variable-pitch-family "Input Sans")
+
+	                           (vp-heliotrope
+	                            :variable-pitch-family "Heliotrope OT"
+	                            :variable-pitch-height 1.05)
+
+	                           (vp-avenir
+	                            :variable-pitch-family "Avenir"
+	                            :default-weight book)
+
+	                           (vp-minion
+	                            :variable-pitch-family "Minion 3")
+	                           )
+	        )
+  :custom (fontaine-mode t)
+  )
+#+end_src
+
+**** View fonts within emacs
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:38]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Font waterfall and size viewer from within emacs.
+#+begin_src emacs-lisp
+(use-package show-font
+  :general  (tyrant-def  "hs" 'show-font-select-preview
+                         "hT" 'show-font-tabulated
+                         )
+  :bind
+  (("C-c s f" . show-font-select-preview)
+   ("C-c s t" . show-font-tabulated))
+  )
+
+#+end_src
+**** Disabled packages
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:38]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no
+(use-package ligature
+  :disabled)
+#+end_src
+*** Theming advice and hooks
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 19:06]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(advice-add 'load-theme :after #'load-theme@run-hooks)
+(advice-add 'load-theme :before #'load-theme@theme-dont-propagate)
+
+(add-hook 'after-load-theme-hook #'bolder-faces)
+(add-hook 'after-load-theme-hook #'customize-tab-bar)
+(add-hook 'after-load-theme-hook #'unscale-outlines)
+(add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
+#+end_src
+
+*** Theming lisp footer
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-19 Sat 20:36]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; configure-theming.el ends here
+#+end_src
+
 ** setup-comment-tools.el
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 22:10]
@@ -1417,7 +2617,14 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 #+end_src
 
 
-** setup-completion-actions.el
+** Configure completion frameworks
+:PROPERTIES:
+:CUSTOM_ID: configure-completion-frameworks
+:LAST_MODIFIED: [2025-07-19 Sat 20:37]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+*** setup-completion-actions.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completion-actionsel
 :END:
@@ -1496,7 +2703,7 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 ;;; setup-completion-actions.el ends here
 #+end_src
 
-** Set up completion backends
+*** Set up completion backends
 :PROPERTIES:
 :CUSTOM_ID: set-up-completion-backends
 :END:
@@ -1534,7 +2741,7 @@ of 2025-07-06
 ;; End:
 ;;; setup-completion-backends.el ends here
 #+end_src
-*** Other completion backends
+**** Other completion backends
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-15 Tue 19:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
@@ -1563,7 +2770,7 @@ of 2025-07-06
 	(setq vertico-prescient-enable-filtering t)
 	)
 #+end_src
-** Annotate completion options
+*** Annotate completion options
 :PROPERTIES:
 :CUSTOM_ID: annotate-completion-options
 :END:
@@ -1601,7 +2808,7 @@ of 2025-07-06
 ;;; setup-completion-display.el ends here
 #+end_src
 
-** setup-completion.el
+*** setup-completion.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completionel
 :END:
@@ -1718,7 +2925,7 @@ of 2025-07-06
 ;;; setup-completion.el ends here
 #+end_src
 
-** setup-consult.el
+*** setup-consult.el
 :PROPERTIES:
 :CUSTOM_ID: setup-consultel
 :END:
@@ -1850,101 +3057,6 @@ of 2025-07-06
 ;; no-update-autoloads: t
 ;; End:
 ;;; setup-consult.el ends here
-#+end_src
-
-** setup-core.el
-:PROPERTIES:
-:CUSTOM_ID: setup-coreel
-:LAST_MODIFIED: [2025-07-18 Fri 04:25]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-core.el
-;;; config/setup-core.el --- Core configuration -*- lexical-binding: t -*-
-
-(use-package ultra-scroll
-  :ensure (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")
-  :init  (setq scroll-conservatively 50
-               scroll-margin 0) 
-  :config (ultra-scroll-mode 1)
-  )
-
-;; Highlight and allow to open http link at point in programming buffers
-;; goto-address-prog-mode only highlights links in strings and comments
-(add-hook 'prog-mode-hook #'goto-address-prog-mode)
-;; Highlight and follow bug references in comments and strings
-(add-hook 'prog-mode-hook #'bug-reference-prog-mode)
-;; enable subword-mode in prog-mode
-(add-hook 'prog-mode-hook #'subword-mode)
-
-
-;; scroll compilation to first error or end
-(setopt compilation-scroll-output 'first-error)
-
-;; Use system trash for file deletion.
-(setopt delete-by-moving-to-trash t)
-(setq trash-directory "~/.Trash")
-
-;; autosave each change
-(setopt bookmark-save-flag 1)
-
-;; keep focus while navigating help buffers
-(setopt help-window-select t)
-
-;; When emacs asks for "yes" or "no", let "y" or "n" suffice
-;; (fset 'yes-or-no-p 'y-or-n-p)
-(setopt use-short-answers t)
-
-;; don't load outdated compiled files.
-(setopt load-prefer-newer t)
-
-;; don't save duplicates in kill-ring
-(setopt kill-do-not-save-duplicates t)
-
-;; break lines after more characters
-(setopt word-wrap-by-category t)
-
-(add-hook 'server-visit-hook #'server-remove-kill-buffer-hook)
-
-;; Do not allow the cursor in the minibuffer prompt
-(setopt minibuffer-prompt-properties
-        '(read-only t cursor-intangible t face minibuffer-prompt))
-(add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-core.el ends here
-#+end_src
-
-*** Removed core customizations
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 18:43]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle no :eval no
-(use-package desktop
-  :disabled
-  :ensure nil
-  :commands restart-emacs-without-desktop
-  :init (desktop-save-mode)
-  :config
-  ;; inhibit no-loaded prompt
-  (setopt desktop-file-modtime (file-attribute-modification-time
-                                (file-attributes
-                                 (desktop-full-file-name)))
-          desktop-lazy-verbose nil
-          desktop-load-locked-desktop t
-          desktop-restore-eager nil
-          desktop-save t)
-
-  (dolist (param '(foreground-color background-color background-mode font cursor-color mouse-color))
-    (push `(,param . :never) frameset-filter-alist))
-
-  (advice-add 'desktop-read :around #'desktop-read@inhibit-message))
-
-
 #+end_src
 
 ** setup-data-formats.el
@@ -2537,6 +3649,8 @@ These packages have the distinction of being useful but I don't use them enough,
 ** setup-evil-addons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evil-addonsel
+:LAST_MODIFIED: [2025-07-19 Sat 20:48]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-evil-addons.el
 ;;; config/setup-evil-addons.el --- Evil addons configuration -*- lexical-binding: t -*-
@@ -2547,7 +3661,8 @@ These packages have the distinction of being useful but I don't use them enough,
 	(setq evil-collection-magit-want-horizontal-movement t
         evil-collection-unimpaired-want-repeat-mode-integration t)
   (add-hook 'org-agenda-mode-hook
-            (lambda () (evil-collection-unimpaired-mode -1))))
+            (lambda () (evil-collection-unimpaired-mode -1)))
+  )
 
 (use-package evil-org
   :hook (org-mode . evil-org-mode)
@@ -3436,391 +4551,6 @@ These packages have the distinction of being useful but I don't use them enough,
 ;;; setup-outlining.el ends here
 #+end_src
 
-** Configure all things org mode
-:PROPERTIES:
-:header-args: :tangle config/configure-org.el :comments noweb
-:LAST_MODIFIED: [2025-07-18 Fri 23:14]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: configure-all-things-org-mode
-:END:
-
-*** Configure org header
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:16]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :comments no :noweb no
-;;; configure-org.el --- Org-mode and its children -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
-#+end_src
-
-*** Configure base org settings and major mode keybinds
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:19]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp
-(use-package org
-  :commands (org-toggle-hidden-emphasis-markers)
-  :init
-  (setq org-directory "~/obsidian/org/"
-        org-inbox-file (concat org-directory "inbox.org")
-        org-default-notes-file org-inbox-file
-        org-project-file (concat org-directory "projects.org")
-        org-confirm-babel-evaluate nil
-        )
-  :config
-  (setopt org-latex-bib-compiler "biber"
-          org-latex-compiler "lualatex"
-          org-babel-load-languages '((emacs-lisp . t)
-                                     (R . t)
-                                     (shell . t)
-                                     )
-          )
-
-  (use-package oc
-    :ensure nil
-    :config
-    (setq org-cite-export-processors '((latex biblatex)
-                                       (t csl))
-          org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
-
-  (use-package org-indent
-    :ensure nil)
-  (use-package org-protocol
-    :ensure nil
-    )
-  :general
-  (despot-def org-mode-map
-    "'"     'org-edit-special
-    ","     'org-ctrl-c-ctrl-c
-    "*"     'org-ctrl-c-star
-    "-"     'org-ctrl-c-minus
-    "#"     'org-update-statistics-cookies
-    "RET"   'org-ctrl-c-ret
-    "M-RET" 'org-meta-return
-    "b"     (cons "babel" (make-sparse-keymap))
-    "ba"    'org-babel-sha1-hash
-    "bb"    'org-babel-execute-buffer
-    "bc"    'org-babel-check-src-block
-    "bd"    'org-babel-demarcate-block
-    "be"    'org-babel-execute-maybe
-    "bf"    'org-babel-tangle-file
-    "bg"    'org-babel-goto-named-src-block
-    "bh"    'org-babel-describe-bindings
-    "bi"    'org-babel-lob-ingest
-    "bI"    'org-babel-view-src-block-info
-    "bj"    'org-babel-insert-header-arg
-    "bl"    'org-babel-load-in-session
-    "bn"    'org-babel-next-src-block
-    "bo"    'org-babel-open-src-block-result
-    "bp"    'org-babel-previous-src-block
-    "br"    'org-babel-goto-named-result
-    "bs"    'org-babel-execute-subtree
-    "bt"    'org-babel-tangle
-    "bu"    'org-babel-goto-src-block-head
-    "bv"    'org-babel-expand-src-block
-    "bx"    'org-babel-do-key-sequence-in-edit-buffer
-    "bz"    'org-babel-switch-to-session
-    "e"     (cons "export" (make-sparse-keymap))
-    "ee"    'org-export-dispatch
-    "eb"    'org-beamer-export-to-pdf
-    "el"    'org-latex-export-to-latex
-    "ep"    'org-latex-export-to-pdf
-    "i"     (cons "insert" (make-sparse-keymap))
-    "ib"    'org-insert-structure-template
-    "ic"    'org-cite-insert
-    "id"    'org-insert-drawer
-    "if"    'org-footnote-new
-    "ih"    'org-insert-heading
-    "iH"    'org-insert-heading-after-current
-    "ii"    'org-id-get-create
-    "iI"    'org-insert-item
-    "il"    'org-insert-link
-    "in"    'org-add-note
-    "ip"    'org-set-property
-    "is"    'org-insert-subheading
-    "it"    'org-set-tags-command
-    "t"     (cons "tables" (make-sparse-keymap))
-    "ta"    'org-table-align
-    "tb"    'org-table-blank-field
-    "tc"    'org-table-convert
-    "td"    (cons "delete" (make-sparse-keymap))
-    "tdc"   'org-table-delete-column
-    "tdr"   'org-table-kill-row
-    "te"    'org-table-eval-formula
-    "tE"    'org-table-export
-    "tf"    'org-table-field-info
-    "th"    'org-table-previous-field
-    "tH"    'org-table-move-column-left
-    "ti"    (cons "insert" (make-sparse-keymap))
-    "tic"   'org-table-insert-column
-    "tih"   'org-table-insert-hline
-    "tiH"   'org-table-hline-and-move
-    "tir"   'org-table-insert-row
-    "tI"    'org-table-import
-    "tj"    'org-table-next-row
-    "tJ"    'org-table-move-row-down
-    "tK"    'org-table-move-row-up
-    "tl"    'org-table-next-field
-    "tL"    'org-table-move-column-right
-    "tn"    'org-table-create
-    "tN"    'org-table-create-with-table.el
-    "tp"    'org-plot/gnuplot
-    "tr"    'org-table-recalculate
-    "ts"    'org-table-sort-lines
-    "tt"    (cons "toggles" (make-sparse-keymap))
-    "ttf"   'org-table-toggle-formula-debugger
-    "tto"   'org-table-toggle-coordinate-overlays
-    "tw"    'org-table-wrap-region
-    "T"     (cons "toggles" (make-sparse-keymap))
-    "Tc"    'org-toggle-checkbox
-    "Td"    'org-modern-indent-mode
-    "TD"    'org-indent-mode
-    "Te"    'org-toggle-pretty-entities
-    "Ti"    'org-toggle-inline-images
-    "Tl"    'org-toggle-link-display
-    "Tm"    'org-toggle-hidden-emphasis-markers
-    "Tt"    'org-show-todo-tree
-    "Tx"    'org-latex-preview
-    "x"     (cons "text" (make-sparse-keymap))
-    "xb"    'org-bold
-    "xc"    'org-code
-    "xi"    'org-italic
-    "xo"    'org-open-at-point
-    "xr"    'org-clear
-    "xs"    'org-strike-through
-    "xu"    'org-underline
-    "xv"    'org-verbatim)
-
-  (general-def 'normal org-mode-map "RET" 'org-open-at-point)
-
-  (tyrant-def
-    "O"      (cons "Org" (make-sparse-keymap))
-    "O/"     'org-occur-in-agenda-files
-    "Oa"     'org-agenda
-    "Oc"     'org-capture
-    "OC"     (cons "clock" (make-sparse-keymap))
-    "OCc"    'org-clock-cancel
-    "OCg"    'org-clock-goto
-    "OCi"    'org-clock-in-last
-    "OCj"    'org-clock-jump-to-current-clock
-    "OCo"    'org-clock-out
-    "OCr"    'org-resolve-clocks
-    "Od"     'open-org-default-notes-file
-    "Ol"     'org-store-link
-    "Op"     'open-org-project-file
-    "Ot"     'org-transclusion-mode
-    )
-  )
-#+end_src
-*********** Configure org functionality add-ons
-:PROPERTIES:
-:CUSTOM_ID: setup-orgel
-:LAST_MODIFIED: [2025-07-18 Fri 23:23]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp 
-(use-package org-make-toc
-  :after org
-  :hook org-mode
-  :config (setopt org-make-toc-insert-custom-ids t)
-  )
-
-(use-package org-modern
-  :hook (org-mode . org-modern-mode)
-  :config
-  (set-face-attribute 'org-modern-symbol nil :family "Iosevka")
-  (setopt  org-auto-align-tags nil
-           org-tags-column 0
-           org-catch-invisible-edits 'show-and-error
-           org-special-ctrl-a/e t
-           org-insert-heading-respect-content t
-           org-hide-emphasis-markers t
-           org-pretty-entities t
-           org-ellipsis "…")
-  )
-
-(use-package org-transclusion
-  :after org
-  :general
-  (despot-def org-mode-map
-    "l" 'org-transclusion-add
-    "L"     (cons "transclusion" (make-sparse-keymap))
-    "L TAB" 'org-cycle
-    "Ld" 'org-transclusion-remove
-    "LD" 'org-transclusion-detach
-    "Lj" 'org-transclusion-demote-subtree
-    "Lk" 'org-transclusion-promote-subtree
-    "Lm" 'org-transclusion-move-to-source
-    "Ls" 'org-transclusion-live-sync-start
-    "Lr" 'org-transclusion-refresh
-    "Lo" 'org-transclusion-open-source
-    )
-  )
-#+end_src
-
-**** Disabled org functionality packages
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:22]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:header-args: :tangle no :comments no
-:END:
-
-#+begin_src emacs-lisp
-(use-package org-side-tree
-  :disabled
-  :hook org-mode
-  :config
-  (setopt org-side-tree-persistent nil
-	  org-side-tree-fontify t
-	  org-side-tree-enable-folding t)
-  )
-(use-package org-pdftools
-  :disabled
-  :hook (org-mode . org-pdftools-setup-link))
-
-(use-package org-noter-pdftools
-  :disabled
-  :after org-noter
-  :config
-  (with-eval-after-load 'pdf-annot
-    (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note))
-  )
-
-(use-package org-contrib
-  :disabled
-  :after org
-  )
-#+end_src
-
-*** Configure org mode's progeny
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 04:45]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-Packages that build on org mode rather than add something to it.
-**** org-todoist
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 04:44]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp
-(use-package org-todoist
-  :after gptel ; why would this depend on gptel? oh my api key olol
-  :ensure (:host github
-                 :repo "lillenne/org-todoist"
-                 :branch "main"
-                 )
-  :init
-  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
-
-  :general (tyrant-def "aT" 'org-todoist-dispatch)
-  )
-#+end_src
-**** Configure Org-node :TODO:
-:PROPERTIES:
-:CUSTOM_ID: setup-org-nodeel
-:LAST_MODIFIED: [2025-07-19 Sat 04:44]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-Disabling this until I have time to sit down and give it an honest effort. 
-#+begin_src emacs-lisp :tangle no
-(use-package org-mem
-  :defer
-  :functions org-mem-updater
-  :config
-  (setopt org-mem-do-sync-with-org-id t
-          org-mem-watch-dirs (list "~/obsidian/org/node")
-          )
-  (org-mem-updater-mode)
-  )
-
-(use-package org-node
-  :after org
-  :init
-  (keymap-global-set "M-o n" org-node-global-prefix-map)
-  (with-eval-after-load 'org
-    (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
-  :config
-  (org-node-cache-mode)
-  :general
-  (tyrant-def
-    "n"      (cons "node" (make-sparse-keymap))
-    "nf" 'org-node-find
-    "ni" 'org-node-insert-link
-    "nb" 'org-node-context-dwim
-    "nd" 'org-node-insert-into-related
-    "ng" 'org-node-grep
-    "nn" 'org-node-nodeify-entry
-    "ns" 'org-node-seq-dispatch
-    "nw" 'org-node-refile
-    "nr" 'org-node-visit-random
-    "nt" 'org-node-insert-transclusion
-    "nu" 'org-node-insert-raw-link
-    "ns" 'org-node-insert-transclusion-as-subtree
-    )
-  )
-#+end_src
-
-*** Configuring org capture templates :TODO:
-:PROPERTIES:
-:CUSTOM_ID: setup-org-captureel
-:LAST_MODIFIED: [2025-07-19 Sat 04:45]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle no
-(use-package doct)
-#+end_src
-
-*** Add additional ways to export from org to other formats
-:PROPERTIES:
-:CUSTOM_ID: setup-org-exportersel
-:LAST_MODIFIED: [2025-07-19 Sat 04:41]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp
-(use-package ox-pandoc
-	:after org
-	:hook (org-mode . org-pandoc-startup-check))
-
-(use-package ob-mermaid
-  :after org)
-#+end_src
-
-**** Disabled Exporters
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 04:45]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp :tangle no
-(use-package ox-tufte
-	:disabled
-	:after org
-  )
-
-(use-package ox-beamer-lecture
-	:after org)
-#+end_src
-*** Configure org footer
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:17]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp :comments no :noweb no
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; configure-org.el ends here
-#+end_src
 ** setup-programming.el
 :PROPERTIES:
 :CUSTOM_ID: setup-programmingel
@@ -4209,608 +4939,6 @@ Just put this function in `hippie-expand-try-functions-list'."
 ;; no-update-autoloads: t
 ;; End:
 ;;; setup-snippets.el ends here
-#+end_src
-
-** Configure (programming) language-specific options
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 05:02]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: configure-programming-language-specific-options
-:END:
-*** setup-python.el
-:PROPERTIES:
-:CUSTOM_ID: setup-pythonel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-python.el
-;;; config/setup-python.el --- Python configuration -*- lexical-binding: t -*-
-
-(use-package python-x
-	)
-
-(use-package live-py-mode
-	:general
-	  (despot-def (python-mode-map)
-    :major-modes '(python-mode python-ts-mode)
-    "l" 'live-py-mode
-    )
-	)
-
-(use-package uv-mode
-	:hook (python-mode . uv-mode))
-
-(use-package pyenv-mode
-	:disabled)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-python.el ends here
-#+end_src
-
-*** setup-r.el
-:PROPERTIES:
-:CUSTOM_ID: setup-rel
-:LAST_MODIFIED: [2025-07-18 Fri 21:46]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-r.el
-;;; config/setup-r.el --- R language configuration -*- lexical-binding: t -*-
-
-(use-package ess
-  :mode ("\([rR]\)\'" . R-mode)
-  :init
-  (setq ess-set-style t
-        comint-scroll-to-bottom-on-input t
-        comint-scroll-to-bottom-on-output t
-        ess-indent-offset 2)
-  (add-hook 'inferior-ess-mode-hook
-            (lambda ()
-              (add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
-  :custom
-  (inferior-R-args "--no-save")
-  (ess-indent-offset 2)
-  (ess-own-style-list '(
-                        (ess-indent-offset . 2)
-                        (ess-offset-arguments . prev-call)
-                        (ess-offset-arguments-newline . prev-line)
-                        (ess-offset-block . prev-line)
-                        (ess-offset-continued . straight)
-                        (ess-align-nested-calls "ifelse")
-                        (ess-align-arguments-in-calls "function[ 	]*(")
-                        (ess-align-continuations-in-calls . t)
-                        (ess-align-blocks control-flow)
-                        (ess-indent-from-lhs arguments fun-decl-opening)
-                        (ess-indent-from-chain-start . t)
-                        (ess-indent-with-fancy-comments . nil))
-                      )
-  (ess-style 'OWN)
-  :config (setopt  ess-ido-flex-matching nil
-                   ess-use-R-completion nil
-                   ess-use-company nil
-                   ess-use-flymake nil
-                   ess-use-ido nil
-                   )
-  :general
-  (despot-def (ess-r-mode-map)
-    :major-modes '(ess-r-mode R-mode)
-    "b" 'ess-eval-buffer
-    "c" 'ess-eval-region-or-function-or-paragraph
-    "TAB" 'ess-install-library
-    "f" 'ess-eval-function
-    "F" 'air-format
-    "r" 'run-ess-r
-    "v" 'oc-set-ess-offset
-    )
-  )
-
-(use-package r-ts-mode
-  :disabled
-  :hook (R-mode . r-ts-mode)
-  :ensure (r-ts-mode
-	   :type git :host github :repo "nverno/r-ts-mode"))
-
-(use-package essgd
-	:general
-	  (despot-def (ess-r-mode-map)
-			:major-modes 'ess-r-mode
-			"g" 'essgd-start)
-	)
-
-(use-package ess-view-data
-	:disabled)
-
-(use-package poly-R
-  :mode ("\\.qmd\\'" . poly-markdown+R-mode)
-  )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-r.el ends here
-#+end_src
-
-*** setup-rust.el
-:PROPERTIES:
-:CUSTOM_ID: setup-rustel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-rust.el
-;;; config/setup-rust.el --- Rust language configuration -*- lexical-binding: t -*-
-
-(use-package rust-mode
-	:mode ("\\.rs\\\'" . rust-mode)
-  :general
-  (despot-def (rust-mode-map)
-      :major-modes '(rust-ts-mode rust-mode)
-      "c"            'rust-compile
-			"k" 'rust-check
-			"t" 'rust-test
-			"r" 'rust-run
-			"F" 'rust-format-buffer)
-	)
-
-(use-package cargo-mode
-  :hook
-  (rust-mode . cargo-minor-mode)
-  :config
-  (setopt compilation-scroll-output t
-			rust-format-on-save t)
-	:general
-	(despot-def (rust-mode-map)
-		:major-modes '(rust-mode rust-ts-mode)
-		"e" 'cargo-mode-execute-task
-		"t" 'cargo-mode-test
-		"l" 'cargo-mode-last-command
-		"b" 'cargo-mode-build
-		"o" 'cargo-mode-test-current-buffer
-		"f" 'cargo-mode-test-current-test)
-	)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-rust.el ends here
-
-#+end_src
-
-*** setup-tex.el
-:PROPERTIES:
-:CUSTOM_ID: setup-texel
-:END:
-#+begin_src emacs-lisp :tangle config/setup-tex.el
-;;; config/setup-tex.el --- TeX and LaTeX configuration -*- lexical-binding: t -*-
-
-(use-package auctex
-  :mode ("\\.tex\\'" . LaTeX-mode)
-  :hook (LaTeX-mode . hs-minor-mode)
-  (LaTeX-mode . outline-minor-mode)
-  (LaTeX-mode . auto-fill-mode)
-  (LaTeX-mode . TeX-fold-mode)
-    (LaTeX-mode . LaTeX-math-mode)
-  :general
-  (despot-def (TeX-latex-mode-map)
-    :major-modes '(TeX-tex-mode LaTeX-mode)
-    ","             'TeX-command-master
-    "a"             'TeX-command-run-all
-    "b"             'TeX-command-menu
-    "c"             'TeX-clean
-    "h"             'TeX-doc
-    "k"             'TeX-kill-job
-    "l"             'TeX-recenter-output-buffer
-    "n"             'TeX-next-error
-    "N"             'TeX-previous-error
-    "v"             'TeX-view
-    "x"             (cons "text/fonts" (make-sparse-keymap))
-    "xb"            'font-bold
-    "xc"            'font-code
-    "xe"            'font-emphasis
-    "xi"            'font-italic
-    "xr"            'font-clear
-    "xo"            'font-oblique
-    "xf"            (cons "fonts" (make-sparse-keymap))
-    "xfc"           'font-small-caps
-    "xff"           'font-sans-serif
-    "xfr"           'font-serif
-    "z"             (cons "fold" (make-sparse-keymap))
-    "z="            'TeX-fold-math
-    "zb"            'TeX-fold-buffer
-    "zB"            'TeX-fold-clearout-buffer
-    "ze"            'TeX-fold-env
-    "zI"            'TeX-fold-clearout-item
-    "zm"            'TeX-fold-macro
-    "zp"            'TeX-fold-paragraph
-    "zP"            'TeX-fold-clearout-paragraph
-    "zr"            'TeX-fold-region
-    "zR"            'TeX-fold-clearout-region
-    "zz"            'TeX-fold-dwim)
-
-  (despot-def LaTeX-mode-map
-    :major-modes '(LaTeX-mode)
-    "."                'LaTeX-mark-environment
-    ","             'TeX-command-master
-    "a"             'TeX-command-run-all
-    "c"             'TeX-clean
-    "e"                'LaTeX-environment
-    "f"                (cons "fill" (make-sparse-keymap))
-    "fe"               'LaTeX-fill-environment
-    "fp"               'LaTeX-fill-paragraph
-    "fr"               'LaTeX-fill-region
-    "fs"               'LaTeX-fill-section
-    "h"             'TeX-doc
-    "k"             'TeX-kill-job
-    "l"             'TeX-recenter-output-buffer
-    "n"             'TeX-next-error
-    "N"             'TeX-previous-error
-    "p"                (cons "preview" (make-sparse-keymap))
-    "pb"               'preview-buffer
-    "pc"               'preview-clearout
-    "pd"               'preview-document
-    "pe"               'preview-environment
-    "pf"               'preview-cache-preamble
-    "pp"               'preview-at-point
-    "pr"               'preview-region
-    "ps"               'preview-section
-    "r"                (cons "reference" (make-sparse-keymap))
-    "rr"               'reftex-reference
-    "rl"               'reftex-label
-    "rj"               'reftex-goto-label
-    "s"                'LaTeX-section
-    "x"                (cons "text/fonts" (make-sparse-keymap))
-    "xB"               'font-medium
-    "xu"               'font-underline
-    "xf"               (cons "fonts" (make-sparse-keymap))
-    "xfa"              'font-calligraphic
-    "xfn"              'font-normal
-    "xfu"              'font-upright
-    "xi"               'font-italic
-    "xr"               'font-clear
-    "xo"               'font-oblique
-    "v"             'TeX-view
-    "x"             (cons "text/fonts" (make-sparse-keymap))
-    "xb"            'font-bold
-    "xc"            'font-code
-    "xe"            'font-emphasis
-    "xi"            'font-italic
-    "xr"            'font-clear
-    "xo"            'font-oblique
-    "xf"            (cons "fonts" (make-sparse-keymap))
-    "xfc"           'font-small-caps
-    "xff"           'font-sans-serif
-    "xfr"           'font-serif
-    "z"             (cons "fold" (make-sparse-keymap))
-    "z="            'TeX-fold-math
-    "zb"            'TeX-fold-buffer
-    "zB"            'TeX-fold-clearout-buffer
-    "ze"            'TeX-fold-env
-    "zI"            'TeX-fold-clearout-item
-    "zm"            'TeX-fold-macro
-    "zp"            'TeX-fold-paragraph
-    "zP"            'TeX-fold-clearout-paragraph
-    "zr"            'TeX-fold-region
-    "zR"            'TeX-fold-clearout-region
-    "zz"            'TeX-fold-dwim)
-
-  :config
-  (setopt TeX-engine 'luatex)
-	(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-  )
-
-(use-package preview-dvisvgm
-  :after auctex)
-
-(use-package xenops
-	:disabled)
-
-(use-package cdlatex
-	:disabled)
-
-(use-package latex-extra
-  :disabled
-  :after auctex
-  :hook (LaTeX-mode . latex-extra-mode))
-
-(use-package latex-table-wizard
-	:disabled)
-
-(use-package evil-tex
-	:disabled)
-
-(use-package latex-extra
-	:disabled)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-tex.el ends here
-#+end_src
-
-** Configure Theming
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle config/configure-theming.el :comments noweb
-:LAST_MODIFIED: [2025-07-19 Sat 19:04]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: configure-theming
-:END:
-
-Packages that substantially change the user interface as configured in 
-
-#+name:theme header
-#+begin_src emacs-lisp :comments no :noweb no
-;;; configure-theming.el --- Themes configuration -*- lexical-binding: t; -*-
-;;; Commentary:
-;;; Code:
-#+end_src
-
-*** Color theme packages
-:PROPERTIES:
-:CUSTOM_ID: color-theme-packages
-:LAST_MODIFIED: [2025-07-19 Sat 19:03]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp
-(use-package catppuccin-theme
-  :disabled)
-
-(use-package doom-themes)
-
-(use-package doric-themes)
-
-(use-package ef-themes
-  :config
-  (setopt ef-themes-mixed-fonts t)
-  )
-
-(use-package flexoki-themes
-	:disabled
-  :custom
-  (flexoki-themes-use-bold-keywords t)
-  (flexoki-themes-use-bold-builtins t)
-  (flexoki-themes-use-italic-comments nil))
-
-(use-package evenok
-	:disabled
-	)
-
-(use-package gruvbox-theme)
-
-(use-package kaolin-themes)
-
-(use-package nordic-night-theme)
-
-(use-package modus-themes)
-
-(use-package solarized-theme
-  :disabled)
-#+end_src
-
-*** Managing fonts
-:PROPERTIES:
-:CUSTOM_ID: setup-fontsel
-:LAST_MODIFIED: [2025-07-19 Sat 19:49]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp
-;;;; Font configuration
-(use-package fontaine
-  :hook (elpaca-after-init . fontaine-mode)
-  :config
-  (setopt fontaine-presets '(
-                             (t  :default-weight normal
-                                 :default-height 150
-                                 :fixed-pitch-family "JetBrains Mono NL"
-                                 :variable-pitch-family "Heliotrope OT"
-                                 :variable-pitch-height 1.05
-                                 :bold-family nil ; use the face's bold
-                                 :bold-weight bold)
-
-;;;;; Presets that keep the same font family but modify its appearance
-	                           ;; Presets to change point size only
-	                           (10pt :default-height 100)
-	                           (11pt :default-height 110)
-	                           (12pt :default-height 120)
-	                           (13pt :default-height 130)
-	                           (14pt :default-height 140)
-	                           (15pt :default-height 150)
-	                           (16pt :default-height 160)
-	                           (17pt :default-height 170)
-	                           (18pt :default-height 180)
-
-;; Line spacing is additional line spacing, not total line spacing
-;; (i.e. 0 is the default)
-;; Meaning differs depending on whether it is an integer or float
-;; Integer = additional pixels to add
-;; Floating point = additional spacing proportional to point size
-	                           (lsd :line-space 0)
-	                           ;; line spacing pixels
-	                           (lsp1 :line-spacing 1)
-	                           (lsp2 :line-spacing 2)
-	                           (lsp3 :line-spacing 3)
-	                           (lsp4 :line-spacing 4)
-	                           (lsp5 :line-spacing 5)
-	                           ;; line spacing scaling
-	                           (lss05 :line-spacing 0.05)
-	                           (lss10 :line-spacing 0.10)
-	                           (lss15 :line-spacing 0.15)
-	                           (lss20 :line-spacing 0.20)
-	                           (lss25 :line-spacing 0.25)
-	                           (lss30 :line-spacing 0.30)
-
-;;;;; Font presets
-
-;;;;;; Monospace fonts
-	                           (iosevka-comfy
-	                            :default-family "Iosevka Comfy"
-	                            :default-weight normal)
-
-	                           (fira-mono
-	                            :default-family "Fira Mono")
-
-	                           (fira-code
-	                            :default-family "FiraCode Nerd Font"
-	                            )
-
-	                           (jetbrains-mono
-	                            :default-family "JetBrains Mono NL")
-
-	                           (plex-mono
-	                            :default-family "IBM Plex Mono")
-
-	                           (dank-mono
-	                            :default-family "Dank Mono")
-
-	                           (hack
-	                            :default-family "Hack Nerd Font")
-
-	                           ;; think inter is proportional not mono
-	                           (inter
-	                            :default-family "Inter")
-
-	                           (xenon
-	                            :default-family "Monaspace Xenon")
-
-	                           (input-mono
-	                            :default-family "Input Mono")
-;;;;;; Quasi-monospace fonts
-	                           (duospace
-	                            :default-family "iA Writer Duospace")
-
-	                           (triplicate-mono-b
-	                            :default-family "Triplicate B")
-
-	                           (triplicate-code-b
-	                            :default-family "Triplicate B Code")
-
-	                           (triplicate-poly-b
-	                            :default-family "Triplicate B Poly")
-
-	                           (triplicate-mono-a
-	                            :default-family "Triplicate A")
-
-	                           (triplicate-code-a
-	                            :default-family "Triplicate A Code")
-
-	                           (triplicate-poly-a
-	                            :default-family "Triplicate A Poly")
-
-	                           (header-triplicate
-	                            :header-line-family "Triplicate A Caps"
-	                            :header-line-height 1.1)
-
-	                           (triplicate-combo
-	                            :default-family "Triplicate A Code"
-	                            :variable-pitch-family "Triplicate A Poly"
-	                            :header-line-family "Triplicate A Caps"
-	                            :header-line-height 1.1
-	                            )
-
-                             ;; Not fully variable width but it's not suitable for coding imo.
-                             ;; Could be fine for writing in a markup language
-                             (quattro
-	                            :default-family "iA Writer Quattro V")
-
-
-;;;;;; Header fonts      
-	                           (header-heliotrope
-	                            :header-line-family "Heliotrope 4 Caps"
-	                            :header-line-height 1.1)
-
-	                           (header-overpass
-	                            :header-line-family "Overpass"
-	                            :header-line-height 1.1)
-
-                             ;; Don't use a different family for headers 
-	                           (header-null
-	                            :header-line-family nil
-	                            :header-line-height 1.0)
-
-;;;;;; Variable pitch fonts
-	                           (serif-input
-	                            :variable-pitch-family "Input Serif")
-
-	                           (sans-input
-	                            :variable-pitch-family "Input Sans")
-
-	                           (vp-heliotrope
-	                            :variable-pitch-family "Heliotrope OT"
-	                            :variable-pitch-height 1.05)
-
-	                           (vp-avenir
-	                            :variable-pitch-family "Avenir"
-	                            :default-weight book)
-
-	                           (vp-minion
-	                            :variable-pitch-family "Minion 3")
-	                           )
-	        )
-  :custom (fontaine-mode t)
-  )
-#+end_src
-
-**** View fonts within emacs
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 19:38]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-Font waterfall and size viewer from within emacs.
-#+begin_src emacs-lisp
-(use-package show-font
-  :general  (tyrant-def  "hs" 'show-font-select-preview
-                         "hT" 'show-font-tabulated
-                         )
-  :bind
-  (("C-c s f" . show-font-select-preview)
-   ("C-c s t" . show-font-tabulated))
-  )
-
-#+end_src
-**** Disabled packages
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 19:38]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp :tangle no
-(use-package ligature
-  :disabled)
-#+end_src
-*** Theming advice and hooks
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 19:06]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp
-(advice-add 'load-theme :after #'load-theme@run-hooks)
-(advice-add 'load-theme :before #'load-theme@theme-dont-propagate)
-
-(add-hook 'after-load-theme-hook #'bolder-faces)
-(add-hook 'after-load-theme-hook #'customize-tab-bar)
-(add-hook 'after-load-theme-hook #'unscale-outlines)
-(add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
-#+end_src
-
-*** Theming lisp footer
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 19:06]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; configure-theming.el ends here
 #+end_src
 
 ** setup-treesit.el

@@ -2,40 +2,26 @@
 ;;; Commentary:
 ;;; Code:
 
-;; [[file:../its-lit.org::#color-theme-packages][Color theme packages:1]]
-(use-package catppuccin-theme
-  :disabled)
+;; [[file:../its-lit.org::*Define additional font lock faces][Define additional font lock faces:1]]
 
+;; Define additional font lock faces:1 ends here
+
+;; [[file:../its-lit.org::#color-theme-packages][Color theme packages:1]]
 (use-package doom-themes)
 
-(use-package doric-themes)
-
 (use-package ef-themes
-  :config
-  (setopt ef-themes-mixed-fonts t)
+  :config (setopt ef-themes-mixed-fonts t)
   )
 
 (use-package flexoki-themes
-	:disabled
   :custom
   (flexoki-themes-use-bold-keywords t)
   (flexoki-themes-use-bold-builtins t)
-  (flexoki-themes-use-italic-comments nil))
+  (flexoki-themes-use-italic-comments nil)
+  )
 
-(use-package evenok
-	:disabled
-	)
-
-(use-package gruvbox-theme)
-
-(use-package kaolin-themes)
-
-(use-package nordic-night-theme)
-
+;; Development version I think? Also built in
 (use-package modus-themes)
-
-(use-package solarized-theme
-  :disabled)
 ;; Color theme packages:1 ends here
 
 ;; [[file:../its-lit.org::#setup-fontsel][Managing fonts:1]]

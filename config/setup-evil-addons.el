@@ -6,7 +6,8 @@
 	(setq evil-collection-magit-want-horizontal-movement t
         evil-collection-unimpaired-want-repeat-mode-integration t)
   (add-hook 'org-agenda-mode-hook
-            (lambda () (evil-collection-unimpaired-mode -1))))
+            (lambda () (evil-collection-unimpaired-mode -1)))
+  )
 
 (use-package evil-org
   :hook (org-mode . evil-org-mode)
