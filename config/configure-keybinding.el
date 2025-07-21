@@ -337,7 +337,7 @@
 ;; "l=" 'eglot-format
 ;; eglot bindings ends here
 
-;; [[file:../its-lit.org::*Mac-specific keybinds][Mac-specific keybinds:1]]
+;; [[file:../its-lit.org::#mac-specific-keybinds][Mac-specific keybinds:1]]
 (when IS-MAC
   (general-def
     "s-`"   'other-frame

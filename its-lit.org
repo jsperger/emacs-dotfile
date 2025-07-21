@@ -4,12 +4,174 @@
 #+language: en
 #+options: toc:2
 #+startup: show2levels
+#+startup: num
 # macros taken from prot's config https://git.sr.ht/~protesilaos/dotfiles
 #+macro: latest-export-date (eval (format-time-string "%F %T %z"))
 #+macro: word-count (eval (count-words (point-min) (point-max)))
 
 *Last revised and exported on {{{latest-export-date}}} with a word
 count of {{{word-count}}}.*
+* Detailed Outline
+:PROPERTIES:
+:TOC:      :include all :depth 4
+:CUSTOM_ID: detailed-outline
+:LAST_MODIFIED: [2025-07-20 Sun 20:49]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+:CONTENTS:
+- [[#detailed-outline][Detailed Outline]]
+- [[#overview][Overview]]
+  - [[#style][Style]]
+  - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
+    - [[#support-for-detangling-excluding-headerfooter][Support for detangling (excluding header/footer)]]
+    - [[#aggressive-time-stamping][Aggressive time-stamping]]
+  - [[#warnings][Warnings]]
+    - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
+    - [[#i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it][I don't care about startup time (or at least don't optimize for it)]]
+  - [[#lisp-helpers-for-maintaining-my-literate-config][Lisp helpers for maintaining my literate config]]
+- [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
+  - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
+    - [[#package-management-and-loading-packages][Package management and loading packages]]
+    - [[#the-right-way-to-configure-package-options][The "right" way to configure package options]]
+  - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
+    - [[#potentially-useful][Potentially useful]]
+      - [[#noweb-syntax][noweb syntax]]
+      - [[#hooks][hooks]]
+      - [[#functions][functions]]
+    - [[#related-examples-from-the-internet][Related examples from the internet]]
+      - [[#use-noweb-functionality-to-include-variable-values-in-tangled-files][Use :noweb functionality to include variable values in tangled files]]
+      - [[#lisp-in-header-argument-for-conditional-evaluation][lisp in header argument for conditional evaluation]]
+      - [[#tangling-with-variables][Tangling with variables]]
+      - [[#eric-schultes-org-scraps][Eric Schulte's org scraps]]
+- [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
+  - [[#initel][init.el]]
+    - [[#bootstrap-elpaca-package-manager][Bootstrap Elpaca package manager]]
+    - [[#define-constants-to-use-as-conditional-configuration-flags][Define constants to use as conditional configuration flags]]
+    - [[#declare-packages-that-are-immediately-loaded][Declare packages that are immediately loaded]]
+      - [[#no-littering][no-littering]]
+      - [[#general-for-keybinds][General for keybinds]]
+      - [[#benchmark-init-time][Benchmark init time]]
+    - [[#load-configuration-files][Load configuration files]]
+    - [[#load-custom-file-and-run-after-init-hooks][Load custom file and run after-init hooks]]
+    - [[#local-variable-footer-for-init][Local variable footer for init]]
+- [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
+  - [[#one-stop-keybinding-shop][One stop keybinding shop]]
+    - [[#keyboard-macros][Keyboard macros]]
+    - [[#global-key-binds][Global key binds]]
+      - [[#removed-keybindings][Removed keybindings]]
+      - [[#mac-specific-keybinds][Mac-specific keybinds]]
+    - [[#keybind-file-footer][Keybind file footer]]
+  - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
+    - [[#base-and-built-in-file-header][Base and built-in file header]]
+    - [[#configure-base-emacs-options][Configure base emacs options]]
+      - [[#currently-unused-base-configuration][Currently unused base configuration]]
+    - [[#configuring-built-in-packages][Configuring built-in packages]]
+      - [[#removed-built-in-configuration][Removed built-in configuration]]
+    - [[#configure-built-in-programming-utilities][Configure built-in programming utilities]]
+    - [[#configure-ediff-for-viewing-diffs][Configure ediff for viewing diffs]]
+    - [[#built-in-package-configuration-that-were-in-a-separate-file-for-some-reason][Built-in package configuration that were in a separate file for some reason]]
+    - [[#which-key-configuration][which-key configuration]]
+    - [[#base-and-built-in-configuration-footer][Base and built-in configuration footer]]
+  - [[#editor-utilities-and-core-functionality][Editor utilities and "core" functionality]]
+    - [[#configure-editor-utility-packages][Configure editor utility packages]]
+      - [[#utilities-for-interact-with-the-operating-system][Utilities for interact with the operating system]]
+      - [[#scratch-buffer-utilities][Scratch buffer utilities]]
+      - [[#search-utilities][Search utilities]]
+      - [[#terminal-configuration][Terminal configuration]]
+    - [[#data-format-modes][Data format modes]]
+      - [[#removed-data-viewers][Removed data viewers]]
+    - [[#modify-core-editor-functioning][Modify core editor functioning]]
+      - [[#smooth-scrolling][Smooth scrolling]]
+      - [[#setup-help-and-documentation-viewers][Setup help and documentation viewers]]
+      - [[#configuring-how-undo-works][Configuring how undo works]]
+      - [[#windowing][Windowing]]
+    - [[#outline-and-fold-text][Outline and fold text]]
+    - [[#text-snippet-insertion-and-collections][Text snippet insertion and collections]]
+      - [[#removed-snippet-packages-and-customization][Removed snippet packages and customization]]
+    - [[#footer-for-utilities-config][Footer for utilities config]]
+    - [[#removed-packages][Removed packages]]
+  - [[#configure-all-things-org-mode][Configure all things org mode]]
+    - [[#configure-org-header][Configure org header]]
+    - [[#configure-base-org-settings-and-major-mode-keybinds][Configure base org settings and major mode keybinds]]
+      - [[#configure-org-functionality-add-ons][Configure org functionality add-ons]]
+    - [[#configure-org-modes-progeny][Configure org mode's progeny]]
+      - [[#org-todoist][org-todoist]]
+      - [[#configure-org-node][Configure Org-node]]
+    - [[#configuring-org-capture-templates][Configuring org capture templates]]
+    - [[#add-additional-ways-to-export-from-org-to-other-formats][Add additional ways to export from org to other formats]]
+      - [[#disabled-exporters][Disabled Exporters]]
+    - [[#configure-org-footer][Configure org footer]]
+  - [[#configure-programming-language-specific-modes-and-options][Configure (programming) language-specific modes and options]]
+    - [[#lisp-based-languages][Lisp-based languages]]
+    - [[#python-configuration][Python configuration]]
+      - [[#disabled-python-packages][Disabled python packages]]
+    - [[#r-programming][R programming]]
+      - [[#disabled-r-packages][Disabled R packages]]
+    - [[#rust-programming][Rust programming]]
+    - [[#latex--tex-configuration][LaTeX / TeX configuration]]
+    - [[#programming-languages-footer][Programming languages footer]]
+  - [[#configure-theming][Configure theming]]
+    - [[#preserve-appearance-of-collapsed-outline-headings-until-window-edge][Preserve appearance of collapsed outline headings until window edge]]
+    - [[#color-theme-packages][Color theme packages]]
+      - [[#disabled-themes][Disabled themes]]
+    - [[#managing-fonts][Managing fonts]]
+      - [[#view-fonts-within-emacs][View fonts within emacs]]
+      - [[#disabled-packages][Disabled packages]]
+    - [[#theming-advice-and-hooks][Theming advice and hooks]]
+    - [[#theming-lisp-footer][Theming lisp footer]]
+  - [[#configure-completion-frameworks][Configure completion frameworks]]
+    - [[#setup-completion-actionsel][setup-completion-actions.el]]
+    - [[#set-up-completion-backends][Set up completion backends]]
+      - [[#other-completion-backends][Other completion backends]]
+    - [[#annotate-completion-options][Annotate completion options]]
+    - [[#setup-completionel][setup-completion.el]]
+    - [[#setup-consultel][setup-consult.el]]
+  - [[#setup-denoteel][setup-denote.el]]
+  - [[#setup-diagrammingel][setup-diagramming.el]]
+  - [[#setup-eafel][setup-eaf.el]]
+  - [[#setup-emacsel][setup-emacs.el]]
+  - [[#setup-emailel][setup-email.el]]
+  - [[#setup-evil-addonsel][setup-evil-addons.el]]
+  - [[#setup-evilel][setup-evil.el]]
+  - [[#setup-font-lockingel][setup-font-locking.el]]
+  - [[#setup-goel][setup-go.el]]
+  - [[#setup-gopherel][setup-gopher.el]]
+  - [[#setup-iconsel][setup-icons.el]]
+  - [[#setup-llmel][setup-llm.el]]
+    - [[#llm-unused-config][LLM unused config]]
+  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
+    - [[#lsp-bridge-command-reference][Lsp Bridge Command reference]]
+  - [[#setup-lspel][setup-lsp.el]]
+  - [[#setup-markdownel][setup-markdown.el]]
+  - [[#setup-mediael][setup-media.el]]
+  - [[#setup-modelineel][setup-modeline.el]]
+  - [[#setup-notesel][setup-notes.el]]
+  - [[#setup-programmingel][setup-programming.el]]
+  - [[#setup-projectsel][setup-projects.el]]
+  - [[#setup-readingel][setup-reading.el]]
+    - [[#removed-reading-packages][Removed reading packages]]
+  - [[#setup-treesitel][setup-treesit.el]]
+  - [[#configure-ui-elements][Configure UI Elements]]
+  - [[#setup-uiel][setup-ui.el]]
+    - [[#removed-elements][Removed elements]]
+  - [[#setup-vcel][setup-vc.el]]
+  - [[#setup-webel][setup-web.el]]
+  - [[#bibliography-management][Bibliography management]]
+  - [[#setup-writingel][setup-writing.el]]
+- [[#lisp-functions][Lisp functions]]
+  - [[#my-core-functionsel][my-core-functions.el]]
+  - [[#my-core-helpersel][my-core-helpers.el]]
+  - [[#my-editor-helpersel][my-editor-helpers.el]]
+  - [[#my-keybinding-helpersel][my-keybinding-helpers.el]]
+  - [[#my-lang-helpersel][my-lang-helpers.el]]
+  - [[#my-lsp-bridge-helpersel][my-lsp-bridge-helpers.el]]
+  - [[#my-org-helpersel][my-org-helpers.el]]
+  - [[#my-theme-helpersel][my-theme-helpers.el]]
+  - [[#my-vc-helpersel][my-vc-helpers.el]]
+- [[#appendices][Appendices]]
+:END:
+
+
 * Overview
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-16 Wed 00:42]
@@ -153,78 +315,6 @@ I'm sympathetic to the arguments in this blog post that [[https://batsov.com/art
 Work in progress
 
 
-* Detailed Outline
-:PROPERTIES:
-:TOC:      :include all :depth 4 :force (nothing) :ignore (nothing) :local (nothing)
-:CUSTOM_ID: detailed-outline
-:LAST_MODIFIED: [2025-07-20 Sun 04:32]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-:CONTENTS:
-- [[#overview][Overview]]
-  - [[#style][Style]]
-  - [[#design-decisions--notable-features][Design Decisions & Notable Features]]
-    - [[#support-for-detangling-excluding-headerfooter][Support for detangling (excluding header/footer)]]
-    - [[#aggressive-time-stamping][Aggressive time-stamping]]
-  - [[#warnings][Warnings]]
-    - [[#i-have-no-idea-what-im-doing][I have no idea what I'm doing]]
-    - [[#i-dont-care-about-startup-time-or-at-least-dont-optimize-for-it][I don't care about startup time (or at least don't optimize for it)]]
-  - [[#lisp-helpers-for-maintaining-my-literate-config][Lisp helpers for maintaining my literate config]]
-- [[#detailed-outline][Detailed Outline]]
-- [[#notes-on-configuring-emacs][Notes on configuring Emacs]]
-  - [[#things-i-found-or-continue-to-find-particularly-confusing][Things I found or continue to find particularly confusing]]
-  - [[#notes-while-figuring-out-how-to-make-header-and-footer-templates][Notes while figuring out how to make header and footer templates]]
-- [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
-  - [[#initel][init.el]]
-- [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
-  - [[#one-stop-keybinding-shop][One stop keybinding shop]]
-  - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
-  - [[#editor-utilities-and-core-functionality][Editor utilities and "core" functionality]]
-  - [[#configure-all-things-org-mode][Configure all things org mode]]
-  - [[#configure-programming-language-specific-modes-and-options][Configure (programming) language-specific modes and options]]
-  - [[#configure-theming][Configure theming]]
-  - [[#configure-completion-frameworks][Configure completion frameworks]]
-  - [[#setup-denoteel][setup-denote.el]]
-  - [[#setup-diagrammingel][setup-diagramming.el]]
-  - [[#setup-eafel][setup-eaf.el]]
-  - [[#setup-emacsel][setup-emacs.el]]
-  - [[#setup-emailel][setup-email.el]]
-  - [[#setup-evil-addonsel][setup-evil-addons.el]]
-  - [[#setup-evilel][setup-evil.el]]
-  - [[#setup-font-lockingel][setup-font-locking.el]]
-  - [[#setup-goel][setup-go.el]]
-  - [[#setup-gopherel][setup-gopher.el]]
-  - [[#setup-iconsel][setup-icons.el]]
-  - [[#setup-llmel][setup-llm.el]]
-  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
-  - [[#setup-lspel][setup-lsp.el]]
-  - [[#setup-markdownel][setup-markdown.el]]
-  - [[#setup-mediael][setup-media.el]]
-  - [[#setup-modelineel][setup-modeline.el]]
-  - [[#setup-notesel][setup-notes.el]]
-  - [[#setup-programmingel][setup-programming.el]]
-  - [[#setup-projectsel][setup-projects.el]]
-  - [[#setup-readingel][setup-reading.el]]
-  - [[#setup-treesitel][setup-treesit.el]]
-  - [[#configure-ui-elements][Configure UI Elements]]
-  - [[#setup-uiel][setup-ui.el]]
-  - [[#setup-vcel][setup-vc.el]]
-  - [[#setup-webel][setup-web.el]]
-  - [[#bibliography-management][Bibliography management]]
-  - [[#setup-writingel][setup-writing.el]]
-- [[#lisp-functions][Lisp functions]]
-  - [[#my-core-functionsel][my-core-functions.el]]
-  - [[#my-core-helpersel][my-core-helpers.el]]
-  - [[#my-editor-helpersel][my-editor-helpers.el]]
-  - [[#my-keybinding-helpersel][my-keybinding-helpers.el]]
-  - [[#my-lang-helpersel][my-lang-helpers.el]]
-  - [[#my-lsp-bridge-helpersel][my-lsp-bridge-helpers.el]]
-  - [[#my-org-helpersel][my-org-helpers.el]]
-  - [[#my-theme-helpersel][my-theme-helpers.el]]
-  - [[#my-vc-helpersel][my-vc-helpers.el]]
-- [[#appendices][Appendices]]
-:END:
-
 * Notes on configuring Emacs
 :PROPERTIES:
 :CUSTOM_ID: notes-on-configuring-emacs
@@ -247,10 +337,14 @@ related:
 :CUSTOM_ID: notes-while-figuring-out-how-to-make-header-and-footer-templates
 :END:
 *** Potentially useful
+:PROPERTIES:
+:CUSTOM_ID: potentially-useful
+:END:
 **** noweb syntax
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 01:06]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: noweb-syntax
 :END:
 =< <code-block-name> >= (no spaces between brackets, just a rendering workaround) Insert the literal body of code block code-block-name itself.
 
@@ -265,6 +359,7 @@ Note that you can customize org-babel-noweb-wrap-start and org-babel-noweb-wrap-
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 00:57]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: hooks
 :END:
 - =org-babel-post-tangle-hook= which is run within tangled code files "making it suitable for post-processing, compilation, and evaluation of code in the tangled files."
 
@@ -288,17 +383,27 @@ Note that you can customize org-babel-noweb-wrap-start and org-babel-noweb-wrap-
 
 - =org-babel-tangle-finished-hook= is run after post-tangle hooks, in the original buffer.
 **** functions
+:PROPERTIES:
+:CUSTOM_ID: functions
+:END:
 - =org-babel-map-src-blocks=
 - =org-sbe=
 *** Related examples from the internet
-[[https://github.com/fniessen/refcard-org-babel][org babel refcard / cheatsheet]]
-**** [[https://emacs.stackexchange.com/a/46721][Use built-in :noweb functionality to include variable values in tangled files]]
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 02:28]
+:CUSTOM_ID: related-examples-from-the-internet
+:END:
+[[https://github.com/fniessen/refcard-org-babel][org babel refcard / cheatsheet]]
+**** [[https://emacs.stackexchange.com/a/46721][Use :noweb functionality to include variable values in tangled files]]
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 20:50]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: use-noweb-functionality-to-include-variable-values-in-tangled-files
 :END:
 
 **** [[https://www.reddit.com/r/orgmode/comments/1cklpow/ansible_like_variables_in_orgmodebabeltangle/][lisp in header argument for conditional evaluation]]
+:PROPERTIES:
+:CUSTOM_ID: lisp-in-header-argument-for-conditional-evaluation
+:END:
 #+NAME: common-config
 #+begin_src conf :tangle no
   timezone=Europe/Berlin
@@ -315,16 +420,21 @@ Note that you can customize org-babel-noweb-wrap-start and org-babel-noweb-wrap-
 #+end_src
 
 **** [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-elisp.html#org46f2da5][Tangling with variables]]
+:PROPERTIES:
+:CUSTOM_ID: tangling-with-variables
+:END:
 ***** Notes
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 02:21]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: notes
 :END:
 Has a direct example of trying to keep a lexical binding directive at the top of the file
 **** [[https://eschulte.github.io/org-scraps/][Eric Schulte's org scraps]]
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-17 Thu 01:36]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: eric-schultes-org-scraps
 :END:
 - [[https://eschulte.github.io/org-scraps/scraps/2011-07-19-including-noweb-refs-without-last-newline.html][Including noweb refs without the last newline]]
 - [[https://eschulte.github.io/org-scraps/scraps/2011-07-25-expand-noweb-refs.html][Expand noweb refs]] 
@@ -355,6 +465,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:46]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: bootstrap-elpaca-package-manager
 :END:
 #+name: init elpaca
 #+begin_src emacs-lisp :tangle init.el :comments noweb
@@ -413,6 +524,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: define-constants-to-use-as-conditional-configuration-flags
 :END:
 
 I find =(when IS-MAC ...)= to be clearer and shorter than checking the system type
@@ -434,6 +546,7 @@ probably being fast and loose with system type and GUI/non-GUI configuration.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:48]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: declare-packages-that-are-immediately-loaded
 :END:
 These packages have to be loaded immediately becuase they either provide
 =use-package= keywords or change how intialization works in some way.
@@ -457,6 +570,7 @@ the magic so newer or less popular packages might not be incorporated.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: general-for-keybinds
 :END:
 
 I lifted the tyrant and despot definer and naming scheme from [[https://github.com/tshu-w/.emacs.d][tshu-w's config
@@ -495,6 +609,7 @@ I lifted the tyrant and despot definer and naming scheme from [[https://github.c
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: benchmark-init-time
 :END:
 
 I don't optimize for it, but I've frequently found slow init times to indicate
@@ -508,7 +623,7 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-20 Sun 04:32]
+:LAST_MODIFIED: [2025-07-20 Sun 06:02]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -573,7 +688,7 @@ mistakes in my configuration.
              ;;              ;; "setup-notes.el"
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
-             ;;              "setup-reading.el"
+             "setup-reading.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
              "setup-vc.el"
@@ -590,6 +705,7 @@ mistakes in my configuration.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 20:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: load-custom-file-and-run-after-init-hooks
 :END:
 #+begin_src
 ;;;; =============================== Customs ===============================
@@ -601,6 +717,7 @@ mistakes in my configuration.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 20:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: local-variable-footer-for-init
 :END:
 #+name: footer-init
 #+begin_src emacs-lisp :tangle init.el :comments no
@@ -926,6 +1043,7 @@ I need to move most of these out of here and put them in the relavent package de
 :LAST_MODIFIED: [2025-07-18 Fri 17:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :HEADER_ARGS: :tangle no :noweb no
+:CUSTOM_ID: removed-keybindings
 :END:
 #+name: ellama keybindings
 #+begin_src emacs-lisp
@@ -990,6 +1108,7 @@ I need to move most of these out of here and put them in the relavent package de
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 17:43]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: mac-specific-keybinds
 :END:
 
 #+begin_src emacs-lisp
@@ -1020,6 +1139,7 @@ I need to move most of these out of here and put them in the relavent package de
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:07]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: keybind-file-footer
 :END:
 #+begin_src emacs-lisp :noweb no :comments no
 ;; Local Variables:
@@ -1040,6 +1160,7 @@ I need to move most of these out of here and put them in the relavent package de
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: base-and-built-in-file-header
 :END:
 #+begin_src emacs-lisp :tangle config/configure-base-and-built-in.el :comments no :noweb no
 ;;; configure-base-and-built-in.el --- Built-in packages -*- lexical-binding: t -*-
@@ -1050,6 +1171,7 @@ I need to move most of these out of here and put them in the relavent package de
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:43]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-base-emacs-options
 :END:
 #+name: emacs package declaration for config options
 #+begin_src emacs-lisp
@@ -1091,6 +1213,7 @@ I need to move most of these out of here and put them in the relavent package de
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:42]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: currently-unused-base-configuration
 :END:
 
 These are out temporarily while sorting through what to keep.
@@ -1120,6 +1243,7 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configuring-built-in-packages
 :END:
 
 #+begin_src emacs-lisp 
@@ -1149,6 +1273,7 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:33]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: removed-built-in-configuration
 :END:
 
 Off the top of my head, I think
@@ -1198,8 +1323,9 @@ Off the top of my head, I think
 
 *** Configure built-in programming utilities
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 18:54]
+:LAST_MODIFIED: [2025-07-20 Sun 21:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-built-in-programming-utilities
 :END:
 - =glasses= separates CamelCase words visually into '=Camel_Case='
 #+begin_src emacs-lisp
@@ -1218,6 +1344,7 @@ Off the top of my head, I think
 
 
 (use-package flymake
+  :disabled
   :ensure nil
   :hook (prog-mode . flymake-mode)
 ;; no idea what this is from, I don't see the function in help so may be outdated
@@ -1241,6 +1368,7 @@ Off the top of my head, I think
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-ediff-for-viewing-diffs
 :END:
 
 I really need to learn how to use =ediff= properly
@@ -1261,6 +1389,7 @@ I really need to learn how to use =ediff= properly
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 18:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: built-in-package-configuration-that-were-in-a-separate-file-for-some-reason
 :END:
 
 #+begin_src emacs-lisp
@@ -1366,7 +1495,7 @@ I really need to learn how to use =ediff= properly
 
 *** =which-key= configuration
 :PROPERTIES:
-:CUSTOM_ID: which-key-config
+:CUSTOM_ID: which-key-configuration
 :LAST_MODIFIED: [2025-07-18 Fri 18:00]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -1387,7 +1516,7 @@ I really need to learn how to use =ediff= properly
 
 *** Base and built-in configuration footer
 :PROPERTIES:
-:CUSTOM_ID: base-built-in-footer
+:CUSTOM_ID: base-and-built-in-configuration-footer
 :LAST_MODIFIED: [2025-07-18 Fri 19:04]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -1445,6 +1574,7 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:58]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: utilities-for-interact-with-the-operating-system
 :END:
 #+begin_src emacs-lisp 
 (use-package reveal-in-folder
@@ -1462,6 +1592,7 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:41]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: scratch-buffer-utilities
 :END:
 
 #+begin_src emacs-lisp
@@ -1471,7 +1602,7 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 #+end_src
 **** Search utilities
 :PROPERTIES:
-:CUSTOM_ID: setup-searchel
+:CUSTOM_ID: search-utilities
 :LAST_MODIFIED: [2025-07-20 Sun 03:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -1490,6 +1621,7 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:03]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: removed-search-related-packages
 :END:
 
 #+begin_src emacs-lisp :tangle no :comments no
@@ -1506,6 +1638,7 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:55]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: terminal-configuration
 :END:
 
 #+begin_src emacs-lisp
@@ -1541,22 +1674,25 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
     "t" 'csv-transpose
     )
   )
-
-(use-package toml
-  :mode ("\\.[tT][oO][mM][lL]\\'" . toml-mode)
-  )
 #+end_src
 ***** Removed data viewers
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 03:15]
+:LAST_MODIFIED: [2025-07-21 Mon 00:19]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: removed-data-viewers
 :END:
+
+- The =toml= package is for parsing toml into lisp. Currently not feature complete, has problems with literal strings. The built-in packages =conf-mode= and =toml-ts-mode= have modes for toml files.
+  
 #+begin_src emacs-lisp :tangle no :comments no
 
 ;; a high-level Emacs Lisp front-end for SQLite
 ;; epkg depends on it, I forget if I was manually declaring it for another reason
 (use-package emacsql)
 
+(use-package toml
+  :mode ("\\.[tT][oO][mM][lL]\\'" . toml-mode)
+  )
 
 (use-package json-navigator
 	:disabled
@@ -1572,7 +1708,7 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 #+end_src
 *** Modify core editor functioning
 :PROPERTIES:
-:CUSTOM_ID: core-editor-functioning
+:CUSTOM_ID: modify-core-editor-functioning
 :LAST_MODIFIED: [2025-07-20 Sun 03:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -1586,6 +1722,7 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:48]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: smooth-scrolling
 :END:
 Who knew scrolling could be so hard?
 #+begin_src emacs-lisp 
@@ -1623,6 +1760,7 @@ Who knew scrolling could be so hard?
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:42]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configuring-how-undo-works
 :END:
 
 #+begin_src emacs-lisp
@@ -1638,6 +1776,7 @@ Who knew scrolling could be so hard?
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:40]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: windowing
 :END:
 Window numbering
 #+begin_src emacs-lisp
@@ -1716,7 +1855,7 @@ Window numbering
 
 *** Text snippet insertion and collections
 :PROPERTIES:
-:CUSTOM_ID: snippet-insertion
+:CUSTOM_ID: text-snippet-insertion-and-collections
 :LAST_MODIFIED: [2025-07-20 Sun 03:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -1759,6 +1898,7 @@ Window numbering
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:23]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: removed-snippet-packages-and-customization
 :END:
 
 I must've been doing something strange to run into the error with
@@ -1779,6 +1919,7 @@ I must've been doing something strange to run into the error with
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:46]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: footer-for-utilities-config
 :END:
 
 #+name: utility config footer
@@ -1796,6 +1937,7 @@ I must've been doing something strange to run into the error with
 :LAST_MODIFIED: [2025-07-20 Sun 03:37]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :header-args: :tangle no :comments no
+:CUSTOM_ID: removed-packages
 :END:
 
 These packages have the distinction of being useful but I don't use them enough, and if I ever want to use them, I need to add them back in an intentional manner.
@@ -1881,6 +2023,7 @@ These packages have the distinction of being useful but I don't use them enough,
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 23:16]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-org-header
 :END:
 #+begin_src emacs-lisp :comments no :noweb no
 ;;; configure-org.el --- Org-mode and its children -*- lexical-binding: t -*-
@@ -1892,6 +2035,7 @@ These packages have the distinction of being useful but I don't use them enough,
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-18 Fri 23:19]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-base-org-settings-and-major-mode-keybinds
 :END:
 
 #+begin_src emacs-lisp
@@ -2051,7 +2195,7 @@ These packages have the distinction of being useful but I don't use them enough,
 #+end_src
 *********** Configure org functionality add-ons
 :PROPERTIES:
-:CUSTOM_ID: setup-orgel
+:CUSTOM_ID: configure-org-functionality-add-ons
 :LAST_MODIFIED: [2025-07-18 Fri 23:23]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2133,12 +2277,14 @@ These packages have the distinction of being useful but I don't use them enough,
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:45]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-org-modes-progeny
 :END:
 Packages that build on org mode rather than add something to it.
 **** org-todoist
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 04:44]
+:LAST_MODIFIED: [2025-07-20 Sun 06:20]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: org-todoist
 :END:
 #+begin_src emacs-lisp
 (use-package org-todoist
@@ -2147,15 +2293,14 @@ Packages that build on org mode rather than add something to it.
                  :repo "lillenne/org-todoist"
                  :branch "main"
                  )
-  :init
-  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
-
+  :init  (setq org-todoist-api-token (my/get-authinfo-token "api.todoist.com"))
+  :config (setopt org-todoist-api-token (my/get-authinfo-token "api.todoist.com"))
   :general (tyrant-def "aT" 'org-todoist-dispatch)
   )
 #+end_src
 **** Configure Org-node :TODO:
 :PROPERTIES:
-:CUSTOM_ID: setup-org-nodeel
+:CUSTOM_ID: configure-org-node
 :LAST_MODIFIED: [2025-07-19 Sat 04:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2201,7 +2346,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 
 *** Configuring org capture templates :TODO:
 :PROPERTIES:
-:CUSTOM_ID: setup-org-captureel
+:CUSTOM_ID: configuring-org-capture-templates
 :LAST_MODIFIED: [2025-07-19 Sat 04:45]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2211,7 +2356,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 
 *** Add additional ways to export from org to other formats
 :PROPERTIES:
-:CUSTOM_ID: setup-org-exportersel
+:CUSTOM_ID: add-additional-ways-to-export-from-org-to-other-formats
 :LAST_MODIFIED: [2025-07-19 Sat 04:41]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2229,6 +2374,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 04:45]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: disabled-exporters
 :END:
 
 #+begin_src emacs-lisp :tangle no
@@ -2244,6 +2390,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 20:34]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-org-footer
 :END:
 
 #+begin_src emacs-lisp :comments no :noweb no
@@ -2274,7 +2421,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 #+end_src
 *** Lisp-based languages
 :PROPERTIES:
-:CUSTOM_ID: setup-lisp-programming
+:CUSTOM_ID: lisp-based-languages
 :LAST_MODIFIED: [2025-07-20 Sun 04:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2320,7 +2467,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 
 *** Python configuration
 :PROPERTIES:
-:CUSTOM_ID: setup-pythonel
+:CUSTOM_ID: python-configuration
 :LAST_MODIFIED: [2025-07-20 Sun 04:49]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2335,6 +2482,7 @@ Disabling this until I have time to sit down and give it an honest effort.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 04:33]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: disabled-python-packages
 :END:
 
 Need time to figure these out but possible options for making Python more
@@ -2367,7 +2515,7 @@ interactive/enhance the REPL loop.
 #+end_src
 *** R programming
 :PROPERTIES:
-:CUSTOM_ID: setup-rel
+:CUSTOM_ID: r-programming
 :LAST_MODIFIED: [2025-07-20 Sun 04:27]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2438,6 +2586,7 @@ a bunch of repeated configuration.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 04:28]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: disabled-r-packages
 :END:
 
 #+begin_src emacs-lisp :tangle no :eval no :comments no
@@ -2453,7 +2602,7 @@ a bunch of repeated configuration.
 #+end_src
 *** Rust programming
 :PROPERTIES:
-:CUSTOM_ID: setup-rustel
+:CUSTOM_ID: rust-programming
 :LAST_MODIFIED: [2025-07-20 Sun 04:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2488,7 +2637,7 @@ a bunch of repeated configuration.
 
 *** LaTeX / TeX configuration
 :PROPERTIES:
-:CUSTOM_ID: setup-texel
+:CUSTOM_ID: latex--tex-configuration
 :LAST_MODIFIED: [2025-07-20 Sun 04:30]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2646,6 +2795,7 @@ Disabled because it's in desperate need of spring cleaning / revision.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 04:40]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: programming-languages-footer
 :END:
 #+begin_src emacs-lisp :comments no :noweb no
 ;; Local Variables:
@@ -2677,6 +2827,7 @@ Packages that substantially change the user interface as configured in
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:58]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: preserve-appearance-of-collapsed-outline-headings-until-window-edge
 :END:
 
 #+begin_src emacs-lisp
@@ -2719,12 +2870,14 @@ Packages that substantially change the user interface as configured in
 :LAST_MODIFIED: [2025-07-19 Sat 21:40]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :header_args:emacs-lisp: :tange no :noweb no :comments no
+:CUSTOM_ID: disabled-themes
 :END:
 
 ***** Just not using at the moment
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 21:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: just-not-using-at-the-moment
 :END:
 Doric themes are nearly monochrome
 
@@ -2742,6 +2895,7 @@ Doric themes are nearly monochrome
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 21:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: disabled-for-a-reason
 :END:
 - Catpppuccin was weirdly slow to load
 - Kaolin is okay but I found the color choices to not be the most readable
@@ -2762,7 +2916,7 @@ Doric themes are nearly monochrome
 #+end_src
 *** Managing fonts
 :PROPERTIES:
-:CUSTOM_ID: setup-fontsel
+:CUSTOM_ID: managing-fonts
 :LAST_MODIFIED: [2025-07-19 Sat 19:49]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -2927,6 +3081,7 @@ Doric themes are nearly monochrome
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 19:38]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: view-fonts-within-emacs
 :END:
 
 Font waterfall and size viewer from within emacs.
@@ -2945,6 +3100,7 @@ Font waterfall and size viewer from within emacs.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 19:38]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: disabled-packages
 :END:
 
 #+begin_src emacs-lisp :tangle no
@@ -2955,6 +3111,7 @@ Font waterfall and size viewer from within emacs.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 19:06]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: theming-advice-and-hooks
 :END:
 
 #+begin_src emacs-lisp
@@ -2971,6 +3128,7 @@ Font waterfall and size viewer from within emacs.
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-19 Sat 20:36]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: theming-lisp-footer
 :END:
 
 #+begin_src emacs-lisp
@@ -3106,6 +3264,9 @@ of 2025-07-06
 ;;; setup-completion-backends.el ends here
 #+end_src
 **** Other completion backends
+:PROPERTIES:
+:CUSTOM_ID: other-completion-backends
+:END:
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-15 Tue 19:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50 (build 1, aarch64-apple-darwin24.5.0, NS appkit-2575.60 Version 15.5 (Build 24F74))
@@ -3612,8 +3773,10 @@ of 2025-07-06
 ** setup-emacs.el
 :PROPERTIES:
 :CUSTOM_ID: setup-emacsel
+:LAST_MODIFIED: [2025-07-20 Sun 06:25]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-emacs.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-emacs.el --- Emacs configuration -*- lexical-binding: t -*-
 
 (use-package emacs
@@ -3773,8 +3936,10 @@ of 2025-07-06
 ** setup-email.el
 :PROPERTIES:
 :CUSTOM_ID: setup-emailel
+:LAST_MODIFIED: [2025-07-20 Sun 06:25]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-email.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-email.el --- Email configuration -*- lexical-binding: t -*-
 
 (use-package mu4e
@@ -4104,39 +4269,21 @@ of 2025-07-06
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2025-07-20 Sun 04:00]
+:LAST_MODIFIED: [2025-07-20 Sun 20:46]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-llm.el
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
-;; (use-package llm
-;;   :config
-;;   (use-package llm-openai
-;;     :ensure nil)
-
-;;   (use-package llm-claude
-;;     :ensure nil)
-;;   )
-
-;; (use-package ellama
-;;   :disabled
-;;   :after llm
-;;   :config
-;;   (setopt ellama-provider (make-llm-openai-compatible
-;; 			   :url "http://127.0.0.1:1234"))
-;;   )
-
-
 (use-package gptel
   :functions gptel--insert-file-string
-  :config
-  (setopt gptel-model   'llama-cpp
-          gptel-backend (gptel-make-openai "llama-cpp"
-                          :stream t
-                          :protocol "http"
-                          :host "localhost:1234"
-                          :models '(llama-cpp)))
+  :config (setopt gptel-model   'llama-cpp
+                  gptel-backend (gptel-make-openai "llama-cpp"
+                                  :stream t
+                                  :protocol "http"
+                                  :host "localhost:1234"
+                                  :models '(llama-cpp))
+                  )
 
   (gptel-make-openai "OpenRouter"               
     :host "openrouter.ai"
@@ -4144,16 +4291,16 @@ of 2025-07-06
     :stream t
     :key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
     :models '(google/gemini-2.5-flash
-	      google/gemini-2.5-pro
+	            google/gemini-2.5-pro
               openrouter/auto
-	      anthropic/claude-sonnet-4
+	            anthropic/claude-sonnet-4
               deepseek/deepseek-r1-0528:free
               deepseek/deepseek-prover-v2:free
-	      open-r1/olympiccoder-32b:free
-	      mistralai/devstral-small:free
+	            open-r1/olympiccoder-32b:free
+	            mistralai/devstral-small:free
               google/gemma-3-27b-it:free
-	      deepseek/deepseek-r1-zero:free
-	      qwen/qwq-32b:free)
+	            deepseek/deepseek-r1-zero:free
+	            qwen/qwq-32b:free)
     )
 
   (gptel-make-anthropic "Claude"          
@@ -4165,7 +4312,9 @@ of 2025-07-06
     :stream t
     :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
     )
-
+  
+  :general (tyrant-def "ag" 'gptel-menu)
+  
   )
 
 (use-package aidermacs
@@ -4180,6 +4329,40 @@ of 2025-07-06
   (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
   :custom
   (aidermacs-default-model "gemini/gemini-pro-2.5")
+  )
+
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-llm.el ends here
+#+end_src
+*** LLM unused config
+:PROPERTIES:
+:LAST_MODIFIED: [2025-07-20 Sun 20:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: llm-unused-config
+:END:
+
+No need to depend on =llm= explicitly. Ellama is complementary to gptel I just haven't used it for a while.
+
+#+begin_src emacs-lisp :tangle no :eval no :comments no
+(use-package llm
+  :config
+  (use-package llm-openai
+    :ensure nil)
+
+  (use-package llm-claude
+    :ensure nil)
+  )
+
+(use-package ellama
+  :disabled
+  :after llm
+  :config
+  (setopt ellama-provider (make-llm-openai-compatible
+			   :url "http://127.0.0.1:1234"))
   )
 
 (use-package forge-llm
@@ -4203,25 +4386,19 @@ of 2025-07-06
     "gt" 'forge-llm-insert-template-at-point
     )
   )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-llm.el ends here
 #+end_src
 
 ** setup-lsp-bridge.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lsp-bridgeel
-:LAST_MODIFIED: [2025-07-18 Fri 20:32]
+:LAST_MODIFIED: [2025-07-20 Sun 21:33]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-lsp-bridge.el
 ;;; config/setup-lsp-bridge.el --- lsp-bridge configuration -*- lexical-binding: t -*-
 
-(require 'my-lsp-bridge-helpers)
+;; testing out the built-in uv support
+;; don't require my helpers for setting up the uv python venv
 
 (use-package lsp-bridge
   :after yasnippet
@@ -4230,21 +4407,20 @@ of 2025-07-06
            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
            :build (:not elpaca--byte-compile)
            )
-  :init
-  (setq lsp-bridge-python-command lsp-bridge-python-path)
+  :config  (setopt toml-indent-offset 2)
 
-  :hook (elpaca-after-init . global-lsp-bridge-mode)
-  :config
-  (setopt toml-indent-offset 2
-          lsp-bridge-enable-completion-in-minibuffer t)
-  :custom (global-lsp-bridge-mode t)
+;;  (global-lsp-bridge-mode)
 
-  (use-package acm
-    :hook lsp-bridge-mode
-    :ensure nil
-    :config (setopt acm-mode t)
+   :general
+  (tyrant-def "l" (cons "lsp" (make-sparse-keymap))
+    "lf" 'lsp-bridge-find-def
+    "lF" 'lsp-bridge-find-def-other-window
+    "lh" 'lsp-bridge-show-documentation
+    "lp" 'lsp-bridge-popup-documentation
     )
   )
+
+(add-hook 'elpaca-after-init-hook #'global-lsp-bridge-mode)
 
 ;; Local Variables:
 ;; no-byte-compile: t
@@ -4253,6 +4429,54 @@ of 2025-07-06
 ;; End:
 ;;; setup-lsp-bridge.el ends here
 #+end_src
+
+*** Lsp Bridge Command reference
+:PROPERTIES:
+:CUSTOM_ID: lsp-bridge-command-reference
+:LAST_MODIFIED: [2025-07-20 Sun 21:01]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+
+- lsp-bridge-find-def: jump to the definition
+- lsp-bridge-find-def-other-window: jump to the definition in other-window
+- lsp-bridge-find-def-return: return to the location before calling lsp-bridge-find-def
+- lsp-bridge-find-type-def: Jump to the position of type definition.
+  lsp-bridge-find-type-def-other-window: Jump to the position of type definition in another window.
+- lsp-bridge-find-impl: jump to the implementation
+- lsp-bridge-find-impl-other-window: jump to the implementation in other-window
+- lsp-bridge-find-references: traverse across code references (forked from color-rg.el)
+- lsp-bridge-popup-documentation: lookup documentation of symbol under the cursor
+- lsp-bridge-popup-documentation-scroll-up: scroll up popup document.
+- lsp-bridge-popup-documentation-scroll-down: scroll down popup document.
+- lsp-bridge-show-documentation: lookup documentation of symbol under the cursor, but using a buffer instead
+- lsp-bridge-rename: rename symbol under the cursor
+- lsp-bridge-diagnostic-jump-next: Jump to the next diagnostic position
+- lsp-bridge-diagnostic-jump-prev: Jump to the previous diagnostic position
+- lsp-bridge-diagnostic-list: List all diagnostic information
+- lsp-bridge-diagnostic-copy: Copy the current diagnostic information to the clipboard
+- lsp-bridge-code-action: Popup code action menu, you can pass special actin-kind to fix, action-kind can use one of "quickfix", "refactor", "refactor.extract", "refactor.inline", "refactor.rewrite", "source", "source.organizeImports", "source.fixAll"
+- lsp-bridge-workspace-list-symbol-at-point: Finds the definition of a symbol at the cursor point
+- lsp-bridge-workspace-list-symbols: List all symbols in workspace and jump to the symbol definition
+- lsp-bridge-signature-help-fetch: show signature help in minibuffer manually (move cursor to parameters area will show signature help automatically)
+- lsp-bridge-popup-complete-menu: Manually popup the completion menu, you only need this command when turn on option lsp-bridge-complete-manually
+- lsp-bridge-restart-process: restart lsp-bridge process (only used for development)
+- lsp-bridge-toggle-sdcv-helper: Switch dictionary completion assistant
+- lsp-bridge-peek-abort: Close peek window (default binding to C-g)
+- lsp-bridge-peek-list-next-line: Select the next definition or reference (default binding to M-S-n)
+- lsp-bridge-peek-list-prev-line: Select the previous definition or reference (default binding to M-S-p)
+- lsp-bridge-peek-file-content-next-line: Scroll down one line in the peek window file content (default binding to M-n)
+- lsp-bridge-peek-file-content-prev-line: Scroll up one line in the peek window file content (default binding to M-p)
+- lsp-bridge-peek-jump: Jump to the location of the definition or reference (default binding to M-l j)
+- lsp-bridge-peek-jump-back: Jump back to the original position (default bound to M-l b)
+- lsp-bridge-peek-through: View one symbol in the peek window
+- lsp-bridge-peek-tree-previous-branch: Select the previous branch at the same level in the browsing history (default binding to <up>)
+- lsp-bridge-peek-tree-next-branch: Select the next branch at the same level in the browsing history (default binding to <down>)
+- lsp-bridge-peek-tree-previous-node: Select the previous higher-level node in the browsing history (default binding to <left>)
+- lsp-bridge-peek-tree-next-node: Select the next lower-level node in the browsing history (default binding to <right>)
+- lsp-bridge-indent-left: Indents the pasted text to the left according to the indent values defined in lsp-bridge-formatting-indent-alist
+- lsp-bridge-indent-right: Indents the pasted text to the right according to the indent values defined in lsp-bridge-formatting-indent-alist
+- lsp-bridge-semantic-tokens-mode: Enables or disables semantic token highlighting, please ref to Semantic Tokens Wiki
 
 ** setup-lsp.el
 :PROPERTIES:
@@ -4803,6 +5027,7 @@ of 2025-07-06
 :LAST_MODIFIED: [2025-07-18 Fri 18:34]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :header_args: :eval no :tangle no :noweb no
+:CUSTOM_ID: removed-reading-packages
 :END:
 
 #+begin_src emacs-lisp :eval no :tangle no :noweb no
@@ -4902,7 +5127,7 @@ of 2025-07-06
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-07-18 Fri 23:06]
+:LAST_MODIFIED: [2025-07-20 Sun 20:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -4950,10 +5175,10 @@ of 2025-07-06
 (use-package shackle
   :config
   (setopt shackle-mode t
-          shackle-default-size 0.2
+          shackle-default-size 0.25
           shackle-rules
-          `((help-mode :select t :align right :size 0.33)
-            (helpful-mode :select t :align right :size 0.33)
+          `((help-mode :select t :align right :size 0.4)
+            (helpful-mode :select t :align right :size 0.4)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
             (special-mode                    :align t)
@@ -4962,7 +5187,7 @@ of 2025-07-06
             (flymake-diagnostics-buffer-mode :align t)
             ("*Shell Command Output*"        :align t :size 2)
             ("*Async Shell Command*"         :align t :size 2)
-            ("*elpaca-info*" :align t)
+            ("*elpaca-info*"                 :align t)
             ))
   )
 
@@ -5067,6 +5292,22 @@ of 2025-07-06
   (popper-echo-mode 1)
   )
 
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-ui.el ends here
+#+end_src
+
+*** Removed elements
+:PROPERTIES:
+:CUSTOM_ID: removed-elements
+:LAST_MODIFIED: [2025-07-20 Sun 21:55]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no :comments no :eval no
 (use-package sideline
   :hook (flymake-mode . sideline-mode)
   )
@@ -5078,15 +5319,7 @@ of 2025-07-06
               (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t))
               )
     )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-ui.el ends here
 #+end_src
-
 ** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
@@ -5842,7 +6075,7 @@ a dedicated window."
 ** my-core-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-helpersel
-:LAST_MODIFIED: [2025-07-18 Fri 21:39]
+:LAST_MODIFIED: [2025-07-20 Sun 06:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-core-helpers.el
@@ -5932,6 +6165,15 @@ the unwritable tidbits."
   ;; unserializable registers in the current session!
   (setq-local register-alist
               (cl-remove-if-not #'savehist-printable register-alist)))
+
+(defun my/get-authinfo-token (host)
+  "Securely retrieve an API token for HOST from `auth-source`."
+  (let* ((entry (car (auth-source-search :host host)))
+         (secret (and entry (plist-get entry :secret))))
+    (when secret
+      (if (functionp secret)
+          (funcall secret)
+        secret))))
 
 (provide 'my-core-helpers)
 ;;; my-core-helpers.el ends here

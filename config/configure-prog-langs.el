@@ -4,7 +4,7 @@
 ;; So LSP config doesn't live here
 ;;; Code:
 
-;; [[file:../its-lit.org::#setup-lisp-programming][Lisp-based languages:1]]
+;; [[file:../its-lit.org::#lisp-based-languages][Lisp-based languages:1]]
 ;;;; ========================= Lisp languages ==========================
 (use-package slime
 	:hook (elisp-mode . slime-mode)
@@ -44,14 +44,14 @@
 	)
 ;; Lisp-based languages:1 ends here
 
-;; [[file:../its-lit.org::#setup-pythonel][Python configuration:1]]
+;; [[file:../its-lit.org::#python-configuration][Python configuration:1]]
 ;;;; ============================== Python ==============================
 (use-package uv-mode
 	:hook (python-mode . uv-mode)
   )
 ;; Python configuration:1 ends here
 
-;; [[file:../its-lit.org::#setup-rel][R programming:1]]
+;; [[file:../its-lit.org::#r-programming][R programming:1]]
 (use-package ess
   :mode ("\\.[rR]\\'" . R-mode)
   :init
@@ -111,7 +111,7 @@
   )
 ;; R programming:1 ends here
 
-;; [[file:../its-lit.org::#setup-rustel][Rust programming:1]]
+;; [[file:../its-lit.org::#rust-programming][Rust programming:1]]
 (use-package rust-mode
 	:mode ("\\.rs\\'" . rust-mode)
   :general

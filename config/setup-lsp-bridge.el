@@ -1,6 +1,7 @@
 ;;; config/setup-lsp-bridge.el --- lsp-bridge configuration -*- lexical-binding: t -*-
 
-(require 'my-lsp-bridge-helpers)
+;; testing out the built-in uv support
+;; don't require my helpers for setting up the uv python venv
 
 (use-package lsp-bridge
   :after yasnippet
@@ -9,21 +10,20 @@
            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
            :build (:not elpaca--byte-compile)
            )
-  :init
-  (setq lsp-bridge-python-command lsp-bridge-python-path)
+  :config  (setopt toml-indent-offset 2)
 
-  :hook (elpaca-after-init . global-lsp-bridge-mode)
-  :config
-  (setopt toml-indent-offset 2
-          lsp-bridge-enable-completion-in-minibuffer t)
-  :custom (global-lsp-bridge-mode t)
+;;  (global-lsp-bridge-mode)
 
-  (use-package acm
-    :hook lsp-bridge-mode
-    :ensure nil
-    :config (setopt acm-mode t)
+   :general
+  (tyrant-def "l" (cons "lsp" (make-sparse-keymap))
+    "lf" 'lsp-bridge-find-def
+    "lF" 'lsp-bridge-find-def-other-window
+    "lh" 'lsp-bridge-show-documentation
+    "lp" 'lsp-bridge-popup-documentation
     )
   )
+
+(add-hook 'elpaca-after-init-hook #'global-lsp-bridge-mode)
 
 ;; Local Variables:
 ;; no-byte-compile: t

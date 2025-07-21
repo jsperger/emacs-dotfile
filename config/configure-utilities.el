@@ -11,7 +11,7 @@
   )
 ;; comment tools ends here
 
-;; [[file:../its-lit.org::*Utilities for interact with the operating system][Utilities for interact with the operating system:1]]
+;; [[file:../its-lit.org::#utilities-for-interact-with-the-operating-system][Utilities for interact with the operating system:1]]
 (use-package reveal-in-folder
   :general (tyrant-def "bf" 'reveal-in-folder))
 
@@ -24,13 +24,13 @@
   )
 ;; Utilities for interact with the operating system:1 ends here
 
-;; [[file:../its-lit.org::*Scratch buffer utilities][Scratch buffer utilities:1]]
+;; [[file:../its-lit.org::#scratch-buffer-utilities][Scratch buffer utilities:1]]
 ;; Conveniently create scratches in the same mode as the current file
 (use-package scratch
   :general (tyrant-def "bS" 'scratch))
 ;; Scratch buffer utilities:1 ends here
 
-;; [[file:../its-lit.org::#setup-searchel][Search utilities:1]]
+;; [[file:../its-lit.org::#search-utilities][Search utilities:1]]
 (use-package rg
   :config (when (and IS-MAC (daemonp)) (setopt rg-executable "/opt/homebrew/bin/rg"))
   :general (tyrant-def   "fr" 'rg
@@ -39,7 +39,7 @@
 	)
 ;; Search utilities:1 ends here
 
-;; [[file:../its-lit.org::*Terminal configuration][Terminal configuration:1]]
+;; [[file:../its-lit.org::#terminal-configuration][Terminal configuration:1]]
 (use-package vterm
   :general (tyrant-def "av" 'vterm
                        "aV" 'vterm-other-window
@@ -67,15 +67,11 @@
     "t" 'csv-transpose
     )
   )
-
-(use-package toml
-  :mode ("\\.[tT][oO][mM][lL]\\'" . toml-mode)
-  )
 ;; Data format modes:1 ends here
 
 ;;;; ================= Modify core editor functionality ================
 
-;; [[file:../its-lit.org::*Smooth scrolling][Smooth scrolling:1]]
+;; [[file:../its-lit.org::#smooth-scrolling][Smooth scrolling:1]]
 (use-package ultra-scroll
   :ensure (ultra-scroll :type git :host github :repo "jdtsmith/ultra-scroll")
   :init  (setq scroll-conservatively 50
@@ -100,7 +96,7 @@
    [remap describe-variable] 'helpful-variable))
 ;; Setup help and documentation viewers:1 ends here
 
-;; [[file:../its-lit.org::*Configuring how undo works][Configuring how undo works:1]]
+;; [[file:../its-lit.org::#configuring-how-undo-works][Configuring how undo works:1]]
 (use-package undo-fu
   :config (setopt evil-undo-system 'undo-fu)
   )
@@ -110,7 +106,7 @@
   )
 ;; Configuring how undo works:1 ends here
 
-;; [[file:../its-lit.org::*Windowing][Windowing:1]]
+;; [[file:../its-lit.org::#windowing][Windowing:1]]
 (use-package winum
   :hook (elpaca-after-init . winum-mode)
   :init
@@ -179,7 +175,7 @@
   )
 ;; Outline and fold text:1 ends here
 
-;; [[file:../its-lit.org::#snippet-insertion][Text snippet insertion and collections:1]]
+;; [[file:../its-lit.org::#text-snippet-insertion-and-collections][Text snippet insertion and collections:1]]
 ;;;; ========================== Text snippets ==========================
 (use-package tempel
   :hook ((text-mode prog-mode) . tempel-setup-capf)

@@ -37,7 +37,7 @@
   )
 ;; emacs package declaration for config options ends here
 
-;; [[file:../its-lit.org::*Configuring built-in packages][Configuring built-in packages:1]]
+;; [[file:../its-lit.org::#configuring-built-in-packages][Configuring built-in packages:1]]
 (use-package autorevert
   :ensure nil
   :hook (elpaca-after-init . global-auto-revert-mode)
@@ -61,7 +61,7 @@
   )
 ;; Configuring built-in packages:1 ends here
 
-;; [[file:../its-lit.org::*Configure built-in programming utilities][Configure built-in programming utilities:1]]
+;; [[file:../its-lit.org::#configure-built-in-programming-utilities][Configure built-in programming utilities:1]]
 (use-package display-line-numbers
   :ensure nil
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
@@ -77,6 +77,7 @@
 
 
 (use-package flymake
+  :disabled
   :ensure nil
   :hook (prog-mode . flymake-mode)
 ;; no idea what this is from, I don't see the function in help so may be outdated
@@ -96,7 +97,7 @@
   )
 ;; Configure built-in programming utilities:1 ends here
 
-;; [[file:../its-lit.org::*Configure ediff for viewing diffs][Configure ediff for viewing diffs:1]]
+;; [[file:../its-lit.org::#configure-ediff-for-viewing-diffs][Configure ediff for viewing diffs:1]]
 (use-package ediff
   :ensure nil
   :defer t
@@ -108,7 +109,7 @@
   )
 ;; Configure ediff for viewing diffs:1 ends here
 
-;; [[file:../its-lit.org::*Built-in package configuration that were in a separate file for some reason][Built-in package configuration that were in a separate file for some reason:1]]
+;; [[file:../its-lit.org::#built-in-package-configuration-that-were-in-a-separate-file-for-some-reason][Built-in package configuration that were in a separate file for some reason:1]]
 (use-package doc-view
   :ensure nil
   :defer t
@@ -209,7 +210,7 @@
   )
 ;; Built-in package configuration that were in a separate file for some reason:1 ends here
 
-;; [[file:../its-lit.org::#which-key-config][=which-key= configuration:1]]
+;; [[file:../its-lit.org::#which-key-configuration][=which-key= configuration:1]]
 (use-package which-key
   :ensure nil
   :hook (elpaca-after-init)

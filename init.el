@@ -166,7 +166,7 @@
              ;;              ;; "setup-notes.el"
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
-             ;;              "setup-reading.el"
+             "setup-reading.el"
              ;; "setup-treesit.el"
              "setup-ui.el"
              "setup-vc.el"
@@ -179,7 +179,7 @@
   )
 ;; load configuration files ends here
 
-;; [[file:its-lit.org::*Load custom file and run after-init hooks][Load custom file and run after-init hooks:1]]
+;; [[file:its-lit.org::#load-custom-file-and-run-after-init-hooks][Load custom file and run after-init hooks:1]]
 ;;;; =============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))

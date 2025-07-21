@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;; [[file:../its-lit.org::*Configure base org settings and major mode keybinds][Configure base org settings and major mode keybinds:1]]
+;; [[file:../its-lit.org::#configure-base-org-settings-and-major-mode-keybinds][Configure base org settings and major mode keybinds:1]]
 (use-package org
   :commands (org-toggle-hidden-emphasis-markers)
   :init
@@ -158,7 +158,7 @@
   )
 ;; Configure base org settings and major mode keybinds:1 ends here
 
-;; [[file:../its-lit.org::#setup-orgel][Configure org functionality add-ons:1]]
+;; [[file:../its-lit.org::#configure-org-functionality-add-ons][Configure org functionality add-ons:1]]
 (use-package org-make-toc
   :after org
   :hook org-mode
@@ -198,21 +198,20 @@
   )
 ;; Configure org functionality add-ons:1 ends here
 
-;; [[file:../its-lit.org::*org-todoist][org-todoist:1]]
+;; [[file:../its-lit.org::#org-todoist][org-todoist:1]]
 (use-package org-todoist
   :after gptel ; why would this depend on gptel? oh my api key olol
   :ensure (:host github
                  :repo "lillenne/org-todoist"
                  :branch "main"
                  )
-  :init
-  (setq org-todoist-api-token (gptel-api-key-from-auth-source "api.todoist.com" "apikey"))
-
+  :init  (setq org-todoist-api-token (my/get-authinfo-token "api.todoist.com"))
+  :config (setopt org-todoist-api-token (my/get-authinfo-token "api.todoist.com"))
   :general (tyrant-def "aT" 'org-todoist-dispatch)
   )
 ;; org-todoist:1 ends here
 
-;; [[file:../its-lit.org::#setup-org-exportersel][Add additional ways to export from org to other formats:1]]
+;; [[file:../its-lit.org::#add-additional-ways-to-export-from-org-to-other-formats][Add additional ways to export from org to other formats:1]]
 (use-package ox-pandoc
 	:after org
 	:hook (org-mode . org-pandoc-startup-check))

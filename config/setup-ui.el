@@ -42,10 +42,10 @@
 (use-package shackle
   :config
   (setopt shackle-mode t
-          shackle-default-size 0.2
+          shackle-default-size 0.25
           shackle-rules
-          `((help-mode :select t :align right :size 0.33)
-            (helpful-mode :select t :align right :size 0.33)
+          `((help-mode :select t :align right :size 0.4)
+            (helpful-mode :select t :align right :size 0.4)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
             (special-mode                    :align t)
@@ -54,7 +54,7 @@
             (flymake-diagnostics-buffer-mode :align t)
             ("*Shell Command Output*"        :align t :size 2)
             ("*Async Shell Command*"         :align t :size 2)
-            ("*elpaca-info*" :align t)
+            ("*elpaca-info*"                 :align t)
             ))
   )
 
@@ -158,18 +158,6 @@
   (popper-mode 1)
   (popper-echo-mode 1)
   )
-
-(use-package sideline
-  :hook (flymake-mode . sideline-mode)
-  )
-
-(use-package sideline-flymake
-    :init
-    (setq sideline-backends-right '(sideline-flymake))
-    (add-hook 'flymake-mode-hook
-              (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t))
-              )
-    )
 
 ;; Local Variables:
 ;; no-byte-compile: t

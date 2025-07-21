@@ -85,5 +85,14 @@ the unwritable tidbits."
   (setq-local register-alist
               (cl-remove-if-not #'savehist-printable register-alist)))
 
+(defun my/get-authinfo-token (host)
+  "Securely retrieve an API token for HOST from `auth-source`."
+  (let* ((entry (car (auth-source-search :host host)))
+         (secret (and entry (plist-get entry :secret))))
+    (when secret
+      (if (functionp secret)
+          (funcall secret)
+        secret))))
+
 (provide 'my-core-helpers)
 ;;; my-core-helpers.el ends here

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-;; [[file:../its-lit.org::*Preserve appearance of collapsed outline headings until window edge][Preserve appearance of collapsed outline headings until window edge:1]]
+;; [[file:../its-lit.org::#preserve-appearance-of-collapsed-outline-headings-until-window-edge][Preserve appearance of collapsed outline headings until window edge:1]]
 (use-package backline
   :after outline
   :config (advice-add 'outline-flag-region :after 'backline-update))
@@ -31,7 +31,7 @@
 (use-package modus-themes)
 ;; Color theme packages:1 ends here
 
-;; [[file:../its-lit.org::#setup-fontsel][Managing fonts:1]]
+;; [[file:../its-lit.org::#managing-fonts][Managing fonts:1]]
 ;;;; Font configuration
 (use-package fontaine
   :hook (elpaca-after-init . fontaine-mode)
@@ -188,7 +188,7 @@
   )
 ;; Managing fonts:1 ends here
 
-;; [[file:../its-lit.org::*View fonts within emacs][View fonts within emacs:1]]
+;; [[file:../its-lit.org::#view-fonts-within-emacs][View fonts within emacs:1]]
 (use-package show-font
   :general  (tyrant-def  "hs" 'show-font-select-preview
                          "hT" 'show-font-tabulated
@@ -199,7 +199,7 @@
   )
 ;; View fonts within emacs:1 ends here
 
-;; [[file:../its-lit.org::*Theming advice and hooks][Theming advice and hooks:1]]
+;; [[file:../its-lit.org::#theming-advice-and-hooks][Theming advice and hooks:1]]
 (advice-add 'load-theme :after #'load-theme@run-hooks)
 (advice-add 'load-theme :before #'load-theme@theme-dont-propagate)
 
@@ -209,7 +209,7 @@
 (add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
 ;; Theming advice and hooks:1 ends here
 
-;; [[file:../its-lit.org::*Theming lisp footer][Theming lisp footer:1]]
+;; [[file:../its-lit.org::#theming-lisp-footer][Theming lisp footer:1]]
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
