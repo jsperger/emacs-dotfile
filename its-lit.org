@@ -44,6 +44,12 @@ count of {{{word-count}}}.*
       - [[#tangling-with-variables][Tangling with variables]]
       - [[#eric-schultes-org-scraps][Eric Schulte's org scraps]]
 - [[#emacs-user-directory-files-init-and-early-init][Emacs user directory files (init and early-init)]]
+  - [[#early-init][Early init]]
+    - [[#optimizations-for-early-init][Optimizations for early-init]]
+    - [[#disable-package-initialization-for-elpaca][Disable package initialization for elpaca]]
+    - [[#configure-gui-elements][Configure GUI elements]]
+    - [[#disable-byte-compilation-warnings][Disable byte compilation warnings]]
+    - [[#early-init-footer][early-init footer]]
   - [[#initel][init.el]]
     - [[#bootstrap-elpaca-package-manager][Bootstrap Elpaca package manager]]
     - [[#define-constants-to-use-as-conditional-configuration-flags][Define constants to use as conditional configuration flags]]
@@ -445,6 +451,120 @@ Has a direct example of trying to keep a lexical binding directive at the top of
 :LAST_MODIFIED: [2025-07-19 Sat 19:02]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
+** Early init
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle early-init.el :comments noweb
+:CUSTOM_ID: early-init
+:LAST_MODIFIED: [2025-07-21 Mon 02:43]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Emacs loads the early init file before the package system and the GUI, so
+modifications to them should be made here and other customizations left to init.
+See [[info:emacs#Early Init File][info: Early Init File]]
+
+#+name: early-init header
+#+begin_src emacs-lisp :comments no
+;;; early-init.el --- before package.el, GUI -*- lexical-binding: t; -*-
+;;; Commentary:
+;;; Code:
+
+#+end_src
+
+*** Optimizations for early-init
+:PROPERTIES:
+:CUSTOM_ID: optimizations-for-early-init
+:LAST_MODIFIED: [2025-07-21 Mon 03:10]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Defer garbage collection until later in the startup process. On 2025-07-21 I conducted a very simple experiment of clocking my init three times with and without this trick enabled, and the time savings are shown in the table below:
+#+name: Average startup time saved by this trick
+| Run | GC Time (ms) | Percentage of total startup time |
+|-----+--------------+----------------------------------|
+|   1 |          247 |                              25% |
+|   2 |          245 |                              24% |
+|   3 |          245 |                              24% |
+|     |              |                                  |
+
+#+begin_src emacs-lisp
+;; Defer garbage collection further back in the startup process
+(setq gc-cons-threshold most-positive-fixnum gc-cons-percentage 0.6)
+(add-hook 'emacs-startup-hook
+          (defun reset-gc-cons-threshold ()
+            (setq gc-cons-threshold 100000000 gc-cons-percentage 0.1))
+          )
+#+end_src
+
+Honestly this makes me wonder if I should increase the gc threshold in general. My emacs config is very unoptimized and has more than  hundred packages but its memory footprint is still quite small compared to my available memory.
+
+*** Disable package initialization for elpaca
+:PROPERTIES:
+:CUSTOM_ID: disable-package-initialization-for-elpaca
+:LAST_MODIFIED: [2025-07-21 Mon 03:12]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+;; Inhibit package initialize
+(setq package-enable-at-startup nil)
+#+end_src
+
+*** Configure GUI elements
+:PROPERTIES:
+:CUSTOM_ID: configure-gui-elements
+:LAST_MODIFIED: [2025-07-21 Mon 03:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Frame parameters need to be set in early init. It's been a while since I set
+these but if memory serves some of these frame options are to make Emacs play
+nicely with a tiling window manager. The =ns= stuff is for Mac OS and refers to
+NeXTSTEP which was the basis for the Mac OS GUI like 30 years ago.
+
+#+begin_src emacs-lisp
+;; Inhibit resizing frame
+(setq frame-inhibit-implied-resize t)
+
+;; Remove some unneeded UI elements
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
+(push '(internal-border-width . 0) default-frame-alist)
+(when (featurep 'ns)
+  (push '(ns-transparent-titlebar . t) default-frame-alist)
+  (setq frame-resize-pixelwise t
+        window-resize-pixelwise t
+        ns-pop-up-frames nil)
+  )
+#+end_src
+
+*** Disable byte compilation warnings
+:PROPERTIES:
+:CUSTOM_ID: disable-byte-compilation-warnings
+:LAST_MODIFIED: [2025-07-21 Mon 03:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+;; Inhibit byte-compiler warnings
+(setq byte-compile-warnings nil)
+#+end_src
+*** early-init footer
+:PROPERTIES:
+:CUSTOM_ID: early-init-footer
+:END:
+#+name: early-init footer
+#+begin_src emacs-lisp :comments no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; early-init.el ends here
+#+end_src
+
+
 ** init.el
 :PROPERTIES:
 :CUSTOM_ID: initel
