@@ -4,8 +4,13 @@
 (when my-debug-mode
   (message "Checkpoint: %s" "latex el" (file-name-base)))
 
-(lambda () (unless (server-running-p)
-             (server-start)))
+
+;; If server package hasn't been loaded then server-running-p won't be defined
+;; Problem: if a server is running and can't connect this will error
+;; Is that really a problem that should be guarded against or should fixing it when it comes up be encouraged?
+;;(unless (and (fboundp 'server-running-p)
+;;             (server-running-p))
+;;  (server-start))
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: before custom set variables"))
 
@@ -18,6 +23,7 @@
  '(TeX-indent-open-delimiters "[")
  '(acm-backend-lsp-show-progress t)
  '(auth-source-debug t)
+ '(custom-enabled-themes '(modus-operandi-tinted))
  '(custom-safe-themes t)
  '(eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly)
  '(ess-ido-flex-matching nil)
@@ -68,7 +74,7 @@
 ;; (load-theme 'doom-nord)
 ;; (load-theme 'doom-monokai-pro)
 ;; (load-theme 'doom-gruvbox)
-
+;; (load-theme 'modus-operandi-tinted)
 
 (when my-debug-mode (message "Checkpoint: %s" "hooks: after load theme"))
 (custom-set-faces

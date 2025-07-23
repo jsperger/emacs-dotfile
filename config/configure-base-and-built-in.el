@@ -5,8 +5,6 @@
 ;; [[file:../its-lit.org::emacs package declaration for config options][emacs package declaration for config options]]
 (use-package emacs
   :ensure nil
-  :init
-  (setq trash-directory "~/.Trash")
   :config
   (setopt enable-recursive-minibuffers t
           user-full-name "John Sperger"
@@ -21,7 +19,6 @@
           sentence-end-double-space nil ;single space between sentences
           use-short-answers t ; use y/n instead of yes/no
           compilation-scroll-output 'first-error ;scroll to 1st error/end compile
-          delete-by-moving-to-trash t ; use system trash for file deletion
           load-prefer-newer t ;don't load outdated compiled files
           kill-do-not-save-duplicates t ; no dupes in kill-ring
           )
@@ -70,10 +67,9 @@
           display-line-numbers-width-start 100)
   )
 
-;; (use-package elec-pair
-;;   :ensure nil
-;; 	:defer t
-;; 	:custom (electric-pair-mode 1))
+(use-package elec-pair
+  :ensure nil
+  )
 
 
 (use-package flymake

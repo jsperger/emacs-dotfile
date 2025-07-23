@@ -11,7 +11,7 @@
   )
 ;; comment tools ends here
 
-;; [[file:../its-lit.org::#utilities-for-interact-with-the-operating-system][Utilities for interact with the operating system:1]]
+;; [[file:../its-lit.org::open here utilities][open here utilities]]
 (use-package reveal-in-folder
   :general (tyrant-def "bf" 'reveal-in-folder))
 
@@ -22,7 +22,13 @@
     "p '" '("terminal project root" . terminal-here-project-launch)
     )
   )
-;; Utilities for interact with the operating system:1 ends here
+;; open here utilities ends here
+
+;; [[file:../its-lit.org::dwim shell commands][dwim shell commands]]
+(use-package dwim-shell-command
+  :general (tyrant-def "fm" 'dwim-shell-commands-rename-all)
+  )
+;; dwim shell commands ends here
 
 ;; [[file:../its-lit.org::#scratch-buffer-utilities][Scratch buffer utilities:1]]
 ;; Conveniently create scratches in the same mode as the current file

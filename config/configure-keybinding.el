@@ -188,6 +188,7 @@
   ;;		"tc"      'nocomments-mode defined-in-package
   "tM"      'consult-minor-mode-menu
   "td"      'toggle-debug-on-error
+  "te"      'electric-pair-local-mode
   "tf"      'display-fill-column-indicator-mode
   ;;    "tg"      'golden-ratio-mode
   "tg"      'zoom-mode

@@ -80,6 +80,7 @@
     "ii"    'org-id-get-create
     "iI"    'org-insert-item
     "il"    'org-insert-link
+    "iL"    'org-insert-last-stored-link
     "in"    'org-add-note
     "ip"    'org-set-property
     "is"    'org-insert-subheading

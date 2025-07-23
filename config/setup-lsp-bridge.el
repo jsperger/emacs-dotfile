@@ -10,7 +10,11 @@
            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
            :build (:not elpaca--byte-compile)
            )
-  :config  (setopt toml-indent-offset 2)
+  :config  (setopt toml-indent-offset 2
+                   lsp-bridge-enable-hover-diagnostic t
+                   lsp-bridge-enable-org-babel t
+                   acm-enable-preview t
+                   )
 
 ;;  (global-lsp-bridge-mode)
 

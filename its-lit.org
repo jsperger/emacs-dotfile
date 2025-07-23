@@ -99,7 +99,8 @@ count of {{{word-count}}}.*
   - [[#configure-all-things-org-mode][Configure all things org mode]]
     - [[#configure-org-header][Configure org header]]
     - [[#configure-base-org-settings-and-major-mode-keybinds][Configure base org settings and major mode keybinds]]
-      - [[#configure-org-functionality-add-ons][Configure org functionality add-ons]]
+    - [[#configure-org-functionality-add-ons][Configure org functionality add-ons]]
+      - [[#disabled-org-functionality-packages][Disabled org functionality packages]]
     - [[#configure-org-modes-progeny][Configure org mode's progeny]]
       - [[#org-todoist][org-todoist]]
       - [[#configure-org-node][Configure Org-node]]
@@ -886,7 +887,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 *** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-07-18 Fri 21:51]
+:LAST_MODIFIED: [2025-07-21 Mon 22:57]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -1067,6 +1068,7 @@ I need to move most of these out of here and put them in the relavent package de
   ;;		"tc"      'nocomments-mode defined-in-package
   "tM"      'consult-minor-mode-menu
   "td"      'toggle-debug-on-error
+  "te"      'electric-pair-local-mode
   "tf"      'display-fill-column-indicator-mode
   ;;    "tg"      'golden-ratio-mode
   "tg"      'zoom-mode
@@ -1297,8 +1299,6 @@ I need to move most of these out of here and put them in the relavent package de
 #+begin_src emacs-lisp
 (use-package emacs
   :ensure nil
-  :init
-  (setq trash-directory "~/.Trash")
   :config
   (setopt enable-recursive-minibuffers t
           user-full-name "John Sperger"
@@ -1313,7 +1313,6 @@ I need to move most of these out of here and put them in the relavent package de
           sentence-end-double-space nil ;single space between sentences
           use-short-answers t ; use y/n instead of yes/no
           compilation-scroll-output 'first-error ;scroll to 1st error/end compile
-          delete-by-moving-to-trash t ; use system trash for file deletion
           load-prefer-newer t ;don't load outdated compiled files
           kill-do-not-save-duplicates t ; no dupes in kill-ring
           )
@@ -1331,7 +1330,7 @@ I need to move most of these out of here and put them in the relavent package de
 
 **** Currently unused base configuration
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 02:42]
+:LAST_MODIFIED: [2025-07-21 Mon 18:24]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: currently-unused-base-configuration
 :END:
@@ -1340,7 +1339,13 @@ These are out temporarily while sorting through what to keep.
 
 See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible explanation
 
+#+name: Unset emacs options
 #+begin_src emacs-lisp :tangle no
+;;  :init
+;; (setq trash-directory "~/.Trash")
+
+(setopt delete-by-moving-to-trash t) ; use system trash for file deletion
+
 ;; autosave each change
 (setopt bookmark-save-flag 1)
 
@@ -1443,7 +1448,7 @@ Off the top of my head, I think
 
 *** Configure built-in programming utilities
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 21:56]
+:LAST_MODIFIED: [2025-07-22 Tue 02:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-built-in-programming-utilities
 :END:
@@ -1457,10 +1462,9 @@ Off the top of my head, I think
           display-line-numbers-width-start 100)
   )
 
-;; (use-package elec-pair
-;;   :ensure nil
-;; 	:defer t
-;; 	:custom (electric-pair-mode 1))
+(use-package elec-pair
+  :ensure nil
+  )
 
 
 (use-package flymake
@@ -1682,6 +1686,8 @@ I really need to learn how to use =ediff= properly
 :END:
 
 I'm a big fan of the look of banner comments but trying to set a custom prefix it wasn't clear how to keep the language-adaptive comment symbol and add a string afterwards. I always want a space
+[[info:elisp#Syntax Table Functions][elisp#Syntax Table Functions]]
+
 
 #+name: comment tools
 #+begin_src emacs-lisp
@@ -1692,10 +1698,13 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 #+end_src
 **** Utilities for interact with the operating system
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 03:58]
+:LAST_MODIFIED: [2025-07-21 Mon 18:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: utilities-for-interact-with-the-operating-system
 :END:
+
+Do a thing here helpers. I wonder if these could be replaced with built-in functionality. 
+#+name: open here utilities
 #+begin_src emacs-lisp 
 (use-package reveal-in-folder
   :general (tyrant-def "bf" 'reveal-in-folder))
@@ -1708,6 +1717,14 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
     )
   )
 #+end_src
+
+#+name: dwim shell commands
+#+begin_src emacs-lisp :eval no
+(use-package dwim-shell-command
+  :general (tyrant-def "fm" 'dwim-shell-commands-rename-all)
+  )
+#+end_src
+
 **** Scratch buffer utilities
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 03:41]
@@ -2153,7 +2170,7 @@ These packages have the distinction of being useful but I don't use them enough,
 
 *** Configure base org settings and major mode keybinds
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:19]
+:LAST_MODIFIED: [2025-07-23 Wed 01:09]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-base-org-settings-and-major-mode-keybinds
 :END:
@@ -2236,6 +2253,7 @@ These packages have the distinction of being useful but I don't use them enough,
     "ii"    'org-id-get-create
     "iI"    'org-insert-item
     "il"    'org-insert-link
+    "iL"    'org-insert-last-stored-link
     "in"    'org-add-note
     "ip"    'org-set-property
     "is"    'org-insert-subheading
@@ -2313,10 +2331,10 @@ These packages have the distinction of being useful but I don't use them enough,
     )
   )
 #+end_src
-*********** Configure org functionality add-ons
+*** Configure org functionality add-ons
 :PROPERTIES:
 :CUSTOM_ID: configure-org-functionality-add-ons
-:LAST_MODIFIED: [2025-07-18 Fri 23:23]
+:LAST_MODIFIED: [2025-07-23 Wed 00:46]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
@@ -2357,16 +2375,22 @@ These packages have the distinction of being useful but I don't use them enough,
     "Lo" 'org-transclusion-open-source
     )
   )
+
 #+end_src
 
 **** Disabled org functionality packages
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 23:22]
+:LAST_MODIFIED: [2025-07-23 Wed 00:46]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :header-args: :tangle no :comments no
+:CUSTOM_ID: disabled-org-functionality-packages
 :END:
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no :eval no 
+(use-package org-special-block-extras
+    :hook (org-mode . org-special-block-extras-mode)
+    )
+
 (use-package org-side-tree
   :disabled
   :hook org-mode
@@ -3456,12 +3480,15 @@ of 2025-07-06
 *** setup-completion.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completionel
+:LAST_MODIFIED: [2025-07-21 Mon 18:21]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
+
+The vertico recipe has been updated to include the extensions folder so I don't need to manually specify it.
 #+begin_src emacs-lisp :tangle config/setup-completion.el
 ;;; config/setup-completion.el --- Completion configuration -*- lexical-binding: t -*-
 
 (use-package vertico
-  :ensure (:files (:defaults "extensions/*.el"))
   :hook (elpaca-after-init . vertico-mode)
   :config
   (setq vertico-cycle t)
@@ -4511,7 +4538,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-lsp-bridge.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lsp-bridgeel
-:LAST_MODIFIED: [2025-07-20 Sun 21:33]
+:LAST_MODIFIED: [2025-07-21 Mon 04:06]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-lsp-bridge.el
@@ -4527,7 +4554,11 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
            :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
            :build (:not elpaca--byte-compile)
            )
-  :config  (setopt toml-indent-offset 2)
+  :config  (setopt toml-indent-offset 2
+                   lsp-bridge-enable-hover-diagnostic t
+                   lsp-bridge-enable-org-babel t
+                   acm-enable-preview t
+                   )
 
 ;;  (global-lsp-bridge-mode)
 
