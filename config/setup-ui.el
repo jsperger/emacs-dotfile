@@ -2,10 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package mct
-  :disabled
-  :hook (vertico-mode . mct-mode))
-
 (use-package bicycle
   :hook ((prog-mode . outline-minor-mode)
          (prog-mode . hs-minor-mode))
@@ -13,20 +9,6 @@
              "t TAB" 'bicycle-cycle
              "t <backtab>" 'bicycle-cycle-global
              )
-  )
-
-(use-package focus
-  :disabled
-  :general
-  (tyrant-def "tF" 'focus-mode)
-  )
-
-(use-package indent-control
-  :disabled)
-
-(use-package nocomments-mode
-  :disabled
-  :general (tyrant-def "tc" 'nocomments-mode)
   )
 
 (use-package olivetti
@@ -46,6 +28,7 @@
           shackle-rules
           `((help-mode :select t :align right :size 0.4)
             (helpful-mode :select t :align right :size 0.4)
+            (ess-r-info-mode :select t :align right :size 0.4)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
             (special-mode                    :align t)
@@ -54,8 +37,10 @@
             (flymake-diagnostics-buffer-mode :align t)
             ("*Shell Command Output*"        :align t :size 2)
             ("*Async Shell Command*"         :align t :size 2)
+            (lsp-bridge-ref-mode             :align t :size 0.2)
             ("*elpaca-info*"                 :align t)
-            ))
+            )
+          )
   )
 
 (use-package spacious-padding
@@ -71,70 +56,6 @@
                   )
   )
 
-
-(use-package visual-fill-column
-  :hook (elpaca-after-init . global-visual-fill-column-mode)
-  :config (setopt visual-fill-column-center-text t
-                  visual-fill-column-extra-text-width '(4 . 4)
-                  fill-column 80
-                  )
-  )
-
-(use-package writeroom-mode
-  :disabled
-  :config
-  (setq split-width-threshold 120
-        writeroom-width 128
-        writeroom-fringes-outside-margins nil
-        writeroom-global-effects nil
-        writeroom-major-modes-exceptions '(process-menu-mode proced-mode backtrace-mode)
-        writeroom-maximize-window t
-        writeroom-mode-line t
-        writeroom-mode-line-toggle-position 'mode-line-format)
-  :general
-  (tyrant-def
-    "wc" 'writeroom-mode
-    "wC" 'global-writeroom-mode))
-
-(use-package logos
-  :disabled
-  )
-(use-package calle24
-  :disabled
-  :hook (compilation-mode . calle24-refresh-appearance)
-  :config
-  (calle24-refresh-appearance)
-  )
-
-(use-package activities
-  :disabled
-  :init
-  (activities-mode)
-  (activities-tabs-mode)
-  (setq edebug-inhibit-emacs-lisp-mode-bindings t)
-
-  :bind
-  (("C-x C-a C-n" . activities-new)
-   ("C-x C-a C-d" . activities-define)
-   ("C-x C-a C-a" . activities-resume)
-   ("C-x C-a C-s" . activities-suspend)
-   ("C-x C-a C-k" . activities-kill)
-   ("C-x C-a RET" . activities-switch)
-   ("C-x C-a b" . activities-switch-buffer)
-   ("C-x C-a g" . activities-revert)
-   ("C-x C-a l" . activities-list)))
-
-(use-package golden-ratio
-  :disabled
-  :config (setopt golden-ratio-mode nil)
-  )
-
-(use-package zoom
-  :disabled)
-
-(use-package eyebrowse
-  :disabled)
-
 (use-package popper
   :config
   (setopt popper-display-control nil
@@ -144,9 +65,12 @@
             "\*Async Shell Command\*"
             "\*eldoc\*"
             "^\*EGLOT"
+            "^\*lsp-bridge.*"
+            "\*lsp-bridge-ref\*"
+            compilation-mode
+            ess-r-help-mode
             help-mode
             helpful-mode
-            compilation-mode
             process-menu-mode
             special-mode
             flymake-diagnostics-buffer-mode))
@@ -159,6 +83,13 @@
   (popper-echo-mode 1)
   )
 
+(use-package visual-fill-column
+  :hook (elpaca-after-init . global-visual-fill-column-mode)
+  :config (setopt visual-fill-column-center-text t
+                  visual-fill-column-extra-text-width '(4 . 4)
+                  fill-column 80
+                  )
+  )
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

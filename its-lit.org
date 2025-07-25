@@ -161,6 +161,11 @@ count of {{{word-count}}}.*
   - [[#configure-ui-elements][Configure UI Elements]]
   - [[#setup-uiel][setup-ui.el]]
     - [[#removed-elements][Removed elements]]
+      - [[#focus-mode-type-packages][Focus mode type packages]]
+      - [[#minibuffer][Minibuffer]]
+      - [[#window-automatic-sizing-and-window-configuration-management][Window automatic sizing and window configuration management]]
+      - [[#programming-focused-ui-changes][Programming focused UI changes]]
+      - [[#probably-theming-not-ui][Probably theming not UI]]
   - [[#setup-vcel][setup-vc.el]]
   - [[#setup-webel][setup-web.el]]
   - [[#bibliography-management][Bibliography management]]
@@ -176,6 +181,7 @@ count of {{{word-count}}}.*
   - [[#my-theme-helpersel][my-theme-helpers.el]]
   - [[#my-vc-helpersel][my-vc-helpers.el]]
 - [[#appendices][Appendices]]
+  - [[#local-variables][Local Variables]]
 :END:
 
 
@@ -1448,7 +1454,7 @@ Off the top of my head, I think
 
 *** Configure built-in programming utilities
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-22 Tue 02:29]
+:LAST_MODIFIED: [2025-07-25 Fri 01:04]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-built-in-programming-utilities
 :END:
@@ -1464,6 +1470,7 @@ Off the top of my head, I think
 
 (use-package elec-pair
   :ensure nil
+  :hook (elpaca-after-init . electric-pair-mode)
   )
 
 
@@ -2445,12 +2452,12 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2025-07-19 Sat 04:44]
+:LAST_MODIFIED: [2025-07-25 Fri 04:02]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 Disabling this until I have time to sit down and give it an honest effort. 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (use-package org-mem
   :defer
   :functions org-mem-updater
@@ -2467,8 +2474,19 @@ Disabling this until I have time to sit down and give it an honest effort.
   (keymap-global-set "M-o n" org-node-global-prefix-map)
   (with-eval-after-load 'org
     (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
+
+  (setq org-node-seq-defs
+        (list
+         ;; My day-notes, a.k.a. journal/diary.  Currently I still
+         ;; structure them like org-roam-dailies expects: confined to a
+         ;; subdirectory, with filenames such as "2024-11-18.org".
+         ;; This is actually a sequence of files, not sequence of ID-nodes.
+         (org-node-seq-def-on-filepath-sort-by-basename
+          "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
+       ))
   :config
   (org-node-cache-mode)
+  
   :general
   (tyrant-def
     "n"      (cons "node" (make-sparse-keymap))
@@ -2479,11 +2497,11 @@ Disabling this until I have time to sit down and give it an honest effort.
     "ng" 'org-node-grep
     "nn" 'org-node-nodeify-entry
     "ns" 'org-node-seq-dispatch
+    "nS" 'org-node-insert-transclusion-as-subtree
     "nw" 'org-node-refile
     "nr" 'org-node-visit-random
     "nt" 'org-node-insert-transclusion
     "nu" 'org-node-insert-raw-link
-    "ns" 'org-node-insert-transclusion-as-subtree
     )
   )
 #+end_src
@@ -2660,7 +2678,7 @@ interactive/enhance the REPL loop.
 *** R programming
 :PROPERTIES:
 :CUSTOM_ID: r-programming
-:LAST_MODIFIED: [2025-07-20 Sun 04:27]
+:LAST_MODIFIED: [2025-07-25 Fri 02:43]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -2700,7 +2718,27 @@ a bunch of repeated configuration.
                    ess-use-company nil
                    ess-use-flymake nil
                    ess-use-ido nil
+                   ess-indent-offset 2
+                   ess-own-style-list '(
+                        (ess-indent-offset . 2)
+                        (ess-offset-arguments . prev-call)
+                        (ess-offset-arguments-newline . prev-line)
+                        (ess-offset-block . prev-line)
+                        (ess-offset-continued . straight)
+                        (ess-align-nested-calls "ifelse")
+                        (ess-align-arguments-in-calls "function[ 	]*(")
+                        (ess-align-continuations-in-calls . t)
+                        (ess-align-blocks control-flow)
+                        (ess-indent-from-lhs arguments fun-decl-opening)
+                        (ess-indent-from-chain-start . t)
+                        (ess-indent-with-fancy-comments . nil)
+                        )
+                   ess-style 'OWN
                    )
+   (with-eval-after-load 'evil
+    (evil-set-initial-state 'ess-r-help-mode 'normal)
+    )
+   
   :general
   (despot-def (ess-r-mode-map)
     :major-modes '(ess-r-mode R-mode)
@@ -2715,6 +2753,7 @@ a bunch of repeated configuration.
   )
 
 (use-package essgd
+  :after ess
 	:general
 	(despot-def (ess-r-mode-map)
 		:major-modes 'ess-r-mode
@@ -4118,7 +4157,8 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 	(setq evil-collection-magit-want-horizontal-movement t
         evil-collection-unimpaired-want-repeat-mode-integration t)
   (add-hook 'org-agenda-mode-hook
-            (lambda () (evil-collection-unimpaired-mode -1)))
+            (lambda () (evil-collection-unimpaired-mode -1))
+            )
   )
 
 (use-package evil-org
@@ -5278,17 +5318,13 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-07-20 Sun 20:13]
+:LAST_MODIFIED: [2025-07-25 Fri 02:21]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
 ;;; config/setup-ui.el --- UI configuration -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
-
-(use-package mct
-  :disabled
-  :hook (vertico-mode . mct-mode))
 
 (use-package bicycle
   :hook ((prog-mode . outline-minor-mode)
@@ -5297,20 +5333,6 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
              "t TAB" 'bicycle-cycle
              "t <backtab>" 'bicycle-cycle-global
              )
-  )
-
-(use-package focus
-  :disabled
-  :general
-  (tyrant-def "tF" 'focus-mode)
-  )
-
-(use-package indent-control
-  :disabled)
-
-(use-package nocomments-mode
-  :disabled
-  :general (tyrant-def "tc" 'nocomments-mode)
   )
 
 (use-package olivetti
@@ -5330,6 +5352,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
           shackle-rules
           `((help-mode :select t :align right :size 0.4)
             (helpful-mode :select t :align right :size 0.4)
+            (ess-r-info-mode :select t :align right :size 0.4)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
             (special-mode                    :align t)
@@ -5338,8 +5361,10 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
             (flymake-diagnostics-buffer-mode :align t)
             ("*Shell Command Output*"        :align t :size 2)
             ("*Async Shell Command*"         :align t :size 2)
+            (lsp-bridge-ref-mode             :align t :size 0.2)
             ("*elpaca-info*"                 :align t)
-            ))
+            )
+          )
   )
 
 (use-package spacious-padding
@@ -5355,6 +5380,32 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
                   )
   )
 
+(use-package popper
+  :config
+  (setopt popper-display-control nil
+          popper-reference-buffers
+          '("\*Messages\*"
+            "Output\*$"
+            "\*Async Shell Command\*"
+            "\*eldoc\*"
+            "^\*EGLOT"
+            "^\*lsp-bridge.*"
+            "\*lsp-bridge-ref\*"
+            compilation-mode
+            ess-r-help-mode
+            help-mode
+            helpful-mode
+            process-menu-mode
+            special-mode
+            flymake-diagnostics-buffer-mode))
+  :general
+  (tyrant-def
+    ";" '("pop toggle" . popper-toggle)
+    ":" '("pop kill" . popper-kill-latest-popup))
+  :custom
+  (popper-mode 1)
+  (popper-echo-mode 1)
+  )
 
 (use-package visual-fill-column
   :hook (elpaca-after-init . global-visual-fill-column-mode)
@@ -5363,7 +5414,35 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
                   fill-column 80
                   )
   )
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-ui.el ends here
+#+end_src
 
+*** Removed elements
+:PROPERTIES:
+:CUSTOM_ID: removed-elements
+:END:
+
+**** Focus mode type packages
+:PROPERTIES:
+:CUSTOM_ID: focus-mode-type-packages
+:LAST_MODIFIED: [2025-07-25 Fri 01:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :tangle no :comments no :eval no
+(use-package logos
+  :disabled
+  )
+(use-package focus
+  :disabled
+  :general
+  (tyrant-def "tF" 'focus-mode)
+  )
 (use-package writeroom-mode
   :disabled
   :config
@@ -5378,17 +5457,44 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
   :general
   (tyrant-def
     "wc" 'writeroom-mode
-    "wC" 'global-writeroom-mode))
+    "wC" 'global-writeroom-mode)
+  )
+#+end_src
 
-(use-package logos
+**** Minibuffer
+:PROPERTIES:
+:CUSTOM_ID: minibuffer
+:LAST_MODIFIED: [2025-07-25 Fri 01:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Minibuffer + completions in tandem
+#+begin_src emacs-lisp :tangle no :comments no :eval no
+(use-package mct
   :disabled
+  :hook (vertico-mode . mct-mode)
   )
-(use-package calle24
+#+end_src
+**** Window automatic sizing and window configuration management
+:PROPERTIES:
+:CUSTOM_ID: window-automatic-sizing-and-window-configuration-management
+:LAST_MODIFIED: [2025-07-25 Fri 02:04]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Golden ratio hasn't been updated in a couple of years and zoom is a replacement
+project maybe?
+
+Activities seems to be more of a session manager + window manager
+#+begin_src emacs-lisp :tangle no :comments no :eval no
+(use-package golden-ratio
   :disabled
-  :hook (compilation-mode . calle24-refresh-appearance)
-  :config
-  (calle24-refresh-appearance)
+  :config (setopt golden-ratio-mode nil)
   )
+
+(use-package zoom
+  :disabled)
+
 
 (use-package activities
   :disabled
@@ -5408,59 +5514,29 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
    ("C-x C-a g" . activities-revert)
    ("C-x C-a l" . activities-list)))
 
-(use-package golden-ratio
-  :disabled
-  :config (setopt golden-ratio-mode nil)
-  )
-
-(use-package zoom
-  :disabled)
-
+;; tiling-window-manager-eqsque window configuration management
 (use-package eyebrowse
   :disabled)
 
-(use-package popper
-  :config
-  (setopt popper-display-control nil
-          popper-reference-buffers
-          '("\*Messages\*"
-            "Output\*$"
-            "\*Async Shell Command\*"
-            "\*eldoc\*"
-            "^\*EGLOT"
-            help-mode
-            helpful-mode
-            compilation-mode
-            process-menu-mode
-            special-mode
-            flymake-diagnostics-buffer-mode))
-  :general
-  (tyrant-def
-    ";" '("pop toggle" . popper-toggle)
-    ":" '("pop kill" . popper-kill-latest-popup))
-  :custom
-  (popper-mode 1)
-  (popper-echo-mode 1)
+(use-package sideline
+  :hook (flymake-mode . sideline-mode)
   )
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-ui.el ends here
 #+end_src
 
-*** Removed elements
+**** Programming focused UI changes
 :PROPERTIES:
-:CUSTOM_ID: removed-elements
-:LAST_MODIFIED: [2025-07-20 Sun 21:55]
+:CUSTOM_ID: programming-focused-ui-changes
+:LAST_MODIFIED: [2025-07-25 Fri 02:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 #+begin_src emacs-lisp :tangle no :comments no :eval no
-(use-package sideline
-  :hook (flymake-mode . sideline-mode)
+(use-package indent-control
+  :disabled)
+
+(use-package nocomments-mode
+  :disabled
+  :general (tyrant-def "tc" 'nocomments-mode)
   )
 
 (use-package sideline-flymake
@@ -5470,6 +5546,24 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
               (lambda () (remove-hook 'eldoc-documentation-functions 'flymake-eldoc-function t))
               )
     )
+#+end_src
+
+**** Probably theming not UI
+:PROPERTIES:
+:CUSTOM_ID: probably-theming-not-ui
+:LAST_MODIFIED: [2025-07-25 Fri 01:34]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Use SF Symbols instead of the default Emacs image toolbar. Would require me to
+use the toolbar in the first place.  
+#+begin_src emacs-lisp :tangle no :comments no :eval no
+(use-package calle24
+  :disabled
+  :hook (compilation-mode . calle24-refresh-appearance)
+  :config
+  (calle24-refresh-appearance)
+  )
 #+end_src
 ** setup-vc.el
 :PROPERTIES:
@@ -6657,10 +6751,15 @@ For example: To unfold from a magit diff buffer, evaluate the following:
 * Appendices
 :PROPERTIES:
 :CUSTOM_ID: appendices
-:LAST_MODIFIED: [2025-07-16 Wed 23:31]
+:END:
+** Local Variables
+:PROPERTIES:
+:CUSTOM_ID: local-variables
+:LAST_MODIFIED: [2025-07-25 Fri 01:40]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 ## Local Variables:
+## eval: (auto-fill-mode t)
 ## eval: (add-hook 'before-save-hook #'org-make-toc nil t)
 ## eval: (add-hook 'before-save-hook #'my/org-update-subtree-modification-info)
 ## End:

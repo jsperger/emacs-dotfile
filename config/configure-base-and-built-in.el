@@ -69,6 +69,7 @@
 
 (use-package elec-pair
   :ensure nil
+  :hook (elpaca-after-init . electric-pair-mode)
   )
 
 

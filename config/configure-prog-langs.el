@@ -85,7 +85,27 @@
                    ess-use-company nil
                    ess-use-flymake nil
                    ess-use-ido nil
+                   ess-indent-offset 2
+                   ess-own-style-list '(
+                        (ess-indent-offset . 2)
+                        (ess-offset-arguments . prev-call)
+                        (ess-offset-arguments-newline . prev-line)
+                        (ess-offset-block . prev-line)
+                        (ess-offset-continued . straight)
+                        (ess-align-nested-calls "ifelse")
+                        (ess-align-arguments-in-calls "function[ 	]*(")
+                        (ess-align-continuations-in-calls . t)
+                        (ess-align-blocks control-flow)
+                        (ess-indent-from-lhs arguments fun-decl-opening)
+                        (ess-indent-from-chain-start . t)
+                        (ess-indent-with-fancy-comments . nil)
+                        )
+                   ess-style 'OWN
                    )
+   (with-eval-after-load 'evil
+    (evil-set-initial-state 'ess-r-help-mode 'normal)
+    )
+   
   :general
   (despot-def (ess-r-mode-map)
     :major-modes '(ess-r-mode R-mode)
@@ -100,6 +120,7 @@
   )
 
 (use-package essgd
+  :after ess
 	:general
 	(despot-def (ess-r-mode-map)
 		:major-modes 'ess-r-mode
