@@ -893,7 +893,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 *** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-07-21 Mon 22:57]
+:LAST_MODIFIED: [2025-07-27 Sun 23:31]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -988,6 +988,8 @@ I need to move most of these out of here and put them in the relavent package de
   "F"       (cons "Frame" (make-sparse-keymap))
   "Fd"      'delete-frame
   "FD"      'delete-other-frames
+  "Fj"      'ns-prev-frame
+  "Fk"      'ns-next-frame
   "Fn"      'make-frame
   "Fo"      'other-frame
 
@@ -5274,6 +5276,8 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-treesit.el
 :PROPERTIES:
 :CUSTOM_ID: setup-treesitel
+:LAST_MODIFIED: [2025-07-25 Fri 15:21]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-treesit.el
 ;;; config/setup-treesit.el --- Treesitter configuration -*- lexical-binding: t -*-
@@ -5295,7 +5299,9 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 					(json "https://github.com/tree-sitter/tree-sitter-json")
 					(make "https://github.com/alemuller/tree-sitter-make")
 					(markdown "https://github.com/ikatyang/tree-sitter-markdown")
-					(python "https://github.com/tree-sitter/tree-sitter-python")
+          (python  "https://github.com/tree-sitter/py-tree-sitter")
+;;					(python "https://github.com/tree-sitter/tree-sitter-python")
+          (rust "https://github.com/tree-sitter/tree-sitter")
 					(toml "https://github.com/tree-sitter/tree-sitter-toml")
 					(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
 					(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
@@ -5318,7 +5324,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-07-25 Fri 02:21]
+:LAST_MODIFIED: [2025-07-25 Fri 15:21]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -5478,12 +5484,15 @@ Minibuffer + completions in tandem
 **** Window automatic sizing and window configuration management
 :PROPERTIES:
 :CUSTOM_ID: window-automatic-sizing-and-window-configuration-management
-:LAST_MODIFIED: [2025-07-25 Fri 02:04]
+:LAST_MODIFIED: [2025-07-27 Sun 18:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
-Golden ratio hasn't been updated in a couple of years and zoom is a replacement
-project maybe?
+*Zoom*: Golden ratio hasn't been updated in a couple of years and zoom is a
+replacement project maybe? Out of the box zoom really does not play nicely with
+my existing configuration. Minibuffer taking half the screen when I go use a
+command, overriding shackle, things like that. Would need to take time to
+configure it to play nicely if I wanted to use it.
 
 Activities seems to be more of a session manager + window manager
 #+begin_src emacs-lisp :tangle no :comments no :eval no

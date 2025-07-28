@@ -102,6 +102,8 @@
   "F"       (cons "Frame" (make-sparse-keymap))
   "Fd"      'delete-frame
   "FD"      'delete-other-frames
+  "Fj"      'ns-prev-frame
+  "Fk"      'ns-next-frame
   "Fn"      'make-frame
   "Fo"      'other-frame
 
