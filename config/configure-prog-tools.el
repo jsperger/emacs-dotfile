@@ -33,6 +33,15 @@
 (add-hook 'elpaca-after-init-hook #'global-lsp-bridge-mode)
 ;; lsp-bridge block ends here
 
+;; [[file:../its-lit.org::#code-formatting][Code formatting:1]]
+(use-package apheleia
+  :config
+  (add-to-list 'apheleia-formatters '(air . ("air" "format" filepath)))
+  (add-to-list 'apheleia-mode-alist '(ess-r-mode . air))
+  (apheleia-global-mode +1)
+  )
+;; Code formatting:1 ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

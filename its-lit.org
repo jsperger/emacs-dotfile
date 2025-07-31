@@ -149,17 +149,19 @@ count of {{{word-count}}}.*
   - [[#configure-programming-tools-language-agnostic-or-multi-language][Configure programming tools (language agnostic or multi-language)]]
     - [[#language-server-lsp-bridge][Language server (lsp-bridge)]]
       - [[#lsp-bridge-command-reference][Lsp Bridge Command reference]]
+    - [[#code-formatting][Code formatting]]
+      - [[#removed-code-formatters][Removed code formatters]]
     - [[#footer-for-configure-programming-tools][Footer for configure programming tools]]
   - [[#setup-lspel][setup-lsp.el]]
   - [[#setup-markdownel][setup-markdown.el]]
   - [[#setup-mediael][setup-media.el]]
   - [[#setup-modelineel][setup-modeline.el]]
   - [[#setup-notesel][setup-notes.el]]
-  - [[#setup-programmingel][setup-programming.el]]
   - [[#setup-projectsel][setup-projects.el]]
   - [[#setup-readingel][setup-reading.el]]
     - [[#removed-reading-packages][Removed reading packages]]
   - [[#setup-treesitel][setup-treesit.el]]
+    - [[#inactive-treesitter][Inactive treesitter]]
   - [[#configure-ui-elements][Configure UI Elements]]
   - [[#setup-uiel][setup-ui.el]]
     - [[#removed-elements][Removed elements]]
@@ -4681,6 +4683,35 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 - lsp-bridge-indent-right: Indents the pasted text to the right according to the indent values defined in lsp-bridge-formatting-indent-alist
 - lsp-bridge-semantic-tokens-mode: Enables or disables semantic token highlighting, please ref to Semantic Tokens Wiki
 
+*** Code formatting
+:PROPERTIES:
+:CUSTOM_ID: code-formatting
+:LAST_MODIFIED: [2025-07-31 Thu 18:39]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+(use-package apheleia
+  :config
+  (add-to-list 'apheleia-formatters '(air . ("air" "format" filepath)))
+  (add-to-list 'apheleia-mode-alist '(ess-r-mode . air))
+  (apheleia-global-mode +1)
+  )
+#+end_src
+
+**** Removed code formatters
+:PROPERTIES:
+:CUSTOM_ID: removed-code-formatters
+:LAST_MODIFIED: [2025-07-31 Thu 18:43]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :eval no :tangle no :comments no
+(use-package editorconfig
+  :config  (editorconfig-mode nil)
+	:general (tyrant-def "ce" 'editorconfig-mode)
+	)
+#+end_src
 
 *** Footer for configure programming tools
 :PROPERTIES:
@@ -5009,47 +5040,11 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ;;; setup-notes.el ends here
 #+end_src
 
-** setup-programming.el
-:PROPERTIES:
-:CUSTOM_ID: setup-programmingel
-:LAST_MODIFIED: [2025-07-18 Fri 04:57]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-programming.el
-;;; config/setup-programming.el --- General programming tools configuration -*- lexical-binding: t -*-
-
-(use-package apheleia
-  :disabled
-  :custom (apheleia-global-mode nil)
-  )
-
-(use-package editorconfig
-	:disabled 
-  :config
-  (editorconfig-mode nil)
-	:general
-	(tyrant-def "ce" 'editorconfig-mode)
-	)
-
-(use-package typespec-ts-mode
-	:mode ("\\.tsp\\'" . typespec-ts-mode)
-	:config
-	(add-to-list
- 'treesit-language-source-alist
- '(typespec "https://github.com/happenslol/tree-sitter-typespec"))
-	)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-programming.el ends here
-#+end_src
-
 ** setup-projects.el
 :PROPERTIES:
 :CUSTOM_ID: setup-projectsel
+:LAST_MODIFIED: [2025-07-31 Thu 18:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-projects.el
 ;;; config/setup-projects.el --- Projects configuration -*- lexical-binding: t -*-
@@ -5339,6 +5334,23 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ;; no-update-autoloads: t
 ;; End:
 ;;; setup-treesit.el ends here
+#+end_src
+
+**** Inactive treesitter 
+:PROPERTIES:
+:CUSTOM_ID: inactive-treesitter
+:LAST_MODIFIED: [2025-07-31 Thu 18:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :eval no :comments no :tangle no 
+(use-package typespec-ts-mode
+	:mode ("\\.tsp\\'" . typespec-ts-mode)
+	:config
+	(add-to-list
+ 'treesit-language-source-alist
+ '(typespec "https://github.com/happenslol/tree-sitter-typespec"))
+	)
 #+end_src
 
 ** Configure UI Elements
