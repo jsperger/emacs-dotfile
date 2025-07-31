@@ -146,8 +146,10 @@ count of {{{word-count}}}.*
   - [[#setup-iconsel][setup-icons.el]]
   - [[#setup-llmel][setup-llm.el]]
     - [[#llm-unused-config][LLM unused config]]
-  - [[#setup-lsp-bridgeel][setup-lsp-bridge.el]]
-    - [[#lsp-bridge-command-reference][Lsp Bridge Command reference]]
+  - [[#configure-programming-tools-language-agnostic-or-multi-language][Configure programming tools (language agnostic or multi-language)]]
+    - [[#language-server-lsp-bridge][Language server (lsp-bridge)]]
+      - [[#lsp-bridge-command-reference][Lsp Bridge Command reference]]
+    - [[#footer-for-configure-programming-tools][Footer for configure programming tools]]
   - [[#setup-lspel][setup-lsp.el]]
   - [[#setup-markdownel][setup-markdown.el]]
   - [[#setup-mediael][setup-media.el]]
@@ -321,12 +323,11 @@ I'm sympathetic to the arguments in this blog post that [[https://batsov.com/art
 :PROPERTIES:
 :header-args: :tangle no
 :CUSTOM_ID: lisp-helpers-for-maintaining-my-literate-config
-:LAST_MODIFIED: [2025-07-18 Fri 21:37]
+:LAST_MODIFIED: [2025-07-31 Thu 17:16]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 Work in progress
-
 
 * Notes on configuring Emacs
 :PROPERTIES:
@@ -571,7 +572,6 @@ NeXTSTEP which was the basis for the Mac OS GUI like 30 years ago.
 ;;; early-init.el ends here
 #+end_src
 
-
 ** init.el
 :PROPERTIES:
 :CUSTOM_ID: initel
@@ -750,7 +750,7 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-20 Sun 06:02]
+:LAST_MODIFIED: [2025-07-31 Thu 17:17]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -789,6 +789,7 @@ mistakes in my configuration.
              "configure-theming.el"
              "configure-utilities.el"
              "configure-prog-langs.el"
+             "configure-prog-tools.el"
              ;; "setup-casual.el"
              ;;              ;; "setup-completion-actions.el"
              "setup-completion-backends.el"
@@ -808,7 +809,6 @@ mistakes in my configuration.
              ;;              ;; "setup-icons.el"
              ;;              ;; "setup-lisp.el"
              "setup-llm.el"
-             "setup-lsp-bridge.el"
              "setup-markdown.el"
              ;;              ;; "setup-media.el"
              "setup-modeline.el"
@@ -4577,53 +4577,63 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
   )
 #+end_src
 
-** setup-lsp-bridge.el
+** Configure programming tools (language agnostic or multi-language)
 :PROPERTIES:
-:CUSTOM_ID: setup-lsp-bridgeel
-:LAST_MODIFIED: [2025-07-21 Mon 04:06]
+:header-args: :tangle config/configure-prog-tools.el :comments noweb
+:CUSTOM_ID: configure-programming-tools-language-agnostic-or-multi-language
+:LAST_MODIFIED: [2025-07-31 Thu 16:59]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-lsp-bridge.el
-;;; config/setup-lsp-bridge.el --- lsp-bridge configuration -*- lexical-binding: t -*-
 
-;; testing out the built-in uv support
-;; don't require my helpers for setting up the uv python venv
+#+name: header for programming tools
+#+begin_src emacs-lisp :comments no
+;;; configure-prog-tools.el --- programming add-ons -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+#+end_src
 
+*** Language server (lsp-bridge)
+:PROPERTIES:
+:CUSTOM_ID: language-server-lsp-bridge
+:LAST_MODIFIED: [2025-07-31 Thu 17:16]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :comments no
+;;;; ========================= Language Server packages ========================
+#+end_src
+
+#+name: lsp-bridge block
+#+begin_src emacs-lisp
 (use-package lsp-bridge
   :after yasnippet
-  :ensure (lsp-bridge
-           :type git :host github :repo "manateelazycat/lsp-bridge"
-           :files (:defaults "*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
-           :build (:not elpaca--byte-compile)
-           )
+
+  :ensure (lsp-bridge :type git
+                      :host github
+                      :repo "manateelazycat/lsp-bridge"
+                      :files (:defaults "*.el" "*.py" "acm" "core" "langserver"
+                                        "multiserver" "resources")
+                      :build (:not elpaca--byte-compile)
+                      )
+
   :config  (setopt toml-indent-offset 2
                    lsp-bridge-enable-hover-diagnostic t
                    lsp-bridge-enable-org-babel t
                    acm-enable-preview t
                    )
 
-;;  (global-lsp-bridge-mode)
-
-   :general
-  (tyrant-def "l" (cons "lsp" (make-sparse-keymap))
-    "lf" 'lsp-bridge-find-def
-    "lF" 'lsp-bridge-find-def-other-window
-    "lh" 'lsp-bridge-show-documentation
-    "lp" 'lsp-bridge-popup-documentation
-    )
+  :general  (tyrant-def "l" (cons "lsp" (make-sparse-keymap))
+              "lf" 'lsp-bridge-find-def
+              "lF" 'lsp-bridge-find-def-other-window
+              "lh" 'lsp-bridge-show-documentation
+              "lp" 'lsp-bridge-popup-documentation
+              )
   )
 
 (add-hook 'elpaca-after-init-hook #'global-lsp-bridge-mode)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-lsp-bridge.el ends here
 #+end_src
 
-*** Lsp Bridge Command reference
+**** Lsp Bridge Command reference
 :PROPERTIES:
 :CUSTOM_ID: lsp-bridge-command-reference
 :LAST_MODIFIED: [2025-07-20 Sun 21:01]
@@ -4671,6 +4681,21 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 - lsp-bridge-indent-right: Indents the pasted text to the right according to the indent values defined in lsp-bridge-formatting-indent-alist
 - lsp-bridge-semantic-tokens-mode: Enables or disables semantic token highlighting, please ref to Semantic Tokens Wiki
 
+
+*** Footer for configure programming tools
+:PROPERTIES:
+:CUSTOM_ID: footer-for-configure-programming-tools
+:END:
+
+#+name: footer for programming tools
+#+begin_src emacs-lisp :comments no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; configure-prog-tools.el ends here
+#+end_src
 ** setup-lsp.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lspel
