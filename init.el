@@ -167,7 +167,6 @@
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
              "setup-reading.el"
-             ;; "setup-treesit.el"
              "setup-ui.el"
              "setup-vc.el"
              ;; "setup-web.el"

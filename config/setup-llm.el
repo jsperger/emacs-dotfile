@@ -52,8 +52,10 @@
   (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
   (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
   (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
-  :custom
-  (aidermacs-default-model "gemini/gemini-pro-2.5")
+
+  :custom  (aidermacs-default-model "gemini/gemini-pro-2.5")
+
+  :general (tyrant-def "aa" 'aidermacs-transient-menu)
   )
 
 ;; Local Variables:

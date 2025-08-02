@@ -75,6 +75,8 @@ count of {{{word-count}}}.*
       - [[#removed-built-in-configuration][Removed built-in configuration]]
     - [[#configure-built-in-programming-utilities][Configure built-in programming utilities]]
     - [[#configure-ediff-for-viewing-diffs][Configure ediff for viewing diffs]]
+    - [[#treesitter][Treesitter]]
+      - [[#inactive-treesitter][Inactive treesitter]]
     - [[#built-in-package-configuration-that-were-in-a-separate-file-for-some-reason][Built-in package configuration that were in a separate file for some reason]]
     - [[#which-key-configuration][which-key configuration]]
     - [[#base-and-built-in-configuration-footer][Base and built-in configuration footer]]
@@ -160,8 +162,6 @@ count of {{{word-count}}}.*
   - [[#setup-projectsel][setup-projects.el]]
   - [[#setup-readingel][setup-reading.el]]
     - [[#removed-reading-packages][Removed reading packages]]
-  - [[#setup-treesitel][setup-treesit.el]]
-    - [[#inactive-treesitter][Inactive treesitter]]
   - [[#configure-ui-elements][Configure UI Elements]]
   - [[#setup-uiel][setup-ui.el]]
     - [[#removed-elements][Removed elements]]
@@ -752,7 +752,7 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-07-31 Thu 17:17]
+:LAST_MODIFIED: [2025-08-02 Sat 00:02]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -818,7 +818,6 @@ mistakes in my configuration.
              ;;              ;; "setup-programming.el"
              ;; "setup-projects.el"
              "setup-reading.el"
-             ;; "setup-treesit.el"
              "setup-ui.el"
              "setup-vc.el"
              ;; "setup-web.el"
@@ -1519,6 +1518,59 @@ I really need to learn how to use =ediff= properly
   )
 
 #+end_src
+
+*** Treesitter
+:PROPERTIES:
+:CUSTOM_ID: treesitter
+:LAST_MODIFIED: [2025-08-01 Fri 23:57]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp 
+(use-package treesit
+  :ensure nil
+	:defer t
+	:config
+	(setopt treesit-language-source-alist
+				'(
+					(r "https://github.com/r-lib/tree-sitter-r" "next")
+					(bash "https://github.com/tree-sitter/tree-sitter-bash")
+					(cmake "https://github.com/uyha/tree-sitter-cmake")
+					(css "https://github.com/tree-sitter/tree-sitter-css")
+					(elisp "https://github.com/Wilfred/tree-sitter-elisp")
+					(go "https://github.com/tree-sitter/tree-sitter-go")
+					(html "https://github.com/tree-sitter/tree-sitter-html")
+					(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+					(json "https://github.com/tree-sitter/tree-sitter-json")
+					(make "https://github.com/alemuller/tree-sitter-make")
+					(markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (python  "https://github.com/tree-sitter/py-tree-sitter")
+;;					(python "https://github.com/tree-sitter/tree-sitter-python")
+          (rust "https://github.com/tree-sitter/tree-sitter")
+					(toml "https://github.com/tree-sitter/tree-sitter-toml")
+					(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+					(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+					(yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+	)
+#+end_src
+
+**** Inactive treesitter 
+:PROPERTIES:
+:CUSTOM_ID: inactive-treesitter
+:LAST_MODIFIED: [2025-07-31 Thu 18:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :eval no :comments no :tangle no 
+(use-package typespec-ts-mode
+	:mode ("\\.tsp\\'" . typespec-ts-mode)
+	:config
+	(add-to-list
+ 'treesit-language-source-alist
+ '(typespec "https://github.com/happenslol/tree-sitter-typespec"))
+	)
+#+end_src
+
 
 *** Built-in package configuration that were in a separate file for some reason
 :PROPERTIES:
@@ -2386,7 +2438,6 @@ These packages have the distinction of being useful but I don't use them enough,
     "Lo" 'org-transclusion-open-source
     )
   )
-
 #+end_src
 
 **** Disabled org functionality packages
@@ -2456,7 +2507,7 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2025-07-25 Fri 04:02]
+:LAST_MODIFIED: [2025-08-01 Fri 23:42]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -2475,10 +2526,6 @@ Disabling this until I have time to sit down and give it an honest effort.
 (use-package org-node
   :after org
   :init
-  (keymap-global-set "M-o n" org-node-global-prefix-map)
-  (with-eval-after-load 'org
-    (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
-
   (setq org-node-seq-defs
         (list
          ;; My day-notes, a.k.a. journal/diary.  Currently I still
@@ -2487,12 +2534,28 @@ Disabling this until I have time to sit down and give it an honest effort.
          ;; This is actually a sequence of files, not sequence of ID-nodes.
          (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
-       ))
+         ))
   :config
   (org-node-cache-mode)
-  
+
   :general
   (tyrant-def
+    "n"      (cons "node" (make-sparse-keymap))
+    "nf" 'org-node-find
+    "ni" 'org-node-insert-link
+    "nb" 'org-node-context-dwim
+    "nd" 'org-node-insert-into-related
+    "ng" 'org-node-grep
+    "nn" 'org-node-nodeify-entry
+    "ns" 'org-node-seq-dispatch
+    "nS" 'org-node-insert-transclusion-as-subtree
+    "nw" 'org-node-refile
+    "nr" 'org-node-visit-random
+    "nt" 'org-node-insert-transclusion
+    "nu" 'org-node-insert-raw-link
+    )
+  (despot-def (org-mode-map)
+    :major-modes 'org-mode
     "n"      (cons "node" (make-sparse-keymap))
     "nf" 'org-node-find
     "ni" 'org-node-insert-link
@@ -2523,14 +2586,14 @@ Disabling this until I have time to sit down and give it an honest effort.
 *** Add additional ways to export from org to other formats
 :PROPERTIES:
 :CUSTOM_ID: add-additional-ways-to-export-from-org-to-other-formats
-:LAST_MODIFIED: [2025-07-19 Sat 04:41]
+:LAST_MODIFIED: [2025-08-02 Sat 00:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 #+begin_src emacs-lisp
 (use-package ox-pandoc
-	:after org
-	:hook (org-mode . org-pandoc-startup-check))
+  :after org
+  :hook (org-mode . org-pandoc-startup-check))
 
 (use-package ob-mermaid
   :after org)
@@ -4460,7 +4523,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2025-07-20 Sun 20:46]
+:LAST_MODIFIED: [2025-08-01 Fri 23:46]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-llm.el
@@ -4518,8 +4581,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
   (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
   (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
   (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
-  :custom
-  (aidermacs-default-model "gemini/gemini-pro-2.5")
+
+  :custom  (aidermacs-default-model "gemini/gemini-pro-2.5")
+
+  :general (tyrant-def "aa" 'aidermacs-transient-menu)
   )
 
 ;; Local Variables:
@@ -4712,6 +4777,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 	:general (tyrant-def "ce" 'editorconfig-mode)
 	)
 #+end_src
+
 
 *** Footer for configure programming tools
 :PROPERTIES:
@@ -5293,66 +5359,6 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
    (consult-customize consult-dash :initial (thing-at-point 'symbol))
 	)
 #+end_src
-** setup-treesit.el
-:PROPERTIES:
-:CUSTOM_ID: setup-treesitel
-:LAST_MODIFIED: [2025-07-25 Fri 15:21]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle config/setup-treesit.el
-;;; config/setup-treesit.el --- Treesitter configuration -*- lexical-binding: t -*-
-
-(use-package treesit
-  :ensure nil
-	:defer t
-	:config
-	(setq treesit-language-source-alist
-				'(
-					(r "https://github.com/r-lib/tree-sitter-r" "next")
-					(bash "https://github.com/tree-sitter/tree-sitter-bash")
-					(cmake "https://github.com/uyha/tree-sitter-cmake")
-					(css "https://github.com/tree-sitter/tree-sitter-css")
-					(elisp "https://github.com/Wilfred/tree-sitter-elisp")
-					(go "https://github.com/tree-sitter/tree-sitter-go")
-					(html "https://github.com/tree-sitter/tree-sitter-html")
-					(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-					(json "https://github.com/tree-sitter/tree-sitter-json")
-					(make "https://github.com/alemuller/tree-sitter-make")
-					(markdown "https://github.com/ikatyang/tree-sitter-markdown")
-          (python  "https://github.com/tree-sitter/py-tree-sitter")
-;;					(python "https://github.com/tree-sitter/tree-sitter-python")
-          (rust "https://github.com/tree-sitter/tree-sitter")
-					(toml "https://github.com/tree-sitter/tree-sitter-toml")
-					(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-					(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-					(yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-	)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-treesit.el ends here
-#+end_src
-
-**** Inactive treesitter 
-:PROPERTIES:
-:CUSTOM_ID: inactive-treesitter
-:LAST_MODIFIED: [2025-07-31 Thu 18:44]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-#+begin_src emacs-lisp :eval no :comments no :tangle no 
-(use-package typespec-ts-mode
-	:mode ("\\.tsp\\'" . typespec-ts-mode)
-	:config
-	(add-to-list
- 'treesit-language-source-alist
- '(typespec "https://github.com/happenslol/tree-sitter-typespec"))
-	)
-#+end_src
-
 ** Configure UI Elements
 :PROPERTIES:
 :CUSTOM_ID: configure-ui-elements
@@ -6801,11 +6807,11 @@ For example: To unfold from a magit diff buffer, evaluate the following:
 ** Local Variables
 :PROPERTIES:
 :CUSTOM_ID: local-variables
-:LAST_MODIFIED: [2025-07-25 Fri 01:40]
+:LAST_MODIFIED: [2025-08-01 Fri 23:40]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 ## Local Variables:
 ## eval: (auto-fill-mode t)
 ## eval: (add-hook 'before-save-hook #'org-make-toc nil t)
-## eval: (add-hook 'before-save-hook #'my/org-update-subtree-modification-info)
+## eval: (add-hook 'before-save-hook #'my/org-update-subtree-modification-info nil t)
 ## End:

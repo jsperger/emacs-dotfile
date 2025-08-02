@@ -106,6 +106,34 @@
   )
 ;; Configure ediff for viewing diffs:1 ends here
 
+;; [[file:../its-lit.org::#treesitter][Treesitter:1]]
+(use-package treesit
+  :ensure nil
+	:defer t
+	:config
+	(setopt treesit-language-source-alist
+				'(
+					(r "https://github.com/r-lib/tree-sitter-r" "next")
+					(bash "https://github.com/tree-sitter/tree-sitter-bash")
+					(cmake "https://github.com/uyha/tree-sitter-cmake")
+					(css "https://github.com/tree-sitter/tree-sitter-css")
+					(elisp "https://github.com/Wilfred/tree-sitter-elisp")
+					(go "https://github.com/tree-sitter/tree-sitter-go")
+					(html "https://github.com/tree-sitter/tree-sitter-html")
+					(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+					(json "https://github.com/tree-sitter/tree-sitter-json")
+					(make "https://github.com/alemuller/tree-sitter-make")
+					(markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (python  "https://github.com/tree-sitter/py-tree-sitter")
+;;					(python "https://github.com/tree-sitter/tree-sitter-python")
+          (rust "https://github.com/tree-sitter/tree-sitter")
+					(toml "https://github.com/tree-sitter/tree-sitter-toml")
+					(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+					(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+					(yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+	)
+;; Treesitter:1 ends here
+
 ;; [[file:../its-lit.org::#built-in-package-configuration-that-were-in-a-separate-file-for-some-reason][Built-in package configuration that were in a separate file for some reason:1]]
 (use-package doc-view
   :ensure nil

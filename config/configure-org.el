@@ -226,10 +226,6 @@
 (use-package org-node
   :after org
   :init
-  (keymap-global-set "M-o n" org-node-global-prefix-map)
-  (with-eval-after-load 'org
-    (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
-
   (setq org-node-seq-defs
         (list
          ;; My day-notes, a.k.a. journal/diary.  Currently I still
@@ -238,12 +234,28 @@
          ;; This is actually a sequence of files, not sequence of ID-nodes.
          (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
-       ))
+         ))
   :config
   (org-node-cache-mode)
-  
+
   :general
   (tyrant-def
+    "n"      (cons "node" (make-sparse-keymap))
+    "nf" 'org-node-find
+    "ni" 'org-node-insert-link
+    "nb" 'org-node-context-dwim
+    "nd" 'org-node-insert-into-related
+    "ng" 'org-node-grep
+    "nn" 'org-node-nodeify-entry
+    "ns" 'org-node-seq-dispatch
+    "nS" 'org-node-insert-transclusion-as-subtree
+    "nw" 'org-node-refile
+    "nr" 'org-node-visit-random
+    "nt" 'org-node-insert-transclusion
+    "nu" 'org-node-insert-raw-link
+    )
+  (despot-def (org-mode-map)
+    :major-modes 'org-mode
     "n"      (cons "node" (make-sparse-keymap))
     "nf" 'org-node-find
     "ni" 'org-node-insert-link
@@ -263,8 +275,8 @@
 
 ;; [[file:../its-lit.org::#add-additional-ways-to-export-from-org-to-other-formats][Add additional ways to export from org to other formats:1]]
 (use-package ox-pandoc
-	:after org
-	:hook (org-mode . org-pandoc-startup-check))
+  :after org
+  :hook (org-mode . org-pandoc-startup-check))
 
 (use-package ob-mermaid
   :after org)
