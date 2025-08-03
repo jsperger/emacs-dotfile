@@ -96,6 +96,7 @@ count of {{{word-count}}}.*
     - [[#outline-and-fold-text][Outline and fold text]]
     - [[#text-snippet-insertion-and-collections][Text snippet insertion and collections]]
       - [[#removed-snippet-packages-and-customization][Removed snippet packages and customization]]
+    - [[#text-editing-non-evil][Text editing (non-evil)]]
     - [[#footer-for-utilities-config][Footer for utilities config]]
     - [[#removed-packages][Removed packages]]
   - [[#configure-all-things-org-mode][Configure all things org mode]]
@@ -162,7 +163,6 @@ count of {{{word-count}}}.*
   - [[#setup-projectsel][setup-projects.el]]
   - [[#setup-readingel][setup-reading.el]]
     - [[#removed-reading-packages][Removed reading packages]]
-  - [[#configure-ui-elements][Configure UI Elements]]
   - [[#setup-uiel][setup-ui.el]]
     - [[#removed-elements][Removed elements]]
       - [[#focus-mode-type-packages][Focus mode type packages]]
@@ -894,7 +894,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 *** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-07-27 Sun 23:31]
+:LAST_MODIFIED: [2025-08-03 Sun 17:10]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -910,8 +910,7 @@ I need to move most of these out of here and put them in the relavent package de
   "M" '("bookmark" . bookmark-set)
   ","       (cons "config" (make-sparse-keymap))
   ",d"      'describe-face
-  ",f"      'fontaine-set-preset
-  ",F"      'menu-set-font
+  ",f"      'menu-set-font
   ",t"      'consult-theme
 
   ;;================================= applications ===========================
@@ -2115,6 +2114,24 @@ I must've been doing something strange to run into the error with
   :hook (eglot-managed-mode .  eglot-tempel-mode)
 	)
 #+end_src
+*** Text editing (non-evil)
+:PROPERTIES:
+:LAST_MODIFIED: [2025-08-03 Sun 15:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: text-editing-non-evil
+:END:
+
+Incredibly useful package for dealing with "surrounding"
+#+name: non-evil text editing
+#+begin_src emacs-lisp
+(use-package surround
+  :general
+  (tyrant-def
+		"Si" 'surround-insert
+		"Sd" 'surround-kill
+		"Sr" 'surround-replace)
+	)
+#+end_src
 *** Footer for utilities config
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:46]
@@ -3058,8 +3075,8 @@ Disabled because it's in desperate need of spring cleaning / revision.
 
 ** Configure theming
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle config/configure-theming.el :comments noweb
-:LAST_MODIFIED: [2025-07-20 Sun 03:04]
+:header-args:emacs-lisp: :tangle config/configure-theming.el :comments noweb :eval no
+:LAST_MODIFIED: [2025-08-03 Sun 18:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-theming
 :END:
@@ -3093,7 +3110,7 @@ Packages that substantially change the user interface as configured in
 *** Color theme packages
 :PROPERTIES:
 :CUSTOM_ID: color-theme-packages
-:LAST_MODIFIED: [2025-07-19 Sat 21:34]
+:LAST_MODIFIED: [2025-08-03 Sun 18:21]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -3101,7 +3118,9 @@ Packages that substantially change the user interface as configured in
 (use-package doom-themes)
 
 (use-package ef-themes
-  :config (setopt ef-themes-mixed-fonts t)
+  :config (setopt ef-themes-mixed-fonts t
+                  ef-themes-variable-pitch-ui t)
+  ;; wonder why this is fine but modus-themes gets angry if you try setopt instead of setq
   )
 
 (use-package flexoki-themes
@@ -3112,7 +3131,19 @@ Packages that substantially change the user interface as configured in
   )
 
 ;; Development version I think? Also built in
-(use-package modus-themes)
+(use-package modus-themes
+  :config
+  ;; setopt will cause an error unless an :after or an autoload e.g. a hook or  is configured because these variables don't exist until load theme is called? something like that. setq is safe. :after org (this was arbitrary I just knew it was configured to autoload when opening an org file) + setopt worked fine
+  ;; (setopt modus-themes-mixed-fonts t
+  ;;       modus-themes-variable-pitch-ui t)
+
+  (setq modus-themes-mixed-fonts t
+        modus-themes-variable-pitch-ui t)
+
+  ;; Maybe define some palette overrides, such as by using our presets
+  ;; (setq modus-themes-common-palette-overrides
+  ;;       modus-themes-preset-overrides-intense)
+  )
 #+end_src
 
 **** Disabled themes
@@ -3125,11 +3156,15 @@ Packages that substantially change the user interface as configured in
 
 ***** Just not using at the moment
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 21:44]
+:LAST_MODIFIED: [2025-08-03 Sun 18:07]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: just-not-using-at-the-moment
 :END:
 Doric themes are nearly monochrome
+
+Unspecified is really a theme that removes all faces. 
+evenok's design involves sequentially loading themes to add more customization
+which doesn't play nicely with my hook to disable themes on loading a new one.
 
 #+name: nice just not using currently
 #+begin_src emacs-lisp :tangle no
@@ -3137,8 +3172,34 @@ Doric themes are nearly monochrome
 
 (use-package nordic-night-theme)
 
-;; requires special setup?
-(use-package evenok	:disabled )
+;; unsets everything
+(use-package unspecified-theme
+  :general (tyrant-def ",u" '(load-theme unspecified t))
+  )
+;; Wants to unload themeing with a special "unspecified" theme instead of using
+;; (disable-theme)
+(use-package evenok
+  :disabled
+  :config
+;; author recommended command wrapped up in a defun
+  (defun evenok-load-theme ()
+    "Load evenok theme after loading unspecified to reset themeing."
+    (interactive)
+    (mapcar #'load-theme
+       '(unspecified
+         evenok-dark
+         ;; evenok-dark-extra ;; optional, very opinionated
+         ))
+    )
+;; idiomatic alternative (only unloads top theme, mapcar for all)  
+    (defun evenok-idiomatic-load-theme ()
+    "Disable the current theme and load the evenok theme."
+    (interactive)
+    (disable-theme (car custom-enabled-themes))
+    (load-theme 'evenok-dark t)
+    )
+
+  )
 #+end_src
 
 ***** Disabled for a reason
@@ -4166,14 +4227,6 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 
 (use-package eat
 	:disabled)
-
-(use-package surround
-	:general
-  (tyrant-def
-		"Si" 'surround-insert
-		"Sd" 'surround-kill
-		"Sr" 'surround-replace)
-	)
 
 (use-package auth-source-1password)
 
@@ -5359,11 +5412,6 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
    (consult-customize consult-dash :initial (thing-at-point 'symbol))
 	)
 #+end_src
-** Configure UI Elements
-:PROPERTIES:
-:CUSTOM_ID: configure-ui-elements
-:END:
-
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel

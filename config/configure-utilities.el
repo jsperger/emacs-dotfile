@@ -216,6 +216,16 @@
 	:after yasnippet)
 ;; Text snippet insertion and collections:1 ends here
 
+;; [[file:../its-lit.org::non-evil text editing][non-evil text editing]]
+(use-package surround
+  :general
+  (tyrant-def
+		"Si" 'surround-insert
+		"Sd" 'surround-kill
+		"Sr" 'surround-replace)
+	)
+;; non-evil text editing ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
