@@ -23,7 +23,6 @@
  '(TeX-indent-open-delimiters "[")
  '(acm-backend-lsp-show-progress t)
  '(auth-source-debug t)
- '(custom-enabled-themes '(modus-operandi-tinted))
  '(custom-safe-themes t)
  '(eldoc-documentation-strategy 'eldoc-documentation-compose-eagerly)
  '(ess-ido-flex-matching nil)

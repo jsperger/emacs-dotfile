@@ -23,8 +23,7 @@
   "M" '("bookmark" . bookmark-set)
   ","       (cons "config" (make-sparse-keymap))
   ",d"      'describe-face
-  ",f"      'fontaine-set-preset
-  ",F"      'menu-set-font
+  ",f"      'menu-set-font
   ",t"      'consult-theme
 
   ;;================================= applications ===========================

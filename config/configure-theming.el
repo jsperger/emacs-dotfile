@@ -17,7 +17,8 @@
 (use-package doom-themes)
 
 (use-package ef-themes
-  :config (setopt ef-themes-mixed-fonts t)
+  :config (setopt ef-themes-mixed-fonts t
+                  ef-themes-variable-pitch-ui t)
   )
 
 (use-package flexoki-themes
@@ -28,7 +29,18 @@
   )
 
 ;; Development version I think? Also built in
-(use-package modus-themes)
+(use-package modus-themes
+  :config
+  ;; (setopt modus-themes-mixed-fonts t
+  ;;       modus-themes-variable-pitch-ui t)
+
+  (setq modus-themes-mixed-fonts t
+        modus-themes-variable-pitch-ui t)
+
+  ;; Maybe define some palette overrides, such as by using our presets
+  ;; (setq modus-themes-common-palette-overrides
+  ;;       modus-themes-preset-overrides-intense)
+  )
 ;; Color theme packages:1 ends here
 
 ;; [[file:../its-lit.org::#managing-fonts][Managing fonts:1]]
