@@ -106,6 +106,16 @@
   )
 ;; Configure ediff for viewing diffs:1 ends here
 
+;; [[file:../its-lit.org::#outline-mode-configuration][Outline mode configuration:1]]
+(use-package outline
+  :ensure nil
+  :defer t
+  :hook (text-mode . outline-minor-mode)
+  :config
+   (setopt outline-minor-mode-highlight t)
+   )
+;; Outline mode configuration:1 ends here
+
 ;; [[file:../its-lit.org::#treesitter][Treesitter:1]]
 (use-package treesit
   :ensure nil

@@ -19,6 +19,7 @@
 (use-package ef-themes
   :config (setopt ef-themes-mixed-fonts t
                   ef-themes-variable-pitch-ui t)
+  ;; wonder why this is fine but modus-themes gets angry if you try setopt instead of setq
   )
 
 (use-package flexoki-themes
@@ -31,6 +32,7 @@
 ;; Development version I think? Also built in
 (use-package modus-themes
   :config
+  ;; setopt will cause an error unless an :after or an autoload e.g. a hook or  is configured because these variables don't exist until load theme is called? something like that. setq is safe. :after org (this was arbitrary I just knew it was configured to autoload when opening an org file) + setopt worked fine
   ;; (setopt modus-themes-mixed-fonts t
   ;;       modus-themes-variable-pitch-ui t)
 
@@ -215,9 +217,9 @@
 (advice-add 'load-theme :after #'load-theme@run-hooks)
 (advice-add 'load-theme :before #'load-theme@theme-dont-propagate)
 
-(add-hook 'after-load-theme-hook #'bolder-faces)
-(add-hook 'after-load-theme-hook #'customize-tab-bar)
-(add-hook 'after-load-theme-hook #'unscale-outlines)
+;; (add-hook 'after-load-theme-hook #'bolder-faces)
+;; (add-hook 'after-load-theme-hook #'customize-tab-bar)
+;; (add-hook 'after-load-theme-hook #'unscale-outlines)
 (add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
 ;; Theming advice and hooks:1 ends here
 

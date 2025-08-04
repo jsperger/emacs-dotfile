@@ -75,6 +75,7 @@ count of {{{word-count}}}.*
       - [[#removed-built-in-configuration][Removed built-in configuration]]
     - [[#configure-built-in-programming-utilities][Configure built-in programming utilities]]
     - [[#configure-ediff-for-viewing-diffs][Configure ediff for viewing diffs]]
+    - [[#outline-mode-configuration][Outline mode configuration]]
     - [[#treesitter][Treesitter]]
       - [[#inactive-treesitter][Inactive treesitter]]
     - [[#built-in-package-configuration-that-were-in-a-separate-file-for-some-reason][Built-in package configuration that were in a separate file for some reason]]
@@ -1516,6 +1517,23 @@ I really need to learn how to use =ediff= properly
           )
   )
 
+#+end_src
+
+*** Outline mode configuration
+:PROPERTIES:
+:LAST_MODIFIED: [2025-08-03 Sun 18:39]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: outline-mode-configuration
+:END:
+
+#+begin_src emacs-lisp
+(use-package outline
+  :ensure nil
+  :defer t
+  :hook (text-mode . outline-minor-mode)
+  :config
+   (setopt outline-minor-mode-highlight t)
+   )
 #+end_src
 
 *** Treesitter
@@ -3420,7 +3438,7 @@ Font waterfall and size viewer from within emacs.
 #+end_src
 *** Theming advice and hooks
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 19:06]
+:LAST_MODIFIED: [2025-08-03 Sun 19:35]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: theming-advice-and-hooks
 :END:
@@ -3429,9 +3447,9 @@ Font waterfall and size viewer from within emacs.
 (advice-add 'load-theme :after #'load-theme@run-hooks)
 (advice-add 'load-theme :before #'load-theme@theme-dont-propagate)
 
-(add-hook 'after-load-theme-hook #'bolder-faces)
-(add-hook 'after-load-theme-hook #'customize-tab-bar)
-(add-hook 'after-load-theme-hook #'unscale-outlines)
+;; (add-hook 'after-load-theme-hook #'bolder-faces)
+;; (add-hook 'after-load-theme-hook #'customize-tab-bar)
+;; (add-hook 'after-load-theme-hook #'unscale-outlines)
 (add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
 #+end_src
 
@@ -4388,6 +4406,8 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-font-locking.el
 :PROPERTIES:
 :CUSTOM_ID: setup-font-lockingel
+:LAST_MODIFIED: [2025-08-03 Sun 20:30]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-font-locking.el
 ;;; config/setup-font-locking.el --- Font locking configuration -*- lexical-binding: t -*-
@@ -4395,14 +4415,29 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 (use-package hl-todo
   :custom (global-hl-todo-mode 't))
 
+(use-package morlock
+  :hook emacs-lisp-mode)
+
 (use-package highlight-parentheses
-  :hook (prog-mode . highlight-parentheses-mode)
+  :hook ((org-mode prog-mode) . highlight-parentheses-mode)
+  
   :config
-  ;; (setq highlight-parentheses-colors '("Springgreen3"
-  ;;                                      "IndianRed1"
-  ;;                                      "IndianRed3"
-  ;;                                      "IndianRed4"))
-  (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold))
+  (defun my-hl-paren-get-theme-colors ()
+    "Return a list of colors for highlight-parentheses from the current theme."
+    (list
+     (face-attribute 'font-lock-keyword-face :foreground nil 'default)
+     (face-attribute 'font-lock-function-name-face :foreground nil 'default)
+     (face-attribute 'font-lock-string-face :foreground nil 'default)
+     (face-attribute 'font-lock-comment-face :foreground nil 'default)))
+
+ ;; (setq highlight-parentheses-colors (function my-hl-paren-get-theme-colors))
+
+;;  (setq highlight-parentheses-attributes '(weight ultra-bold))
+
+  (setopt highlight-parentheses-delay 0.05)
+  
+  (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold)
+  )
 
 (use-package rainbow-delimiters
 	:disabled
@@ -4414,7 +4449,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 	;; https://github.com/tarsius/paren-face
 	;; Parentheses dimming
 	;;	:hook (elisp-mode . paren-face-mode)
-	:custom (global-paren-face-mode t)
+  
+	:config
+  (add-to-list 'paren-face-modes '(r-mode R-mode ess-r-mode))
+  (global-paren-face-mode t)
 	)
 
 ;;;

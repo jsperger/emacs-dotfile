@@ -3,14 +3,29 @@
 (use-package hl-todo
   :custom (global-hl-todo-mode 't))
 
+(use-package morlock
+  :hook emacs-lisp-mode)
+
 (use-package highlight-parentheses
-  :hook (prog-mode . highlight-parentheses-mode)
+  :hook ((org-mode prog-mode) . highlight-parentheses-mode)
+  
   :config
-  ;; (setq highlight-parentheses-colors '("Springgreen3"
-  ;;                                      "IndianRed1"
-  ;;                                      "IndianRed3"
-  ;;                                      "IndianRed4"))
-  (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold))
+  (defun my-hl-paren-get-theme-colors ()
+    "Return a list of colors for highlight-parentheses from the current theme."
+    (list
+     (face-attribute 'font-lock-keyword-face :foreground nil 'default)
+     (face-attribute 'font-lock-function-name-face :foreground nil 'default)
+     (face-attribute 'font-lock-string-face :foreground nil 'default)
+     (face-attribute 'font-lock-comment-face :foreground nil 'default)))
+
+ ;; (setq highlight-parentheses-colors (function my-hl-paren-get-theme-colors))
+
+;;  (setq highlight-parentheses-attributes '(weight ultra-bold))
+
+  (setopt highlight-parentheses-delay 0.05)
+  
+  (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold)
+  )
 
 (use-package rainbow-delimiters
 	:disabled
@@ -22,7 +37,10 @@
 	;; https://github.com/tarsius/paren-face
 	;; Parentheses dimming
 	;;	:hook (elisp-mode . paren-face-mode)
-	:custom (global-paren-face-mode t)
+  
+	:config
+  (add-to-list 'paren-face-modes '(r-mode R-mode ess-r-mode))
+  (global-paren-face-mode t)
 	)
 
 ;;;
