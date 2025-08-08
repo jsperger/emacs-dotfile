@@ -95,6 +95,7 @@ count of {{{word-count}}}.*
       - [[#configuring-how-undo-works][Configuring how undo works]]
       - [[#windowing][Windowing]]
     - [[#outline-and-fold-text][Outline and fold text]]
+    - [[#spell-check-with-jinx][Spell check with jinx]]
     - [[#text-snippet-insertion-and-collections][Text snippet insertion and collections]]
       - [[#removed-snippet-packages-and-customization][Removed snippet packages and customization]]
     - [[#text-editing-non-evil][Text editing (non-evil)]]
@@ -108,6 +109,7 @@ count of {{{word-count}}}.*
     - [[#configure-org-modes-progeny][Configure org mode's progeny]]
       - [[#org-todoist][org-todoist]]
       - [[#configure-org-node][Configure Org-node]]
+    - [[#configure-additional-org-exporters][Configure additional org exporters]]
     - [[#configuring-org-capture-templates][Configuring org capture templates]]
     - [[#add-additional-ways-to-export-from-org-to-other-formats][Add additional ways to export from org to other formats]]
       - [[#disabled-exporters][Disabled Exporters]]
@@ -2084,6 +2086,40 @@ Window numbering
   )
 #+end_src
 
+*** Spell check with jinx
+:PROPERTIES:
+:LAST_MODIFIED: [2025-08-08 Fri 19:31]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: spell-check-with-jinx
+:END:
+
+#+begin_src emacs-lisp
+(use-package jinx
+  :after evil
+  :hook (text-mode . jinx-mode)
+  :config
+  (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
+  (add-to-list 'jinx-exclude-regexps '(LaTeX-mode "\\s*\\input{[^}]+}\\s*"))
+
+  (add-to-list 'jinx-camel-modes 'R-mode)
+  (add-to-list 'jinx-camel-modes 'ess-r-mode)
+
+  (with-eval-after-load 'vertico-multiform
+    (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20))))
+  (with-eval-after-load 'evil
+    (evil-define-motion evil-prev-jinx-error (count)
+      "Go to the COUNT'th spelling mistake preceding point."
+      :jump t (jinx-previous (or count 1)))
+    (evil-define-motion evil-next-jinx-error (count)
+      "Go to the COUNT'th spelling mistake after point."
+      :jump t (jinx-next (or count 1))))
+  :general([remap ispell-word] 'jinx-correct-word
+           [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
+           [remap evil-next-flyspell-error] 'evil-next-jinx-error)
+  )
+
+#+end_src
+
 *** Text snippet insertion and collections
 :PROPERTIES:
 :CUSTOM_ID: text-snippet-insertion-and-collections
@@ -2282,7 +2318,7 @@ These packages have the distinction of being useful but I don't use them enough,
 
 *** Configure base org settings and major mode keybinds
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-23 Wed 01:09]
+:LAST_MODIFIED: [2025-08-08 Fri 17:12]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-base-org-settings-and-major-mode-keybinds
 :END:
@@ -2622,6 +2658,31 @@ Disabling this until I have time to sit down and give it an honest effort.
   )
 #+end_src
 
+*** Configure additional org exporters
+:PROPERTIES:
+:LAST_MODIFIED: [2025-08-08 Fri 17:13]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: configure-additional-org-exporters
+:END:
+
+Not sure if there's a reason to use the bundled package =oer-reveal= if you
+install reveal yourself using =npm= or similar. 
+
+#+begin_src emacs-lisp
+(use-package org-re-reveal
+  :init (setq org-re-reveal-root "~/code/js-reveal")
+  :general (despot-def org-mode-map
+             "ee"    'org-export-dispatch
+             "er"    'org-re-reveal-export-to-html
+             "eR"   'org-re-reveal-export-to-html-and-browse
+             "et"   'org-re-reveal-export-current-subtree
+             )
+  )
+
+(use-package oer-reveal
+  ;; bundle with org-re-reveal, reveal js, plugins
+  :disabled)
+#+end_src
 *** Configuring org capture templates :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configuring-org-capture-templates
@@ -6009,30 +6070,6 @@ use the toolbar in the first place.
 	:general
 	(tyrant-def
 		"as" 'flymake-vale-load))
-
-(use-package jinx
-  :after evil
-  :hook (text-mode . jinx-mode)
-  :config
-  (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
-  (add-to-list 'jinx-exclude-regexps '(LaTeX-mode "\\s*\\input{[^}]+}\\s*"))
-
-  (add-to-list 'jinx-camel-modes 'R-mode)
-  (add-to-list 'jinx-camel-modes 'ess-r-mode)
-
-  (with-eval-after-load 'vertico-multiform
-    (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20))))
-  (with-eval-after-load 'evil
-    (evil-define-motion evil-prev-jinx-error (count)
-      "Go to the COUNT'th spelling mistake preceding point."
-      :jump t (jinx-previous (or count 1)))
-    (evil-define-motion evil-next-jinx-error (count)
-      "Go to the COUNT'th spelling mistake after point."
-      :jump t (jinx-next (or count 1))))
-  :general
-  ([remap ispell-word] 'jinx-correct-word
-   [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
-   [remap evil-next-flyspell-error] 'evil-next-jinx-error))
 
 (use-package freeze-it
 	:disabled

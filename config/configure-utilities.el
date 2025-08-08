@@ -183,6 +183,32 @@
   )
 ;; Outline and fold text:1 ends here
 
+;; [[file:../its-lit.org::#spell-check-with-jinx][Spell check with jinx:1]]
+(use-package jinx
+  :after evil
+  :hook (text-mode . jinx-mode)
+  :config
+  (add-to-list 'jinx-exclude-regexps '(t "\\cc"))
+  (add-to-list 'jinx-exclude-regexps '(LaTeX-mode "\\s*\\input{[^}]+}\\s*"))
+
+  (add-to-list 'jinx-camel-modes 'R-mode)
+  (add-to-list 'jinx-camel-modes 'ess-r-mode)
+
+  (with-eval-after-load 'vertico-multiform
+    (add-to-list 'vertico-multiform-categories '(jinx grid (vertico-grid-annotate . 20))))
+  (with-eval-after-load 'evil
+    (evil-define-motion evil-prev-jinx-error (count)
+      "Go to the COUNT'th spelling mistake preceding point."
+      :jump t (jinx-previous (or count 1)))
+    (evil-define-motion evil-next-jinx-error (count)
+      "Go to the COUNT'th spelling mistake after point."
+      :jump t (jinx-next (or count 1))))
+  :general([remap ispell-word] 'jinx-correct-word
+           [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
+           [remap evil-next-flyspell-error] 'evil-next-jinx-error)
+  )
+;; Spell check with jinx:1 ends here
+
 ;; [[file:../its-lit.org::#text-snippet-insertion-and-collections][Text snippet insertion and collections:1]]
 ;;;; ========================== Text snippets ==========================
 (use-package tempel

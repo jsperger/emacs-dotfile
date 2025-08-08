@@ -273,6 +273,22 @@
   )
 ;; Configure Org-node:1 ends here
 
+;; [[file:../its-lit.org::#configure-additional-org-exporters][Configure additional org exporters:1]]
+(use-package org-re-reveal
+  :init (setq org-re-reveal-root "~/code/js-reveal")
+  :general (despot-def org-mode-map
+             "ee"    'org-export-dispatch
+             "er"    'org-re-reveal-export-to-html
+             "eR"   'org-re-reveal-export-to-html-and-browse
+             "et"   'org-re-reveal-export-current-subtree
+             )
+  )
+
+(use-package oer-reveal
+  ;; bundle with org-re-reveal, reveal js, plugins
+  :disabled)
+;; Configure additional org exporters:1 ends here
+
 ;; [[file:../its-lit.org::#add-additional-ways-to-export-from-org-to-other-formats][Add additional ways to export from org to other formats:1]]
 (use-package ox-pandoc
   :after org
