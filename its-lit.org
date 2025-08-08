@@ -120,6 +120,8 @@ count of {{{word-count}}}.*
       - [[#disabled-r-packages][Disabled R packages]]
     - [[#rust-programming][Rust programming]]
     - [[#latex--tex-configuration][LaTeX / TeX configuration]]
+      - [[#restarting-my-tex-config][Restarting my TeX config]]
+      - [[#old-config-restarting-from-scratch][Old config, restarting from scratch]]
     - [[#programming-languages-footer][Programming languages footer]]
   - [[#configure-theming][Configure theming]]
     - [[#preserve-appearance-of-collapsed-outline-headings-until-window-edge][Preserve appearance of collapsed outline headings until window edge]]
@@ -2732,13 +2734,13 @@ Disabling this until I have time to sit down and give it an honest effort.
 *** Python configuration
 :PROPERTIES:
 :CUSTOM_ID: python-configuration
-:LAST_MODIFIED: [2025-07-20 Sun 04:49]
+:LAST_MODIFIED: [2025-08-07 Thu 22:16]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
 ;;;; ============================== Python ==============================
 (use-package uv-mode
-	:hook (python-mode . uv-mode)
+	:hook (python-mode . uv-mode-auto-activate)
   )
 #+end_src
 
@@ -2923,12 +2925,37 @@ a bunch of repeated configuration.
 *** LaTeX / TeX configuration
 :PROPERTIES:
 :CUSTOM_ID: latex--tex-configuration
-:LAST_MODIFIED: [2025-07-20 Sun 04:30]
+:END:
+**** Restarting my TeX config
+:PROPERTIES:
+:LAST_MODIFIED: [2025-08-06 Wed 22:18]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: restarting-my-tex-config
+:END:
+
+#+name: auctex
+#+begin_src emacs-lisp
+(use-package auctex
+  )
+#+end_src
+**** Old config, restarting from scratch
+:PROPERTIES:
+:CUSTOM_ID: old-config-restarting-from-scratch
+:LAST_MODIFIED: [2025-08-06 Wed 22:17]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-Disabled because it's in desperate need of spring cleaning / revision.
+Disabled because it's in desperate need of spring cleaning / revision. For
+something so integral to my work it's really held together by duct tape and glue
+with notably nonfunctioning pieces. 
 #+begin_src emacs-lisp :tangle no :eval no :comments no
 ;;; config/setup-tex.el --- TeX and LaTeX configuration -*- lexical-binding: t -*-
+
+(use-package citar
+  :custom
+  (citar-bibliography '("~/obsidian/references.bib"))
+  :hook
+  (LaTeX-mode . citar-capf-setup)
+  (org-mode . citar-capf-setup))
 
 (use-package auctex
   :mode ("\\.tex\\'" . LaTeX-mode)

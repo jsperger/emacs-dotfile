@@ -47,7 +47,7 @@
 ;; [[file:../its-lit.org::#python-configuration][Python configuration:1]]
 ;;;; ============================== Python ==============================
 (use-package uv-mode
-	:hook (python-mode . uv-mode)
+	:hook (python-mode . uv-mode-auto-activate)
   )
 ;; Python configuration:1 ends here
 
@@ -160,6 +160,11 @@
              )
   )
 ;; Rust programming:1 ends here
+
+;; [[file:../its-lit.org::auctex][auctex]]
+(use-package auctex
+  )
+;; auctex ends here
 
 ;; Local Variables:
 ;; no-byte-compile: t
