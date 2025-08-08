@@ -897,7 +897,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 *** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-08-03 Sun 17:10]
+:LAST_MODIFIED: [2025-08-07 Thu 17:01]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -1377,7 +1377,7 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
 #+end_src
 *** Configuring built-in packages
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 18:05]
+:LAST_MODIFIED: [2025-08-03 Sun 20:47]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configuring-built-in-packages
 :END:
@@ -1404,6 +1404,16 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
           dired-vc-rename-file t
           )
   )
+
+;; (use-package paren
+;;   :ensure nil
+;;   :defer t
+;;   :config
+;;   (show-paren-mode 1)
+;;   (setq show-paren-style 'expression)
+;;   (setq show-paren-delay 0.05)
+;;   )
+
 #+end_src
 **** Removed built-in configuration
 :PROPERTIES:
@@ -1870,7 +1880,7 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 *** Data format modes
 :PROPERTIES:
 :CUSTOM_ID: data-format-modes
-:LAST_MODIFIED: [2025-07-20 Sun 03:53]
+:LAST_MODIFIED: [2025-08-07 Thu 22:53]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp
@@ -1880,7 +1890,9 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
   :mode ("\\.[cC][sS][vV]\\\'" . csv-mode)
   :config
   (add-hook 'csv-mode-hook 'csv-guess-set-separator)
-	:general
+	(add-hook 'csv-mode-hook (lambda () (visual-fill-column-mode -1)))
+
+:general
   (despot-def csv-mode-map
     "s" 'csv-sort-fields
     "n" 'csv-sort-numeric-fields

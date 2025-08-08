@@ -60,7 +60,9 @@
   :mode ("\\.[cC][sS][vV]\\\'" . csv-mode)
   :config
   (add-hook 'csv-mode-hook 'csv-guess-set-separator)
-	:general
+	(add-hook 'csv-mode-hook (lambda () (visual-fill-column-mode -1)))
+
+:general
   (despot-def csv-mode-map
     "s" 'csv-sort-fields
     "n" 'csv-sort-numeric-fields

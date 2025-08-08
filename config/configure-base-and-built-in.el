@@ -56,6 +56,15 @@
           dired-vc-rename-file t
           )
   )
+
+;; (use-package paren
+;;   :ensure nil
+;;   :defer t
+;;   :config
+;;   (show-paren-mode 1)
+;;   (setq show-paren-style 'expression)
+;;   (setq show-paren-delay 0.05)
+;;   )
 ;; Configuring built-in packages:1 ends here
 
 ;; [[file:../its-lit.org::#configure-built-in-programming-utilities][Configure built-in programming utilities:1]]
