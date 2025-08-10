@@ -25,10 +25,10 @@
 	)
 
 (use-package mermaid-mode
-			:mode ("\\.mermaid\\''" . mermaid-mode))
+			:mode ("\\.mermaid\\'" . mermaid-mode))
 
 (use-package pikchr-mode
-		:mode ("\\.pikchr\\''" . pikchr-mode))
+		:mode ("\\.pikchr\\'" . pikchr-mode))
 
 (use-package uniline
 	:general

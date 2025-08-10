@@ -3,7 +3,6 @@
 ;;; Code:
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
-        ("\\.qmd\\'" . markdown-mode)
   :init (setq markdown-command "multimarkdown")
   :config
   (setopt markdown-fontify-code-blocks-natively t)

@@ -57,7 +57,7 @@
 ;;;; ======================= Data file format modes ======================
 
 (use-package csv-mode
-  :mode ("\\.[cC][sS][vV]\\\'" . csv-mode)
+  :mode ("\\.[cC][sS][vV]\\'" . csv-mode)
   :config
   (add-hook 'csv-mode-hook 'csv-guess-set-separator)
 	(add-hook 'csv-mode-hook (lambda () (visual-fill-column-mode -1)))

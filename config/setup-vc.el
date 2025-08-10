@@ -82,7 +82,7 @@
   )
 
 (use-package git-modes
-  :mode ("\\.gitignore\\\'" . gitignore-mode)
+  :mode ("\\.gitignore\\'" . gitignore-mode)
   :after vc magit)
 
 (use-package git-link

@@ -128,8 +128,12 @@
 	)
 
 (use-package poly-R
-  :mode ("\\.qmd\\'" . poly-markdown+R-mode)
+  :mode ("\\.[Rr][mM][dD]\\'" . poly-markdown+R-mode)
   )
+
+(use-package quarto-mode
+  :mode ("\\.[qQ][mM][dD]\\'" . poly-quarto-mode)
+)
 ;; R programming:1 ends here
 
 ;; [[file:../its-lit.org::#rust-programming][Rust programming:1]]
@@ -163,6 +167,11 @@
 
 ;; [[file:../its-lit.org::auctex][auctex]]
 (use-package auctex
+  :mode ("\\.[Tt][Ee][Xx]\\'" . LaTeX-mode)
+  :init (setq TeX-auto-save t
+              TeX-parse-self t
+              )
+  :config (setopt TeX-master nil)
   )
 ;; auctex ends here
 

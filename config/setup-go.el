@@ -1,7 +1,7 @@
 ;;; config/setup-go.el --- Go programming language configuration -*- lexical-binding: t -*-
 
 (use-package go-mode
-  :mode ("\.go\"" . go-mode)
+  :mode ("\\.go\\'" . go-mode)
   :general
   (despot-def (go-mode-map)
     :major-modes '(go-mode go-ts-mode)

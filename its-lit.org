@@ -1882,14 +1882,14 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 *** Data format modes
 :PROPERTIES:
 :CUSTOM_ID: data-format-modes
-:LAST_MODIFIED: [2025-08-07 Thu 22:53]
+:LAST_MODIFIED: [2025-08-10 Sun 17:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp
 ;;;; ======================= Data file format modes ======================
 
 (use-package csv-mode
-  :mode ("\\.[cC][sS][vV]\\\'" . csv-mode)
+  :mode ("\\.[cC][sS][vV]\\'" . csv-mode)
   :config
   (add-hook 'csv-mode-hook 'csv-guess-set-separator)
 	(add-hook 'csv-mode-hook (lambda () (visual-fill-column-mode -1)))
@@ -2855,7 +2855,7 @@ interactive/enhance the REPL loop.
 *** R programming
 :PROPERTIES:
 :CUSTOM_ID: r-programming
-:LAST_MODIFIED: [2025-07-25 Fri 02:43]
+:LAST_MODIFIED: [2025-08-10 Sun 17:38]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -2938,8 +2938,12 @@ a bunch of repeated configuration.
 	)
 
 (use-package poly-R
-  :mode ("\\.qmd\\'" . poly-markdown+R-mode)
+  :mode ("\\.[Rr][mM][dD]\\'" . poly-markdown+R-mode)
   )
+
+(use-package quarto-mode
+  :mode ("\\.[qQ][mM][dD]\\'" . poly-quarto-mode)
+)
 #+end_src
 
 **** Disabled R packages
@@ -3009,6 +3013,7 @@ a bunch of repeated configuration.
 #+name: auctex
 #+begin_src emacs-lisp
 (use-package auctex
+  :mode ("\\.[Tt][Ee][Xx]\\'" . LaTeX-mode)
   )
 #+end_src
 **** Old config, restarting from scratch
@@ -4158,10 +4163,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 	)
 
 (use-package mermaid-mode
-			:mode ("\\.mermaid\\''" . mermaid-mode))
+			:mode ("\\.mermaid\\'" . mermaid-mode))
 
 (use-package pikchr-mode
-		:mode ("\\.pikchr\\''" . pikchr-mode))
+		:mode ("\\.pikchr\\'" . pikchr-mode))
 
 (use-package uniline
 	:general
@@ -4578,12 +4583,14 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-go.el
 :PROPERTIES:
 :CUSTOM_ID: setup-goel
+:LAST_MODIFIED: [2025-08-10 Sun 17:55]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-go.el
 ;;; config/setup-go.el --- Go programming language configuration -*- lexical-binding: t -*-
 
 (use-package go-mode
-  :mode ("\.go\"" . go-mode)
+  :mode ("\\.go\\'" . go-mode)
   :general
   (despot-def (go-mode-map)
     :major-modes '(go-mode go-ts-mode)
@@ -5091,7 +5098,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-markdown.el
 :PROPERTIES:
 :CUSTOM_ID: setup-markdownel
-:LAST_MODIFIED: [2025-07-18 Fri 22:33]
+:LAST_MODIFIED: [2025-08-10 Sun 17:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-markdown.el
@@ -5100,7 +5107,6 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ;;; Code:
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
-        ("\\.qmd\\'" . markdown-mode)
   :init (setq markdown-command "multimarkdown")
   :config
   (setopt markdown-fontify-code-blocks-natively t)
@@ -5806,7 +5812,7 @@ use the toolbar in the first place.
 ** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
-:LAST_MODIFIED: [2025-07-18 Fri 22:00]
+:LAST_MODIFIED: [2025-08-10 Sun 17:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-vc.el
@@ -5894,7 +5900,7 @@ use the toolbar in the first place.
   )
 
 (use-package git-modes
-  :mode ("\\.gitignore\\\'" . gitignore-mode)
+  :mode ("\\.gitignore\\'" . gitignore-mode)
   :after vc magit)
 
 (use-package git-link
