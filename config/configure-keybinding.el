@@ -187,7 +187,7 @@
   "ta"      'auto-fill-mode
   ;;    "tb"      'global-obsidian-mode
   ;;		"tc"      'nocomments-mode defined-in-package
-  "tM"      'consult-minor-mode-menu
+  "tm"      'consult-minor-mode-menu
   "td"      'toggle-debug-on-error
   "te"      'electric-pair-local-mode
   "tf"      'display-fill-column-indicator-mode
@@ -196,7 +196,7 @@
   "th"      'hs-minor-mode
   "tj"      'jinx-mode
   "tl"      'toggle-truncate-lines
-  "tm"      'flymake-mode
+  "tM"      'flymake-mode
   "tn"      'display-line-numbers-mode
   "tz"      'outline-minor-mode
   "tO"      'org-modern-mode

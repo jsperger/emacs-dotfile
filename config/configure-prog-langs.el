@@ -54,6 +54,7 @@
 ;; [[file:../its-lit.org::#r-programming][R programming:1]]
 (use-package ess
   :mode ("\\.[rR]\\'" . R-mode)
+;;  :hook (inferior-ess-r-mode . (lsp-bridge-mode acm-mode))
   :init
   (setq ess-set-style t
         comint-scroll-to-bottom-on-input t
@@ -122,9 +123,11 @@
 (use-package essgd
   :after ess
 	:general
-	(despot-def (ess-r-mode-map)
-		:major-modes 'ess-r-mode
+	(despot-def (inferior-ess-r-mode-map)
+		:major-modes 'inferior-ess-r-mode
 		"g" 'essgd-start)
+  :config
+  (add-hook 'inferior-ess-r-mode-hook #'essgd-start)
 	)
 
 (use-package poly-R

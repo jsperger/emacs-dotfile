@@ -119,6 +119,7 @@ count of {{{word-count}}}.*
     - [[#python-configuration][Python configuration]]
       - [[#disabled-python-packages][Disabled python packages]]
     - [[#r-programming][R programming]]
+      - [[#keymap-references-for-ess][Keymap references for ess]]
       - [[#disabled-r-packages][Disabled R packages]]
     - [[#rust-programming][Rust programming]]
     - [[#latex--tex-configuration][LaTeX / TeX configuration]]
@@ -899,7 +900,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 *** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-08-07 Thu 17:01]
+:LAST_MODIFIED: [2025-08-10 Sun 18:20]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -1079,7 +1080,7 @@ I need to move most of these out of here and put them in the relavent package de
   "ta"      'auto-fill-mode
   ;;    "tb"      'global-obsidian-mode
   ;;		"tc"      'nocomments-mode defined-in-package
-  "tM"      'consult-minor-mode-menu
+  "tm"      'consult-minor-mode-menu
   "td"      'toggle-debug-on-error
   "te"      'electric-pair-local-mode
   "tf"      'display-fill-column-indicator-mode
@@ -1088,7 +1089,7 @@ I need to move most of these out of here and put them in the relavent package de
   "th"      'hs-minor-mode
   "tj"      'jinx-mode
   "tl"      'toggle-truncate-lines
-  "tm"      'flymake-mode
+  "tM"      'flymake-mode
   "tn"      'display-line-numbers-mode
   "tz"      'outline-minor-mode
   "tO"      'org-modern-mode
@@ -2855,15 +2856,22 @@ interactive/enhance the REPL loop.
 *** R programming
 :PROPERTIES:
 :CUSTOM_ID: r-programming
-:LAST_MODIFIED: [2025-08-10 Sun 17:38]
+:LAST_MODIFIED: [2025-08-10 Sun 18:42]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 I need to go over this again, ess was refusing to respect my style and there's
 a bunch of repeated configuration.
+
+I should probably try to ditch ess completely. I think 90% of my effort goes to
+working around it.
+
+"ESS Mode doesn’t support Hideshow Minor Mode"
+
 #+begin_src emacs-lisp 
 (use-package ess
   :mode ("\\.[rR]\\'" . R-mode)
+;;  :hook (inferior-ess-r-mode . (lsp-bridge-mode acm-mode))
   :init
   (setq ess-set-style t
         comint-scroll-to-bottom-on-input t
@@ -2932,9 +2940,11 @@ a bunch of repeated configuration.
 (use-package essgd
   :after ess
 	:general
-	(despot-def (ess-r-mode-map)
-		:major-modes 'ess-r-mode
+	(despot-def (inferior-ess-r-mode-map)
+		:major-modes 'inferior-ess-r-mode
 		"g" 'essgd-start)
+  :config
+  (add-hook 'inferior-ess-r-mode-hook #'essgd-start)
 	)
 
 (use-package poly-R
@@ -2945,6 +2955,190 @@ a bunch of repeated configuration.
   :mode ("\\.[qQ][mM][dD]\\'" . poly-quarto-mode)
 )
 #+end_src
+
+**** Keymap references for =ess=
+:PROPERTIES:
+:LAST_MODIFIED: [2025-08-10 Sun 18:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: keymap-references-for-ess
+:END:
+
+A reference as I consider what functionality I actually use and would need to
+replace if I dropped =ess=. Number one thing I use is definitely evaluating a line
+or region in an inferior process buffer. 
+#+name: ess keymap
+#+begin_src text :tangle no
+Key             Binding
+
+TAB							ess-indent-or-complete
+,								ess-smart-comma
+{								skeleton-pair-insert-maybe
+}								skeleton-pair-insert-maybe
+C-<return>			ess-eval-region-or-line-visibly-and-step
+
+C-M-a						ess-goto-beginning-of-function-or-para
+C-M-e						ess-goto-end-of-function-or-para
+C-M-h						ess-mark-function-or-para
+M-RET						ess-use-this-dir
+C-M-q						ess-indent-exp
+C-M-x						ess-eval-region-or-function-or-paragraph
+
+C-c C-b					ess-eval-buffer
+C-c C-c					ess-eval-region-or-function-or-paragraph-and-step
+C-c C-f					ess-eval-function
+C-c C-j					ess-eval-line
+C-c C-k					ess-force-buffer-current
+C-c C-l					ess-load-file
+C-c C-n					ess-eval-line-visibly-and-step
+C-c C-p					ess-eval-paragraph-and-step
+C-c C-q					ess-quit
+C-c C-r					ess-eval-region
+C-c C-s					ess-switch-process
+C-c C-v					ess-display-help-on-object
+C-c C-z					ess-switch-to-inferior-or-script-buffer
+C-c `						ess-show-traceback
+C-c ~						ess-show-call-stack
+C-c C-<down>		ess-eval-buffer-from-here-to-end
+C-c C-<up>			ess-eval-buffer-from-beg-to-here
+
+<remap> <yank>	ess-yank
+
+C-x n d					ess-narrow-to-defun-or-para
+C-x n f					ess-narrow-to-defun-or-para
+
+C-c C-t C-b							ess-bp-set-conditional
+C-c C-t C-d							ess-debug-unflag-for-debugging
+C-c C-t C-e							ess-debug-toggle-error-action
+C-c C-t C-k							ess-bp-kill-all
+C-c C-t C-l							ess-bp-set-logger
+C-c C-t C-n							ess-bp-next
+C-c C-t C-o							ess-bp-toggle-state
+C-c C-t C-p							ess-bp-previous
+C-c C-t C-s							ess-r-set-evaluation-env
+C-c C-t C-u							ess-debug-unflag-for-debugging
+C-c C-t C-w							ess-watch
+C-c C-t 0 .. C-c C-t 9	ess-electric-selection
+C-c C-t ?								ess-tracebug-show-help
+C-c C-t B								ess-bp-set-conditional
+C-c C-t I								ess-debug-goto-input-event-marker
+C-c C-t K								ess-bp-kill-all
+C-c C-t L								ess-bp-set-logger
+C-c C-t T								ess-toggle-tracebug
+C-c C-t `								ess-show-traceback
+C-c C-t b								ess-bp-set
+C-c C-t d								ess-debug-flag-for-debugging
+C-c C-t e								ess-debug-toggle-error-action
+C-c C-t i								ess-debug-goto-input-event-marker
+C-c C-t k								ess-bp-kill
+C-c C-t l								ess-r-devtools-load-package
+C-c C-t n								ess-bp-next
+C-c C-t o								ess-bp-toggle-state
+C-c C-t p								ess-bp-previous
+C-c C-t s								ess-r-set-evaluation-env
+C-c C-t u								ess-debug-unflag-for-debugging
+C-c C-t w								ess-watch
+C-c C-t ~								ess-show-call-stack
+
+C-c C-e C-d			ess-dump-object-into-edit-buffer
+C-c C-e C-e			ess-execute
+C-c C-e TAB			ess-install-library
+C-c C-e C-l			ess-load-library
+C-c C-e C-r			inferior-ess-reload
+C-c C-e C-s			ess-set-style
+C-c C-e C-t			ess-build-tags-for-directory
+C-c C-e C-w			ess-execute-screen-options
+C-c C-e /				ess-set-working-directory
+C-c C-e d				ess-dump-object-into-edit-buffer
+C-c C-e e				ess-execute
+C-c C-e i				ess-install-library
+C-c C-e l				ess-load-library
+C-c C-e r				inferior-ess-reload
+C-c C-e s				ess-set-style
+C-c C-e t				ess-build-tags-for-directory
+C-c C-e w				ess-execute-screen-options
+
+C-c C-d C-a			ess-display-help-apropos
+C-c C-d C-d			ess-display-help-on-object
+C-c C-d C-e			ess-describe-object-at-point
+C-c C-d TAB			ess-display-package-index
+C-c C-d RET			ess-manual-lookup
+C-c C-d C-o			ess-display-demos
+C-c C-d C-v			ess-display-vignettes
+C-c C-d C-w			ess-help-web-search
+C-c C-d a				ess-display-help-apropos
+C-c C-d d				ess-display-help-on-object
+C-c C-d e				ess-describe-object-at-point
+C-c C-d i				ess-display-package-index
+C-c C-d m				ess-manual-lookup
+C-c C-d o				ess-display-demos
+C-c C-d v				ess-display-vignettes
+C-c C-d w				ess-help-web-search
+
+C-c M-b					ess-eval-buffer-and-go
+C-c M-f					ess-eval-function-and-go
+C-c M-j					ess-eval-line-and-go
+C-c M-l					ess-load-file
+C-c M-p					ess-eval-paragraph-and-go
+C-c M-r					ess-eval-region-and-go
+#+end_src
+
+#+name: ess-r-mode-map keymap
+#+begin_src text :tangle no :comments no
+;;(describe-keymap 'ess-r-mode-map)
+Key             Binding
+
+C-c C-=					ess-cycle-assign
+
+C-c C-. H				ess-rutils-html-docs
+C-c C-. a				ess-display-help-apropos
+C-c C-. d				ess-change-directory
+C-c C-. l				ess-r-package-list-local-packages
+C-c C-. m				ess-rutils-rm-all
+C-c C-. o				ess-rdired
+C-c C-. r				ess-r-package-list-available-packages
+C-c C-. s				ess-rutils-save-workspace
+C-c C-. u				ess-r-package-update-packages
+C-c C-. w				ess-rutils-load-workspace
+
+<emacs-state> M-SPC m TAB				ess-install-library
+<emacs-state> M-SPC m F					air-format
+<emacs-state> M-SPC m b					ess-eval-buffer
+<emacs-state> M-SPC m c					ess-eval-region-or-function-or-paragraph
+<emacs-state> M-SPC m f					ess-eval-function
+<emacs-state> M-SPC m g					essgd-start
+<emacs-state> M-SPC m r					run-ess-r
+<emacs-state> M-SPC m v					oc-set-ess-offset
+
+<motion-state> SPC m TAB				ess-install-library
+<motion-state> SPC m F					air-format
+<motion-state> SPC m b					ess-eval-buffer
+<motion-state> SPC m c					ess-eval-region-or-function-or-paragraph
+<motion-state> SPC m f					ess-eval-function
+<motion-state> SPC m g					essgd-start
+<motion-state> SPC m r					run-ess-r
+<motion-state> SPC m v					oc-set-ess-offset
+
+<insert-state> M-SPC m TAB			ess-install-library
+<insert-state> M-SPC m F				air-format
+<insert-state> M-SPC m b				ess-eval-buffer
+<insert-state> M-SPC m c				ess-eval-region-or-function-or-paragraph
+<insert-state> M-SPC m f				ess-eval-function
+<insert-state> M-SPC m g				essgd-start
+<insert-state> M-SPC m r				run-ess-r
+<insert-state> M-SPC m v				oc-set-ess-offset
+
+<normal-state> SPC m TAB				ess-install-library
+<normal-state> SPC m F					air-format
+<normal-state> SPC m b					ess-eval-buffer
+<normal-state> SPC m c					ess-eval-region-or-function-or-paragraph
+<normal-state> SPC m f					ess-eval-function
+<normal-state> SPC m g					essgd-start
+<normal-state> SPC m r					run-ess-r
+<normal-state> SPC m v					oc-set-ess-offset
+
+#+end_src
+
+
 
 **** Disabled R packages
 :PROPERTIES:
