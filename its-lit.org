@@ -2967,7 +2967,7 @@ a bunch of repeated configuration.
 *** Rust programming
 :PROPERTIES:
 :CUSTOM_ID: rust-programming
-:LAST_MODIFIED: [2025-07-20 Sun 04:56]
+:LAST_MODIFIED: [2025-08-10 Sun 18:14]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
@@ -3005,7 +3005,7 @@ a bunch of repeated configuration.
 :END:
 **** Restarting my TeX config
 :PROPERTIES:
-:LAST_MODIFIED: [2025-08-06 Wed 22:18]
+:LAST_MODIFIED: [2025-08-10 Sun 18:01]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: restarting-my-tex-config
 :END:
@@ -3014,6 +3014,11 @@ a bunch of repeated configuration.
 #+begin_src emacs-lisp
 (use-package auctex
   :mode ("\\.[Tt][Ee][Xx]\\'" . LaTeX-mode)
+  :init (setq TeX-auto-save t
+              TeX-parse-self t
+              )
+  :config (setopt TeX-master nil
+                  TeX-engine 'luatex)
   )
 #+end_src
 **** Old config, restarting from scratch
@@ -4721,7 +4726,15 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2025-08-01 Fri 23:46]
+:LAST_MODIFIED: [2025-08-10 Sun 18:16]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+Customize =mcp-server-lib= to use =no-littering='s directory otherwise it defaults
+to installing its helper script to the root of the emacs user directory.
+:PROPERTIES:
+:CUSTOM_ID: setup-llmel
+:LAST_MODIFIED: [2025-08-10 Sun 18:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-llm.el
@@ -4784,6 +4797,14 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 
   :general (tyrant-def "aa" 'aidermacs-transient-menu)
   )
+
+(use-package mcp-server-lib
+  :after no-littering
+  :custom (mcp-server-lib-install-directory 'no-littering-var-directory)
+  )
+
+(use-package elisp-dev-mcp
+  :after mcp-server-lib)
 
 ;; Local Variables:
 ;; no-byte-compile: t

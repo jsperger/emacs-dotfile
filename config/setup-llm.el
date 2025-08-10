@@ -58,6 +58,14 @@
   :general (tyrant-def "aa" 'aidermacs-transient-menu)
   )
 
+(use-package mcp-server-lib
+  :after no-littering
+  :custom (mcp-server-lib-install-directory 'no-littering-var-directory)
+  )
+
+(use-package elisp-dev-mcp
+  :after mcp-server-lib)
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

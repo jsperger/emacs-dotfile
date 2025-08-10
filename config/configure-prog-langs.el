@@ -171,7 +171,8 @@
   :init (setq TeX-auto-save t
               TeX-parse-self t
               )
-  :config (setopt TeX-master nil)
+  :config (setopt TeX-master nil
+                  TeX-engine 'luatex)
   )
 ;; auctex ends here
 
