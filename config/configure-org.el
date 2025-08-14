@@ -42,6 +42,8 @@
     "#"     'org-update-statistics-cookies
     "RET"   'org-ctrl-c-ret
     "M-RET" 'org-meta-return
+    "a"     'org-babel-tangle
+;;;; ============================= Babel =============================  
     "b"     (cons "babel" (make-sparse-keymap))
     "ba"    'org-babel-sha1-hash
     "bb"    'org-babel-execute-buffer
@@ -85,6 +87,7 @@
     "ip"    'org-set-property
     "is"    'org-insert-subheading
     "it"    'org-set-tags-command
+;;;; ============================= Tables =============================
     "t"     (cons "tables" (make-sparse-keymap))
     "ta"    'org-table-align
     "tb"    'org-table-blank-field
@@ -117,6 +120,7 @@
     "ttf"   'org-table-toggle-formula-debugger
     "tto"   'org-table-toggle-coordinate-overlays
     "tw"    'org-table-wrap-region
+;;;; ============================= Toggle Settings =============================
     "T"     (cons "toggles" (make-sparse-keymap))
     "Tc"    'org-toggle-checkbox
     "Td"    'org-modern-indent-mode
@@ -127,6 +131,7 @@
     "Tm"    'org-toggle-hidden-emphasis-markers
     "Tt"    'org-show-todo-tree
     "Tx"    'org-latex-preview
+;;;; ============================= Text markup =============================
     "x"     (cons "text" (make-sparse-keymap))
     "xb"    'org-bold
     "xc"    'org-code
