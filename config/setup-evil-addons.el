@@ -1,6 +1,9 @@
 ;;; config/setup-evil-addons.el --- Evil addons configuration -*- lexical-binding: t -*-
 
 (use-package evil-collection
+:ensure(evil-collection :host github
+:repo "emacs-evil/evil-collection"
+:ref "a406585")
 	:hook (elpaca-after-init . evil-collection-init)
   :init
 	(setq evil-collection-magit-want-horizontal-movement t
