@@ -4,7 +4,7 @@
 
 (use-package nov
 	:mode ("\\.epub\\'" . nov-mode)
-	:hook (nov-mode . visual-line-fill-column-mode)
+	:hook (nov-mode . visual-line-mode)
 	:config
 ;; Want this only in nov-mode with variable pitch font, not the right way to do        
 ;;	(setq-local visual-fill-column-width 60)

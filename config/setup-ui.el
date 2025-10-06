@@ -89,6 +89,7 @@
                   visual-fill-column-extra-text-width '(4 . 4)
                   fill-column 80
                   )
+  (add-hook 'visual-line-mode-hook #'visual-fill-column-for-vline)
   )
 ;; Local Variables:
 ;; no-byte-compile: t

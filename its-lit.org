@@ -5687,7 +5687,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-reading.el
 :PROPERTIES:
 :CUSTOM_ID: setup-readingel
-:LAST_MODIFIED: [2025-07-18 Fri 18:40]
+:LAST_MODIFIED: [2025-10-05 Sun 16:53]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-reading.el
@@ -5697,7 +5697,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 
 (use-package nov
 	:mode ("\\.epub\\'" . nov-mode)
-	:hook (nov-mode . visual-line-fill-column-mode)
+	:hook (nov-mode . visual-line-mode)
 	:config
 ;; Want this only in nov-mode with variable pitch font, not the right way to do        
 ;;	(setq-local visual-fill-column-width 60)
@@ -5789,7 +5789,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-07-25 Fri 15:21]
+:LAST_MODIFIED: [2025-10-05 Sun 16:47]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -5884,6 +5884,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
                   visual-fill-column-extra-text-width '(4 . 4)
                   fill-column 80
                   )
+  (add-hook 'visual-line-mode-hook #'visual-fill-column-for-vline)
   )
 ;; Local Variables:
 ;; no-byte-compile: t
