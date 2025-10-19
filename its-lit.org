@@ -2063,12 +2063,13 @@ Window numbering
 *** Outline and fold text
 :PROPERTIES:
 :CUSTOM_ID: outline-and-fold-text
-:LAST_MODIFIED: [2025-07-20 Sun 03:29]
+:LAST_MODIFIED: [2025-10-19 Sun 18:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
 (use-package outline-indent
   :commands outline-indent-minor-mode
+  :hook ((python-mode python-ts-mode yaml-mode yaml-ts-mode) . outline-indent-minor-mode)
   :custom
   (outline-indent-ellipsis " ▼ ")
   :general

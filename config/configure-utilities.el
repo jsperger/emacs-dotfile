@@ -160,6 +160,7 @@
 ;; [[file:../its-lit.org::#outline-and-fold-text][Outline and fold text:1]]
 (use-package outline-indent
   :commands outline-indent-minor-mode
+  :hook ((python-mode python-ts-mode yaml-mode yaml-ts-mode) . outline-indent-minor-mode)
   :custom
   (outline-indent-ellipsis " ▼ ")
   :general
