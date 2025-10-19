@@ -2818,13 +2818,13 @@ install reveal yourself using =npm= or similar.
 *** Python configuration
 :PROPERTIES:
 :CUSTOM_ID: python-configuration
-:LAST_MODIFIED: [2025-08-07 Thu 22:16]
+:LAST_MODIFIED: [2025-10-19 Sun 18:46]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
 ;;;; ============================== Python ==============================
 (use-package uv-mode
-	:hook (python-mode . uv-mode-auto-activate)
+  :hook (python-mode . uv-mode-auto-activate-hook)
   )
 #+end_src
 

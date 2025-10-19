@@ -47,7 +47,7 @@
 ;; [[file:../its-lit.org::#python-configuration][Python configuration:1]]
 ;;;; ============================== Python ==============================
 (use-package uv-mode
-	:hook (python-mode . uv-mode-auto-activate)
+  :hook (python-mode . uv-mode-auto-activate-hook)
   )
 ;; Python configuration:1 ends here
 
