@@ -3942,6 +3942,8 @@ of 2025-07-06
 *** Annotate completion options
 :PROPERTIES:
 :CUSTOM_ID: annotate-completion-options
+:LAST_MODIFIED: [2025-10-19 Sun 19:14]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 :PROPERTIES:
 :CUSTOM_ID: annotate-completion-options
@@ -3960,8 +3962,8 @@ of 2025-07-06
 (use-package epkg-marginalia
   :after marginalia
   :config
-  (setcar (alist-get 'package marginalia-annotator-registry)
-          #'epkg-marginalia-annotate-package)
+    (setcar (alist-get 'package marginalia-annotators)
+            #'epkg-marginalia-annotate-package)
   )
 
 (use-package nerd-icons-completion

@@ -7,8 +7,8 @@
 (use-package epkg-marginalia
   :after marginalia
   :config
-  (setcar (alist-get 'package marginalia-annotator-registry)
-          #'epkg-marginalia-annotate-package)
+    (setcar (alist-get 'package marginalia-annotators)
+            #'epkg-marginalia-annotate-package)
   )
 
 (use-package nerd-icons-completion
