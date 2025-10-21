@@ -5792,7 +5792,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-10-05 Sun 16:47]
+:LAST_MODIFIED: [2025-10-21 Tue 03:41]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -5826,6 +5826,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
           shackle-rules
           `((help-mode :select t :align right :size 0.4)
             (helpful-mode :select t :align right :size 0.4)
+            (inferior-ess-r-mode :select t :alight right :size 0.5)
             (ess-r-info-mode :select t :align right :size 0.4)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)

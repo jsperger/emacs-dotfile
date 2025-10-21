@@ -28,6 +28,7 @@
           shackle-rules
           `((help-mode :select t :align right :size 0.4)
             (helpful-mode :select t :align right :size 0.4)
+            (inferior-ess-r-mode :select t :alight right :size 0.5)
             (ess-r-info-mode :select t :align right :size 0.4)
             ("*Messages*"                    :select t :align t)
             ("*eldoc*"                       :align t)
