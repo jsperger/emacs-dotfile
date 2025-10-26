@@ -10,6 +10,9 @@
                                   :models '(llama-cpp))
                   )
 
+  (gptel-make-openai "OpenAI"
+    :stream t
+    :key (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
   (gptel-make-openai "OpenRouter"               
     :host "openrouter.ai"
     :endpoint "/api/v1/chat/completions"
@@ -19,13 +22,7 @@
 	            google/gemini-2.5-pro
               openrouter/auto
 	            anthropic/claude-sonnet-4
-              deepseek/deepseek-r1-0528:free
-              deepseek/deepseek-prover-v2:free
-	            open-r1/olympiccoder-32b:free
-	            mistralai/devstral-small:free
-              google/gemma-3-27b-it:free
-	            deepseek/deepseek-r1-zero:free
-	            qwen/qwq-32b:free)
+              )
     )
 
   (gptel-make-anthropic "Claude"          
@@ -44,12 +41,12 @@
 
 (use-package aidermacs
   :after gptel
-  :general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
   (setopt aidermacs-backend 'vterm)
   (setenv "GEMINI_API_KEY" (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
   (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
   (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
+  (setenv "OPENAI_API_KEY" (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
   (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
   (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
 

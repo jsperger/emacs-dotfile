@@ -4748,12 +4748,15 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2025-08-10 Sun 18:16]
+:LAST_MODIFIED: [2025-10-08 Wed 05:03]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 Customize =mcp-server-lib= to use =no-littering='s directory otherwise it defaults
 to installing its helper script to the root of the emacs user directory.
+I need to find a better way to access secrets than using =gptel=. The current
+configuration means that I can't launch =aidermacs= until I've launched =gptel=, and
+=aidermacs='s keybind won't appear until after =gptel= is loaded.
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
 :LAST_MODIFIED: [2025-08-10 Sun 18:05]
@@ -4772,6 +4775,9 @@ to installing its helper script to the root of the emacs user directory.
                                   :models '(llama-cpp))
                   )
 
+  (gptel-make-openai "OpenAI"
+    :stream t
+    :key (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
   (gptel-make-openai "OpenRouter"               
     :host "openrouter.ai"
     :endpoint "/api/v1/chat/completions"
@@ -4781,13 +4787,7 @@ to installing its helper script to the root of the emacs user directory.
 	            google/gemini-2.5-pro
               openrouter/auto
 	            anthropic/claude-sonnet-4
-              deepseek/deepseek-r1-0528:free
-              deepseek/deepseek-prover-v2:free
-	            open-r1/olympiccoder-32b:free
-	            mistralai/devstral-small:free
-              google/gemma-3-27b-it:free
-	            deepseek/deepseek-r1-zero:free
-	            qwen/qwq-32b:free)
+              )
     )
 
   (gptel-make-anthropic "Claude"          
@@ -4806,12 +4806,12 @@ to installing its helper script to the root of the emacs user directory.
 
 (use-package aidermacs
   :after gptel
-  :general (tyrant-def "aa" 'aidermacs-transient-menu)
   :config
   (setopt aidermacs-backend 'vterm)
   (setenv "GEMINI_API_KEY" (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
   (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
   (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
+  (setenv "OPENAI_API_KEY" (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
   (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
   (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
 
