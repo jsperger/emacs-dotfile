@@ -160,7 +160,6 @@
              ;;              ;; "setup-icons.el"
              ;;              ;; "setup-lisp.el"
              "setup-llm.el"
-             "setup-markdown.el"
              ;;              ;; "setup-media.el"
              "setup-modeline.el"
              ;;              ;; "setup-notes.el"
@@ -171,6 +170,7 @@
              "setup-vc.el"
              ;; "setup-web.el"
              ;; "setup-writing.el"
+             "writing-in-emacs.el"
              )
            )
     (load-file (expand-file-name file config-dir))
