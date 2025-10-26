@@ -5973,7 +5973,7 @@ use the toolbar in the first place.
 
 **** Markdown mode
 :PROPERTIES:
-:LAST_MODIFIED: [2025-08-13 Wed 21:47]
+:LAST_MODIFIED: [2025-10-26 Sun 03:12]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: markdown-mode
 :END:
@@ -6260,15 +6260,23 @@ with notably nonfunctioning pieces.
 
 *** Bibliography management
 :PROPERTIES:
-:LAST_MODIFIED: [2025-10-26 Sun 02:59]
+:LAST_MODIFIED: [2025-10-26 Sun 03:09]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: bibliography-management
 :END:
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp
 (use-package bibtex
   :ensure nil
   )
+
+(use-package ebib
+  :config
+  (setopt ebib-preload-bib-files '("~/obsidian/obsidian-biblatex.bib"))
+	:general
+  (tyrant-def "d" 'ebib)
+  )
+
 #+end_src
 **** Old config
 :PROPERTIES:
@@ -6312,9 +6320,6 @@ with notably nonfunctioning pieces.
 
 )
 
-(use-package ebib
-	:general
-	(tyrant-def "d" 'ebib))
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

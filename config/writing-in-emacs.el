@@ -112,6 +112,19 @@
   )
 ;; auctex ends here
 
+;; [[file:../its-lit.org::#bibliography-management][Bibliography management:1]]
+(use-package bibtex
+  :ensure nil
+  )
+
+(use-package ebib
+  :config
+  (setopt ebib-preload-bib-files '("~/obsidian/obsidian-biblatex.bib"))
+	:general
+  (tyrant-def "d" 'ebib)
+  )
+;; Bibliography management:1 ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
