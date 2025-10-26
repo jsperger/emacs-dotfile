@@ -101,6 +101,17 @@
   )
 ;; Markdown mode:1 ends here
 
+;; [[file:../its-lit.org::auctex][auctex]]
+(use-package auctex
+  :mode ("\\.[Tt][Ee][Xx]\\'" . LaTeX-mode)
+  :init (setq TeX-auto-save t
+              TeX-parse-self t
+              )
+  :config (setopt TeX-master nil
+                  TeX-engine 'luatex)
+  )
+;; auctex ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
