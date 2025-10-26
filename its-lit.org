@@ -180,8 +180,8 @@ count of {{{word-count}}}.*
       - [[#markdown-mode][Markdown mode]]
       - [[#latex--tex-configuration][LaTeX / TeX configuration]]
     - [[#bibliography-management][Bibliography management]]
+      - [[#old-config][Old config]]
     - [[#writing-footer][Writing footer]]
-  - [[#bibliography-management-0][Bibliography management]]
   - [[#setup-writingel][setup-writing.el]]
 - [[#lisp-functions][Lisp functions]]
   - [[#my-core-functionsel][my-core-functions.el]]
@@ -761,7 +761,7 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-10-26 Sun 02:47]
+:LAST_MODIFIED: [2025-10-26 Sun 02:58]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -793,7 +793,6 @@ mistakes in my configuration.
 (let ((config-dir (expand-file-name "config" user-emacs-directory)))
   (dolist (file
            '(
-             ;; "setup-bib.el"
              "configure-base-and-built-in.el"
              "configure-keybinding.el"
              "configure-org.el"
@@ -6261,38 +6260,25 @@ with notably nonfunctioning pieces.
 
 *** Bibliography management
 :PROPERTIES:
-:LAST_MODIFIED: [2025-10-26 Sun 02:53]
+:LAST_MODIFIED: [2025-10-26 Sun 02:59]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: bibliography-management
 :END:
-*** Writing footer
-:PROPERTIES:
-:CUSTOM_ID: writing-footer
-:LAST_MODIFIED: [2025-08-13 Wed 21:42]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
 
-#+begin_src emacs-lisp :comments no :eval no
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; writing-in-emacs.el ends here
-#+end_src
-
-** Bibliography management
-:PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 04:41]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: bibliography-management-0
-:END:
-#+begin_src emacs-lisp :tangle config/setup-bib.el 
-;;; setup-bib --- bibliography management -*- lexical-binding: t; -*-
+#+begin_src emacs-lisp :tangle yes
 (use-package bibtex
   :ensure nil
   )
+#+end_src
+**** Old config
+:PROPERTIES:
+:LAST_MODIFIED: [2025-10-26 Sun 02:58]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: old-config
+:END:
 
+#+begin_src emacs-lisp :tangle no :eval no :comments no
+;;; setup-bib --- bibliography management -*- lexical-binding: t; -*-
 (use-package citar
   :after bibtex auctex
   :hook ((org-mode LaTeX-mode TeX-latex-mode org-beamer-mode) . citar-capf-setup)
@@ -6336,11 +6322,26 @@ with notably nonfunctioning pieces.
 ;; End:
 ;;; setup-bib.el ends here
 #+end_src
+*** Writing footer
+:PROPERTIES:
+:CUSTOM_ID: writing-footer
+:LAST_MODIFIED: [2025-08-13 Wed 21:42]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp :comments no :eval no
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; writing-in-emacs.el ends here
+#+end_src
 
 ** setup-writing.el
 :PROPERTIES:
 :CUSTOM_ID: setup-writingel
-:LAST_MODIFIED: [2025-10-26 Sun 01:16]
+:LAST_MODIFIED: [2025-10-26 Sun 02:58]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-writing.el

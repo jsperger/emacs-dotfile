@@ -133,7 +133,6 @@
 (let ((config-dir (expand-file-name "config" user-emacs-directory)))
   (dolist (file
            '(
-             ;; "setup-bib.el"
              "configure-base-and-built-in.el"
              "configure-keybinding.el"
              "configure-org.el"
