@@ -2601,7 +2601,7 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2025-08-01 Fri 23:42]
+:LAST_MODIFIED: [2025-11-13 Thu 05:37]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -2618,7 +2618,6 @@ Disabling this until I have time to sit down and give it an honest effort.
   )
 
 (use-package org-node
-  :after org
   :init
   (setq org-node-seq-defs
         (list
@@ -2628,6 +2627,10 @@ Disabling this until I have time to sit down and give it an honest effort.
          ;; This is actually a sequence of files, not sequence of ID-nodes.
          (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
+         (org-node-seq-def-on-filepath-sort-by-basename
+          "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)
+         (org-node-seq-def-on-filepath-sort-by-basename
+          "p" "Painting log" "~/obsidian/org/node/painting-log/" nil t)
          ))
   :config
   (org-node-cache-mode)

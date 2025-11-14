@@ -229,7 +229,6 @@
   )
 
 (use-package org-node
-  :after org
   :init
   (setq org-node-seq-defs
         (list
@@ -239,6 +238,10 @@
          ;; This is actually a sequence of files, not sequence of ID-nodes.
          (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
+         (org-node-seq-def-on-filepath-sort-by-basename
+          "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)
+         (org-node-seq-def-on-filepath-sort-by-basename
+          "p" "Painting log" "~/obsidian/org/node/painting-log/" nil t)
          ))
   :config
   (org-node-cache-mode)
