@@ -2601,11 +2601,15 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2025-11-13 Thu 05:37]
+:LAST_MODIFIED: [2025-12-05 Fri 07:09]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
-Disabling this until I have time to sit down and give it an honest effort. 
+TODO - create unique titles for the node sequences by updating the creator
+function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences#amendment-custom-titles][see here]] 
+[[https://github.com/meedstrom/org-node?tab=readme-ov-file#limitation-unique-titles][Limitation - org-node requires unique titles]]
+  
+
 #+begin_src emacs-lisp
 (use-package org-mem
   :defer
@@ -2621,11 +2625,12 @@ Disabling this until I have time to sit down and give it an honest effort.
   :init
   (setq org-node-seq-defs
         (list
-         ;; My day-notes, a.k.a. journal/diary.  Currently I still
-         ;; structure them like org-roam-dailies expects: confined to a
-         ;; subdirectory, with filenames such as "2024-11-18.org".
-         ;; This is actually a sequence of files, not sequence of ID-nodes.
-         (org-node-seq-def-on-filepath-sort-by-basename
+       ;; All notes in creation order, 
+       ;; according to the timestamps in their :CREATED: property.
+       (org-node-seq-def-on-any-sort-by-property
+        "a" "All notes by property :CREATED:" "CREATED")
+       
+        (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
          (org-node-seq-def-on-filepath-sort-by-basename
           "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)
@@ -2634,6 +2639,7 @@ Disabling this until I have time to sit down and give it an honest effort.
          ))
   :config
   (org-node-cache-mode)
+  (org-node-seq-mode)
 
   :general
   (tyrant-def

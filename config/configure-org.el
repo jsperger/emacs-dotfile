@@ -232,11 +232,12 @@
   :init
   (setq org-node-seq-defs
         (list
-         ;; My day-notes, a.k.a. journal/diary.  Currently I still
-         ;; structure them like org-roam-dailies expects: confined to a
-         ;; subdirectory, with filenames such as "2024-11-18.org".
-         ;; This is actually a sequence of files, not sequence of ID-nodes.
-         (org-node-seq-def-on-filepath-sort-by-basename
+       ;; All notes in creation order, 
+       ;; according to the timestamps in their :CREATED: property.
+       (org-node-seq-def-on-any-sort-by-property
+        "a" "All notes by property :CREATED:" "CREATED")
+       
+        (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
          (org-node-seq-def-on-filepath-sort-by-basename
           "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)
@@ -245,6 +246,7 @@
          ))
   :config
   (org-node-cache-mode)
+  (org-node-seq-mode)
 
   :general
   (tyrant-def
