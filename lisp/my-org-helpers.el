@@ -49,5 +49,22 @@ Intended for `before-save-hook` in an Org mode buffer."
         ;; Set the Emacs version in the same property drawer.
         (org-entry-put nil "MODIFIED_WITH_EMACS" emacs-version-short))))
  )
+
+;; source: http://yummymelon.com/devnull/import-markdown-to-org-with-the-clipboard-in-emacs.html
+(defun my/yank-markdown-as-org ()
+  "Yank Markdown text as Org.
+
+This command will convert Markdown text in the top of the `kill-ring'
+and convert it to Org using the pandoc utility."
+  (interactive)
+  (save-excursion
+    (with-temp-buffer
+      (yank)
+      (shell-command-on-region
+       (point-min) (point-max)
+       "pandoc -f markdown -t org --wrap=preserve" t t)
+      (kill-region (point-min) (point-max)))
+    (yank)))
+
 (provide 'my-org-helpers)
 ;;; my-org-helpers.el ends here
