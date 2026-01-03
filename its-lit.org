@@ -164,6 +164,8 @@ count of {{{word-count}}}.*
   - [[#setup-notesel][setup-notes.el]]
   - [[#setup-projectsel][setup-projects.el]]
   - [[#setup-readingel][setup-reading.el]]
+    - [[#fix-pdf-tools-post-build-command][Fix pdf-tools post-build command]]
+    - [[#reading-package-declarations][Reading package declarations]]
     - [[#removed-reading-packages][Removed reading packages]]
   - [[#setup-uiel][setup-ui.el]]
     - [[#removed-elements][Removed elements]]
@@ -5404,8 +5406,22 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 ** setup-reading.el
 :PROPERTIES:
 :CUSTOM_ID: setup-readingel
-:LAST_MODIFIED: [2025-10-05 Sun 16:53]
+:LAST_MODIFIED: [2026-01-03 Sat 02:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+*** TODO Fix pdf-tools post-build command
+:PROPERTIES:
+:LAST_MODIFIED: [2026-01-03 Sat 02:33]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: fix-pdf-tools-post-build-command
+:END:
+Figure out why the post-build command stopped working. Needed to delete the
+package, reinstall it, and manually run =pdf-tools-install=
+
+*** Reading package declarations
+:PROPERTIES:
+:CUSTOM_ID: reading-package-declarations
 :END:
 #+begin_src emacs-lisp :tangle config/setup-reading.el
 ;;; config/setup-reading.el --- Reading tools -*- lexical-binding: t -*-
@@ -5423,7 +5439,7 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
         )
 
 (use-package pdf-tools
-  :ensure (:post-build (pdf-tools-install))
+;;  :ensure (:post-build (pdf-tools-install))
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
   :init

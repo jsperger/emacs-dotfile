@@ -13,7 +13,7 @@
         )
 
 (use-package pdf-tools
-  :ensure (:post-build (pdf-tools-install))
+;;  :ensure (:post-build (pdf-tools-install))
   :mode ("\\.pdf\\'" . pdf-view-mode)
   :hook (pdf-view-mode . (lambda () (visual-fill-column-mode -1)))
   :init
