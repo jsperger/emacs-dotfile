@@ -18,10 +18,9 @@
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
-    :models '(google/gemini-2.5-flash
-	            google/gemini-2.5-pro
+    :models '(google/gemini-3.0-flash
+	            google/gemini-3.0-pro
               openrouter/auto
-	            anthropic/claude-sonnet-4
               )
     )
 
