@@ -39,22 +39,6 @@
   
   )
 
-(use-package aidermacs
-  :after gptel
-  :config
-  (setopt aidermacs-backend 'vterm)
-  (setenv "GEMINI_API_KEY" (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
-  (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
-  (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
-  (setenv "OPENAI_API_KEY" (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
-  (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
-  (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
-
-  :custom  (aidermacs-default-model "gemini/gemini-pro-2.5")
-
-  :general (tyrant-def "aa" 'aidermacs-transient-menu)
-  )
-
 (use-package mcp-server-lib
   :after no-littering
   :custom (mcp-server-lib-install-directory 'no-littering-var-directory)

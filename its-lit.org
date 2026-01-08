@@ -4759,7 +4759,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2025-10-08 Wed 05:03]
+:LAST_MODIFIED: [2026-01-08 Thu 17:27]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -4815,22 +4815,6 @@ configuration means that I can't launch =aidermacs= until I've launched =gptel=,
   
   )
 
-(use-package aidermacs
-  :after gptel
-  :config
-  (setopt aidermacs-backend 'vterm)
-  (setenv "GEMINI_API_KEY" (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
-  (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
-  (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
-  (setenv "OPENAI_API_KEY" (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
-  (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
-  (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
-
-  :custom  (aidermacs-default-model "gemini/gemini-pro-2.5")
-
-  :general (tyrant-def "aa" 'aidermacs-transient-menu)
-  )
-
 (use-package mcp-server-lib
   :after no-littering
   :custom (mcp-server-lib-install-directory 'no-littering-var-directory)
@@ -4848,7 +4832,7 @@ configuration means that I can't launch =aidermacs= until I've launched =gptel=,
 #+end_src
 *** LLM unused config
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 20:45]
+:LAST_MODIFIED: [2026-01-08 Thu 17:27]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: llm-unused-config
 :END:
@@ -4893,6 +4877,23 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
     "gp" 'forge-llm-generate-pr-description-at-point
     "gt" 'forge-llm-insert-template-at-point
     )
+  )
+
+(use-package aidermacs
+  :disabled
+  :after gptel
+  :config
+  (setopt aidermacs-backend 'vterm)
+  (setenv "GEMINI_API_KEY" (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
+  (setenv "ANTHROPIC_API_KEY" (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
+  (setenv "OPENROUTER_API_KEY" (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey"))
+  (setenv "OPENAI_API_KEY" (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
+  (setenv "LM_STUDIO_API_KEY" "dummy-api-key")
+  (setenv "LM_STUDIO_API_BASE" "http://localhost:1234/v1") 
+
+  :custom  (aidermacs-default-model "gemini/gemini-pro-3.0")
+
+  :general (tyrant-def "aa" 'aidermacs-transient-menu)
   )
 #+end_src
 
