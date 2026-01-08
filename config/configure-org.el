@@ -206,7 +206,6 @@
 
 ;; [[file:../its-lit.org::#org-todoist][org-todoist:1]]
 (use-package org-todoist
-  :after gptel ; why would this depend on gptel? oh my api key olol
   :ensure (:host github
                  :repo "lillenne/org-todoist"
                  :branch "main"

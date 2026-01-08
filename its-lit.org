@@ -2577,7 +2577,7 @@ These packages have the distinction of being useful but I don't use them enough,
 
 *** Configure org mode's progeny
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 04:45]
+:LAST_MODIFIED: [2026-01-08 Thu 17:24]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-org-modes-progeny
 :END:
@@ -2590,7 +2590,6 @@ Packages that build on org mode rather than add something to it.
 :END:
 #+begin_src emacs-lisp
 (use-package org-todoist
-  :after gptel ; why would this depend on gptel? oh my api key olol
   :ensure (:host github
                  :repo "lillenne/org-todoist"
                  :branch "main"
