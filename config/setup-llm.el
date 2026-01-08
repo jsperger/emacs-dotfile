@@ -46,6 +46,23 @@
 (use-package elisp-dev-mcp
   :after mcp-server-lib)
 
+(use-package chatgpt-shell
+  :config
+  (setopt chatgpt-shell-openai-key (getenv "OPENAI_API_KEY")
+          chatgpt-shell-anthropic-key (getenv "ANTHROPIC_API_KEY")
+          )
+  :general (tyrant-def "as" 'chatgpt-shell-transient)
+  )
+
+(use-package agent-shell
+  :config
+  (setopt
+   agent-shell-anthropic-claude-environment        (agent-shell-make-environment-variables :inherit-env t)
+   agent-shell-anthropic-authentication          (agent-shell-anthropic-make-authentication :login t)
+   )
+  agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)
+  )
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
