@@ -4759,15 +4759,13 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2026-01-08 Thu 17:27]
+:LAST_MODIFIED: [2026-01-08 Thu 21:55]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
 Customize =mcp-server-lib= to use =no-littering='s directory otherwise it defaults
 to installing its helper script to the root of the emacs user directory.
-I need to find a better way to access secrets than using =gptel=. The current
-configuration means that I can't launch =aidermacs= until I've launched =gptel=, and
-=aidermacs='s keybind won't appear until after =gptel= is loaded.
+
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
 :LAST_MODIFIED: [2025-08-10 Sun 18:05]
