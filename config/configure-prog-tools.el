@@ -33,6 +33,12 @@
 (add-hook 'elpaca-after-init-hook #'global-lsp-bridge-mode)
 ;; lsp-bridge block ends here
 
+;; [[file:../its-lit.org::#unicode-input][Unicode input:1]]
+(use-package unicode-math-input
+  :general (tyrant-def "K" 'unicode-math-input)
+  )
+;; Unicode input:1 ends here
+
 ;; [[file:../its-lit.org::#code-formatting][Code formatting:1]]
 (use-package apheleia
   :config

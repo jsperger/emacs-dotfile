@@ -155,6 +155,7 @@ count of {{{word-count}}}.*
   - [[#configure-programming-tools-language-agnostic-or-multi-language][Configure programming tools (language agnostic or multi-language)]]
     - [[#language-server-lsp-bridge][Language server (lsp-bridge)]]
       - [[#lsp-bridge-command-reference][Lsp Bridge Command reference]]
+    - [[#unicode-input][Unicode input]]
     - [[#code-formatting][Code formatting]]
       - [[#removed-code-formatters][Removed code formatters]]
     - [[#footer-for-configure-programming-tools][Footer for configure programming tools]]
@@ -5016,6 +5017,22 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 - lsp-bridge-indent-right: Indents the pasted text to the right according to the indent values defined in lsp-bridge-formatting-indent-alist
 - lsp-bridge-semantic-tokens-mode: Enables or disables semantic token highlighting, please ref to Semantic Tokens Wiki
 
+
+*** Unicode input
+:PROPERTIES:
+:CUSTOM_ID: unicode-input
+:LAST_MODIFIED: [2026-01-08 Thu 22:13]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+For inserting unicode math characters e.g. for Lean programming. This is
+distinct from any TeX typesetting.
+
+#+begin_src emacs-lisp
+(use-package unicode-math-input
+  :general (tyrant-def "K" 'unicode-math-input)
+  )
+#+end_src
 *** Code formatting
 :PROPERTIES:
 :CUSTOM_ID: code-formatting
