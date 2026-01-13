@@ -22,14 +22,6 @@
 	:disabled
 	)
 
-(use-package unfill
-	:general
-	(general-def '(normal visual) text-mode-map
-		"g=" 'unfill-region
-		"g+" 'unfill-paragraph
-		"t+" 'unfill-toggle)
-	)
-
 (use-package pandoc-mode
 	:disabled
   :hook (pandoc-mode . pandoc-load-default-settings)

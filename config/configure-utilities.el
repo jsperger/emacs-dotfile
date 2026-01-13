@@ -253,6 +253,14 @@
 		"Sd" 'surround-kill
 		"Sr" 'surround-replace)
 	)
+
+(use-package unfill
+	:general
+	(general-def '(normal visual) text-mode-map
+		"g=" 'unfill-region
+		"g+" 'unfill-paragraph
+		"t+" 'unfill-toggle)
+	)
 ;; non-evil text editing ends here
 
 ;; Local Variables:

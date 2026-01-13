@@ -2191,12 +2191,19 @@ I must've been doing something strange to run into the error with
 #+end_src
 *** Text editing (non-evil)
 :PROPERTIES:
-:LAST_MODIFIED: [2025-08-03 Sun 15:40]
+:LAST_MODIFIED: [2026-01-13 Tue 16:16]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: text-editing-non-evil
 :END:
 
-Incredibly useful package for dealing with "surrounding"
+Incredibly useful package for dealing with "surrounding" a string or region i.e.
+inserting characters before and after the region. It's intelligent about
+parentheses and similar characters that have opening and closing forms.   
+
+Filling splits texts into lines of a certain length in an intelligent way e.g.
+words aren't split and meaningful structures in the major-mode may be preserved.
+=unfill= takes lines of text and forms them back into a single line.
+
 #+name: non-evil text editing
 #+begin_src emacs-lisp
 (use-package surround
@@ -2205,6 +2212,14 @@ Incredibly useful package for dealing with "surrounding"
 		"Si" 'surround-insert
 		"Sd" 'surround-kill
 		"Sr" 'surround-replace)
+	)
+
+(use-package unfill
+	:general
+	(general-def '(normal visual) text-mode-map
+		"g=" 'unfill-region
+		"g+" 'unfill-paragraph
+		"t+" 'unfill-toggle)
 	)
 #+end_src
 *** Footer for utilities config
@@ -6428,14 +6443,6 @@ with notably nonfunctioning pieces.
 
 (use-package freeze-it
 	:disabled
-	)
-
-(use-package unfill
-	:general
-	(general-def '(normal visual) text-mode-map
-		"g=" 'unfill-region
-		"g+" 'unfill-paragraph
-		"t+" 'unfill-toggle)
 	)
 
 (use-package pandoc-mode
