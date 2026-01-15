@@ -2143,7 +2143,7 @@ Window numbering
 *** Text snippet insertion and collections
 :PROPERTIES:
 :CUSTOM_ID: text-snippet-insertion-and-collections
-:LAST_MODIFIED: [2025-07-20 Sun 03:54]
+:LAST_MODIFIED: [2026-01-15 Thu 03:01]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
@@ -2172,9 +2172,9 @@ Window numbering
   :after tempel)
 
 (use-package yasnippet
-	:hook ((text-mode prog-mode) . yas-minor-mode)
-	:config
-	(setopt yas-global-mode t)
+;;	:hook ((text-mode prog-mode) . yas-minor-mode)
+;;	:config
+;;	(setopt yas-global-mode t)
 	)
 
 (use-package yasnippet-snippets

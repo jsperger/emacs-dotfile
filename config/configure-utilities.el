@@ -236,9 +236,9 @@
   :after tempel)
 
 (use-package yasnippet
-	:hook ((text-mode prog-mode) . yas-minor-mode)
-	:config
-	(setopt yas-global-mode t)
+;;	:hook ((text-mode prog-mode) . yas-minor-mode)
+;;	:config
+;;	(setopt yas-global-mode t)
 	)
 
 (use-package yasnippet-snippets
