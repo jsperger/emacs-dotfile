@@ -34,7 +34,7 @@
     :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
     )
   
-  :general (tyrant-def "ag" 'gptel-menu)
+  :general (tyrant-def "aG" 'gptel-menu)
   
   )
 

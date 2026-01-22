@@ -118,9 +118,7 @@
   (setq gitignore-templates-api 'github)
   :general
   (tyrant-def
-    "gI"  (cons "gitignore" (make-sparse-keymap))
-    "gIn" 'gitignore-templates-new-file
-    "gIi" 'gitignore-templates-insert)
+    "gI" 'gitignore-templates-insert)
   )
 
 (use-package magit-todos

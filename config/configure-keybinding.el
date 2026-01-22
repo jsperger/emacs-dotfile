@@ -29,7 +29,7 @@
   ;;================================= applications ===========================
   "a"       (cons "apps" (make-sparse-keymap))
   ;;		"ab" 'banner-comment ; defined in package dec
-  "ac"      'consult-minor-mode-menu
+  "am"      'consult-minor-mode-menu
   "aC"      'calc-dispatch
   "ae"      'embark-act
   "aE"      'embark-act-all

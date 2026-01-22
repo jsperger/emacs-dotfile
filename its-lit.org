@@ -905,7 +905,7 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 *** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2025-08-10 Sun 18:20]
+:LAST_MODIFIED: [2026-01-15 Thu 03:29]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 I need to move most of these out of here and put them in the relavent package declaration. 
@@ -927,7 +927,7 @@ I need to move most of these out of here and put them in the relavent package de
   ;;================================= applications ===========================
   "a"       (cons "apps" (make-sparse-keymap))
   ;;		"ab" 'banner-comment ; defined in package dec
-  "ac"      'consult-minor-mode-menu
+  "am"      'consult-minor-mode-menu
   "aC"      'calc-dispatch
   "ae"      'embark-act
   "aE"      'embark-act-all
@@ -4837,7 +4837,7 @@ to installing its helper script to the root of the emacs user directory.
     :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
     )
   
-  :general (tyrant-def "ag" 'gptel-menu)
+  :general (tyrant-def "aG" 'gptel-menu)
   
   )
 
@@ -5837,7 +5837,7 @@ use the toolbar in the first place.
 ** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
-:LAST_MODIFIED: [2025-08-10 Sun 17:56]
+:LAST_MODIFIED: [2026-01-22 Thu 01:32]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-vc.el
@@ -5961,9 +5961,7 @@ use the toolbar in the first place.
   (setq gitignore-templates-api 'github)
   :general
   (tyrant-def
-    "gI"  (cons "gitignore" (make-sparse-keymap))
-    "gIn" 'gitignore-templates-new-file
-    "gIi" 'gitignore-templates-insert)
+    "gI" 'gitignore-templates-insert)
   )
 
 (use-package magit-todos
