@@ -94,5 +94,16 @@ the unwritable tidbits."
           (funcall secret)
         secret))))
 
+(defun my/strip-markdown-citations ()
+    "Remove all [cite: ...] tags from the current buffer.
+  Handles single citations like [cite: 95] and multiple
+  citations like [cite: 122, 146]."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "\\[cite: [0-9, ]+\\]" nil t)
+        (replace-match "")))
+    (message "Citations removed."))
+
 (provide 'my-core-helpers)
 ;;; my-core-helpers.el ends here

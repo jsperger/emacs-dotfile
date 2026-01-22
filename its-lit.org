@@ -6910,7 +6910,7 @@ a dedicated window."
 ** my-core-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-helpersel
-:LAST_MODIFIED: [2025-07-20 Sun 06:13]
+:LAST_MODIFIED: [2026-01-22 Thu 03:26]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-core-helpers.el
@@ -7009,6 +7009,17 @@ the unwritable tidbits."
       (if (functionp secret)
           (funcall secret)
         secret))))
+
+(defun my/strip-markdown-citations ()
+    "Remove all [cite: ...] tags from the current buffer.
+  Handles single citations like [cite: 95] and multiple
+  citations like [cite: 122, 146]."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "\\[cite: [0-9, ]+\\]" nil t)
+        (replace-match "")))
+    (message "Citations removed."))
 
 (provide 'my-core-helpers)
 ;;; my-core-helpers.el ends here
