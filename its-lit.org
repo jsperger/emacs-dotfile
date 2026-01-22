@@ -1385,7 +1385,7 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
 #+end_src
 *** Configuring built-in packages
 :PROPERTIES:
-:LAST_MODIFIED: [2025-08-03 Sun 20:47]
+:LAST_MODIFIED: [2026-01-21 Wed 19:25]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configuring-built-in-packages
 :END:
@@ -1410,6 +1410,7 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
           dired-do-revert-buffer t
           dired-dwim-target t
           dired-vc-rename-file t
+          dired-listing-switches "-alh"
           )
   )
 

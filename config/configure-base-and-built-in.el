@@ -54,6 +54,7 @@
           dired-do-revert-buffer t
           dired-dwim-target t
           dired-vc-rename-file t
+          dired-listing-switches "-alh"
           )
   )
 
