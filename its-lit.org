@@ -60,14 +60,14 @@ count of {{{word-count}}}.*
     - [[#load-configuration-files][Load configuration files]]
     - [[#load-custom-file-and-run-after-init-hooks][Load custom file and run after-init hooks]]
     - [[#local-variable-footer-for-init][Local variable footer for init]]
-- [[#config-directory-for-non-byte-copiled-files][Config directory for non-byte-copiled files]]
+- [[#config-directory-for-non-byte-compiled-files][Config directory for non-byte-compiled files]]
   - [[#one-stop-keybinding-shop][One stop keybinding shop]]
     - [[#keyboard-macros][Keyboard macros]]
     - [[#global-key-binds][Global key binds]]
       - [[#removed-keybindings][Removed keybindings]]
       - [[#mac-specific-keybinds][Mac-specific keybinds]]
     - [[#keybind-file-footer][Keybind file footer]]
-  - [[#configure-base-emacs-options-and-built-in-packages][Configure base emacs options and built-in packages]]
+  - [[#configure-base-emacs-options-and-built-in-packages][Configure base Emacs options and built-in packages]]
     - [[#base-and-built-in-file-header][Base and built-in file header]]
     - [[#configure-base-emacs-options][Configure base emacs options]]
       - [[#currently-unused-base-configuration][Currently unused base configuration]]
@@ -115,7 +115,7 @@ count of {{{word-count}}}.*
       - [[#disabled-exporters][Disabled Exporters]]
     - [[#configure-org-footer][Configure org footer]]
   - [[#configure-programming-language-specific-modes-and-options][Configure (programming) language-specific modes and options]]
-    - [[#lisp-based-languages][Lisp-based languages]]
+    - [[#lisp-like-languages][Lisp-like languages]]
     - [[#python-configuration][Python configuration]]
       - [[#disabled-python-packages][Disabled python packages]]
     - [[#r-programming][R programming]]
@@ -868,10 +868,10 @@ mistakes in my configuration.
 ;;; init.el ends here
 #+end_src
 
-* Config directory for non-byte-copiled files
+* Config directory for non-byte-compiled files
 :PROPERTIES:
-:CUSTOM_ID: config-directory-for-non-byte-copiled-files
-:LAST_MODIFIED: [2025-07-19 Sat 20:28]
+:CUSTOM_ID: config-directory-for-non-byte-compiled-files
+:LAST_MODIFIED: [2026-02-02 Mon 21:32]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -1290,7 +1290,7 @@ I need to move most of these out of here and put them in the relavent package de
 ;; End:
 ;;; configure-keybinding.el ends here
 #+end_src
-** Configure base emacs options and built-in packages
+** Configure base Emacs options and built-in packages
 :PROPERTIES:
 :CUSTOM_ID: configure-base-emacs-options-and-built-in-packages
 :header-args: :tangle config/configure-base-and-built-in.el :comments noweb
@@ -2354,7 +2354,7 @@ These packages have the distinction of being useful but I don't use them enough,
 
 *** Configure base org settings and major mode keybinds
 :PROPERTIES:
-:LAST_MODIFIED: [2025-08-13 Wed 21:53]
+:LAST_MODIFIED: [2026-02-01 Sun 18:42]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-base-org-settings-and-major-mode-keybinds
 :END:
@@ -2383,6 +2383,7 @@ These packages have the distinction of being useful but I don't use them enough,
     :config
     (setq org-cite-export-processors '((latex biblatex)
                                        (t csl))
+          org-cite-insert-processor 'basic
           org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
 
   (use-package org-indent
@@ -2632,7 +2633,7 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2025-12-05 Fri 07:09]
+:LAST_MODIFIED: [2026-02-01 Sun 19:05]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -2659,19 +2660,41 @@ function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences
        ;; All notes in creation order, 
        ;; according to the timestamps in their :CREATED: property.
        (org-node-seq-def-on-any-sort-by-property
-        "a" "All notes by property :CREATED:" "CREATED")
-       
+        "a" "All notes by property :CREATED:" "CREATED")       
         (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
-         (org-node-seq-def-on-filepath-sort-by-basename
-          "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)
-         (org-node-seq-def-on-filepath-sort-by-basename
-          "p" "Painting log" "~/obsidian/org/node/painting-log/" nil t)
-         ))
+       (let ((m-def (org-node-seq-def-on-filepath-sort-by-basename
+                     "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)))
+         (plist-put (cdr m-def) :prompter
+                    (lambda (key)
+                      (let ((date (let ((org-node-seq-that-marks-calendar key))
+                                    (org-read-date))))
+                        (concat "Meeting " date))))
+         m-def)
+
+       (let ((p-def (org-node-seq-def-on-filepath-sort-by-basename
+                     "p" "Painting log" "~/obsidian/org/node/painting-log/" nil t)))
+         (plist-put (cdr p-def) :prompter
+                    (lambda (key)
+                      (let ((date (let ((org-node-seq-that-marks-calendar key))
+                                    (org-read-date))))
+                        (concat "Painting " date))))
+         p-def)
+       ))
   :config
   (org-node-cache-mode)
-  (org-node-seq-mode)
-
+  (org-node-seq-mode) 
+  ;; (defun my/org-node-create-lit-note ()
+  ;;   "Create a literature note with a citation key."
+  ;;   (interactive)
+  ;;   (let ((key (if (fboundp 'org-cite-read-key)
+  ;;                  (org-cite-read-key)
+  ;;                (read-string "Citekey (@key): ")))
+  ;;         (title (read-string "Title: ")))
+  ;;     (unless (string-prefix-p "@" key)
+  ;;       (setq key (concat "@" key)))
+  ;;     (org-node-create title (org-id-new))
+  ;;     (org-node-add-refs key)))
   :general
   (tyrant-def
     "n"      (cons "node" (make-sparse-keymap))
@@ -2680,6 +2703,7 @@ function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences
     "nb" 'org-node-context-dwim
     "nd" 'org-node-insert-into-related
     "ng" 'org-node-grep
+;;    "nl" 'my/org-node-create-lit-note
     "nn" 'org-node-nodeify-entry
     "ns" 'org-node-seq-dispatch
     "nS" 'org-node-insert-transclusion-as-subtree
@@ -2807,10 +2831,10 @@ install reveal yourself using =npm= or similar.
 ;;; Code:
 
 #+end_src
-*** Lisp-based languages
+*** Lisp-like languages
 :PROPERTIES:
-:CUSTOM_ID: lisp-based-languages
-:LAST_MODIFIED: [2025-07-20 Sun 04:31]
+:CUSTOM_ID: lisp-like-languages
+:LAST_MODIFIED: [2026-01-26 Mon 19:51]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 

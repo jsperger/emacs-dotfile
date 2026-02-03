@@ -4,7 +4,7 @@
 ;; So LSP config doesn't live here
 ;;; Code:
 
-;; [[file:../its-lit.org::#lisp-based-languages][Lisp-based languages:1]]
+;; [[file:../its-lit.org::#lisp-like-languages][Lisp-like languages:1]]
 ;;;; ========================= Lisp languages ==========================
 (use-package slime
 	:hook (elisp-mode . slime-mode)
@@ -42,12 +42,28 @@
 (use-package racket-mode
   :mode ("\\.rkt\\'" . racket-mode)
 	)
-;; Lisp-based languages:1 ends here
+;; Lisp-like languages:1 ends here
 
 ;; [[file:../its-lit.org::#python-configuration][Python configuration:1]]
 ;;;; ============================== Python ==============================
 (use-package uv-mode
   :hook (python-mode . uv-mode-auto-activate-hook)
+  )
+
+(use-package jupyter-ascending
+  :hook (python-mode . (lambda ()
+                         (when (and buffer-file-name
+                                    (string-match-p "\\.sync\\.py\\'" buffer-file-name))
+                           (jupyter-ascending-mode 1))))
+  :general (despot-def (python-mode-map)
+             :major-modes '(python-mode python-ts-mode)
+             "ck" 'jupyter-ascending-execute-line
+             "ca" 'jupyter-ascending-execute-all
+             "cn" 'jupyter-ascending-next-cell
+             "cp" 'jupyter-ascending-previous-cell
+             "ct" 'jupyter-ascending-cycle-cell-type
+             "c'" 'jupyter-ascending-edit-markdown-cell
+             )
   )
 ;; Python configuration:1 ends here
 

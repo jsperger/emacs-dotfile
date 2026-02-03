@@ -26,6 +26,7 @@
     :config
     (setq org-cite-export-processors '((latex biblatex)
                                        (t csl))
+          org-cite-insert-processor 'basic
           org-cite-global-bibliography '("~/obsidian/obsidian-biblatex.bib")))
 
   (use-package org-indent
@@ -234,19 +235,41 @@
        ;; All notes in creation order, 
        ;; according to the timestamps in their :CREATED: property.
        (org-node-seq-def-on-any-sort-by-property
-        "a" "All notes by property :CREATED:" "CREATED")
-       
+        "a" "All notes by property :CREATED:" "CREATED")       
         (org-node-seq-def-on-filepath-sort-by-basename
           "d" "Dailies" "~/obsidian/org/node/daily/" nil t)
-         (org-node-seq-def-on-filepath-sort-by-basename
-          "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)
-         (org-node-seq-def-on-filepath-sort-by-basename
-          "p" "Painting log" "~/obsidian/org/node/painting-log/" nil t)
-         ))
+       (let ((m-def (org-node-seq-def-on-filepath-sort-by-basename
+                     "m" "Meetings" "~/obsidian/org/node/meetings/" nil t)))
+         (plist-put (cdr m-def) :prompter
+                    (lambda (key)
+                      (let ((date (let ((org-node-seq-that-marks-calendar key))
+                                    (org-read-date))))
+                        (concat "Meeting " date))))
+         m-def)
+
+       (let ((p-def (org-node-seq-def-on-filepath-sort-by-basename
+                     "p" "Painting log" "~/obsidian/org/node/painting-log/" nil t)))
+         (plist-put (cdr p-def) :prompter
+                    (lambda (key)
+                      (let ((date (let ((org-node-seq-that-marks-calendar key))
+                                    (org-read-date))))
+                        (concat "Painting " date))))
+         p-def)
+       ))
   :config
   (org-node-cache-mode)
-  (org-node-seq-mode)
-
+  (org-node-seq-mode) 
+  ;; (defun my/org-node-create-lit-note ()
+  ;;   "Create a literature note with a citation key."
+  ;;   (interactive)
+  ;;   (let ((key (if (fboundp 'org-cite-read-key)
+  ;;                  (org-cite-read-key)
+  ;;                (read-string "Citekey (@key): ")))
+  ;;         (title (read-string "Title: ")))
+  ;;     (unless (string-prefix-p "@" key)
+  ;;       (setq key (concat "@" key)))
+  ;;     (org-node-create title (org-id-new))
+  ;;     (org-node-add-refs key)))
   :general
   (tyrant-def
     "n"      (cons "node" (make-sparse-keymap))
@@ -255,6 +278,7 @@
     "nb" 'org-node-context-dwim
     "nd" 'org-node-insert-into-related
     "ng" 'org-node-grep
+;;    "nl" 'my/org-node-create-lit-note
     "nn" 'org-node-nodeify-entry
     "ns" 'org-node-seq-dispatch
     "nS" 'org-node-insert-transclusion-as-subtree
