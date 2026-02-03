@@ -5645,7 +5645,7 @@ package, reinstall it, and manually run =pdf-tools-install=
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2025-10-21 Tue 03:41]
+:LAST_MODIFIED: [2026-02-01 Sun 16:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -5663,7 +5663,7 @@ package, reinstall it, and manually run =pdf-tools-install=
   )
 
 (use-package olivetti
-  :hook ((text-mode prog-mode org-mode) . olivetti-mode)
+  :hook ((text-mode prog-mode org-mode help-mode Info-mode) . olivetti-mode)
   :config (setopt olivetti-style 'fancy
                   olivetti-body-width 0.7
                   olivetti-minimum-body-width 80

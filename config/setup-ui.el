@@ -12,7 +12,7 @@
   )
 
 (use-package olivetti
-  :hook ((text-mode prog-mode org-mode) . olivetti-mode)
+  :hook ((text-mode prog-mode org-mode help-mode Info-mode) . olivetti-mode)
   :config (setopt olivetti-style 'fancy
                   olivetti-body-width 0.7
                   olivetti-minimum-body-width 80
