@@ -14,7 +14,19 @@
           doom-modeline-gnus nil
           doom-modeline-irc nil
           doom-modeline-persp-name nil
+          doom-modeline-lsp t
           )
+  )
+
+(use-package maple-modeline
+  :disabled
+  :ensure (maple-modeline :type git
+                      :host github
+                      :repo "honmaple/emacs-maple-modeline")
+  :hook (elpaca-after-init . maple-modeline-mode)
+  :custom-face
+  (mode-line ((t (:box nil))))
+  (mode-line-inactive ((t (:box nil))))
   )
 
 (use-package moody

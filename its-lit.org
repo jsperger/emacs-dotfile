@@ -5296,6 +5296,8 @@ distinct from any TeX typesetting.
 ** setup-modeline.el
 :PROPERTIES:
 :CUSTOM_ID: setup-modelineel
+:LAST_MODIFIED: [2026-02-02 Mon 21:50]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-modeline.el
 ;;; config/setup-modeline.el --- Modeline configuration -*- lexical-binding: t -*-
@@ -5314,7 +5316,19 @@ distinct from any TeX typesetting.
           doom-modeline-gnus nil
           doom-modeline-irc nil
           doom-modeline-persp-name nil
+          doom-modeline-lsp t
           )
+  )
+
+(use-package maple-modeline
+  :disabled
+  :ensure (maple-modeline :type git
+                      :host github
+                      :repo "honmaple/emacs-maple-modeline")
+  :hook (elpaca-after-init . maple-modeline-mode)
+  :custom-face
+  (mode-line ((t (:box nil))))
+  (mode-line-inactive ((t (:box nil))))
   )
 
 (use-package moody
