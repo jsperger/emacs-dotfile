@@ -18,7 +18,7 @@
 
   :config  (setopt toml-indent-offset 2
                    lsp-bridge-enable-hover-diagnostic t
-                   lsp-bridge-enable-org-babel t
+                   lsp-bridge-enable-org-babel nil
                    acm-enable-preview t
                    )
 
@@ -26,7 +26,9 @@
               "lf" 'lsp-bridge-find-def
               "lF" 'lsp-bridge-find-def-other-window
               "lh" 'lsp-bridge-show-documentation
-              "lp" 'lsp-bridge-popup-documentation
+              "ld" 'lsp-bridge-popup-documentation
+              "lp" 'lsp-bridge-peek
+              "lP" 'lsp-bridge-peek-abort
               )
   )
 
