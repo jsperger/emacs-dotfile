@@ -2880,13 +2880,29 @@ install reveal yourself using =npm= or similar.
 *** Python configuration
 :PROPERTIES:
 :CUSTOM_ID: python-configuration
-:LAST_MODIFIED: [2025-10-19 Sun 18:46]
+:LAST_MODIFIED: [2026-01-26 Mon 19:50]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
 ;;;; ============================== Python ==============================
 (use-package uv-mode
   :hook (python-mode . uv-mode-auto-activate-hook)
+  )
+
+(use-package jupyter-ascending
+  :hook (python-mode . (lambda ()
+                         (when (and buffer-file-name
+                                    (string-match-p "\\.sync\\.py\\'" buffer-file-name))
+                           (jupyter-ascending-mode 1))))
+  :general (despot-def (python-mode-map)
+             :major-modes '(python-mode python-ts-mode)
+             "ck" 'jupyter-ascending-execute-line
+             "ca" 'jupyter-ascending-execute-all
+             "cn" 'jupyter-ascending-next-cell
+             "cp" 'jupyter-ascending-previous-cell
+             "ct" 'jupyter-ascending-cycle-cell-type
+             "c'" 'jupyter-ascending-edit-markdown-cell
+             )
   )
 #+end_src
 
