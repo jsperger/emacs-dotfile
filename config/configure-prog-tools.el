@@ -21,6 +21,7 @@
                    lsp-bridge-enable-org-babel nil
                    acm-enable-preview t
                    )
+  (evil-set-initial-state 'lsp-bridge-ref-mode 'emacs)
 
   :general  (tyrant-def "l" (cons "lsp" (make-sparse-keymap))
               "lf" 'lsp-bridge-find-def
