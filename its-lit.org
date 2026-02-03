@@ -4814,7 +4814,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2026-01-08 Thu 21:55]
+:LAST_MODIFIED: [2026-01-19 Mon 18:14]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -4858,10 +4858,10 @@ to installing its helper script to the root of the emacs user directory.
     :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
     )
 
-  (gptel-make-gemini "Gemini-API"
-    :stream t
-    :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
-    )
+  ;; (gptel-make-gemini "Gemini-API"
+  ;;   :stream t
+  ;;   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
+  ;;   )
   
   :general (tyrant-def "aG" 'gptel-menu)
   
@@ -4886,10 +4886,28 @@ to installing its helper script to the root of the emacs user directory.
 (use-package agent-shell
   :config
   (setopt
-   agent-shell-anthropic-claude-environment        (agent-shell-make-environment-variables :inherit-env t)
-   agent-shell-anthropic-authentication          (agent-shell-anthropic-make-authentication :login t)
+   agent-shell-anthropic-claude-environment
+   (agent-shell-make-environment-variables :inherit-env t)
+   agent-shell-anthropic-authentication
+   (agent-shell-anthropic-make-authentication :login t)
+   agent-shell-google-authentication
+   (agent-shell-google-make-authentication :login t)
+   agent-shell-google-gemini-environment (agent-shell-make-environment-variables :inherit-env t)
    )
-  agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)
+   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
+  (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
+  (evil-define-key 'normal agent-shell-mode-map (kbd "RET") #'comint-send-input)
+
+  ;; Configure *agent-shell-diff* buffers to start in Emacs state
+  (add-hook 'diff-mode-hook
+	    (lambda ()
+	      (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
+		(evil-emacs-state))))
+  :general
+  (tyrant-def
+    "ag" 'agent-shell-google-start-gemini
+    "ac" 'agent-shell-anthropic-start-claude-code
+    )
   )
 
 ;; Local Variables:

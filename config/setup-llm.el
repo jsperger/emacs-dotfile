@@ -29,10 +29,10 @@
     :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
     )
 
-  (gptel-make-gemini "Gemini-API"
-    :stream t
-    :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
-    )
+  ;; (gptel-make-gemini "Gemini-API"
+  ;;   :stream t
+  ;;   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
+  ;;   )
   
   :general (tyrant-def "aG" 'gptel-menu)
   
@@ -57,10 +57,28 @@
 (use-package agent-shell
   :config
   (setopt
-   agent-shell-anthropic-claude-environment        (agent-shell-make-environment-variables :inherit-env t)
-   agent-shell-anthropic-authentication          (agent-shell-anthropic-make-authentication :login t)
+   agent-shell-anthropic-claude-environment
+   (agent-shell-make-environment-variables :inherit-env t)
+   agent-shell-anthropic-authentication
+   (agent-shell-anthropic-make-authentication :login t)
+   agent-shell-google-authentication
+   (agent-shell-google-make-authentication :login t)
+   agent-shell-google-gemini-environment (agent-shell-make-environment-variables :inherit-env t)
    )
-  agent-shell-preferred-agent-config (agent-shell-anthropic-make-claude-code-config)
+   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
+  (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
+  (evil-define-key 'normal agent-shell-mode-map (kbd "RET") #'comint-send-input)
+
+  ;; Configure *agent-shell-diff* buffers to start in Emacs state
+  (add-hook 'diff-mode-hook
+	    (lambda ()
+	      (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
+		(evil-emacs-state))))
+  :general
+  (tyrant-def
+    "ag" 'agent-shell-google-start-gemini
+    "ac" 'agent-shell-anthropic-start-claude-code
+    )
   )
 
 ;; Local Variables:
