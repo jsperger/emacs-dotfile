@@ -43,6 +43,8 @@
   ;; (setq modus-themes-common-palette-overrides
   ;;       modus-themes-preset-overrides-intense)
   )
+
+(use-package catppuccin-theme)
 ;; Color theme packages:1 ends here
 
 ;; [[file:../its-lit.org::#managing-fonts][Managing fonts:1]]

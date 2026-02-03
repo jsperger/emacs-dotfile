@@ -3293,10 +3293,13 @@ Packages that substantially change the user interface as configured in
 *** Color theme packages
 :PROPERTIES:
 :CUSTOM_ID: color-theme-packages
-:LAST_MODIFIED: [2025-08-03 Sun 18:21]
+:LAST_MODIFIED: [2026-02-01 Sun 16:07]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
+- Keep an eye on Catpppuccin, in the past it was weirdly slow to load. Like a
+  substantial part of my startup time level of weirdly slow.
+  
 #+begin_src emacs-lisp
 (use-package doom-themes)
 
@@ -3327,6 +3330,9 @@ Packages that substantially change the user interface as configured in
   ;; (setq modus-themes-common-palette-overrides
   ;;       modus-themes-preset-overrides-intense)
   )
+
+(use-package catppuccin-theme)
+
 #+end_src
 
 **** Disabled themes
@@ -3391,13 +3397,9 @@ which doesn't play nicely with my hook to disable themes on loading a new one.
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: disabled-for-a-reason
 :END:
-- Catpppuccin was weirdly slow to load
 - Kaolin is okay but I found the color choices to not be the most readable
 
 #+begin_src emacs-lisp :tangle no
-(use-package catppuccin-theme
-  :disabled)
-
 (use-package kaolin-themes)
 #+end_src
 
