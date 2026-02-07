@@ -764,7 +764,7 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2025-10-26 Sun 02:58]
+:LAST_MODIFIED: [2026-02-06 Fri 20:49]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -803,35 +803,17 @@ mistakes in my configuration.
              "configure-utilities.el"
              "configure-prog-langs.el"
              "configure-prog-tools.el"
-             ;; "setup-casual.el"
-             ;;              ;; "setup-completion-actions.el"
              "setup-completion-backends.el"
              "setup-completion-display.el"
              "setup-completion.el"
              "setup-consult.el"
-             ;; "setup-data-formats.el"
-             ;; "setup-denote.el"
-             ;; "setup-diagramming.el"
-             ;; "setup-eaf.el"
-             ;; "setup-emacs.el"
-             ;;              ;; "setup-email.el"
              "setup-evil-addons.el"
              "setup-font-locking.el"
-             ;;              ;; "setup-go.el"
-             ;;              ;; "setup-gopher.el"
-             ;;              ;; "setup-icons.el"
-             ;;              ;; "setup-lisp.el"
              "setup-llm.el"
-             ;;              ;; "setup-media.el"
              "setup-modeline.el"
-             ;;              ;; "setup-notes.el"
-             ;;              ;; "setup-programming.el"
-             ;; "setup-projects.el"
              "setup-reading.el"
              "setup-ui.el"
              "setup-vc.el"
-             ;; "setup-web.el"
-             ;; "setup-writing.el"
              "writing-in-emacs.el"
              )
            )
@@ -3685,8 +3667,10 @@ Font waterfall and size viewer from within emacs.
 *** setup-completion-actions.el
 :PROPERTIES:
 :CUSTOM_ID: setup-completion-actionsel
+:LAST_MODIFIED: [2026-02-06 Fri 20:52]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-completion-actions.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-completion-actions.el --- Completion actions -*- lexical-binding: t -*-
 
 (use-package avy
@@ -4128,8 +4112,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-denote.el
 :PROPERTIES:
 :CUSTOM_ID: setup-denoteel
+:LAST_MODIFIED: [2026-02-06 Fri 20:53]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-denote.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-denote.el --- Denote configuration -*- lexical-binding: t -*-
 
 (use-package denote
@@ -4238,8 +4224,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-diagramming.el
 :PROPERTIES:
 :CUSTOM_ID: setup-diagrammingel
+:LAST_MODIFIED: [2026-02-06 Fri 20:53]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-diagramming.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-diagramming.el --- Diagramming tools configuration -*- lexical-binding: t -*-
 
 (use-package chatu
@@ -4288,8 +4276,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-eaf.el
 :PROPERTIES:
 :CUSTOM_ID: setup-eafel
+:LAST_MODIFIED: [2026-02-06 Fri 20:53]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-eaf.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-eaf.el --- EAF configuration -*- lexical-binding: t -*-
 
 (use-package eaf
@@ -4692,10 +4682,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-go.el
 :PROPERTIES:
 :CUSTOM_ID: setup-goel
-:LAST_MODIFIED: [2025-08-10 Sun 17:55]
+:LAST_MODIFIED: [2026-02-06 Fri 20:54]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-go.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-go.el --- Go programming language configuration -*- lexical-binding: t -*-
 
 (use-package go-mode
@@ -4724,8 +4714,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-gopher.el
 :PROPERTIES:
 :CUSTOM_ID: setup-gopherel
+:LAST_MODIFIED: [2026-02-06 Fri 20:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-gopher.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-gopher.el --- Gopher configuration -*- lexical-binding: t -*-
 
 (use-package elpher
@@ -4742,8 +4734,10 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-icons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-iconsel
+:LAST_MODIFIED: [2026-02-06 Fri 20:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-icons.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-icons.el --- Icons configuration -*- lexical-binding: t -*-
 
 (use-package nerd-icons-dired
@@ -5171,8 +5165,10 @@ distinct from any TeX typesetting.
 ** setup-lsp.el
 :PROPERTIES:
 :CUSTOM_ID: setup-lspel
+:LAST_MODIFIED: [2026-02-06 Fri 20:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-lsp.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-lsp.el --- LSP configuration -*- lexical-binding: t -*-
 
 (use-package eglot
@@ -5274,8 +5270,10 @@ distinct from any TeX typesetting.
 ** setup-media.el
 :PROPERTIES:
 :CUSTOM_ID: setup-mediael
+:LAST_MODIFIED: [2026-02-06 Fri 20:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-media.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-media.el --- Media players configuration -*- lexical-binding: t -*-
 
 (use-package ready-player
@@ -5353,8 +5351,10 @@ distinct from any TeX typesetting.
 ** setup-notes.el
 :PROPERTIES:
 :CUSTOM_ID: setup-notesel
+:LAST_MODIFIED: [2026-02-06 Fri 20:54]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-notes.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-notes.el --- Notes configuration -*- lexical-binding: t -*-
 
 (use-package obsidian
@@ -5392,10 +5392,10 @@ distinct from any TeX typesetting.
 ** setup-projects.el
 :PROPERTIES:
 :CUSTOM_ID: setup-projectsel
-:LAST_MODIFIED: [2025-07-31 Thu 18:45]
+:LAST_MODIFIED: [2026-02-06 Fri 20:55]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-projects.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-projects.el --- Projects configuration -*- lexical-binding: t -*-
 
 (use-package todoist
@@ -6057,8 +6057,10 @@ use the toolbar in the first place.
 ** setup-web.el
 :PROPERTIES:
 :CUSTOM_ID: setup-webel
+:LAST_MODIFIED: [2026-02-06 Fri 20:55]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-web.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-web.el --- Web development configuration -*- lexical-binding: t -*-
 
 (use-package ox-hugo
@@ -6506,10 +6508,10 @@ with notably nonfunctioning pieces.
 ** setup-writing.el
 :PROPERTIES:
 :CUSTOM_ID: setup-writingel
-:LAST_MODIFIED: [2025-10-26 Sun 02:58]
+:LAST_MODIFIED: [2026-02-06 Fri 20:55]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-writing.el
+#+begin_src emacs-lisp :tangle no
 ;;; config/setup-writing.el --- Writing tools configuration -*- lexical-binding: t -*-
 
 (use-package binder
