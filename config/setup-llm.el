@@ -65,20 +65,27 @@
    (agent-shell-google-make-authentication :login t)
    agent-shell-google-gemini-environment (agent-shell-make-environment-variables :inherit-env t)
    )
-   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
+  ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
   (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
   (evil-define-key 'normal agent-shell-mode-map (kbd "RET") #'comint-send-input)
 
   ;; Configure *agent-shell-diff* buffers to start in Emacs state
   (add-hook 'diff-mode-hook
-	    (lambda ()
-	      (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
-		(evil-emacs-state))))
+	          (lambda ()
+	            (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
+		            (evil-emacs-state))))
   :general
   (tyrant-def
     "ag" 'agent-shell-google-start-gemini
     "ac" 'agent-shell-anthropic-start-claude-code
     )
+  )
+
+(use-package beads
+  :ensure (beads :type git
+                 :host codeberg
+                 :repo "ctietze/beads.el"
+                 )
   )
 
 ;; Local Variables:
