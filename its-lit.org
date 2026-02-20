@@ -2506,8 +2506,35 @@ These packages have the distinction of being useful but I don't use them enough,
 #+end_src
 *** Configure org functionality add-ons
 :PROPERTIES:
+:LAST_MODIFIED: [2026-02-20 Fri 07:16]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-org-functionality-add-ons
-:LAST_MODIFIED: [2025-07-23 Wed 00:46]
+:END:
+
+Strange interaction between =org-link-beautify= and =elpaca= or some other package:
+1. ~:hook (elpaca-after-init . org-link-beautify-mode)~ works in that the links
+   have the desired icons after them. However org-link-beautify-mode claims to
+   be disabled, e.g. running the command =org-link-beautify-mode= in an org buffer
+   that's already displaying the icons will say org-link-beautify-mode enabled
+   when it should presumably be toggling to disabled.
+2. Adding a hook like
+
+     #+begin_example
+:config
+ (add-hook 'elpaca-after-init-hook #'org-link-beautify-mode) 
+  #+end_example
+
+and opening an org file the links don't have the icons but running the command
+=org-link-beautify-mode= will say disabled when first called which is what you'd
+expect if the hook is working.
+
+In both cases the org buffer doesn't seem to update as you cycle through calls
+to =org-link-beautify-mode= so I'm going with the ~:hook~ version where the
+functionality works even if the mode is messed up. 
+ 
+:PROPERTIES:
+:CUSTOM_ID: configure-org-functionality-add-ons
+:LAST_MODIFIED: [2026-02-20 Fri 07:06]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
@@ -2548,6 +2575,14 @@ These packages have the distinction of being useful but I don't use them enough,
     "Lo" 'org-transclusion-open-source
     )
   )
+
+(use-package org-link-beautify
+  :hook (elpaca-after-init . org-link-beautify-mode)
+  :config
+  (setopt org-link-beautify-async-preview t
+          org-element-use-cache t
+          )
+)
 #+end_src
 
 **** Disabled org functionality packages

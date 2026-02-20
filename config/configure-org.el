@@ -203,6 +203,14 @@
     "Lo" 'org-transclusion-open-source
     )
   )
+
+(use-package org-link-beautify
+  :hook (elpaca-after-init . org-link-beautify-mode)
+  :config
+  (setopt org-link-beautify-async-preview t
+          org-element-use-cache t
+          )
+)
 ;; Configure org functionality add-ons:1 ends here
 
 ;; [[file:../its-lit.org::#org-todoist][org-todoist:1]]
