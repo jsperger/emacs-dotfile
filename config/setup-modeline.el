@@ -16,13 +16,16 @@
           doom-modeline-persp-name nil
           doom-modeline-lsp t
           )
+  (add-hook 'inferior-ess-mode-hook
+            (lambda ()
+              (add-to-list 'mode-line-process '(:eval (nth ess--busy-count ess-busy-strings)))))
   )
 
 (use-package maple-modeline
   :disabled
   :ensure (maple-modeline :type git
-                      :host github
-                      :repo "honmaple/emacs-maple-modeline")
+                          :host github
+                          :repo "honmaple/emacs-maple-modeline")
   :hook (elpaca-after-init . maple-modeline-mode)
   :custom-face
   (mode-line ((t (:box nil))))
