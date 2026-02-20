@@ -215,6 +215,31 @@
   )
 ;; View fonts within emacs:1 ends here
 
+;; [[file:../its-lit.org::#nerd-icons][Nerd icons:1]]
+(use-package nerd-icons-dired
+  :hook  (dired-mode . nerd-icons-dired-mode)
+  )
+
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+	:config
+	(setopt
+	 nerd-icons-ibuffer-icon t ; Display icons in ibuffer?
+   nerd-icons-ibuffer-color-icon t ; Use colorful icons? Respects `nerd-icons-color-icons'
+	 nerd-icons-ibuffer-icon-size 1.0 ; Default icon size in ibuffer
+	 nerd-icons-ibuffer-human-readable-size t ; Use human readable file size in ibuffer.
+	 ;; See `ibuffer-formats' for details.
+	 ;; nerd-icons-ibuffer-formats
+	 inhibit-compacting-font-caches t) ; Speed up rendering
+	)
+
+(use-package nerd-icons-completion
+  :after marginalia
+  :hook (marginalia-mode . nerd-icons-completion-mode)
+  :config (setopt nerd-icons-completion-mode t)
+  )
+;; Nerd icons:1 ends here
+
 ;; [[file:../its-lit.org::#theming-advice-and-hooks][Theming advice and hooks:1]]
 (advice-add 'load-theme :after #'load-theme@run-hooks)
 (advice-add 'load-theme :before #'load-theme@theme-dont-propagate)

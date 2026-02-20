@@ -130,6 +130,8 @@ count of {{{word-count}}}.*
     - [[#managing-fonts][Managing fonts]]
       - [[#view-fonts-within-emacs][View fonts within emacs]]
       - [[#disabled-packages][Disabled packages]]
+    - [[#nerd-icons][Nerd icons]]
+      - [[#disabled-icon-packages][Disabled icon packages]]
     - [[#theming-advice-and-hooks][Theming advice and hooks]]
     - [[#theming-lisp-footer][Theming lisp footer]]
   - [[#configure-completion-frameworks][Configure completion frameworks]]
@@ -149,7 +151,6 @@ count of {{{word-count}}}.*
   - [[#setup-font-lockingel][setup-font-locking.el]]
   - [[#setup-goel][setup-go.el]]
   - [[#setup-gopherel][setup-gopher.el]]
-  - [[#setup-iconsel][setup-icons.el]]
   - [[#setup-llmel][setup-llm.el]]
     - [[#llm-unused-config][LLM unused config]]
   - [[#configure-programming-tools-language-agnostic-or-multi-language][Configure programming tools (language agnostic or multi-language)]]
@@ -3625,6 +3626,69 @@ Font waterfall and size viewer from within emacs.
 (use-package ligature
   :disabled)
 #+end_src
+
+*** Nerd icons
+:PROPERTIES:
+:CUSTOM_ID: nerd-icons
+:LAST_MODIFIED: [2026-02-12 Thu 18:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:END:
+
+#+begin_src emacs-lisp
+
+(use-package nerd-icons-dired
+  :hook  (dired-mode . nerd-icons-dired-mode)
+  )
+
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
+	:config
+	(setopt
+	 nerd-icons-ibuffer-icon t ; Display icons in ibuffer?
+   nerd-icons-ibuffer-color-icon t ; Use colorful icons? Respects `nerd-icons-color-icons'
+	 nerd-icons-ibuffer-icon-size 1.0 ; Default icon size in ibuffer
+	 nerd-icons-ibuffer-human-readable-size t ; Use human readable file size in ibuffer.
+	 ;; See `ibuffer-formats' for details.
+	 ;; nerd-icons-ibuffer-formats
+	 inhibit-compacting-font-caches t) ; Speed up rendering
+	)
+
+(use-package nerd-icons-completion
+  :after marginalia
+  :hook (marginalia-mode . nerd-icons-completion-mode)
+  :config (setopt nerd-icons-completion-mode t)
+  )
+#+end_src
+
+**** Disabled icon packages
+:PROPERTIES:
+:LAST_MODIFIED: [2026-02-12 Thu 18:37]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: disabled-icon-packages
+:END:
+
+#+begin_src emacs-lisp :tangle no :eval no
+(use-package tab-line-nerd-icons
+	:hook (tab-line-mode . tab-line-nerd-icons-global-mode))
+
+(use-package nerd-icons-corfu
+	:disabled
+;;	:if (global-corfu-mode) ; not defined if corfu isn't on. Need to figure out how to safely try this or an alternative condition
+	:after corfu
+	:init
+	(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
+;;	:hook (corfu-mode . nerd-icons-completion)
+;; ;; Optionally:
+;; (setq nerd-icons-corfu-mapping
+;;       '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+;;         (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+;;         ;; ...
+;;         (t :style "cod" :icon "code" :face font-lock-warning-face)))
+;;         ;; Remember to add an entry for `t', the library uses that as default.
+;; The Custom interface is also supported for tuning the variable above.
+	)
+#+end_src
+
 *** Theming advice and hooks
 :PROPERTIES:
 :LAST_MODIFIED: [2025-08-03 Sun 19:35]
@@ -3842,11 +3906,6 @@ of 2025-07-06
             #'epkg-marginalia-annotate-package)
   )
 
-(use-package nerd-icons-completion
-  :after marginalia
-  :hook (marginalia-mode . nerd-icons-completion-mode)
-  :config (setopt nerd-icons-completion-mode t)
-  )
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
@@ -3854,6 +3913,8 @@ of 2025-07-06
 ;; End:
 ;;; setup-completion-display.el ends here
 #+end_src
+
+Note: icon display configuration moved to [[Nerd icons]]
 
 *** setup-completion.el
 :PROPERTIES:
@@ -4731,96 +4792,6 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ;; End:
 ;;; setup-gopher.el ends here
 #+end_src
-** setup-icons.el
-:PROPERTIES:
-:CUSTOM_ID: setup-iconsel
-:LAST_MODIFIED: [2026-02-06 Fri 20:54]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp :tangle no
-;;; config/setup-icons.el --- Icons configuration -*- lexical-binding: t -*-
-
-(use-package nerd-icons-dired
-  :hook  (dired-mode . nerd-icons-dired-mode)
-  )
-
-(use-package nerd-icons-ibuffer
-  :hook (ibuffer-mode . nerd-icons-ibuffer-mode)
-	:config
-	(setopt
-	 nerd-icons-ibuffer-icon t ; Whether display the icons.
-	 nerd-icons-ibuffer-color-icon t ; Whether display the colorful icons.
-	 ;; It respects `nerd-icons-color-icons'.
-	 nerd-icons-ibuffer-icon-size 1.0
-	 ;; The default icon size in ibuffer.
-	 nerd-icons-ibuffer-human-readable-size t ; Use human readable file size in ibuffer.
-	 ;; A list of ways to display buffer lines with `nerd-icons'.
-	 ;; See `ibuffer-formats' for details.
-	 ;; nerd-icons-ibuffer-formats
-
-	 ;; Slow Rendering
-	 ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
-	 ;; you can try setting the following variable
-	 inhibit-compacting-font-caches t)
-	)
-
-
-(use-package tab-line-nerd-icons
-	:hook (tab-line-mode . tab-line-nerd-icons-global-mode))
-
-(use-package nerd-icons-corfu
-	:disabled
-;;	:if (global-corfu-mode) ; not defined if corfu isn't on. Need to figure out how to safely try this or an alternative condition
-	:after corfu
-	:init
-	(add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter)
-;;	:hook (corfu-mode . nerd-icons-completion)
-;; ;; Optionally:
-;; (setq nerd-icons-corfu-mapping
-;;       '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
-;;         (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
-;;         ;; ...
-;;         (t :style "cod" :icon "code" :face font-lock-warning-face)))
-;;         ;; Remember to add an entry for `t', the library uses that as default.
-;; The Custom interface is also supported for tuning the variable above.
-	)
-
-(use-package all-the-icons
-	:disabled
-  :if (display-graphic-p))
-
-(use-package all-the-icons-dired
-	:disabled
-  :after all-the-icons
-  :hook (dired-mode . all-the-icons-dired-mode))
-
-(use-package all-the-icons-ibuffer
-	:disabled
-  :after all-the-icons
-  :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
-
-(use-package kind-icon
-	:disabled
-  :after corfu
-  :custom
-   (kind-icon-blend-background t)
-   (kind-icon-default-face 'corfu-default) ; only needed with blend-background
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
-
-(use-package nerd-icons
-	;;	:hook (doom-modeline-mode)
-	:custom (nerd-icon-scale-factor 0.8)
-)
-
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-icons.el ends here
-#+end_src
-
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
@@ -5301,10 +5272,13 @@ distinct from any TeX typesetting.
 ** setup-modeline.el
 :PROPERTIES:
 :CUSTOM_ID: setup-modelineel
-:LAST_MODIFIED: [2026-02-02 Mon 21:50]
+:LAST_MODIFIED: [2026-02-12 Thu 18:42]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
-#+begin_src emacs-lisp :tangle config/setup-modeline.el
+
+See also: [[Nerd icons]]
+
+#+begin_src emacs-lisp :tangle config/setup-modeline.el 
 ;;; config/setup-modeline.el --- Modeline configuration -*- lexical-binding: t -*-
 
 (use-package doom-modeline

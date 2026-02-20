@@ -11,11 +11,6 @@
             #'epkg-marginalia-annotate-package)
   )
 
-(use-package nerd-icons-completion
-  :after marginalia
-  :hook (marginalia-mode . nerd-icons-completion-mode)
-  :config (setopt nerd-icons-completion-mode t)
-  )
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
