@@ -605,7 +605,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 #+end_src
 *** Bootstrap Elpaca package manager
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 03:46]
+:LAST_MODIFIED: [2026-02-25 Wed 13:53]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: bootstrap-elpaca-package-manager
 :END:
@@ -657,7 +657,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
   ;; Enable :elpaca use-package keyword.
   (elpaca-use-package-mode)
   ;; Assume :elpaca t unless otherwise specified.
-  (setq elpaca-use-package-by-default t)
+  (setq use-package-always-ensure t)
   )
 
 (elpaca-wait) ; Block until current queue processed.
