@@ -80,6 +80,7 @@
   )
 
 (use-package beads
+  :disabled
   :ensure (beads :type git
                  :host codeberg
                  :repo "ctietze/beads.el"

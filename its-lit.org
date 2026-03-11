@@ -4926,6 +4926,7 @@ to installing its helper script to the root of the emacs user directory.
   )
 
 (use-package beads
+  :disabled
   :ensure (beads :type git
                  :host codeberg
                  :repo "ctietze/beads.el"
