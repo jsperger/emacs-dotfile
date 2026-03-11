@@ -1,15 +1,15 @@
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
 (use-package gptel
-	:functions gptel--insert-file-string
-	:config
+  :functions gptel--insert-file-string
+  :config
   (setopt gptel-model   'llama-cpp
-                  gptel-backend (gptel-make-openai "llama-cpp"
-                                  :stream t
-                                  :protocol "http"
-                                  :host "localhost:1234"
-                                  :models '(llama-cpp))
-                  )
+          gptel-backend (gptel-make-openai "llama-cpp"
+                          :stream t
+                          :protocol "http"
+                          :host "localhost:1234"
+                          :models '(llama-cpp))
+          )
 
   (gptel-make-openai "OpenAI"
     :stream t
@@ -69,9 +69,9 @@
 
   ;; Configure *agent-shell-diff* buffers to start in Emacs state
   (add-hook 'diff-mode-hook
-	          (lambda ()
-	            (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
-		            (evil-emacs-state))))
+  	        (lambda ()
+  	          (when (string-match-p "\\*agent-shell-diff\\*" (buffer-name))
+  		          (evil-emacs-state))))
   :general
   (tyrant-def
     "ag" 'agent-shell-google-start-gemini
