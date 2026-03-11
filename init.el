@@ -5,15 +5,15 @@
 ;; [[file:its-lit.org::init elpaca][init elpaca]]
 ;; ===================== Elpaca bootstrap install ====================
 ;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
-(defvar elpaca-installer-version 0.11)
+(defvar elpaca-installer-version 0.12)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
                               :ref nil :depth 1 :inherit ignore
                               :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-                              :build (:not elpaca--activate-package)))
-(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+                              :build (:not elpaca-activate)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
        (order (cdr elpaca-order))
        (default-directory repo))
@@ -48,11 +48,12 @@
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
   (elpaca-use-package-mode)
-  ;; Assume :elpaca t unless otherwise specified.
-  (setq use-package-always-ensure t)
-  )
+	)
 
 (elpaca-wait) ; Block until current queue processed.
+
+(setopt use-package-always-ensure t) ; Assume :elpaca t by default.
+
 ;; init elpaca ends here
 
 ;; [[file:its-lit.org::constant flags][constant flags]]
@@ -63,7 +64,8 @@
 (defconst IS-ANDROID (eq system-type 'android))
 
 (defconst my-debug-mode nil
-  "Toggle debugging messages. Set to t to enable, nil to disable.")
+  "Toggle debugging messages. Set to t to enable, nil to disable."
+	)
 ;; constant flags ends here
 
 ;; [[file:its-lit.org::no-littering][no-littering]]
@@ -161,8 +163,10 @@
 
 ;; [[file:its-lit.org::#load-custom-file-and-run-after-init-hooks][Load custom file and run after-init hooks:1]]
 ;;;; =============================== Customs ===============================
+
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
+
 ;; Load custom file and run after-init hooks:1 ends here
 
 ;; Local Variables:
