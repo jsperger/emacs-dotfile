@@ -605,7 +605,7 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 #+end_src
 *** Bootstrap Elpaca package manager
 :PROPERTIES:
-:LAST_MODIFIED: [2026-02-25 Wed 13:53]
+:LAST_MODIFIED: [2026-03-11 Wed 02:48]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: bootstrap-elpaca-package-manager
 :END:
@@ -613,15 +613,15 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 #+begin_src emacs-lisp :tangle init.el :comments noweb
 ;; ===================== Elpaca bootstrap install ====================
 ;; https://github.com/progfolio/elpaca?tab=readme-ov-file#installer
-(defvar elpaca-installer-version 0.11)
+(defvar elpaca-installer-version 0.12)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
 (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
                               :ref nil :depth 1 :inherit ignore
                               :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-                              :build (:not elpaca--activate-package)))
-(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+                              :build (:not elpaca-activate)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
        (order (cdr elpaca-order))
        (default-directory repo))
@@ -656,11 +656,12 @@ while still having tangle/detangle functionality. Shouldn't be too difficult hon
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
   (elpaca-use-package-mode)
-  ;; Assume :elpaca t unless otherwise specified.
-  (setq use-package-always-ensure t)
-  )
+	)
 
 (elpaca-wait) ; Block until current queue processed.
+
+(setopt use-package-always-ensure t) ; Assume :elpaca t by default.
+
 #+end_src
 *** Define constants to use as conditional configuration flags
 :PROPERTIES:

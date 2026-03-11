@@ -53,7 +53,6 @@
 (elpaca-wait) ; Block until current queue processed.
 
 (setopt use-package-always-ensure t) ; Assume :elpaca t by default.
-
 ;; init elpaca ends here
 
 ;; [[file:its-lit.org::constant flags][constant flags]]
@@ -64,8 +63,7 @@
 (defconst IS-ANDROID (eq system-type 'android))
 
 (defconst my-debug-mode nil
-  "Toggle debugging messages. Set to t to enable, nil to disable."
-	)
+  "Toggle debugging messages. Set to t to enable, nil to disable.")
 ;; constant flags ends here
 
 ;; [[file:its-lit.org::no-littering][no-littering]]
@@ -163,10 +161,8 @@
 
 ;; [[file:its-lit.org::#load-custom-file-and-run-after-init-hooks][Load custom file and run after-init hooks:1]]
 ;;;; =============================== Customs ===============================
-
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
-
 ;; Load custom file and run after-init hooks:1 ends here
 
 ;; Local Variables:
