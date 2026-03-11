@@ -1,8 +1,9 @@
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
 (use-package gptel
-  :functions gptel--insert-file-string
-  :config (setopt gptel-model   'llama-cpp
+	:functions gptel--insert-file-string
+	:config
+  (setopt gptel-model   'llama-cpp
                   gptel-backend (gptel-make-openai "llama-cpp"
                                   :stream t
                                   :protocol "http"
@@ -12,16 +13,14 @@
 
   (gptel-make-openai "OpenAI"
     :stream t
-    :key (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
+    :key (gptel-api-key-from-auth-source "api.openai.com" "apikey")
+    )
+  
   (gptel-make-openai "OpenRouter"               
     :host "openrouter.ai"
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
-    :models '(google/gemini-3.0-flash
-	            google/gemini-3.0-pro
-              openrouter/auto
-              )
     )
 
   (gptel-make-anthropic "Claude"          
@@ -34,8 +33,7 @@
   ;;   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
   ;;   )
   
-  :general (tyrant-def "aG" 'gptel-menu)
-  
+  :general (tyrant-def "aG" 'gptel-menu) 
   )
 
 (use-package mcp-server-lib

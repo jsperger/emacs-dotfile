@@ -4831,7 +4831,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2026-02-06 Fri 22:51]
+:LAST_MODIFIED: [2026-03-11 Wed 04:07]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -4847,8 +4847,9 @@ to installing its helper script to the root of the emacs user directory.
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
 (use-package gptel
-  :functions gptel--insert-file-string
-  :config (setopt gptel-model   'llama-cpp
+	:functions gptel--insert-file-string
+	:config
+  (setopt gptel-model   'llama-cpp
                   gptel-backend (gptel-make-openai "llama-cpp"
                                   :stream t
                                   :protocol "http"
@@ -4858,16 +4859,14 @@ to installing its helper script to the root of the emacs user directory.
 
   (gptel-make-openai "OpenAI"
     :stream t
-    :key (gptel-api-key-from-auth-source "api.openai.com" "apikey"))
+    :key (gptel-api-key-from-auth-source "api.openai.com" "apikey")
+    )
+  
   (gptel-make-openai "OpenRouter"               
     :host "openrouter.ai"
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
-    :models '(google/gemini-3.0-flash
-	            google/gemini-3.0-pro
-              openrouter/auto
-              )
     )
 
   (gptel-make-anthropic "Claude"          
@@ -4880,8 +4879,7 @@ to installing its helper script to the root of the emacs user directory.
   ;;   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
   ;;   )
   
-  :general (tyrant-def "aG" 'gptel-menu)
-  
+  :general (tyrant-def "aG" 'gptel-menu) 
   )
 
 (use-package mcp-server-lib
