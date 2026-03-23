@@ -263,6 +263,21 @@
 	)
 ;; non-evil text editing ends here
 
+;; [[file:../its-lit.org::#group-buffers-by-project][Group buffers by project:1]]
+(use-package perspective
+  :general
+  (tyrant-def
+;;    "P"       (cons "Perspective" perspective-prefix-map)
+		"P" (cons "Perspective" (make-sparse-keymap))
+    "Pb" 'persp-list-buffers
+    )
+  :config
+  (consult-customize consult-source-buffer :hidden t :default nil)
+  (add-to-list 'consult-buffer-sources persp-consult-source)
+  (persp-mode)
+  )
+;; Group buffers by project:1 ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

@@ -15,7 +15,7 @@ count of {{{word-count}}}.*
 :PROPERTIES:
 :TOC:      :include all :depth 4
 :CUSTOM_ID: detailed-outline
-:LAST_MODIFIED: [2025-07-20 Sun 20:49]
+:LAST_MODIFIED: [2026-03-23 Mon 18:39]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 :CONTENTS:
@@ -99,6 +99,8 @@ count of {{{word-count}}}.*
     - [[#text-snippet-insertion-and-collections][Text snippet insertion and collections]]
       - [[#removed-snippet-packages-and-customization][Removed snippet packages and customization]]
     - [[#text-editing-non-evil][Text editing (non-evil)]]
+    - [[#group-buffers-by-project][Group buffers by project]]
+      - [[#disabled][Disabled]]
     - [[#footer-for-utilities-config][Footer for utilities config]]
     - [[#removed-packages][Removed packages]]
   - [[#configure-all-things-org-mode][Configure all things org mode]]
@@ -2220,6 +2222,44 @@ words aren't split and meaningful structures in the major-mode may be preserved.
 		"t+" 'unfill-toggle)
 	)
 #+end_src
+*** Group buffers by project
+:PROPERTIES:
+:LAST_MODIFIED: [2026-03-23 Mon 19:27]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: group-buffers-by-project
+:END:
+
+#+begin_src emacs-lisp
+  (use-package perspective
+    :general
+    (tyrant-def
+  ;;    "P"       (cons "Perspective" perspective-prefix-map)
+  		"P" (cons "Perspective" (make-sparse-keymap))
+      "Pb" 'persp-list-buffers
+      )
+    :config
+    (consult-customize consult-source-buffer :hidden t :default nil)
+    (add-to-list 'consult-buffer-sources persp-consult-source)
+    (persp-mode)
+    )
+#+end_src
+
+**** Disabled
+:PROPERTIES:
+:LAST_MODIFIED: [2026-03-23 Mon 19:01]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:CUSTOM_ID: disabled
+:END:
+#+name: One tab per project
+#+begin_src emacs-lisp :tangle no
+(use-package otpp
+  :after project
+  :config (otpp-mode 1)
+  )
+
+#+end_src
+
+
 *** Footer for utilities config
 :PROPERTIES:
 :LAST_MODIFIED: [2025-07-20 Sun 02:46]
