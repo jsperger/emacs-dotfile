@@ -182,6 +182,16 @@
     "oT" 'bicycle-cycle-global
     "oz" 'TeX-fold-mode)
   )
+
+(use-package kirigami
+  :config
+  (define-key evil-normal-state-map "zo" 'kirigami-open-fold)
+  (define-key evil-normal-state-map "zO" 'kirigami-open-fold-rec)
+  (define-key evil-normal-state-map "zc" 'kirigami-close-fold)
+  (define-key evil-normal-state-map "za" 'kirigami-toggle-fold)
+  (define-key evil-normal-state-map "zr" 'kirigami-open-folds)
+  (define-key evil-normal-state-map "zm" 'kirigami-close-folds)
+  )
 ;; Outline and fold text:1 ends here
 
 ;; [[file:../its-lit.org::#spell-check-with-jinx][Spell check with jinx:1]]

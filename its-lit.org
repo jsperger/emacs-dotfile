@@ -828,11 +828,13 @@ mistakes in my configuration.
 
 *** Load custom file and run after-init hooks
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 20:29]
+:LAST_MODIFIED: [2026-03-23 Mon 18:49]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: load-custom-file-and-run-after-init-hooks
 :END:
-#+begin_src
+
+#+name: specify customs file
+#+begin_src emacs-lisp :noweb yes :comments noweb :tangle init.el 
 ;;;; =============================== Customs ===============================
 (setq custom-file (expand-file-name "customs.el" user-emacs-directory))
 (add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
@@ -2063,7 +2065,7 @@ Window numbering
 *** Outline and fold text
 :PROPERTIES:
 :CUSTOM_ID: outline-and-fold-text
-:LAST_MODIFIED: [2025-10-19 Sun 18:54]
+:LAST_MODIFIED: [2026-03-23 Mon 18:36]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp 
@@ -2090,6 +2092,16 @@ Window numbering
     "ot" 'bicycle-cycle
     "oT" 'bicycle-cycle-global
     "oz" 'TeX-fold-mode)
+  )
+
+(use-package kirigami
+  :config
+  (define-key evil-normal-state-map "zo" 'kirigami-open-fold)
+  (define-key evil-normal-state-map "zO" 'kirigami-open-fold-rec)
+  (define-key evil-normal-state-map "zc" 'kirigami-close-fold)
+  (define-key evil-normal-state-map "za" 'kirigami-toggle-fold)
+  (define-key evil-normal-state-map "zr" 'kirigami-open-folds)
+  (define-key evil-normal-state-map "zm" 'kirigami-close-folds)
   )
 #+end_src
 
@@ -2692,7 +2704,7 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2026-02-01 Sun 19:05]
+:LAST_MODIFIED: [2026-02-25 Wed 15:34]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
