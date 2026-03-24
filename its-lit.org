@@ -2236,24 +2236,40 @@ words aren't split and meaningful structures in the major-mode may be preserved.
 #+end_src
 *** Group buffers by project
 :PROPERTIES:
-:LAST_MODIFIED: [2026-03-23 Mon 19:27]
+:LAST_MODIFIED: [2026-03-23 Mon 20:09]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: group-buffers-by-project
 :END:
 
 #+begin_src emacs-lisp
-  (use-package perspective
-    :general
-    (tyrant-def
-  ;;    "P"       (cons "Perspective" perspective-prefix-map)
-  		"P" (cons "Perspective" (make-sparse-keymap))
-      "Pb" 'persp-list-buffers
-      )
-    :config
-    (consult-customize consult-source-buffer :hidden t :default nil)
-    (add-to-list 'consult-buffer-sources persp-consult-source)
-    (persp-mode)
+(use-package perspective
+  :general
+  (tyrant-def
+;;    "P"       (cons "Perspective" perspective-prefix-map)
+		"P" (cons "Perspective" (make-sparse-keymap))
+    "Pa" 'persp-add-buffer
+    "PA" 'persp-set-buffer ; Add buffer to current perspective, rm from all others
+    "Pb" 'persp-list-buffers
+    "Pd" 'persp-kill
+    "Pg" 'persp-add-buffer-to-frame-global
+    "Pi" 'persp-import ; Import a given perspective from another frame.
+    "Pk" 'persp-remove-buffer
+    "Pm" 'persp-merge ; Temporarily merge buffers from one persp into another
+    "Pn" 'persp-next
+    "Pp" 'persp-prev
+    "Pr" 'persp-rename
+    "Ps" 'persp-switch
+    "Pu" 'persp-unmerge
+    "PS" 'persp-state-save ; Save all perspectives in all frames to a file
+    "PL" 'persp-state-load ; Load all perspectives from a file
     )
+ 
+  :config
+  (setopt persp-mode-prefix-key (kbd "C-M-p"))
+  (consult-customize consult-source-buffer :hidden t :default nil)
+  (add-to-list 'consult-buffer-sources persp-consult-source)
+  (persp-mode)
+  )
 #+end_src
 
 **** Disabled

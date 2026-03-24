@@ -279,9 +279,25 @@
   (tyrant-def
 ;;    "P"       (cons "Perspective" perspective-prefix-map)
 		"P" (cons "Perspective" (make-sparse-keymap))
+    "Pa" 'persp-add-buffer
+    "PA" 'persp-set-buffer ; Add buffer to current perspective, rm from all others
     "Pb" 'persp-list-buffers
+    "Pd" 'persp-kill
+    "Pg" 'persp-add-buffer-to-frame-global
+    "Pi" 'persp-import ; Import a given perspective from another frame.
+    "Pk" 'persp-remove-buffer
+    "Pm" 'persp-merge ; Temporarily merge buffers from one persp into another
+    "Pn" 'persp-next
+    "Pp" 'persp-prev
+    "Pr" 'persp-rename
+    "Ps" 'persp-switch
+    "Pu" 'persp-unmerge
+    "PS" 'persp-state-save ; Save all perspectives in all frames to a file
+    "PL" 'persp-state-load ; Load all perspectives from a file
     )
+ 
   :config
+  (setopt persp-mode-prefix-key (kbd "C-M-p"))
   (consult-customize consult-source-buffer :hidden t :default nil)
   (add-to-list 'consult-buffer-sources persp-consult-source)
   (persp-mode)
