@@ -123,6 +123,7 @@
 	:general
   (tyrant-def "d" 'ebib)
   )
+
 ;; Bibliography management:1 ends here
 
 ;; Local Variables:

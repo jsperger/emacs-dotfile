@@ -45,6 +45,7 @@
   )
 
 (use-package catppuccin-theme)
+
 ;; Color theme packages:1 ends here
 
 ;; [[file:../its-lit.org::#managing-fonts][Managing fonts:1]]
@@ -213,9 +214,11 @@
   (("C-c s f" . show-font-select-preview)
    ("C-c s t" . show-font-tabulated))
   )
+
 ;; View fonts within emacs:1 ends here
 
 ;; [[file:../its-lit.org::#nerd-icons][Nerd icons:1]]
+
 (use-package nerd-icons-dired
   :hook  (dired-mode . nerd-icons-dired-mode)
   )

@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+
 ;;;; ========================= Utility packages ========================
 
 ;; [[file:../its-lit.org::comment tools][comment tools]]
@@ -76,6 +77,7 @@
     )
   )
 ;; Data format modes:1 ends here
+
 
 ;;;; ================= Modify core editor functionality ================
 
@@ -218,6 +220,7 @@
            [remap evil-prev-flyspell-error] 'evil-prev-jinx-error
            [remap evil-next-flyspell-error] 'evil-next-jinx-error)
   )
+
 ;; Spell check with jinx:1 ends here
 
 ;; [[file:../its-lit.org::#text-snippet-insertion-and-collections][Text snippet insertion and collections:1]]

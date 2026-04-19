@@ -53,6 +53,7 @@
 (elpaca-wait) ; Block until current queue processed.
 
 (setopt use-package-always-ensure t) ; Assume :elpaca t by default.
+
 ;; init elpaca ends here
 
 ;; [[file:its-lit.org::constant flags][constant flags]]
