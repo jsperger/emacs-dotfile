@@ -13,7 +13,7 @@
         evil-magic 'very-magic
         evil-want-C-u-delete t
         evil-want-C-u-scroll t
-        hs-minor-mode-map nil)
+        )
   :config
   (setopt evil-cross-lines t
         evil-kill-on-visual-paste nil

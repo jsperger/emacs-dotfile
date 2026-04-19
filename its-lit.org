@@ -4701,7 +4701,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-evil.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evilel
-:LAST_MODIFIED: [2025-10-05 Sun 16:48]
+:LAST_MODIFIED: [2026-04-19 Sun 14:24]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-evil.el
@@ -4720,7 +4720,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
         evil-magic 'very-magic
         evil-want-C-u-delete t
         evil-want-C-u-scroll t
-        hs-minor-mode-map nil)
+        )
   :config
   (setopt evil-cross-lines t
         evil-kill-on-visual-paste nil
