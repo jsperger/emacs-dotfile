@@ -27,12 +27,6 @@
   (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold)
   )
 
-(use-package rainbow-delimiters
-	:disabled
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-
-
 (use-package paren-face
 	;; https://github.com/tarsius/paren-face
 	;; Parentheses dimming
@@ -42,18 +36,6 @@
   (add-to-list 'paren-face-modes '(r-mode R-mode ess-r-mode))
   (global-paren-face-mode t)
 	)
-
-;;;
-;; --- Font Locking Utilities ---
-;;;
-
-(use-package font-lock-studio
-  ;; really useful when you need it, but doesn't need to be enabled most of the time
-  :disabled)
-
-(use-package highlight-refontification
-  ;; really useful when you need it, but doesn't need to be enabled most of the time
-  :disabled)
 
 ;; Local Variables:
 ;; no-byte-compile: t

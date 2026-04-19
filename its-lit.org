@@ -151,6 +151,7 @@ count of {{{word-count}}}.*
   - [[#setup-evil-addonsel][setup-evil-addons.el]]
   - [[#setup-evilel][setup-evil.el]]
   - [[#setup-font-lockingel][setup-font-locking.el]]
+    - [[#disabled-font-lock-packages][Disabled font lock packages]]
   - [[#setup-goel][setup-go.el]]
   - [[#setup-gopherel][setup-gopher.el]]
   - [[#setup-llmel][setup-llm.el]]
@@ -4776,6 +4777,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 :PROPERTIES:
 :CUSTOM_ID: setup-font-lockingel
 :LAST_MODIFIED: [2025-08-03 Sun 20:30]
+:LAST_MODIFIED: [2026-04-19 Sun 14:28]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-font-locking.el
@@ -4808,12 +4810,6 @@ The vertico recipe has been updated to include the extensions folder so I don't 
   (set-face-attribute 'highlight-parentheses-highlight nil :weight 'ultra-bold)
   )
 
-(use-package rainbow-delimiters
-	:disabled
-  :hook (prog-mode . rainbow-delimiters-mode))
-
-
-
 (use-package paren-face
 	;; https://github.com/tarsius/paren-face
 	;; Parentheses dimming
@@ -4824,10 +4820,31 @@ The vertico recipe has been updated to include the extensions folder so I don't 
   (global-paren-face-mode t)
 	)
 
-;;;
-;; --- Font Locking Utilities ---
-;;;
+;; Local Variables:
+;; no-byte-compile: t
+;; no-native-compile: t
+;; no-update-autoloads: t
+;; End:
+;;; setup-font-locking.el ends here
+#+end_src
 
+
+*** Disabled font lock packages
+:PROPERTIES:
+:LAST_MODIFIED: [2026-04-19 Sun 13:51]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header_args: :eval no :tangle no :noweb no
+:CUSTOM_ID: disabled-font-lock-packages
+:END:
+
+#+begin_src emacs-lisp
+(use-package rainbow-delimiters
+	:disabled
+  :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+#+name: Font lock utilities
+#+begin_src emacs-lisp
 (use-package font-lock-studio
   ;; really useful when you need it, but doesn't need to be enabled most of the time
   :disabled)
@@ -4836,12 +4853,6 @@ The vertico recipe has been updated to include the extensions folder so I don't 
   ;; really useful when you need it, but doesn't need to be enabled most of the time
   :disabled)
 
-;; Local Variables:
-;; no-byte-compile: t
-;; no-native-compile: t
-;; no-update-autoloads: t
-;; End:
-;;; setup-font-locking.el ends here
 #+end_src
 
 ** setup-go.el
