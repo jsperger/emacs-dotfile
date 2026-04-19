@@ -125,7 +125,7 @@ count of {{{word-count}}}.*
       - [[#disabled-r-packages][Disabled R packages]]
     - [[#rust-programming][Rust programming]]
     - [[#programming-languages-footer][Programming languages footer]]
-  - [[#configure-theming][Configure theming]]
+  - [[#configure-themes][Configure themes]]
     - [[#preserve-appearance-of-collapsed-outline-headings-until-window-edge][Preserve appearance of collapsed outline headings until window edge]]
     - [[#color-theme-packages][Color theme packages]]
       - [[#disabled-themes][Disabled themes]]
@@ -134,8 +134,8 @@ count of {{{word-count}}}.*
       - [[#disabled-packages][Disabled packages]]
     - [[#nerd-icons][Nerd icons]]
       - [[#disabled-icon-packages][Disabled icon packages]]
-    - [[#theming-advice-and-hooks][Theming advice and hooks]]
-    - [[#theming-lisp-footer][Theming lisp footer]]
+    - [[#theme-advice-and-hooks][Theme advice and hooks]]
+    - [[#theme-lisp-footer][Theme lisp footer]]
   - [[#configure-completion-frameworks][Configure completion frameworks]]
     - [[#setup-completion-actionsel][setup-completion-actions.el]]
     - [[#set-up-completion-backends][Set up completion backends]]
@@ -178,7 +178,6 @@ count of {{{word-count}}}.*
       - [[#minibuffer][Minibuffer]]
       - [[#window-automatic-sizing-and-window-configuration-management][Window automatic sizing and window configuration management]]
       - [[#programming-focused-ui-changes][Programming focused UI changes]]
-      - [[#probably-theming-not-ui][Probably theming not UI]]
   - [[#setup-vcel][setup-vc.el]]
   - [[#setup-webel][setup-web.el]]
   - [[#writing-in-emacs][Writing in emacs]]
@@ -769,7 +768,7 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2026-02-06 Fri 20:49]
+:LAST_MODIFIED: [2026-04-19 Sun 14:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -804,7 +803,7 @@ mistakes in my configuration.
              "configure-base-and-built-in.el"
              "configure-keybinding.el"
              "configure-org.el"
-             "configure-theming.el"
+             "configure-themes.el"
              "configure-utilities.el"
              "configure-prog-langs.el"
              "configure-prog-tools.el"
@@ -3384,19 +3383,19 @@ C-c C-. w				ess-rutils-load-workspace
 ;;; configure-prog-langs.el ends here
 #+end_src
 
-** Configure theming
+** Configure themes
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle config/configure-theming.el :comments noweb :eval no
-:LAST_MODIFIED: [2025-08-03 Sun 18:13]
+:header-args:emacs-lisp: :tangle config/configure-themes.el :comments noweb :eval no
+:LAST_MODIFIED: [2026-04-19 Sun 14:53]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: configure-theming
+:CUSTOM_ID: configure-themes
 :END:
 
 Packages that substantially change the user interface as configured in 
 
 #+name:theme header
 #+begin_src emacs-lisp :comments no :noweb no
-;;; configure-theming.el --- Themes configuration -*- lexical-binding: t; -*-
+;;; configure-themes.el --- Themes configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 #+end_src
@@ -3794,11 +3793,11 @@ Font waterfall and size viewer from within emacs.
 	)
 #+end_src
 
-*** Theming advice and hooks
+*** Theme advice and hooks
 :PROPERTIES:
 :LAST_MODIFIED: [2025-08-03 Sun 19:35]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: theming-advice-and-hooks
+:CUSTOM_ID: theme-advice-and-hooks
 :END:
 
 #+begin_src emacs-lisp
@@ -3811,11 +3810,11 @@ Font waterfall and size viewer from within emacs.
 (add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
 #+end_src
 
-*** Theming lisp footer
+*** Theme lisp footer
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-19 Sat 20:36]
+:LAST_MODIFIED: [2026-04-19 Sun 14:55]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:CUSTOM_ID: theming-lisp-footer
+:CUSTOM_ID: theme-lisp-footer
 :END:
 
 #+begin_src emacs-lisp
@@ -3824,7 +3823,7 @@ Font waterfall and size viewer from within emacs.
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; configure-theming.el ends here
+;;; configure-themes.el ends here
 #+end_src
 
 ** Configure completion frameworks
@@ -5992,27 +5991,10 @@ Activities seems to be more of a session manager + window manager
     )
 #+end_src
 
-**** Probably theming not UI
-:PROPERTIES:
-:CUSTOM_ID: probably-theming-not-ui
-:LAST_MODIFIED: [2025-07-25 Fri 01:34]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-
-Use SF Symbols instead of the default Emacs image toolbar. Would require me to
-use the toolbar in the first place.  
-#+begin_src emacs-lisp :tangle no :comments no :eval no
-(use-package calle24
-  :disabled
-  :hook (compilation-mode . calle24-refresh-appearance)
-  :config
-  (calle24-refresh-appearance)
-  )
-#+end_src
 ** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
-:LAST_MODIFIED: [2026-01-22 Thu 01:32]
+:LAST_MODIFIED: [2026-04-19 Sun 14:56]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-vc.el

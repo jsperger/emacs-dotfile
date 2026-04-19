@@ -137,7 +137,7 @@
              "configure-base-and-built-in.el"
              "configure-keybinding.el"
              "configure-org.el"
-             "configure-theming.el"
+             "configure-themes.el"
              "configure-utilities.el"
              "configure-prog-langs.el"
              "configure-prog-tools.el"

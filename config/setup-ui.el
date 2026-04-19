@@ -3,21 +3,22 @@
 ;;; Code:
 
 (use-package bicycle
-  :hook ((prog-mode . outline-minor-mode)
-         (prog-mode . hs-minor-mode))
-  :general (tyrant-def
-             "t TAB" 'bicycle-cycle
-             "t <backtab>" 'bicycle-cycle-global
-             )
+  :hook (prog-mode . outline-minor-mode)
+  :general
+  (tyrant-def
+    "t TAB" 'bicycle-cycle
+    "t <backtab>" 'bicycle-cycle-global
+    )
   )
 
 (use-package olivetti
   :hook ((text-mode prog-mode org-mode help-mode Info-mode) . olivetti-mode)
-  :config (setopt olivetti-style 'fancy
-                  olivetti-body-width 0.7
-                  olivetti-minimum-body-width 80
-                  olivetti-recall-visual-line-mode-entry-state t
-                  )
+  :config
+  (setopt olivetti-style 'fancy
+          olivetti-body-width 0.7
+          olivetti-minimum-body-width 80
+          olivetti-recall-visual-line-mode-entry-state t
+          )
   )
 
 
@@ -46,15 +47,18 @@
 
 (use-package spacious-padding
   :hook elpaca-after-init
-  :config (setopt spacious-padding-subtle-frame-lines t
-                  spacious-padding-widths '(:internal-border-width 10
-                                            :header-line-width 4
-                                            :mode-line-width 4
-                                            :tab-width 4
-                                            :right-divider-width 0
-                                            :scroll-bar-width 4
-                                            :fringe-width 8)
-                  )
+  :config
+  (setopt
+   spacious-padding-subtle-frame-lines t
+   spacious-padding-widths '(
+                             :internal-border-width 10
+                             :header-line-width 4
+                             :mode-line-width 4
+                             :tab-width 4
+                             :right-divider-width 0
+                             :scroll-bar-width 4
+                             :fringe-width 8)
+   )
   )
 
 (use-package popper

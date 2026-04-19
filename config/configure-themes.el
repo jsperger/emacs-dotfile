@@ -1,4 +1,4 @@
-;;; configure-theming.el --- Themes configuration -*- lexical-binding: t; -*-
+;;; configure-themes.el --- Themes configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -243,7 +243,7 @@
   )
 ;; Nerd icons:1 ends here
 
-;; [[file:../its-lit.org::#theming-advice-and-hooks][Theming advice and hooks:1]]
+;; [[file:../its-lit.org::#theme-advice-and-hooks][Theme advice and hooks:1]]
 (advice-add 'load-theme :after #'load-theme@run-hooks)
 (advice-add 'load-theme :before #'load-theme@theme-dont-propagate)
 
@@ -251,13 +251,13 @@
 ;; (add-hook 'after-load-theme-hook #'customize-tab-bar)
 ;; (add-hook 'after-load-theme-hook #'unscale-outlines)
 (add-hook 'after-load-theme-hook #'my-disable-flymake-underline)
-;; Theming advice and hooks:1 ends here
+;; Theme advice and hooks:1 ends here
 
-;; [[file:../its-lit.org::#theming-lisp-footer][Theming lisp footer:1]]
+;; [[file:../its-lit.org::#theme-lisp-footer][Theme lisp footer:1]]
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; configure-theming.el ends here
-;; Theming lisp footer:1 ends here
+;;; configure-themes.el ends here
+;; Theme lisp footer:1 ends here
