@@ -4701,7 +4701,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-evil.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evilel
-:LAST_MODIFIED: [2026-04-19 Sun 14:24]
+:LAST_MODIFIED: [2026-04-19 Sun 14:35]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-evil.el
@@ -4710,8 +4710,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 (use-package evil
   :ensure (:wait t)
   :demand t
-  :hook ((elpaca-after-init . evil-mode)
-         (prog-mode . hs-minor-mode)) ;why is this here?
+  :hook (elpaca-after-init . evil-mode)
   :init
   (setq evil-want-keybinding nil
         evil-symbol-word-search t
@@ -5756,7 +5755,7 @@ package, reinstall it, and manually run =pdf-tools-install=
 ** setup-ui.el
 :PROPERTIES:
 :CUSTOM_ID: setup-uiel
-:LAST_MODIFIED: [2026-02-01 Sun 16:56]
+:LAST_MODIFIED: [2026-04-19 Sun 14:51]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 #+begin_src emacs-lisp :tangle config/setup-ui.el
@@ -5765,21 +5764,22 @@ package, reinstall it, and manually run =pdf-tools-install=
 ;;; Code:
 
 (use-package bicycle
-  :hook ((prog-mode . outline-minor-mode)
-         (prog-mode . hs-minor-mode))
-  :general (tyrant-def
-             "t TAB" 'bicycle-cycle
-             "t <backtab>" 'bicycle-cycle-global
-             )
+  :hook (prog-mode . outline-minor-mode)
+  :general
+  (tyrant-def
+    "t TAB" 'bicycle-cycle
+    "t <backtab>" 'bicycle-cycle-global
+    )
   )
 
 (use-package olivetti
   :hook ((text-mode prog-mode org-mode help-mode Info-mode) . olivetti-mode)
-  :config (setopt olivetti-style 'fancy
-                  olivetti-body-width 0.7
-                  olivetti-minimum-body-width 80
-                  olivetti-recall-visual-line-mode-entry-state t
-                  )
+  :config
+  (setopt olivetti-style 'fancy
+          olivetti-body-width 0.7
+          olivetti-minimum-body-width 80
+          olivetti-recall-visual-line-mode-entry-state t
+          )
   )
 
 
@@ -5808,15 +5808,18 @@ package, reinstall it, and manually run =pdf-tools-install=
 
 (use-package spacious-padding
   :hook elpaca-after-init
-  :config (setopt spacious-padding-subtle-frame-lines t
-                  spacious-padding-widths '(:internal-border-width 10
-                                            :header-line-width 4
-                                            :mode-line-width 4
-                                            :tab-width 4
-                                            :right-divider-width 0
-                                            :scroll-bar-width 4
-                                            :fringe-width 8)
-                  )
+  :config
+  (setopt
+   spacious-padding-subtle-frame-lines t
+   spacious-padding-widths '(
+                             :internal-border-width 10
+                             :header-line-width 4
+                             :mode-line-width 4
+                             :tab-width 4
+                             :right-divider-width 0
+                             :scroll-bar-width 4
+                             :fringe-width 8)
+   )
   )
 
 (use-package popper

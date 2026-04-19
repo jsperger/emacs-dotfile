@@ -3,8 +3,7 @@
 (use-package evil
   :ensure (:wait t)
   :demand t
-  :hook ((elpaca-after-init . evil-mode)
-         (prog-mode . hs-minor-mode)) ;why is this here?
+  :hook (elpaca-after-init . evil-mode)
   :init
   (setq evil-want-keybinding nil
         evil-symbol-word-search t
