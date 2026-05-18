@@ -215,6 +215,7 @@
 
 ;; [[file:../its-lit.org::#org-todoist][org-todoist:1]]
 (use-package org-todoist
+  :disabled
   :ensure (:host github
                  :repo "lillenne/org-todoist"
                  :branch "main"
@@ -227,16 +228,18 @@
 
 ;; [[file:../its-lit.org::#configure-org-node][Configure Org-node:1]]
 (use-package org-mem
-  :defer
-  :functions org-mem-updater
+  :disabled
+  :after org
   :config
   (setopt org-mem-do-sync-with-org-id t
-          org-mem-watch-dirs (list "~/obsidian/org/node")
+          org-mem-watch-dirs (list "~/obsidian/org/node/")
           )
   (org-mem-updater-mode)
   )
 
 (use-package org-node
+  :disabled
+  :after (org org-mem)
   :init
   (setq org-node-seq-defs
         (list
@@ -294,6 +297,9 @@
     "nr" 'org-node-visit-random
     "nt" 'org-node-insert-transclusion
     "nu" 'org-node-insert-raw-link
+    ;; citar-org-node commands
+    "na" 'citar-org-node-add-refs
+    "no" 'citar-org-node-open-resource
     )
   (despot-def (org-mode-map)
     :major-modes 'org-mode
@@ -311,6 +317,13 @@
     "nt" 'org-node-insert-transclusion
     "nu" 'org-node-insert-raw-link
     )
+  )
+
+(use-package citar-org-node
+  :disabled
+  :after (:any citar org-node)
+  :config
+  (citar-org-node-mode 1)
   )
 ;; Configure Org-node:1 ends here
 

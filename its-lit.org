@@ -2708,12 +2708,13 @@ functionality works even if the mode is messed up.
 Packages that build on org mode rather than add something to it.
 **** org-todoist
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 06:20]
+:LAST_MODIFIED: [2026-04-19 Sun 11:23]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: org-todoist
 :END:
 #+begin_src emacs-lisp
 (use-package org-todoist
+  :disabled
   :ensure (:host github
                  :repo "lillenne/org-todoist"
                  :branch "main"
@@ -2726,7 +2727,7 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2026-02-25 Wed 15:34]
+:LAST_MODIFIED: [2026-04-19 Sun 11:23]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
 
@@ -2737,16 +2738,18 @@ function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences
 
 #+begin_src emacs-lisp
 (use-package org-mem
-  :defer
-  :functions org-mem-updater
+  :disabled
+  :after org
   :config
   (setopt org-mem-do-sync-with-org-id t
-          org-mem-watch-dirs (list "~/obsidian/org/node")
+          org-mem-watch-dirs (list "~/obsidian/org/node/")
           )
   (org-mem-updater-mode)
   )
 
 (use-package org-node
+  :disabled
+  :after (org org-mem)
   :init
   (setq org-node-seq-defs
         (list
@@ -2804,6 +2807,9 @@ function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences
     "nr" 'org-node-visit-random
     "nt" 'org-node-insert-transclusion
     "nu" 'org-node-insert-raw-link
+    ;; citar-org-node commands
+    "na" 'citar-org-node-add-refs
+    "no" 'citar-org-node-open-resource
     )
   (despot-def (org-mode-map)
     :major-modes 'org-mode
