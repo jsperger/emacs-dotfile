@@ -187,6 +187,7 @@ count of {{{word-count}}}.*
       - [[#latex--tex-configuration][LaTeX / TeX configuration]]
     - [[#bibliography-management][Bibliography management]]
       - [[#old-config][Old config]]
+    - [[#write-browser-text-from-emacs][Write browser text from Emacs]]
     - [[#writing-footer][Writing footer]]
   - [[#setup-writingel][setup-writing.el]]
 - [[#lisp-functions][Lisp functions]]
@@ -6576,6 +6577,19 @@ with notably nonfunctioning pieces.
 ;; no-update-autoloads: t
 ;; End:
 ;;; setup-bib.el ends here
+#+end_src
+*** Write browser text from Emacs
+:PROPERTIES:
+:LAST_MODIFIED: [2026-05-18 Mon 05:15]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.60
+:CUSTOM_ID: write-browser-text-from-emacs
+:END:
+https://github.com/fregante/GhostText
+#+begin_src emacs-lisp
+(use-package atomic-chrome
+  :config
+  (atomic-chrome-start-server)
+  )
 #+end_src
 *** Writing footer
 :PROPERTIES:

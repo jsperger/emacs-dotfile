@@ -126,6 +126,13 @@
 
 ;; Bibliography management:1 ends here
 
+;; [[file:../its-lit.org::#write-browser-text-from-emacs][Write browser text from Emacs:1]]
+(use-package atomic-chrome
+  :config
+  (atomic-chrome-start-server)
+  )
+;; Write browser text from Emacs:1 ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
