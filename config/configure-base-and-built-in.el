@@ -66,9 +66,15 @@
 ;;   (setq show-paren-style 'expression)
 ;;   (setq show-paren-delay 0.05)
 ;;   )
+
 ;; Configuring built-in packages:1 ends here
 
 ;; [[file:../its-lit.org::#configure-built-in-programming-utilities][Configure built-in programming utilities:1]]
+;; (use-package prog-mode
+;;   :ensure nil
+;;   :hook (prog-mode . (outline-minor-mode hs-minor-mode)) 
+;; )
+
 (use-package display-line-numbers
   :ensure nil
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
@@ -114,6 +120,7 @@
           ediff-merge-split-window-function 'split-window-horizontally
           )
   )
+
 ;; Configure ediff for viewing diffs:1 ends here
 
 ;; [[file:../its-lit.org::#outline-mode-configuration][Outline mode configuration:1]]

@@ -1466,12 +1466,17 @@ Off the top of my head, I think
 
 *** Configure built-in programming utilities
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-25 Fri 01:04]
+:LAST_MODIFIED: [2026-04-19 Sun 14:44]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: configure-built-in-programming-utilities
 :END:
 - =glasses= separates CamelCase words visually into '=Camel_Case='
 #+begin_src emacs-lisp
+;; (use-package prog-mode
+;;   :ensure nil
+;;   :hook (prog-mode . (outline-minor-mode hs-minor-mode)) 
+;; )
+
 (use-package display-line-numbers
   :ensure nil
   :hook ((text-mode prog-mode conf-mode) . display-line-numbers-mode)
