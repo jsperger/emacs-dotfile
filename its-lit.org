@@ -2828,6 +2828,13 @@ function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences
     "nu" 'org-node-insert-raw-link
     )
   )
+
+(use-package citar-org-node
+  :disabled
+  :after (:any citar org-node)
+  :config
+  (citar-org-node-mode 1)
+  )
 #+end_src
 
 *** Configure additional org exporters
@@ -6336,7 +6343,7 @@ specific readme -> github-flavored markdown mode hook.
 :END:
 ***** Restarting my TeX config
 :PROPERTIES:
-:LAST_MODIFIED: [2025-08-10 Sun 18:01]
+:LAST_MODIFIED: [2026-03-23 Mon 20:13]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: restarting-my-tex-config
 :END:
@@ -6352,7 +6359,13 @@ specific readme -> github-flavored markdown mode hook.
                   TeX-engine 'luatex)
   )
 
-
+(use-package citar
+  :custom
+  (citar-bibliography '("~/obsidian/obsidian-biblatex.bib"))
+  :hook
+  (LaTeX-mode . citar-capf-setup)
+  (org-mode . citar-capf-setup)
+  )
 #+end_src
 ***** Old config, restarting from scratch
 :PROPERTIES:

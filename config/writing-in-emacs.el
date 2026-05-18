@@ -110,6 +110,14 @@
   :config (setopt TeX-master nil
                   TeX-engine 'luatex)
   )
+
+(use-package citar
+  :custom
+  (citar-bibliography '("~/obsidian/obsidian-biblatex.bib"))
+  :hook
+  (LaTeX-mode . citar-capf-setup)
+  (org-mode . citar-capf-setup)
+  )
 ;; auctex ends here
 
 ;; [[file:../its-lit.org::#bibliography-management][Bibliography management:1]]
