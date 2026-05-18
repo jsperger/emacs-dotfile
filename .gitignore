@@ -27,3 +27,4 @@
 /site-lisp/
 *.sqlite
 .aider*
+.agent-shell/

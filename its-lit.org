@@ -4707,9 +4707,13 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-evil.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evilel
-:LAST_MODIFIED: [2026-04-19 Sun 14:35]
+:LAST_MODIFIED: [2026-04-19 Sun 15:03]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
+
+
+TODO: Prune evil config, seems like it has a lot of accumulated cruft. 
+
 #+begin_src emacs-lisp :tangle config/setup-evil.el
 ;;; config/setup-evil.el --- Evil configuration -*- lexical-binding: t -*-
 
@@ -4780,7 +4784,6 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-font-locking.el
 :PROPERTIES:
 :CUSTOM_ID: setup-font-lockingel
-:LAST_MODIFIED: [2025-08-03 Sun 20:30]
 :LAST_MODIFIED: [2026-04-19 Sun 14:28]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :END:
@@ -5651,12 +5654,13 @@ See also: [[Nerd icons]]
 
 *** TODO Fix pdf-tools post-build command
 :PROPERTIES:
-:LAST_MODIFIED: [2026-01-03 Sat 02:33]
+:LAST_MODIFIED: [2026-03-23 Mon 15:33]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
 :CUSTOM_ID: fix-pdf-tools-post-build-command
 :END:
-Figure out why the post-build command stopped working. Needed to delete the
-package, reinstall it, and manually run =pdf-tools-install=
+~Figure out why the post-build command stopped working. Needed to delete the package, reinstall it, and manually run pdf-tools-install~
+https://github.com/progfolio/elpaca/releases/tag/v0.1.0
+TODO: replace deprecated =:post-build= command with =:build= but first check if it's necessary
 
 *** Reading package declarations
 :PROPERTIES:

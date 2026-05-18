@@ -45,6 +45,8 @@
  '(org-cite-export-processors '((latex biblatex nil nil) (t csl nil nil)))
  '(org-make-toc-insert-custom-ids t)
  '(org-src-content-indentation 0)
+ '(outline-indent-ellipsis " ▼ ")
+ '(package-enable-at-startup nil)
  '(package-native-compile t)
  '(safe-local-variable-values
    '((eval add-hook 'before-save-hook #'my/org-update-subtree-modification-info nil
