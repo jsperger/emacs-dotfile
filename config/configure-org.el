@@ -228,16 +228,16 @@
 
 ;; [[file:../its-lit.org::#configure-org-node][Configure Org-node:1]]
 (use-package org-mem
-  :after org
+  :init
+  (setq org-mem-watch-dirs '("~/obsidian/org/node/"))
   :config
   (setopt org-mem-do-sync-with-org-id t
-          org-mem-watch-dirs (list "~/obsidian/org/node/")
           )
   (org-mem-updater-mode)
   )
 
 (use-package org-node
-  :after (org org-mem)
+  :after org-mem
   :init
   (setq org-node-seq-defs
         (list
