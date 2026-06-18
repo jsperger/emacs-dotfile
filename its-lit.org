@@ -1806,8 +1806,8 @@ I'm a big fan of the look of banner comments but trying to set a custom prefix i
 #+end_src
 **** Utilities for interact with the operating system
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-21 Mon 18:31]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-05-30 Sat 07:58]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.60
 :CUSTOM_ID: utilities-for-interact-with-the-operating-system
 :END:
 
@@ -1830,6 +1830,16 @@ Do a thing here helpers. I wonder if these could be replaced with built-in funct
 #+begin_src emacs-lisp :eval no
 (use-package dwim-shell-command
   :general (tyrant-def "fm" 'dwim-shell-commands-rename-all)
+  )
+#+end_src
+
+#+begin_src emacs-lisp
+(when IS-MAC 
+  (use-package appine
+    :ensure (appine
+             :host github
+             :repo "chaoswork/appine")
+    )
   )
 #+end_src
 

@@ -31,6 +31,16 @@
   )
 ;; dwim shell commands ends here
 
+;; [[file:../its-lit.org::#utilities-for-interact-with-the-operating-system][Utilities for interact with the operating system:3]]
+(when IS-MAC 
+  (use-package appine
+    :ensure (appine
+             :host github
+             :repo "chaoswork/appine")
+    )
+  )
+;; Utilities for interact with the operating system:3 ends here
+
 ;; [[file:../its-lit.org::#scratch-buffer-utilities][Scratch buffer utilities:1]]
 ;; Conveniently create scratches in the same mode as the current file
 (use-package scratch
