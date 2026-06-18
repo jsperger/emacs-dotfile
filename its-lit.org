@@ -2737,8 +2737,8 @@ Packages that build on org mode rather than add something to it.
 **** Configure Org-node :TODO:
 :PROPERTIES:
 :CUSTOM_ID: configure-org-node
-:LAST_MODIFIED: [2026-04-19 Sun 11:23]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-05-30 Sat 17:13]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.60
 :END:
 
 TODO - create unique titles for the node sequences by updating the creator
@@ -2748,7 +2748,6 @@ function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences
 
 #+begin_src emacs-lisp
 (use-package org-mem
-  :disabled
   :after org
   :config
   (setopt org-mem-do-sync-with-org-id t
@@ -2758,7 +2757,6 @@ function [[https://github.com/meedstrom/org-node/wiki/Configuring-node-sequences
   )
 
 (use-package org-node
-  :disabled
   :after (org org-mem)
   :init
   (setq org-node-seq-defs

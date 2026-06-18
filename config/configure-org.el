@@ -228,7 +228,6 @@
 
 ;; [[file:../its-lit.org::#configure-org-node][Configure Org-node:1]]
 (use-package org-mem
-  :disabled
   :after org
   :config
   (setopt org-mem-do-sync-with-org-id t
@@ -238,7 +237,6 @@
   )
 
 (use-package org-node
-  :disabled
   :after (org org-mem)
   :init
   (setq org-node-seq-defs
