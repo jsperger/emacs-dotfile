@@ -1891,8 +1891,8 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 #+end_src
 **** Terminal configuration
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 03:55]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-06-22 Mon 02:45]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :CUSTOM_ID: terminal-configuration
 :END:
 
@@ -1902,6 +1902,15 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
                        "aV" 'vterm-other-window
                        )
   )
+
+(use-package ghostel
+  )
+
+(use-package evil-ghostel
+  :after (ghostel evil)
+  :hook (ghostel-mode . evil-ghostel-mode)
+  )
+
 #+end_src
 *** Data format modes
 :PROPERTIES:

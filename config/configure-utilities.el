@@ -62,6 +62,15 @@
                        "aV" 'vterm-other-window
                        )
   )
+
+(use-package ghostel
+  )
+
+(use-package evil-ghostel
+  :after (ghostel evil)
+  :hook (ghostel-mode . evil-ghostel-mode)
+  )
+
 ;; Terminal configuration:1 ends here
 
 ;; [[file:../its-lit.org::#data-format-modes][Data format modes:1]]
