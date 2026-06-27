@@ -4695,16 +4695,13 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-evil-addons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evil-addonsel
-:LAST_MODIFIED: [2025-09-29 Mon 23:40]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-06-18 Thu 16:49]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :END:
 #+begin_src emacs-lisp :tangle config/setup-evil-addons.el
 ;;; config/setup-evil-addons.el --- Evil addons configuration -*- lexical-binding: t -*-
 
 (use-package evil-collection
-:ensure(evil-collection :host github
-:repo "emacs-evil/evil-collection"
-:ref "a406585")
 	:hook (elpaca-after-init . evil-collection-init)
   :init
 	(setq evil-collection-magit-want-horizontal-movement t
