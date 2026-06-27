@@ -1891,7 +1891,7 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 #+end_src
 **** Terminal configuration
 :PROPERTIES:
-:LAST_MODIFIED: [2026-06-22 Mon 02:45]
+:LAST_MODIFIED: [2026-06-27 Sat 09:20]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :CUSTOM_ID: terminal-configuration
 :END:
@@ -1904,9 +1904,11 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
   )
 
 (use-package ghostel
+  :disabled
   )
 
 (use-package evil-ghostel
+  :disabled
   :after (ghostel evil)
   :hook (ghostel-mode . evil-ghostel-mode)
   )

@@ -64,9 +64,11 @@
   )
 
 (use-package ghostel
+  :disabled
   )
 
 (use-package evil-ghostel
+  :disabled
   :after (ghostel evil)
   :hook (ghostel-mode . evil-ghostel-mode)
   )
