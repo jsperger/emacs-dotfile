@@ -117,6 +117,7 @@
     "tp"    'org-plot/gnuplot
     "tr"    'org-table-recalculate
     "ts"    'org-table-sort-lines
+    "tS"    'org-table-shrink
     "tt"    (cons "toggles" (make-sparse-keymap))
     "ttf"   'org-table-toggle-formula-debugger
     "tto"   'org-table-toggle-coordinate-overlays

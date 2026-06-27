@@ -2433,8 +2433,8 @@ These packages have the distinction of being useful but I don't use them enough,
 
 *** Configure base org settings and major mode keybinds
 :PROPERTIES:
-:LAST_MODIFIED: [2026-02-01 Sun 18:42]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-06-27 Sat 09:19]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :CUSTOM_ID: configure-base-org-settings-and-major-mode-keybinds
 :END:
 
@@ -2553,6 +2553,7 @@ These packages have the distinction of being useful but I don't use them enough,
     "tp"    'org-plot/gnuplot
     "tr"    'org-table-recalculate
     "ts"    'org-table-sort-lines
+    "tS"    'org-table-shrink
     "tt"    (cons "toggles" (make-sparse-keymap))
     "ttf"   'org-table-toggle-formula-debugger
     "tto"   'org-table-toggle-coordinate-overlays
