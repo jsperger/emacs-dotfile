@@ -3593,6 +3593,16 @@ which doesn't play nicely with my hook to disable themes on loading a new one.
 #+end_src
 *** Managing fonts
 :PROPERTIES:
+:LAST_MODIFIED: [2026-06-17 Wed 09:08]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
+:CUSTOM_ID: managing-fonts
+:END:
+
+TODO Investigate the point size presets. They seem to change the font back to
+whatever was last set by calling =menu-set-font= . Changing font with
+=fontaine-set-preset= and then using a point-size preset seems to work as intended.
+
+:PROPERTIES:
 :CUSTOM_ID: managing-fonts
 :LAST_MODIFIED: [2025-07-19 Sat 19:49]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
