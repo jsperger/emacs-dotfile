@@ -145,6 +145,7 @@
              "setup-completion-display.el"
              "setup-completion.el"
              "setup-consult.el"
+             "setup-diagramming.el"
              "setup-evil-addons.el"
              "setup-font-locking.el"
              "setup-llm.el"

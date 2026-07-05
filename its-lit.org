@@ -144,7 +144,11 @@ count of {{{word-count}}}.*
     - [[#setup-completionel][setup-completion.el]]
     - [[#setup-consultel][setup-consult.el]]
   - [[#setup-denoteel][setup-denote.el]]
-  - [[#setup-diagrammingel][setup-diagramming.el]]
+  - [[#diagramming-modes-and-tools][Diagramming modes and tools]]
+    - [[#diagramming-language-modes][Diagramming Language Modes]]
+      - [[#disabled-diagramming-tools][Disabled diagramming tools]]
+    - [[#unicode-drawing-tools][Unicode Drawing Tools]]
+    - [[#diagramming-file-footer][Diagramming File Footer]]
   - [[#setup-eafel][setup-eaf.el]]
   - [[#setup-emacsel][setup-emacs.el]]
   - [[#setup-emailel][setup-email.el]]
@@ -769,8 +773,8 @@ mistakes in my configuration.
 *** Load configuration files
 :PROPERTIES:
 :CUSTOM_ID: load-configuration-files
-:LAST_MODIFIED: [2026-04-19 Sun 14:56]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-05 Sun 03:27]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :END:
 
 #+name: load configuration files
@@ -812,6 +816,7 @@ mistakes in my configuration.
              "setup-completion-display.el"
              "setup-completion.el"
              "setup-consult.el"
+             "setup-diagramming.el"
              "setup-evil-addons.el"
              "setup-font-locking.el"
              "setup-llm.el"
@@ -4435,15 +4440,41 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ;;; setup-denote.el ends here
 #+end_src
 
-** setup-diagramming.el
+** Diagramming modes and tools
 :PROPERTIES:
-:CUSTOM_ID: setup-diagrammingel
-:LAST_MODIFIED: [2026-02-06 Fri 20:53]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:header-args:emacs-lisp: :tangle config/setup-diagramming.el :comments noweb :eval no
+:CUSTOM_ID: diagramming-modes-and-tools
+:LAST_MODIFIED: [2026-07-05 Sun 03:25]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :END:
-#+begin_src emacs-lisp :tangle no
-;;; config/setup-diagramming.el --- Diagramming tools configuration -*- lexical-binding: t -*-
 
+#+name: diagramming header
+#+begin_src emacs-lisp :comments no :noweb no
+;;; config/setup-diagramming.el --- Diagramming tools configuration -*- lexical-binding: t -*-
+#+end_src
+
+*** Diagramming Language Modes
+:PROPERTIES:
+:CUSTOM_ID: diagramming-language-modes
+:LAST_MODIFIED: [2026-07-05 Sun 03:33]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
+:END:
+
+#+begin_src emacs-lisp
+(use-package graphviz-dot-mode
+  :mode ("\\.[Dd][Oo][Tt]\\'" . graphviz-dot-mode)
+)
+#+end_src
+
+**** Disabled diagramming tools
+:PROPERTIES:
+:header_args:emacs-lisp: :tangle no :noweb no :comments no
+:CUSTOM_ID: disabled-diagramming-tools
+:LAST_MODIFIED: [2026-07-05 Sun 03:34]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
+:END:
+
+#+begin_src emacs-lisp :tangle no
 (use-package chatu
   :hook ((org-mode markdown-mode) . chatu-mode)
   :commands (chatu-add
@@ -4471,14 +4502,30 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 (use-package mermaid-mode
 			:mode ("\\.mermaid\\'" . mermaid-mode))
 
+
 (use-package pikchr-mode
 		:mode ("\\.pikchr\\'" . pikchr-mode))
+#+end_src
 
+*** Unicode Drawing Tools
+:PROPERTIES:
+:CUSTOM_ID: unicode-drawing-tools
+:END:
+
+#+begin_src emacs-lisp
 (use-package uniline
 	:general
 (tyrant-def "au" 'uniline-mode)
 	)
+#+end_src
 
+*** Diagramming File Footer
+:PROPERTIES:
+:CUSTOM_ID: diagramming-file-footer
+:END:
+
+#+name: diagramming footer
+#+begin_src emacs-lisp
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t
