@@ -6306,13 +6306,14 @@ Activities seems to be more of a session manager + window manager
 #+end_src
 *** Organizing writing projects
 :PROPERTIES:
-:LAST_MODIFIED: [2025-08-13 Wed 21:40]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-05-30 Sat 08:01]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.60
 :CUSTOM_ID: organizing-writing-projects
 :END:
 #+name: organizing writing projects
 #+begin_src emacs-lisp
 (use-package binder
+  :disabled
   :general
   (tyrant-def
     "t;" 'binder-toggle-sidebar

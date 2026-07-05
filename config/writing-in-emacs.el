@@ -2,6 +2,7 @@
 
 ;; [[file:../its-lit.org::organizing writing projects][organizing writing projects]]
 (use-package binder
+  :disabled
   :general
   (tyrant-def
     "t;" 'binder-toggle-sidebar
