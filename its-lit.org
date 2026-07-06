@@ -3085,8 +3085,8 @@ interactive/enhance the REPL loop.
 *** R programming
 :PROPERTIES:
 :CUSTOM_ID: r-programming
-:LAST_MODIFIED: [2025-08-10 Sun 18:42]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-06 Mon 19:03]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :END:
 
 I need to go over this again, ess was refusing to respect my style and there's
@@ -3151,6 +3151,9 @@ working around it.
                    )
    (with-eval-after-load 'evil
     (evil-set-initial-state 'ess-r-help-mode 'normal)
+     ;; Map Enter/Return to evaluate the line in Evil's insert state
+     (evil-define-key 'insert inferior-ess-mode-map (kbd "RET") #'inferior-ess-send-input)
+     (evil-define-key 'insert inferior-ess-mode-map (kbd "<return>") #'inferior-ess-send-input)
     )
    
   :general
@@ -4753,7 +4756,7 @@ The vertico recipe has been updated to include the extensions folder so I don't 
 ** setup-evil-addons.el
 :PROPERTIES:
 :CUSTOM_ID: setup-evil-addonsel
-:LAST_MODIFIED: [2026-06-28 Sun 15:50]
+:LAST_MODIFIED: [2026-07-06 Mon 19:19]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :END:
 #+begin_src emacs-lisp :tangle config/setup-evil-addons.el
@@ -4767,11 +4770,6 @@ The vertico recipe has been updated to include the extensions folder so I don't 
   (add-hook 'org-agenda-mode-hook
             (lambda () (evil-collection-unimpaired-mode -1))
             )
-  :config
-  ;; This seemed to have had the opposite of the desired effect.
-  ;; Wanted: In inferior-ess-r-mode (the ESS R repl) and evil's insert state hitting enter/return evaluates the line instead of inserting a new line character.
-  ;; Got: Hitting enter in normal state does nothing, and in insert state it still inserts a new line. 
-  ;; (setopt evil-collection-binding-overrides '((repl-submit :state insert)))
   )
 
 (use-package evil-org

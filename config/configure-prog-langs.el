@@ -122,6 +122,9 @@
                    )
    (with-eval-after-load 'evil
     (evil-set-initial-state 'ess-r-help-mode 'normal)
+     ;; Map Enter/Return to evaluate the line in Evil's insert state
+     (evil-define-key 'insert inferior-ess-mode-map (kbd "RET") #'inferior-ess-send-input)
+     (evil-define-key 'insert inferior-ess-mode-map (kbd "<return>") #'inferior-ess-send-input)
     )
    
   :general

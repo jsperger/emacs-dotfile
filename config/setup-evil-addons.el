@@ -8,11 +8,6 @@
   (add-hook 'org-agenda-mode-hook
             (lambda () (evil-collection-unimpaired-mode -1))
             )
-  :config
-  ;; This seemed to have had the opposite of the desired effect.
-  ;; Wanted: In inferior-ess-r-mode (the ESS R repl) and evil's insert state hitting enter/return evaluates the line instead of inserting a new line character.
-  ;; Got: Hitting enter in normal state does nothing, and in insert state it still inserts a new line. 
-  ;; (setopt evil-collection-binding-overrides '((repl-submit :state insert)))
   )
 
 (use-package evil-org
