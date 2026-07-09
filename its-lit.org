@@ -5017,8 +5017,8 @@ TODO: Prune evil config, seems like it has a lot of accumulated cruft.
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2026-03-11 Wed 04:13]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-09 Thu 00:05]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :END:
 
 Customize =mcp-server-lib= to use =no-littering='s directory otherwise it defaults
@@ -5053,6 +5053,9 @@ to installing its helper script to the root of the emacs user directory.
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
+    :models '(tencent/hy3:free
+              nvidia/nemotron-3-ultra-550b-a55b:free)
+
     )
 
   (gptel-make-anthropic "Claude"          

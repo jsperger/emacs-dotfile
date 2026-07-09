@@ -21,6 +21,9 @@
     :endpoint "/api/v1/chat/completions"
     :stream t
     :key (gptel-api-key-from-auth-source "api.openrouter.ai" "apikey")
+    :models '(tencent/hy3:free
+              nvidia/nemotron-3-ultra-550b-a55b:free)
+
     )
 
   (gptel-make-anthropic "Claude"          
