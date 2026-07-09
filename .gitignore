@@ -28,3 +28,5 @@
 *.sqlite
 .aider*
 .agent-shell/
+mlartifacts/
+mlflow.db
