@@ -106,7 +106,8 @@ count of {{{word-count}}}.*
   - [[#configure-all-things-org-mode][Configure all things org mode]]
     - [[#configure-org-header][Configure org header]]
     - [[#configure-base-org-settings-and-major-mode-keybinds][Configure base org settings and major mode keybinds]]
-    - [[#configure-org-functionality-add-ons][Configure org functionality add-ons]]
+    - [[#configure-org-visual-modifications][Configure org visual modifications]]
+    - [[#configure-org-functional-add-ons][Configure org functional add-ons]]
       - [[#disabled-org-functionality-packages][Disabled org functionality packages]]
     - [[#configure-org-modes-progeny][Configure org mode's progeny]]
       - [[#org-todoist][org-todoist]]
@@ -2606,11 +2607,11 @@ These packages have the distinction of being useful but I don't use them enough,
     )
   )
 #+end_src
-*** Configure org functionality add-ons
+*** Configure org visual modifications 
 :PROPERTIES:
-:LAST_MODIFIED: [2026-07-10 Fri 15:04]
+:LAST_MODIFIED: [2026-07-16 Thu 13:23]
 :MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
-:CUSTOM_ID: configure-org-functionality-add-ons
+:CUSTOM_ID: configure-org-visual-modifications
 :END:
 
 Strange interaction between =org-link-beautify= and =elpaca= or some other package:
@@ -2633,19 +2634,15 @@ expect if the hook is working.
 In both cases the org buffer doesn't seem to update as you cycle through calls
 to =org-link-beautify-mode= so I'm going with the ~:hook~ version where the
 functionality works even if the mode is messed up. 
- 
-:PROPERTIES:
-:CUSTOM_ID: configure-org-functionality-add-ons
-:LAST_MODIFIED: [2026-02-20 Fri 07:06]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
-#+begin_src emacs-lisp 
-(use-package org-make-toc
-  :after org
-  :hook org-mode
-  :config (setopt org-make-toc-insert-custom-ids t)
-  )
 
+3. =org-link-beautify-open-at-point= is wildin' out (2026-07-16), and I can't hit
+   return or mouse click anywhere in a document without it opening the most
+   recent link I added to the document. There's a chance it's related to, if not
+   entirely caused by, a problem I'm having with Emacs Client not initializing the
+   same way as when launching Emacs from the command line. 
+
+#+name: Org mode visual mods
+#+begin_src emacs-lisp
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
   :config
@@ -2657,6 +2654,31 @@ functionality works even if the mode is messed up.
            org-hide-emphasis-markers t
            org-pretty-entities t
            org-ellipsis "…")
+  )
+
+(use-package org-link-beautify
+  :hook (elpaca-after-init . org-link-beautify-mode)
+  :config
+  (setopt org-link-beautify-async-preview t
+          org-element-use-cache t
+          )
+)
+#+end_src
+
+*** Configure org functional add-ons
+:PROPERTIES:
+:CUSTOM_ID: configure-org-functional-add-ons
+:LAST_MODIFIED: [2026-07-16 Thu 13:17]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
+:END:
+
+Packages for automatic TOC generation and transculsion. 
+
+#+begin_src emacs-lisp 
+(use-package org-make-toc
+  :after org
+  :hook org-mode
+  :config (setopt org-make-toc-insert-custom-ids t)
   )
 
 (use-package org-transclusion
@@ -2676,14 +2698,6 @@ functionality works even if the mode is messed up.
     "Lo" 'org-transclusion-open-source
     )
   )
-
-(use-package org-link-beautify
-  :hook (elpaca-after-init . org-link-beautify-mode)
-  :config
-  (setopt org-link-beautify-async-preview t
-          org-element-use-cache t
-          )
-)
 #+end_src
 
 **** Disabled org functionality packages

@@ -166,13 +166,7 @@
   )
 ;; Configure base org settings and major mode keybinds:1 ends here
 
-;; [[file:../its-lit.org::#configure-org-functionality-add-ons][Configure org functionality add-ons:1]]
-(use-package org-make-toc
-  :after org
-  :hook org-mode
-  :config (setopt org-make-toc-insert-custom-ids t)
-  )
-
+;; [[file:../its-lit.org::Org mode visual mods][Org mode visual mods]]
 (use-package org-modern
   :hook (org-mode . org-modern-mode)
   :config
@@ -184,6 +178,22 @@
            org-hide-emphasis-markers t
            org-pretty-entities t
            org-ellipsis "…")
+  )
+
+(use-package org-link-beautify
+  :hook (elpaca-after-init . org-link-beautify-mode)
+  :config
+  (setopt org-link-beautify-async-preview t
+          org-element-use-cache t
+          )
+)
+;; Org mode visual mods ends here
+
+;; [[file:../its-lit.org::#configure-org-functional-add-ons][Configure org functional add-ons:1]]
+(use-package org-make-toc
+  :after org
+  :hook org-mode
+  :config (setopt org-make-toc-insert-custom-ids t)
   )
 
 (use-package org-transclusion
@@ -203,15 +213,7 @@
     "Lo" 'org-transclusion-open-source
     )
   )
-
-(use-package org-link-beautify
-  :hook (elpaca-after-init . org-link-beautify-mode)
-  :config
-  (setopt org-link-beautify-async-preview t
-          org-element-use-cache t
-          )
-)
-;; Configure org functionality add-ons:1 ends here
+;; Configure org functional add-ons:1 ends here
 
 ;; [[file:../its-lit.org::#org-todoist][org-todoist:1]]
 (use-package org-todoist
