@@ -1,6 +1,8 @@
 org-mode
 
 (caption "#+caption: ")
+(em-dash "—")
+(en-dash "–")
 (drawer ":" p ":" n r ":end:")
 (begin "#+begin_" (s name) n> r> n "#+end_" name)
 (quote "#+begin_quote" n> r> n "#+end_quote")
