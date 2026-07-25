@@ -1131,7 +1131,7 @@ I need to move most of these out of here and put them in the relavent package de
   ;;================================= windows ================================
   "w"       (cons "windows" (make-sparse-keymap))
   "w TAB"   'alternate-window
-  "w+"      'window-layout-toggle
+  "w+"      'window-layout-transpose
   "wb"      'switch-to-minibuffer-window
   "wd"      'delete-window
   "wD"      'delete-other-windows
@@ -6811,8 +6811,8 @@ https://github.com/fregante/GhostText
 ** my-core-functions.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-functionsel
-:LAST_MODIFIED: [2025-07-18 Fri 21:39]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-24 Fri 20:15]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.91
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-core-functions.el
 ;;; my-core-functions.el --- Core functions -*- lexical-binding: t -*-
@@ -7084,24 +7084,7 @@ If the universal prefix argument is used then kill also the window."
 ;; Window
 ;; ---------------------------------------------------------------------------
 
-;; from @bmag
-(defun window-layout-toggle ()
-  "Toggle between horizontal and vertical layout of two windows."
-  (interactive)
-  (if (= (count-windows) 2)
-      (let* ((window-tree (car (window-tree)))
-             (current-split-vertical-p (car window-tree))
-             (first-window (nth 2 window-tree))
-             (second-window (nth 3 window-tree))
-             (second-window-state (window-state-get second-window))
-             (splitter (if current-split-vertical-p
-                           #'split-window-horizontally
-                         #'split-window-vertically)))
-        (delete-other-windows first-window)
-        ;; `window-state-put' also re-selects the window if needed, so we don't
-        ;; need to call `select-window'
-        (window-state-put second-window-state (funcall splitter)))
-    (error "Can't toggle window layout when the number of windows isn't two")))
+;; =window-layout-toggle= replaced by built-in =window-layout-transpose=
 
 ;; originally from magnars and modified by ffevotte for dedicated windows
 ;; support, it has quite diverged by now
