@@ -13,6 +13,7 @@
           tab-width 2 ; tab-width default 2 instead of 4
           fill-column 80 ; fill-column default 80 chars
           ring-bell-function 'ignore ;no beep
+          delete-by-moving-to-trash t ; use system trash for file deletion
           undo-limit 67108864 ; increases undo limit 64mb.
           undo-strong-limit 100663296 ; 96mb.
           undo-outer-limit 1006632960 ; 960mb.

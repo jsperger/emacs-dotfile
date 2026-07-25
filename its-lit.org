@@ -1305,8 +1305,8 @@ I need to move most of these out of here and put them in the relavent package de
 #+end_src
 *** Configure base emacs options
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-20 Sun 02:43]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-22 Wed 01:16]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :CUSTOM_ID: configure-base-emacs-options
 :END:
 #+name: emacs package declaration for config options
@@ -1321,6 +1321,7 @@ I need to move most of these out of here and put them in the relavent package de
           tab-width 2 ; tab-width default 2 instead of 4
           fill-column 80 ; fill-column default 80 chars
           ring-bell-function 'ignore ;no beep
+          delete-by-moving-to-trash t ; use system trash for file deletion
           undo-limit 67108864 ; increases undo limit 64mb.
           undo-strong-limit 100663296 ; 96mb.
           undo-outer-limit 1006632960 ; 960mb.
@@ -1357,8 +1358,6 @@ See [[info:elisp#Special Properties][elisp#Special Properties]] for intangible e
 #+begin_src emacs-lisp :tangle no
 ;;  :init
 ;; (setq trash-directory "~/.Trash")
-
-(setopt delete-by-moving-to-trash t) ; use system trash for file deletion
 
 ;; autosave each change
 (setopt bookmark-save-flag 1)
@@ -7216,16 +7215,11 @@ a dedicated window."
 ** my-core-helpers.el
 :PROPERTIES:
 :CUSTOM_ID: my-core-helpersel
-:LAST_MODIFIED: [2026-01-22 Thu 03:26]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-22 Wed 01:15]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
 :END:
 #+begin_src emacs-lisp :tangle lisp/my-core-helpers.el
 ;;; my-core-helpers.el --- Helper functions for core config -*- lexical-binding: t -*-
-
-(defun system-move-file-to-trash (file)
-  "Use \"trash\" to move FILE to the system trash."
-  (cl-assert (executable-find "trash") nil "'trash' must be installed. Needs \"brew install trash\"")
-  (call-process "trash" nil 0 nil "-F"  file))
 
 (defun server-remove-kill-buffer-hook ()
   "Remove prompt if the file is opened in other clients."

@@ -1,10 +1,5 @@
 ;;; my-core-helpers.el --- Helper functions for core config -*- lexical-binding: t -*-
 
-(defun system-move-file-to-trash (file)
-  "Use \"trash\" to move FILE to the system trash."
-  (cl-assert (executable-find "trash") nil "'trash' must be installed. Needs \"brew install trash\"")
-  (call-process "trash" nil 0 nil "-F"  file))
-
 (defun server-remove-kill-buffer-hook ()
   "Remove prompt if the file is opened in other clients."
   (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
