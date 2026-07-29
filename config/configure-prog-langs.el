@@ -48,7 +48,7 @@
 ;; [[file:../its-lit.org::#python-configuration][Python configuration:1]]
 ;;;; ============================== Python ==============================
 (use-package uv-mode
-  :hook (python-mode . uv-mode-auto-activate-hook)
+  :hook ((python-mode python-ts-mode) . uv-mode-auto-activate-hook)
   )
 
 (use-package jupyter-ascending

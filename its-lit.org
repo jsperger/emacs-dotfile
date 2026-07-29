@@ -3038,13 +3038,13 @@ install reveal yourself using =npm= or similar.
 *** Python configuration
 :PROPERTIES:
 :CUSTOM_ID: python-configuration
-:LAST_MODIFIED: [2026-01-26 Mon 19:50]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-28 Tue 22:36]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.91
 :END:
 #+begin_src emacs-lisp 
 ;;;; ============================== Python ==============================
 (use-package uv-mode
-  :hook (python-mode . uv-mode-auto-activate-hook)
+  :hook ((python-mode python-ts-mode) . uv-mode-auto-activate-hook)
   )
 
 (use-package jupyter-ascending
