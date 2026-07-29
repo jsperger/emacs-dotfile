@@ -137,42 +137,44 @@
 ;; [[file:../its-lit.org::#treesitter][Treesitter:1]]
 (use-package treesit
   :ensure nil
-	:defer t
-	:config
-	(setopt treesit-language-source-alist
-				'(
-					(bash "https://github.com/tree-sitter/tree-sitter-bash")
-          (bibtex "https://github.com/latex-lsp/tree-sitter-bibtex")
-					(cmake "https://github.com/uyha/tree-sitter-cmake")
-					(css "https://github.com/tree-sitter/tree-sitter-css")
-          (dart "https://github.com/UserNobody14/tree-sitter-dart")
-          (diff "https://github.com/the-mikedavis/tree-sitter-diff")
-          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
-          (dot "https://github.com/rydesun/tree-sitter-dot")
-          (editorconfig "https://github.com/ValdezFOmar/tree-sitter-editorconfig")
-					(elisp "https://github.com/Wilfred/tree-sitter-elisp")
-					(go "https://github.com/tree-sitter/tree-sitter-go")
-					(html "https://github.com/tree-sitter/tree-sitter-html")
-					(javascript "https://github.com/tree-sitter/tree-sitter-javascript")
-          (jinja2 "https://github.com/dbt-labs/tree-sitter-jinja2")
-					(json "https://github.com/tree-sitter/tree-sitter-json")
-          (latex "https://github.com/latex-lsp/tree-sitter-latex")
-          (lean "https://github.com/Julian/tree-sitter-lean")
-					(make "https://github.com/alemuller/tree-sitter-make")
-					(markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown")
-          (matlab "https://github.com/acristoffers/tree-sitter-matlab")
-          (mermaid "https://github.com/monaqa/tree-sitter-mermaid")
-       ;;   (python  "https://github.com/tree-sitter/py-tree-sitter")
-          (python "https://github.com/tree-sitter/tree-sitter-python")
-					(r "https://github.com/r-lib/tree-sitter-r")
-          (racket "https://github.com/6cdh/tree-sitter-racket")
-          (regex "https://github.com/tree-sitter/tree-sitter-regex")
-          (rust "https://github.com/tree-sitter/tree-sitter")
-					(toml "https://github.com/tree-sitter/tree-sitter-toml")
-					(typescript "https://github.com/tree-sitter/tree-sitter-typescript")
-					(yaml "https://github.com/ikatyang/tree-sitter-yaml"))
-        )
-	)
+  :defer t
+  :config
+  (setopt
+   treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (bibtex "https://github.com/latex-lsp/tree-sitter-bibtex")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (dart "https://github.com/UserNobody14/tree-sitter-dart")
+     (diff "https://github.com/the-mikedavis/tree-sitter-diff")
+     (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+     (dot "https://github.com/rydesun/tree-sitter-dot")
+     (editorconfig "https://github.com/ValdezFOmar/tree-sitter-editorconfig")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
+     (jinja2 "https://github.com/dbt-labs/tree-sitter-jinja2")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (latex "https://github.com/latex-lsp/tree-sitter-latex")
+     (lean "https://github.com/Julian/tree-sitter-lean")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown")
+     (matlab "https://github.com/acristoffers/tree-sitter-matlab")
+     (mermaid "https://github.com/monaqa/tree-sitter-mermaid")
+     ;;   (python  "https://github.com/tree-sitter/py-tree-sitter")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (r "https://github.com/r-lib/tree-sitter-r")
+     (racket "https://github.com/6cdh/tree-sitter-racket")
+     (regex "https://github.com/tree-sitter/tree-sitter-regex")
+     (rust "https://github.com/tree-sitter/tree-sitter")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml"))
+   treesit-auto-install-grammar 'always
+   treesit-enabled-modes t
+   )
+  )
 ;; Treesitter:1 ends here
 
 ;; [[file:../its-lit.org::#built-in-package-configuration-that-were-in-a-separate-file-for-some-reason][Built-in package configuration that were in a separate file for some reason:1]]
