@@ -900,10 +900,14 @@ Recommended reading: [[https://www.masteringemacs.org/article/keyboard-macros-ar
 *** Global key binds
 :PROPERTIES:
 :CUSTOM_ID: global-key-binds
-:LAST_MODIFIED: [2026-01-15 Thu 03:29]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-07-24 Fri 20:15]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.91
 :END:
-I need to move most of these out of here and put them in the relavent package declaration. 
+I need to move most of these out of here and put them in the relavent package
+declaration.
+
+TODO bind =elpaca-ui-browse-package= to normal-state <return> to in elpaca-manager-mode 
+
 #+begin_src emacs-lisp 
 ;;;; ========================== General Keybinds ==========================
 (tyrant-def
