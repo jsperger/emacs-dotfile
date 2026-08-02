@@ -6127,8 +6127,8 @@ Activities seems to be more of a session manager + window manager
 ** setup-vc.el
 :PROPERTIES:
 :CUSTOM_ID: setup-vcel
-:LAST_MODIFIED: [2026-04-19 Sun 14:56]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-08-01 Sat 23:40]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.91
 :END:
 #+begin_src emacs-lisp :tangle config/setup-vc.el
 ;;; config/setup-vc.el --- Version control configuration -*- lexical-binding: t -*-
@@ -6255,6 +6255,7 @@ Activities seems to be more of a session manager + window manager
   )
 
 (use-package magit-todos
+  :disabled
   :after magit
   :config (magit-todos-mode 1)
   )
