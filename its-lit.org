@@ -5325,12 +5325,14 @@ No need to depend on =llm= explicitly. Ellama is complementary to gptel I just h
 *** Unicode input
 :PROPERTIES:
 :CUSTOM_ID: unicode-input
-:LAST_MODIFIED: [2026-01-08 Thu 22:13]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-08-04 Tue 16:47]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.0.91
 :END:
 
 For inserting unicode math characters e.g. for Lean programming. This is
 distinct from any TeX typesetting.
+
+The elpaca recipe needs to be modified to generate =symbols.eld= 
 
 #+begin_src emacs-lisp
 (use-package unicode-math-input
