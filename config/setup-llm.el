@@ -44,14 +44,6 @@
 (use-package elisp-dev-mcp
   :after mcp-server-lib)
 
-(use-package chatgpt-shell
-  :config
-  (setopt chatgpt-shell-openai-key (getenv "OPENAI_API_KEY")
-          chatgpt-shell-anthropic-key (getenv "ANTHROPIC_API_KEY")
-          )
-  :general (tyrant-def "as" 'chatgpt-shell-transient)
-  )
-
 (use-package agent-shell
   :config
   (setopt
@@ -79,12 +71,17 @@
     )
   )
 
-(use-package beads
-  :disabled
-  :ensure (beads :type git
-                 :host codeberg
-                 :repo "ctietze/beads.el"
-                 )
+(use-package agent-shell-math-renderer
+  :ensure t
+  :hook (agent-shell-mode . agent-shell-math-renderer-mode)
+  ;; Optional: re-tint equations the instant you switch themes, and
+  ;; rescale them when the frame font changes.  See "Usage" below; omit
+  ;; if you never change themes or font sizes at runtime.
+  :config
+  (add-hook 'enable-theme-functions
+            #'agent-shell-math-renderer-on-appearance-change)
+  (add-hook 'after-setting-font-hook
+            #'agent-shell-math-renderer-on-appearance-change)
   )
 
 ;; Local Variables:

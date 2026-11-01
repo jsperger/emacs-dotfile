@@ -5038,18 +5038,13 @@ TODO: Prune evil config, seems like it has a lot of accumulated cruft.
 ** setup-llm.el
 :PROPERTIES:
 :CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2026-07-09 Thu 00:05]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
+:LAST_MODIFIED: [2026-10-29 Thu 07:59]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.1
 :END:
 
 Customize =mcp-server-lib= to use =no-littering='s directory otherwise it defaults
 to installing its helper script to the root of the emacs user directory.
 
-:PROPERTIES:
-:CUSTOM_ID: setup-llmel
-:LAST_MODIFIED: [2025-08-10 Sun 18:05]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
-:END:
 #+begin_src emacs-lisp :tangle config/setup-llm.el
 ;;; config/setup-llm.el --- LLM configuration -*- lexical-binding: t -*-
 
@@ -5097,14 +5092,6 @@ to installing its helper script to the root of the emacs user directory.
 (use-package elisp-dev-mcp
   :after mcp-server-lib)
 
-(use-package chatgpt-shell
-  :config
-  (setopt chatgpt-shell-openai-key (getenv "OPENAI_API_KEY")
-          chatgpt-shell-anthropic-key (getenv "ANTHROPIC_API_KEY")
-          )
-  :general (tyrant-def "as" 'chatgpt-shell-transient)
-  )
-
 (use-package agent-shell
   :config
   (setopt
@@ -5132,12 +5119,17 @@ to installing its helper script to the root of the emacs user directory.
     )
   )
 
-(use-package beads
-  :disabled
-  :ensure (beads :type git
-                 :host codeberg
-                 :repo "ctietze/beads.el"
-                 )
+(use-package agent-shell-math-renderer
+  :ensure t
+  :hook (agent-shell-mode . agent-shell-math-renderer-mode)
+  ;; Optional: re-tint equations the instant you switch themes, and
+  ;; rescale them when the frame font changes.  See "Usage" below; omit
+  ;; if you never change themes or font sizes at runtime.
+  :config
+  (add-hook 'enable-theme-functions
+            #'agent-shell-math-renderer-on-appearance-change)
+  (add-hook 'after-setting-font-hook
+            #'agent-shell-math-renderer-on-appearance-change)
   )
 
 ;; Local Variables:
@@ -5147,10 +5139,11 @@ to installing its helper script to the root of the emacs user directory.
 ;; End:
 ;;; setup-llm.el ends here
 #+end_src
+
 *** LLM unused config
 :PROPERTIES:
-:LAST_MODIFIED: [2026-01-08 Thu 17:27]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-10-29 Thu 05:44]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.1
 :CUSTOM_ID: llm-unused-config
 :END:
 
