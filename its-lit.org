@@ -1944,10 +1944,16 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
 #+end_src
 **** Terminal configuration
 :PROPERTIES:
-:LAST_MODIFIED: [2026-06-27 Sat 09:20]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
+:LAST_MODIFIED: [2026-11-04 Wed 11:48]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.1
 :CUSTOM_ID: terminal-configuration
 :END:
+
+Setting =ghostel-module-auto-install= to nil prevents asking whether to build a
+pre-built binary or compile from source. Not sure if it's my config (Emacs or
+system), but elpaca would hang and then error without this set. Manually
+downloading =M-x ghostel-download-module= or compiling =M-x
+ghostel-module-compile= the ghostel module is then required. 
 
 #+begin_src emacs-lisp
 (use-package vterm
@@ -1957,11 +1963,10 @@ Don't know if this is still the case but for a spell the emacs package wouldn't 
   )
 
 (use-package ghostel
-  :disabled
+  :init (setq ghostel-module-auto-install nil)
   )
 
 (use-package evil-ghostel
-  :disabled
   :after (ghostel evil)
   :hook (ghostel-mode . evil-ghostel-mode)
   )

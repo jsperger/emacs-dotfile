@@ -97,11 +97,10 @@
   )
 
 (use-package ghostel
-  :disabled
+  :init (setq ghostel-module-auto-install nil)
   )
 
 (use-package evil-ghostel
-  :disabled
   :after (ghostel evil)
   :hook (ghostel-mode . evil-ghostel-mode)
   )
