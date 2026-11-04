@@ -1634,8 +1634,8 @@ I really need to learn how to use =ediff= properly
 
 *** Built-in package configuration that were in a separate file for some reason
 :PROPERTIES:
-:LAST_MODIFIED: [2025-07-18 Fri 18:54]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.50
+:LAST_MODIFIED: [2026-11-04 Wed 11:30]
+:MODIFIED_WITH_EMACS: GNU Emacs 31.1
 :CUSTOM_ID: built-in-package-configuration-that-were-in-a-separate-file-for-some-reason
 :END:
 
@@ -1696,7 +1696,7 @@ I really need to learn how to use =ediff= properly
   :custom (savehist-mode 1)
   :config
   (setopt enable-recursive-minibuffers t ; allow commands in minibuffers
-          history-length 500
+          history-length 1000
           savehist-autosave-interval nil
           savehist-additional-variables '(evil-jumps-history
                                           mark-ring global-mark-ring

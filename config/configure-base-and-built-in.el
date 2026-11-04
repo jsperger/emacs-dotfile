@@ -234,7 +234,7 @@
   :custom (savehist-mode 1)
   :config
   (setopt enable-recursive-minibuffers t ; allow commands in minibuffers
-          history-length 500
+          history-length 1000
           savehist-autosave-interval nil
           savehist-additional-variables '(evil-jumps-history
                                           mark-ring global-mark-ring
