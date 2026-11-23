@@ -1564,8 +1564,8 @@ I really need to learn how to use =ediff= properly
 *** Treesitter
 :PROPERTIES:
 :CUSTOM_ID: treesitter
-:LAST_MODIFIED: [2026-07-24 Fri 20:24]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.91
+:LAST_MODIFIED: [2026-11-23 Mon 13:17]
+:MODIFIED_WITH_EMACS: GNU Emacs 32.0.50
 :END:
 
 #+begin_src emacs-lisp 
@@ -1573,42 +1573,26 @@ I really need to learn how to use =ediff= properly
   :ensure nil
   :defer t
   :config
+  (dolist (source
+           '((bibtex "https://github.com/latex-lsp/tree-sitter-bibtex")
+             (dart "https://github.com/UserNobody14/tree-sitter-dart")
+             (diff "https://github.com/the-mikedavis/tree-sitter-diff")
+             (dot "https://github.com/rydesun/tree-sitter-dot")
+             (editorconfig "https://github.com/ValdezFOmar/tree-sitter-editorconfig")
+             (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+             (jinja2 "https://github.com/dbt-labs/tree-sitter-jinja2")
+             (latex "https://github.com/latex-lsp/tree-sitter-latex")
+             (lean "https://github.com/Julian/tree-sitter-lean")
+             (make "https://github.com/alemuller/tree-sitter-make")
+             (matlab "https://github.com/acristoffers/tree-sitter-matlab")
+             (mermaid "https://github.com/monaqa/tree-sitter-mermaid")
+             (r "https://github.com/r-lib/tree-sitter-r")
+             (racket "https://github.com/6cdh/tree-sitter-racket")
+             (regex "https://github.com/tree-sitter/tree-sitter-regex")))
+    (add-to-list 'treesit-language-source-alist source t))
   (setopt
-   treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (bibtex "https://github.com/latex-lsp/tree-sitter-bibtex")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (dart "https://github.com/UserNobody14/tree-sitter-dart")
-     (diff "https://github.com/the-mikedavis/tree-sitter-diff")
-     (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
-     (dot "https://github.com/rydesun/tree-sitter-dot")
-     (editorconfig "https://github.com/ValdezFOmar/tree-sitter-editorconfig")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript")
-     (jinja2 "https://github.com/dbt-labs/tree-sitter-jinja2")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (latex "https://github.com/latex-lsp/tree-sitter-latex")
-     (lean "https://github.com/Julian/tree-sitter-lean")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown")
-     (matlab "https://github.com/acristoffers/tree-sitter-matlab")
-     (mermaid "https://github.com/monaqa/tree-sitter-mermaid")
-     ;;   (python  "https://github.com/tree-sitter/py-tree-sitter")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (r "https://github.com/r-lib/tree-sitter-r")
-     (racket "https://github.com/6cdh/tree-sitter-racket")
-     (regex "https://github.com/tree-sitter/tree-sitter-regex")
-     (rust "https://github.com/tree-sitter/tree-sitter")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml"))
    treesit-auto-install-grammar 'always
-   treesit-enabled-modes t
-   )
-  )
+   treesit-enabled-modes t))
 #+end_src
 
 #+RESULTS:
