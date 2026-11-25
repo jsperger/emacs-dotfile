@@ -52,13 +52,14 @@
 
 ;; [[file:../its-lit.org::#packages-for-learning-programming-languages][Packages for Learning Programming Languages:1]]
 (use-package exercism
-    :ensure (exercism :type git
-                      :host github
-                      :repo "pwojnowski/exercism.el"
-                      )
-    :config
-    (evil-set-initial-state 'exercism-track-list-mode 'emacs)
-)
+  :ensure (exercism :type git
+                    :host github
+                    :repo "jsperger/exercism.el")
+  :defer t
+  :custom
+  (exercism-state-file (no-littering-expand-var-file-name "exercism-state.el"))
+  :config
+  (evil-set-initial-state 'exercism-track-list-mode 'emacs))
 ;; Packages for Learning Programming Languages:1 ends here
 
 ;; Local Variables:
