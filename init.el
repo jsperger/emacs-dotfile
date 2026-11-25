@@ -125,6 +125,7 @@
 (require 'my-editor-helpers)
 (require 'my-keybinding-helpers)
 (require 'my-lang-helpers)
+(require 'my-llm-helpers)
 (require 'my-lsp-bridge-helpers)
 (require 'my-org-helpers)
 (require 'my-theme-helpers)

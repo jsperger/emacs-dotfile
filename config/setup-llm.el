@@ -38,15 +38,34 @@
 
 (use-package mcp-server-lib
   :after no-littering
-  :custom (mcp-server-lib-install-directory 'no-littering-var-directory)
+  :custom (mcp-server-lib-install-directory no-littering-var-directory)
+  :config
+  (require 'mcp-server-lib-commands)
+  ;; The stdio wrapper agents launch; it talks to this Emacs via emacsclient
+  (unless (file-exists-p (mcp-server-lib-installed-script-path))
+    (mcp-server-lib-install))
   )
 
 (use-package elisp-dev-mcp
   :after mcp-server-lib)
 
 (use-package agent-shell
+  :after mcp-server-lib
   :config
+  (require 'my-llm-helpers)
+  (unless mcp-server-lib--running
+    (mcp-server-lib-start))
   (setopt
+   agent-shell-dot-subdir-function #'my/agent-shell-dot-subdir
+   agent-shell-file-completion-enabled t
+   agent-shell-command-completion-enabled t
+   agent-shell-mcp-servers
+   `(((name . "elisp-dev")
+      (command . ,(mcp-server-lib-installed-script-path))
+      (args . ("--init-function=elisp-dev-mcp-enable"
+               "--stop-function=elisp-dev-mcp-disable"
+               "--server-id=elisp-dev-mcp"))
+      (env . ())))
    agent-shell-anthropic-claude-environment
    (agent-shell-make-environment-variables :inherit-env t)
    agent-shell-anthropic-authentication
@@ -57,7 +76,9 @@
    )
   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
   (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
-  (evil-define-key 'normal agent-shell-mode-map (kbd "RET") #'comint-send-input)
+  (evil-define-key 'normal agent-shell-mode-map
+    (kbd "RET") #'agent-shell-submit
+    (kbd "M-RET") #'agent-shell-submit-override)
 
   ;; Configure *agent-shell-diff* buffers to start in Emacs state
   (add-hook 'diff-mode-hook
@@ -68,6 +89,26 @@
   (tyrant-def
     "ag" 'agent-shell-google-start-gemini
     "ac" 'agent-shell-anthropic-start-claude-code
+    "ai" (cons "agent-shell" (make-sparse-keymap))
+    "aii" 'agent-shell
+    "ait" 'agent-shell-toggle
+    "aib" 'agent-shell-switch-buffer
+    "ais" 'agent-shell-send-dwim
+    "aif" 'agent-shell-send-current-file
+    "aiw" 'agent-shell-new-worktree-shell
+    "aih" 'agent-shell-help-menu
+    )
+  (despot-def agent-shell-mode-map
+    "h" 'agent-shell-help-menu
+    "r" 'agent-shell-quote-region
+    "o" 'agent-shell-other-buffer
+    "c" 'agent-shell-prompt-compose
+    "f" 'agent-shell-fork
+    "v" 'agent-shell-set-session-model
+    "m" 'agent-shell-set-session-mode
+    "t" 'agent-shell-set-session-thought-level
+    "u" 'agent-shell-show-usage
+    "i" 'agent-shell-send-clipboard-image
     )
   )
 

@@ -799,6 +799,7 @@ mistakes in my configuration.
 (require 'my-editor-helpers)
 (require 'my-keybinding-helpers)
 (require 'my-lang-helpers)
+(require 'my-llm-helpers)
 (require 'my-lsp-bridge-helpers)
 (require 'my-org-helpers)
 (require 'my-theme-helpers)
@@ -5120,15 +5121,34 @@ to installing its helper script to the root of the emacs user directory.
 
 (use-package mcp-server-lib
   :after no-littering
-  :custom (mcp-server-lib-install-directory 'no-littering-var-directory)
+  :custom (mcp-server-lib-install-directory no-littering-var-directory)
+  :config
+  (require 'mcp-server-lib-commands)
+  ;; The stdio wrapper agents launch; it talks to this Emacs via emacsclient
+  (unless (file-exists-p (mcp-server-lib-installed-script-path))
+    (mcp-server-lib-install))
   )
 
 (use-package elisp-dev-mcp
   :after mcp-server-lib)
 
 (use-package agent-shell
+  :after mcp-server-lib
   :config
+  (require 'my-llm-helpers)
+  (unless mcp-server-lib--running
+    (mcp-server-lib-start))
   (setopt
+   agent-shell-dot-subdir-function #'my/agent-shell-dot-subdir
+   agent-shell-file-completion-enabled t
+   agent-shell-command-completion-enabled t
+   agent-shell-mcp-servers
+   `(((name . "elisp-dev")
+      (command . ,(mcp-server-lib-installed-script-path))
+      (args . ("--init-function=elisp-dev-mcp-enable"
+               "--stop-function=elisp-dev-mcp-disable"
+               "--server-id=elisp-dev-mcp"))
+      (env . ())))
    agent-shell-anthropic-claude-environment
    (agent-shell-make-environment-variables :inherit-env t)
    agent-shell-anthropic-authentication
@@ -5139,7 +5159,9 @@ to installing its helper script to the root of the emacs user directory.
    )
   ;; Evil state-specific RET behavior: insert mode = newline, normal mode = send
   (evil-define-key 'insert agent-shell-mode-map (kbd "RET") #'newline)
-  (evil-define-key 'normal agent-shell-mode-map (kbd "RET") #'comint-send-input)
+  (evil-define-key 'normal agent-shell-mode-map
+    (kbd "RET") #'agent-shell-submit
+    (kbd "M-RET") #'agent-shell-submit-override)
 
   ;; Configure *agent-shell-diff* buffers to start in Emacs state
   (add-hook 'diff-mode-hook
@@ -5150,6 +5172,26 @@ to installing its helper script to the root of the emacs user directory.
   (tyrant-def
     "ag" 'agent-shell-google-start-gemini
     "ac" 'agent-shell-anthropic-start-claude-code
+    "ai" (cons "agent-shell" (make-sparse-keymap))
+    "aii" 'agent-shell
+    "ait" 'agent-shell-toggle
+    "aib" 'agent-shell-switch-buffer
+    "ais" 'agent-shell-send-dwim
+    "aif" 'agent-shell-send-current-file
+    "aiw" 'agent-shell-new-worktree-shell
+    "aih" 'agent-shell-help-menu
+    )
+  (despot-def agent-shell-mode-map
+    "h" 'agent-shell-help-menu
+    "r" 'agent-shell-quote-region
+    "o" 'agent-shell-other-buffer
+    "c" 'agent-shell-prompt-compose
+    "f" 'agent-shell-fork
+    "v" 'agent-shell-set-session-model
+    "m" 'agent-shell-set-session-mode
+    "t" 'agent-shell-set-session-thought-level
+    "u" 'agent-shell-show-usage
+    "i" 'agent-shell-send-clipboard-image
     )
   )
 
@@ -7528,6 +7570,32 @@ This provides a consolidated view of all global leader keys."
 
 (provide 'my-lsp-bridge-helpers)
 ;;; my-lsp-bridge-helpers.el ends here
+#+end_src
+
+** my-llm-helpers.el
+:PROPERTIES:
+:CUSTOM_ID: my-llm-helpersel
+:END:
+#+begin_src emacs-lisp :tangle lisp/my-llm-helpers.el
+;;; my-llm-helpers.el --- Helper functions for LLM tools -*- lexical-binding: t -*-
+
+(declare-function agent-shell-cwd "agent-shell-project")
+(declare-function no-littering-expand-etc-file-name "no-littering")
+
+(defun my/agent-shell-dot-subdir (subdir)
+  "Return SUBDIR of a per-project agent-shell data directory under etc/.
+The project path is flattened into the directory name, e.g.
+etc/agent-shell/Users-me-src-proj/SUBDIR, so nothing is written into
+the project itself."
+  (let* ((cwd (directory-file-name (agent-shell-cwd)))
+         (project (replace-regexp-in-string
+                   "/" "-" (string-remove-prefix "/" cwd))))
+    (expand-file-name
+     subdir
+     (no-littering-expand-etc-file-name (concat "agent-shell/" project)))))
+
+(provide 'my-llm-helpers)
+;;; my-llm-helpers.el ends here
 #+end_src
 
 ** my-org-helpers.el
