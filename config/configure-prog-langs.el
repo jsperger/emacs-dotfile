@@ -155,7 +155,12 @@
   )
 
 (use-package quarto-mode
+  :ensure (quarto-mode :type git
+                      :host github
+                      :repo "jsperger/quarto-emacs"
+                      )
   :mode ("\\.[qQ][mM][dD]\\'" . poly-quarto-mode)
+  
 )
 ;; R programming:1 ends here
 

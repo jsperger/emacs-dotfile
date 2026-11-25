@@ -3135,8 +3135,8 @@ interactive/enhance the REPL loop.
 *** R programming
 :PROPERTIES:
 :CUSTOM_ID: r-programming
-:LAST_MODIFIED: [2026-07-06 Mon 19:03]
-:MODIFIED_WITH_EMACS: GNU Emacs 31.0.90
+:LAST_MODIFIED: [2026-11-24 Tue 21:57]
+:MODIFIED_WITH_EMACS: GNU Emacs 32.0.50
 :END:
 
 I need to go over this again, ess was refusing to respect my style and there's
@@ -3234,7 +3234,12 @@ working around it.
   )
 
 (use-package quarto-mode
+  :ensure (quarto-mode :type git
+                      :host github
+                      :repo "jsperger/quarto-emacs"
+                      )
   :mode ("\\.[qQ][mM][dD]\\'" . poly-quarto-mode)
+  
 )
 #+end_src
 
