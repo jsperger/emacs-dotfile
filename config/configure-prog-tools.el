@@ -18,7 +18,6 @@
 
   :config  (setopt toml-indent-offset 2
                    lsp-bridge-enable-hover-diagnostic t
-                   lsp-bridge-enable-org-babel nil
                    acm-enable-preview t
                    )
   (evil-set-initial-state 'lsp-bridge-ref-mode 'emacs)
