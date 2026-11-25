@@ -32,6 +32,10 @@
   (add-hook 'prog-mode-hook #'subword-mode)
   ;; Don't  prompt on killing a buffer if the file is open in other clients
   (add-hook 'server-visit-hook #'server-remove-kill-buffer-hook)
+  ;; Start the server for emacsclient (EDITOR, emacs-mcp-stdio.sh)
+  (require 'server)
+  (unless (server-running-p)
+    (server-start))
   )
 ;; emacs package declaration for config options ends here
 
