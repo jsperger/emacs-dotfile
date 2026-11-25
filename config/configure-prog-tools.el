@@ -51,6 +51,17 @@
   )
 ;; Code formatting:1 ends here
 
+;; [[file:../its-lit.org::#packages-for-learning-programming-languages][Packages for Learning Programming Languages:1]]
+(use-package exercism
+    :ensure (exercism :type git
+                      :host github
+                      :repo "pwojnowski/exercism.el"
+                      )
+    :config
+    (evil-set-initial-state 'exercism-track-list-mode 'emacs)
+)
+;; Packages for Learning Programming Languages:1 ends here
+
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; no-native-compile: t

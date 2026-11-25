@@ -168,6 +168,7 @@ count of {{{word-count}}}.*
     - [[#unicode-input][Unicode input]]
     - [[#code-formatting][Code formatting]]
       - [[#removed-code-formatters][Removed code formatters]]
+    - [[#packages-for-learning-programming-languages][Packages for Learning Programming Languages]]
     - [[#footer-for-configure-programming-tools][Footer for configure programming tools]]
   - [[#setup-lspel][setup-lsp.el]]
   - [[#setup-mediael][setup-media.el]]
@@ -5390,6 +5391,23 @@ The elpaca recipe needs to be modified to generate =symbols.eld=
 	)
 #+end_src
 
+*** Packages for Learning Programming Languages
+:PROPERTIES:
+:LAST_MODIFIED: [2026-11-24 Tue 21:42]
+:MODIFIED_WITH_EMACS: GNU Emacs 32.0.50
+:CUSTOM_ID: packages-for-learning-programming-languages
+:END:
+
+#+begin_src emacs-lisp
+(use-package exercism
+    :ensure (exercism :type git
+                      :host github
+                      :repo "pwojnowski/exercism.el"
+                      )
+    :config
+    (evil-set-initial-state 'exercism-track-list-mode 'emacs)
+)
+#+end_src
 
 *** Footer for configure programming tools
 :PROPERTIES:
